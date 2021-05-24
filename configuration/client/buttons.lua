@@ -1,0 +1,57 @@
+local modkey = require("configuration.keys.mod").modKey
+
+local function getButtons()
+  return awful.util.table.join(
+    awful.button(
+      {},
+      1,
+      function(c)
+             -- only raise the focus if the app is not onboard
+        if c.name ~= "Onboard" and c.name ~= "onboard" then
+          _G.client.focus = c
+          c:raise()
+        end
+      end
+    ),
+    awful.button(
+      {modkey},
+      1,
+      function(c)
+        c:activate {context = "mouse_click", action = "mouse_move"}
+      end
+    ),
+    awful.button(
+      {modkey},
+      3,
+      function(c)
+        c:activate {context = "mouse_click", action = "mouse_resize"}
+      end
+    )
+  )
+end
+
+client.connect_signal(
+  "request::default_mousebindings",
+  function()
+    awful.mouse.append_client_mousebindings(
+      {
+        awful.button(
+          {modkey},
+          1,
+          function(c)
+            c:activate {context = "mouse_click", action = "mouse_move"}
+          end
+        ),
+        awful.button(
+          {modkey},
+          3,
+          function(c)
+            c:activate {context = "mouse_click", action = "mouse_resize"}
+          end
+        )
+      }
+    )
+  end
+)
+
+return getButtons()

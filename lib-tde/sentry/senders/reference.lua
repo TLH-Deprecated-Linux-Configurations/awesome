@@ -1,0 +1,59 @@
+--[[
+--MIT License
+--
+--Copyright (c) 2019 manilarome
+--Copyright (c) 2020 Tom Meyers
+--
+--Permission is hereby granted, free of charge, to any person obtaining a copy
+--of this software and associated documentation files (the "Software"), to deal
+--in the Software without restriction, including without limitation the rights
+--to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+--copies of the Software, and to permit persons to whom the Software is
+--furnished to do so, subject to the following conditions:
+--
+--The above copyright notice and this permission notice shall be included in all
+--copies or substantial portions of the Software.
+--
+--THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+--IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+--FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+--AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+--LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+--OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+--SOFTWARE.
+]]
+-- vim: st=4 sts=4 sw=4 et:
+--- Sender object specification.
+-- A Lua has a disparate ecosystem of networking libraries, this makes difficult
+-- doing a one-size-fits-all library. Lua-TDE does as much logic as possible
+-- in a generic way, relying on a *sender* object to send the actual payload to
+-- the Sentry server.
+--
+-- This module only contains documentation, it does not implement an actual
+-- sender.
+--
+-- @module TDE.senders.reference
+-- @copyright 2014-2017 CloudFlare, Inc.
+-- @license BSD 3-clause (see LICENSE file)
+
+--- A sender object can be a table or a userdata.
+-- I must contain all the logic to locate the server and send the data to it.
+-- Notably, the core TDE object has no idea of the URL of the server, the
+-- sender object must be able to build it by itself.
+--
+-- You can use the @{TDE.util.parse_dsn} function to process DSN strings.
+--
+-- @type Sender
+
+--- The `send` method is called whenever a message must be sent to the Sentry
+-- server. The authentication header can be generated with
+-- @{TDE.util.generate_auth_header}.
+--
+-- @param json_str Request payload as a serialized string (it must be sent
+--   verbatim, the sender should **not** try to alter it in any way)
+-- @return[1] `true` when the payload has been sent successfully
+-- @return[2] `nil` in case of error
+-- @return[2] error message (will be logged)
+-- @function Sender:send
+
+return
