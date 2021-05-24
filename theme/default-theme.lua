@@ -55,6 +55,7 @@ theme.xcolor15 = xrdb.color15
 theme.xcolor16 = "#555e70"
 theme.xcolor17 = "#b2bfd9"
 theme.xcolor18 = "#22262d"
+theme.xcolor19 = "#727f96"
 -- Custom
 theme.custom = "#ffffff"
 
@@ -190,7 +191,20 @@ local awesome_overrides = function(awesome_theme)
   awesome_theme.tasklist_fg_normal = theme.foreground
 
   awesome_theme.icon_theme = "chhinamasta"
-
+-- ####################################################################
+-- Taglist
+-- ####################################################################
+--- Generate taglist squares:
+theme.taglist_spacing = 2
+--colors
+ awesome_theme.taglist_fg_focus = theme.xcolor15
+ awesome_theme.taglist_fg_urgent = theme.xcolor1
+ awesome_theme.taglist_fg_occupied = theme.xcolor17
+ awesome_theme.taglist_fg_empty = theme.xcolor19
+ awesome_theme.taglist_bg_empty = theme.xbackground .. '00'
+ awesome_theme.taglist_bg = theme.xbackground .. '00'
+ awesome_theme.taglist_bg_focus = theme.xbackground .. '00'
+ awesome_theme.taglist_fg_volatile = theme.xcolor11
   --####################################################################
 -- MStab Configuration
 -- ####################################################################
@@ -199,6 +213,7 @@ theme.mstab_bar_ontop = true -- whether you want to allow the bar to be ontop of
 theme.mstab_bar_padding = dpi(2) -- how much padding there should be between clients and your tabbar
 theme.mstab_dont_resize_slaves = false
 theme.mstab_bar_height = 21
+
 theme.taglist_font = "awesomewm-font 24"
   -- TODO: use native functions instead of a shell script
   local out =
