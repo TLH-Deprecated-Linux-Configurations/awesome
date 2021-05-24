@@ -181,13 +181,7 @@ local function topbar_right_plugin(s)
   table_widget:add(show_widget_or_default("widget.battery", hardware.hasBattery(), true))
   table_widget:add(show_widget_or_default("widget.bluetooth", hardware.hasBluetooth()))
   table_widget:add(show_widget_or_default("widget.wifi", hardware.hasWifi()))
-  table_widget:add(show_widget_or_default("widget.package-updater", general["minimize_network_usage"] ~= "1"))
-  table_widget:add(
-    show_widget_or_default(
-      "widget.music",
-      (hardware.hasSound() and hardware.has_package_installed("playerctl")) or weak_hardware
-    )
-  ) --only add this when the data can be extracted from spotify
+
   table_widget:add(require("widget.about"))
   table_widget:add(show_widget_or_default("widget.screen-recorder", hardware.hasFFMPEG() or weak_hardware, true))
   table_widget:add(require("widget.search"))
@@ -204,10 +198,9 @@ local function topbar_center_plugin(_)
 
   for _, value in ipairs(pluginscenter) do
     table_widget:add(value)
-  
-end
+  end
   require("layout.action-bar")
-  
+
   return table_widget
 end
 
@@ -220,8 +213,6 @@ local function topbar_left_plugin(s)
   table_widget:add(show_widget_or_default("widget.control-center", weak_hardware))
   table_widget:add(TaskList(s))
   table_widget:add(add_button)
-
-  
 
   for _, value in ipairs(pluginsleft) do
     table_widget:add(value)
@@ -297,12 +288,10 @@ local TopPanel = function(s, offset, controlCenterOnly)
     {
       layout = wibox.layout.fixed.horizontal,
       -- Create a taglist widget
-      topbar_center_plugin(s),
+      topbar_center_plugin(s)
     },
     topbar_left_plugin(s),
     topbar_right_plugin(s)
-    
-
   }
   if controlCenterOnly then
     return require("widget.control-center")

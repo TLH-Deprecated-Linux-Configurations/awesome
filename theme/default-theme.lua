@@ -146,7 +146,7 @@ local awesome_overrides = function(awesome_theme)
   awesome_theme.layout_fairv = darklight(awesome_theme.icons .. "layouts/fair.png")
   awesome_theme.layout_fairh = darklight(awesome_theme.icons .. "layouts/fairh.png")
   awesome_theme.layout_magnifier = darklight(awesome_theme.icons .. "layouts/magnifier.png")
-
+awesome_theme.layout_mstab = darklight(awesome_theme.icons .. "layouts/mstab.png")
   -- Taglist
   taglist_occupied = theme.xcolor17
   awesome_theme.taglist_bg_empty = theme.background .. "99"
@@ -213,6 +213,7 @@ theme.mstab_bar_ontop = true -- whether you want to allow the bar to be ontop of
 theme.mstab_bar_padding = dpi(2) -- how much padding there should be between clients and your tabbar
 theme.mstab_dont_resize_slaves = false
 theme.mstab_bar_height = 21
+theme.mstab_icon = awesome_theme.icons .. "layouts/mstab.png"
 
 theme.taglist_font = "awesomewm-font 24"
   -- TODO: use native functions instead of a shell script

@@ -13,7 +13,7 @@
    width="1500"
    height="1500"
    viewBox="0 0 1500 1500"
-   sodipodi:docname="el-logo.svg"
+   sodipodi:docname="logo.svg"
    inkscape:version="1.0.2 (e86c870879, 2021-01-15, custom)">
   <metadata
      id="metadata8">
@@ -31,7 +31,7 @@
      id="defs6" />
   <sodipodi:namedview
      pagecolor="#f4f4f7fff"
-     bordercolor="#556666"
+     bordercolor="#f4f4f7ff"
      borderopacity="1"
      objecttolerance="10"
      gridtolerance="10"

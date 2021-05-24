@@ -26,8 +26,9 @@ local config = {
     cpu_poll = 5, -- how often do we check the current cpu status
     cpu_startup_delay = 9,
     garbage_collection_cycle = 2 * 60, -- collect garbage every x seconds
-    colors_config = HOME .. "/.config/tos/colors.conf",
-    icons_config = HOME .. "/.config/tos/icons.conf",
+    colors_config = HOME .. "/.config/awesome/electric-tantra/colors.conf",
+    icons_config = HOME .. "/.config/awesome/electric-tantra/icons.conf",
+    logo = HOME .. "/.config/awesome/theme/icons/logo.svg",
     getComptonFile = function()
         local userfile = HOME .. "/.config/picom.conf"
         if (file_exists(userfile)) then
@@ -36,7 +37,7 @@ local config = {
         return filesystem.get_configuration_dir() .. "/external/picom.conf "
     end,
     aboutText = "the Electric Tantra Linux " ..
-        os.date("%Y") .. "\n\n" .. i18n.translate("Thanks for checking this bad mother out!") .. " ♥"
+        os.date("%Y") .. "\n\n" .. i18n.translate("The Linux Environment of Thomas Leon Highbaugh") .. " "
 }
 
 return config
