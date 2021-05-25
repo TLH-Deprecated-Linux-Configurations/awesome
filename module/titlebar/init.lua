@@ -1,27 +1,4 @@
---[[
---MIT License
---
---Copyright (c) 2019 manilarome
---Copyright (c) 2020 Tom Meyers
---
---Permission is hereby granted, free of charge, to any person obtaining a copy
---of this software and associated documentation files (the "Software"), to deal
---in the Software without restriction, including without limitation the rights
---to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
---copies of the Software, and to permit persons to whom the Software is
---furnished to do so, subject to the following conditions:
---
---The above copyright notice and this permission notice shall be included in all
---copies or substantial portions of the Software.
---
---THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
---IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
---FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
---AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
---LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
---OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
---SOFTWARE.
-]]
+
 --[[
 ███╗   ██╗██╗ ██████╗███████╗
 ████╗  ██║██║██╔════╝██╔════╝
@@ -114,8 +91,8 @@ local double_click_jitter_tolerance = 4
 local double_click_time_window_ms = 250
 local stroke_inner_sides_lighten_mul = 0.4
 local stroke_outer_top_darken_mul = 0.7
-local title_color_dark = "#242424"
-local title_color_light = "#fefefa"
+local title_color_dark = "#17191e"
+local title_color_light = "#f4f4f7"
 local title_unfocused_opacity = 0.7
 local titlebar_gradient_c1_lighten = 1
 local titlebar_gradient_c2_offset = 0.5
@@ -130,7 +107,7 @@ end
 -- remove transparency from a hex color
 local function untransparant(color)
     if tonumber(color:sub(2, 7), 16) < tonumber("200000", 16) then
-        return "#27272e"
+        return "#17191e"
     end
     if not (#color) == 9 then
         return color
@@ -154,16 +131,16 @@ _private.max_width = 0
 _private.max_height = 0
 
 -- Titlebar
-_private.titlebar_height = dpi(30)
+_private.titlebar_height = dpi(22)
 _private.titlebar_radius = dpi(9)
-_private.titlebar_color = "#383838"
+_private.titlebar_color = "#17191e"
 _private.titlebar_margin_left = 0
 _private.titlebar_margin_right = 0
-_private.titlebar_font = "Sans 11"
+_private.titlebar_font = "Hurmit Nerd Font Mono bold 11"
 _private.titlebar_items = {
-    left = {"close", "minimize", "maximize"},
+    left = {"floating", "ontop", "sticky"},
     middle = "title",
-    right = {"sticky", "ontop", "floating"}
+    right = { "maximize", "minimize", "close"}
 }
 _private.context_menu_theme = {
     bg_focus = beautiful.primary.hue_300,
@@ -172,9 +149,9 @@ _private.context_menu_theme = {
     border_width = 20,
     --fg_focus = "#fefefa",
     --fg_normal = "#fefefa",
-    font = "Iosevka Custom Regular 11",
-    height = dpi(35),
-    width = dpi(250)
+    font = "Hurmit Nerd Font Mono bold  11",
+    height = dpi(45),
+    width = dpi(450)
 }
 _private.no_titlebar_maximized = true
 _private.mb_move = nice.MB_LEFT
@@ -204,12 +181,12 @@ _private.tooltip_messages = {
     sticky_active = i18n.translate("disable sticky mode"),
     sticky_inactive = i18n.translate("enable sticky mode")
 }
-_private.close_color = "#ee4266"
-_private.minimize_color = "#ffb400"
-_private.maximize_color = "#4CBB17"
+_private.close_color = "#ff3d81"
+_private.minimize_color = "#f9f871"
+_private.maximize_color = "#00ffcc"
 _private.floating_color = primary_color
-_private.ontop_color = primary_color
-_private.sticky_color = primary_color
+_private.ontop_color = "#b2bfd8"
+_private.sticky_color = "#8265ff"
 -- ------------------------------------------------------------
 
 -- => Saving and loading of color rules
@@ -221,7 +198,7 @@ table.save = t.save
 table.load = t.load
 
 -- Load the color rules or create an empty table if there aren't any
-local config_dir = os.getenv("HOME") .. "/.cache/tde"
+local config_dir = os.getenv("HOME") .. "/.cache/electric-tantra"
 local color_rules_filename = "color_rules"
 local color_rules_filepath = config_dir .. "/titlebar/" .. color_rules_filename
 _private.color_rules = table.load(color_rules_filepath) or {}
@@ -772,7 +749,7 @@ function _private.add_window_decorations(c)
     local titlebar = awful.titlebar(c, {size = titlebar_height, bg = "transparent"})
     -- Arrange the graphics
     titlebar.widget = {
-        imagebox(corner_top_left_img, false),
+        imagebox(corner_top_left_img, true),
         {
             {
                 {

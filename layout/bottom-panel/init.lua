@@ -1,89 +1,134 @@
---[[
---MIT License
---
---Copyright (c) 2019 manilarome
---Copyright (c) 2020 Tom Meyers
---
---Permission is hereby granted, free of charge, to any person obtaining a copy
---of this software and associated documentation files (the "Software"), to deal
---in the Software without restriction, including without limitation the rights
---to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
---copies of the Software, and to permit persons to whom the Software is
---furnished to do so, subject to the following conditions:
---
---The above copyright notice and this permission notice shall be included in all
---copies or substantial portions of the Software.
---
---THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
---IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
---FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
---AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
---LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
---OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
---SOFTWARE.
-]]
-local beautiful = require("beautiful")
-local wibox = require("wibox")
-local dpi = require("beautiful").xresources.apply_dpi
-local signals = require("lib-tde.signals")
+local awful = require('awful')
+local beautiful = require('beautiful')
+local wibox = require('wibox')
+local gears = require('gears')
+local icons = require('theme.icons')
+local dpi = beautiful.xresources.apply_dpi
+local clickable_container = require('widget.clickable-container')
+local task_list = require('widget.task-list')
+local tag_list = require('widget.tag-list')
+local hardware = require("lib-tde.hardware-check")
 
 local bottom_panel = function(s)
-  local action_bar_height = dpi(45) -- 48
 
-  local panel =
-    wibox {
-    screen = s,
-    height = action_bar_height,
-    width = s.geometry.width,
-    x = s.geometry.x,
-    y = (s.geometry.y + s.geometry.height) - action_bar_height,
-    ontop = true,
-    bg = beautiful.background.hue_800,
-    fg = beautiful.fg_normal
-  }
-
-  signals.connect_background_theme_changed(
-    function(theme)
-      panel.bg = theme.hue_800 .. beautiful.background_transparency
+  local function show_widget_or_default(widget, show, require_is_function)
+    if show and require_is_function then
+      return require(widget)()
+    elseif show then
+      return require(widget)
     end
+    return wibox.widget.base.empty_widget()
+  end  
+  
+  local offsetx = 0
+	local panel = awful.wibar( {
+	  ontop = true,
+      screen = s,
+      position = "bottom",
+      height = 35, -- 48
+      width = s.geometry.width - offsetx,
+      x = s.geometry.x + offsetx,
+      y = s.geometry.y,
+      stretch = false,
+      bg = beautiful.background.hue_800,
+      fg = beautiful.fg_normal,
+      struts = {
+        bottom = dpi(26) -- 48
+      }
+	}
   )
+	panel:struts {
+		bottom = dpi(25)
+	}
 
-  screen.connect_signal(
-    "removed",
-    function(removed)
-      if s == removed then
-        panel.visible = false
-        panel = nil
-        collectgarbage("collect")
-      end
-    end
-  )
+	panel:connect_signal(
+		'mouse::enter',
+		function() 
+			local w = mouse.current_wibox
+			if w then
+				w.cursor = 'left_ptr'
+			end
+		end
+	)
 
-  -- this is called when we need to update the screen
-  signals.connect_refresh_screen(
-    function()
-      print("Refreshing bottom-panel")
-      if not s.valid or panel == nil then
-        return
-      end
-      panel.x = s.geometry.x
-      panel.y = (s.geometry.y + s.geometry.height) - action_bar_height
-      panel.width = s.geometry.width
-      panel.height = action_bar_height
-    end
-  )
+	local build_widget = function(widget)
+		return wibox.widget {
+			{
+				widget,
+				border_width = dpi(1),
+        		border_color = beautiful.groups_title_bg,
+				bg = beautiful.transparent,
+				shape = function(cr, w, h)
+					gears.shape.rounded_rect(cr, w, h, dpi(12))
+				end,
+				widget = wibox.container.background
+			},
+			top = dpi(2),
+			bottom = dpi(2),
+			widget = wibox.container.margin
+		}
+	end
 
-  panel:struts(
-    {
-      bottom = action_bar_height
-    }
-  )
+	s.systray = wibox.widget {
+		{
+			base_size = dpi(20),
+			horizontal = true,
+			screen = 'primary',
+			widget = wibox.widget.systray
+		},
+		visible = false,
+		bottom = dpi(10),
+		widget = wibox.container.margin
+	}
 
-  panel:setup {
-    layout = wibox.layout.align.vertical,
-    require("layout.bottom-panel.action-bar")(s, action_bar_height)
-  }
-  return panel
+	s.control_center_toggle = build_widget(require("widget.control-center"))
+
+	s.screen_rec 			= build_widget(require('widget.screen-recorder')())
+	s.bluetooth   			= build_widget(show_widget_or_default("widget.bluetooth", hardware.hasBluetooth()))
+	s.network       		= build_widget(show_widget_or_default("widget.wifi", hardware.hasWifi()))
+	local layout_box 		= build_widget(require('widget.layoutbox')(s))
+	s.battery     			= build_widget(show_widget_or_default("widget.battery", hardware.hasBattery(), true))
+  s.notification_center = build_widget(require("widget.notification-center"))
+	
+
+	panel : setup {
+		{
+			layout = wibox.layout.align.horizontal,
+			expand = 'none',
+      position = "bottom",
+			{
+				layout = wibox.layout.align.horizontal,
+				spacing = dpi(5),
+				
+				build_widget(tag_list(s)),
+				build_widget(task_list(s)),
+			},
+			nil,
+			{
+				layout = wibox.layout.fixed.horizontal,
+				spacing = dpi(5),
+				{
+					s.systray,
+					margins = dpi(5),
+					widget = wibox.container.margin
+				},
+				s.screen_rec,
+				s.network,
+        s.notification_center,
+        s.control_center_toggle,
+
+				s.bluetooth,
+				s.battery,
+				layout_box
+			}
+		},
+		left = dpi(5),
+		right = dpi(5),
+		widget = wibox.container.margin
+	}
+
+	return panel
 end
+
 
 return bottom_panel

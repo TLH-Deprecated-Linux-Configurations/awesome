@@ -22,6 +22,7 @@
 --OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 --SOFTWARE.
 ]]
+local awful = require("awful")
 local beautiful = require("beautiful")
 local wibox = require("wibox")
 local TaskList = require("widget.task-list")
@@ -193,7 +194,7 @@ end
 local function topbar_center_plugin(_)
   local table_widget =
     wibox.widget {
-    layout = wibox.layout.fixed.horizontal
+    layout = wibox.layout.fixed.horizontal,
   }
 
   for _, value in ipairs(pluginscenter) do
@@ -222,7 +223,7 @@ local function topbar_left_plugin(s)
 end
 
 local TopPanel = function(s, offset, controlCenterOnly)
-  local action_bar_height = dpi(26) -- 48
+  local action_bar_height = dpi(32) -- 48
 
   local offsetx = 0
   if offset == true then
@@ -241,7 +242,7 @@ local TopPanel = function(s, offset, controlCenterOnly)
       bg = beautiful.background.hue_800,
       fg = beautiful.fg_normal,
       struts = {
-        top = dpi(26) -- 48
+        bottom = dpi(26) -- 48
       }
     }
   )
@@ -278,7 +279,7 @@ local TopPanel = function(s, offset, controlCenterOnly)
 
   panel:struts(
     {
-      top = dpi(26) -- 48
+      bottom = dpi(26) -- 48
     }
   )
 
@@ -286,7 +287,7 @@ local TopPanel = function(s, offset, controlCenterOnly)
     expand = "none",
     layout = wibox.layout.align.horizontal,
     {
-      layout = wibox.layout.fixed.horizontal,
+      layout = wibox.layout.align.horizontal,
       -- Create a taglist widget
       topbar_center_plugin(s)
     },
