@@ -31,14 +31,14 @@ return {
       screen.primary.dpi ..
         ' -show "Global Search" -modi "Global Search":' ..
           HOME ..
-            "/.config/awesome/configuration/rofi/sidebar/rofi-spotlight.sh -theme " ..
-              HOME .. "/.config/awesome/configuration/rofi/sidebar/rofi.rasi",
+            "/.config/awesome/external/rofi/sidebar/rofi-spotlight.sh -theme " ..
+              HOME .. "/.config/awesome/external/rofi/sidebar/rofi.rasi",
     web = "rofi -dpi " ..
       screen.primary.dpi ..
         " -show Search -modi Search:" ..
           HOME ..
-            "/configuration/rofi/search.py" ..
-              " -theme " .. HOME .. "/.config/awesome/configuration/rofi/sidebar/rofi.rasi",
+            "/external/rofi/search.py" ..
+              " -theme " .. HOME .. "/.config/awesome/external/rofi/sidebar/rofi.rasi",
     rofiappmenu = "bash ".. HOME .."/.config/awesome/applauncher.sh " .. screen.primary.dpi .. " " .. filesystem.get_configuration_dir(),
     rofiemojimenu = "bash " .. HOME .. "/.config/awesome/emoji.sh " .. screen.primary.dpi,
     rofiwindowswitch = "bash " ..
@@ -46,7 +46,7 @@ return {
     roficlipboard = "rofi -dpi " ..
       screen.primary.dpi ..
         ' -modi "clipboard:greenclip print" -show clipboard -theme ' ..
-          HOME .. "/.config/awesome/configuration/rofi/appmenu/drun.rasi",
+          HOME .. "/.config/awesome/external/rofi/appmenu/drun.rasi",
     rofidpimenu = "bash " .. HOME .. "dpi.sh",
     rofiwifimenu = "bash " .. HOME .. "wifi.sh" .. " " .. screen.primary.dpi,
     lock = "$HOME/.config/awesome/external/i3lock/blur.sh",

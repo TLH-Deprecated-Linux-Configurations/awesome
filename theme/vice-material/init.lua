@@ -33,10 +33,11 @@ end
 local theme = {}
 theme.icons = theme_dir .. "/icons/"
 theme.font = "Hurmit Nerd Font Mono bold 10"
-theme.taglist_font = "awesomewm-font 24"
---HERE
+theme.taglist_font = "awesomewm-font 22"
+theme.taglist_spacing = 1
+theme.useless_gap = dpi(4)
 theme.titlebars_enabled = true
-theme.titlebar_size = dpi(54)
+
 -- Colors Pallets
 
 -- Primary
