@@ -28,8 +28,9 @@ local mat_list_item = require("widget.material.list-item")
 local signals = require("lib-tde.signals")
 local card = require("lib-widget.card")
 local checkbox = require("lib-widget.checkbox")
-
-local PATH_TO_ICONS = "/etc/xdg/tde/widget/notification-center/icons/"
+local HOME = os.getenv("HOME")
+local beautiful = require("beautiful")
+local PATH_TO_ICONS = HOME .. "/.config/awesome/widget/notification-center/icons/"
 local theme = require("theme.icons.dark-light")
 
 _G.dont_disturb = false
@@ -40,7 +41,7 @@ local box
 local dont_disturb_text =
   wibox.widget {
   text = i18n.translate("Do Not Disturb"),
-  font = "SFNS Display 12",
+  font = beautiful.font .. " 12",
   align = "left",
   widget = wibox.widget.textbox
 }

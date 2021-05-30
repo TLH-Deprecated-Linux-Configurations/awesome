@@ -1,30 +1,4 @@
---[[
---MIT License
---
---Copyright (c) 2019 manilarome
---Copyright (c) 2020 Tom Meyers
---
---Permission is hereby granted, free of charge, to any person obtaining a copy
---of this software and associated documentation files (the "Software"), to deal
---in the Software without restriction, including without limitation the rights
---to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
---copies of the Software, and to permit persons to whom the Software is
---furnished to do so, subject to the following conditions:
---
---The above copyright notice and this permission notice shall be included in all
---copies or substantial portions of the Software.
---
---THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
---IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
---FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
---AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
---LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
---OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
---SOFTWARE.
-]]
--- The one that generates notification in right-panel
---
---
+
 
 local naughty = require("naughty")
 local wibox = require("wibox")
@@ -64,7 +38,7 @@ end
 local notif_title = function(title)
   return wibox.widget {
     markup = gears.string.xml_escape(title),
-    font = "SFNS Display Bold 12",
+    font = beautiful.font .. " 12",
     align = "center",
     valign = "center",
     widget = wibox.widget.textbox
@@ -74,7 +48,7 @@ end
 local notif_message = function(msg)
   return wibox.widget {
     markup = msg,
-    font = "SFNS Display Regular 12",
+    font = beautiful.font .. " 12",
     align = "center",
     valign = "center",
     widget = wibox.widget.textbox
@@ -82,8 +56,8 @@ local notif_message = function(msg)
 end
 
 -- Empty content
-local empty_title = i18n.translate("Spooky...")
-local empty_message = i18n.translate("There's nothing in here... Come back later.")
+local empty_title = i18n.translate("All Clear")
+local empty_message = i18n.translate("There's nothing requiring your attention... Come check back later.")
 
 -- The function that generates notifications in right-panel
 local function notif_generate(title, message, icon, noti)
@@ -106,7 +80,7 @@ local function notif_generate(title, message, icon, noti)
         {
           {
             id = "text_role",
-            font = "SFNS Display Regular 10",
+            font = beautiful.font .. " 10",
             widget = wibox.widget.textbox
           },
           widget = wibox.container.place

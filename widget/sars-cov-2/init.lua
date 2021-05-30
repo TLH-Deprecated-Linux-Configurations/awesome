@@ -6,14 +6,14 @@ local theme = require("theme.icons.dark-light")
 local split = require("lib-tde.function.common").split
 local card = require("lib-widget.card")
 local HOME = os.getenv("HOME")
-local PATH_TO_ICONS = "/.config/awesome/widget/sars-cov-2/icons/"
-
+local PATH_TO_ICONS = HOME.. "/.config/awesome/widget/sars-cov-2/icons/"
+local beautiful = require("beautiful")
 local covid_card = card("Covid-19 cases in your country")
 
 local covid_deceases =
   wibox.widget {
   text = i18n.translate("No internet connection..."),
-  font = "SFNS Display Regular 16",
+  font = beautiful.font .. " 16",
   align = "left",
   valign = "center",
   widget = wibox.widget.textbox
@@ -22,7 +22,7 @@ local covid_deceases =
 local covid_deaths =
   wibox.widget {
   text = i18n.translate("Can't retreive deaths."),
-  font = "SFNS Display Regular 12",
+  font = beautiful.font .. " 12",
   align = "left",
   valign = "center",
   widget = wibox.widget.textbox

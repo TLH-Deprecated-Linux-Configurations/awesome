@@ -1,13 +1,9 @@
-/**
- * User: deadguy
- * Copyright: deadguy
- */
+
 
 configuration {
 
 	display-window:  "Window";
 	show-icons:      true;
-	sidebar-mode:    true;
 	font: "Hurmit Nerd Font Mono bold 15";
     fullscreen: false;
     window-thumbnail: true;

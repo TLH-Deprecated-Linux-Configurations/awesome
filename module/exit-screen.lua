@@ -39,12 +39,12 @@ local animate = require("lib-tde.animations").createAnimObject
 local icon_size = beautiful.exit_screen_icon_size or dpi(90)
 local exit_screen_hide
 
-local text = i18n.translate("Goodbye ")
+local text = i18n.translate("Goodbye for Now")
 
 local user_name =
 	wibox.widget {
 	markup = text .. i18n.translate("user!"),
-	font = "SF Pro Text UltraLight 48",
+	font = beautiful.font .. " 48",
 	align = "center",
 	valign = "center",
 	widget = wibox.widget.textbox
@@ -120,7 +120,7 @@ local suspend_command = function()
 end
 
 local exit_command = function()
-	print("Stopping TDE")
+	print("Stopping the Electric Tantra Linux")
 	_G.awesome.quit()
 end
 

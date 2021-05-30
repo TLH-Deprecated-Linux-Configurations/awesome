@@ -8,7 +8,7 @@ require("global_var")
 require("awful.autofocus")
 
 -- We load in the notifications before loading in the plugins, this is because if an error occurred during plugin loading it will be displayed correctly
-    require("module.notifications")
+--require("module.notifications")
 
     require("module.titlebar")()
 

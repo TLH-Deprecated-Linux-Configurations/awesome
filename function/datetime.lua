@@ -1,12 +1,4 @@
 
----------------------------------------------------------------------------
--- This contains functions that help with manipulating time.
---
---
--- @author Tom Meyers
--- @copyright 2020 Tom Meyers
--- @tdemod lib-tde.function.datetime
----------------------------------------------------------------------------
 
 local split = require("lib-tde.function.common").split
 

@@ -1,7 +1,7 @@
 
 local wibox = require("wibox")
 local gears = require("gears")
-
+local beautiful = require("beautiful")
 local dpi = require("beautiful").xresources.apply_dpi
 local clickable_container = require("widget.material.clickable-container")
 
@@ -11,7 +11,7 @@ local inactive_button = "#ffffff" .. "20"
 local notif_text =
   wibox.widget {
   text = i18n.translate("Notifications"),
-  font = "SFNS Display Regular 12",
+  font = beautiful.font .. " 12",
   align = "center",
   valign = "center",
   widget = wibox.widget.textbox
@@ -33,7 +33,7 @@ local wrap_notif =
 local widgets_text =
   wibox.widget {
   text = i18n.translate("Widgets"),
-  font = "SFNS Display Regular 12",
+  font = beautiful.font .. " 12",
   align = "center",
   valign = "center",
   widget = wibox.widget.textbox

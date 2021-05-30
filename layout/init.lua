@@ -1,7 +1,6 @@
 
 local bottom_panel = require("layout.bottom-panel")
-local left_panel = require("layout.left-panel")
-local right_panel = require("layout.right-panel")
+
 
 -- Create a wibox for each screen and add it
 awful.screen.connect_for_each_screen(

@@ -140,7 +140,7 @@ _private.titlebar_font = "Hurmit Nerd Font Mono bold 11"
 _private.titlebar_items = {
     left = {"floating", "ontop", "sticky"},
     middle = "title",
-    right = { "maximize", "minimize", "close"}
+    right = { "minimize", "maximize", "close"}
 }
 _private.context_menu_theme = {
     bg_focus = beautiful.primary.hue_300,
@@ -185,7 +185,7 @@ _private.close_color = "#ff3d81"
 _private.minimize_color = "#f9f871"
 _private.maximize_color = "#00ffcc"
 _private.floating_color = primary_color
-_private.ontop_color = "#b2bfd8"
+_private.ontop_color = "#0badff"
 _private.sticky_color = "#8265ff"
 -- ------------------------------------------------------------
 
@@ -470,7 +470,6 @@ local function get_titlebar_mouse_bindings(c)
                 local function add_item(text, callback)
                     menu_items[#menu_items + 1] = {text, callback}
                 end
-                -- TODO: Add client control options as menu entries for options that haven't had their buttons added
                 add_item(
                     "Auto detect Window Decoration color",
                     function()
@@ -950,7 +949,6 @@ function nice.initialize(args)
     _G.client.connect_signal(
         "request::titlebars",
         function(c)
-            -- TODO: this check should never happen in the request::titlebars callback
             if c.requests_no_titlebar then
                 awful.titlebar.hide(c, "top")
                 return

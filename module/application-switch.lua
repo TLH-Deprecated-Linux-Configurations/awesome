@@ -23,9 +23,9 @@ local _M = {}
 _M.settings = {
     preview_box = true,
     preview_box_bg = beautiful.bg_normal,
-    preview_box_border = beautiful.primary.hue_700,
+    preview_box_border = beautiful.xcolor7,
     preview_box_fps = 0.3,
-    preview_box_delay = 150,
+    preview_box_delay = 100,
     preview_box_title_font = {"sans", "italic", "normal"},
     preview_box_title_font_size_factor = 0.8,
     preview_box_title_color = {0, 0, 0, 1},
@@ -76,11 +76,7 @@ function _M.getClients()
         c = awful.client.focus.history.get(s, idx)
     end
 
-    -- Minimized clients will not appear in the focus history
-    -- Find them by cycling through all clients, and adding them to the list
-    -- if not already there.
-    -- This will preserve the history AND enable you to focus on minimized clients
-
+-- cycle through all the clients enabling cycling through minimized clients without loosing history
     local t = s.selected_tag
     local all = client.get(s)
 

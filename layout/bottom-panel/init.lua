@@ -8,7 +8,6 @@ local clickable_container = require("widget.clickable-container")
 local task_list = require("widget.task-list")
 local tag_list = require("widget.tag-list")
 local hardware = require("lib-tde.hardware-check")
-local clock = require("widget.clock")
 
 local bottom_panel = function(s)
   local function show_widget_or_default(widget, show, require_is_function)
@@ -27,15 +26,15 @@ local bottom_panel = function(s)
       ontop = true,
       screen = s,
       position = "bottom",
-      height = dpi(35), -- 48
+      height = dpi(38), -- 48
       width = s.geometry.width - offsetx,
       x = s.geometry.x + offsetx,
       y = s.geometry.y,
       stretch = false,
-      bg = beautiful.background.hue_800,
+      bg = beautiful.bg_normal .. '88',
       fg = beautiful.fg_normal,
       struts = {
-        bottom = dpi(36) -- 48
+        bottom = dpi(38) -- 48
       }
     }
   )
@@ -57,15 +56,15 @@ local bottom_panel = function(s)
     return wibox.widget {
       {
         widget,
-        border_width = dpi(1),
+        border_width = dpi(3),
         border_color = beautiful.xcolor0,
         bg = beautiful.xcolor0 .. "99",
         shape = function(cr, w, h)
-          gears.shape.rounded_rect(cr, w, h, dpi(6))
+          gears.shape.rounded_rect(cr, w, h, dpi(3))
         end,
         widget = wibox.container.background
       },
-      top = dpi(0),
+      top = dpi(1),
       bottom = dpi(0),
       widget = wibox.container.margin
     }
@@ -102,13 +101,14 @@ s.mytextclock = build_widget(require("widget.clock"))
       {
         layout = wibox.layout.align.horizontal,
         spacing = dpi(2),
+        s.control_center_toggle,
         tag_list(s),
         task_list(s)
       },
       nil,
       {
         layout = wibox.layout.fixed.horizontal,
-        spacing = dpi(5),
+        spacing = dpi(2),
         {
           s.systray,
           margins = dpi(5),
@@ -117,13 +117,14 @@ s.mytextclock = build_widget(require("widget.clock"))
         s.about,
         s.screen_rec,
         s.network,
-        s.notification_center,
-        s.control_center_toggle,
         s.bluetooth,
+        
         s.battery,
        
         layout_box,
         s.mytextclock,
+        s.notification_center,
+
         --clock,
       }
     },

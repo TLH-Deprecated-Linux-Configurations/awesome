@@ -16,5 +16,10 @@
         "root",
         "awful",
         "mouse"
+    ],
+    "spellright.language": [],
+    "spellright.documentTypes": [
+        "latex",
+        "plaintext"
     ]
 }
