@@ -45,7 +45,7 @@ local function handle_plugin(value, name)
             -- otherwise the user entered a wrong plugin
             return true, require(value)
         end
-    elseif dirExists(os.getenv("HOME") .. "/.config/tde/" .. value) then
+    elseif dirExists(os.getenv("HOME") .. "/.config/awesome/plugins/" .. value) then
         local plugin = prequire(value)
         if (plugin) then
             print("Plugin " .. name .. " is loaded in!")
@@ -53,11 +53,11 @@ local function handle_plugin(value, name)
         else
             inValidPlugin(
                 name,
-                "Errored out while loading. Make sure your plugins is the latest version and supports the latest TDE build."
+                "Errored out while loading. Make sure your plugins is the latest version."
             )
         end
     else
-        inValidPlugin(name, "Not found. Make sure it is present in  ~/.config/tde/" .. name .. "/init.lua")
+        inValidPlugin(name, "Not found. Make sure it is present in  ~/.config/awesome/plugins/" .. name .. "/init.lua")
     end
     return false
 end

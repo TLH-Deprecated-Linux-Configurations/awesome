@@ -1,4 +1,6 @@
-
+-- ########################################################################
+-- Initialization #########################################################
+-- ########################################################################
 local awful = require("awful")
 local wibox = require("wibox")
 local gears = require("gears")
@@ -12,12 +14,17 @@ local card = require("lib-widget.card")
 
 local dpi = beautiful.xresources.apply_dpi
 local icons = require("theme.icons")
-
+-- ########################################################################
+-- Settings ###############################################################
+-- ########################################################################
 local m = dpi(10)
 local settings_index = dpi(40)
 local settings_width = dpi(1100)
 local settings_nw = dpi(260)
 
+-- ########################################################################
+-- Widget #################################################################
+-- ########################################################################
 -- returns the total widget and text widget holding the normal name
 local function generate_setting_panel(title)
   local typeWidget =
@@ -78,7 +85,7 @@ return function()
   local separator = seperator_widget(settings_index / 1.5)
 
   local container = wibox.layout.fixed.vertical()
-  local device_name, device_text = generate_setting_panel(i18n.translate("Device name"))
+  local device_name, device_text = generate_setting_panel(i18n.translate("Name"))
 
   signals.connect_username(
     function(value)
@@ -123,7 +130,7 @@ return function()
   display_freq_text.text = tostring(hardware.getDisplayFrequency()) .. " Hz"
 
   local os_name_name, os_name_text = generate_setting_panel(i18n.translate("OS Name"))
-  os_name_text.text = "TOS Linux"
+  os_name_text.text = "the Electric Tantra Linux"
 
   signals.connect_distro(
     function(payload)
@@ -135,8 +142,6 @@ return function()
   local out, _ = execute("uname -m")
   os_type_text.text = out
 
-  local tde_version_name, tde_version_text = generate_setting_panel(i18n.translate("TDE Version"))
-  tde_version_text.text = require("release")
 
   local windowing_system_name, windowing_system_text = generate_setting_panel(i18n.translate("Windowing system"))
   -- TDE currently only supports X11
@@ -159,7 +164,6 @@ return function()
 
   container:add(os_name_name)
   container:add(os_type_name)
-  container:add(tde_version_name)
   container:add(windowing_system_name)
 
   view:setup {

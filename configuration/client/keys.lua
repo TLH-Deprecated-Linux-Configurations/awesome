@@ -16,7 +16,7 @@ local clientKeys =
   ),
   awful.key(
     {modkey},
-    config.ontop,
+    "t",
     function(c)
       c.ontop = not c.ontop
       c.sticky = c.ontop
@@ -26,6 +26,16 @@ local clientKeys =
   ),
   awful.key(
     {modkey},
+    "n",
+    function(c)
+        -- The client currently has the input focus, so it cannot be
+        -- minimized, since minimized clients can't have the focus.
+        c.minimized = true
+    end,
+    {description = "minimize", group = "client"}
+),
+  awful.key(
+    {modkey},
     "x",
     function(c)
       c:kill()
@@ -33,8 +43,8 @@ local clientKeys =
     {description = i18n.translate("close"), group = i18n.translate("client")}
   ),
   awful.key(
-    {modkey},
-    "x",
+    {modkey, "Control"},
+    "f",
     function(c)
       c.floating = not c.floating
       c:raise()

@@ -100,7 +100,7 @@ local function secondTip()
         {
             app_name = "New User Tutorial",
             title = "New User Tutorial",
-            message = i18n.translate("The default label can be changed by pressing the icon below to the left of the clock."),
+            message = i18n.translate("The default window tiling layout can be changed by pressing the icon below to the left of the clock."),
             timeout = 0,
             position = "bottom_left"
         }

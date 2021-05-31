@@ -40,7 +40,7 @@ local reddit_widget =
   layout = wibox.layout.align.horizontal
 }
 
-local reddit_button = clickable_container(wibox.container.margin(reddit_widget, dpi(7), dpi(7), dpi(7), dpi(7)))
+local reddit_button = clickable_container(wibox.container.margin(reddit_widget, dpi(3), dpi(3), dpi(3), dpi(3)))
 reddit_button:buttons(
   gears.table.join(
     awful.button(
@@ -70,7 +70,7 @@ local facebook_widget =
   layout = wibox.layout.align.horizontal
 }
 
-local facebook_button = clickable_container(wibox.container.margin(facebook_widget, dpi(7), dpi(7), dpi(7), dpi(7)))
+local facebook_button = clickable_container(wibox.container.margin(facebook_widget, dpi(3), dpi(3), dpi(3), dpi(3)))
 facebook_button:buttons(
   gears.table.join(
     awful.button(
@@ -99,7 +99,7 @@ local twitter_widget =
   layout = wibox.layout.align.horizontal
 }
 
-local twitter_button = clickable_container(wibox.container.margin(twitter_widget, dpi(7), dpi(7), dpi(7), dpi(7)))
+local twitter_button = clickable_container(wibox.container.margin(twitter_widget, dpi(3), dpi(3), dpi(3), dpi(3)))
 twitter_button:buttons(
   gears.table.join(
     awful.button(
@@ -128,7 +128,7 @@ local instagram_widget =
   layout = wibox.layout.align.horizontal
 }
 
-local instagram_button = clickable_container(wibox.container.margin(instagram_widget, dpi(7), dpi(7), dpi(7), dpi(7)))
+local instagram_button = clickable_container(wibox.container.margin(instagram_widget, dpi(3), dpi(3), dpi(3), dpi(3)))
 instagram_button:buttons(
   gears.table.join(
     awful.button(

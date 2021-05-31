@@ -311,7 +311,7 @@ return function()
     }
   }
 
-  -- TODO: decrease precision of the values
+  
   signals.connect_ram_usage(
     function(value)
       ram_progress:set_value(value)

@@ -1,4 +1,6 @@
-
+-- ########################################################################
+-- ########################################################################
+-- ########################################################################
 local awful = require("awful")
 local wibox = require("wibox")
 local gears = require("gears")
@@ -16,12 +18,17 @@ local scrollbox = require("lib-widget.scrollbox")
 
 
 local dpi = beautiful.xresources.apply_dpi
-
+-- ########################################################################
+-- ########################################################################
+-- ########################################################################
 local m = dpi(10)
 local settings_index = dpi(40)
 local settings_width = dpi(1100)
 local settings_nw = dpi(260)
 
+-- ########################################################################
+-- ########################################################################
+-- ########################################################################
 local scrollbox_body = {}
 
 local refresh = function()
@@ -54,6 +61,9 @@ return function()
   title.font = beautiful.title_font
   title.forced_height = settings_index + m + m
 
+  -- ########################################################################
+-- ########################################################################
+-- ########################################################################
   local close = wibox.widget.imagebox(icons.close)
   close.forced_height = dpi(30)
   close:buttons(
@@ -80,7 +90,9 @@ return function()
   local mic_footer = wibox.widget.textbox(i18n.translate("test"))
   mic_footer.font = beautiful.font
   mic_footer.align = "right"
-
+-- ########################################################################
+-- ########################################################################
+-- ########################################################################
   local vol_slider =
     slider(
     0,
@@ -100,7 +112,9 @@ return function()
       end
     end
   )
-
+-- ########################################################################
+-- ########################################################################
+-- ########################################################################
   local function create_volume_widget(button_icon, text, obj, set_function)
     local button_wgt = mat_icon_button(mat_icon(button_icon, dpi(25)))
     button_wgt:buttons(
@@ -117,7 +131,9 @@ return function()
         )
       )
     )
-
+-- ########################################################################
+-- ########################################################################
+-- ########################################################################
     return wibox.widget {
       wibox.container.margin(
         wibox.widget {
@@ -137,7 +153,9 @@ return function()
       layout = wibox.layout.align.horizontal
     }
   end
-
+-- ########################################################################
+-- ########################################################################
+-- ########################################################################
   local function create_sink_widget(sink)
     return create_volume_widget(icons.volume, sink.name, sink, volume.set_default_sink)
   end
@@ -189,7 +207,9 @@ return function()
         }
       )
     end
-
+-- ########################################################################
+-- ########################################################################
+-- ########################################################################
     -- add buttons to test the audio
     sink_children:add(wibox.container.margin(button("Test speaker", function()
       sound()
@@ -296,7 +316,6 @@ return function()
       mic_footer.markup = 'Input: <span font="' .. beautiful.font .. '">' .. source.name .. "</span>"
     end
 
-    -- TODO: Find a nicer api for detecting if audio is not working
     -- for example when no audio driver is found
     if sinks == nil or sources == nil or sink == nil or source == nil then
       scrollbox_body.reset()

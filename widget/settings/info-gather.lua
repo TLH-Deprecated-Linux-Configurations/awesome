@@ -1,4 +1,3 @@
-
 local signals = require("lib-tde.signals")
 local hardware = require("lib-tde.hardware-check")
 local filehandle = require("lib-tde.file")
@@ -32,48 +31,36 @@ end
 
 local function get_uptime()
     -- get the uptime
-    awful.widget.watch(
-        "uptime -p",
-        600,
-        function(_, stdout)
-            local uptime = string.gsub(stdout, "%\n", "") or ""
-            signals.emit_uptime(uptime)
-        end
-    )
+    awful.widget.watch("uptime -p", 600, function(_, stdout)
+        local uptime = string.gsub(stdout, "%\n", "") or ""
+        signals.emit_uptime(uptime)
+    end)
 end
 
 local function get_ram_info()
-    delayed_timer(
-        config.ram_poll,
-        function()
-            local usage, total = hardware.getRamInfo()
-            signals.emit_ram_usage(usage)
-            signals.emit_ram_total(common.num_to_str(total))
-            print("Ram usage: " .. usage .. "%")
-        end,
-        config.ram_startup_delay
-    )
+    delayed_timer(config.ram_poll, function()
+        local usage, total = hardware.getRamInfo()
+        signals.emit_ram_usage(usage)
+        signals.emit_ram_total(common.num_to_str(total))
+        print("Ram usage: " .. usage .. "%")
+    end, config.ram_startup_delay)
 end
 
 local function get_disk_info()
-    delayed_timer(
-        config.harddisk_poll,
-        function()
-            local res = statvfs("/")
-            local usage = ((res.f_blocks - res.f_bfree) / res.f_blocks) * 100
+    delayed_timer(config.harddisk_poll, function()
+        local res = statvfs("/")
+        local usage = ((res.f_blocks - res.f_bfree) / res.f_blocks) * 100
 
-            -- by default f_blocks is in 512 byte chunks
-            local block_size = res.f_frsize or 512
-            local size_in_bytes = res.f_blocks * block_size
+        -- by default f_blocks is in 512 byte chunks
+        local block_size = res.f_frsize or 512
+        local size_in_bytes = res.f_blocks * block_size
 
-            print("Hard drive size: " .. size_in_bytes .. "b")
-            print("Hard drive usage: " .. usage .. "%")
+        print("Hard drive size: " .. size_in_bytes .. "b")
+        print("Hard drive usage: " .. usage .. "%")
 
-            signals.emit_disk_usage(usage)
-            signals.emit_disk_space(common.bytes_to_grandness(size_in_bytes))
-        end,
-        config.harddisk_startup_delay
-    )
+        signals.emit_disk_usage(usage)
+        signals.emit_disk_space(common.bytes_to_grandness(size_in_bytes))
+    end, config.harddisk_startup_delay)
 end
 
 local function init()
@@ -83,8 +70,6 @@ local function init()
     get_ram_info()
     get_disk_info()
 
-    -- TODO: don't create a dependency to the left panel
-    -- extract that info here
 end
 
 init()

@@ -44,7 +44,7 @@ return {
   art = theme(config["art"] or lit_dir .. "/art.svg"),
   --others
   menu = theme(config["menu"] or lit_dir .. "/menu.svg"),
-  logo = config["logo"] or lit_dir .. "/logo.svg",
+  logo = dir .. "/logo.svg",
   settings = theme(config["settings"] or dir .. "/settings.svg"),
   close = theme(config["close"] or dir .. "/close.svg"),
   logout = theme(config["logout"] or dir .. "/logout.svg"),

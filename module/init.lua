@@ -13,4 +13,3 @@ _G.switcher = require("module.application-switch")
 
 
 require("module.battery-notifier")
-_G.collision = require("collision")()

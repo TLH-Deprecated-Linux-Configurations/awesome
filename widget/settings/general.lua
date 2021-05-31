@@ -200,18 +200,13 @@ return function()
       general["audio_change_sound"] == "1",
       "audio_change_sound"
     ),
-    create_checkbox(
-      i18n.translate("Error data opt out"),
-      i18n.translate("Send error messages to the developers, this is useful for debugging and reducing errors/bugs"),
-      general["tde_opt_out"] == "1",
-      "tde_opt_out"
-    ),
+
     create_checkbox(
       i18n.translate("Titlebar drawing"),
       i18n.translate("Draw the titlebar above every application"),
-      general["draw_mode"] == "fast",
+      general["draw_mode"] == "full",
       "draw_mode",
-      "fast",
+      "full",
       "none"
     ),
     create_checkbox(
@@ -281,49 +276,6 @@ return function()
     layout = wibox.layout.flex.vertical
   }
 
-  local break_timeout_value = tonumber(general["break_timeout"]) or 60
-  local break_time_value = tonumber(general["break_time"]) or 60
-
-  local break_widget =
-    wibox.widget {
-    create_checkbox(
-      i18n.translate("Break Timer"),
-      i18n.translate(
-        "A break timer gets triggered every hour, this is intended to give you some time to stretch, take a break etc"
-      ),
-      general["break"] == "1",
-      "break"
-    ),
-    create_option_slider(
-      i18n.translate("Break Timeout"),
-      60, -- one minute
-      60 * 60 * 12, -- 12 hours
-      60,
-      "break_timeout",
-      break_timeout_value,
-      function(value)
-        break_timeout_value = value
-      end,
-      function()
-        return i18n.translate("Timeout before the break triggers: ") .. datetime.numberInSecToMS(break_timeout_value)
-      end
-    ),
-    create_option_slider(
-      i18n.translate("Break Time"),
-      1, -- one second
-      60 * 15, -- 15 minutes
-      5,
-      "break_time",
-      break_time_value,
-      function(value)
-        break_time_value = value
-      end,
-      function()
-        return i18n.translate("Duration of the break: ") .. datetime.numberInSecToMS(break_time_value)
-      end
-    ),
-    layout = wibox.layout.flex.vertical
-  }
 
   local slider_widget =
     wibox.widget {

@@ -2,17 +2,10 @@ local filesystem = require("gears.filesystem")
 local config = require("config")
 local hardware = require("lib-tde.hardware-check")
 
-local function addHash(input)
-  if input == nil then
-    return nil
-  end
-  return "#" .. input
-end
 
 -- lib-tde to retrieve current theme
 local beautiful = require("beautiful")
 local color = beautiful.xforeground
-local colorBG = beautiful.primary.xbackground
 local HOME = os.getenv("HOME")
 local picom = "picom -b --dbus --experimental-backends --config " .. config.getComptonFile()
 -- if the user has weak hardware then don't use picom with it's blur effects

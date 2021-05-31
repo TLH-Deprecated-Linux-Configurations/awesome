@@ -83,122 +83,121 @@ local globalKeys =
   ),
   --#############################################################################
 
---#############################################################################
-awful.key(
-  {modkey},
-  "F2",
-  function()
-    awful.spawn("firefox")
-  end,
-  {
-    description = "Launch Firefox",
-    group = "Launcher"
-  }
-),
---#############################################################################
-awful.key(
-  {modkey, "Shift"},
-  "F2",
-  function()
-    awful.spawn("buku_run")
-  end,
-  {
-    description = "Launch Buku Rofi Menu",
-    group = "Launcher"
-  }
-),
---#############################################################################
-
-awful.key(
-  {modkey, "Control"},
-  "F2",
-  function()
-    awful.spawn("chrome")
-  end,
-  {
-    description = "Launch Chrome",
-    group = "Launcher"
-  }
-),
---#############################################################################
-
- 	--#############################################################################
-
-   awful.key(
-		{modkey},
-		"F3",
-		function()
-			awful.spawn("thunar")
-		end,
-		{
-			description = "Launch File Manager",
-			group = "Launcher"
-		}
-	),
-	--#############################################################################
-
-	awful.key(
-		{modkey, "Control"},
-		"F3",
-		function()
-			awful.spawn("gksu caja")
-		end,
-		{
-			description = "Launch File Manager as Root",
-			group = "Launcher"
-		}
-	),
-	--#############################################################################
-
-	awful.key(
-		{modkey, "Shift"},
-		"F3",
-		function()
-			awful.spawn("kitty -e ranger")
-		end,
-		{
-			description = "Launch Terminal File Manager",
-			group = "Launcher"
-		}
-	),
-	--#############################################################################
-	awful.key(
-		{modkey},
-		"F4",
-		function()
-			awful.spawn.easy_async_with_shell("~/.config/awesome/configuration/rofi/fontawesome_menu/fontawesome-menu")
-		end,
-		{
-			description = "Copy Font - Awesome Icons to Clipboard",
-			group = "Launcher"
-		}
-	), --#############################################################################
-	awful.key(
-		{modkey, "Control"},
-		"F4",
-		function()
-			awful.spawn.easy_async_with_shell("emojipick")
-		end,
-		{
-			description = "Copy Emojis to Clipboard",
-			group = "Launcher"
-		}
-	),
-	--#############################################################################
+  --#############################################################################
   awful.key(
-		{modkey},
-		"F5",
-		function()
-			awful.spawn("arandr")
-		end,
-		{description = "open display configuration application", group = "function"}
-	),
+    {modkey},
+    "F2",
+    function()
+      awful.spawn("firefox")
+    end,
+    {
+      description = "Launch Firefox",
+      group = "Launcher"
+    }
+  ),
+  --#############################################################################
+  awful.key(
+    {modkey, "Shift"},
+    "F2",
+    function()
+      awful.spawn("buku_run")
+    end,
+    {
+      description = "Launch Buku Rofi Menu",
+      group = "Launcher"
+    }
+  ),
+  --#############################################################################
 
+  awful.key(
+    {modkey, "Control"},
+    "F2",
+    function()
+      awful.spawn("chrome")
+    end,
+    {
+      description = "Launch Chrome",
+      group = "Launcher"
+    }
+  ),
+  --#############################################################################
+
+  --#############################################################################
+
+  awful.key(
+    {modkey},
+    "F3",
+    function()
+      awful.spawn("thunar")
+    end,
+    {
+      description = "Launch File Manager",
+      group = "Launcher"
+    }
+  ),
+  --#############################################################################
+
+  awful.key(
+    {modkey, "Control"},
+    "F3",
+    function()
+      awful.spawn("gksu caja")
+    end,
+    {
+      description = "Launch File Manager as Root",
+      group = "Launcher"
+    }
+  ),
+  --#############################################################################
+
+  awful.key(
+    {modkey, "Shift"},
+    "F3",
+    function()
+      awful.spawn("kitty -e ranger")
+    end,
+    {
+      description = "Launch Terminal File Manager",
+      group = "Launcher"
+    }
+  ),
+  --#############################################################################
+  awful.key(
+    {modkey},
+    "F4",
+    function()
+      awful.spawn.easy_async_with_shell("~/.config/awesome/configuration/rofi/fontawesome_menu/fontawesome-menu")
+    end,
+    {
+      description = "Copy Font - Awesome Icons to Clipboard",
+      group = "Launcher"
+    }
+  ), --#############################################################################
+  awful.key(
+    {modkey, "Control"},
+    "F4",
+    function()
+      awful.spawn.easy_async_with_shell("emojipick")
+    end,
+    {
+      description = "Copy Emojis to Clipboard",
+      group = "Launcher"
+    }
+  ),
+  --#############################################################################
+  awful.key(
+    {modkey},
+    "F5",
+    function()
+      awful.spawn("arandr")
+    end,
+    {description = "open display configuration application", group = "function"}
+  ),
   --#############################################################################
 
   -- Dropdown application
   awful.key(
-    {modkey,},
+    {modkey},
     "F12",
     function()
       _G.toggle_quake()
@@ -239,45 +238,45 @@ awful.key(
     {description = i18n.translate("Tab between applications in reverse order"), group = i18n.translate("Laucher")}
   ),
   --#############################################################################
-	--#############################################################################
-	-- Client resize master
-	awful.key(
-		{modkey, },
-		"Right",
-		function()
-			awful.tag.incmwfact(0.05)
-		end,
-		{description = "increase master width factor", group = "layout"}
-	),
-	--#############################################################################
-	awful.key(
-		{modkey,},
-		"Left",
-		function()
-			awful.tag.incmwfact(-0.05)
-		end,
-		{description = "decrease master width factor", group = "layout"}
-	),
-	--#############################################################################
-	-- Increase/Decrease numbers of master
-	awful.key(
-		{modkey,},
-		"Up",
-		function()
-			awful.tag.incnmaster(1, nil, true)
-		end,
-		{description = "increase the number of master clients", group = "layout"}
-	),
-	--#############################################################################
-	awful.key(
-		{modkey,},
-		"Down",
-		function()
-			awful.tag.incnmaster(-1, nil, true)
-		end,
-		{description = "decrease the number of master clients", group = "layout"}
-	),
-	--#############################################################################
+  --#############################################################################
+  -- Client resize master
+  awful.key(
+    {modkey},
+    "Right",
+    function()
+      awful.tag.incmwfact(0.05)
+    end,
+    {description = "increase master width factor", group = "layout"}
+  ),
+  --#############################################################################
+  awful.key(
+    {modkey},
+    "Left",
+    function()
+      awful.tag.incmwfact(-0.05)
+    end,
+    {description = "decrease master width factor", group = "layout"}
+  ),
+  --#############################################################################
+  -- Increase/Decrease numbers of master
+  awful.key(
+    {modkey},
+    "Up",
+    function()
+      awful.tag.incnmaster(1, nil, true)
+    end,
+    {description = "increase the number of master clients", group = "layout"}
+  ),
+  --#############################################################################
+  awful.key(
+    {modkey},
+    "Down",
+    function()
+      awful.tag.incnmaster(-1, nil, true)
+    end,
+    {description = "decrease the number of master clients", group = "layout"}
+  ),
+  --#############################################################################
 
   -- Screen Shots
   -- Screen Shot and Save
@@ -295,7 +294,7 @@ awful.key(
 
   -- Screen Shot Area and Save
   awful.key(
-    {modkey,},
+    {modkey},
     "Print",
     function()
       print("Taking an area screenhot")
@@ -329,7 +328,7 @@ awful.key(
 
   awful.key(
     {modkey},
-   "a",
+    "a",
     awful.tag.viewnext,
     {description = i18n.translate("view next"), group = i18n.translate(i18n.translate("tag"))}
   ),
@@ -408,7 +407,7 @@ awful.key(
 
   -- Standard program
   awful.key(
-    {modkey,},
+    {modkey},
     "r",
     _G.awesome.restart,
     {description = i18n.translate("reload awesome"), group = i18n.translate("awesome")}
@@ -516,7 +515,6 @@ awful.key(
     end,
     {description = i18n.translate("restore minimized"), group = i18n.translate("client")}
   ),
-
   --#############################################################################
 
   -- Brightness
@@ -774,7 +772,6 @@ awful.key(
     end,
     {description = i18n.translate("window screenshot"), group = i18n.translate("Utility")}
   ),
-
   --#############################################################################
 
   awful.key(
