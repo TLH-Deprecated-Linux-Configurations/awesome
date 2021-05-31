@@ -8,7 +8,7 @@ local layout_box = function(s)
 	local layoutbox = wibox.widget {
 		{
 			awful.widget.layoutbox(s),
-			margins = dpi(2),
+			margins = dpi(1),
 			widget = wibox.container.margin
 		},
 		widget = clickable_container

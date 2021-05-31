@@ -1,4 +1,3 @@
-
 local gears = require("gears")
 local client_keys = require("configuration.client.keys")
 local client_buttons = require("configuration.client.buttons")
@@ -13,26 +12,12 @@ local function getItemFloat(item)
   return config_float[item] or nil
 end
 
-local function getApplicationsPerTag(number)
-  local screen = "screen_" .. number
-  local iterator = {}
-  local item = getItem(screen)
-  if item ~= nil and type(item) == "table" then
-    for _, value in ipairs(item) do
-      table.insert(iterator, value)
-    end
-  elseif item ~= nil and type(item) == "string" then
-    table.insert(iterator, item)
-  end
-  return iterator
-end
-
 local function getFloatingWindow()
   local name = "float"
   -- Add default applications that are always floating
   local iterator = {"Steam"}
   local item = getItemFloat(name)
-  if  item ~= nil and type(item) == "table" then
+  if item ~= nil and type(item) == "table" then
     for _, value in ipairs(item) do
       table.insert(iterator, value)
     end
@@ -47,7 +32,7 @@ local function getTitlebarWindow()
   -- Add default applications that are always floating
   local iterator = {"Steam"}
   local item = getItem(name)
-  if  item ~= nil and type(item) == "table" then
+  if item ~= nil and type(item) == "table" then
     for _, value in ipairs(item) do
       table.insert(iterator, value)
     end
@@ -86,7 +71,8 @@ awful.rules.rules = {
       sticky = false,
       maximized_horizontal = false,
       maximized_vertical = false,
-      titlebars_enabled = true
+      titlebars_enabled = true,
+      skip_decoration = false
     }
   },
   {
@@ -253,8 +239,6 @@ awful.rules.rules = {
       }
     }
   },
-  -- Polkit
-  -- TODO: Detect the polkit type automatically
   {
     rule_any = {class = {"lxpolkit", "Lxpolkit"}},
     except_any = {type = {"dialog"}},

@@ -5,13 +5,13 @@ local wibox = require("wibox")
 local gears = require("gears")
 local dpi = require("beautiful").xresources.apply_dpi
 local theme = require("theme.icons.dark-light")
-
+local HOME = os.getenv("HOME")
 local lgi = require("lgi")
 local Pango = lgi.Pango
 
 local beautiful = require("beautiful")
 
-local PATH_TO_ICONS = "/etc/xdg/tde/widget/notification-center/icons/"
+local PATH_TO_ICONS = HOME ..  "/.config/awesome/widget/notification-center/icons/"
 
 local notif_layout = wibox.layout.fixed.vertical(reverse)
 notif_layout.spacing = dpi(5)

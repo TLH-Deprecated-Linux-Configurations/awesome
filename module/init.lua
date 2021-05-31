@@ -6,7 +6,6 @@ require("module.exit-screen")
 require("module.quake-terminal")
 require("module.brightness-slider-osd")
 require("module.volume-slider-osd")
-require("module.plugin-module")
 require("module.volume_manager")
 _G.switcher = require("module.application-switch")
 

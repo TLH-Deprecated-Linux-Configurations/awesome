@@ -466,7 +466,7 @@ local globalKeys =
     {modkey, "Control"},
     "h",
     function()
-      awful.tag.incncol(1, nil, true)
+      awful.tag.incnplugplug(1, nil, true)
     end,
     {description = i18n.translate("increase the number of columns"), group = i18n.translate("layout")}
   ),
@@ -484,7 +484,7 @@ local globalKeys =
 
   awful.key(
     {modkey},
-    "Space",
+    "space",
     function()
       awful.layout.inc(1)
     end,
@@ -494,7 +494,7 @@ local globalKeys =
 
   awful.key(
     {modkey, "Shift"},
-    "Space",
+    "space",
     function()
       awful.layout.inc(-1)
     end,

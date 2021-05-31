@@ -31,7 +31,7 @@ local bottom_panel = function(s)
       x = s.geometry.x + offsetx,
       y = s.geometry.y,
       stretch = false,
-      bg = beautiful.bg_normal .. '88',
+      bg = beautiful.bg_normal .. "88",
       fg = beautiful.fg_normal,
       struts = {
         bottom = dpi(38) -- 48
@@ -91,15 +91,15 @@ local bottom_panel = function(s)
   local layout_box = build_widget(require("widget.layoutbox")(s))
   s.battery = build_widget(show_widget_or_default("widget.battery", hardware.hasBattery(), true))
   s.notification_center = build_widget(require("widget.notification-center"))
-s.about = build_widget(require("widget.about"))
-s.mytextclock = build_widget(require("widget.clock"))
+  s.about = build_widget(require("widget.about"))
+  s.mytextclock = build_widget(require("widget.clock"))
   panel:setup {
     {
       layout = wibox.layout.align.horizontal,
       expand = "none",
       position = "bottom",
       {
-        layout = wibox.layout.align.horizontal,
+        layout = wibox.layout.fixed.horizontal,
         spacing = dpi(2),
         s.control_center_toggle,
         tag_list(s),
@@ -118,12 +118,10 @@ s.mytextclock = build_widget(require("widget.clock"))
         s.screen_rec,
         s.network,
         s.bluetooth,
-        
         s.battery,
-       
         layout_box,
         s.mytextclock,
-        s.notification_center,
+        s.notification_center
 
         --clock,
       }

@@ -1,4 +1,4 @@
-# Directories & Files 
+plug# Directories & Files 
 
 | File or Directory Name | Purpose/Files Contained |
 |------------------------|-------------------------|
