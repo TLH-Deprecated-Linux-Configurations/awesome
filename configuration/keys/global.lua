@@ -501,7 +501,16 @@ local globalKeys =
     {description = i18n.translate("select previous"), group = i18n.translate("layout")}
   ),
   --#############################################################################
-
+  awful.key(
+    {modkey},
+    "n",
+    function(c)
+        -- The client currently has the input focus, so it cannot be
+        -- minimized, since minimized clients can't have the focus.
+        c.minimized = true
+    end,
+    {description = "minimize", group = "client"}
+),
   awful.key(
     {modkey, "Control"},
     "n",

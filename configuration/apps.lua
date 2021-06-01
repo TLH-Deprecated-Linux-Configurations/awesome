@@ -49,7 +49,7 @@ return {
   },
   -- List of apps to start once on start-up
   run_on_start_up = {
-    "picom -b --experimental-backends --config ~/.config/awesome/configuration/picom.conf",
+    "picom -b --experimental-backends --config $HOME/.config/awesome/external/picom.conf",
     --"blueman-applet", -- Bluetooth tray icon
     "xfce4-power-manager", -- Power manager
     "xfsettingsd",

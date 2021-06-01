@@ -32,9 +32,10 @@ _G.client.connect_signal(
         end
 
         if _G.awesome.startup and not c.size_hints.user_position and not c.size_hints.program_position then
-            awful.placement.under_mouse(c) -- This line added
+            awful.screen.preferred(c)
             -- Prevent clients from being unreachable after screen count changes.
             awful.placement.no_offscreen(c)
+            awful.placement.no_overlap(c)
         end
     end
 )

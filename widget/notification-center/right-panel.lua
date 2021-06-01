@@ -133,7 +133,7 @@ local right_panel = function()
   local clear_all_text =
     wibox.widget {
     text = i18n.translate("Clear All Notifications"),
-    font = "SFNS Display Regular 10",
+    font = beautiful.font .. " 10",
     align = "center",
     valign = "bottom",
     widget = wibox.widget.textbox

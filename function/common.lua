@@ -69,12 +69,6 @@ local function num_to_str(num, precision)
 end
 
 
---- sleep for x seconds where x can be subseconds long
--- @tparam number time The time in seconds
--- @staticfct sleep
--- @usage -- lib-tde.function.common.sleep(1)
--- lib-tde.function.common.sleep(5)
--- lib-tde.function.common.sleep(0.2)
 local function sleep(time)
     if type(time) == "number" then
         if time < 0 then

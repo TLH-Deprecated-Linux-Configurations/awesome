@@ -110,7 +110,6 @@ signals.connect_battery_charging(
 		local text
 		local icon
 		local urgency
-		-- TODO if charger is plugged and battery is full, then set
 		-- battery_full_already_notified to true
 		if plugged then
 			battery_critical_already_notified = false

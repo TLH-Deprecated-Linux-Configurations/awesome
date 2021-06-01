@@ -60,11 +60,10 @@ theme.xcolor19 = "#727f96"
 theme.custom = "#ffffff"
 
 -- Primary
-theme.primary = theme.foreground 
+theme.primary = theme.foreground
 
 -- Accent
-theme.accent = theme.xcolor17 
-
+theme.accent = theme.xcolor17
 
 theme.text = theme.foreground
 
@@ -74,8 +73,7 @@ theme.ram_bar = theme.xcolor2
 theme.disk_bar = theme.xcolor3
 
 local awesome_overrides = function(awesome_theme)
-  awesome_theme.dir = theme_dir 
-
+  awesome_theme.dir = theme_dir
 
   awesome_theme.icons = awesome_theme.dir .. "/icons/"
 
@@ -88,19 +86,19 @@ local awesome_overrides = function(awesome_theme)
   awesome_theme.fg_black = theme.xcolor0
   awesome_theme.fg_normal = theme.xcolor15
 
-  awesome_theme.fg_focus =  theme.xcolor15
+  awesome_theme.fg_focus = theme.xcolor15
   awesome_theme.fg_urgent = theme.xcolor9
   awesome_theme.bat_fg_critical = theme.xcolor9
 
   awesome_theme.bg_normal = theme.background
-  awesome_theme.bg_focus =  theme.xcolor18
+  awesome_theme.bg_focus = theme.xcolor18
   awesome_theme.bg_urgent = theme.xcolor1
   awesome_theme.bg_systray = theme.xcolor18
 
   awesome_theme.bg_modal = theme.xcolor18
   awesome_theme.bg_modal_title = theme.xcolor18
   awesome_theme.bg_settings_display_number = "#00000070"
-  
+
   -- Borders
   awesome_theme.border_width = dpi(2)
   awesome_theme.border_normal = theme.background
@@ -130,7 +128,7 @@ local awesome_overrides = function(awesome_theme)
   awesome_theme.menu_width = dpi(160)
 
   -- Tooltips
-  awesome_theme.tooltip_bg = theme.background .. 'aa'
+  awesome_theme.tooltip_bg = theme.background .. "aa"
   --awesome_theme.tooltip_border_color = '#232323'
   awesome_theme.tooltip_border_width = 0
   awesome_theme.tooltip_shape = function(cr, w, h)
@@ -146,7 +144,7 @@ local awesome_overrides = function(awesome_theme)
   awesome_theme.layout_fairv = awesome_theme.icons .. "layouts/fair.png"
   awesome_theme.layout_fairh = awesome_theme.icons .. "layouts/fairh.png"
   awesome_theme.layout_magnifier = awesome_theme.icons .. "layouts/magnifier.png"
-awesome_theme.layout_mstab = awesome_theme.icons .. "layouts/mstab.png"
+  awesome_theme.layout_mstab = awesome_theme.icons .. "layouts/mstab.png"
   -- Taglist
   local taglist_occupied = theme.xcolor17
   awesome_theme.taglist_bg_empty = theme.background .. "99"
@@ -154,24 +152,16 @@ awesome_theme.layout_mstab = awesome_theme.icons .. "layouts/mstab.png"
     "linear:0," ..
     dpi(48) ..
       ":0,0:0," ..
-        taglist_occupied ..
-          ":0.11," ..
-            taglist_occupied .. ":0.11," .. theme.background .. "99" .. theme.background
+        taglist_occupied .. ":0.11," .. taglist_occupied .. ":0.11," .. theme.background .. "99" .. theme.background
   awesome_theme.taglist_bg_urgent =
     "linear:0," ..
     dpi(48) ..
       ":0,0:0," ..
-        theme.xcolor16 ..
-          ":0.11," ..
-            theme.xcolor16 ..
-              ":0.11," .. theme.background .. ":1," .. theme.background
+        theme.xcolor16 .. ":0.11," .. theme.xcolor16 .. ":0.11," .. theme.background .. ":1," .. theme.background
   awesome_theme.taglist_bg_focus =
-  "linear:0,0:0," ..
-  dpi(48) ..
-    ":0," ..
-      theme.background ..
-        "bb," ..
-          theme.background .. "bb," .. theme.xcolor8 .. "22," .. theme.xcolor16
+    "linear:0,0:0," ..
+    dpi(48) ..
+      ":0," .. theme.background .. "bb," .. theme.background .. "bb," .. theme.xcolor8 .. "22," .. theme.xcolor16
 
   -- Tasklist
 
@@ -180,41 +170,38 @@ awesome_theme.layout_mstab = awesome_theme.icons .. "layouts/mstab.png"
   awesome_theme.tasklist_bg_focus =
     "linear:0,0:0," ..
     dpi(48) ..
-      ":0," ..
-        theme.background ..
-          "bb," ..
-            theme.background .. "bb," .. theme.xcolor8 .. "22," .. theme.xcolor16
+      ":0," .. theme.background .. "bb," .. theme.background .. "bb," .. theme.xcolor8 .. "22," .. theme.xcolor16
   awesome_theme.tasklist_bg_urgent = theme.background
   awesome_theme.tasklist_fg_focus = theme.xcolor15
   awesome_theme.tasklist_fg_urgent = theme.xcolor1
   awesome_theme.tasklist_fg_normal = theme.foreground
 
   awesome_theme.icon_theme = "chhinamasta"
--- ####################################################################
--- Taglist
--- ####################################################################
---- Generate taglist squares:
-awesome_theme.taglist_spacing = 1
---colors
- awesome_theme.taglist_fg_focus = theme.xcolor15
- awesome_theme.taglist_fg_urgent = theme.xcolor1
- awesome_theme.taglist_fg_occupied = theme.xcolor17
- awesome_theme.taglist_fg_empty = theme.xcolor19
- awesome_theme.taglist_bg_empty = theme.xbackground .. '00'
- awesome_theme.taglist_bg = theme.xbackground .. '00'
+  -- ####################################################################
+  -- Taglist
+  -- ####################################################################
+  --- Generate taglist squares:
+  awesome_theme.taglist_spacing = 1
+  --colors
+  awesome_theme.taglist_fg_focus = theme.xcolor15
+  awesome_theme.taglist_fg_urgent = theme.xcolor1
+  awesome_theme.taglist_fg_occupied = theme.xcolor17
+  awesome_theme.taglist_fg_empty = theme.xcolor19
+  awesome_theme.taglist_bg_empty = theme.xbackground .. "00"
+  awesome_theme.taglist_bg = theme.xbackground .. "00"
 
- awesome_theme.taglist_fg_volatile = theme.xcolor11
+  awesome_theme.taglist_fg_volatile = theme.xcolor11
   --####################################################################
--- MStab Configuration
--- ####################################################################
-theme.mstab_tabbar_style = "modern"
-theme.mstab_bar_ontop = true -- whether you want to allow the bar to be ontop of clients
-theme.mstab_bar_padding = dpi(0) -- how much padding there should be between clients and your tabbar
-theme.mstab_dont_resize_slaves = true
-theme.mstab_bar_height = 21
-theme.layout_mstab = awesome_theme.icons .. "layouts/mstab.png"
+  -- MStab Configuration
+  -- ####################################################################
+  theme.mstab_tabbar_style = "modern"
+  theme.mstab_bar_ontop = true -- whether you want to allow the bar to be ontop of clients
+  theme.mstab_bar_padding = dpi(0) -- how much padding there should be between clients and your tabbar
+  theme.mstab_dont_resize_slaves = true
+  theme.mstab_bar_height = 21
+  theme.layout_mstab = awesome_theme.icons .. "layouts/mstab.png"
 
-theme.taglist_font = "awesomewm-font 20"
+  theme.taglist_font = "awesomewm-font 20"
   -- TODO: use native functions instead of a shell script
   local out =
     io.popen(
@@ -229,7 +216,7 @@ theme.taglist_font = "awesomewm-font 20"
   awesome_theme.border_focus = theme.xcolor18
   awesome_theme.border_normal = theme.xcolor0
   awesome_theme.border_color = theme.xcolor0
-  awesome_theme.snap_bg = theme.xbackground .. '99'
+  awesome_theme.snap_bg = theme.xbackground .. "99"
 end
 return {
   theme = theme,

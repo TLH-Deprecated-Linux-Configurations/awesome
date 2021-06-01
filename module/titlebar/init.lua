@@ -164,7 +164,7 @@ _private.mb_win_shade_rolldown = nice.MB_SCROLL_DOWN
 _private.button_size = dpi(13)
 _private.button_margin_horizontal = 5
 -- _private.button_margin_vertical
-_private.button_margin_top = 2
+_private.button_margin_top = 5
 -- _private.button_margin_bottom = 0
 -- _private.button_margin_left = 0
 -- _private.button_margin_right = 0
@@ -350,7 +350,7 @@ local function create_titlebar_button(c, name, button_callback, property)
             timer_function = function()
                 return _private.tooltip_messages[name .. (property and (c[property] and "_active" or "_inactive") or "")]
             end,
-            delay_show = 0.5,
+            delay_show = 0.1,
             margins_leftright = 12,
             margins_topbottom = 6,
             timeout = 0.25,

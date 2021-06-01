@@ -7,7 +7,7 @@ local clientKeys =
   awful.util.table.join(
   awful.key(
     {modkey},
-    config.fullscreen,
+    "m",
     function(c)
       c.fullscreen = not c.fullscreen
       c:raise()
@@ -24,16 +24,7 @@ local clientKeys =
     end,
     {description = i18n.translate("toggle ontop mode"), group = i18n.translate("client")}
   ),
-  awful.key(
-    {modkey},
-    "n",
-    function(c)
-        -- The client currently has the input focus, so it cannot be
-        -- minimized, since minimized clients can't have the focus.
-        c.minimized = true
-    end,
-    {description = "minimize", group = "client"}
-),
+
   awful.key(
     {modkey},
     "x",
@@ -43,7 +34,7 @@ local clientKeys =
     {description = i18n.translate("close"), group = i18n.translate("client")}
   ),
   awful.key(
-    {modkey, "Control"},
+    {modkey,},
     "f",
     function(c)
       c.floating = not c.floating

@@ -14,6 +14,7 @@ local animate = require("lib-tde.animations").createAnimObject
 local profilebox = require("lib-widget.profilebox")
 local button = require("lib-widget.button")
 local hardware = require("lib-tde.hardware-check")
+local HOME = os.getenv("HOME")
 
 local keyconfig = require("configuration.keys.mod")
 local modKey = keyconfig.modKey
@@ -284,7 +285,7 @@ local function make_nav()
       user.text = name
     end
   )
-  local img = "/etc/xdg/tde/widget/user-profile/icons/user.svg"
+  local img = HOME ..  "/.config/awesome/widget/user-profile/icons/user.svg"
 
   local avatar =
     profilebox(
@@ -315,10 +316,7 @@ local function make_nav()
     root.elements.settings_views,
     make_view(icons.settings, i18n.translate("General"), require("widget.settings.general")())
   )
-  table.insert(
-    root.elements.settings_views,
-    make_view(icons.user, i18n.translate("User"), require("widget.settings.user")())
-  )
+
   table.insert(
     root.elements.settings_views,
     make_view(icons.wifi, i18n.translate("Connections"), require("widget.settings.connections")())
