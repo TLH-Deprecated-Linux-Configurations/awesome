@@ -25,7 +25,7 @@
 local wibox = require("wibox")
 local beautiful = require("beautiful")
 local dpi = beautiful.xresources.apply_dpi
-local card = require("lib-widget.card")
+local card = require("lib.card")
 
 local function build(screen)
   local hardware_card = card("Hardware monitor")

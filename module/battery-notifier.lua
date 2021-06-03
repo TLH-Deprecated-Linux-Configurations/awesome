@@ -6,11 +6,11 @@ local naughty = require("naughty")
 
 local icons = require("theme.icons")
 local config = require("config")
-local battery_function = require("lib-tde.function.battery")
+local battery_function = require("lib.function.battery")
 local gears = require("gears")
 
 -- Subscribe to power supply status changes with acpi_listen
-local signals = require("lib-tde.signals")
+local signals = require("lib.signals")
 
 gears.timer {
 	timeout = config.battery_timeout,

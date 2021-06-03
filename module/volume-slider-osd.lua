@@ -27,7 +27,7 @@
 local gears = require("gears")
 local wibox = require("wibox")
 local dpi = require("beautiful").xresources.apply_dpi
-local signals = require("lib-tde.signals")
+local signals = require("lib.signals")
 
 local vol_osd = require("widget.volume.volume-slider-osd")
 

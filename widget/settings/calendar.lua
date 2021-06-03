@@ -6,7 +6,7 @@ local awful = require("awful")
 local wibox = require("wibox")
 local gears = require("gears")
 local beautiful = require("beautiful")
-local rounded = require("lib-tde.widget.rounded")
+local rounded = require("lib.widget.rounded")
 local dpi = beautiful.xresources.apply_dpi
 local icons = require("theme.icons")
 -- ########################################################################

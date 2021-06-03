@@ -24,8 +24,8 @@
 ]]
 local wibox = require("wibox")
 local beautiful = require("beautiful")
-local delayed_timer = require("lib-tde.function.delayed-timer")
-local rounded = require("lib-tde.widget.rounded")
+local delayed_timer = require("lib.function.delayed-timer")
+local rounded = require("lib.widget.rounded")
 
 -- the x and y variables are used to show the current position
 -- width and height are the sizes of your widget

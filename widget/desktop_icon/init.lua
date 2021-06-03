@@ -5,10 +5,10 @@ local dpi = beautiful.xresources.apply_dpi
 local gears = require("gears")
 local icons = require("theme.icons")
 local menubar = require("menubar")
-local filehandle = require("lib-tde.file")
-local hardware = require("lib-tde.hardware-check")
-local err = require("lib-tde.logger").error
-local signals = require("lib-tde.signals")
+local filehandle = require("lib.file")
+local hardware = require("lib.hardware-check")
+local err = require("lib.logger").error
+local signals = require("lib.signals")
 
 local width = dpi(100)
 local height = width

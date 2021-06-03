@@ -5,28 +5,28 @@
 -- To get the charging status of the battery you must do an asynchronous call to not block the main thread
 -- a function call must be wrapped in a `awful.spawn.easy_async_with_shell`
 --
---     awful.spawn.easy_async_with_shell(lib-tde.function.battery.chargedScript, function(stdout)
---        lib-tde.function.battery.isBatteryCharging(stdout) -- returns is the battery is charging e.g. false
+--     awful.spawn.easy_async_with_shell(lib.function.battery.chargedScript, function(stdout)
+--        lib.function.battery.isBatteryCharging(stdout) -- returns is the battery is charging e.g. false
 --     end)
 --
 -- Another example is to check the current battery percentage
 --
---     awful.spawn.easy_async_with_shell(lib-tde.function.battery.upowerBatteryScript, function(stdout)
---        lib-tde.function.battery.getBatteryInformationFromUpower(stdout) -- returns battery percentage e.g. 87
+--     awful.spawn.easy_async_with_shell(lib.function.battery.upowerBatteryScript, function(stdout)
+--        lib.function.battery.getBatteryInformationFromUpower(stdout) -- returns battery percentage e.g. 87
 --     end)
 --
 -- @author Tom Meyers
 -- @copyright 2020 Tom Meyers
--- @tdemod lib-tde.function.battery
+-- @tdemod lib.function.battery
 ---------------------------------------------------------------------------
 
-local filehandle = require("lib-tde.file")
+local filehandle = require("lib.file")
 
 --- Check if a battery exists
 -- @return string The percentage of the battery
 -- @staticfct getBatteryPath
 -- @usage -- This will /sys/class/power_supply/BAT0 if it exists
--- lib-tde.function.battery.getBatteryPath() -- return location of the battery state
+-- lib.function.battery.getBatteryPath() -- return location of the battery state
 local function getBatteryPath()
     -- check if battery 0 or 1 exists
     local battery_base_dir = "/sys/class/power_supply"
@@ -43,7 +43,7 @@ end
 -- @return boolean True if it is charging
 -- @staticfct isBatteryCharging
 -- @usage -- This will return True if charging
---  lib-tde.function.battery.isBatteryCharging() -- True
+--  lib.function.battery.isBatteryCharging() -- True
 local function isBatteryCharging()
     local battery = getBatteryPath()
     if battery then
@@ -59,7 +59,7 @@ end
 -- @return number The percentage of the battery
 -- @staticfct getBatteryPercentage
 -- @usage -- This will 100 if fully charged
--- lib-tde.function.battery.getBatteryPercentage() -- return percentage of battery
+-- lib.function.battery.getBatteryPercentage() -- return percentage of battery
 local function getBatteryPercentage()
     -- get back a battery location
     local battery = getBatteryPath()

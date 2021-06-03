@@ -31,9 +31,9 @@ local dpi = require("beautiful").xresources.apply_dpi
 local icons = require("theme.icons")
 local apps = require("configuration.apps")
 local clickable_container = require("widget.clickable-container")
-local signals = require("lib-tde.signals")
+local signals = require("lib.signals")
 
-local animate = require("lib-tde.animations").createAnimObject
+local animate = require("lib.animations").createAnimObject
 
 -- Appearance
 local icon_size = beautiful.exit_screen_icon_size or dpi(90)

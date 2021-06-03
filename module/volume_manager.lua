@@ -22,10 +22,10 @@
 --OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 --SOFTWARE.
 ]]
-local signals = require("lib-tde.signals")
-local sound = require("lib-tde.sound")
+local signals = require("lib.signals")
+local sound = require("lib.sound")
 local time = require("socket").gettime
-local volume = require("lib-tde.volume")
+local volume = require("lib.volume")
 
 local startup = true
 local prev_time = 0

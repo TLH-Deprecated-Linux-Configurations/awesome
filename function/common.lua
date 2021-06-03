@@ -7,17 +7,17 @@
 --
 -- For example the split() function splits strings into a table of indexes:
 --
---    lib-tde.function.common.split("a,b,c,d", ",") -- returns {1:"a",2:"b",3:"c",4:"d"}
+--    lib.function.common.split("a,b,c,d", ",") -- returns {1:"a",2:"b",3:"c",4:"d"}
 --
 -- As another example you can use the sleep() function to implement delay into you logic.
 -- Be careful using sleep() as it blocks the main thread and can result in extreme poor performance.
 -- As it also blocks user input from being processes.
 --
---    lib-tde.function.common.sleep(0.5) -- blocks this thread for 0.5 seconds
+--    lib.function.common.sleep(0.5) -- blocks this thread for 0.5 seconds
 --
 -- @author Tom Meyers
 -- @copyright 2020 Tom Meyers
--- @tdemod lib-tde.function.common
+-- @tdemod lib.function.common
 ---------------------------------------------------------------------------
 
 local socket = require("socket")
@@ -28,7 +28,7 @@ local socket = require("socket")
 -- @treturn table The table as a list of strings
 -- @staticfct split
 -- @usage -- This will return {1: "abc", 2: "def"}
--- lib-tde.function.common.split("abc;def", ";")
+-- lib.function.common.split("abc;def", ";")
 local function split(inputstr, sep)
     if not (type(sep) == "string") then
         sep = "%s"
@@ -57,7 +57,7 @@ end
 -- @tparam[opt] number precision The precision after the decimal point (by default 2)
 -- @staticfct num_to_str
 -- @usage -- returns 12.123
--- lib-tde.function.common.num_to_str(12.1234567)
+-- lib.function.common.num_to_str(12.1234567)
 local function num_to_str(num, precision)
     if precision == nil then
         precision = 2
@@ -83,8 +83,8 @@ end
 -- @tparam[opt] number start indicate if the number already has a prefix e.g. Kilo = 1, Mega =2, Giga = 3 etc
 -- @staticfct num_to_si_prefix
 -- @usage -- returns 42.0K and 123.0M respectively
--- lib-tde.function.common.num_to_si_prefix(42000)
--- lib-tde.function.common.num_to_si_prefix(123000000)
+-- lib.function.common.num_to_si_prefix(42000)
+-- lib.function.common.num_to_si_prefix(123000000)
 local function num_to_si_prefix(num, start)
     -- sanitize the input
     local number = num
@@ -111,8 +111,8 @@ end
 -- @tparam[opt] number start indicate if the number already has a prefix e.g. Kilo = 1, Mega =2, Giga = 3 etc
 -- @staticfct bytes_to_grandness
 -- @usage -- returns 42.0KB and 123.0MB respectively
--- lib-tde.function.common.bytes_to_grandness(42000)
--- lib-tde.function.common.bytes_to_grandness(123000000)
+-- lib.function.common.bytes_to_grandness(42000)
+-- lib.function.common.bytes_to_grandness(123000000)
 local function bytes_to_grandness(bytes, start)
     -- sanitize the input
     local number = bytes
@@ -127,7 +127,7 @@ end
 --- Returns the currently focused screen
 -- @staticfct focused_screen
 -- @usage -- returns the focused screen, otherwise the first screen
--- lib-tde.function.focused_screen()
+-- lib.function.focused_screen()
 local function focused_screen()
     if mouse ~= nil and mouse.screen ~= nil then
         return mouse.screen

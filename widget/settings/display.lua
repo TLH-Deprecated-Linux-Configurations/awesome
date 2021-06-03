@@ -5,20 +5,20 @@ local awful = require("awful")
 local wibox = require("wibox")
 local gears = require("gears")
 local beautiful = require("beautiful")
-local rounded = require("lib-tde.widget.rounded")
-local filesystem = require("lib-tde.file")
+local rounded = require("lib.widget.rounded")
+local filesystem = require("lib.file")
 local icons = require("theme.icons")
-local signals = require("lib-tde.signals")
+local signals = require("lib.signals")
 local dpi = beautiful.xresources.apply_dpi
-local configWriter = require("lib-tde.config-writer")
-local datetime = require("lib-tde.function.datetime")
-local filehandle = require("lib-tde.file")
-local imagemagic = require("lib-tde.imagemagic")
-local xrandr_menu = require("lib-tde.xrandr").menu
-local scrollbox = require("lib-widget.scrollbox")
-local slider = require("lib-widget.slider")
-local card = require("lib-widget.card")
-local button = require("lib-widget.button")
+local configWriter = require("lib.config-writer")
+local datetime = require("lib.function.datetime")
+local filehandle = require("lib.file")
+local imagemagic = require("lib.imagemagic")
+local xrandr_menu = require("lib.xrandr").menu
+local scrollbox = require("lib.scrollbox")
+local slider = require("lib.slider")
+local card = require("lib.card")
+local button = require("lib.button")
 -- ########################################################################
 -- ########################################################################
 -- ########################################################################

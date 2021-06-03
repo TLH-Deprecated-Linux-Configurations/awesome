@@ -1,7 +1,7 @@
 -- This file holds general configuration parameters and functions you can use
 local HOME = os.getenv("HOME")
 local filesystem = require("gears.filesystem")
-local file_exists = require("lib-tde.file").exists
+local file_exists = require("lib.file").exists
 
 -- We add *_startup_delay to most polls
 -- to separate the runtime

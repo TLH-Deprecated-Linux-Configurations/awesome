@@ -1,7 +1,7 @@
 
 local background = require("theme.config")["background"]
-local file_exists = require("lib-tde.file").exists
-local split = require("lib-tde.function.common").split
+local file_exists = require("lib.file").exists
+local split = require("lib.function.common").split
 
 -- suffix the icon name with dark if light theme is enabled (icons have an inverted color compared with the background)
 -- light theme is enabled if the background property is set to light in colors.conf

@@ -1,5 +1,5 @@
 
-local signals = require("lib-tde.signals")
+local signals = require("lib.signals")
 local gettime = require("socket").gettime
 
 local screen_geometry = {}

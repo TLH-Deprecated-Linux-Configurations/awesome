@@ -10,18 +10,18 @@
 --
 --    -- this will print hello every 5 seconds, after an initial delay of 10 seconds
 --    -- It however by default calls the callback function on startup once
---    lib-tde.function.delayed-timer(5, function()
+--    lib.function.delayed-timer(5, function()
 --        print("hello")
 --    end, 10)
 --
 --    -- If you want to do the same as above but without the call when creating the time
---    lib-tde.function.delayed-timer(5, function()
+--    lib.function.delayed-timer(5, function()
 --        print("hello")
 --    end, 10, true)
 --
 -- @author Tom Meyers
 -- @copyright 2020 Tom Meyers
--- @tdemod lib-tde.function.delayed-timer
+-- @tdemod lib.function.delayed-timer
 ---------------------------------------------------------------------------
 
 local gears = require("gears")
@@ -32,7 +32,7 @@ local gears = require("gears")
 -- @tparam number delay How long to wait until we start the async timer
 -- @tparam[opt] bool only_delay By default we call the callback on creation, when true we don't call the callback
 -- @staticfct delayed-timer
--- @usage -- lib-tde.function.delayed-timer(1, function()
+-- @usage -- lib.function.delayed-timer(1, function()
 --      print("Callback")
 -- end, 10, true)
 return function(timeout, callback, delay, only_delay)

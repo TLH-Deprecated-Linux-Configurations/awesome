@@ -1,5 +1,5 @@
-require("lib-tde.luapath")
-require("lib-tde.logger")
+require("lib.luapath")
+require("lib.logger")
 
 print("Booting up...")
 

@@ -2,7 +2,7 @@
 local gears = require("gears")
 local wibox = require("wibox")
 local beautiful = require("beautiful")
-local signals = require("lib-tde.signals")
+local signals = require("lib.signals")
 local HOME = os.getenv("HOME")
 local dpi = require("beautiful").xresources.apply_dpi
 

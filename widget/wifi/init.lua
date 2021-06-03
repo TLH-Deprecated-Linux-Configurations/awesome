@@ -5,8 +5,8 @@ local gears = require("gears")
 local dpi = require("beautiful").xresources.apply_dpi
 local config = require("config")
 local theme = require("theme.icons.dark-light")
-local filehandle = require("lib-tde.file")
-local signals = require("lib-tde.signals")
+local filehandle = require("lib.file")
+local signals = require("lib.signals")
 
 -- acpi sample outputs
 -- Battery 0: Discharging, 75%, 01:51:38 remaining

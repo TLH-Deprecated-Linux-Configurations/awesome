@@ -1,15 +1,15 @@
 require("awful.autofocus")
 local hotkeys_popup = require("awful.hotkeys_popup").widget
-local has_package_installed = require("lib-tde.hardware-check").has_package_installed
+local has_package_installed = require("lib.hardware-check").has_package_installed
 require("awful.hotkeys_popup.keys")
 
 local config = require("configuration.keys.mod")
 local modkey = config.modKey
 local altkey = config.altKey
 local apps = require("configuration.apps")
-local xrandr = require("lib-tde.xrandr")
-local signals = require("lib-tde.signals")
-local volume = require("lib-tde.volume")
+local xrandr = require("lib.xrandr")
+local signals = require("lib.signals")
+local volume = require("lib.volume")
 
 -- returns true if we cannot create a screenshot
 local function send_notification_if_maim_missing()
@@ -504,11 +504,14 @@ local globalKeys =
   awful.key(
     {modkey},
     "n",
-    function(c)
+    function()
         -- The client currently has the input focus, so it cannot be
         -- minimized, since minimized clients can't have the focus.
-        c.minimized = true
-    end,
+        local c = client.focus
+        if c then
+          c.minimized=true
+        end
+          end,
     {description = "minimize", group = "client"}
 ),
   awful.key(

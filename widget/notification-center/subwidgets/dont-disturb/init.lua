@@ -25,9 +25,9 @@
 local wibox = require("wibox")
 local dpi = require("beautiful").xresources.apply_dpi
 local mat_list_item = require("widget.material.list-item")
-local signals = require("lib-tde.signals")
-local card = require("lib-widget.card")
-local checkbox = require("lib-widget.checkbox")
+local signals = require("lib.signals")
+local card = require("lib.card")
+local checkbox = require("lib.checkbox")
 local HOME = os.getenv("HOME")
 local beautiful = require("beautiful")
 local PATH_TO_ICONS = HOME .. "/.config/awesome/widget/notification-center/icons/"

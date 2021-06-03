@@ -1,8 +1,8 @@
 
 local wibox = require("wibox")
 local dpi = require("beautiful").xresources.apply_dpi
-local has_package_installed = require("lib-tde.hardware-check").has_package_installed
-local seperator_widget = require("lib-widget.separator")
+local has_package_installed = require("lib.hardware-check").has_package_installed
+local seperator_widget = require("lib.separator")
 
 local function show_widget_or_default(widget, show)
   if show then

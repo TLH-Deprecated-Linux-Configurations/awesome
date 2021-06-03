@@ -2,9 +2,9 @@
 local watch = require("awful.widget.watch")
 local wibox = require("wibox")
 local dpi = require("beautiful").xresources.apply_dpi
-local theme = require("theme.icons.dark-light")
-local split = require("lib-tde.function.common").split
-local card = require("lib-widget.card")
+local theme = require("theme.icons.dark-light")  
+local split = require("lib.function.common").split
+local card = require("lib.card")
 local HOME = os.getenv("HOME")
 local PATH_TO_ICONS = HOME.. "/.config/awesome/widget/sars-cov-2/icons/"
 local beautiful = require("beautiful")

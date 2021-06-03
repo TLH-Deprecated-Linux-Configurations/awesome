@@ -1,5 +1,5 @@
 
-local installed = require("lib-tde.hardware-check").has_package_installed
+local installed = require("lib.hardware-check").has_package_installed
 local menubar = require("menubar")
 local icons = require("theme.icons")
 local desktop_icon = require("widget.desktop_icon")

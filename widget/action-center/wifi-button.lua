@@ -2,8 +2,8 @@
 local wibox = require("wibox")
 local gears = require("gears")
 local mat_list_item = require("widget.material.list-item")
-local signals = require("lib-tde.signals")
-local checkbox = require("lib-widget.checkbox")
+local signals = require("lib.signals")
+local checkbox = require("lib.checkbox")
 local beautiful = require("beautiful")
 local dpi = beautiful.xresources.apply_dpi
 

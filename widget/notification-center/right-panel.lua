@@ -5,19 +5,19 @@ local beautiful = require("beautiful")
 
 local dpi = require("beautiful").xresources.apply_dpi
 local clickable_container = require("widget.material.clickable-container")
-local signals = require("lib-tde.signals")
-local animate = require("lib-tde.animations").createAnimObject
-local seperator_widget = require("lib-widget.separator")
+local signals = require("lib.signals")
+local animate = require("lib.animations").createAnimObject
+local seperator_widget = require("lib.separator")
 
 local keyconfig = require("configuration.keys.mod")
 local modKey = keyconfig.modKey
 
-local scrollbox = require("lib-widget.scrollbox")
+local scrollbox = require("lib.scrollbox")
 
 -- load the notification plugins
-local plugins = require("lib-tde.plugin-loader")("notification")
+local plugins = require("lib.plugin-loader")("notification")
 
-local get_screen = require("lib-tde.function.common").focused_screen
+local get_screen = require("lib.function.common").focused_screen
 
 -- body gets populated with a scrollbox widget once generated
 local body = {}

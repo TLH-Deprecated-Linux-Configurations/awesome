@@ -1,22 +1,20 @@
-
 local wibox = require("wibox")
 local gears = require("gears")
 local beautiful = require("beautiful")
 local icons = require("theme.icons")
-local scrollbox = require("lib-widget.scrollbox")
+local scrollbox = require("lib.scrollbox")
 
 local apps = require("configuration.apps")
 local dpi = require("beautiful").xresources.apply_dpi
 local mat_list_item = require("widget.material.list-item")
 local mat_icon = require("widget.material.icon")
-local signals = require("lib-tde.signals")
-local animate = require("lib-tde.animations").createAnimObject
-local seperator_widget = require("lib-widget.separator")
-local card = require("lib-widget.card")
-local button = require("lib-widget.button")
+local signals = require("lib.signals")
+local animate = require("lib.animations").createAnimObject
+local seperator_widget = require("lib.separator")
+local card = require("lib.card")
+local button = require("lib.button")
 
-local get_screen = require("lib-tde.function.common").focused_screen
-
+local get_screen = require("lib.function.common").focused_screen
 
 local keyconfig = require("configuration.keys.mod")
 local modKey = keyconfig.modKey
@@ -24,7 +22,7 @@ local modKey = keyconfig.modKey
 -- body gets populated with a scrollbox widget once generated
 local body = {}
 
-local plugins = require("lib-tde.plugin-loader")("settings")
+local plugins = require("lib.plugin-loader")("settings")
 
 local left_panel_func = function()
   -- set the panel width equal to the rofi settings
@@ -120,9 +118,15 @@ local left_panel_func = function()
     left_panel.y = s.geometry.y
     left_panel.height = s.geometry.height
     left_panel.opacity = 0
-    animate(_G.anim_speed, left_panel, {opacity = 1, x = s.geometry.x}, "outCubic", function()
-      update_backdrop_location()
-    end)
+    animate(
+      _G.anim_speed,
+      left_panel,
+      {opacity = 1, x = s.geometry.x},
+      "outCubic",
+      function()
+        update_backdrop_location()
+      end
+    )
   end
 
   local closeleft_panel = function()
@@ -132,7 +136,7 @@ local left_panel_func = function()
     left_panel.x = s.geometry.x
     left_panel.y = s.geometry.y
     left_panel.height = s.geometry.height
-    left_panel.opacity = 1
+    left_panel.opacity = 0.88
     backdrop.visible = false
     animate(
       _G.anim_speed,
@@ -270,35 +274,6 @@ local left_panel_func = function()
     )
   )
 
-  local search_button =
-    wibox.widget {
-    wibox.widget {
-      icon = icons.search,
-      size = dpi(24),
-      widget = mat_icon
-    },
-    wibox.widget {
-      text = i18n.translate("Global search"),
-      font = "Iosevka Regular 12",
-      widget = wibox.widget.textbox,
-      align = center
-    },
-    forced_height = dpi(12),
-    clickable = true,
-    widget = mat_list_item
-  }
-
-  search_button:buttons(
-    awful.util.table.join(
-      awful.button(
-        {},
-        1,
-        function()
-          left_panel:run_rofi()
-        end
-      )
-    )
-  )
   local dpi_button =
     wibox.widget {
     wibox.widget {
@@ -419,18 +394,6 @@ local left_panel_func = function()
     local table_widget =
       wibox.widget {
       topSeparator,
-      {
-        wibox.widget {
-          search_button,
-          bg = beautiful.bg_modal, --beautiful.background.hue_800,
-          shape = function(cr, w, h)
-            gears.shape.rounded_rect(cr, w, h, 28)
-          end,
-          widget = wibox.container.background
-        },
-        widget = mat_list_item
-      },
-      separator,
       require("widget.control-center.dashboard.quick-settings"),
       require("widget.control-center.dashboard.hardware-monitor")(s),
       require("widget.control-center.dashboard.action-center"),

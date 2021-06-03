@@ -1,6 +1,6 @@
 
-local file_exists = require("lib-tde.file").exists
-local split = require("lib-tde.function.common").split
+local file_exists = require("lib.file").exists
+local split = require("lib.function.common").split
 
 local function extract(line)
     local splitted = split(line, "=")

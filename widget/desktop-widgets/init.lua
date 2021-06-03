@@ -22,8 +22,8 @@
 --OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 --SOFTWARE.
 ]]
-local signal = require("lib-tde.signals")
-local hardware = require("lib-tde.hardware-check")
+local signal = require("lib.signals")
+local hardware = require("lib.hardware-check")
 local widget = require("desktop-widgets.widgets")
 local config = require("desktop-widgets.config")
 

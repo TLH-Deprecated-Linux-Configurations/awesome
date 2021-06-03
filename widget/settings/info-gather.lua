@@ -1,10 +1,10 @@
-local signals = require("lib-tde.signals")
-local hardware = require("lib-tde.hardware-check")
-local filehandle = require("lib-tde.file")
+local signals = require("lib.signals")
+local hardware = require("lib.hardware-check")
+local filehandle = require("lib.file")
 local config = require("config")
-local delayed_timer = require("lib-tde.function.delayed-timer")
+local delayed_timer = require("lib.function.delayed-timer")
 local statvfs = require("posix.sys.statvfs").statvfs
-local common = require("lib-tde.function.common")
+local common = require("lib.function.common")
 
 local function get_username()
     -- get the username

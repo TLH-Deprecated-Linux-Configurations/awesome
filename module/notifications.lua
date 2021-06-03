@@ -7,9 +7,9 @@ local menubar = require("menubar")
 local beautiful = require("beautiful")
 local icons = require("theme.icons")
 local dpi = beautiful.xresources.apply_dpi
-local signals = require("lib-tde.signals")
+local signals = require("lib.signals")
 local clickable_container = require("widget.clickable-container")
-local queue = require("lib-tde.datastructure.queue")()
+local queue = require("lib.datastructure.queue")()
 
 -- Defaults
 naughty.config.defaults.ontop = true

@@ -7,7 +7,7 @@ local xrdb = xresources.get_current_theme()
 local gtk = require("beautiful.gtk")
 local config = require("theme.config")
 local darklight = require("theme.icons.dark-light")
-local filehandle = require("lib-tde.file")
+local filehandle = require("lib.file")
 local file_exists = filehandle.exists
 
 local theme = {}

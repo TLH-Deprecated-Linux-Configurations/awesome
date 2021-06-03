@@ -7,8 +7,8 @@
 -- Run all the apps listed in configuration/apps.lua as run_on_start_up only once when awesome start
 
 local apps = require("configuration.apps")
-local run_once = require("lib-tde.function.application_runner")
-local delayed_timer = require("lib-tde.function.delayed-timer")
+local run_once = require("lib.function.application_runner")
+local delayed_timer = require("lib.function.delayed-timer")
 
 for _, app in ipairs(apps.run_on_start_up) do
   run_once(app)

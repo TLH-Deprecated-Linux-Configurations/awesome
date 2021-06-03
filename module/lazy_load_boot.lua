@@ -17,7 +17,7 @@ require("tutorial")
 
 require("module.dev-widget-update")
 
-require("lib-tde.signals").connect_exit(
+require("lib.signals").connect_exit(
     function()
         -- stop current autorun.sh
         -- This is done because otherwise multiple instances would be running at the same time

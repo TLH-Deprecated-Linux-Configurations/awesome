@@ -7,7 +7,7 @@ local dpi = beautiful.xresources.apply_dpi
 local clickable_container = require("widget.clickable-container")
 local task_list = require("widget.task-list")
 local tag_list = require("widget.tag-list")
-local hardware = require("lib-tde.hardware-check")
+local hardware = require("lib.hardware-check")
 
 local bottom_panel = function(s)
   local function show_widget_or_default(widget, show, require_is_function)

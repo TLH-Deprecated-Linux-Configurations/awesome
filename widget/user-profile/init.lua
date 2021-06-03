@@ -4,15 +4,15 @@
 
 local wibox = require("wibox")
 local dpi = require("beautiful").xresources.apply_dpi
-local profilebox = require("lib-widget.profilebox")
-local card = require("lib-widget.card")
+local profilebox = require("lib.profilebox")
+local card = require("lib.card")
 local HOME = os.getenv("HOME")
 local PATH_TO_ICONS = HOME .."/.config/awesome/widget/user-profile/icons/"
 
 local PATH_TO_CACHE_ICON = os.getenv("HOME") .. "/.cache/tos/user-icons/"
 
-local signals = require("lib-tde.signals")
-local filehandle = require("lib-tde.file")
+local signals = require("lib.signals")
+local filehandle = require("lib.file")
 
 local user_card = card()
 

@@ -1,11 +1,11 @@
 
 local wibox = require("wibox")
 local mat_list_item = require("widget.material.list-item")
-local slider = require("lib-widget.slider")
+local slider = require("lib.slider")
 local mat_icon_button = require("widget.material.icon-button")
 local icons = require("theme.icons")
-local signals = require("lib-tde.signals")
-local volume = require("lib-tde.volume")
+local signals = require("lib.signals")
+local volume = require("lib.volume")
 
 local vol_slider =
   slider(

@@ -8,7 +8,7 @@ local dpi = require("beautiful").xresources.apply_dpi
 -- Commons requirements
 local wibox = require("wibox")
 local clickable_container = require("widget.material.clickable-container")
-local seperator_widget = require("lib-widget.separator")
+local seperator_widget = require("lib.separator")
 -- Local declarations
 
 local mat_list_item = {mt = {}}

@@ -12,8 +12,8 @@ local clickable_container = require("widget.material.clickable-container")
 local icons = require("theme.icons")
 
 local config = require("config")
-local animate = require("lib-tde.animations").createAnimObject
-local signals = require("lib-tde.signals")
+local animate = require("lib.animations").createAnimObject
+local signals = require("lib.signals")
 
 local height = dpi(200)
 local width = dpi(380)

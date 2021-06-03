@@ -4,11 +4,11 @@ local wibox = require("wibox")
 local gears = require("gears")
 local beautiful = require("beautiful")
 local icons = require("theme.icons")
-local mouse = require("lib-tde.mouse")
-local slider = require("lib-widget.slider")
-local card = require("lib-widget.card")
-local checkbox = require("lib-widget.checkbox")
-local scrollbox = require("lib-widget.scrollbox")
+local mouse = require("lib.mouse")
+local slider = require("lib.slider")
+local card = require("lib.card")
+local checkbox = require("lib.checkbox")
+local scrollbox = require("lib.scrollbox")
 
 local dpi = beautiful.xresources.apply_dpi
 

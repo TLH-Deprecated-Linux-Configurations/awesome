@@ -1,14 +1,14 @@
 
 local wibox = require("wibox")
 local mat_list_item = require("widget.material.list-item")
-local mat_slider = require("lib-widget.progress_bar")
+local mat_slider = require("lib.progress_bar")
 local mat_icon = require("widget.material.icon")
 local icons = require("theme.icons")
 local dpi = require("beautiful").xresources.apply_dpi
 local config = require("config")
-local file = require("lib-tde.file")
-local signals = require("lib-tde.signals")
-local delayed_timer = require("lib-tde.function.delayed-timer")
+local file = require("lib.file")
+local signals = require("lib.signals")
+local delayed_timer = require("lib.function.delayed-timer")
 
 local noNetwork = true
 

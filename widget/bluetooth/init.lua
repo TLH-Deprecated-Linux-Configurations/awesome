@@ -3,8 +3,8 @@ local clickable_container = require("widget.material.clickable-container")
 local gears = require("gears")
 local dpi = require("beautiful").xresources.apply_dpi
 local config = require("config")
-local signals = require("lib-tde.signals")
-local delayed_timer = require("lib-tde.function.delayed-timer")
+local signals = require("lib.signals")
+local delayed_timer = require("lib.function.delayed-timer")
 local icons = require("theme.icons")
 
 -- acpi sample outputs

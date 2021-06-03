@@ -3,8 +3,8 @@ local wibox = require("wibox")
 local beautiful = require("beautiful")
 local dpi = beautiful.xresources.apply_dpi
 local gears = require("gears")
-local hardware = require("lib-tde.hardware-check")
-local signals = require("lib-tde.signals")
+local hardware = require("lib.hardware-check")
+local signals = require("lib.signals")
 
 local startx = -1
 local starty = -1

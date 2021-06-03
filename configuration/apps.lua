@@ -1,9 +1,9 @@
 local filesystem = require("gears.filesystem")
 local config = require("config")
-local hardware = require("lib-tde.hardware-check")
+local hardware = require("lib.hardware-check")
 
 
--- lib-tde to retrieve current theme
+-- lib to retrieve current theme
 local beautiful = require("beautiful")
 local color = beautiful.xforeground
 local HOME = os.getenv("HOME")
@@ -58,7 +58,7 @@ return {
     'xcape -e "Super_L=Super_L|Control_L|Escape"',
   },
   bins = {
-    coverUpdate = require("lib-tde.extractcover").extractalbum,
+    coverUpdate = require("lib.extractcover").extractalbum,
     full_screenshot = 'sh /.config/awesome/snapshot.sh full "' .. color .. '"',
     full_blank_screenshot = "sh " .. HOME .. ' /.config/awesome/snapshot.sh full_blank',
     area_screenshot = "sh " .. HOME .. '/.config/awesome/snapshot.sh area ' .. color .. '"',

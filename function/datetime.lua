@@ -1,13 +1,13 @@
 
 
-local split = require("lib-tde.function.common").split
+local split = require("lib.function.common").split
 
 --- Adds a leading 0 if the number is smaller than 10
 -- @param number integer the number to pad zero's in front of
 -- @return string a string representing the number with padded zero's
 -- @staticfct numberZeroPadding
 -- @usage -- This will return 06
--- lib-tde.function.datetime.numberZeroPadding(6)
+-- lib.function.datetime.numberZeroPadding(6)
 local function numberZeroPadding(number)
     if not (type(number) == "number") then
         return "00"
@@ -26,7 +26,7 @@ end
 -- @return string The string format of the time in MM:SS
 -- @staticfct numberInSecToMS
 -- @usage -- This will return 02:06
--- lib-tde.function.datetime.leadingZero(126)
+-- lib.function.datetime.leadingZero(126)
 local function numberInSecToMS(number)
     if not (type(number) == "number") then
         return "00:00"
@@ -46,7 +46,7 @@ end
 -- @return boolean Returns if the system time is between these numbers
 -- @staticfct current_time_inbetween
 -- @usage -- This will return True if the system time is before 1 pm
--- lib-tde.function.datetime.current_time_inbetween("00:00", "13:00")
+-- lib.function.datetime.current_time_inbetween("00:00", "13:00")
 local function current_time_inbetween(time_start, time_end, mock_time)
     local time = os.date("*t")
 

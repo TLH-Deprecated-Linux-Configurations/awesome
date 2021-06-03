@@ -3,7 +3,7 @@ local wibox = require("wibox")
 local gears = require("gears")
 local dpi = require("beautiful").xresources.apply_dpi
 local mat_list_item = require("widget.material.list-item")
-local checkbox = require("lib-widget.checkbox")
+local checkbox = require("lib.checkbox")
 
 local config = require("config")
 

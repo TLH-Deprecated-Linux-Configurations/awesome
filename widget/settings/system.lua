@@ -4,9 +4,9 @@ local wibox = require("wibox")
 local gears = require("gears")
 local beautiful = require("beautiful")
 local icons = require("theme.icons")
-local file = require("lib-tde.file")
-local signals = require("lib-tde.signals")
-local card = require("lib-widget.card")
+local file = require("lib.file")
+local signals = require("lib.signals")
+local card = require("lib.card")
 
 local dpi = beautiful.xresources.apply_dpi
 

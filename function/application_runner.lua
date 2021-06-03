@@ -7,14 +7,14 @@
 -- We would only want to start the webserver once.
 --
 --    -- this will run the script
---    lib-tde.function.application_runner.run_once(os.getenv("HOME") .. "/launch-webserver.sh") -- returns true
+--    lib.function.application_runner.run_once(os.getenv("HOME") .. "/launch-webserver.sh") -- returns true
 --
 --    -- this won't run the script
---    lib-tde.function.application_runner.run_once(os.getenv("HOME") .. "/launch-webserver.sh") -- returns false
+--    lib.function.application_runner.run_once(os.getenv("HOME") .. "/launch-webserver.sh") -- returns false
 --
 -- @author Tom Meyers
 -- @copyright 2020 Tom Meyers
--- @tdemod lib-tde.function.application_runner
+-- @tdemod lib.function.application_runner
 ---------------------------------------------------------------------------
 
 local ran_before = {}
@@ -24,7 +24,7 @@ local ran_before = {}
 -- @treturn bool Returns true if the command ran
 -- @staticfct run_once
 -- @usage -- This will return true
--- lib-tde.function.application_runner.run_once("echo 'hello'")
+-- lib.function.application_runner.run_once("echo 'hello'")
 local function run_once(cmd)
     if cmd == "" then
         return false

@@ -1,11 +1,11 @@
-local hardware = require("lib-tde.hardware-check")
+local hardware = require("lib.hardware-check")
 local is_weak = hardware.isWeakHardware()
 local beautiful = require("beautiful")
 
 -- general conf is used by sentry (to opt out of it)
 general = require("parser")(os.getenv("HOME") .. "/.config/awesome/electric-tantra/general.conf")
 
-i18n = require("lib-tde.i18n")
+i18n = require("lib.i18n")
 i18n.init("en")
 
 

@@ -4,14 +4,14 @@ local wibox = require("wibox")
 local gears = require("gears")
 local beautiful = require("beautiful")
 local icons = require("theme.icons")
-local split = require("lib-tde.function.common").split
-local signals = require("lib-tde.signals")
+local split = require("lib.function.common").split
+local signals = require("lib.signals")
 local mat_icon_button = require("widget.material.icon-button")
 local mat_icon = require("widget.material.icon")
-local card = require("lib-widget.card")
+local card = require("lib.card")
 local naughty = require("naughty")
-local execute = require("lib-tde.hardware-check").execute
-local scrollbox = require("lib-widget.scrollbox")
+local execute = require("lib.hardware-check").execute
+local scrollbox = require("lib.scrollbox")
 
 local dpi = beautiful.xresources.apply_dpi
 

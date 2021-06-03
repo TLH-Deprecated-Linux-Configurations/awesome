@@ -1,10 +1,10 @@
 
-local filehandle = require("lib-tde.file")
+local filehandle = require("lib.file")
 local desktop_icon = require("widget.desktop_icon")
-local installed = require("lib-tde.hardware-check").has_package_installed
+local installed = require("lib.hardware-check").has_package_installed
 local inotify = require("inotify")
 local gears = require("gears")
-local common = require("lib-tde.function.common")
+local common = require("lib.function.common")
 
 local desktopLocation = os.getenv("HOME") .. "/Desktop"
 local offset = -1

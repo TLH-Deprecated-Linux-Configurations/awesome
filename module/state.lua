@@ -2,11 +2,11 @@
 -- This module listens for events and stores then
 -- This makes certain data persistent
 
-local signals = require("lib-tde.signals")
-local serialize = require("lib-tde.serialize")
-local filehandle = require("lib-tde.file")
-local mouse = require("lib-tde.mouse")
-local volume = require("lib-tde.volume")
+local signals = require("lib.signals")
+local serialize = require("lib.serialize")
+local filehandle = require("lib.file")
+local mouse = require("lib.mouse")
+local volume = require("lib.volume")
 
 local file = os.getenv("HOME") .. "/.cache/tde/settings_state.json"
 

@@ -2,7 +2,7 @@
 local wibox = require("wibox")
 local gears = require("gears")
 local dpi = require("beautiful").xresources.apply_dpi
-local card = require("lib-widget.card")
+local card = require("lib.card")
 
 local beautiful = require("beautiful")
 
