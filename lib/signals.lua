@@ -12,7 +12,7 @@ local connections = {}
 -- ########################################################################
 -- ########################################################################
 -- ########################################################################
---- Notify other TDE components that the exit_screen should be hidden
+--- Notify other awesome components that the exit_screen should be hidden
 -- @tparam function func The callback function that will be called when the event happens
 -- @staticfct emit_module_exit_screen_hide
 -- @usage -- notify other components
@@ -37,7 +37,7 @@ end
 -- ########################################################################
 -- ########################################################################
 -- ########################################################################
---- Notify other TDE components that the battery has updated its value
+--- Notify other awesome components that the battery has updated its value
 -- @staticfct emit_module_exit_screen_show
 -- @usage -- notify other components
 -- lib.signals.emit_module_exit_screen_show()
@@ -61,7 +61,7 @@ end
 -- ########################################################################
 -- ########################################################################
 -- ########################################################################
---- Notify other TDE components that the battery has updated its value
+--- Notify other awesome components that the battery has updated its value
 -- @tparam number value The current percentage of the battery
 -- @staticfct emit_module_battery
 -- @usage -- notify other components when the battery is updated
@@ -86,7 +86,7 @@ end
 -- ########################################################################
 -- ########################################################################
 -- ########################################################################
---- Notify other TDE components that the battery charging has changed
+--- Notify other awesome components that the battery charging has changed
 -- @tparam bool value if it is charging
 -- @staticfct emit_module_battery_charging
 -- @usage -- notify other components when the battery charging changed
@@ -111,7 +111,7 @@ end
 -- ########################################################################
 -- ########################################################################
 -- ########################################################################
---- Notify other TDE components that the screen brightness has changed
+--- Notify other awesome components that the screen brightness has changed
 -- @tparam number value The brightness between 0 and 100
 -- @staticfct emit_brightness
 -- @usage -- notify other components when the brightness changed
@@ -133,8 +133,10 @@ end
 connections.connect_brightness = function(func)
     awesome.connect_signal("brightness::update", func)
 end
-
---- Notify other TDE components that the screen volume has changed
+-- ########################################################################
+-- ########################################################################
+-- ########################################################################
+--- Notify other awesome components that the screen volume has changed
 -- @tparam number value The volume between 0 and 100
 -- @staticfct emit_volume
 -- @usage -- notify other components when the volume changed
@@ -175,7 +177,7 @@ connections.connect_volume_update = function(func)
     awesome.connect_signal("volume::update::request", func)
 end
 
---- Notify other TDE components that the volume mute state changed
+--- Notify other awesome components that the volume mute state changed
 -- @tparam bool value True if the volume is muted
 -- @staticfct emit_volume_is_muted
 -- @usage -- notify other components when the volume mute state changed
@@ -196,7 +198,7 @@ connections.connect_volume_is_muted = function(func)
     awesome.connect_signal("volume::update::muted", func)
 end
 
---- Notify other TDE components that the weather updated
+--- Notify other awesome components that the weather updated
 -- @tparam temp string The temperature in string representation
 -- @tparam desc string A short description about the weather
 -- @tparam icon string An icon code use to differentiate the weather
@@ -220,7 +222,7 @@ connections.connect_weather = function(func)
     awesome.connect_signal("widget::weather", func)
 end
 
---- Notify other TDE components that the username changed
+--- Notify other awesome components that the username changed
 -- @tparam string value The username
 -- @staticfct emit_username
 -- @usage -- notify other components when the user changed
@@ -241,7 +243,7 @@ connections.connect_username = function(func)
     awesome.connect_signal("user::changed", func)
 end
 
---- Notify other TDE components that the distro name changed
+--- Notify other awesome components that the distro name changed
 -- @tparam string value The distribution name
 -- @staticfct emit_distro
 -- @usage -- notify other components when the distro changed
@@ -262,7 +264,7 @@ connections.connect_distro = function(func)
     awesome.connect_signal("distro::changed", func)
 end
 
---- Notify other TDE components that the uptime changed
+--- Notify other awesome components that the uptime changed
 -- @tparam string value The uptime
 -- @staticfct emit_uptime
 -- @usage -- notify other components when the uptime changed
@@ -283,7 +285,7 @@ connections.connect_uptime = function(func)
     awesome.connect_signal("uptime::changed", func)
 end
 
---- Notify other TDE components what the current kernel version is
+--- Notify other awesome components what the current kernel version is
 -- @tparam string value The kernel version
 -- @staticfct emit_kernel
 -- @usage -- notify other components what the current kernel is
@@ -304,7 +306,7 @@ connections.connect_kernel = function(func)
     awesome.connect_signal("kernel::changed", func)
 end
 
---- Notify other TDE components how many packages should be updated
+--- Notify other awesome components how many packages should be updated
 -- @tparam string value The amount of updates
 -- @staticfct emit_packages_to_update
 -- @usage -- notify other components how much packages need to be updated
@@ -325,7 +327,7 @@ connections.connect_packages_to_update = function(func)
     awesome.connect_signal("packages::changed:update", func)
 end
 
---- Notify other TDE components about the current cpu usage
+--- Notify other awesome components about the current cpu usage
 -- @tparam number value The current cpu usage in percentage
 -- @staticfct emit_cpu_usage
 -- @usage -- notify other components of the current cpu usage
@@ -346,7 +348,7 @@ connections.connect_cpu_usage = function(func)
     awesome.connect_signal("cpu::usage", func)
 end
 
---- Notify other TDE components about the current disk usage
+--- Notify other awesome components about the current disk usage
 -- @tparam number value The current disk usage in percentage
 -- @staticfct emit_disk_usage
 -- @usage -- notify other components of the current disk usage
@@ -367,7 +369,7 @@ connections.connect_disk_usage = function(func)
     awesome.connect_signal("disk::usage", func)
 end
 
---- Notify other TDE components about the total disk space
+--- Notify other awesome components about the total disk space
 -- @tparam string value The current total disk space in percentage
 -- @staticfct emit_disk_space
 -- @usage -- notify other components of the total disk space
@@ -388,7 +390,7 @@ connections.connect_disk_space = function(func)
     awesome.connect_signal("disk::space", func)
 end
 
---- Notify other TDE components about the current ram usage
+--- Notify other awesome components about the current ram usage
 -- @tparam number value The current ram usage in percentage
 -- @staticfct emit_ram_usage
 -- @usage -- notify other components of the current ram usage
@@ -409,7 +411,7 @@ connections.connect_ram_usage = function(func)
     awesome.connect_signal("ram::usage", func)
 end
 
---- Notify other TDE components about the total ram
+--- Notify other awesome components about the total ram
 -- @tparam string value The total ram available on the system in kilobytes
 -- @staticfct emit_ram_total
 -- @usage -- notify other components of the total ram in kilobytes
@@ -430,10 +432,10 @@ connections.connect_ram_total = function(func)
     awesome.connect_signal("ram::total", func)
 end
 
---- Notify other TDE components about the current bluetooth status
+--- Notify other awesome components about the current bluetooth status
 -- @tparam boolean value If bluetooth is on or off
 -- @staticfct emit_bluetooth_status
--- @usage -- Notify other TDE components about the current bluetooth status
+-- @usage -- Notify other awesome components about the current bluetooth status
 -- lib.signals.emit_bluetooth_status(true)
 connections.emit_bluetooth_status = function(value)
     awesome.emit_signal("BLUETOOTH::status", value)
@@ -451,10 +453,10 @@ connections.connect_bluetooth_status = function(func)
     awesome.connect_signal("BLUETOOTH::status", func)
 end
 
---- Notify other TDE components about the current wifi status
+--- Notify other awesome components about the current wifi status
 -- @tparam boolean value If wifi is on or off
 -- @staticfct emit_wifi_status
--- @usage -- Notify other TDE components about the current wifi status
+-- @usage -- Notify other awesome components about the current wifi status
 -- lib.signals.emit_wifi_status(true)
 connections.emit_wifi_status = function(value)
     awesome.emit_signal("WIFI::status", value)
@@ -484,13 +486,13 @@ connections.connect_exit = function(func)
     awesome.connect_signal("exit", func)
 end
 
---- Notify other TDE components about the change in mouse acceleration
+--- Notify other awesome components about the change in mouse acceleration
 -- @tparam table the mouse id and speed value
 -- @staticfct emit_mouse_acceleration
--- @usage -- Notify other TDE components about the change in mouse acceleration
+-- @usage -- Notify other awesome components about the change in mouse acceleration
 -- lib.signals.emit_mouse_acceleration({id: 11, speed: 1.5})
 connections.emit_mouse_acceleration = function(value)
-    awesome.emit_signal("TDE::mouse::acceleration", value)
+    awesome.emit_signal("awesome::mouse::acceleration", value)
 end
 
 --- Trigger a callback function when the mouse acceleration changed
@@ -502,16 +504,16 @@ end
 --      print("Mouse acceleration settings: " .. value.id .. " with speed:" .. value.speed)
 --    end)
 connections.connect_mouse_acceleration = function(func)
-    awesome.connect_signal("TDE::mouse::acceleration", func)
+    awesome.connect_signal("awesome::mouse::acceleration", func)
 end
 
---- Notify other TDE components about the change in mouse speed
+--- Notify other awesome components about the change in mouse speed
 -- @tparam table the mouse id and speed value
 -- @staticfct emit_mouse_speed
--- @usage -- Notify other TDE components about the change in mouse speed
+-- @usage -- Notify other awesome components about the change in mouse speed
 -- lib.signals.emit_mouse_speed({id: 11, speed: 1.5})
 connections.emit_mouse_speed = function(value)
-    awesome.emit_signal("TDE::mouse::speed", value)
+    awesome.emit_signal("awesome::mouse::speed", value)
 end
 
 --- Trigger a callback function when the mouse speed changed
@@ -523,16 +525,16 @@ end
 --      print("Mouse speed settings: " .. value.id .. " with speed:" .. value.speed)
 --    end)
 connections.connect_mouse_speed = function(func)
-    awesome.connect_signal("TDE::mouse::speed", func)
+    awesome.connect_signal("awesome::mouse::speed", func)
 end
 
---- Notify other TDE components about the change in mouse natural scrolling
+--- Notify other awesome components about the change in mouse natural scrolling
 -- @tparam table the mouse id and natural scrolling state
 -- @staticfct emit_mouse_natural_scrolling
--- @usage -- Notify other TDE components about the change in mouse natural scrolling state
+-- @usage -- Notify other awesome components about the change in mouse natural scrolling state
 -- lib.signals.emit_mouse_speed({id: 11, state: true})
 connections.emit_mouse_natural_scrolling = function(value)
-    awesome.emit_signal("TDE::mouse::natural_scrolling", value)
+    awesome.emit_signal("awesome::mouse::natural_scrolling", value)
 end
 
 --- Trigger a callback function when the mouse natural scrolling state changed
@@ -544,15 +546,15 @@ end
 --      print("Mouse natural scrolling state settings: " .. value.id .. " with state:" .. value.state)
 --    end)
 connections.connect_mouse_natural_scrolling = function(func)
-    awesome.connect_signal("TDE::mouse::natural_scrolling", func)
+    awesome.connect_signal("awesome::mouse::natural_scrolling", func)
 end
 
 --- Notify wiboxes when the screen layout is updated (so they can update their position)
 -- @staticfct emit_refresh_screen
--- @usage -- Notify other TDE components about the screen update
+-- @usage -- Notify other awesome components about the screen update
 -- lib.signals.emit_refresh_screen()
 connections.emit_refresh_screen = function()
-    awesome.emit_signal("TDE::screen:refresh")
+    awesome.emit_signal("awesome::screen:refresh")
 end
 
 --- Trigger a callback function when a wibox should update their position on the screen
@@ -564,16 +566,16 @@ end
 --      print("Some screen updated")
 --    end)
 connections.connect_refresh_screen = function(func)
-    awesome.connect_signal("TDE::screen:refresh", func)
+    awesome.connect_signal("awesome::screen:refresh", func)
 end
 
 --- Notify when the user profile picture changed
 -- @tparam string picture The profile picture file path
 -- @staticfct emit_profile_picture_changed
--- @usage -- Notify other TDE components when the user profile picture changed
+-- @usage -- Notify other awesome components when the user profile picture changed
 -- lib.signals.emit_profile_picture_changed()
 connections.emit_profile_picture_changed = function(picture)
-    awesome.emit_signal("TDE::profile:picture::changed", picture)
+    awesome.emit_signal("awesome::profile:picture::changed", picture)
 end
 
 --- Trigger a callback function when the user profile picture changed
@@ -585,16 +587,16 @@ end
 --      print("Changed profile picture to: " .. picture)
 --    end)
 connections.connect_profile_picture_changed = function(func)
-    awesome.connect_signal("TDE::profile:picture::changed", func)
+    awesome.connect_signal("awesome::profile:picture::changed", func)
 end
 
 --- Notify when the notification disturb state changes
 -- @tparam bool bDoNotDisturb If Do Not Disturb mode is turned on
 -- @staticfct emit_do_not_disturb
--- @usage -- Notify other TDE components what the current do not disturb mode is
+-- @usage -- Notify other awesome components what the current do not disturb mode is
 -- lib.signals.emit_do_not_disturb()
 connections.emit_do_not_disturb = function(bDoNotDisturb)
-    awesome.emit_signal("TDE::do_not_disturb::changed", bDoNotDisturb)
+    awesome.emit_signal("awesome::do_not_disturb::changed", bDoNotDisturb)
 end
 
 --- Trigger a callback function when the do not disturb mode changed
@@ -606,16 +608,16 @@ end
 --      print("Do not disturb mode: " .. tostring(bDoNotDisturb))
 --    end)
 connections.connect_do_not_disturb = function(func)
-    awesome.connect_signal("TDE::do_not_disturb::changed", func)
+    awesome.connect_signal("awesome::do_not_disturb::changed", func)
 end
 
 --- Notify when the primary theme changed
 -- @tparam table theme The new theme pallet
 -- @staticfct emit_primary_theme_changed
--- @usage -- Notify other TDE components that the primary theme changed
+-- @usage -- Notify other awesome components that the primary theme changed
 -- lib.signals.emit_primary_theme_changed()
 connections.emit_primary_theme_changed = function(bDoNotDisturb)
-    awesome.emit_signal("TDE::primary::theme::changed", bDoNotDisturb)
+    awesome.emit_signal("awesome::primary::theme::changed", bDoNotDisturb)
 end
 
 --- Trigger a callback function when the primary theme changed
@@ -627,16 +629,16 @@ end
 --      print("The hue_600 color of this theme: " .. theme.hue_600)
 --    end)
 connections.connect_primary_theme_changed = function(func)
-    awesome.connect_signal("TDE::primary::theme::changed", func)
+    awesome.connect_signal("awesome::primary::theme::changed", func)
 end
 
 --- Notify when the background theme changed
 -- @tparam table theme The new theme pallet
 -- @staticfct emit_background_theme_changed
--- @usage -- Notify other TDE components that the background theme changed
+-- @usage -- Notify other awesome components that the background theme changed
 -- lib.signals.emit_background_theme_changed()
 connections.emit_background_theme_changed = function(bDoNotDisturb)
-    awesome.emit_signal("TDE::background::theme::changed", bDoNotDisturb)
+    awesome.emit_signal("awesome::background::theme::changed", bDoNotDisturb)
 end
 
 --- Trigger a callback function when the background theme changed
@@ -648,16 +650,16 @@ end
 --      print("The hue_600 color of this theme: " .. theme.hue_600)
 --    end)
 connections.connect_background_theme_changed = function(func)
-    awesome.connect_signal("TDE::background::theme::changed", func)
+    awesome.connect_signal("awesome::background::theme::changed", func)
 end
 
 --- Notify when the oled brightness mode changed
 -- @tparam table theme The new theme pallet
 -- @staticfct emit_oled_mode
--- @usage -- Notify other TDE components that the oled brightness mode changed
+-- @usage -- Notify other awesome components that the oled brightness mode changed
 -- lib.signals.emit_oled_mode(true)
 connections.emit_oled_mode = function(bIsOledMode)
-    awesome.emit_signal("TDE::oled::mode::changed", bIsOledMode)
+    awesome.emit_signal("awesome::oled::mode::changed", bIsOledMode)
 end
 
 --- Trigger a callback function when the oled brightness mode changed
@@ -669,7 +671,7 @@ end
 --      print("Is oled mode enabled?: " .. tostring(bIsOledMode))
 --    end)
 connections.connect_oled_mode = function(func)
-    awesome.connect_signal("TDE::oled::mode::changed", func)
+    awesome.connect_signal("awesome::oled::mode::changed", func)
 end
 
 return connections

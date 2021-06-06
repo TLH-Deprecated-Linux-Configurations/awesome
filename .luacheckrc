@@ -35,24 +35,23 @@ exclude_files = {
     "lib/lib-lua/socket/url.lua",
     "lib/lib-lua/ssl.lua",
     "lib/lib-lua/ssl/https.lua",
-    "tde/lib/lib-lua/cjson/util.lua",
-    "tde/lib/lib-lua/ltn12.lua",
-    "tde/lib/lib-lua/mime.lua",
-    "tde/lib/lib-lua/posix/_base.lua",
-    "tde/lib/lib-lua/posix/compat.lua",
-    "tde/lib/lib-lua/posix/deprecated.lua",
-    "tde/lib/lib-lua/posix/init.lua",
-    "tde/lib/lib-lua/socket.lua",
-    "tde/lib/lib-lua/socket/ftp.lua",
-    "tde/lib/lib-lua/socket/http.lua",
-    "tde/lib/lib-lua/socket/smtp.lua",
-    "tde/lib/lib-lua/socket/tp.lua",
-    "tde/lib/lib-lua/socket/url.lua",
-    "tde/lib/lib-lua/ssl.lua",
-    "tde/lib/lib-lua/ssl/https.lua",
+    "lib/lib-lua/cjson/util.lua",
+    "lib/lib-lua/ltn12.lua",
+    "lib/lib-lua/mime.lua",
+    "lib/lib-lua/posix/_base.lua",
+    "lib/lib-lua/posix/compat.lua",
+    "lib/lib-lua/posix/deprecated.lua",
+    "lib/lib-lua/posix/init.lua",
+    "lib/lib-lua/socket.lua",
+    "lib/lib-lua/socket/ftp.lua",
+    "lib/lib-lua/socket/http.lua",
+    "lib/lib-lua/socket/smtp.lua",
+    "lib/lib-lua/socket/tp.lua",
+    "lib/lib-lua/socket/url.lua",
+    "lib/lib-lua/ssl.lua",
+    "lib/lib-lua/ssl/https.lua",
     -- contains a lot of globals
     "tests/**",
-    -- TODO: refactor plugins, then remove this
     --"plugins/**",
 }
 
@@ -84,8 +83,6 @@ read_globals = {
 -- screen may not be read-only, because newer luacheck versions complain about
 -- screen[1].tags[1].selected = true.
 -- The same happens with the following code:
---   local tags = mouse.screen.tags
---   tags[7].index = 4
 -- client may not be read-only due to client.focus.
 globals = {
     "screen",
@@ -93,7 +90,6 @@ globals = {
     "root",
     "client",
     "timer",
-    -- custom globals defined by tde
     "awful",
     "i18n",
     "general",
@@ -106,12 +102,10 @@ globals = {
     "print",
     "echo",
     "desktop_icons",
+    "awesome",
 }
 
 -- Enable cache (uses .luacheckcache relative to this rc file).
 cache = true
-
--- Do not enable colors to make the Travis CI output more readable.
-color = true
 
 -- vim: filetype=lua:expandtab:shiftwidth=4:tabstop=8:softtabstop=4:textwidth=80
