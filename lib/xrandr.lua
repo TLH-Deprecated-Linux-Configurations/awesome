@@ -27,9 +27,9 @@ local gtable = require("gears.table")
 
 local naughty = require("naughty")
 local apps = require("configuration.apps")
-
+local home = os.getenv("HOME")
 -- A path to a fancy icon
-local icon_path = "/etc/xdg/tde/theme/icons/laptop.svg"
+local icon_path = home .. ".config/awesome/theme/icons/laptop.svg"
 
 -- Get active outputs
 local function outputs()

@@ -1,50 +1,17 @@
---[[
---MIT License
---
---Copyright (c) 2019 manilarome
---Copyright (c) 2020 Tom Meyers
---
---Permission is hereby granted, free of charge, to any person obtaining a copy
---of this software and associated documentation files (the "Software"), to deal
---in the Software without restriction, including without limitation the rights
---to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
---copies of the Software, and to permit persons to whom the Software is
---furnished to do so, subject to the following conditions:
---
---The above copyright notice and this permission notice shall be included in all
---copies or substantial portions of the Software.
---
---THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
---IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
---FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
---AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
---LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
---OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
---SOFTWARE.
-]]
----------------------------------------------------------------------------
--- Internal signal delegator, this module manages signals from and to different components of TDE
---
--- This package contains a lot of signals.
--- most are in the form:
---
---     emit_property_ram("123450")
---     connect_property_ram(
---      function(value)
---        print("Received: " .. value)
---      end)
---
--- This module tries to improve re-usage of know variables throughout the tde infrastructure.
---
---
--- @author Tom Meyers
--- @copyright 2020 Tom Meyers
--- @tdemod lib.signals
--- @supermodule awesome
----------------------------------------------------------------------------
+--  _______ __                     __        
+-- |     __|__|.-----.-----.---.-.|  |.-----.
+-- |__     |  ||  _  |     |  _  ||  ||__ --|
+-- |_______|__||___  |__|__|___._||__||_____|
+--             |_____|                       
+-- ########################################################################
+-- ########################################################################
+-- ########################################################################------------------------------
+-- Internal signal delegator, this module manages signals 
 
 local connections = {}
-
+-- ########################################################################
+-- ########################################################################
+-- ########################################################################
 --- Notify other TDE components that the exit_screen should be hidden
 -- @tparam function func The callback function that will be called when the event happens
 -- @staticfct emit_module_exit_screen_hide
@@ -53,7 +20,9 @@ local connections = {}
 connections.emit_module_exit_screen_hide = function()
     awesome.emit_signal("module::exit_screen_hide")
 end
-
+-- ########################################################################
+-- ########################################################################
+-- ########################################################################
 --- Trigger a callback function when the exit screen goes hidden
 -- @tparam function func The callback function that will be called when the event happens
 -- @staticfct connect_module_exit_screen_hide
@@ -65,7 +34,9 @@ end
 connections.connect_module_exit_screen_hide = function(func)
     awesome.connect_signal("module::exit_screen_hide", func)
 end
-
+-- ########################################################################
+-- ########################################################################
+-- ########################################################################
 --- Notify other TDE components that the battery has updated its value
 -- @staticfct emit_module_exit_screen_show
 -- @usage -- notify other components
@@ -73,7 +44,9 @@ end
 connections.emit_module_exit_screen_show = function()
     awesome.emit_signal("module::exit_screen_show")
 end
-
+-- ########################################################################
+-- ########################################################################
+-- ########################################################################
 --- Trigger a callback function when the exit screen is being show
 -- @tparam function func The callback function that will be called when the event happens
 -- @staticfct connect_module_exit_screen_show
@@ -85,7 +58,9 @@ end
 connections.connect_module_exit_screen_show = function(func)
     awesome.connect_signal("module::exit_screen_show", func)
 end
-
+-- ########################################################################
+-- ########################################################################
+-- ########################################################################
 --- Notify other TDE components that the battery has updated its value
 -- @tparam number value The current percentage of the battery
 -- @staticfct emit_module_battery
@@ -94,7 +69,9 @@ end
 connections.emit_battery = function(value)
     awesome.emit_signal("module::battery", value)
 end
-
+-- ########################################################################
+-- ########################################################################
+-- ########################################################################
 --- Trigger a callback function when the battery is updated
 -- @tparam function func The callback function that will be called when the event happens
 -- @staticfct connect_battery
@@ -106,7 +83,9 @@ end
 connections.connect_battery = function(func)
     awesome.connect_signal("module::battery", func)
 end
-
+-- ########################################################################
+-- ########################################################################
+-- ########################################################################
 --- Notify other TDE components that the battery charging has changed
 -- @tparam bool value if it is charging
 -- @staticfct emit_module_battery_charging
@@ -115,7 +94,9 @@ end
 connections.emit_battery_charging = function(value)
     awesome.emit_signal("module::charger", value)
 end
-
+-- ########################################################################
+-- ########################################################################
+-- ########################################################################
 --- Trigger a callback function when the battery charging changed
 -- @tparam function func The callback function that will be called when the event happens
 -- @staticfct connect_battery_charging
@@ -127,7 +108,9 @@ end
 connections.connect_battery_charging = function(func)
     awesome.connect_signal("module::charger", func)
 end
-
+-- ########################################################################
+-- ########################################################################
+-- ########################################################################
 --- Notify other TDE components that the screen brightness has changed
 -- @tparam number value The brightness between 0 and 100
 -- @staticfct emit_brightness
@@ -136,7 +119,9 @@ end
 connections.emit_brightness = function(value)
     awesome.emit_signal("brightness::update", value)
 end
-
+-- ########################################################################
+-- ########################################################################
+-- ########################################################################
 --- Trigger a callback function when the brightness changed
 -- @tparam function func The callback function that will be called when the event happens
 -- @staticfct connect_brightness

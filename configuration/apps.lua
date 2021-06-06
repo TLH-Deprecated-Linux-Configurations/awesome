@@ -37,7 +37,6 @@ return {
       screen.primary.dpi ..
         ' -modi "clipboard:greenclip print" -show clipboard -theme ' ..
           HOME .. "/.config/awesome/external/rofi/appmenu/drun.rasi",
-    rofidpimenu = "bash " .. HOME .. "dpi.sh",
     rofiwifimenu = "bash " .. HOME .. "wifi.sh" .. " " .. screen.primary.dpi,
     lock = "$HOME/.config/awesome/external/i3lock/blur.sh",
     --lock = "dm-tool lock",

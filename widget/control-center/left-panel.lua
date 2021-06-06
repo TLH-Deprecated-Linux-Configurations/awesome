@@ -234,19 +234,7 @@ local left_panel_func = function()
     )
   end
 
-  function left_panel:run_dpi()
-    action_grabber:stop()
-    _G.awesome.spawn(
-      apps.default.rofidpimenu,
-      false,
-      false,
-      false,
-      false,
-      function()
-        left_panel:toggle()
-      end
-    )
-  end
+
 
   function left_panel:run_wifi()
     action_grabber:stop()

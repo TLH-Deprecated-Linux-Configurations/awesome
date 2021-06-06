@@ -21,7 +21,7 @@ require("lib.signals").connect_exit(
     function()
         -- stop current autorun.sh
         -- This is done because otherwise multiple instances would be running at the same time
-        awful.spawn("pgrep -f" .. HOME..  "/.config/awesome/autorun.sh | xargs kill -9")
+        awful.spawn("pgrep -f" .. HOME..  ".config/awesome/autorun.sh | xargs kill -9")
     end
 )
 

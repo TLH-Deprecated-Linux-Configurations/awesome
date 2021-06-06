@@ -1,27 +1,4 @@
---[[
---MIT License
---
---Copyright (c) 2019 manilarome
---Copyright (c) 2020 Tom Meyers
---
---Permission is hereby granted, free of charge, to any person obtaining a copy
---of this software and associated documentation files (the "Software"), to deal
---in the Software without restriction, including without limitation the rights
---to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
---copies of the Software, and to permit persons to whom the Software is
---furnished to do so, subject to the following conditions:
---
---The above copyright notice and this permission notice shall be included in all
---copies or substantial portions of the Software.
---
---THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
---IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
---FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
---AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
---LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
---OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
---SOFTWARE.
-]]
+
 local HOME = os.getenv("HOME")
 
 local leftpanel_icon_theme = "tos" -- Available Themes: 'lines', 'original', 'macos'
@@ -77,7 +54,7 @@ return {
   bluetooth = theme(config["bluetooth"] or dir .. "/bluetooth.svg"),
   bluetooth_off = theme(config["bluetooth_off"] or dir .. "/bluetooth-off.svg"),
   bios = theme(config["bios"] or dir .. "/bios.svg"),
-  package = theme("/etc/xdg/tde/widget/package-updater/icons/package.svg"),
+  package = theme(HOME .. ".config/awesome/widget/package-updater/icons/package.svg"),
   about = theme(dir .. "/info.svg"),
   mouse = theme(dir .. "/mouse.svg"),
   user = theme(dir .. "/user.svg"),

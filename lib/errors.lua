@@ -30,9 +30,9 @@
 --  * TDE version
 --  * stack trace of error
 
-local sentrypkg = require("lib.sentry")
+local sentrypkg = require("lib-tde.sentry")
 local release = require("release")
-local logger = require("lib.logger")
+local logger = require("lib-tde.logger")
 local loglevel = logger.error
 local warn = logger.warn
 
@@ -41,7 +41,7 @@ print("Resolved environment to: " .. (os.getenv("TDE_ENV") or "production"))
 
 local sentry =
     sentrypkg.new {
-    sender = require("lib.sentry.senders.luasocket").new {
+    sender = require("lib-tde.sentry.senders.luasocket").new {
         dsn = "https://4684617907b540c0a3caf0245e1d6a2a@sentry.odex.be/6"
     },
     logger = "TDE-log",
