@@ -2,7 +2,6 @@ local filesystem = require("gears.filesystem")
 local config = require("config")
 local hardware = require("lib.hardware-check")
 
-
 -- lib to retrieve current theme
 local beautiful = require("beautiful")
 local color = beautiful.xforeground
@@ -29,13 +28,11 @@ return {
     web = "rofi -dpi " ..
       screen.primary.dpi ..
         " -show Search -modi Search:" ..
-          HOME ..
-            "/external/rofi/search.py" ..
-              " -theme " .. HOME .. "/.config/awesome/external/rofi/sidebar/rofi.rasi",
-    rofiappmenu = "bash ".. HOME .."/.config/awesome/applauncher.sh " .. screen.primary.dpi .. " " .. filesystem.get_configuration_dir(),
+          HOME .. "/external/rofi/search.py" .. " -theme " .. HOME .. "/.config/awesome/external/rofi/sidebar/rofi.rasi",
+    rofiappmenu = "bash " ..
+      HOME .. "/.config/awesome/applauncher.sh " .. screen.primary.dpi .. " " .. filesystem.get_configuration_dir(),
     rofiemojimenu = "bash " .. HOME .. "/.config/awesome/emoji.sh " .. screen.primary.dpi,
-    rofiwindowswitch = "bash " ..
-      HOME .. "/.config/awesome/application-switch.sh" .. " " .. screen.primary.dpi,
+    rofiwindowswitch = "bash " .. HOME .. "/.config/awesome/application-switch.sh" .. " " .. screen.primary.dpi,
     roficlipboard = "rofi -dpi " ..
       screen.primary.dpi ..
         ' -modi "clipboard:greenclip print" -show clipboard -theme ' ..
@@ -55,15 +52,15 @@ return {
     "xfsettingsd",
     "xrdb $HOME/.Xresources",
     "xsetroot -cursor_name left_ptr",
-    'xcape -e "Super_L=Super_L|Control_L|Escape"',
+    'xcape -e "Super_L=Super_L|Control_L|Escape"'
   },
   bins = {
     coverUpdate = require("lib.extractcover").extractalbum,
     full_screenshot = 'sh /.config/awesome/snapshot.sh full "' .. color .. '"',
-    full_blank_screenshot = "sh " .. HOME .. ' /.config/awesome/snapshot.sh full_blank',
-    area_screenshot = "sh " .. HOME .. '/.config/awesome/snapshot.sh area ' .. color .. '"',
-    area_blank_screenshot = "sh " .. HOME .. '/.config/awesome/snapshot.sh area_blank',
+    full_blank_screenshot = "sh " .. HOME .. " /.config/awesome/snapshot.sh full_blank",
+    area_screenshot = "sh " .. HOME .. "/.config/awesome/snapshot.sh area " .. color .. '"',
+    area_blank_screenshot = "sh " .. HOME .. "/.config/awesome/snapshot.sh area_blank",
     window_screenshot = "sh " .. HOME .. '/.config/awesome/snapshot.sh" window ' .. color .. '"',
-    window_blank_screenshot = "sh " .. HOME .. '/.config/awesome/snapshot.sh window_blank'
+    window_blank_screenshot = "sh " .. HOME .. "/.config/awesome/snapshot.sh window_blank"
   }
 }

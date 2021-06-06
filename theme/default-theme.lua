@@ -6,7 +6,6 @@ local xresources = require("beautiful.xresources")
 local xrdb = xresources.get_current_theme()
 local gtk = require("beautiful.gtk")
 local config = require("theme.config")
-local darklight = require("theme.icons.dark-light")
 local filehandle = require("lib.file")
 local file_exists = filehandle.exists
 
@@ -21,7 +20,7 @@ theme.background_transparency = config["background_transparent"] or "66"
 -- list/table if the file does not exist
 local function lines_from(file)
   if not file_exists(file) then
-    return "/usr/share/backgrounds/5.png"
+    return "/usr/share/backgrounds/background.png"
   end
   local lines = {}
   for line in io.lines(file) do
@@ -78,7 +77,7 @@ local awesome_overrides = function(awesome_theme)
   awesome_theme.icons = awesome_theme.dir .. "/icons/"
 
   local resultset = lines_from(os.getenv("HOME") .. "/.config/awesome/electric-tantra/theme")
-  awesome_theme.wallpaper = "/usr/share/backgrounds/background.png"
+  awesome_theme.wallpaper = theme_dir .. "/background.png"
   awesome_theme.font = "Hurmit Nerd Font Mono bold 10"
   awesome_theme.title_font = "Hurmit Nerd Font Mono bold 18"
 
@@ -100,7 +99,7 @@ local awesome_overrides = function(awesome_theme)
   awesome_theme.bg_settings_display_number = "#00000070"
 
   -- Borders
-  awesome_theme.border_width = dpi(2)
+  awesome_theme.border_width = dpi(1)
   awesome_theme.border_normal = theme.background
   awesome_theme.border_focus = awesome_theme.primary.hue_300
   awesome_theme.border_marked = theme.xcolor7
@@ -128,7 +127,7 @@ local awesome_overrides = function(awesome_theme)
   awesome_theme.menu_width = dpi(160)
 
   -- Tooltips
-  awesome_theme.tooltip_bg = theme.background .. "aa"
+  awesome_theme.tooltip_bg = theme.background .. "66"
   --awesome_theme.tooltip_border_color = '#232323'
   awesome_theme.tooltip_border_width = 0
   awesome_theme.tooltip_shape = function(cr, w, h)

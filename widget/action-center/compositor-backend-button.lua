@@ -1,4 +1,16 @@
+--  ______                                    __ __
+-- |      |.-----.--------.-----.-----.-----.|__|  |_.-----.----.
+-- |   ---||  _  |        |  _  |  _  |__ --||  |   _|  _  |   _|
+-- |______||_____|__|__|__|   __|_____|_____||__|____|_____|__|
+--                        |__|
+--  ______              __                   __
+-- |   __ \.---.-.----.|  |--.-----.-----.--|  |
+-- |   __ <|  _  |  __||    <|  -__|     |  _  |
+-- |______/|___._|____||__|__|_____|__|__|_____|
 
+-- ########################################################################
+-- ########################################################################
+-- ########################################################################
 local wibox = require("wibox")
 local gears = require("gears")
 local dpi = require("beautiful").xresources.apply_dpi
@@ -7,22 +19,23 @@ local checkbox = require("lib.checkbox")
 
 local config = require("config")
 
+-- ########################################################################
+-- Command ################################################################
+-- ########################################################################
+-- Checks that background blur is false
+-- tr command removes special characters because lua is choosy on MATCH method
+
 local cmd = 'grep -F \'"glx";\' ' .. config.getComptonFile() .. "| tr -d '[\\-\\;\\=\\ ]' "
 local frameStatus
+-- ########################################################################
+-- ########################################################################
+-- ########################################################################
 
-------
-
--- The cmd variable is declared above
--- It checks the line "blur-background-frame: false;"
--- I use 'tr' shell command to remove the special characters
--- because lua is choosy on MATCH method
--- So the output will be 'blurbackgroundframefalse'
--- if it matches the assigned value inside the match method below
--- then it will declared as value of frameChecker
--- The rest is history
 local frameChecker
 
--- Commands that will be executed when I toggle the button
+-- ########################################################################
+-- Commands User Toggles ##################################################
+-- ########################################################################
 local glxDisable = {
   'sed -i -e \'s/"glx";/"xrender";/g\' ' .. config.getComptonFile(),
   "picom -b --dbus --experimental-backends --config " .. config.getComptonFile(),
@@ -58,7 +71,9 @@ local function update_compositor()
   end
 end
 
------------------------------------------------------------------------------------------------------------------
+-- ########################################################################
+-- ########################################################################
+-- ########################################################################
 
 local compton_button =
   checkbox(
@@ -68,7 +83,9 @@ local compton_button =
     update_compositor()
   end
 )
-
+-- ########################################################################
+-- ########################################################################
+-- ########################################################################
 local function checkFrame()
   awful.spawn.easy_async_with_shell(
     cmd,
@@ -82,15 +99,19 @@ local function checkFrame()
 end
 
 checkFrame()
-
+-- ########################################################################
+-- ########################################################################
+-- ########################################################################
 local settingsName =
   wibox.widget {
   text = "Accelerated graphics composition",
-  font = "Iosevka Regular 10",
+  font = "Hurmit Nerd Font Mono bold10",
   align = "left",
   widget = wibox.widget.textbox
 }
-
+-- ########################################################################
+-- ########################################################################
+-- ########################################################################
 local content =
   wibox.widget {
   settingsName,
@@ -101,7 +122,9 @@ local content =
   layout = wibox.layout.ratio.horizontal
 }
 content:set_ratio(1, .85)
-
+-- ########################################################################
+-- ########################################################################
+-- ########################################################################
 local comptonButton =
   wibox.widget {
   wibox.widget {
@@ -110,5 +133,7 @@ local comptonButton =
   },
   layout = wibox.layout.fixed.vertical
 }
-
+-- ########################################################################
+-- Return Widget ##########################################################
+-- ########################################################################
 return comptonButton

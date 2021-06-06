@@ -10,8 +10,8 @@ local beautiful = require("beautiful")
 
 local dpi = beautiful.xresources.apply_dpi
 local clickable_container = require("widget.material.clickable-container")
-
-local widget_icon_dir = "/etc/xdg/tde/widget/calculator/icons/"
+local HOME = os.getenv("HOME")
+local widget_icon_dir = HOME .. ".config/awesome/widget/calculator/icons/"
 local theme = require("theme.icons.dark-light")
 
 local mouse_entered_started_keygrab = false
@@ -22,7 +22,7 @@ local calculator_screen =
 	{
 		id = "calcu_screen",
 		text = "0",
-		font = "SF Pro Text Regular 20",
+		font = "Hurmit Nerd Font Mono bold 20",
 		align = "right",
 		valign = "center",
 		widget = wibox.widget.textbox
@@ -31,13 +31,9 @@ local calculator_screen =
 	widget = wibox.container.margin
 }
 
---  #######
---  #       #    # #    #  ####  ##### #  ####  #    #  ####
---  #       #    # ##   # #    #   #   # #    # ##   # #
---  #####   #    # # #  # #        #   # #    # # #  #  ####
---  #       #    # #  # # #        #   # #    # #  # #      #
---  #       #    # #   ## #    #   #   # #    # #   ## #    #
---  #        ####  #    #  ####    #   #  ####  #    #  ####
+-- ########################################################################
+-- Functions ##############################################################
+-- ########################################################################
 
 -- format integer numbers with delimiters every 3 numbers
 -- e.g. 123,456 or 12,345 or 345
@@ -248,13 +244,9 @@ local build_shape = function(position, radius)
 	end
 end
 
---  #     # ###
---  #     #  #
---  #     #  #
---  #     #  #
---  #     #  #
---  #     #  #
---   #####  ###
+-- ########################################################################
+-- UI #####################################################################
+-- ########################################################################
 
 -- Themes widgets
 local decorate_widget = function(widget_arg, pos, rad)
@@ -275,7 +267,7 @@ local build_button_widget = function(text, rcp, rad)
 		{
 			id = "btn_name",
 			text = value,
-			font = "SF Pro Text 12",
+			font = "Hurmit Nerd Font Mono bold12",
 			align = "center",
 			valign = "center",
 			widget = wibox.widget.textbox
@@ -321,13 +313,9 @@ local build_button_widget = function(text, rcp, rad)
 	return decorate_widget(build_button, rcp, rad)
 end
 
---  #    #                  #####
---  #   #  ###### #   #    #     # #####    ##   #####
---  #  #   #       # #     #       #    #  #  #  #    #
---  ###    #####    #      #  #### #    # #    # #####
---  #  #   #        #      #     # #####  ###### #    #
---  #   #  #        #      #     # #   #  #    # #    #
---  #    # ######   #       #####  #    # #    # #####
+-- ########################################################################
+-- Keys ###################################################################
+-- ########################################################################
 
 local keygrab_running = false
 
@@ -427,13 +415,9 @@ local calcu_keygrabber =
 	end
 }
 
---  #     # ###
---  #     #  #
---  #     #  #
---  #     #  #
---  #     #  #
---  #     #  #
---   #####  ###
+-- ########################################################################
+-- UI #####################################################################
+-- ########################################################################
 
 local calculator_body =
 	wibox.widget {
@@ -486,13 +470,9 @@ local calculator_body =
 	}
 }
 
---   #####
---  #     # #  ####  #    #   ##   #       ####
---  #       # #    # ##   #  #  #  #      #
---   #####  # #      # #  # #    # #       ####
---        # # #  ### #  # # ###### #           #
---  #     # # #    # #   ## #    # #      #    #
---   #####  #  ####  #    # #    # ######  ####
+-- ########################################################################
+-- Signals ################################################################
+-- ########################################################################
 calculator_body:connect_signal(
 	"mouse::enter",
 	function()
@@ -534,13 +514,9 @@ awesome.connect_signal(
 	end
 )
 
---  #######
---     #     ####   ####  #      ##### # #####
---     #    #    # #    # #        #   # #    #
---     #    #    # #    # #        #   # #    #
---     #    #    # #    # #        #   # #####
---     #    #    # #    # #        #   # #
---     #     ####   ####  ######   #   # #
+-- ########################################################################
+-- Tooltip ################################################################
+-- ########################################################################
 
 awful.tooltip {
 	objects = {kb_button},

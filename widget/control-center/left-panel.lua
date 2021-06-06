@@ -283,7 +283,7 @@ local left_panel_func = function()
     },
     wibox.widget {
       text = i18n.translate("Change Application Scaling"),
-      font = "Iosevka Regular 12",
+      font = "Hurmit Nerd Font Mono bold12",
       widget = wibox.widget.textbox,
       align = center
     },
@@ -313,7 +313,7 @@ local left_panel_func = function()
     },
     wibox.widget {
       text = i18n.translate("Full settings application"),
-      font = "Iosevka Regular 12",
+      font = "Hurmit Nerd Font Mono bold12",
       widget = wibox.widget.textbox,
       align = center
     },
@@ -344,7 +344,7 @@ local left_panel_func = function()
     },
     wibox.widget {
       text = i18n.translate("Connect to a wireless network"),
-      font = "Iosevka Regular 12",
+      font = "Hurmit Nerd Font Mono bold12",
       widget = wibox.widget.textbox,
       align = center
     },

@@ -18,7 +18,7 @@ local file_manager = apps.default.file_manager
 local text_editor = apps.default.editor
 local editor_cmd = terminal .. " -e " .. (os.getenv("EDITOR") or "nano")
 
-beautiful.menu_font = "Iosevka Custom Regular 10"
+beautiful.menu_font = "Hurmit Nerd Font Mono bold 10"
 beautiful.menu_height = 34
 beautiful.menu_width = 180
 beautiful.menu_bg_focus = beautiful.primary.hue_600 -- add a bit of transparency
@@ -87,7 +87,7 @@ local mymainmenu =
 			-- other triads can be put here
 		},
 		after = {
-			{"TDE", myawesomemenu, icons.logo},
+			{"Awesome", myawesomemenu},
 			{i18n.translate("Screenshot"), screenshot},
 			{
 				i18n.translate("End Session"),

@@ -299,7 +299,7 @@ return function()
     wibox.widget {
       widget = wibox.widget.textbox,
       text = i18n.translate("Network list"),
-      font = "SF Pro Display Bold 24"
+      font = "Hurmit Nerd Font Mono bold24"
     },
     dpi(20),
     0,

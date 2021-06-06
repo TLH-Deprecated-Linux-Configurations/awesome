@@ -1,4 +1,10 @@
-
+--    _______ __                 __
+--  |   _   |  |--.-----.--.--.|  |_
+--  |       |  _  |  _  |  |  ||   _|
+--  |___|___|_____|_____|_____||____|
+-- ########################################################################
+-- Initialization #########################################################
+-- ########################################################################
 local beautiful = require("beautiful")
 local gears = require("gears")
 
@@ -24,7 +30,9 @@ local icon = theme(HOME .. "/.config/awesome/widget/about/icons/info.svg")
 
 local aboutPage
 local aboutBackdrop
-
+-- ########################################################################
+-- Widget #################################################################
+-- ########################################################################
 screen.connect_signal(
   "request::desktop_decoration",
   function(s)
@@ -82,7 +90,7 @@ screen.connect_signal(
       x = s.geometry.x,
       y = s.geometry.y,
       width = s.geometry.width,
-      height = s.geometry.height - dpi(40)
+      height = s.geometry.height - dpi(38)
     }
   end
 )
@@ -111,7 +119,9 @@ local grabber =
   stop_key = "Escape",
   stop_event = "release"
 }
-
+-- ########################################################################
+-- Controls ###############################################################
+-- ########################################################################
 local function toggleAbout()
   aboutBackdrop.visible = not aboutBackdrop.visible
   aboutPage.visible = not aboutPage.visible
@@ -181,7 +191,7 @@ widget_button:buttons(
       1,
       nil,
       function()
-        print("Showing about page")
+        print("Showing Who Is To Blame")
         toggleAbout()
       end
     )
@@ -196,11 +206,11 @@ browserOpen:buttons(
       1,
       nil,
       function()
-        print("Opening tos.odex.be in default browser")
-        awful.spawn.easy_async_with_shell("$BROWSER tos.odex.be")
+        print("Opening the developer's portfolio site in your browser")
+        awful.spawn.easy_async_with_shell("$BROWSER https://thomasleonhighbaugh.me")
         toggleAbout()
         naughty.notify(
-          {title = "TOS website", message = "Opened the tos homepage", timeout = 5, position = "top_right"}
+          {title = "Who's Responsible for this Mess?", message = "Opened the developer's portfolio homepage", timeout = 5, position = "top_right"}
         )
       end
     )
@@ -213,7 +223,7 @@ aboutPage:setup {
     browserOpen,
     wibox.widget {
       text = config.aboutText,
-      font = "Iosevka Regular 10",
+      font = "Hurmit Nerd Font Mono bold10",
       align = "center",
       widget = wibox.widget.textbox
     },

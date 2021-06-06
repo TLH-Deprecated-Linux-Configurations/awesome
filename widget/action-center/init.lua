@@ -13,7 +13,9 @@ local wifibutton = require("widget.action-center.wifi-button")
 local bluebutton = require("widget.action-center.bluetooth-button")
 local comptonbutton = require("widget.action-center.compositor-button")
 local comptonBackendbutton = require("widget.action-center.compositor-backend-button")
-
+-- ########################################################################
+-- ########################################################################
+-- ########################################################################
 local widget =
   wibox.widget {
   spacing = gap,
@@ -29,6 +31,9 @@ local widget =
     },
     widget = mat_list_item
   },
+  -- ########################################################################
+-- ########################################################################
+-- ########################################################################
   -- Bluetooth Connection
   wibox.widget {
     wibox.widget {
@@ -41,7 +46,9 @@ local widget =
     },
     widget = mat_list_item
   },
-
+-- ########################################################################
+-- ########################################################################
+-- ########################################################################
   -- Compositor Toggle
   wibox.widget {
     wibox.widget {
@@ -54,6 +61,9 @@ local widget =
     },
     widget = mat_list_item
   },
+  -- ########################################################################
+-- ########################################################################
+-- ########################################################################
   -- Compositor Backend Toggle
   layout = wibox.layout.fixed.vertical,
   wibox.widget {
@@ -68,5 +78,7 @@ local widget =
     widget = mat_list_item
   }
 }
-
+-- ########################################################################
+-- ########################################################################
+-- ########################################################################
 return wibox.container.margin(widget, 0, 0, dpi(20), dpi(20))

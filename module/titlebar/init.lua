@@ -23,7 +23,7 @@ local wibox = require("wibox")
 local dpi = require("beautiful").xresources.apply_dpi
 
 local mode = ""
-local draw_mode = general["draw_mode"]
+local draw_mode = "full"
 
 local beautiful = require("beautiful")
 local get_font_height = beautiful.get_font_height
@@ -323,8 +323,8 @@ local function create_button_image(name, is_focused, event, is_on)
         end
         -- Then the color is lightened if the button is being hovered over, or darkened if it is being pressed, otherwise it is left as is
         button_color =
-            (event == "hover") and colors.lighten(button_color, 25) or
-            (event == "press") and colors.darken(button_color, 25) or
+            (event == "hover") and colors.lighten(button_color, 45) or
+            (event == "press") and colors.darken(button_color, 45) or
             button_color
         -- Save the generate color because why not lol
         _private[key_color] = button_color

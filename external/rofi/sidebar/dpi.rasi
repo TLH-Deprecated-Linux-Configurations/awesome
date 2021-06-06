@@ -1,5 +1,5 @@
 configuration {
-	font:                       	"SF Pro Text Regular 10";
+	font:                       	"Hurmit Nerd Font Mono bold 10";
 	show-icons:                		true;
 	fullscreen:                     false;
 	sidebar-mode:               	true;
@@ -71,7 +71,7 @@ button {
 
 
 entry {
-	font:            				"SF Pro Text Regular 12";
+	font:            				"Hurmit Nerd Font Mono bold 12";
 	background-color:               @background;
 	placeholder-color:          	@foreground;
 	placeholder:                	"Is the scaling correct?";
@@ -118,7 +118,7 @@ element-icon {
 }
 
 element-text {
-	font:                      		"SF Pro Text Regular 11";
+	font:                      		"Hurmit Nerd Font Mono bold 11";
 	expand:                        	true;
 	horizontal-align:              	0.0;
 	vertical-align: 				0.5;

@@ -372,7 +372,7 @@ return function()
     wibox.widget {
       widget = wibox.widget.textbox,
       text = i18n.translate("Audio list"),
-      font = "SF Pro Display Bold 24"
+      font = "Hurmit Nerd Font Mono bold24"
     },
     dpi(20),
     0,
@@ -385,7 +385,7 @@ return function()
   wibox.widget {
     widget = wibox.widget.textbox,
     text = i18n.translate("Application list"),
-    font = "SF Pro Display Bold 24"
+    font = "Hurmit Nerd Font Mono bold24"
   },
   dpi(20),
   0,

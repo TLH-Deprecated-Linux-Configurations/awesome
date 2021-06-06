@@ -9,7 +9,6 @@ configuration {
 	disable-history: false;
 	fullscreen: true;
 	window-thumbnail: true;
-	width:1920;
 }
 
 * {
@@ -86,16 +85,17 @@ inputbar {
 
 listview {
 	background-color: @transparent;
-	columns: 5;
+	columns: 6;
 	spacing: 5px;
-	cycle: true;
+	cycle: false;
+	dynamic: true;
 	layout: vertical;
 }
 
 mainbox {
 	background-color: @background-black;
 	children: [ inputbar, listview ];
-	spacing: 5px;
+	spacing: 15px;
 	padding: 70px 5% 0 5%;
 	/*padding: 70px 135px 0 135px;*/
 }
@@ -105,15 +105,16 @@ element {
 	text-color: @foreground;
 	orientation: vertical;
 	border-radius: 12px;
+	padding: 25px 0 25px 0;
 }
 
 element-icon {
-	size: 96px;
+	size: 72px;
 	border: 0;
 }
 
 element-text {
-	expand: false;
+	expand: true;
 	horizontal-align: 0.5;
 	vertical-align: 0.5;
 	margin: 0 10px 0 10px;

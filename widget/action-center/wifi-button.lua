@@ -8,6 +8,9 @@ local beautiful = require("beautiful")
 local dpi = beautiful.xresources.apply_dpi
 
 local mode
+-- ########################################################################
+-- ########################################################################
+-- ########################################################################
 
 local function update_wifi()
   if (mode == false) then
@@ -29,7 +32,9 @@ local wifi_button =
     update_wifi()
   end
 )
-
+-- ########################################################################
+-- ########################################################################
+-- ########################################################################
 -- Alternative to naughty.notify - tooltip. You can compare both and choose the preferred one
 awful.tooltip(
   {
@@ -46,7 +51,9 @@ awful.tooltip(
     preferred_positions = {"right", "left", "top", "bottom"}
   }
 )
-
+-- ########################################################################
+-- ########################################################################
+-- ########################################################################
 signals.connect_wifi_status(
   function(active)
     mode = active
@@ -57,7 +64,7 @@ signals.connect_wifi_status(
 local settingsName =
   wibox.widget {
   text = i18n.translate("Wireless Connection"),
-  font = "Iosevka Regular 10",
+  font = "Hurmit Nerd Font Mono bold10",
   align = "left",
   widget = wibox.widget.textbox
 }

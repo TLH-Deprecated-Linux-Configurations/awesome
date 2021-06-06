@@ -105,7 +105,7 @@ return function(typing_callback, done_callback, hidden)
 
     local textbox = wibox.widget.textbox(active_text)
     -- TODO: allow custom fonts
-    textbox.font = "SF Pro Display Bold 16"
+    textbox.font = "Hurmit Nerd Font Mono bold16"
     textbox.align = "left"
     textbox.valign = "center"
 
