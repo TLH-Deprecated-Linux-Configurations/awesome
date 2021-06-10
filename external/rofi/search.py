@@ -1,4 +1,8 @@
-
+#  _______                         __    
+# |     __|.-----.---.-.----.----.|  |--.
+# |__     ||  -__|  _  |   _|  __||     |
+# |_______||_____|___._|__| |____||__|__|
+                                       
 import json
 import re
 import urllib.parse
@@ -23,16 +27,13 @@ TERMINAL = ['kitty', '--'] # or ['st', '-e'] or something like that
 
 CONFIG = {
     'BROWSER_PATH' : {
-        'chrome' : ['google-chrome-stable'],
+        'firefox' : ['firefox'],
         'firefox-developer-edition' : ['firefox-developer-edition'],
-        'chromium' : ['chromium-browser'],
         'brave' : ['brave-browser'],
         'lynx' : TERMINAL + ['lynx']
     },
     'USER_AGENT' : {
-        'chrome' : 'Mozilla/5.0 (X11; Fedora; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/77.0.3865.90 Safari/537.36',
         'firefox' : 'Mozilla/5.0 (X11; Fedora; Linux x86_64; rv:69.0) Gecko/20100101 Firefox/69.0',
-        'chromium' : 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Ubuntu Chromium/76.0.3809.100 Chrome/76.0.3809.100 Safari/537.36',
         'brave' : 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/77.0.3865.120 Safari/537.36',
         'lynx' : 'Lynx/2.8.9rel.1 libwww-FM/2.14 SSL-MM/1.4.1 OpenSSL/1.1.1d'
     },
@@ -75,7 +76,7 @@ def fetch_suggestions(search_string):
             'accept' : '*/*',
             'cache-control' : 'no-cache',
             'authority' : 'www.google.com',
-            'referer' : 'https://www.google.com/',
+            'referrer' : 'https://www.google.com/',
             'sec-fetch-site' : 'same-origin'
         }
         req = urllib.request.Request(url, headers=headers, method='GET')
@@ -108,7 +109,7 @@ def fetch_suggestions(search_string):
             'accept' : '*/*',
             'cache-control' : 'no-cache',
            'authority' : 'duckduckgo.com',
-            'referer' : 'https://duckduckgo.com/',
+            'referrer' : 'https://duckduckgo.com/',
             'sec-fetch-site' : 'same-origin',
         }
         req = urllib.request.Request(url, headers=headers, method='GET')
