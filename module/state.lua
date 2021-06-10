@@ -1,15 +1,23 @@
+--  _______ __          __
+-- |     __|  |_.---.-.|  |_.-----.
+-- |__     |   _|  _  ||   _|  -__|
+-- |_______|____|___._||____|_____|
 
--- This module listens for events and stores then
+-- ########################################################################
+-- ########################################################################
+-- ########################################################################-- This module listens for events and stores then
 -- This makes certain data persistent
 
-local signals = require("lib.signals")
-local serialize = require("lib.serialize")
-local filehandle = require("lib.file")
-local mouse = require("lib.mouse")
-local volume = require("lib.volume")
+local signals = require('module.signals')
+local serialize = require('lib.serialize')
+local filehandle = require('lib.file')
+local mouse = require('lib.mouse')
+local volume = require('lib.volume')
 
-local file = os.getenv("HOME") .. "/.cache/tde/settings_state.json"
-
+local file = os.getenv('HOME') .. '/.cache/awesome/settings_state.json'
+-- ########################################################################
+-- ########################################################################
+-- ########################################################################
 local function load()
     local table = {
         volume = 50,
@@ -32,35 +40,45 @@ local function load()
     result.oled_mode = result.oled_mode or table.oled_mode
     return result
 end
-
+-- ########################################################################
+-- ########################################################################
+-- ########################################################################
 local function save(table)
-    print("Updating state into: " .. file)
+    print('Updating state into: ' .. file)
     serialize.serialize_to_file(file, table)
 end
-
+-- ########################################################################
+-- ########################################################################
+-- ########################################################################
 local function setup_state(state)
     -- set volume mute state
     volume.set_muted_state(state.volume_muted)
-
+    -- ########################################################################
+    -- ########################################################################
+    -- ########################################################################
     -- set the volume
-    print("Setting volume: " .. state.volume)
+    print('Setting volume: ' .. state.volume)
     volume.set_volume(state.volume or 0)
     signals.emit_volume_update()
-
+    -- ########################################################################
+    -- ########################################################################
+    -- ########################################################################
     -- set the brightness
     if (_G.oled) then
-        awful.spawn("brightness -s " .. math.max(state.brightness, 5) .. " -F") -- toggle pixel values
+        awful.spawn('brightness -s ' .. math.max(state.brightness, 5) .. ' -F') -- toggle pixel values
     else
-        awful.spawn("brightness -s 100 -F") -- reset pixel values
-        awful.spawn("brightness -s " .. math.max(state.brightness, 5))
+        awful.spawn('brightness -s 100 -F') -- reset pixel values
+        awful.spawn('brightness -s ' .. math.max(state.brightness, 5))
     end
-
+    -- ########################################################################
+    -- ########################################################################
+    -- ########################################################################
     signals.emit_brightness(math.max(state.brightness, 5))
     signals.emit_do_not_disturb(state.do_not_disturb or false)
     signals.emit_oled_mode(state.oled_mode or false)
     -- execute xrandr script
     awesome.connect_signal(
-        "startup",
+        'startup',
         function()
             awful.spawn.easy_async(
                 "sh -c 'which autorandr && autorandr --load tde'",
@@ -89,7 +107,9 @@ local function setup_state(state)
         end
     end
 end
-
+-- ########################################################################
+-- ########################################################################
+-- ########################################################################
 -- load the initial state
 -- luacheck: ignore 121
 save_state = load()
@@ -119,7 +139,9 @@ local function get_mouse_state_id(id)
     end
     return name
 end
-
+-- ########################################################################
+-- ########################################################################
+-- ########################################################################
 -- listen for events and store the state on those events
 
 signals.connect_volume(
@@ -128,34 +150,42 @@ signals.connect_volume(
         save(save_state)
     end
 )
-
+-- ########################################################################
+-- ########################################################################
+-- ########################################################################
 signals.connect_volume_is_muted(
     function(is_muted)
         save_state.volume_muted = is_muted
         save(save_state)
     end
 )
-
+-- ########################################################################
+-- ########################################################################
+-- ########################################################################
 signals.connect_brightness(
     function(value)
-        print("Brightness value: " .. value)
+        print('Brightness value: ' .. value)
         save_state.brightness = value
         save(save_state)
     end
 )
-
+-- ########################################################################
+-- ########################################################################
+-- ########################################################################
 signals.connect_exit(
     function()
-        print("Shutting down, grabbing last state")
-        awful.spawn("sh -c 'which autorandr && autorandr --save tde --force'")
+        print('Shutting down, grabbing last state')
+        awful.spawn("sh -c 'which autorandr && autorandr --force'")
         save(save_state)
     end
 )
-
+-- ########################################################################
+-- ########################################################################
+-- ########################################################################
 -- mouse related signals
 signals.connect_mouse_speed(
     function(tbl)
-        print("Saving mouse id: " .. tbl.id .. " to speed value: " .. tbl.speed)
+        print('Saving mouse id: ' .. tbl.id .. ' to speed value: ' .. tbl.speed)
         local id = get_mouse_state_id(tbl.id)
         if id ~= nil then
             save_state.mouse[id].speed = tbl.speed
@@ -163,10 +193,12 @@ signals.connect_mouse_speed(
         end
     end
 )
-
+-- ########################################################################
+-- ########################################################################
+-- ########################################################################
 signals.connect_mouse_acceleration(
     function(tbl)
-        print("Saving mouse id: " .. tbl.id .. " to accel value: " .. tbl.speed)
+        print('Saving mouse id: ' .. tbl.id .. ' to accel value: ' .. tbl.speed)
         local id = get_mouse_state_id(tbl.id)
         if id ~= nil then
             save_state.mouse[id].accel = tbl.speed
@@ -174,26 +206,32 @@ signals.connect_mouse_acceleration(
         end
     end
 )
-
+-- ########################################################################
+-- ########################################################################
+-- ########################################################################
 signals.connect_do_not_disturb(
     function(bDoNotDisturb)
-        print("Changed do not disturb: " .. tostring(bDoNotDisturb))
+        print('Changed do not disturb: ' .. tostring(bDoNotDisturb))
         save_state.do_not_disturb = bDoNotDisturb
         save(save_state)
     end
 )
-
+-- ########################################################################
+-- ########################################################################
+-- ########################################################################
 signals.connect_oled_mode(
     function(bIsOledMode)
-        print("Changed oled mode to: " .. tostring(bIsOledMode))
+        print('Changed oled mode to: ' .. tostring(bIsOledMode))
         save_state.oled_mode = bIsOledMode
         save(save_state)
     end
 )
-
+-- ########################################################################
+-- ########################################################################
+-- ########################################################################
 signals.connect_mouse_natural_scrolling(
     function(tbl)
-        print("Saving mouse id: " .. tbl.id .. " to natural scrolling state: " .. tostring(tbl.state))
+        print('Saving mouse id: ' .. tbl.id .. ' to natural scrolling state: ' .. tostring(tbl.state))
         local id = get_mouse_state_id(tbl.id)
         if id ~= nil then
             save_state.mouse[id].natural_scroll = tbl.state

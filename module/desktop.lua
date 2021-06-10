@@ -1,4 +1,11 @@
-
+--  _____               __     __               
+-- |     \.-----.-----.|  |--.|  |_.-----.-----.
+-- |  --  |  -__|__ --||    < |   _|  _  |  _  |
+-- |_____/|_____|_____||__|__||____|_____|   __|
+--                                       |__|   
+-- ########################################################################
+-- ########################################################################
+-- ########################################################################
 local filehandle = require("lib.file")
 local desktop_icon = require("widget.desktop_icon")
 local installed = require("lib.hardware-check").has_package_installed
@@ -71,7 +78,9 @@ local function find_pos_by_name(name)
     return {x = nil, y = nil}
 end
 
--- TODO: run filesystem event listener each time the desktop changes
+-- ########################################################################
+-- ########################################################################
+-- ########################################################################
 if filehandle.dir_exists(desktopLocation) then
     for index, file in ipairs(filehandle.list_dir(desktopLocation)) do
         -- initialize x and y to nil, find the stored location otherwise use the default location
@@ -94,7 +103,9 @@ if filehandle.dir_exists(desktopLocation) then
         )
     end
 end
-
+-- ########################################################################
+-- ########################################################################
+-- ########################################################################
 local handle = inotify.init({blocking = false})
 handle:addwatch(desktopLocation .. "/", inotify.IN_CREATE, inotify.IN_DELETE)
 

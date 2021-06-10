@@ -1,1 +1,9 @@
-{"files.associations":{"*.rsh":"javascript"}}
+{
+    "files.associations": {
+        "*.rsh": "javascript"
+    },
+    "Lua.diagnostics.globals": [
+        "awesome",
+        "mouse"
+    ]
+}

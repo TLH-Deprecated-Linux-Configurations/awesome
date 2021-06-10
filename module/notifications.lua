@@ -1,42 +1,54 @@
-local gears = require("gears")
-local wibox = require("wibox")
-local awful = require("awful")
-local ruled = require("ruled")
-local naughty = require("naughty")
-local menubar = require("menubar")
-local beautiful = require("beautiful")
-local icons = require("theme.icons")
+--  _______         __   __   ___ __              __   __
+-- |    |  |.-----.|  |_|__|.'  _|__|.----.---.-.|  |_|__|.-----.-----.-----.
+-- |       ||  _  ||   _|  ||   _|  ||  __|  _  ||   _|  ||  _  |     |__ --|
+-- |__|____||_____||____|__||__| |__||____|___._||____|__||_____|__|__|_____|
+-- ########################################################################
+-- ########################################################################
+-- ########################################################################
+local gears = require('gears')
+local wibox = require('wibox')
+local awful = require('awful')
+local ruled = require('ruled')
+local naughty = require('naughty')
+local menubar = require('menubar')
+local beautiful = require('beautiful')
+local icons = require('theme.icons')
 local dpi = beautiful.xresources.apply_dpi
-local signals = require("lib.signals")
-local clickable_container = require("widget.clickable-container")
-local queue = require("lib.datastructure.queue")()
-
+local signals = require('module.signals')
+local clickable_container = require('widget.clickable-container')
+local queue = require('lib.datastructure.queue')()
+-- ########################################################################
+-- ########################################################################
+-- ########################################################################
 -- Defaults
 naughty.config.defaults.ontop = true
 naughty.config.defaults.icon_size = dpi(32)
 naughty.config.defaults.timeout = 5
-naughty.config.defaults.title = i18n.translate("System Notification")
+naughty.config.defaults.title = i18n.translate('System Notification')
 naughty.config.defaults.margin = dpi(16)
 naughty.config.defaults.border_width = 0
-naughty.config.defaults.position = "top_left"
+naughty.config.defaults.position = 'top_left'
 naughty.config.defaults.shape = function(cr, w, h)
     gears.shape.rounded_rect(cr, w, h, dpi(6))
 end
-
+-- ########################################################################
+-- ########################################################################
+-- ########################################################################
 -- Apply theme variables
 naughty.config.padding = dpi(8)
 naughty.config.spacing = dpi(8)
 naughty.config.icon_dirs = {
-    "/usr/share/icons/chhinamasta",
-    "/usr/share/icons/Papirus-Dark",
-    "/usr/share/icons/Tela",
-    "/usr/share/icons/Tela-blue-dark",
-    "/usr/share/icons/la-capitaine-icon-theme/",
-    "/usr/share/icons/gnome/",
-    "/usr/share/icons/hicolor/",
-    "/usr/share/pixmaps/"
+    '/usr/share/icons/chhinamasta',
+    '/usr/share/icons/Papirus-Dark',
+    '/usr/share/icons/Tela',
+    '/usr/share/icons/Tela-blue-dark',
+    '/usr/share/icons/la-capitaine-icon-theme/',
+    '/usr/share/icons/gnome/',
+    '/usr/share/icons/hicolor/',
+    '/usr/share/pixmaps/'
 }
-naughty.config.icon_formats = {"svg", "png", "jpg", "gif"}
+
+naughty.config.icon_formats = {'svg', 'png', 'jpg', 'gif'}
 
 local theme = beautiful.primary
 
@@ -45,99 +57,114 @@ signals.connect_primary_theme_changed(
         theme = new_theme
     end
 )
-
+-- ########################################################################
+-- ########################################################################
+-- ########################################################################
 -- Presets / rules
 
 ruled.notification.connect_signal(
-    "request::rules",
+    'request::rules',
     function()
-        -- Critical notifications
+        -- ########################################################################
+        -- ########################################################################
+        -- ########################################################################-- Critical notifications
         ruled.notification.append_rule {
             rule = {
-                urgency = "critical"
+                urgency = 'critical'
             },
             properties = {
-                bg = "#ff0000",
-                fg = "#ffffff",
+                bg = '#ff0000',
+                fg = '#ffffff',
                 margin = dpi(16),
-                position = "top_right",
+                position = 'top_right',
                 implicit_timeout = 10
             }
         }
-
+        -- ########################################################################
+        -- ########################################################################
+        -- ########################################################################
         -- Normal notifications
         ruled.notification.append_rule {
             rule = {
-                urgency = "normal"
+                urgency = 'normal'
             },
             properties = {
                 bg = beautiful.transparent,
                 fg = beautiful.fg_normal,
                 margin = dpi(16),
-                position = "top_right",
+                position = 'top_right',
                 implicit_timeout = 5
             }
         }
-
+        -- ########################################################################
+        -- ########################################################################
+        -- ########################################################################
         -- Low notifications
         ruled.notification.append_rule {
             rule = {
-                urgency = "low"
+                urgency = 'low'
             },
             properties = {
                 bg = beautiful.transparent,
                 fg = beautiful.fg_normal,
                 margin = dpi(16),
-                position = "top_right",
+                position = 'top_right',
                 implicit_timeout = 5
             }
         }
     end
 )
+-- ########################################################################
+-- ########################################################################
+-- ########################################################################
 
 -- Error handling
 naughty.connect_signal(
-    "request::display_error",
+    'request::display_error',
     function(message, startup)
         naughty.notification {
-            urgency = "critical",
-            title = i18n.translate("Oops, an error happened") .. (startup and i18n.translate(" during startup!") or "!"),
+            urgency = 'critical',
+            title = i18n.translate('Oops, an error happened') .. (startup and i18n.translate(' during startup!') or '!'),
             message = message,
-            app_name = i18n.translate("System Notification"),
+            app_name = i18n.translate('System Notification'),
             icon = icons.logo
         }
     end
 )
-
+-- ########################################################################
+-- ########################################################################
+-- ########################################################################
 awesome.connect_signal(
-    "startup",
+    'startup',
     function()
         gears.timer {
             single_shot = true,
             autostart = true,
             timeout = 5,
             callback = function()
-                print("TDE startup cycle finished, playback queued items")
+                print('TDE startup cycle finished, playback queued items')
                 while queue.next() ~= nil do
                     local n = queue.pop()
                     naughty.notification {
-                        urgency = n.urgency or "normal",
-                        title = n.title or "",
-                        message = n.message or "",
-                        app_name = n.app_name or "",
-                        icon = n.icon or "dialog-warning"
+                        urgency = n.urgency or 'normal',
+                        title = n.title or '',
+                        message = n.message or '',
+                        app_name = n.app_name or '',
+                        icon = n.icon or 'dialog-warning'
                     }
                 end
             end
         }
     end
 )
-
+-- ########################################################################
+-- ########################################################################
+-- ########################################################################
 -- XDG icon lookup
 naughty.connect_signal(
-    "request::icon",
+    'request::icon',
     function(n, context, hints)
-        if context ~= "app_icon" then
+        if context ~= 'app_icon' then
             return
         end
 
@@ -148,23 +175,27 @@ naughty.connect_signal(
         end
     end
 )
-
+-- ########################################################################
+-- ########################################################################
+-- ########################################################################
 -- Connect to naughty on display signal
 naughty.connect_signal(
-    "request::display",
+    'request::display',
     function(n)
         if screen.count() < 1 or awesome.startup then
-            print("Enqueueing: " .. n.title)
+            print('Enqueueing: ' .. n.title)
             queue.push(n)
             return
         end
         local screen = awful.screen.focused() or awful.screen.primary
         if (screen == nil) then
-            print("Enqueueing: " .. n.title)
+            print('Enqueueing: ' .. n.title)
             queue.push(n)
             return
         end
-
+        -- ########################################################################
+        -- ########################################################################
+        -- ########################################################################
         -- Actions Blueprint
         local actions_template =
             wibox.widget {
@@ -178,7 +209,7 @@ naughty.connect_signal(
                     {
                         {
                             {
-                                id = "text_role",
+                                id = 'text_role',
                                 widget = wibox.widget.textbox
                             },
                             widget = wibox.container.place
@@ -199,11 +230,13 @@ naughty.connect_signal(
             },
             widget = naughty.list.actions
         }
-
+        -- ########################################################################
+        -- ########################################################################
+        -- ########################################################################
         -- Notification box Blueprint
         naughty.layout.box {
             notification = n,
-            type = "notification",
+            type = 'notification',
             screen = awful.screen.focused(),
             shape = gears.shape.rectangle,
             widget_template = {
@@ -218,9 +251,9 @@ naughty.connect_signal(
                                                 {
                                                     {
                                                         markup = (n.title or n.app_name) or
-                                                            i18n.translate("System Notification"),
-                                                        align = "center",
-                                                        valign = "center",
+                                                            i18n.translate('System Notification'),
+                                                        align = 'center',
+                                                        valign = 'center',
                                                         widget = wibox.widget.textbox
                                                     },
                                                     margins = beautiful.notification_margin,
@@ -232,7 +265,7 @@ naughty.connect_signal(
                                             {
                                                 {
                                                     {
-                                                        resize_strategy = "center",
+                                                        resize_strategy = 'center',
                                                         widget = naughty.widget.icon
                                                     },
                                                     margins = beautiful.notification_margin,
@@ -241,10 +274,10 @@ naughty.connect_signal(
                                                 {
                                                     {
                                                         layout = wibox.layout.align.vertical,
-                                                        expand = "inside",
+                                                        expand = 'inside',
                                                         nil,
                                                         {
-                                                            align = "left",
+                                                            align = 'left',
                                                             widget = naughty.widget.message
                                                         },
                                                         nil
@@ -272,14 +305,14 @@ naughty.connect_signal(
                                 layout = wibox.layout.fixed.vertical
                             },
                             bg = beautiful.transparent,
-                            id = "background_role",
+                            id = 'background_role',
                             widget = naughty.container.background
                         },
-                        strategy = "min",
+                        strategy = 'min',
                         width = dpi(250),
                         widget = wibox.container.constraint
                     },
-                    strategy = "max",
+                    strategy = 'max',
                     height = dpi(250),
                     width = dpi(250),
                     widget = wibox.container.constraint
@@ -289,7 +322,9 @@ naughty.connect_signal(
                 widget = wibox.container.background
             }
         }
-
+        -- ########################################################################
+        -- ########################################################################
+        -- ########################################################################
         -- Destroy popups if dont_disturb mode is on
         -- Or if the right_panel is visible
         local focused = awful.screen.focused()

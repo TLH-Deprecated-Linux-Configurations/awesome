@@ -1,68 +1,67 @@
-
 -- I decided to create another slider for the OSD's
 -- So we can modify its behavior without messing
 -- the slider in the dashboard.
 -- Excuse my messy code.
 
-local wibox = require("wibox")
-local mat_list_item = require("widget.material.list-item")
-local slider = require("lib.slider")
-local mat_icon_button = require("widget.material.icon-button")
-local icons = require("theme.icons")
-local signal = require("lib.signals")
-local volume = require("lib.volume")
+local wibox = require('wibox')
+local mat_list_item = require('widget.material.list-item')
+local slider = require('lib.slider')
+local mat_icon_button = require('widget.material.icon-button')
+local icons = require('theme.icons')
+local signal = require('module.signals')
+local volume = require('lib.volume')
 
 local slider_osd =
-  slider(
-  0,
-  100,
-  1,
-  0,
-  function(value)
-    signal.emit_volume(value)
-  end
+    slider(
+    0,
+    100,
+    1,
+    0,
+    function(value)
+        signal.emit_volume(value)
+    end
 )
 
 signal.connect_volume(
-  function(value)
-    local number = tonumber(value)
-    if not (number == slider_osd.value) then
-      slider_osd.update(number)
+    function(value)
+        local number = tonumber(value)
+        if not (number == slider_osd.value) then
+            slider_osd.update(number)
+        end
     end
-  end
 )
 
 local icon =
-  wibox.widget {
-  image = icons.volume,
-  widget = wibox.widget.imagebox
+    wibox.widget {
+    image = icons.volume,
+    widget = wibox.widget.imagebox
 }
 
 local button = mat_icon_button(icon)
 
 button:connect_signal(
-  "button::press",
-  function()
-    volume.toggle_master()
-    signal.emit_volume_update()
-  end
+    'button::press',
+    function()
+        volume.toggle_master()
+        signal.emit_volume_update()
+    end
 )
 
 signal.connect_volume_is_muted(
-  function(muted)
-    if (muted) then
-      icon.image = icons.muted
-    else
-      icon.image = icons.volume
+    function(muted)
+        if (muted) then
+            icon.image = icons.muted
+        else
+            icon.image = icons.volume
+        end
     end
-  end
 )
 
 local volume_setting_osd =
-  wibox.widget {
-  button,
-  slider_osd,
-  widget = mat_list_item
+    wibox.widget {
+    button,
+    slider_osd,
+    widget = mat_list_item
 }
 
 return volume_setting_osd

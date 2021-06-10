@@ -12,13 +12,11 @@
 -- @tdewidget lib.checkbox
 -- @supermodule wibox.widget.checkbox
 ---------------------------------------------------------------------------
--- TODO: implement this files
--- TODO: refactor codebase to use this (settings app + left panel)
 
-local wibox = require("wibox")
-local beautiful = require("beautiful")
-local gears = require("gears")
-local signals = require("lib.signals")
+local wibox = require('wibox')
+local beautiful = require('beautiful')
+local gears = require('gears')
+local signals = require('module.signals')
 local dpi = beautiful.xresources.apply_dpi
 
 local theme = beautiful.primary
@@ -54,18 +52,18 @@ return function(checked, callback, size)
     )
 
     checkbox:connect_signal(
-        "button::press",
+        'button::press',
         function(_, _, _, button)
             if not (button == 1) then
                 return
             end
-            print("Pressed checkbox")
+            print('Pressed checkbox')
             checkbox.checked = not checkbox.checked
             callback(checkbox.checked or false)
         end
     )
     checkbox:connect_signal(
-        "mouse::enter",
+        'mouse::enter',
         function()
             if checkbox.checked then
                 checkbox.check_color = theme.hue_700
@@ -73,7 +71,7 @@ return function(checked, callback, size)
         end
     )
     checkbox:connect_signal(
-        "mouse::leave",
+        'mouse::leave',
         function()
             if checkbox.checked then
                 checkbox.check_color = theme.hue_600

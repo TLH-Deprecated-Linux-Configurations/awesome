@@ -1,13 +1,13 @@
-local wibox = require("wibox")
-local dpi = require("beautiful").xresources.apply_dpi
-local mat_list_item = require("widget.material.list-item")
-local signals = require("lib.signals")
-local card = require("lib.card")
-local checkbox = require("lib.checkbox")
-local HOME = os.getenv("HOME")
-local beautiful = require("beautiful")
-local PATH_TO_ICONS = HOME .. "/.config/awesome/widget/notification-center/icons/"
-local theme = require("theme.icons.dark-light")
+local wibox = require('wibox')
+local dpi = require('beautiful').xresources.apply_dpi
+local mat_list_item = require('widget.material.list-item')
+local signals = require('module.signals')
+local card = require('lib.card')
+local checkbox = require('lib.checkbox')
+local HOME = os.getenv('HOME')
+local beautiful = require('beautiful')
+local PATH_TO_ICONS = HOME .. '/.config/awesome/widget/notification-center/icons/'
+local theme = require('theme.icons.dark-light')
 
 _G.dont_disturb = false
 
@@ -15,76 +15,76 @@ local disturb_card = card()
 local box
 
 local dont_disturb_text =
-  wibox.widget {
-  text = i18n.translate("Do Not Disturb"),
-  font = beautiful.font .. " 12",
-  align = "left",
-  widget = wibox.widget.textbox
+    wibox.widget {
+    text = i18n.translate('Do Not Disturb'),
+    font = beautiful.font .. ' 12',
+    align = 'left',
+    widget = wibox.widget.textbox
 }
 
 local function update_disturb(state)
-  -- luacheck: ignore dont_disturb
-  dont_disturb = state
-  if box then
-    box.update(state)
-  end
-  signals.emit_do_not_disturb(dont_disturb)
+    -- luacheck: ignore dont_disturb
+    dont_disturb = state
+    if box then
+        box.update(state)
+    end
+    signals.emit_do_not_disturb(dont_disturb)
 end
 
 box =
-  checkbox(
-  false,
-  function(checked)
-    update_disturb(checked)
-  end
+    checkbox(
+    false,
+    function(checked)
+        update_disturb(checked)
+    end
 )
 
 local dont_disturb_icon =
-  wibox.widget {
-  {
-    image = theme(PATH_TO_ICONS .. "dont-disturb" .. ".svg"),
-    widget = wibox.widget.imagebox,
-    resize = true
-  },
-  layout = wibox.layout.align.horizontal
+    wibox.widget {
+    {
+        image = theme(PATH_TO_ICONS .. 'dont-disturb' .. '.svg'),
+        widget = wibox.widget.imagebox,
+        resize = true
+    },
+    layout = wibox.layout.align.horizontal
 }
 
 signals.connect_do_not_disturb(
-  function(bDoNotDisturb)
-    if dont_disturb == bDoNotDisturb then
-      return
-    end
+    function(bDoNotDisturb)
+        if dont_disturb == bDoNotDisturb then
+            return
+        end
 
-    update_disturb(bDoNotDisturb)
-  end
+        update_disturb(bDoNotDisturb)
+    end
 )
 
 local content =
-  wibox.widget {
-  {
-    wibox.container.margin(dont_disturb_icon, dpi(12), dpi(12), dpi(5), dpi(5)),
-    dont_disturb_text,
-    layout = wibox.layout.fixed.horizontal
-  },
-  nil,
-  {
-    box,
-    layout = wibox.layout.fixed.horizontal
-  },
-  layout = wibox.layout.align.horizontal
+    wibox.widget {
+    {
+        wibox.container.margin(dont_disturb_icon, dpi(12), dpi(12), dpi(5), dpi(5)),
+        dont_disturb_text,
+        layout = wibox.layout.fixed.horizontal
+    },
+    nil,
+    {
+        box,
+        layout = wibox.layout.fixed.horizontal
+    },
+    layout = wibox.layout.align.horizontal
 }
 
 local dont_disturb_wrap =
-  wibox.widget {
-  wibox.widget {
-    {
-      content,
-      margins = dpi(10),
-      widget = wibox.container.margin
+    wibox.widget {
+    wibox.widget {
+        {
+            content,
+            margins = dpi(10),
+            widget = wibox.container.margin
+        },
+        widget = wibox.container.background
     },
-    widget = wibox.container.background
-  },
-  widget = mat_list_item
+    widget = mat_list_item
 }
 
 disturb_card.update_body(dont_disturb_wrap)

@@ -1,14 +1,13 @@
-
-local beautiful = require("beautiful")
-local wibox = require("wibox")
+local beautiful = require('beautiful')
+local wibox = require('wibox')
 local dpi = beautiful.xresources.apply_dpi
-local gears = require("gears")
-local icons = require("theme.icons")
-local menubar = require("menubar")
-local filehandle = require("lib.file")
-local hardware = require("lib.hardware-check")
-local err = require("lib.logger").error
-local signals = require("lib.signals")
+local gears = require('gears')
+local icons = require('theme.icons')
+local menubar = require('menubar')
+local filehandle = require('lib.file')
+local hardware = require('lib.hardware-check')
+local err = require('lib.logger').error
+local signals = require('module.signals')
 
 local width = dpi(100)
 local height = width
@@ -48,12 +47,12 @@ local function create_icon(icon, name, num, callback, drag)
     local y = 0
     local active_theme = beautiful.accent
 
-    if type(num) == "number" then
+    if type(num) == 'number' then
         x = dpi(10) + (math.floor((num / amount)) * (width + dpi(10)))
         y = dpi(36) + ((num % amount) * (height + dpi(10)))
     end
 
-    if type(num) == "table" then
+    if type(num) == 'table' then
         x = num.x
         y = num.y
     end
@@ -71,8 +70,8 @@ local function create_icon(icon, name, num, callback, drag)
             visible = true,
             x = x,
             y = y,
-            type = "dock",
-            bg = beautiful.background.hue_800 .. "00",
+            type = 'dock',
+            bg = beautiful.background.hue_800 .. '00',
             width = width,
             height = height,
             screen = awful.screen.primary
@@ -108,7 +107,7 @@ local function create_icon(icon, name, num, callback, drag)
                     yoffset = coords.y - box.y
                     if not started then
                         started = true
-                        print("TIMER: started")
+                        print('TIMER: started')
                         timer:start()
                     end
                     timercount = 0
@@ -116,10 +115,10 @@ local function create_icon(icon, name, num, callback, drag)
                 function()
                     if started then
                         started = false
-                        print("TIMER: stopped")
+                        print('TIMER: stopped')
                         timer:stop()
                     end
-                    if type(drag) == "function" then
+                    if type(drag) == 'function' then
                         drag(name, box.x, box.y)
                     end
                     if timercount < 10 then
@@ -144,8 +143,8 @@ local function create_icon(icon, name, num, callback, drag)
         wibox.container.place(
             {
                 text = name,
-                halign = "center",
-                valign = "top",
+                halign = 'center',
+                valign = 'top',
                 font = beautiful.title_font,
                 widget = wibox.widget.textbox
             }
@@ -155,22 +154,22 @@ local function create_icon(icon, name, num, callback, drag)
 
     box.hover = function()
         box.ontop = true
-        box.bg = active_theme.hue_600 .. "99"
+        box.bg = active_theme.hue_600 .. '99'
     end
 
     box.unhover = function()
         box.ontop = false
-        box.bg = active_theme.hue_800 .. "00"
+        box.bg = active_theme.hue_800 .. '00'
     end
 
-    widget:connect_signal("mouse::enter", box.hover)
+    widget:connect_signal('mouse::enter', box.hover)
 
-    widget:connect_signal("mouse::leave", box.unhover)
+    widget:connect_signal('mouse::leave', box.unhover)
 
     signals.connect_primary_theme_changed(
         function(theme)
             active_theme = theme
-            box.bg = active_theme.hue_800 .. "00"
+            box.bg = active_theme.hue_800 .. '00'
         end
     )
 
@@ -186,16 +185,16 @@ local function create_icon(icon, name, num, callback, drag)
 end
 
 local function desktop_file(file, _, index, drag)
-    local name = "Desktop file"
-    local icon = "application-x-executable"
+    local name = 'Desktop file'
+    local icon = 'application-x-executable'
     local lines = filehandle.lines(file)
     for _, line in ipairs(lines) do
-        local nameMatch = line:match("Name=(.*)")
-        local iconMatch = line:match("Icon=(.*)")
+        local nameMatch = line:match('Name=(.*)')
+        local iconMatch = line:match('Icon=(.*)')
 
-        if nameMatch and name == "Desktop file" then
+        if nameMatch and name == 'Desktop file' then
             name = nameMatch
-        elseif iconMatch and icon == "application-x-executable" then
+        elseif iconMatch and icon == 'application-x-executable' then
             icon = iconMatch
         end
     end
@@ -204,9 +203,9 @@ local function desktop_file(file, _, index, drag)
         name,
         index,
         function()
-            print("Opened: " .. file)
+            print('Opened: ' .. file)
             clear_selections()
-            awful.spawn("gtk-launch " .. filehandle.basename(file))
+            awful.spawn('gtk-launch ' .. filehandle.basename(file))
         end,
         drag
     )
@@ -214,18 +213,18 @@ end
 
 local function from_file(file, index, x, y, drag)
     local name = filehandle.basename(file)
-    if name:match(".desktop$") then
+    if name:match('.desktop$') then
         desktop_file(file, name, index or {x = x, y = y}, drag)
     else
         -- can be found here https://specifications.freedesktop.org/icon-naming-spec/latest/ar01s04.html
         create_icon(
-            menubar.utils.lookup_icon("text-x-generic") or icons.warning,
+            menubar.utils.lookup_icon('text-x-generic') or icons.warning,
             name,
             index or {x = x, y = y},
             function()
-                print("Opened: " .. file)
+                print('Opened: ' .. file)
                 clear_selections()
-                awful.spawn("open " .. file)
+                awful.spawn('open ' .. file)
             end,
             drag
         )
@@ -240,7 +239,7 @@ local function delete(name)
         end
     end
     if i == -1 or i > #desktop_icons then
-        print("Trying to remove: " .. name .. " from the desktop but it no longer exists", err)
+        print('Trying to remove: ' .. name .. ' from the desktop but it no longer exists', err)
     end
     desktop_icons[i].visible = false
     icon_timers[i]:stop()

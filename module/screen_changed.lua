@@ -1,12 +1,21 @@
-
-local signals = require("lib.signals")
-local gettime = require("socket").gettime
+--  _______                                   ______ __                               __
+-- |     __|.----.----.-----.-----.-----.    |      |  |--.---.-.-----.-----.-----.--|  |
+-- |__     ||  __|   _|  -__|  -__|     |    |   ---|     |  _  |     |  _  |  -__|  _  |
+-- |_______||____|__| |_____|_____|__|__|    |______|__|__|___._|__|__|___  |_____|_____|
+--                                                                    |_____|
+-- ########################################################################
+-- ########################################################################
+-- ########################################################################
+local signals = require('module.signals')
+local gettime = require('socket').gettime
 
 local screen_geometry = {}
 local bIsInRemoveState = false
-
+-- ########################################################################
+-- ########################################################################
+-- ########################################################################
 local function update_screens()
-    print("Screen layout changed")
+    print('Screen layout changed')
 
     -- cleanup
     screen_geometry = {}
@@ -21,29 +30,39 @@ local function update_screens()
 
     bIsInRemoveState = false
 end
-
+-- ########################################################################
+-- ########################################################################
+-- ########################################################################
 -- listen for screen changes
 awesome.connect_signal(
-    "screen::change",
+    'screen::change',
     function()
-        print("screen::change")
+        print('screen::change')
         if not bIsInRemoveState then
             update_screens()
         end
     end
 )
+-- ########################################################################
+-- ########################################################################
+-- ########################################################################
 
 screen.connect_signal(
-    "removed",
+    'removed',
     function()
-        print("Removed a screen")
+        print('Removed a screen')
         bIsInRemoveState = true
-        awful.spawn.easy_async("xrandr -s 0", function ()
-            update_screens()
-        end)
+        awful.spawn.easy_async(
+            'xrandr -s 0',
+            function()
+                update_screens()
+            end
+        )
     end
 )
-
+-- ########################################################################
+-- ########################################################################
+-- ########################################################################
 local prev_time = gettime()
 -- specify how often to poll
 local refresh_timeout_in_seconds = 0.5
@@ -51,7 +70,9 @@ local refresh_timeout_in_seconds = 0.5
 local function are_screens_equal(s1, s2)
     return s1.x == s2.x and s1.y == s2.y and s1.width == s2.width and s1.height == s2.height
 end
-
+-- ########################################################################
+-- ########################################################################
+-- ########################################################################
 local function perform_refresh()
     if not (#screen_geometry == screen.count()) then
         update_screens()
@@ -65,9 +86,11 @@ local function perform_refresh()
         i = i + 1
     end
 end
-
+-- ########################################################################
+-- ########################################################################
+-- ########################################################################
 awesome.connect_signal(
-    "refresh",
+    'refresh',
     function()
         local time = gettime()
         if prev_time < (time - refresh_timeout_in_seconds) then

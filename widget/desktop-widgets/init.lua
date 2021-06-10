@@ -1,7 +1,7 @@
-local signal = require("lib.signals")
-local hardware = require("lib.hardware-check")
-local widget = require("desktop-widgets.widgets")
-local config = require("desktop-widgets.config")
+local signal = require('module.signals')
+local hardware = require('lib.hardware-check')
+local widget = require('desktop-widgets.widgets')
+local config = require('desktop-widgets.config')
 
 local cpu_value = 0
 
@@ -28,17 +28,17 @@ for _, element in ipairs(config) do
     local y = element.y * height
     local _width = element.width * width
     local _height = element.height * height
-    if element.type == "chart" then
-        if element.resource == "CPU" then
-            widget.chart(x, y, _width, _height, element.title or "CPU Chart", getCPUValue, 5)
+    if element.type == 'chart' then
+        if element.resource == 'CPU' then
+            widget.chart(x, y, _width, _height, element.title or 'CPU Chart', getCPUValue, 5)
         else
-            widget.chart(x, y, _width, _height, element.title or "RAM Chart", getRAMValue, 5)
+            widget.chart(x, y, _width, _height, element.title or 'RAM Chart', getRAMValue, 5)
         end
     else
-        if element.resource == "CPU" then
-            widget.radial(x, y, _width, _height, element.title or "CPU Widget", getCPUValue, 5)
+        if element.resource == 'CPU' then
+            widget.radial(x, y, _width, _height, element.title or 'CPU Widget', getCPUValue, 5)
         else
-            widget.radial(x, y, _width, _height, element.title or "RAM Widget", getRAMValue, 5)
+            widget.radial(x, y, _width, _height, element.title or 'RAM Widget', getRAMValue, 5)
         end
     end
 end

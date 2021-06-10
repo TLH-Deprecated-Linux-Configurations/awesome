@@ -17,10 +17,10 @@
 -- @supermodule wibox.widget.slider
 ---------------------------------------------------------------------------
 
-local wibox = require("wibox")
-local beautiful = require("beautiful")
-local gears = require("gears")
-local signals = require("lib.signals")
+local wibox = require('wibox')
+local beautiful = require('beautiful')
+local gears = require('gears')
+local signals = require('module.signals')
 local dpi = beautiful.xresources.apply_dpi
 
 local theme = beautiful.primary
@@ -54,7 +54,7 @@ return function(min, max, increment, default_value, callback, tooltip_callback)
     widget.handle_width = dpi(35)
     widget.handle_color = theme.hue_500
     widget.handle_border_width = 1
-    widget.handle_border_color = "#00000012"
+    widget.handle_border_color = '#00000012'
     widget.minimum = min * step_size
     widget.maximum = max * step_size
 
@@ -62,7 +62,7 @@ return function(min, max, increment, default_value, callback, tooltip_callback)
     widget:set_value(default_value * step_size)
 
     widget:connect_signal(
-        "property::value",
+        'property::value',
         function()
             local value = widget.value / step_size
             callback(value)
@@ -78,7 +78,7 @@ return function(min, max, increment, default_value, callback, tooltip_callback)
         widget:set_value(value * step_size)
     end
 
-    if tooltip_callback ~= nil and type(tooltip_callback) == "function" then
+    if tooltip_callback ~= nil and type(tooltip_callback) == 'function' then
         awful.tooltip {
             objects = {widget},
             timer_function = tooltip_callback

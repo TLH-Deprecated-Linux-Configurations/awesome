@@ -5,28 +5,28 @@
 -- ########################################################################
 -- Initialization #########################################################
 -- ########################################################################
-local beautiful = require("beautiful")
-local gears = require("gears")
+local beautiful = require('beautiful')
+local gears = require('gears')
 
-local wibox = require("wibox")
+local wibox = require('wibox')
 
-local naughty = require("naughty")
-local dpi = require("beautiful").xresources.apply_dpi
+local naughty = require('naughty')
+local dpi = require('beautiful').xresources.apply_dpi
 
-local clickable_container = require("widget.material.clickable-container")
+local clickable_container = require('widget.material.clickable-container')
 
-local icons = require("theme.icons")
+local icons = require('theme.icons')
 
-local config = require("config")
-local animate = require("lib.animations").createAnimObject
-local signals = require("lib.signals")
+local config = require('config')
+local animate = require('lib.animations').createAnimObject
+local signals = require('module.signals')
 
 local height = dpi(200)
 local width = dpi(380)
-local theme = require("theme.icons.dark-light")
-local HOME = os.getenv("HOME")
+local theme = require('theme.icons.dark-light')
+local HOME = os.getenv('HOME')
 
-local icon = theme(HOME .. "/.config/awesome/widget/about/icons/info.svg")
+local icon = theme(HOME .. '/.config/awesome/widget/about/icons/info.svg')
 
 local aboutPage
 local aboutBackdrop
@@ -34,208 +34,213 @@ local aboutBackdrop
 -- Widget #################################################################
 -- ########################################################################
 screen.connect_signal(
-  "request::desktop_decoration",
-  function(s)
-    -- Create the box
+    'request::desktop_decoration',
+    function(s)
+        -- Create the box
 
-    aboutPage =
-      wibox {
-      bg = beautiful.background.hue_800,
-      visible = false,
-      ontop = true,
-      type = "normal",
-      height = height,
-      width = width,
-      x = s.geometry.x + s.geometry.width / 2 - (width / 2),
-      y = s.geometry.y + s.geometry.height / 2 - (height / 2)
-    }
+        aboutPage =
+            wibox {
+            bg = beautiful.background.hue_800,
+            visible = false,
+            ontop = true,
+            type = 'normal',
+            height = height,
+            width = width,
+            x = s.geometry.x + s.geometry.width / 2 - (width / 2),
+            y = s.geometry.y + s.geometry.height / 2 - (height / 2)
+        }
 
-    screen.connect_signal(
-      "removed",
-      function(removed)
-        if s == removed then
-          aboutPage.visible = false
-          aboutPage = nil
-        end
-      end
-    )
+        screen.connect_signal(
+            'removed',
+            function(removed)
+                if s == removed then
+                    aboutPage.visible = false
+                    aboutPage = nil
+                end
+            end
+        )
 
-    signals.connect_refresh_screen(
-      function()
-        print("Refreshing about page")
+        signals.connect_refresh_screen(
+            function()
+                print('Refreshing about page')
 
-        if not s.valid or aboutPage == nil then
-          return
-        end
+                if not s.valid or aboutPage == nil then
+                    return
+                end
 
-        -- the action center itself
-        aboutPage.x = s.geometry.x + s.geometry.width / 2 - (width / 2)
-        aboutPage.y = s.geometry.y + s.geometry.height / 2 - (height / 2)
-      end
-    )
+                -- the action center itself
+                aboutPage.x = s.geometry.x + s.geometry.width / 2 - (width / 2)
+                aboutPage.y = s.geometry.y + s.geometry.height / 2 - (height / 2)
+            end
+        )
 
-    signals.connect_background_theme_changed(
-      function(new_theme)
-        aboutPage.bg = new_theme.hue_800 .. beautiful.background_transparency
-      end
-    )
+        signals.connect_background_theme_changed(
+            function(new_theme)
+                aboutPage.bg = new_theme.hue_800 .. beautiful.background_transparency
+            end
+        )
 
-    aboutBackdrop =
-      wibox {
-      ontop = true,
-      visible = false,
-      screen = s,
-      bg = "#00000000",
-      type = "dock",
-      x = s.geometry.x,
-      y = s.geometry.y,
-      width = s.geometry.width,
-      height = s.geometry.height - dpi(38)
-    }
-  end
+        aboutBackdrop =
+            wibox {
+            ontop = true,
+            visible = false,
+            screen = s,
+            bg = '#00000000',
+            type = 'dock',
+            x = s.geometry.x,
+            y = s.geometry.y,
+            width = s.geometry.width,
+            height = s.geometry.height - dpi(38)
+        }
+    end
 )
 
 local grabber =
-  awful.keygrabber {
-  keybindings = {
-    awful.key {
-      modifiers = {},
-      key = "Escape",
-      on_press = function()
-        aboutBackdrop.visible = false
-        animate(
-          _G.anim_speed,
-          aboutPage,
-          {y = aboutPage.screen.geometry.y - aboutPage.height},
-          "outCubic",
-          function()
-            aboutPage.visible = false
-          end
-        )
-      end
-    }
-  },
-  -- Note that it is using the key name and not the modifier name.
-  stop_key = "Escape",
-  stop_event = "release"
+    awful.keygrabber {
+    keybindings = {
+        awful.key {
+            modifiers = {},
+            key = 'Escape',
+            on_press = function()
+                aboutBackdrop.visible = false
+                animate(
+                    _G.anim_speed,
+                    aboutPage,
+                    {y = aboutPage.screen.geometry.y - aboutPage.height},
+                    'outCubic',
+                    function()
+                        aboutPage.visible = false
+                    end
+                )
+            end
+        }
+    },
+    -- Note that it is using the key name and not the modifier name.
+    stop_key = 'Escape',
+    stop_event = 'release'
 }
 -- ########################################################################
 -- Controls ###############################################################
 -- ########################################################################
 local function toggleAbout()
-  aboutBackdrop.visible = not aboutBackdrop.visible
-  aboutPage.visible = not aboutPage.visible
-  if aboutPage.visible then
-    grabber:start()
-    aboutPage.y = aboutPage.screen.geometry.y - aboutPage.height
-    animate(
-      _G.anim_speed,
-      aboutPage,
-      {y = aboutPage.screen.geometry.y + aboutPage.screen.geometry.height / 2 - (aboutPage.height / 2)},
-      "outCubic"
-    )
-  else
-    grabber:stop()
-    aboutPage.visible = true
-    animate(
-      _G.anim_speed,
-      aboutPage,
-      {y = aboutPage.screen.geometry.y - aboutPage.height},
-      "outCubic",
-      function()
-        aboutPage.visible = false
-      end
-    )
-  end
+    aboutBackdrop.visible = not aboutBackdrop.visible
+    aboutPage.visible = not aboutPage.visible
+    if aboutPage.visible then
+        grabber:start()
+        aboutPage.y = aboutPage.screen.geometry.y - aboutPage.height
+        animate(
+            _G.anim_speed,
+            aboutPage,
+            {y = aboutPage.screen.geometry.y + aboutPage.screen.geometry.height / 2 - (aboutPage.height / 2)},
+            'outCubic'
+        )
+    else
+        grabber:stop()
+        aboutPage.visible = true
+        animate(
+            _G.anim_speed,
+            aboutPage,
+            {y = aboutPage.screen.geometry.y - aboutPage.height},
+            'outCubic',
+            function()
+                aboutPage.visible = false
+            end
+        )
+    end
 end
 
 aboutBackdrop:buttons(
-  awful.util.table.join(
-    awful.button(
-      {},
-      1,
-      function()
-        toggleAbout()
-      end
+    awful.util.table.join(
+        awful.button(
+            {},
+            1,
+            function()
+                toggleAbout()
+            end
+        )
     )
-  )
 )
 
 local widget =
-  wibox.widget {
-  {
-    id = "icon",
-    image = icon,
-    widget = wibox.widget.imagebox,
-    resize = true
-  },
-  layout = wibox.layout.align.horizontal
+    wibox.widget {
+    {
+        id = 'icon',
+        image = icon,
+        widget = wibox.widget.imagebox,
+        resize = true
+    },
+    layout = wibox.layout.align.horizontal
 }
 
 local browserWidget =
-  wibox.widget {
-  {
-    id = "icon",
-    image = icons.logo,
-    widget = wibox.widget.imagebox,
-    resize = true
-  },
-  layout = wibox.layout.align.horizontal
+    wibox.widget {
+    {
+        id = 'icon',
+        image = icons.logo,
+        widget = wibox.widget.imagebox,
+        resize = true
+    },
+    layout = wibox.layout.align.horizontal
 }
 
 local widget_button = clickable_container(wibox.container.margin(widget, dpi(7), dpi(7), dpi(6), dpi(6)))
 widget_button:buttons(
-  gears.table.join(
-    awful.button(
-      {},
-      1,
-      nil,
-      function()
-        print("Showing Who Is To Blame")
-        toggleAbout()
-      end
+    gears.table.join(
+        awful.button(
+            {},
+            1,
+            nil,
+            function()
+                print('Showing Who Is To Blame')
+                toggleAbout()
+            end
+        )
     )
-  )
 )
 
 local browserOpen = clickable_container(browserWidget, dpi(8), dpi(8), dpi(8), dpi(8))
 browserOpen:buttons(
-  gears.table.join(
-    awful.button(
-      {},
-      1,
-      nil,
-      function()
-        print("Opening the developer's portfolio site in your browser")
-        awful.spawn.easy_async_with_shell("$BROWSER https://thomasleonhighbaugh.me")
-        toggleAbout()
-        naughty.notify(
-          {title = "Who's Responsible for this Mess?", message = "Opened the developer's portfolio homepage", timeout = 5, position = "top_right"}
+    gears.table.join(
+        awful.button(
+            {},
+            1,
+            nil,
+            function()
+                print("Opening the developer's portfolio site in your browser")
+                awful.spawn.easy_async_with_shell('$BROWSER https://thomasleonhighbaugh.me')
+                toggleAbout()
+                naughty.notify(
+                    {
+                        title = "Who's Responsible for this Mess?",
+                        message = "Opened the developer's portfolio homepage",
+                        timeout = 5,
+                        position = 'top_right'
+                    }
+                )
+            end
         )
-      end
     )
-  )
 )
 
 aboutPage:setup {
-  expand = "none",
-  {
-    browserOpen,
-    wibox.widget {
-      text = config.aboutText,
-      font = "Hurmit Nerd Font Mono bold10",
-      align = "center",
-      widget = wibox.widget.textbox
+    expand = 'none',
+    {
+        browserOpen,
+        wibox.widget {
+            text = config.aboutText,
+            font = 'Hurmit Nerd Font Mono bold10',
+            align = 'center',
+            widget = wibox.widget.textbox
+        },
+        layout = wibox.layout.fixed.horizontal
     },
-    layout = wibox.layout.fixed.horizontal
-  },
-  -- The real background color
-  bg = beautiful.background.hue_800,
-  -- The real, anti-aliased shape
-  shape = function(cr, shapeWidth, shapeHeight)
-    gears.shape.rounded_rect(cr, shapeWidth, shapeHeight, 12)
-  end,
-  widget = wibox.container.background()
+    -- The real background color
+    bg = beautiful.background.hue_800,
+    -- The real, anti-aliased shape
+    shape = function(cr, shapeWidth, shapeHeight)
+        gears.shape.rounded_rect(cr, shapeWidth, shapeHeight, 12)
+    end,
+    widget = wibox.container.background()
 }
 
 return widget_button

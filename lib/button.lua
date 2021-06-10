@@ -10,15 +10,11 @@
 -- @tdewidget lib.button
 -- @supermodule wibox.container.background
 ---------------------------------------------------------------------------
-
--- TODO: implement this files
--- TODO: refactor codebase to use this
-
-local wibox = require("wibox")
-local rounded = require("lib.widget.rounded")
-local beautiful = require("beautiful")
-local gears = require("gears")
-local signals = require("lib.signals")
+local wibox = require('wibox')
+local rounded = require('lib.widget.rounded')
+local beautiful = require('beautiful')
+local gears = require('gears')
+local signals = require('module.signals')
 local dpi = beautiful.xresources.apply_dpi
 
 --- Create a new button widget
@@ -43,7 +39,7 @@ return function(body, callback, pallet, bNo_center, enter_callback, leave_callba
     button.shape = rounded()
     button.forced_height = dpi(40)
 
-    if type(body) == "string" then
+    if type(body) == 'string' then
         body = wibox.widget.textbox(i18n.translate(body))
     end
 
@@ -72,13 +68,13 @@ return function(body, callback, pallet, bNo_center, enter_callback, leave_callba
     end
 
     button:connect_signal(
-        "mouse::enter",
+        'mouse::enter',
         function()
             button.emulate_hover()
         end
     )
     button:connect_signal(
-        "mouse::leave",
+        'mouse::leave',
         function()
             button.emulate_focus_loss()
         end
@@ -91,7 +87,7 @@ return function(body, callback, pallet, bNo_center, enter_callback, leave_callba
     else
         button:setup {
             layout = wibox.container.place,
-            halign = "center",
+            halign = 'center',
             body
         }
     end

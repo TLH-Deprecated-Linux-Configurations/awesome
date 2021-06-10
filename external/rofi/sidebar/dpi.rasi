@@ -1,5 +1,5 @@
 configuration {
-	font:                       	"Hurmit Nerd Font Mono bold 10";
+	font:                       	"agave Nerd Font Mono Bold";
 	show-icons:                		true;
 	fullscreen:                     false;
 	sidebar-mode:               	true;

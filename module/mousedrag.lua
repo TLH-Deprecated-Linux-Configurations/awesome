@@ -1,11 +1,20 @@
-
-local wibox = require("wibox")
-local beautiful = require("beautiful")
+--  _______                               _____
+-- |   |   |.-----.--.--.-----.-----.    |     \.----.---.-.-----.
+-- |       ||  _  |  |  |__ --|  -__|    |  --  |   _|  _  |  _  |
+-- |__|_|__||_____|_____|_____|_____|    |_____/|__| |___._|___  |
+--                                                         |_____|
+-- ########################################################################
+-- ########################################################################
+-- ########################################################################
+local wibox = require('wibox')
+local beautiful = require('beautiful')
 local dpi = beautiful.xresources.apply_dpi
-local gears = require("gears")
-local hardware = require("lib.hardware-check")
-local signals = require("lib.signals")
-
+local gears = require('gears')
+local hardware = require('lib.hardware-check')
+local signals = require('module.signals')
+-- ########################################################################
+-- ########################################################################
+-- ########################################################################
 local startx = -1
 local starty = -1
 local endx = -1
@@ -15,17 +24,21 @@ local box = nil
 
 local started = false
 local theme = beautiful.accent
-
+-- ########################################################################
+-- ########################################################################
+-- ########################################################################
 signals.connect_primary_theme_changed(
     function(new_theme)
         theme = new_theme
         if box ~= nil then
-            box.bg = theme.hue_800 .. "44"
+            box.bg = theme.hue_800 .. '44'
             box.border_color = theme.hue_600
         end
     end
 )
-
+-- ########################################################################
+-- ########################################################################
+-- ########################################################################
 local function createBox(x, y, width, height)
     local _box =
         wibox(
@@ -34,8 +47,8 @@ local function createBox(x, y, width, height)
             visible = true,
             x = x,
             y = y,
-            type = "dock",
-            bg = theme.hue_800 .. "44",
+            type = 'dock',
+            bg = theme.hue_800 .. '44',
             border_width = dpi(1),
             border_color = theme.hue_600,
             width = width,
@@ -45,7 +58,9 @@ local function createBox(x, y, width, height)
     )
     return _box
 end
-
+-- ########################################################################
+-- ########################################################################
+-- ########################################################################
 local function calculate(sx, sy, ex, ey)
     local x
     local y
@@ -73,7 +88,9 @@ local function calculate(sx, sy, ex, ey)
         height = height
     }
 end
-
+-- ########################################################################
+-- ########################################################################
+-- ########################################################################
 -- check if 2 rectangles are colliding
 local function collides(icon, computation)
     if (computation.x >= icon.x + icon.width) or (icon.x >= computation.x + computation.width) then
@@ -86,7 +103,9 @@ local function collides(icon, computation)
 
     return true
 end
-
+-- ########################################################################
+-- ########################################################################
+-- ########################################################################
 -- this function tries to find all desktop icons that are under the current selection
 local function find_colliding_icons(computation)
     local desktop_icons = _G.desktop_icons or {}
@@ -105,7 +124,9 @@ local function find_colliding_icons(computation)
         end
     end
 end
-
+-- ########################################################################
+-- ########################################################################
+-- ########################################################################
 local time_delay = 1 / hardware.getDisplayFrequency()
 local timer
 timer =
@@ -114,7 +135,6 @@ timer =
     call_now = false,
     autostart = false,
     callback = function()
-
         -- in this case we are in a client not on the root window, thus we need to disable dragging
         if mouse.current_client ~= nil then
             box.visible = false
@@ -149,9 +169,11 @@ timer =
         find_colliding_icons(computation)
     end
 }
-
+-- ########################################################################
+-- ########################################################################
+-- ########################################################################
 timer:connect_signal(
-    "timeout",
+    'timeout',
     function()
         if not mouse.coords().buttons[1] then
             box.visible = false
@@ -160,7 +182,9 @@ timer:connect_signal(
                 started = false
             end
         end
-
+        -- ########################################################################
+        -- ########################################################################
+        -- ########################################################################
         -- in this case we are in a client not on the root window, thus we need to disable dragging
         if mouse.current_client ~= nil then
             box.visible = false
@@ -171,7 +195,9 @@ timer:connect_signal(
         end
     end
 )
-
+-- ########################################################################
+-- ########################################################################
+-- ########################################################################
 local function clear_selected_icons()
     find_colliding_icons({x = 0, y = 0, width = 0, height = 0})
 end
@@ -189,7 +215,9 @@ local function start()
         started = true
     end
 end
-
+-- ########################################################################
+-- ########################################################################
+-- ########################################################################
 local function stop()
     if started then
         timer:stop()

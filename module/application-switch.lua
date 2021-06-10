@@ -1,21 +1,32 @@
-
-local cairo = require("lgi").cairo
-local wibox = require("wibox")
-local math = require("math")
-local awful = require("awful")
-local gears = require("gears")
+--  _______               __ __              __   __                   _______            __ __         __
+-- |   _   |.-----.-----.|  |__|.----.---.-.|  |_|__|.-----.-----.    |     __|.--.--.--.|__|  |_.----.|  |--.
+-- |       ||  _  |  _  ||  |  ||  __|  _  ||   _|  ||  _  |     |    |__     ||  |  |  ||  |   _|  __||     |
+-- |___|___||   __|   __||__|__||____|___._||____|__||_____|__|__|    |_______||________||__|____|____||__|__|
+--          |__|  |__|
+-- ########################################################################
+-- ########################################################################
+-- ########################################################################
+local cairo = require('lgi').cairo
+local wibox = require('wibox')
+local math = require('math')
+local awful = require('awful')
+local gears = require('gears')
 local timer = gears.timer
-local beautiful = require("beautiful")
-local icons = require("theme.icons")
-awful.client = require("awful.client")
+local beautiful = require('beautiful')
+local icons = require('theme.icons')
+awful.client = require('awful.client')
 local dpi = beautiful.xresources.apply_dpi
-
+-- ########################################################################
+-- ########################################################################
+-- ########################################################################
 -- luacheck: ignore 113
 local unpack = unpack or table.unpack
 
 local surface = cairo.ImageSurface(cairo.Format.RGB24, 20, 20)
 local cr = cairo.Context(surface)
-
+-- ########################################################################
+-- ########################################################################
+-- ########################################################################
 local _M = {}
 
 -- settings
@@ -26,7 +37,7 @@ _M.settings = {
     preview_box_border = beautiful.xcolor7,
     preview_box_fps = 0.3,
     preview_box_delay = 100,
-    preview_box_title_font = {"sans", "italic", "normal"},
+    preview_box_title_font = {'sans', 'italic', 'normal'},
     preview_box_title_font_size_factor = 0.8,
     preview_box_title_color = {0, 0, 0, 1},
     client_opacity = false,
@@ -35,7 +46,9 @@ _M.settings = {
     client_opacity_value = 0.8,
     cycle_raise_client = true
 }
-
+-- ########################################################################
+-- ########################################################################
+-- ########################################################################
 -- Create a wibox to contain all the client-widgets
 _M.preview_wbox = wibox({width = screen[mouse.screen].geometry.width})
 _M.preview_wbox.border_width = 3
@@ -48,9 +61,11 @@ _M.preview_widgets = {}
 _M.altTabTable = {}
 _M.altTabIndex = 1
 
-_M.source = string.sub(debug.getinfo(1, "S").source, 2)
+_M.source = string.sub(debug.getinfo(1, 'S').source, 2)
 _M.noicon = icons.unknown
-
+-- ########################################################################
+-- ########################################################################
+-- ########################################################################
 -- simple function for counting the size of a table
 function _M.tableLength(T)
     local count = 0
@@ -59,7 +74,9 @@ function _M.tableLength(T)
     end
     return count
 end
-
+-- ########################################################################
+-- ########################################################################
+-- ########################################################################
 -- this function returns the list of clients to be shown.
 function _M.getClients()
     local clients = {}
@@ -75,8 +92,10 @@ function _M.getClients()
         idx = idx + 1
         c = awful.client.focus.history.get(s, idx)
     end
-
--- cycle through all the clients enabling cycling through minimized clients without loosing history
+    -- ########################################################################
+    -- ########################################################################
+    -- ########################################################################
+    -- cycle through all the clients enabling cycling through minimized clients without loosing history
     local t = s.selected_tag
     local all = client.get(s)
 
@@ -92,7 +111,9 @@ function _M.getClients()
                 break
             end
         end
-
+        -- ########################################################################
+        -- ########################################################################
+        -- ########################################################################
         if isCurrentTag then
             -- check if client is already in the history
             -- if not, add it
@@ -109,10 +130,14 @@ function _M.getClients()
             end
         end
     end
-
+    -- ########################################################################
+    -- ########################################################################
+    -- ########################################################################
     return clients
 end
-
+-- ########################################################################
+-- ########################################################################
+-- ########################################################################
 -- here we populate altTabTable using the list of clients taken from
 -- _M.getClients(). In case we have altTabTable with some value, the list of the
 -- old known clients is restored.
@@ -130,7 +155,9 @@ function _M.populateAltTabTable()
             end
         end
     end
-
+    -- ########################################################################
+    -- ########################################################################
+    -- ########################################################################
     _M.altTabTable = {}
 
     for i = 1, #clients do
@@ -144,7 +171,9 @@ function _M.populateAltTabTable()
         )
     end
 end
-
+-- ########################################################################
+-- ########################################################################
+-- ########################################################################
 -- If the length of list of clients is not equal to the length of altTabTable,
 -- we need to repopulate the array and update the UI. This function does this
 -- check.
@@ -152,15 +181,19 @@ function _M.clientsHaveChanged()
     local clients = _M.getClients()
     return _M.tableLength(clients) ~= _M.tableLength(_M.altTabTable)
 end
-
+-- ########################################################################
+-- ########################################################################
+-- ########################################################################
 function _M.createPreviewText(client)
     if client.class then
-        return " - " .. client.class
+        return ' - ' .. client.class
     else
-        return " - " .. client.name
+        return ' - ' .. client.name
     end
 end
-
+-- ########################################################################
+-- ########################################################################
+-- ########################################################################
 -- Preview is created here.
 function _M.clientOpacity()
     if not _M.settings.client_opacity then
@@ -174,7 +207,9 @@ function _M.clientOpacity()
     for _, data in pairs(_M.altTabTable) do
         data.client.opacity = opacity
     end
-
+    -- ########################################################################
+    -- ########################################################################
+    -- ########################################################################
     if client.focus == _M.altTabTable[_M.altTabIndex].client then
         -- Let's normalize the value up to 1.
         local opacityFocusSelected =
@@ -198,7 +233,9 @@ function _M.clientOpacity()
         _M.altTabTable[_M.altTabIndex].client.opacity = opacitySelected
     end
 end
-
+-- ########################################################################
+-- ########################################################################
+-- ########################################################################
 -- This is called any _M.settings.preview_box_fps milliseconds. In case the list
 -- of clients is changed, we need to redraw the whole preview box. Otherwise, a
 -- simple widget::updated signal is enough
@@ -209,10 +246,12 @@ function _M.updatePreview()
     end
 
     for i = 1, #_M.preview_widgets do
-        _M.preview_widgets[i]:emit_signal("widget::updated")
+        _M.preview_widgets[i]:emit_signal('widget::updated')
     end
 end
-
+-- ########################################################################
+-- ########################################################################
+-- ########################################################################
 function _M.cycle(dir)
     -- Switch to next client
     _M.altTabIndex = _M.altTabIndex + dir
@@ -238,7 +277,9 @@ function _M.cycle(dir)
         _M.altTabTable[_M.altTabIndex].client:raise()
     end
 end
-
+-- ########################################################################
+-- ########################################################################
+-- ########################################################################
 function _M.preview()
     if not _M.settings.preview_box then
         return
@@ -281,7 +322,9 @@ function _M.preview()
         table.insert(leftRightTab, _M.altTabTable[i].client)
         table.insert(leftRightTabToAltTabIndex, i)
     end
-
+    -- ########################################################################
+    -- ########################################################################
+    -- ########################################################################
     -- determine fontsize -> find maximum classname-length
     local text, textWidth, textHeight, maxText
     local maxTextWidth = 0
@@ -298,7 +341,9 @@ function _M.preview()
             maxText = text
         end
     end
-
+    -- ########################################################################
+    -- ########################################################################
+    -- ########################################################################
     while true do
         cr:set_font_size(bigFont)
         textWidth = cr:text_extents(maxText).width
@@ -313,7 +358,9 @@ function _M.preview()
     local smallFont = bigFont * _M.settings.preview_box_title_font_size_factor
 
     _M.preview_widgets = {}
-
+    -- ########################################################################
+    -- ########################################################################
+    -- ########################################################################
     -- create all the widgets
     for i = 1, #leftRightTab do
         _M.preview_widgets[i] = wibox.widget.base.make_widget()
@@ -407,16 +454,20 @@ function _M.preview()
                 cro:fill()
             end
         end
-
+        -- ########################################################################
+        -- ########################################################################
+        -- ########################################################################
         -- Add mouse handler
         _M.preview_widgets[i]:connect_signal(
-            "mouse::enter",
+            'mouse::enter',
             function()
                 _M.cycle(leftRightTabToAltTabIndex[i] - _M.altTabIndex)
             end
         )
     end
-
+    -- ########################################################################
+    -- ########################################################################
+    -- ########################################################################
     -- Spacers left and right
     local spacer = wibox.widget.base.make_widget()
     spacer.fit = function(_, _, _)
@@ -424,7 +475,9 @@ function _M.preview()
     end
     spacer.draw = function(_, _, _, _, _)
     end
-
+    -- ########################################################################
+    -- ########################################################################
+    -- ########################################################################
     --layout
     local preview_layout = wibox.layout.fixed.horizontal()
 
@@ -436,11 +489,13 @@ function _M.preview()
 
     _M.preview_wbox:set_widget(preview_layout)
 end
-
+-- ########################################################################
+-- ########################################################################
+-- ########################################################################
 -- This starts the timer for updating and it shows the preview UI.
 function _M.showPreview()
     _M.preview_live_timer.timeout = 1 / _M.settings.preview_box_fps
-    _M.preview_live_timer:connect_signal("timeout", _M.updatePreview)
+    _M.preview_live_timer:connect_signal('timeout', _M.updatePreview)
     _M.preview_live_timer:start()
 
     _M.preview()
@@ -448,7 +503,9 @@ function _M.showPreview()
 
     _M.clientOpacity()
 end
-
+-- ########################################################################
+-- ########################################################################
+-- ########################################################################
 function _M.switch(dir, mod_key1, release_key, mod_key2, key_switch)
     _M.populateAltTabTable()
 
@@ -467,21 +524,23 @@ function _M.switch(dir, mod_key1, release_key, mod_key2, key_switch)
     local previewDelay = _M.settings.preview_box_delay / 1000
     _M.previewDelayTimer = timer({timeout = previewDelay})
     _M.previewDelayTimer:connect_signal(
-        "timeout",
+        'timeout',
         function()
             _M.previewDelayTimer:stop()
             _M.showPreview()
         end
     )
     _M.previewDelayTimer:start()
-
+    -- ########################################################################
+    -- ########################################################################
+    -- ########################################################################
     -- Now that we have collected all windows, we should run a keygrabber
     -- as long as the user is alt-tabbing:
     keygrabber.run(
         function(mod, key, event)
             -- Stop alt-tabbing when the alt-key is released
             if gears.table.hasitem(mod, mod_key1) then
-                if (key == release_key or key == "Escape") and event == "release" then
+                if (key == release_key or key == 'Escape') and event == 'release' then
                     if _M.preview_wbox.visible == true then
                         _M.preview_wbox.visible = false
                         _M.preview_live_timer:stop()
@@ -489,7 +548,7 @@ function _M.switch(dir, mod_key1, release_key, mod_key2, key_switch)
                         _M.previewDelayTimer:stop()
                     end
 
-                    if key == "Escape" then
+                    if key == 'Escape' then
                         for i = 1, #_M.altTabTable do
                             _M.altTabTable[i].client.opacity = _M.altTabTable[i].opacity
                             _M.altTabTable[i].client.minimized = _M.altTabTable[i].minimized
@@ -519,9 +578,11 @@ function _M.switch(dir, mod_key1, release_key, mod_key2, key_switch)
                             _M.altTabTable[i].client.opacity = _M.altTabTable[i].opacity
                         end
                     end
-
+                    -- ########################################################################
+                    -- ########################################################################
+                    -- ########################################################################
                     keygrabber.stop()
-                elseif key == key_switch and event == "press" then
+                elseif key == key_switch and event == 'press' then
                     if gears.table.hasitem(mod, mod_key2) then
                         -- Move to previous client on Shift-Tab
                         _M.cycle(-1)
@@ -533,9 +594,13 @@ function _M.switch(dir, mod_key1, release_key, mod_key2, key_switch)
             end
         end
     )
-
+    -- ########################################################################
+    -- ########################################################################
+    -- ########################################################################
     -- switch to next client
     _M.cycle(dir)
 end -- function altTab
-
+-- ########################################################################
+-- ########################################################################
+-- ########################################################################
 return {switch = _M.switch, settings = _M.settings}
