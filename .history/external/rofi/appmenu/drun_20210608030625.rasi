@@ -3,10 +3,11 @@ configuration {
     font:                           "SF Pro Text Regular 10";
     show-icons:                     true;
     drun-display-format:            "{name}";
-    fullscreen:                     true;
+    fullscreen:                     false;
     threads:                        0;
     scroll-method:                  0;
     disable-history:                false;
+    monitor:                        "primary";
 }
 
 * {
@@ -24,10 +25,12 @@ window {
     transparency:                   "real";
     background-color:               @background;
     text-color:                     @foreground;
-    width:                          100%;
-    height:                         100%;
+    height:                         740px;
+    width:                          1321px;
     location:                       northwest;
     anchor:                         northwest;
+    x-offset:                       45;
+    y-offset:                       28;
 }
 
 prompt {

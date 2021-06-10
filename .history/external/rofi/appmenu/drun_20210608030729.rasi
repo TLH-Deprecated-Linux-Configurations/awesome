@@ -24,10 +24,12 @@ window {
     transparency:                   "real";
     background-color:               @background;
     text-color:                     @foreground;
-    width:                          100%;
-    height:                         100%;
+    height:                         740px;
+    width:                          1321px;
     location:                       northwest;
     anchor:                         northwest;
+    x-offset:                       45;
+    y-offset:                       28;
 }
 
 prompt {
