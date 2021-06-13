@@ -25,11 +25,10 @@ local animate = require('lib.animations').createAnimObject
 local icon_size = beautiful.exit_screen_icon_size or dpi(90)
 local exit_screen_hide
 
-local text = i18n.translate('Goodbye for Now')
+local text = 'Goodbye for Now'
 
 local user_name =
     wibox.widget {
-    markup = text .. i18n.translate('user!'),
     font = beautiful.font .. ' 48',
     align = 'center',
     valign = 'center',
@@ -43,7 +42,7 @@ awful.spawn.easy_async_with_shell(
     function(stdout)
         if stdout then
             -- Remove new line
-            local username = stdout:gsub('%\n', '')
+            local username = stdout:gsub('', '')
 
             -- Capitalize first letter of username
             -- Comment it if you're not using your name as your username
@@ -78,7 +77,7 @@ local buildButton = function(icon, name)
                         image = icon,
                         widget = wibox.widget.imagebox
                     },
-                    margins = dpi(16),
+                    margins = dpi(0),
                     widget = wibox.container.margin
                 },
                 bg = beautiful.groups_bg,
@@ -112,7 +111,7 @@ end
 local suspend_command = function()
     print('Suspending')
     exit_screen_hide()
-    awful.spawn.with_shell(apps.default.lock .. ' && systemctl suspend')
+    awful.spawn.with_shell(apps.default.lock)
 end
 -- ########################################################################
 -- ########################################################################
@@ -163,7 +162,7 @@ end
 -- ########################################################################
 -- ########################################################################
 -- ########################################################################
-local ignore = buildButton(icons.close, i18n.translate('Return'))
+local ignore = buildButton(icons.close, 'Return')
 ignore:connect_signal(
     'button::release',
     function()
@@ -173,7 +172,7 @@ ignore:connect_signal(
 -- ########################################################################
 -- ########################################################################
 -- ########################################################################
-local poweroff = buildButton(icons.power, i18n.translate('Shutdown'))
+local poweroff = buildButton(icons.power, 'Shutdown')
 poweroff:connect_signal(
     'button::release',
     function()
@@ -183,7 +182,7 @@ poweroff:connect_signal(
 -- ########################################################################
 -- ########################################################################
 -- ########################################################################
-local reboot = buildButton(icons.restart, i18n.translate('Restart'))
+local reboot = buildButton(icons.restart, 'Restart')
 reboot:connect_signal(
     'button::release',
     function()
@@ -193,7 +192,7 @@ reboot:connect_signal(
 -- ########################################################################
 -- ########################################################################
 -- ########################################################################
-local suspend = buildButton(icons.sleep, i18n.translate('Sleep'))
+local suspend = buildButton(icons.sleep, 'Sleep')
 suspend:connect_signal(
     'button::release',
     function()
@@ -203,7 +202,7 @@ suspend:connect_signal(
 -- ########################################################################
 -- ########################################################################
 -- ########################################################################
-local exit = buildButton(icons.logout, i18n.translate('Logout'))
+local exit = buildButton(icons.logout, 'Logout')
 exit:connect_signal(
     'button::release',
     function()
@@ -213,7 +212,7 @@ exit:connect_signal(
 -- ########################################################################
 -- ########################################################################
 -- ########################################################################
-local lock = buildButton(icons.lock, i18n.translate('Lock'))
+local lock = buildButton(icons.lock, 'Lock')
 lock:connect_signal(
     'button::release',
     function()
@@ -223,7 +222,7 @@ lock:connect_signal(
 -- ########################################################################
 -- ########################################################################
 -- ########################################################################
-local bios = buildButton(icons.bios, i18n.translate('BIOS'))
+local bios = buildButton(icons.bios, 'BIOS')
 bios:connect_signal(
     'button::release',
     function()

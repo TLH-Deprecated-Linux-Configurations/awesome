@@ -1,4 +1,3 @@
-
 --[[
 ███╗   ██╗██╗ ██████╗███████╗
 ████╗  ██║██║██╔════╝██╔════╝
@@ -15,17 +14,17 @@ Forked to fit TDE (transapancy support)
 -- local debug = ret and lib.debug or function() end
 -- => Awesome WM
 -- ============================================================
-local gears = require("gears")
+local gears = require('gears')
 
 local atooltip = awful.tooltip
 local abutton = awful.button
-local wibox = require("wibox")
-local dpi = require("beautiful").xresources.apply_dpi
+local wibox = require('wibox')
+local dpi = require('beautiful').xresources.apply_dpi
 
-local mode = ""
-local draw_mode = "full"
+local mode = ''
+local draw_mode = 'full'
 
-local beautiful = require("beautiful")
+local beautiful = require('beautiful')
 local get_font_height = beautiful.get_font_height
 local primary_color = beautiful.primary.hue_500
 -- Widgets
@@ -43,8 +42,8 @@ local wcontainer_constraint = wcontainer.constraint
 local wcontainer_margin = wcontainer.margin
 local wcontainer_place = wcontainer.place
 -- Gears
-local gsurface = require("gears.surface")
-local gtimer = require("gears.timer")
+local gsurface = require('gears.surface')
+local gtimer = require('gears.timer')
 local gtimer_weak_start_new = gtimer.weak_start_new
 -- ------------------------------------------------------------
 
@@ -61,7 +60,7 @@ local ipairs = ipairs
 
 -- => LGI
 -- ============================================================
-local lgi = require("lgi")
+local lgi = require('lgi')
 local gdk = lgi.Gdk
 local get_default_root_window = gdk.get_default_root_window
 local pixbuf_get_from_surface = gdk.pixbuf_get_from_surface
@@ -71,13 +70,13 @@ local pixbuf_get_from_window = gdk.pixbuf_get_from_window
 -- => nice
 -- ============================================================
 -- Colors
-local colors = require("module.titlebar.colors")
+local colors = require('module.titlebar.colors')
 local color_darken = colors.darken
 local color_lighten = colors.lighten
 local is_contrast_acceptable = colors.is_contrast_acceptable
 local relative_luminance = colors.relative_luminance
 -- Shapes
-local shapes = require("module.titlebar.shapes")
+local shapes = require('module.titlebar.shapes')
 local create_corner_top_left = shapes.create_corner_top_left
 local create_edge_top_middle = shapes.create_edge_top_middle
 local gradient = shapes.duotone_gradient_vertical
@@ -91,8 +90,8 @@ local double_click_jitter_tolerance = 4
 local double_click_time_window_ms = 250
 local stroke_inner_sides_lighten_mul = 0.4
 local stroke_outer_top_darken_mul = 0.7
-local title_color_dark = "#17191e"
-local title_color_light = "#f4f4f7"
+local title_color_dark = '#17191e'
+local title_color_light = '#f4f4f7'
 local title_unfocused_opacity = 0.7
 local titlebar_gradient_c1_lighten = 1
 local titlebar_gradient_c2_offset = 0.5
@@ -106,8 +105,8 @@ end
 
 -- remove transparency from a hex color
 local function untransparant(color)
-    if tonumber(color:sub(2, 7), 16) < tonumber("200000", 16) then
-        return "#17191e"
+    if tonumber(color:sub(2, 7), 16) < tonumber('200000', 16) then
+        return '#17191e'
     end
     if not (#color) == 9 then
         return color
@@ -133,23 +132,23 @@ _private.max_height = 0
 -- Titlebar
 _private.titlebar_height = dpi(22)
 _private.titlebar_radius = dpi(9)
-_private.titlebar_color = "#17191e"
+_private.titlebar_color = '#17191e'
 _private.titlebar_margin_left = 0
 _private.titlebar_margin_right = 0
-_private.titlebar_font = "Hurmit Nerd Font Mono bold 11"
+_private.titlebar_font = 'Hurmit Nerd Font Mono bold 11'
 _private.titlebar_items = {
-    left = {"floating", "ontop", "sticky"},
-    middle = "title",
-    right = { "minimize", "maximize", "close"}
+    left = {'floating', 'ontop', 'sticky'},
+    middle = 'title',
+    right = {'minimize', 'maximize', 'close'}
 }
 _private.context_menu_theme = {
     bg_focus = beautiful.primary.hue_300,
-    bg_normal = "#00000044",
-    border_color = "#00000075",
+    bg_normal = '#00000044',
+    border_color = '#00000075',
     border_width = 20,
     --fg_focus = "#fefefa",
     --fg_normal = "#fefefa",
-    font = "Hurmit Nerd Font Mono bold  11",
+    font = 'Hurmit Nerd Font Mono bold  11',
     height = dpi(45),
     width = dpi(450)
 }
@@ -170,37 +169,37 @@ _private.button_margin_top = 5
 -- _private.button_margin_right = 0
 _private.tooltips_enabled = true
 _private.tooltip_messages = {
-    close = i18n.translate("close"),
-    minimize = i18n.translate("minimize"),
-    maximize_active = i18n.translate("unmaximize"),
-    maximize_inactive = i18n.translate("maximize"),
-    floating_active = i18n.translate("enable tiling mode"),
-    floating_inactive = i18n.translate("enable floating mode"),
+    close = i18n.translate('close'),
+    minimize = i18n.translate('minimize'),
+    maximize_active = i18n.translate('unmaximize'),
+    maximize_inactive = i18n.translate('maximize'),
+    floating_active = i18n.translate('enable tiling mode'),
+    floating_inactive = i18n.translate('enable floating mode'),
     ontop_active = i18n.translate("don't keep above other windows"),
-    ontop_inactive = i18n.translate("keep above other windows"),
-    sticky_active = i18n.translate("disable sticky mode"),
-    sticky_inactive = i18n.translate("enable sticky mode")
+    ontop_inactive = i18n.translate('keep above other windows'),
+    sticky_active = i18n.translate('disable sticky mode'),
+    sticky_inactive = i18n.translate('enable sticky mode')
 }
-_private.close_color = "#ff3d81"
-_private.minimize_color = "#f9f871"
-_private.maximize_color = "#00ffcc"
+_private.close_color = '#ff3d81'
+_private.minimize_color = '#f9f871'
+_private.maximize_color = '#00ffcc'
 _private.floating_color = primary_color
-_private.ontop_color = "#0badff"
-_private.sticky_color = "#8265ff"
+_private.ontop_color = '#0badff'
+_private.sticky_color = '#8265ff'
 -- ------------------------------------------------------------
 
 -- => Saving and loading of color rules
 -- ============================================================
-local t = require("module.titlebar.table")
+local t = require('module.titlebar.table')
 -- luacheck: ignore 142 143
 table.save = t.save
 -- luacheck: ignore 142 143
 table.load = t.load
 
 -- Load the color rules or create an empty table if there aren't any
-local config_dir = os.getenv("HOME") .. "/.cache/electric-tantra"
-local color_rules_filename = "color_rules"
-local color_rules_filepath = config_dir .. "/titlebar/" .. color_rules_filename
+local config_dir = os.getenv('HOME') .. '/.cache/electric-tantra'
+local color_rules_filename = 'color_rules'
+local color_rules_filepath = config_dir .. '/titlebar/' .. color_rules_filename
 _private.color_rules = table.load(color_rules_filepath) or {}
 
 -- Saves the contents of _private.color_rules table to file
@@ -227,11 +226,11 @@ end
 local function get_pixel_at(x, y)
     local pixbuf = pixbuf_get_from_window(get_default_root_window(), x, y, 1, 1)
     local bytes = pixbuf:get_pixels()
-    return "#" ..
+    return '#' ..
         bytes:gsub(
-            ".",
+            '.',
             function(c)
-                return ("%02x"):format(c:byte())
+                return ('%02x'):format(c:byte())
             end
         )
 end
@@ -255,11 +254,11 @@ local function get_dominant_color(client)
             end
             bytes = pb:get_pixels()
             color =
-                "#" ..
+                '#' ..
                 bytes:gsub(
-                    ".",
+                    '.',
                     function(c)
-                        return ("%02x"):format(c:byte())
+                        return ('%02x'):format(c:byte())
                     end
                 )
             if not tally[color] then
@@ -279,7 +278,7 @@ local function get_dominant_color(client)
     end
     color = mode
     set_color_rule(client, color)
-    print("Found color of client:  " .. color)
+    print('Found color of client:  ' .. color)
     return color
 end
 
@@ -294,37 +293,37 @@ end
 
 -- Returns (or generates) a button image based on the given params
 local function create_button_image(name, is_focused, event, is_on)
-    local focus_state = is_focused and "focused" or "unfocused"
+    local focus_state = is_focused and 'focused' or 'unfocused'
     local key_img
     -- If it is a toggle button, then the key has an extra param
     if is_on ~= nil then
-        local toggle_state = is_on and "on" or "off"
-        key_img = ("%s_%s_%s_%s"):format(name, toggle_state, focus_state, event)
+        local toggle_state = is_on and 'on' or 'off'
+        key_img = ('%s_%s_%s_%s'):format(name, toggle_state, focus_state, event)
     else
-        key_img = ("%s_%s_%s"):format(name, focus_state, event)
+        key_img = ('%s_%s_%s'):format(name, focus_state, event)
     end
     -- If an image already exists, then we are done
     if _private[key_img] then
         return _private[key_img]
     end
     -- The color key just has _color at the end
-    local key_color = key_img .. "_color"
+    local key_color = key_img .. '_color'
     -- If the user hasn't provided a color, then we have to generate one
     if not _private[key_color] then
-        local key_base_color = name .. "_color"
+        local key_base_color = name .. '_color'
         -- Maybe the user has at least provided a base color? If not we just pick a pseudo-random color
         local base_color = _private[key_base_color] or get_next_color()
         _private[key_base_color] = base_color
         local button_color = base_color
         local H = colors.hex2hsv(base_color)
         -- Unfocused buttons are desaturated and darkened (except when they are being hovered over)
-        if not is_focused and event ~= "hover" then
+        if not is_focused and event ~= 'hover' then
             button_color = colors.hsv2hex(H, 0, 50)
         end
         -- Then the color is lightened if the button is being hovered over, or darkened if it is being pressed, otherwise it is left as is
         button_color =
-            (event == "hover") and colors.lighten(button_color, 45) or
-            (event == "press") and colors.darken(button_color, 45) or
+            (event == 'hover') and colors.lighten(button_color, 45) or
+            (event == 'press') and colors.darken(button_color, 45) or
             button_color
         -- Save the generate color because why not lol
         _private[key_color] = button_color
@@ -348,18 +347,18 @@ local function create_titlebar_button(c, name, button_callback, property)
         local tooltip =
             atooltip {
             timer_function = function()
-                return _private.tooltip_messages[name .. (property and (c[property] and "_active" or "_inactive") or "")]
+                return _private.tooltip_messages[name .. (property and (c[property] and '_active' or '_inactive') or '')]
             end,
             delay_show = 0.1,
             margins_leftright = 12,
             margins_topbottom = 6,
             timeout = 0.25,
-            align = "bottom_right"
+            align = 'bottom_right'
         }
         tooltip:add_to_object(button_img)
     end
     local is_on, is_focused
-    local event = "normal"
+    local event = 'normal'
     local function update()
         is_focused = c.active
         -- If the button is for a property that can be toggled
@@ -371,24 +370,24 @@ local function create_titlebar_button(c, name, button_callback, property)
         end
     end
     -- Update the button when the client gains/loses focus
-    c:connect_signal("unfocus", update)
-    c:connect_signal("focus", update)
+    c:connect_signal('unfocus', update)
+    c:connect_signal('focus', update)
     -- If the button is for a property that can be toggled, update it accordingly
     if property then
-        c:connect_signal("property::" .. property, update)
+        c:connect_signal('property::' .. property, update)
     end
     -- Update the button on mouse hover/leave
     button_img:connect_signal(
-        "mouse::enter",
+        'mouse::enter',
         function()
-            event = "hover"
+            event = 'hover'
             update()
         end
     )
     button_img:connect_signal(
-        "mouse::leave",
+        'mouse::leave',
         function()
-            event = "normal"
+            event = 'normal'
             update()
         end
     )
@@ -398,20 +397,20 @@ local function create_titlebar_button(c, name, button_callback, property)
         {},
         nice.MB_LEFT,
         function()
-            event = "press"
+            event = 'press'
             update()
         end,
         function()
             if button_callback then
-                event = "normal"
+                event = 'normal'
                 button_callback()
             else
-                event = "hover"
+                event = 'hover'
             end
             update()
         end
     )
-    button_img.id = "button_image"
+    button_img.id = 'button_image'
     update()
     return wibox.widget {
         widget = wcontainer_place,
@@ -426,7 +425,7 @@ local function create_titlebar_button(c, name, button_callback, property)
                 widget = wcontainer_constraint,
                 height = _private.button_size,
                 width = _private.button_size,
-                strategy = "exact"
+                strategy = 'exact'
             }
         }
     }
@@ -451,7 +450,7 @@ local function get_titlebar_mouse_bindings(c)
                         c.maximized = not c.maximized
                     end
                 else
-                    c:activate {context = "titlebar", action = "mouse_move"}
+                    c:activate {context = 'titlebar', action = 'mouse_move'}
                 end
                 -- Start a timer to clear the click count
                 gtimer_weak_start_new(
@@ -471,7 +470,7 @@ local function get_titlebar_mouse_bindings(c)
                     menu_items[#menu_items + 1] = {text, callback}
                 end
                 add_item(
-                    "Auto detect Window Decoration color",
+                    'Auto detect Window Decoration color',
                     function()
                         c._nice_base_color = untransparant(get_dominant_color(c))
                         set_color_rule(c, c._nice_base_color)
@@ -479,7 +478,7 @@ local function get_titlebar_mouse_bindings(c)
                     end
                 )
                 add_item(
-                    "Color Picker",
+                    'Color Picker',
                     function()
                         _G.mousegrabber.run(
                             function(m)
@@ -491,12 +490,12 @@ local function get_titlebar_mouse_bindings(c)
                                 end
                                 return true
                             end,
-                            "crosshair"
+                            'crosshair'
                         )
                     end
                 )
                 add_item(
-                    "Nevermind...",
+                    'Nevermind...',
                     function()
                     end
                 )
@@ -515,7 +514,7 @@ local function get_titlebar_mouse_bindings(c)
             {},
             _private.mb_resize,
             function()
-                c:activate {context = "mouse_click", action = "mouse_resize"}
+                c:activate {context = 'mouse_click', action = 'mouse_resize'}
             end
         )
     }
@@ -529,10 +528,10 @@ local function create_titlebar_title(c)
 
     local title_widget =
         wibox.widget {
-        align = "center",
-        ellipsize = "middle",
+        align = 'center',
+        ellipsize = 'middle',
         opacity = c.active and 1 or title_unfocused_opacity,
-        valign = "center",
+        valign = 'center',
         widget = textbox
     }
 
@@ -546,15 +545,15 @@ local function create_titlebar_title(c)
             gears.string.xml_escape(c.name)
         )
     end
-    c:connect_signal("property::name", update)
+    c:connect_signal('property::name', update)
     c:connect_signal(
-        "unfocus",
+        'unfocus',
         function()
             title_widget.opacity = title_unfocused_opacity
         end
     )
     c:connect_signal(
-        "focus",
+        'focus',
         function()
             title_widget.opacity = 1
         end
@@ -573,7 +572,7 @@ end
 
 -- Returns a titlebar item
 local function get_titlebar_item(c, name)
-    if name == "close" then
+    if name == 'close' then
         return create_titlebar_button(
             c,
             name,
@@ -581,16 +580,16 @@ local function get_titlebar_item(c, name)
                 c:kill()
             end
         )
-    elseif name == "maximize" then
+    elseif name == 'maximize' then
         return create_titlebar_button(
             c,
             name,
             function()
                 c.maximized = not c.maximized
             end,
-            "maximized"
+            'maximized'
         )
-    elseif name == "minimize" then
+    elseif name == 'minimize' then
         return create_titlebar_button(
             c,
             name,
@@ -598,16 +597,16 @@ local function get_titlebar_item(c, name)
                 c.minimized = true
             end
         )
-    elseif name == "ontop" then
+    elseif name == 'ontop' then
         return create_titlebar_button(
             c,
             name,
             function()
                 c.ontop = not c.ontop
             end,
-            "ontop"
+            'ontop'
         )
-    elseif name == "floating" then
+    elseif name == 'floating' then
         return create_titlebar_button(
             c,
             name,
@@ -617,9 +616,9 @@ local function get_titlebar_item(c, name)
                     c.maximized = false
                 end
             end,
-            "floating"
+            'floating'
         )
-    elseif name == "sticky" then
+    elseif name == 'sticky' then
         return create_titlebar_button(
             c,
             name,
@@ -627,9 +626,9 @@ local function get_titlebar_item(c, name)
                 c.sticky = not c.sticky
                 return c.sticky
             end,
-            "sticky"
+            'sticky'
         )
-    elseif name == "title" then
+    elseif name == 'title' then
         return create_titlebar_title(c)
     end
 end
@@ -639,7 +638,7 @@ local function create_titlebar_items(c, group)
     if not group then
         return nil
     end
-    if type(group) == "string" then
+    if type(group) == 'string' then
         return get_titlebar_item(c, group)
     end
     local titlebar_group_items =
@@ -728,7 +727,7 @@ function _private.add_window_decorations(c)
         stroke_source_outer = gradient(stroke_color_outer_top, stroke_color_outer_sides, titlebar_height)
     }
     -- The top right corner of the titlebar
-    local corner_top_right_img = shapes.flip(corner_top_left_img, "horizontal")
+    local corner_top_right_img = shapes.flip(corner_top_left_img, 'horizontal')
 
     -- The middle part of the titlebar
     local top_edge =
@@ -745,7 +744,7 @@ function _private.add_window_decorations(c)
         width = _private.max_width
     }
     -- Create the titlebar
-    local titlebar = awful.titlebar(c, {size = titlebar_height, bg = "transparent"})
+    local titlebar = awful.titlebar(c, {size = titlebar_height, bg = 'transparent'})
     -- Arrange the graphics
     titlebar.widget = {
         imagebox(corner_top_left_img, true),
@@ -777,7 +776,7 @@ function _private.add_window_decorations(c)
 
     if _private.no_titlebar_maximized then
         c:connect_signal(
-            "property::maximized",
+            'property::maximized',
             function()
                 if c.maximized and client.focus then
                     local curr_screen_workarea = client.focus.screen.workarea
@@ -805,7 +804,7 @@ function _private.add_window_decorations(c)
     end
 
     -- Clean up
-    collectgarbage("collect")
+    collectgarbage('collect')
 end
 
 local function update_max_screen_dims()
@@ -820,11 +819,11 @@ end
 
 local function validate_mb_bindings()
     local action_mbs = {
-        "mb_move",
-        "mb_contextmenu",
-        "mb_resize",
-        "mb_win_shade_rollup",
-        "mb_win_shade_rolldown"
+        'mb_move',
+        'mb_contextmenu',
+        'mb_resize',
+        'mb_win_shade_rollup',
+        'mb_win_shade_rolldown'
     }
     local mb_specified = {false, false, false, false, false}
     local mb
@@ -832,12 +831,12 @@ local function validate_mb_bindings()
     for _, action_mb in ipairs(action_mbs) do
         mb = _private[action_mb]
         if mb then
-            assert(mb >= 1 and mb <= 5, "Invalid mouse button specified!")
+            assert(mb >= 1 and mb <= 5, 'Invalid mouse button specified!')
             mb_conflict_test = mb_specified[mb]
             if not mb_conflict_test then
                 mb_specified[mb] = action_mb
             else
-                error(("%s and %s can not be bound to the same mouse button"):format(action_mb, mb_conflict_test))
+                error(('%s and %s can not be bound to the same mouse button'):format(action_mb, mb_conflict_test))
             end
         end
     end
@@ -845,8 +844,8 @@ end
 
 function nice.initialize(args)
     update_max_screen_dims()
-    _G.screen.connect_signal("list", update_max_screen_dims)
-    local crush = require("gears.table").crush
+    _G.screen.connect_signal('list', update_max_screen_dims)
+    local crush = require('gears.table').crush
     local table_args = {
         titlebar_items = true,
         context_menu_theme = true,
@@ -856,7 +855,7 @@ function nice.initialize(args)
         for prop, value in pairs(args) do
             if table_args[prop] == true then
                 crush(_private[prop], value)
-            elseif prop == "titlebar_radius" then
+            elseif prop == 'titlebar_radius' then
                 value = max(3, value)
                 _private[prop] = value
             else
@@ -869,45 +868,45 @@ function nice.initialize(args)
 
     local function full(s)
         for _, c in pairs(s.clients) do
-            if #s.tiled_clients >= 0 and (c.floating or c.first_tag.layout.name == "floating") then
-                awful.titlebar.show(c, "top")
+            if #s.tiled_clients >= 0 and (c.floating or c.first_tag.layout.name == 'floating') then
+                awful.titlebar.show(c, 'top')
                 c.shape = function(cr, w, h)
                     gears.shape.rectangle(cr, w, h)
                 end
             elseif #s.tiled_clients == 1 and c.fullscreen == true then
-                awful.titlebar.show(c, "top")
+                awful.titlebar.show(c, 'top')
                 c.shape = function(cr, w, h)
                     gears.shape.rectangle(cr, w, h)
                 end
             elseif #s.tiled_clients >= 1 and c.fullscreen == true then
-                awful.titlebar.show(c, "top")
+                awful.titlebar.show(c, 'top')
                 c.shape = function(cr, w, h)
                     gears.shape.rectangle(cr, w, h)
                 end
             elseif #s.tiled_clients >= 1 and c.maximized == true then
                 if c.maximized then
-                    awful.titlebar.show(c, "top")
+                    awful.titlebar.show(c, 'top')
                     c.shape = function(cr, w, h)
                         gears.shape.rectangle(cr, w, h)
                     end
                 end
-            elseif #s.tiled_clients == 1 and c.first_tag.layout.name == "dwindle" then
-                awful.titlebar.hide(c, "top")
+            elseif #s.tiled_clients == 1 and c.first_tag.layout.name == 'dwindle' then
+                awful.titlebar.hide(c, 'top')
                 c.shape = function(cr, w, h)
                     gears.shape.rectangle(cr, w, h)
                 end
-            elseif #s.tiled_clients > 1 and c.first_tag.layout.name == "dwindle" then
-                awful.titlebar.show(c, "top")
+            elseif #s.tiled_clients > 1 and c.first_tag.layout.name == 'dwindle' then
+                awful.titlebar.show(c, 'top')
                 c.shape = function(cr, w, h)
                     gears.shape.rectangle(cr, w, h)
                 end
-            elseif #s.tiled_clients == 1 and c.first_tag.layout.name == "tile" then
-                awful.titlebar.hide(c, "top")
+            elseif #s.tiled_clients == 1 and c.first_tag.layout.name == 'tile' then
+                awful.titlebar.hide(c, 'top')
                 c.shape = function(cr, w, h)
                     gears.shape.rectangle(cr, w, h)
                 end
-            elseif #s.tiled_clients > 1 and c.first_tag.layout.name == "tile" then
-                awful.titlebar.show(c, "top")
+            elseif #s.tiled_clients > 1 and c.first_tag.layout.name == 'tile' then
+                awful.titlebar.show(c, 'top')
                 c.shape = function(cr, w, h)
                     gears.shape.rectangle(cr, w, h)
                 end
@@ -919,17 +918,17 @@ function nice.initialize(args)
         for _, c in pairs(s.clients) do
             c.titlebars_enabled = c.titlebars_enabled or true
             if (not c.titlebars_enabled) or c.requests_no_titlebar then
-                awful.titlebar.hide(c, "top")
+                awful.titlebar.hide(c, 'top')
                 c.shape = function(cr, w, h)
                     gears.shape.rectangle(cr, w, h)
                 end
-            elseif (c.floating or c.first_tag.layout.name == "floating") then
-                awful.titlebar.show(c, "top")
+            elseif (c.floating or c.first_tag.layout.name == 'floating') then
+                awful.titlebar.show(c, 'top')
                 c.shape = function(cr, w, h)
                     gears.shape.rectangle(cr, w, h)
                 end
             else
-                awful.titlebar.hide(c, "top")
+                awful.titlebar.hide(c, 'top')
                 c.shape = function(cr, w, h)
                     gears.shape.rectangle(cr, w, h)
                 end
@@ -939,7 +938,7 @@ function nice.initialize(args)
 
     local function none(s)
         for _, c in pairs(s.clients) do
-            awful.titlebar.hide(c, "top")
+            awful.titlebar.hide(c, 'top')
             c.shape = function(cr, w, h)
                 gears.shape.rectangle(cr, w, h)
             end
@@ -947,10 +946,10 @@ function nice.initialize(args)
     end
 
     _G.client.connect_signal(
-        "request::titlebars",
+        'request::titlebars',
         function(c)
             if c.requests_no_titlebar then
-                awful.titlebar.hide(c, "top")
+                awful.titlebar.hide(c, 'top')
                 return
             end
             -- Callback
@@ -962,7 +961,7 @@ function nice.initialize(args)
                             untransparant(get_dominant_color(c) or _private.context_menu_theme.bg_normal)
                         set_color_rule(c, c._nice_base_color)
                         _private.add_window_decorations(c)
-                        c:disconnect_signal("request::activate", c._cb_add_window_decorations)
+                        c:disconnect_signal('request::activate', c._cb_add_window_decorations)
                     end
                 )
             end -- _cb_add_window_decorations
@@ -977,7 +976,7 @@ function nice.initialize(args)
                 c._nice_base_color = _private.titlebar_color
                 _private.add_window_decorations(c)
                 -- Connect a signal to determine the client color and then re-decorate it
-                c:connect_signal("request::activate", c._cb_add_window_decorations)
+                c:connect_signal('request::activate', c._cb_add_window_decorations)
             end
             -- Shape the client
             c.shape =
@@ -991,11 +990,11 @@ function nice.initialize(args)
     )
 
     _G.screen.connect_signal(
-        "arrange",
+        'arrange',
         function(s)
-            if draw_mode == "full" then
+            if draw_mode == 'full' then
                 full(s)
-            elseif draw_mode == "none" then
+            elseif draw_mode == 'none' then
                 none(s)
             else
                 fast(s)
@@ -1005,32 +1004,32 @@ function nice.initialize(args)
 end
 
 _G.client.connect_signal(
-    "property::floating",
+    'property::floating',
     function(c)
         if c.floating then
             awful.placement.centered(c)
         end
         if c.titlebars_enabled and not c.requests_no_titlebar then
-            awful.titlebar.show(c, "top")
+            awful.titlebar.show(c, 'top')
         else
-            awful.titlebar.hide(c, "top")
+            awful.titlebar.hide(c, 'top')
         end
     end
 )
 
 -- Show the titlebar if it's not maximized layout or floating layout
 _G.tag.connect_signal(
-    "property::layout",
+    'property::layout',
     function(tag)
         local clients = tag:clients()
         for _, c in pairs(clients) do
             if
-                (c.first_tag.layout.name ~= "max" and c.first_tag.layout.name ~= "floating") and
+                (c.first_tag.layout.name ~= 'max' and c.first_tag.layout.name ~= 'floating') and
                     not c.requests_no_titlebar
              then
-                awful.titlebar.show(c, "top")
+                awful.titlebar.show(c, 'top')
             else
-                awful.titlebar.hide(c, "top")
+                awful.titlebar.hide(c, 'top')
             end
         end
     end

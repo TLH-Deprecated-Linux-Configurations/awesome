@@ -399,7 +399,7 @@ local globalKeys =
     awful.key({modkey}, 'u', awful.client.urgent.jumpto, {description = 'jump to urgent client', group = 'Client'}),
     awful.key(
         {modkey},
-        config.toggleFocus,
+        'Tab',
         function()
             awful.client.focus.history.previous()
             if _G.client.focus then
@@ -734,7 +734,7 @@ local globalKeys =
     -- keys for keyboards without xf86 keys
     awful.key(
         {modkey},
-        config.toggleMusic,
+        't',
         function()
             print('toggeling music')
             awful.spawn('playerctl play-pause')
@@ -745,7 +745,7 @@ local globalKeys =
 
     awful.key(
         {modkey},
-        config.prevMusic,
+        'k',
         function()
             print('Previous song')
             awful.spawn('playerctl previous')
@@ -756,7 +756,7 @@ local globalKeys =
 
     awful.key(
         {modkey},
-        config.nextMusic,
+        'n',
         function()
             print('Next song')
             awful.spawn('playerctl next')
@@ -767,7 +767,7 @@ local globalKeys =
 
     awful.key(
         {},
-        config.printscreen,
+        'Print',
         function()
             print('Taking a full screenshot')
             if not send_notification_if_maim_missing() then
@@ -784,7 +784,7 @@ local globalKeys =
 
     awful.key(
         {modkey},
-        config.snapArea,
+        'Print',
         function()
             print('Taking an area screenshot')
             if not send_notification_if_maim_missing() then
@@ -801,7 +801,7 @@ local globalKeys =
 
     awful.key(
         {modkey, 'Shift'},
-        config.windowSnapArea,
+        'Print',
         function()
             print('Taking a screenshot of a window')
             if not send_notification_if_maim_missing() then
@@ -818,7 +818,7 @@ local globalKeys =
 
     awful.key(
         {modkey},
-        config.clipboard,
+        'p',
         function()
             print('Opening rofi clipboard')
             awful.spawn(apps.default.roficlipboard)

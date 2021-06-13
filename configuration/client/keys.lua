@@ -1,47 +1,64 @@
-
-require("awful.autofocus")
-local config = require("configuration.keys.mod")
+--  ______ __ __               __        __  __
+-- |      |  |__|.-----.-----.|  |_     |  |/  |.-----.--.--.-----.
+-- |   ---|  |  ||  -__|     ||   _|    |     < |  -__|  |  |__ --|
+-- |______|__|__||_____|__|__||____|    |__|\__||_____|___  |_____|
+--                                                    |_____|
+-- ########################################################################
+-- ########################################################################
+-- ########################################################################
+require('awful.autofocus')
+local config = require('configuration.keys.mod')
 local modkey = config.modKey
-
+-- ########################################################################
+-- ########################################################################
+-- ########################################################################
 local clientKeys =
-  awful.util.table.join(
-  awful.key(
-    {modkey},
-    "m",
-    function(c)
-      c.fullscreen = not c.fullscreen
-      c:raise()
-    end,
-    {description = i18n.translate("toggle fullscreen"), group = i18n.translate("client")}
-  ),
-  awful.key(
-    {modkey},
-    "t",
-    function(c)
-      c.ontop = not c.ontop
-      c.sticky = c.ontop
-      c:raise()
-    end,
-    {description = i18n.translate("toggle ontop mode"), group = i18n.translate("client")}
-  ),
-
-  awful.key(
-    {modkey},
-    "x",
-    function(c)
-      c:kill()
-    end,
-    {description = i18n.translate("close"), group = i18n.translate("client")}
-  ),
-  awful.key(
-    {modkey,},
-    "f",
-    function(c)
-      c.floating = not c.floating
-      c:raise()
-    end,
-    {description = i18n.translate("toggle floating"), group = i18n.translate("client")}
-  )
+    awful.util.table.join(
+    awful.key(
+        {modkey},
+        'm',
+        function(c)
+            c.maximized = not c.maximized
+            c:raise()
+        end,
+        {description = i18n.translate('Toggle Maximized'), group = i18n.translate('Client')}
+    ),
+    -- ########################################################################
+    -- ########################################################################
+    -- ########################################################################
+    awful.key(
+        {modkey},
+        't',
+        function(c)
+            c.ontop = not c.ontop
+            c.sticky = c.ontop
+            c:raise()
+        end,
+        {description = i18n.translate('Toggle OnTop Mode'), group = i18n.translate('Client')}
+    ),
+    -- ########################################################################
+    -- ########################################################################
+    -- ########################################################################
+    awful.key(
+        {modkey},
+        'x',
+        function(c)
+            c:kill()
+        end,
+        {description = i18n.translate('Close'), group = i18n.translate('Client')}
+    ),
+    -- ########################################################################
+    -- ########################################################################
+    -- ########################################################################
+    awful.key(
+        {modkey, 'Shift'},
+        'Space',
+        function(c)
+            c.floating = not c.floating
+            c:raise()
+        end,
+        {description = i18n.translate('Toggle Floating'), group = i18n.translate('Client')}
+    )
 )
 
 return clientKeys
