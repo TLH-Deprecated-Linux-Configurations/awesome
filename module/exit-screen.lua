@@ -25,7 +25,7 @@ local animate = require('lib.animations').createAnimObject
 local icon_size = beautiful.exit_screen_icon_size or dpi(90)
 local exit_screen_hide
 
-local text = 'Goodbye for Now'
+local text = 'Exit Menu'
 
 local user_name =
     wibox.widget {
@@ -42,13 +42,9 @@ awful.spawn.easy_async_with_shell(
     function(stdout)
         if stdout then
             -- Remove new line
-            local username = stdout:gsub('', '')
+            local username
 
-            -- Capitalize first letter of username
-            -- Comment it if you're not using your name as your username
-            username = username:sub(1, 1):upper() .. username:sub(2)
-
-            user_name:set_markup(text .. username .. '!')
+            user_name:set_markup(text)
         end
     end,
     false
@@ -148,7 +144,7 @@ end
 -- ########################################################################
 -- ########################################################################
 local bios_command = function()
-    print('Telling firmware to boot into the bios...')
+    print('Rebooting to the BIOS Menu')
     awful.spawn.with_shell('systemctl reboot --firmware-setup')
     signals.emit_module_exit_screen_hide()
 end
@@ -243,19 +239,27 @@ screen.connect_signal(
         s.exit_screen =
             wibox {
             screen = s,
-            type = 'splash',
             visible = false,
             ontop = true,
             height = screen_geometry.height,
+            maximum_height = screen_geometry.height,
+            maximum_width = screen_geometry.width,
             width = screen_geometry.width,
+            placement = awful.placement.center,
             x = screen_geometry.x,
             y = screen_geometry.y
         }
         -- ########################################################################
         -- ########################################################################
         -- ########################################################################
-        s.exit_screen.bg = beautiful.bg_normal
+        s.exit_screen.bg = beautiful.bg_normal .. '88'
         s.exit_screen.fg = beautiful.xforeground or '#FEFEFE'
+        s.exit_screen.x = s.geometry.x
+        s.exit_screen.y = s.geometry.y
+        s.exit_screen.width = s.geometry.width
+        s.exit_screen.maximum_width = s.geometry.width
+        s.exit_screen.height = s.geometry.height
+        s.exit_screen.maximum_height = s.geometry.height
         -- ########################################################################
         -- ########################################################################
         -- ########################################################################
@@ -280,11 +284,12 @@ screen.connect_signal(
                     return
                 end
 
-                -- the action center itself
                 s.exit_screen.x = s.geometry.x
                 s.exit_screen.y = s.geometry.y
                 s.exit_screen.width = s.geometry.width
+                s.exit_screen.maximum_width = s.geometry.width
                 s.exit_screen.height = s.geometry.height
+                s.exit_screen.maximum_height = s.geometry.height
             end
         )
         -- ########################################################################
@@ -292,7 +297,7 @@ screen.connect_signal(
         -- ########################################################################
         signals.connect_background_theme_changed(
             function(theme)
-                s.exit_screen.bg = theme.hue_800 .. beautiful.background_transparency
+                s.exit_screen.bg = theme.bg_normal .. '88'
             end
         )
         -- ########################################################################
@@ -343,19 +348,11 @@ screen.connect_signal(
             -- ########################################################################
             -- ########################################################################
             -- ########################################################################
-            -- Hide exit_screen in all screens to avoid duplication
+            -- It makes more sense to have both screens show the menu than just one while the other screen is normal
             for scrn in screen do
-                scrn.exit_screen.visible = false
+                scrn.exit_screen.visible = true
             end
-            -- ########################################################################
-            -- ########################################################################
-            -- ########################################################################
-            -- Then open it in the focused one
-            local exit_scrn = awful.screen.focused().exit_screen
-            exit_scrn.visible = true
 
-            exit_scrn.y = screen_geometry.y - screen_geometry.height
-            exit_scrn.opacity = 0
             -- ########################################################################
             -- ########################################################################
             -- ########################################################################
@@ -364,6 +361,7 @@ screen.connect_signal(
                 exit_scrn,
                 {
                     y = screen_geometry.y,
+                    height = screen_geometry.height,
                     opacity = 1
                 },
                 'outCubic'
@@ -378,7 +376,7 @@ screen.connect_signal(
                 print('Showing exit screen')
 
                 -- turn of the left panel so we can consume the keygrabber
-                _G.screen.primary.left_panel:HideDashboard()
+                _G.screen.left_panel:HideDashboard()
 
                 _G.exit_screen_show()
             end

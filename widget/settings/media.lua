@@ -109,7 +109,7 @@ return function()
         function(value)
             local number = tonumber(value)
             if not (number == vol_slider.value) then
-                vol_slider.update(tonumber(value) or 0)
+                vol_slider.update(tonumber(value) or 100)
             end
         end
     )

@@ -299,7 +299,7 @@ local left_panel_func = function()
         },
         wibox.widget {
             text = i18n.translate('Full settings application'),
-            font = 'Hurmit Nerd Font Mono bold12',
+            font = 'agave Nerd Font Mono Bold 12',
             widget = wibox.widget.textbox,
             align = center
         },

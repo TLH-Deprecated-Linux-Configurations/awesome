@@ -8,7 +8,7 @@ local card = require('lib.card')
 local HOME = os.getenv('HOME')
 local PATH_TO_ICONS = HOME .. '/.config/awesome/widget/user-profile/icons/'
 
-local PATH_TO_CACHE_ICON = os.getenv('HOME') .. '/.cache/tos/user-icons/'
+local PATH_TO_CACHE_ICON = os.getenv('HOME') .. '/.cache/awesome/user-icons/'
 
 local signals = require('module.signals')
 local filehandle = require('lib.file')
@@ -28,28 +28,21 @@ local profile_imagebox =
 
 local profile_name =
     wibox.widget {
-    align = 'left',
+    align = 'right',
     valign = 'bottom',
     widget = wibox.widget.textbox
 }
 
 local distro_name =
     wibox.widget {
-    align = 'left',
-    valign = 'center',
-    widget = wibox.widget.textbox
-}
-
-local kernel_name =
-    wibox.widget {
-    align = 'left',
+    align = 'right',
     valign = 'center',
     widget = wibox.widget.textbox
 }
 
 local uptime_time =
     wibox.widget {
-    align = 'left',
+    align = 'right',
     valign = 'center',
     widget = wibox.widget.textbox
 }
@@ -58,7 +51,7 @@ local function init()
     -- get the username
     signals.connect_username(
         function(name)
-            profile_name.markup = '<span font="SFNS Display Bold 24">' .. name .. '</span>'
+            profile_name.markup = '<span font="agave Nerd Font Mono Bold 24">' .. name .. '</span>'
         end
     )
 
@@ -70,23 +63,13 @@ local function init()
 
     signals.connect_distro(
         function(distroname)
-            distro_name.markup = '<span font="SFNS Display Regular 12">' .. distroname .. '</span>'
+            distro_name.markup = '<span font="agave Nerd Font Mono Bold  16">' .. distroname .. '</span>'
         end
     )
 
     signals.connect_uptime(
         function(time)
-            uptime_time.markup = '<span font="SFNS Display Regular 10">' .. time .. '</span>'
-        end
-    )
-
-    -- Run once on startup or login
-    awful.spawn.easy_async_with_shell(
-        "uname -r | cut -d '-' -f 1,2",
-        function(out)
-            local kernel = out:gsub('%\n', '')
-            kernel_name.markup = '<span font="SFNS Display Regular 12">Kernel: ' .. kernel .. '</span>'
-            signals.emit_kernel(kernel)
+            uptime_time.markup = '<span font="agave Nerd Font Mono Bold  8">' .. time .. '</span>'
         end
     )
 end
@@ -99,7 +82,7 @@ local body =
         layout = wibox.layout.align.horizontal,
         {
             profile_imagebox,
-            margins = dpi(3),
+            margins = dpi(0),
             widget = wibox.container.margin
         },
         {
@@ -107,14 +90,10 @@ local body =
             layout = wibox.layout.fixed.vertical,
             {
                 wibox.container.margin(profile_name, dpi(5)),
-                layout = wibox.layout.fixed.horizontal
-            },
-            {
-                wibox.container.margin(distro_name, dpi(5)),
                 layout = wibox.layout.fixed.vertical
             },
             {
-                wibox.container.margin(kernel_name, dpi(5)),
+                wibox.container.margin(distro_name, dpi(5)),
                 layout = wibox.layout.fixed.vertical
             },
             {
