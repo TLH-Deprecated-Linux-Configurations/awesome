@@ -518,7 +518,7 @@ return function()
     }
 
     local function render_wallpaper_mode()
-        changewall.visible = true
+        changewall.visible = false
         screenLayoutBtn.visible = false
         -- do an asynchronous render of all wallpapers
         timer:start()
@@ -574,7 +574,7 @@ return function()
         awful.spawn.easy_async_with_shell(
             'brightness -g',
             function(o)
-                brightness:set_value(math.floor(tonumber(o)))
+                brightness:set_value(math.floor(tonumber(255)))
             end
         )
         if Display_Mode == WALLPAPER_MODE then

@@ -214,12 +214,6 @@ return function()
             'screen_timeout'
         ),
         create_checkbox(
-            i18n.translate('Disable Desktop'),
-            i18n.translate("When enabled we don't draw icons or anything on the desktop"),
-            general['disable_desktop'] == '1',
-            'disable_desktop'
-        ),
-        create_checkbox(
             i18n.translate('Weak Hardware'),
             i18n.translate("Disable a lot of the 'nice' features in order to reduce hardware consumption"),
             general['weak_hardware'] == '1',
@@ -241,27 +235,6 @@ return function()
 
     local multi_option_widget =
         wibox.widget {
-        create_multi_option_array(
-            i18n.translate('Tagbar anchor location'),
-            i18n.translate('The location where you want the tagbar to appear (default bottom)'),
-            {'bottom', 'right', 'left'},
-            general['tag_bar_anchor'] or 'bottom',
-            'tag_bar_anchor'
-        ),
-        create_multi_option_array(
-            i18n.translate('Tagbar bar draw location'),
-            i18n.translate("Draw the tagbar either on all screens, the main screen or don't draw it at all"),
-            {'all', 'main', 'none'},
-            general['tag_bar_draw'] or 'all',
-            'tag_bar_draw'
-        ),
-        create_multi_option_array(
-            i18n.translate('Topbar draw location'),
-            i18n.translate("Draw the topbar either on all screens, the main screen or don't draw it at all"),
-            {'all', 'main', 'none'},
-            general['top_bar_draw'] or 'all',
-            'top_bar_draw'
-        ),
         create_multi_option_array(
             i18n.translate('Window screenshot mode'),
             i18n.translate(

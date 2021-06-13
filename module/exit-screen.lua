@@ -358,7 +358,7 @@ screen.connect_signal(
             -- ########################################################################
             animate(
                 _G.anim_speed,
-                exit_scrn,
+                s.exit_screen,
                 {
                     y = screen_geometry.y,
                     height = screen_geometry.height,

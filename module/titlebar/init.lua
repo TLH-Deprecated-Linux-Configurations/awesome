@@ -135,24 +135,24 @@ _private.titlebar_radius = dpi(9)
 _private.titlebar_color = '#17191e'
 _private.titlebar_margin_left = 0
 _private.titlebar_margin_right = 0
-_private.titlebar_font = 'Hurmit Nerd Font Mono bold 11'
+_private.titlebar_font = beautiful.font .. ' 11'
 _private.titlebar_items = {
     left = {'floating', 'ontop', 'sticky'},
     middle = 'title',
     right = {'minimize', 'maximize', 'close'}
 }
 _private.context_menu_theme = {
-    bg_focus = beautiful.primary.hue_300,
+    bg_focus = beautiful.xcolor5,
     bg_normal = '#00000044',
     border_color = '#00000075',
     border_width = 20,
     --fg_focus = "#fefefa",
     --fg_normal = "#fefefa",
-    font = 'Hurmit Nerd Font Mono bold  11',
+    font = 'agave Nerd Font Mono Bold  11',
     height = dpi(45),
     width = dpi(450)
 }
-_private.no_titlebar_maximized = true
+_private.no_titlebar_maximized = false
 _private.mb_move = nice.MB_LEFT
 _private.mb_contextmenu = nice.MB_RIGHT
 _private.mb_resize = nice.MB_MIDDLE
@@ -197,7 +197,7 @@ table.save = t.save
 table.load = t.load
 
 -- Load the color rules or create an empty table if there aren't any
-local config_dir = os.getenv('HOME') .. '/.cache/electric-tantra'
+local config_dir = os.getenv('HOME') .. '/.cache/awesome'
 local color_rules_filename = 'color_rules'
 local color_rules_filepath = config_dir .. '/titlebar/' .. color_rules_filename
 _private.color_rules = table.load(color_rules_filepath) or {}
@@ -495,7 +495,7 @@ local function get_titlebar_mouse_bindings(c)
                     end
                 )
                 add_item(
-                    'Nevermind...',
+                    'Cancel',
                     function()
                     end
                 )

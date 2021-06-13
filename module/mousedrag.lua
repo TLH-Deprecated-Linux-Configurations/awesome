@@ -103,28 +103,7 @@ local function collides(icon, computation)
 
     return true
 end
--- ########################################################################
--- ########################################################################
--- ########################################################################
--- this function tries to find all desktop icons that are under the current selection
-local function find_colliding_icons(computation)
-    local desktop_icons = _G.desktop_icons or {}
-    if #desktop_icons > 0 then
-        for _, icon in ipairs(desktop_icons) do
-            if collides(icon, computation) then
-                if not (icon.ontop) then
-                    icon.hover()
-                end
-            else
-                -- optimization to reduce rendering
-                if icon.ontop then
-                    icon.unhover()
-                end
-            end
-        end
-    end
-end
--- ########################################################################
+--#############################################################
 -- ########################################################################
 -- ########################################################################
 local time_delay = 1 / hardware.getDisplayFrequency()
