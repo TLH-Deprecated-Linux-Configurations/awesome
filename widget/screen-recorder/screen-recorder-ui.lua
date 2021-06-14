@@ -198,7 +198,7 @@ local screen_rec_back_txt =
     wibox.widget {
     {
         text = i18n.translate('Back'),
-        font = 'Hurmit Nerd Font Mono bold16',
+        font = 'agave Nerd Font Mono Bold  16',
         align = 'left',
         valign = 'center',
         widget = wibox.widget.textbox
@@ -211,7 +211,7 @@ local screen_rec_res_txt =
     wibox.widget {
     {
         text = i18n.translate('Resolution'),
-        font = 'Hurmit Nerd Font Mono bold16',
+        font = 'agave Nerd Font Mono Bold  16',
         align = 'left',
         valign = 'center',
         widget = wibox.widget.textbox
@@ -227,7 +227,7 @@ local screen_rec_res_txtbox =
             {
                 id = 'res_tbox',
                 markup = '<span foreground="#FFFFFF66">' .. '1920x1080' .. '</span>',
-                font = 'Hurmit Nerd Font Mono bold16',
+                font = 'agave Nerd Font Mono Bold  16',
                 align = 'left',
                 valign = 'center',
                 widget = wibox.widget.textbox
@@ -250,7 +250,7 @@ local screen_rec_fps_txt =
     wibox.widget {
     {
         text = i18n.translate('FPS'),
-        font = 'Hurmit Nerd Font Mono bold16',
+        font = 'agave Nerd Font Mono Bold  16',
         align = 'left',
         valign = 'center',
         widget = wibox.widget.textbox
@@ -266,7 +266,7 @@ local screen_rec_fps_txtbox =
             {
                 id = 'fps_tbox',
                 markup = '<span foreground="#FFFFFF66">' .. '30' .. '</span>',
-                font = 'Hurmit Nerd Font Mono bold16',
+                font = 'agave Nerd Font Mono Bold  16',
                 align = 'left',
                 valign = 'center',
                 widget = wibox.widget.textbox
@@ -289,7 +289,7 @@ local screen_rec_offset_txt =
     wibox.widget {
     {
         text = i18n.translate('Offset'),
-        font = 'Hurmit Nerd Font Mono bold16',
+        font = 'agave Nerd Font Mono Bold  16',
         align = 'left',
         valign = 'center',
         widget = wibox.widget.textbox
@@ -305,7 +305,7 @@ local screen_rec_offset_txtbox =
             {
                 id = 'offset_tbox',
                 markup = '<span foreground="#FFFFFF66">' .. '0,0' .. '</span>',
-                font = 'Hurmit Nerd Font Mono bold16',
+                font = 'agave Nerd Font Mono Bold  16',
                 ellipsize = 'start',
                 align = 'left',
                 valign = 'center',

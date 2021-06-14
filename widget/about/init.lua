@@ -228,7 +228,7 @@ aboutPage:setup {
         browserOpen,
         wibox.widget {
             text = config.aboutText,
-            font = 'Hurmit Nerd Font Mono bold10',
+            font = 'agave Nerd Font Mono Bold  10',
             align = 'center',
             widget = wibox.widget.textbox
         },

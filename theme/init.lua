@@ -1,8 +1,12 @@
+--  _______ __
+-- |_     _|  |--.-----.--------.-----.
+--   |   | |     |  -__|        |  -__|
+--   |___| |__|__|_____|__|__|__|_____|
 
-local gtable = require("gears.table")
-local default_theme = require("theme.default-theme")
+local gtable = require('gears.table')
+local default_theme = require('theme.default-theme')
 -- PICK THEME HERE
-local theme = require("theme.vice-material")
+local theme = require('theme.vice-material')
 
 local final_theme = {}
 gtable.crush(final_theme, default_theme.theme)

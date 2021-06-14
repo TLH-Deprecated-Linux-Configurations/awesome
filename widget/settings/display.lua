@@ -32,7 +32,7 @@ local settings_height = dpi(900)
 local tempDisplayDir = filehandle.mktempdir()
 local monitorScaledImage = ''
 
-local active_pallet = beautiful.primary
+local active_pallet = beautiful.xcolor4
 
 signals.connect_primary_theme_changed(
     function(pallete)

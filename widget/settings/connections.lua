@@ -38,7 +38,7 @@ end
 local qr_code_image = ''
 local bIsShowingNetworkTab = true
 
-local active_pallet = beautiful.primary
+local active_pallet = beautiful.xcolor4
 
 signals.connect_primary_theme_changed(
     function(pallete)
@@ -301,7 +301,7 @@ return function()
         wibox.widget {
             widget = wibox.widget.textbox,
             text = i18n.translate('Network list'),
-            font = 'Hurmit Nerd Font Mono bold24'
+            font = 'agave Nerd Font Mono Bold  24'
         },
         dpi(20),
         0,

@@ -5,7 +5,8 @@
 
 -- ########################################################################
 -- ########################################################################
--- ########################################################################-- This module listens for events and stores then
+-- ########################################################################
+-- This module listens for events and stores then
 -- This makes certain data persistent
 
 local signals = require('module.signals')

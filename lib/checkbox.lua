@@ -19,7 +19,7 @@ local gears = require('gears')
 local signals = require('module.signals')
 local dpi = beautiful.xresources.apply_dpi
 
-local theme = beautiful.primary
+local theme = beautiful.xcolor4
 
 --- Create a new checkbox widget
 -- @tparam number size The height of the checkbox

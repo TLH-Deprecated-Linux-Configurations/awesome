@@ -71,7 +71,7 @@ button {
 
 
 entry {
-	font:            				"Hurmit Nerd Font Mono bold 12";
+	font:            				"agave Nerd Font Mono Bold   12";
 	background-color:               @background;
 	placeholder-color:          	@foreground;
 	placeholder:                	"Global Search";
@@ -118,7 +118,7 @@ element-icon {
 }
 
 element-text {
-	font:                      		"Hurmit Nerd Font Mono bold 11";
+	font:                      		"agave Nerd Font Mono Bold   11";
 	expand:                        	true;
 	horizontal-align:              	0.0;
 	vertical-align: 				0.5;

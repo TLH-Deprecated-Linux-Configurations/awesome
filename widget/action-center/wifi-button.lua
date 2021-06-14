@@ -1,3 +1,8 @@
+--            __   ___ __      __           __   __
+-- .--.--.--.|__|.'  _|__|    |  |--.--.--.|  |_|  |_.-----.-----.
+-- |  |  |  ||  ||   _|  |    |  _  |  |  ||   _|   _|  _  |     |
+-- |________||__||__| |__|    |_____|_____||____|____|_____|__|__|
+
 local wibox = require('wibox')
 local gears = require('gears')
 local mat_list_item = require('widget.material.list-item')
@@ -59,26 +64,32 @@ signals.connect_wifi_status(
         wifi_button.update(active)
     end
 )
-
+-- ########################################################################
+-- ########################################################################
+-- ########################################################################
 local settingsName =
     wibox.widget {
     text = i18n.translate('Wireless Connection'),
-    font = 'Hurmit Nerd Font Mono bold10',
+    font = 'agave Nerd Font Mono Bold  10',
     align = 'left',
     widget = wibox.widget.textbox
 }
-
+-- ########################################################################
+-- ########################################################################
+-- ########################################################################
 local content =
     wibox.widget {
     settingsName,
     wibox.container.margin(wifi_button, 0, 0, dpi(5), dpi(5)),
-    bg = '#ffffff20',
+    bg = '#8b9scbe20',
     shape = gears.shape.rounded_rect,
     widget = wibox.container.background(settingsName),
     layout = wibox.layout.ratio.horizontal
 }
 content:set_ratio(1, .85)
-
+-- ########################################################################
+-- ########################################################################
+-- ########################################################################
 local wifiButton =
     wibox.widget {
     wibox.widget {

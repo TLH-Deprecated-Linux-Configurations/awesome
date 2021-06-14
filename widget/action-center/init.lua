@@ -1,82 +1,89 @@
+--  _______        __   __                   ______               __
+-- |   _   |.----.|  |_|__|.-----.-----.    |      |.-----.-----.|  |_.-----.----.
+-- |       ||  __||   _|  ||  _  |     |    |   ---||  -__|     ||   _|  -__|   _|
+-- |___|___||____||____|__||_____|__|__|    |______||_____|__|__||____|_____|__|
 
-local wibox = require("wibox")
-local gears = require("gears")
-local beautiful = require("beautiful")
+-- ########################################################################
+-- ########################################################################
+-- ########################################################################
+local wibox = require('wibox')
+local gears = require('gears')
+local beautiful = require('beautiful')
 local dpi = beautiful.xresources.apply_dpi
 
 local gap = 1
 
-local mat_list_item = require("widget.material.list-item")
+local mat_list_item = require('widget.material.list-item')
 
 local barColor = beautiful.bg_modal
-local wifibutton = require("widget.action-center.wifi-button")
-local bluebutton = require("widget.action-center.bluetooth-button")
-local comptonbutton = require("widget.action-center.compositor-button")
-local comptonBackendbutton = require("widget.action-center.compositor-backend-button")
+local wifibutton = require('widget.action-center.wifi-button')
+local bluebutton = require('widget.action-center.bluetooth-button')
+local comptonbutton = require('widget.action-center.compositor-button')
+local comptonBackendbutton = require('widget.action-center.compositor-backend-button')
 -- ########################################################################
 -- ########################################################################
 -- ########################################################################
 local widget =
-  wibox.widget {
-  spacing = gap,
-  -- Wireless Connection
-  wibox.widget {
     wibox.widget {
-      wifibutton,
-      bg = barColor,
-      shape = function(cr, width, height)
-        gears.shape.partially_rounded_rect(cr, width, height, true, true, false, false, 12)
-      end,
-      widget = wibox.container.background
-    },
-    widget = mat_list_item
-  },
-  -- ########################################################################
--- ########################################################################
--- ########################################################################
-  -- Bluetooth Connection
-  wibox.widget {
+    spacing = gap,
+    -- Wireless Connection
     wibox.widget {
-      bluebutton,
-      bg = barColor,
-      shape = function(cr, width, height)
-        gears.shape.partially_rounded_rect(cr, width, height, false, false, false, false, 12)
-      end,
-      widget = wibox.container.background
+        wibox.widget {
+            wifibutton,
+            bg = barColor,
+            shape = function(cr, width, height)
+                gears.shape.partially_rounded_rect(cr, width, height, true, true, false, false, 12)
+            end,
+            widget = wibox.container.background
+        },
+        widget = mat_list_item
     },
-    widget = mat_list_item
-  },
--- ########################################################################
--- ########################################################################
--- ########################################################################
-  -- Compositor Toggle
-  wibox.widget {
+    -- ########################################################################
+    -- ########################################################################
+    -- ########################################################################
+    -- Bluetooth Connection
     wibox.widget {
-      comptonbutton,
-      bg = barColor,
-      shape = function(cr, width, height)
-        gears.shape.partially_rounded_rect(cr, width, height, false, false, false, false, 12)
-      end,
-      widget = wibox.container.background
+        wibox.widget {
+            bluebutton,
+            bg = barColor,
+            shape = function(cr, width, height)
+                gears.shape.partially_rounded_rect(cr, width, height, false, false, false, false, 12)
+            end,
+            widget = wibox.container.background
+        },
+        widget = mat_list_item
     },
-    widget = mat_list_item
-  },
-  -- ########################################################################
--- ########################################################################
--- ########################################################################
-  -- Compositor Backend Toggle
-  layout = wibox.layout.fixed.vertical,
-  wibox.widget {
+    -- ########################################################################
+    -- ########################################################################
+    -- ########################################################################
+    -- Compositor Toggle
     wibox.widget {
-      comptonBackendbutton,
-      bg = barColor,
-      shape = function(cr, width, height)
-        gears.shape.partially_rounded_rect(cr, width, height, false, false, true, true, 12)
-      end,
-      widget = wibox.container.background
+        wibox.widget {
+            comptonbutton,
+            bg = barColor,
+            shape = function(cr, width, height)
+                gears.shape.partially_rounded_rect(cr, width, height, false, false, false, false, 12)
+            end,
+            widget = wibox.container.background
+        },
+        widget = mat_list_item
     },
-    widget = mat_list_item
-  }
+    -- ########################################################################
+    -- ########################################################################
+    -- ########################################################################
+    -- Compositor Backend Toggle
+    layout = wibox.layout.fixed.vertical,
+    wibox.widget {
+        wibox.widget {
+            comptonBackendbutton,
+            bg = barColor,
+            shape = function(cr, width, height)
+                gears.shape.partially_rounded_rect(cr, width, height, false, false, true, true, 12)
+            end,
+            widget = wibox.container.background
+        },
+        widget = mat_list_item
+    }
 }
 -- ########################################################################
 -- ########################################################################

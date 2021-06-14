@@ -448,7 +448,7 @@ function _M.preview()
                 -- Overlays
                 cro:scale(1 / sx, 1 / sy)
                 cro:translate(-tx, -ty)
-                local r, g, b = gears.color.parse_color(beautiful.primary.hue_500)
+                local r, g, b = gears.color.parse_color(beautiful.xcolor4)
                 cro:set_source_rgba(r, g, b, overlay)
                 cro:rectangle(tx, ty, sx * cg.width, sy * cg.height)
                 cro:fill()

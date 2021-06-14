@@ -4,7 +4,7 @@ configuration {
 
 	display-window:  "Window";
 	show-icons:      true;
-	font: "Hurmit Nerd Font Mono bold 15";
+	font: "agave Nerd Font Mono Bold   15";
     fullscreen: false;
     window-thumbnail: true;
     threads: 0;

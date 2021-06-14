@@ -50,7 +50,7 @@ naughty.config.icon_dirs = {
 
 naughty.config.icon_formats = {'svg', 'png', 'jpg', 'gif'}
 
-local theme = beautiful.primary
+local theme = beautiful.xcolor4
 
 signals.connect_primary_theme_changed(
     function(new_theme)

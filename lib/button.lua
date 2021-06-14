@@ -31,9 +31,9 @@ local dpi = beautiful.xresources.apply_dpi
 -- local button = lib.button(function()
 --    print("Clicked")
 -- end, require("theme.mat-colors").red)
-return function(body, callback, pallet, bNo_center, enter_callback, leave_callback, no_update)
+return function(body, callback, bNo_center, enter_callback, leave_callback, no_update)
     local button = wibox.container.background()
-    local color = pallet or beautiful.primary
+    local color = beautiful.xcolor4
     local bIsHovered = false
     button.bg = color.hue_600
     button.shape = rounded()

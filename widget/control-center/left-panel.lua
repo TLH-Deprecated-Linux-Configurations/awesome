@@ -269,7 +269,7 @@ local left_panel_func = function()
         },
         wibox.widget {
             text = i18n.translate('Change Application Scaling'),
-            font = 'Hurmit Nerd Font Mono bold12',
+            font = 'agave Nerd Font Mono Bold  12',
             widget = wibox.widget.textbox,
             align = center
         },
@@ -330,7 +330,7 @@ local left_panel_func = function()
         },
         wibox.widget {
             text = i18n.translate('Connect to a wireless network'),
-            font = 'Hurmit Nerd Font Mono bold12',
+            font = 'agave Nerd Font Mono Bold  12',
             widget = wibox.widget.textbox,
             align = center
         },

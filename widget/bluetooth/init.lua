@@ -1,6 +1,7 @@
 local wibox = require('wibox')
 local clickable_container = require('widget.material.clickable-container')
 local gears = require('gears')
+local beautiful = require('beautiful')
 local dpi = require('beautiful').xresources.apply_dpi
 local config = require('config')
 local signals = require('module.signals')
@@ -56,8 +57,8 @@ awful.tooltip(
 
 -- To use colors from beautiful theme put
 -- following lines in rc.lua before require("battery"):
---beautiful.tooltip_fg = beautiful.fg_normal
---beautiful.tooltip_bg = beautiful.bg_normal
+beautiful.tooltip_fg = beautiful.fg_normal
+beautiful.tooltip_bg = beautiful.bg_normal
 
 delayed_timer(
     config.bluetooth_poll,

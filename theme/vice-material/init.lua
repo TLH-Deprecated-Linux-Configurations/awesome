@@ -1,3 +1,16 @@
+--  ___ ___ __
+-- |   |   |__|.----.-----.
+-- |   |   |  ||  __|  -__|
+--  \_____/|__||____|_____|
+
+--  _______         __               __         __      ______         __
+-- |   |   |.---.-.|  |_.-----.----.|__|.---.-.|  |    |      |.-----.|  |.-----.----.-----.
+-- |       ||  _  ||   _|  -__|   _||  ||  _  ||  |    |   ---||  _  ||  ||  _  |   _|__ --|
+-- |__|_|__||___._||____|_____|__|  |__||___._||__|    |______||_____||__||_____|__| |_____|
+-- ########################################################################
+-- ########################################################################
+-- ########################################################################
+
 local filesystem = require('gears.filesystem')
 local mat_colors = require('theme.mat-colors')
 local theme_dir = filesystem.get_configuration_dir() .. '/theme'
@@ -10,7 +23,9 @@ local function color(value)
     end
     return '#' .. value
 end
-
+-- ########################################################################
+-- ########################################################################
+-- ########################################################################
 local function loadtheme(standard, override, prefix)
     standard['hue_50'] = color(override[prefix .. 'hue_50']) or standard['hue_50']
     standard['hue_100'] = color(override[prefix .. 'hue_100']) or standard['hue_100']
@@ -28,7 +43,9 @@ local function loadtheme(standard, override, prefix)
     standard['hue_A700'] = color(override[prefix .. 'hue_A700']) or standard['hue_A700']
     return standard
 end
-
+-- ########################################################################
+-- ########################################################################
+-- ########################################################################
 local theme = {}
 theme.icons = theme_dir .. '/icons/'
 theme.font = 'agave Nerd Font Mono Bold'
@@ -36,11 +53,13 @@ theme.taglist_font = 'awesomewm-font 22'
 theme.taglist_spacing = 1
 theme.useless_gap = dpi(4)
 theme.titlebars_enabled = true
-
+-- ########################################################################
+-- ########################################################################
+-- ########################################################################
 -- Colors Pallets
 
 -- Primary
-theme.primary = mat_colors[config['primary']] or mat_colors.purple
+theme.primary = mat_colors.purple
 --theme.primary.hue_500 = '#8AB4F8' --#003f6b
 
 -- Accent
@@ -49,6 +68,9 @@ theme.accent = mat_colors[config['accent']] or mat_colors.hue_purple
 -- Background
 theme.background = mat_colors[config['background']] or mat_colors.blue_grey
 
+-- ########################################################################
+-- ########################################################################
+-- ########################################################################
 theme.primary = loadtheme(theme.primary, config, 'primary_')
 theme.accent = loadtheme(theme.accent, config, 'accent_')
 theme.background = loadtheme(theme.background, config, 'background_')
@@ -68,6 +90,9 @@ end
 local awesome_overrides = function(_)
     --
 end
+-- ########################################################################
+-- ########################################################################
+-- ########################################################################
 return {
     theme = theme,
     awesome_overrides = awesome_overrides

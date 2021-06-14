@@ -1,30 +1,30 @@
-local wibox = require("wibox")
-local beautiful = require("beautiful")
+local wibox = require('wibox')
+local beautiful = require('beautiful')
 local dpi = beautiful.xresources.apply_dpi
-local card = require("lib.card")
+local card = require('lib.card')
 
 local function build(screen)
-  local hardware_card = card("Hardware monitor")
+    local hardware_card = card('Hardware monitor')
 
-  local cpu = require("widget.cpu.cpu-meter")
-  local ram = require("widget.ram.ram-meter")
-  local temp = require("widget.temperature.temperature-meter")
-  local drive = require("widget.harddrive.harddrive-meter")
-  local network_up = require("widget.network.network-meter")(true, screen)
-  local network_down = require("widget.network.network-meter")(false, screen)
+    local cpu = require('widget.cpu.cpu-meter')
+    local ram = require('widget.ram.ram-meter')
+    local temp = require('widget.temperature.temperature-meter')
+    local drive = require('widget.harddrive.harddrive-meter')
+    local network_up = require('widget.network.network-meter')(true, screen)
+    local network_down = require('widget.network.network-meter')(false, screen)
 
-  local body =
-    wibox.widget {
-    cpu,
-    ram,
-    temp,
-    drive,
-    network_up,
-    network_down,
-    layout = wibox.layout.fixed.vertical
-  }
-  hardware_card.update_body(body)
-  return wibox.container.margin(hardware_card, dpi(20), dpi(20), dpi(20), dpi(20))
+    local body =
+        wibox.widget {
+        cpu,
+        ram,
+        temp,
+        drive,
+        network_up,
+        network_down,
+        layout = wibox.layout.fixed.vertical
+    }
+    hardware_card.update_body(body)
+    return wibox.container.margin(hardware_card, dpi(20), dpi(20), dpi(20), dpi(20))
 end
 
 return build

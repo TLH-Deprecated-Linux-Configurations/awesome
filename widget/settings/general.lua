@@ -20,7 +20,7 @@ local settings_width = dpi(1100)
 local settings_nw = dpi(260)
 
 local button_widgets = {}
-local primary_theme = beautiful.primary
+local primary_theme = beautiful.xcolor4
 
 signals.connect_primary_theme_changed(
     function(new_theme)

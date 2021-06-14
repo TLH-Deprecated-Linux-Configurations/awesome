@@ -56,7 +56,7 @@ return function()
     local ram_progress = wibox.widget.progressbar()
     ram_progress.max_value = 100
     ram_progress.background_color = beautiful.bg_modal .. '00'
-    ram_progress.color = beautiful.ram_bar
+    ram_progress.color = beautiful.xcolor6
     ram_progress.value = 0
     ram_progress.bar_shape = function(c, w, h)
         gears.shape.partially_rounded_rect(c, w, h, false, true, true, false, dpi(10))
@@ -65,7 +65,7 @@ return function()
     local cpu_progress = wibox.widget.progressbar()
     cpu_progress.max_value = 100
     cpu_progress.background_color = beautiful.bg_modal .. '00'
-    cpu_progress.color = beautiful.cpu_bar
+    cpu_progress.color = beautiful.xcolor1
     cpu_progress.value = 0
     cpu_progress.bar_shape = function(c, w, h)
         gears.shape.partially_rounded_rect(c, w, h, false, true, true, false, dpi(10))
@@ -74,7 +74,7 @@ return function()
     local disk_progress = wibox.widget.progressbar()
     disk_progress.max_value = 100
     disk_progress.background_color = beautiful.bg_modal .. '00'
-    disk_progress.color = beautiful.disk_bar
+    disk_progress.color = beautiful.xcolor4
     disk_progress.value = 0
     disk_progress.bar_shape = function(c, w, h)
         gears.shape.partially_rounded_rect(c, w, h, false, true, true, false, dpi(10))

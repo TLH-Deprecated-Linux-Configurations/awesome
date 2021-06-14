@@ -60,5 +60,5 @@ return {
   user = theme(dir .. "/user.svg"),
   qr_code = theme(dir .. "/qr_code.svg"),
   --png's
-  unknown = theme(dir .. "/noicon.png")
+  unknown = theme(dir .. "/noicon.svg")
 }
