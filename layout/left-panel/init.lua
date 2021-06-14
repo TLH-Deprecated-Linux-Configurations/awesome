@@ -14,7 +14,7 @@ local dpi = require('beautiful').xresources.apply_dpi
 local clickable_container = require('widget.material.clickable-container')
 
 -- Load panel rules, it will create panel for each screen
-require('layout.control-center.panel-rules')
+require('layout.left-panel.panel-rules')
 -- ########################################################################
 -- ########################################################################
 -- ########################################################################

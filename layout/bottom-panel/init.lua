@@ -100,14 +100,14 @@ local bottom_panel = function(s)
     -- ########################################################################
     -- ########################################################################
     -- ########################################################################
-    s.control_center_toggle = build_widget(require('layout.control-center'))
+    s.control_center_toggle = build_widget(require('layout.left-panel'))
 
     s.screen_rec = build_widget(require('widget.screen-recorder')())
     s.bluetooth = build_widget(show_widget_or_default('widget.bluetooth', hardware.hasBluetooth()))
     s.network = build_widget(show_widget_or_default('widget.wifi', hardware.hasWifi()))
     local layout_box = build_widget(require('widget.layoutbox')(s))
     s.battery = build_widget(show_widget_or_default('widget.battery', hardware.hasBattery(), true))
-    s.notification_center = build_widget(require('layout.notification-center'))
+    s.notification_center = build_widget(require('layout.right-panel'))
     s.about = build_widget(require('widget.about'))
     s.mytextclock = build_widget(require('widget.clock'))
     -- ########################################################################

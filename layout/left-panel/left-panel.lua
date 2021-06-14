@@ -445,9 +445,9 @@ local left_panel_func = function()
         local table_widget =
             wibox.widget {
             topSeparator,
-            require('layout.control-center.dashboard.quick-settings'),
-            require('layout.control-center.dashboard.hardware-monitor')(s),
-            require('layout.control-center.dashboard.action-center'),
+            require('layout.left-panel.dashboard.quick-settings'),
+            require('layout.left-panel.dashboard.hardware-monitor')(s),
+            require('layout.left-panel.dashboard.action-center'),
             separator,
             wibox.container.margin(network_card, dpi(20), dpi(20), dpi(20), dpi(20)),
             separator,

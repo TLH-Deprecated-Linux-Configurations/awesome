@@ -4,11 +4,11 @@ local gears = require('gears')
 
 local dpi = require('beautiful').xresources.apply_dpi
 local clickable_container = require('widget.material.clickable-container')
-local PATH_TO_ICONS = HOME .. '/.config/awesome/widget/notification-center/icons/'
+local PATH_TO_ICONS = HOME .. '/.config/awesome/layout/right-panel/icons/'
 local theme = require('theme.icons.dark-light')
 
 -- Load panel rules, it will create panel for each screen
-require('layout.notification-center.panel-rules')
+require('layout.right-panel.panel-rules')
 
 local widget =
     wibox.widget {

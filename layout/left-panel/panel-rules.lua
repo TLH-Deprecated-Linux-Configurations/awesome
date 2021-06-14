@@ -1,4 +1,4 @@
-local left_panel = require('layout.control-center.left-panel')
+local left_panel = require('layout.left-panel.left-panel')
 
 -- Create a wibox for each screen connected
 awful.screen.connect_for_each_screen(

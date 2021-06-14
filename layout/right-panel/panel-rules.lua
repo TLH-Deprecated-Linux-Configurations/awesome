@@ -1,4 +1,4 @@
-local right_panel = require('layout.notification-center.right-panel')
+local right_panel = require('layout.right-panel.right-panel')
 
 -- Create a wibox for each screen connected
 awful.screen.connect_for_each_screen(
