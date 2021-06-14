@@ -1,4 +1,11 @@
--- A basic calculator widget
+--  ______         __              __         __                   ________ __     __               __
+-- |      |.---.-.|  |.----.--.--.|  |.---.-.|  |_.-----.----.    |  |  |  |__|.--|  |.-----.-----.|  |_
+-- |   ---||  _  ||  ||  __|  |  ||  ||  _  ||   _|  _  |   _|    |  |  |  |  ||  _  ||  _  |  -__||   _|
+-- |______||___._||__||____|_____||__||___._||____|_____|__|      |________|__||_____||___  |_____||____|
+--                                                                                    |_____|
+-- ########################################################################
+-- ########################################################################
+-- ########################################################################
 -- Supports keyboard input!
 --  Just hover your cursor above the calculator widget and start typing
 --  Stop keygrabbing by leaving the calculator
@@ -12,10 +19,14 @@ local clickable_container = require('widget.material.clickable-container')
 local HOME = os.getenv('HOME')
 local widget_icon_dir = HOME .. '.config/awesome/widget/calculator/icons/'
 local theme = require('theme.icons.dark-light')
-
+-- ########################################################################
+-- ########################################################################
+-- ########################################################################
 local mouse_entered_started_keygrab = false
 local start_button_keygrab = false
-
+-- ########################################################################
+-- ########################################################################
+-- ########################################################################
 local calculator_screen =
     wibox.widget {
     {
@@ -31,9 +42,8 @@ local calculator_screen =
 }
 
 -- ########################################################################
--- Functions ##############################################################
 -- ########################################################################
-
+-- ########################################################################
 -- format integer numbers with delimiters every 3 numbers
 -- e.g. 123,456 or 12,345 or 345
 local formatInt = function(number, seperator)
@@ -59,6 +69,9 @@ local formatInt = function(number, seperator)
     end
     return sign .. out
 end
+-- ########################################################################
+-- ########################################################################
+-- ########################################################################
 -- format digits including rational numbers e.g. 12,345.0607
 local formatDigits = function(number, seperator)
     local i = 0
@@ -82,7 +95,9 @@ local formatDigits = function(number, seperator)
     end
     return sign .. out
 end
-
+-- ########################################################################
+-- ########################################################################
+-- ########################################################################
 -- perform calculations that doesn't have a signed number as a beginning
 -- format basic mathematical expressions e.g. 777,777 * 99,999.03
 -- or 123;456 ^ 2
@@ -103,7 +118,9 @@ local unsignedNumberFormat = function(calculation, seperator)
     end
     return out
 end
-
+-- ########################################################################
+-- ########################################################################
+-- ########################################################################
 -- format basic mathematical expressions e.g. 777,777 * 99,999.03
 -- or -123,456 ^ 2
 -- can have a - as the first parameter
@@ -115,7 +132,9 @@ local numberFormat = function(calculation, seperator)
     end
     return sign .. unsignedNumberFormat(calculation, seperator)
 end
-
+-- ########################################################################
+-- ########################################################################
+-- ########################################################################
 -- Evaluate
 local calculate = function()
     local calcu_screen = calculator_screen.calcu_screen
@@ -129,13 +148,17 @@ local calculate = function()
 
     local func = assert(load('return ' .. string_expression))
     local ans = tostring(func())
-
+    -- ########################################################################
+    -- ########################################################################
+    -- ########################################################################
     -- Convert -NaN to undefined
     if ans == '-nan' then
         calcu_screen:set_text('undefined')
         return
     end
-
+    -- ########################################################################
+    -- ########################################################################
+    -- ########################################################################
     -- Set the answer in textbox
     local num = numberFormat(ans, ',')
     calcu_screen:set_text(num)
@@ -147,12 +170,16 @@ local txt_on_screen = function()
 
     return screen_text == 'inf' or screen_text == 'undefined' or screen_text == 'SYNTAX ERROR' or #screen_text == 1
 end
-
+-- ########################################################################
+-- ########################################################################
+-- ########################################################################
 -- Delete the last digit in screen
 
 local delete_value = function()
     local calcu_screen = calculator_screen.calcu_screen
-
+    -- ########################################################################
+    -- ########################################################################
+    -- ########################################################################
     -- Set the screen text to 0 if conditions met
     if txt_on_screen() then
         calcu_screen:set_text('0')
@@ -161,16 +188,22 @@ local delete_value = function()
         calcu_screen:set_text(calcu_screen.text:sub(1, -2))
     end
 end
-
+-- ########################################################################
+-- ########################################################################
+-- ########################################################################
 -- Clear screen
 local clear_screen = function()
     calculator_screen.calcu_screen:set_text('0')
 end
-
+-- ########################################################################
+-- ########################################################################
+-- ########################################################################
 -- The one that filters and checks the user input to avoid errors and bugs
 local format_screen = function(value)
     local calcu_screen = calculator_screen.calcu_screen
-
+    -- ########################################################################
+    -- ########################################################################
+    -- ########################################################################
     -- If the screen has only 0
     if calcu_screen.text == '0' then
         -- Check if the button pressed sends a value of either +, -, /, *, ^, .
@@ -192,13 +225,18 @@ local format_screen = function(value)
             calcu_screen:set_text(tostring(value))
         end
     else
+        -- ########################################################################
+        -- ########################################################################
+        -- ########################################################################
         -- Don't let the user to input two or more consecutive arithmetic operators and decimals
 
         if calcu_screen.text:sub(-1):match('[%+%-%/%*%^%.]') and value:sub(-1):match('[%+%-%/%*%^%.%%]') then
             -- Get the operator from button pressed
 
             local string_eval = calcu_screen.text:sub(-1):gsub('[%+%-%/%*%^%.]', value)
-
+            -- ########################################################################
+            -- ########################################################################
+            -- ########################################################################
             -- This will prevent the user to input consecutive operators and decimals
             -- It will replace the previous operator with the value of input
             calcu_screen:set_text(calcu_screen.text:sub(1, -2))
@@ -212,7 +250,9 @@ local format_screen = function(value)
     end
     calcu_screen:set_text(numberFormat(calcu_screen.text:gsub(',', ''), ','))
 end
-
+-- ########################################################################
+-- ########################################################################
+-- ########################################################################
 -- shape up the widget
 local build_shape = function(position, radius)
     -- Position represents the position of rounded corners
@@ -244,9 +284,8 @@ local build_shape = function(position, radius)
 end
 
 -- ########################################################################
--- UI #####################################################################
 -- ########################################################################
-
+-- ########################################################################
 -- Themes widgets
 local decorate_widget = function(widget_arg, pos, rad)
     return wibox.widget {
@@ -256,7 +295,9 @@ local decorate_widget = function(widget_arg, pos, rad)
         widget = wibox.container.background
     }
 end
-
+-- ########################################################################
+-- ########################################################################
+-- ########################################################################
 -- Build a button
 local build_button_widget = function(text, rcp, rad)
     local value = text
@@ -284,7 +325,9 @@ local build_button_widget = function(text, rcp, rad)
         },
         widget = clickable_container
     }
-
+    -- ########################################################################
+    -- ########################################################################
+    -- ########################################################################
     build_button:buttons(
         gears.table.join(
             awful.button(
@@ -344,7 +387,9 @@ local kb_button_widget =
     shape = build_shape('bottom_left', beautiful.groups_radius),
     widget = wibox.container.background
 }
-
+-- ########################################################################
+-- ########################################################################
+-- ########################################################################
 local toggle_btn_keygrab = function()
     -- started running keygrab by clicking button
     if keygrab_running and not mouse_entered_started_keygrab then
@@ -354,7 +399,9 @@ local toggle_btn_keygrab = function()
         keygrab_running = false
     elseif keygrab_running then
         kb_imagebox.image = theme(widget_icon_dir .. 'kb' .. '.svg')
-
+        -- ########################################################################
+        -- ########################################################################
+        -- ########################################################################
         -- now the button gets the main attention instead of the mouse hover
         -- this happens because we clicked on the button
         awesome.emit_signal('widget::calc_start_keygrab')
@@ -366,7 +413,9 @@ local toggle_btn_keygrab = function()
         mouse_entered_started_keygrab = false
     end
 end
-
+-- ########################################################################
+-- ########################################################################
+-- ########################################################################
 local kb_button = clickable_container(kb_button_widget)
 
 kb_button:buttons(
@@ -381,7 +430,9 @@ kb_button:buttons(
         )
     )
 )
-
+-- ########################################################################
+-- ########################################################################
+-- ########################################################################
 local calcu_keygrabber =
     awful.keygrabber {
     auto_start = true,

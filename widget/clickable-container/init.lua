@@ -1,54 +1,72 @@
+--  ______ __ __        __           __     __             ______               __          __
+-- |      |  |__|.----.|  |--.---.-.|  |--.|  |.-----.    |      |.-----.-----.|  |_.---.-.|__|.-----.-----.----.
+-- |   ---|  |  ||  __||    <|  _  ||  _  ||  ||  -__|    |   ---||  _  |     ||   _|  _  ||  ||     |  -__|   _|
+-- |______|__|__||____||__|__|___._||_____||__||_____|    |______||_____|__|__||____|___._||__||__|__|_____|__|
 
-local wibox = require("wibox")
-local beautiful = require("beautiful")
+-- ########################################################################
+-- ########################################################################
+-- ########################################################################
 
+local wibox = require('wibox')
+local beautiful = require('beautiful')
+-- ########################################################################
+-- ########################################################################
+-- ########################################################################
 local function build(widget)
-	local container =
-		wibox.widget {
-		widget,
-		widget = wibox.container.background
-	}
-	local old_cursor, old_wibox
+    local container =
+        wibox.widget {
+        widget,
+        widget = wibox.container.background
+    }
+    local old_cursor, old_wibox
+    -- ########################################################################
+    -- ########################################################################
+    -- ########################################################################
+    container:connect_signal(
+        'mouse::enter',
+        function()
+            container.bg = beautiful.groups_bg
+            -- No idea how to get the wibox from this signal's arguments...
+            local w = mouse.current_wibox
+            if w then
+                old_cursor, old_wibox = w.cursor, w
+                w.cursor = 'hand1'
+            end
+        end
+    )
+    -- ########################################################################
+    -- ########################################################################
+    -- ########################################################################
+    container:connect_signal(
+        'mouse::leave',
+        function()
+            container.bg = beautiful.transparent
+            if old_wibox then
+                old_wibox.cursor = old_cursor
+                old_wibox = nil
+            end
+        end
+    )
+    -- ########################################################################
+    -- ########################################################################
+    -- ########################################################################
+    container:connect_signal(
+        'button::press',
+        function()
+            container.bg = beautiful.groups_title_bg
+        end
+    )
+    -- ########################################################################
+    -- ########################################################################
+    -- ########################################################################
+    container:connect_signal(
+        'button::release',
+        function()
+            container.bg = beautiful.groups_bg
+        end
+    )
 
-	container:connect_signal(
-		"mouse::enter",
-		function()
-			container.bg = beautiful.groups_bg
-			-- No idea how to get the wibox from this signal's arguments...
-			local w = mouse.current_wibox
-			if w then
-				old_cursor, old_wibox = w.cursor, w
-				w.cursor = "hand1"
-			end
-		end
-	)
-
-	container:connect_signal(
-		"mouse::leave",
-		function()
-			container.bg = beautiful.transparent
-			if old_wibox then
-				old_wibox.cursor = old_cursor
-				old_wibox = nil
-			end
-		end
-	)
-
-	container:connect_signal(
-		"button::press",
-		function()
-			container.bg = beautiful.groups_title_bg
-		end
-	)
-
-	container:connect_signal(
-		"button::release",
-		function()
-			container.bg = beautiful.groups_bg
-		end
-	)
-
-	return container
+    return container
 end
 
 return build

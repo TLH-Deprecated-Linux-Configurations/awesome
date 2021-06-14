@@ -164,7 +164,7 @@ local right_panel = function()
         wibox.widget {
         visible = true,
         separator,
-        require('widget.notification-center.subwidgets.dont-disturb'),
+        require('layout.notification-center.subwidgets.dont-disturb'),
         {
             expand = 'none',
             layout = wibox.layout.align.horizontal,
@@ -179,7 +179,7 @@ local right_panel = function()
             }
         },
         {
-            require('widget.notification-center.subwidgets.notif-generate'),
+            require('layout.notification-center.subwidgets.notif-generate'),
             wibox.widget({}),
             margins = dpi(15),
             widget = wibox.container.margin
@@ -332,7 +332,7 @@ local right_panel = function()
                     nil,
                     layout = wibox.layout.fixed.horizontal
                 },
-                require('widget.notification-center.subwidgets.panel-mode-switcher'),
+                require('layout.notification-center.subwidgets.panel-mode-switcher'),
                 {
                     nil,
                     layout = wibox.layout.fixed.horizontal
