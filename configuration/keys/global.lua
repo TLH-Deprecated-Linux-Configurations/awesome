@@ -201,10 +201,10 @@ local globalKeys =
         {modkey, 'Control'},
         'F4',
         function()
-            awful.spawn.easy_async_with_shell('emojipick')
+            awful.spawn.easy_async_with_shell('bin/emojipick')
         end,
         {
-            description = 'Copy Emojis to Clipboard',
+            description = 'Copy bin/emojis to Clipboard',
             group = 'Launcher'
         }
     ),

@@ -51,8 +51,9 @@ return {
         -- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
         rofiappmenu = 'bash ' ..
             HOME ..
-                '/.config/awesome/applauncher.sh ' .. screen.primary.dpi .. ' ' .. filesystem.get_configuration_dir(),
-        rofiemojimenu = 'bash ' .. HOME .. '/.config/awesome/emoji.sh ' .. screen.primary.dpi,
+                '/.config/awesome/bin/applauncher.sh ' ..
+                    screen.primary.dpi .. ' ' .. filesystem.get_configuration_dir(),
+
         -- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
         rofiwindowswitch = 'bash ' .. HOME .. '/.config/awesome/application-switch.sh' .. ' ' .. screen.primary.dpi,
         -- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -93,17 +94,17 @@ return {
     bins = {
         coverUpdate = require 'lib.extractcover'.extractalbum,
         -- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-        full_screenshot = 'sh /.config/awesome/snapshot.sh full "' .. color .. '"',
+        full_screenshot = 'sh /.config/awesome/bin/snapshot.sh full "' .. color .. '"',
         -- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-        full_blank_screenshot = 'sh ' .. HOME .. ' /.config/awesome/snapshot.sh full_blank',
+        full_blank_screenshot = 'sh ' .. HOME .. ' /.config/awesome/bin/snapshot.sh full_blank',
         -- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-        area_screenshot = 'sh ' .. HOME .. '/.config/awesome/snapshot.sh area ' .. color .. '"',
+        area_screenshot = 'sh ' .. HOME .. '/.config/awesome/bin/snapshot.sh area ' .. color .. '"',
         -- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-        area_blank_screenshot = 'sh ' .. HOME .. '/.config/awesome/snapshot.sh area_blank',
+        area_blank_screenshot = 'sh ' .. HOME .. '/.config/awesome/bin/snapshot.sh area_blank',
         -- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-        window_screenshot = 'sh ' .. HOME .. '/.config/awesome/snapshot.sh" window ' .. color .. '"',
+        window_screenshot = 'sh ' .. HOME .. '/.config/awesome/bin/snapshot.sh" window ' .. color .. '"',
         -- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-        window_blank_screenshot = 'sh ' .. HOME .. '/.config/awesome/snapshot.sh window_blank'
+        window_blank_screenshot = 'sh ' .. HOME .. '/.config/awesome/bin/snapshot.sh window_blank'
         -- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     }
 }

@@ -21,8 +21,8 @@ local config = require('config')
 local animate = require('lib.animations').createAnimObject
 local signals = require('module.signals')
 
-local height = dpi(200)
-local width = dpi(380)
+local height = dpi(320)
+local width = dpi(480)
 local theme = require('theme.icons.dark-light')
 local HOME = os.getenv('HOME')
 
@@ -40,14 +40,17 @@ screen.connect_signal(
 
         aboutPage =
             wibox {
-            bg = beautiful.background.hue_800,
+            bg = beautiful.bg_normal .. 'bb',
             visible = false,
             ontop = true,
             type = 'normal',
             height = height,
             width = width,
             x = s.geometry.x + s.geometry.width / 2 - (width / 2),
-            y = s.geometry.y + s.geometry.height / 2 - (height / 2)
+            y = s.geometry.y + s.geometry.height / 2 - (height / 2),
+            shape = function(cr, shapeWidth, shapeHeight)
+                gears.shape.rounded_rect(cr, shapeWidth, shapeHeight, 12)
+            end
         }
 
         screen.connect_signal(
@@ -59,7 +62,9 @@ screen.connect_signal(
                 end
             end
         )
-
+        -- ########################################################################
+        -- ########################################################################
+        -- ########################################################################
         signals.connect_refresh_screen(
             function()
                 print('Refreshing about page')
@@ -73,7 +78,9 @@ screen.connect_signal(
                 aboutPage.y = s.geometry.y + s.geometry.height / 2 - (height / 2)
             end
         )
-
+        -- ########################################################################
+        -- ########################################################################
+        -- ########################################################################
         signals.connect_background_theme_changed(
             function(new_theme)
                 aboutPage.bg = new_theme.hue_800 .. beautiful.background_transparency
@@ -148,7 +155,9 @@ local function toggleAbout()
         )
     end
 end
-
+-- ########################################################################
+-- ########################################################################
+-- ########################################################################
 aboutBackdrop:buttons(
     awful.util.table.join(
         awful.button(
@@ -160,7 +169,9 @@ aboutBackdrop:buttons(
         )
     )
 )
-
+-- ########################################################################
+-- ########################################################################
+-- ########################################################################
 local widget =
     wibox.widget {
     {
@@ -171,7 +182,9 @@ local widget =
     },
     layout = wibox.layout.align.horizontal
 }
-
+-- ########################################################################
+-- ########################################################################
+-- ########################################################################
 local browserWidget =
     wibox.widget {
     {
@@ -197,7 +210,9 @@ widget_button:buttons(
         )
     )
 )
-
+-- ########################################################################
+-- ########################################################################
+-- ########################################################################
 local browserOpen = clickable_container(browserWidget, dpi(8), dpi(8), dpi(8), dpi(8))
 browserOpen:buttons(
     gears.table.join(
@@ -213,7 +228,7 @@ browserOpen:buttons(
                     {
                         title = "Who's Responsible for this Mess?",
                         message = "Opened the developer's portfolio homepage",
-                        timeout = 5,
+                        timeout = 10,
                         position = 'top_right'
                     }
                 )
@@ -232,10 +247,13 @@ aboutPage:setup {
             align = 'center',
             widget = wibox.widget.textbox
         },
-        layout = wibox.layout.fixed.horizontal
+        layout = wibox.layout.fixed.horizontal,
+        shape = function(cr, shapeWidth, shapeHeight)
+            gears.shape.rounded_rect(cr, shapeWidth, shapeHeight, 12)
+        end
     },
     -- The real background color
-    bg = beautiful.background.hue_800,
+    bg = beautiful.bg_normal,
     -- The real, anti-aliased shape
     shape = function(cr, shapeWidth, shapeHeight)
         gears.shape.rounded_rect(cr, shapeWidth, shapeHeight, 12)
