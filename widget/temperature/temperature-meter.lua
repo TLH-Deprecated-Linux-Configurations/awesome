@@ -8,9 +8,10 @@ local config = require('configuration.functions')
 local file = require('lib.file')
 local signals = require('module.signals')
 local delayed_timer = require('lib.function.delayed-timer')
-
+local beautiful = require('beautiful')
 local noNetwork = true
-
+local gears = require('gears')
+local vicious = require('lib.vicious')
 signals.connect_wifi_status(
     function(status)
         noNetwork = not status
@@ -20,10 +21,12 @@ signals.connect_wifi_status(
 local slider =
     wibox.widget {
     read_only = true,
-    widget = mat_slider
+    widget = mat_slider,
+    forced_height = 32,
+    forced_width = 32
 }
 
-local max_temp = 80
+local max_temp = 90
 
 delayed_timer(
     config.temp_poll,
@@ -41,16 +44,40 @@ delayed_timer(
     end,
     config.temp_startup_delay
 )
+local widget_icon =
+    wibox.widget {
+    id = 'icon',
+    image = icons.thermometer,
+    forced_width = 36,
+    forced_height = 36,
+    widget = wibox.widget.imagebox
+}
+
+local temp = wibox.widget.textbox()
+vicious.cache(vicious.widgets.thermal)
+vicious.register(temp, vicious.widgets.thermal, '$1°C', 4, 'thermal_zone0')
+temp.font = beautiful.font .. ' 14'
 
 local temperature_meter =
     wibox.widget {
-    wibox.widget {
-        icon = icons.thermometer,
-        size = dpi(24),
-        widget = mat_icon
+    {
+        {
+            widget_icon,
+            temp,
+            spacing = dpi(1),
+            layout = wibox.layout.flex.horizontal
+        },
+        top = dpi(2),
+        bottom = dpi(2),
+        left = dpi(1),
+        right = dpi(1),
+        widget = wibox.container.margin
     },
-    slider,
-    widget = mat_list_item
+    shape = gears.shape.rounded_rect,
+    bg = beautiful.bg_normal .. '77',
+    shape_border_color = beautiful.bg_normal,
+    shape_border_width = dpi(3),
+    widget = wibox.container.background
 }
 
 return temperature_meter

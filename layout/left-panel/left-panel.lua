@@ -313,7 +313,7 @@ local left_panel_func = function()
             widget = mat_icon
         },
         wibox.widget {
-            text = i18n.translate('Change Application Scaling'),
+            text = 'Change Application Scaling',
             font = 'agave Nerd Font Mono Bold  12',
             widget = wibox.widget.textbox,
             align = center
@@ -347,7 +347,7 @@ local left_panel_func = function()
             widget = mat_icon
         },
         wibox.widget {
-            text = i18n.translate('Full settings application'),
+            text = 'Full settings application',
             font = 'agave Nerd Font Mono Bold 12',
             widget = wibox.widget.textbox,
             align = center
@@ -382,7 +382,7 @@ local left_panel_func = function()
             widget = mat_icon
         },
         wibox.widget {
-            text = i18n.translate('Connect to a wireless network'),
+            text = 'Connect to a wireless network',
             font = 'agave Nerd Font Mono Bold  12',
             widget = wibox.widget.textbox,
             align = center

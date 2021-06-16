@@ -2,7 +2,6 @@
 -- |   |   |__|.----.-----.
 -- |   |   |  ||  __|  -__|
 --  \_____/|__||____|_____|
-
 --  _______         __               __         __      ______         __
 -- |   |   |.---.-.|  |_.-----.----.|__|.---.-.|  |    |      |.-----.|  |.-----.----.-----.
 -- |       ||  _  ||   _|  -__|   _||  ||  _  ||  |    |   ---||  _  ||  ||  _  |   _|__ --|
@@ -10,7 +9,6 @@
 -- ########################################################################
 -- ########################################################################
 -- ########################################################################
-
 local filesystem = require('gears.filesystem')
 local mat_colors = require('theme.mat-colors')
 local theme_dir = filesystem.get_configuration_dir() .. '/theme'
@@ -18,29 +16,41 @@ local dpi = require('beautiful').xresources.apply_dpi
 local config = require('theme.config')
 
 local function color(value)
-    if value == nil then
-        return nil
-    end
+    if value == nil then return nil end
     return '#' .. value
 end
 -- ########################################################################
 -- ########################################################################
 -- ########################################################################
 local function loadtheme(standard, override, prefix)
-    standard['hue_50'] = color(override[prefix .. 'hue_50']) or standard['hue_50']
-    standard['hue_100'] = color(override[prefix .. 'hue_100']) or standard['hue_100']
-    standard['hue_200'] = color(override[prefix .. 'hue_200']) or standard['hue_200']
-    standard['hue_300'] = color(override[prefix .. 'hue_300']) or standard['hue_300']
-    standard['hue_400'] = color(override[prefix .. 'hue_400']) or standard['hue_400']
-    standard['hue_500'] = color(override[prefix .. 'hue_500']) or standard['hue_500']
-    standard['hue_600'] = color(override[prefix .. 'hue_600']) or standard['hue_600']
-    standard['hue_700'] = color(override[prefix .. 'hue_700']) or standard['hue_700']
-    standard['hue_800'] = color(override[prefix .. 'hue_800']) or standard['hue_800']
-    standard['hue_900'] = color(override[prefix .. 'hue_900']) or standard['hue_900']
-    standard['hue_A100'] = color(override[prefix .. 'hue_A100']) or standard['hue_A100']
-    standard['hue_A200'] = color(override[prefix .. 'hue_A200']) or standard['hue_A200']
-    standard['hue_A400'] = color(override[prefix .. 'hue_A400']) or standard['hue_A400']
-    standard['hue_A700'] = color(override[prefix .. 'hue_A700']) or standard['hue_A700']
+    standard['hue_50'] = color(override[prefix .. 'hue_50']) or
+                             standard['hue_50']
+    standard['hue_100'] = color(override[prefix .. 'hue_100']) or
+                              standard['hue_100']
+    standard['hue_200'] = color(override[prefix .. 'hue_200']) or
+                              standard['hue_200']
+    standard['hue_300'] = color(override[prefix .. 'hue_300']) or
+                              standard['hue_300']
+    standard['hue_400'] = color(override[prefix .. 'hue_400']) or
+                              standard['hue_400']
+    standard['hue_500'] = color(override[prefix .. 'hue_500']) or
+                              standard['hue_500']
+    standard['hue_600'] = color(override[prefix .. 'hue_600']) or
+                              standard['hue_600']
+    standard['hue_700'] = color(override[prefix .. 'hue_700']) or
+                              standard['hue_700']
+    standard['hue_800'] = color(override[prefix .. 'hue_800']) or
+                              standard['hue_800']
+    standard['hue_900'] = color(override[prefix .. 'hue_900']) or
+                              standard['hue_900']
+    standard['hue_A100'] = color(override[prefix .. 'hue_A100']) or
+                               standard['hue_A100']
+    standard['hue_A200'] = color(override[prefix .. 'hue_A200']) or
+                               standard['hue_A200']
+    standard['hue_A400'] = color(override[prefix .. 'hue_A400']) or
+                               standard['hue_A400']
+    standard['hue_A700'] = color(override[prefix .. 'hue_A700']) or
+                               standard['hue_A700']
     return standard
 end
 -- ########################################################################
@@ -53,6 +63,7 @@ theme.taglist_font = 'awesomewm-font 22'
 theme.taglist_spacing = 1
 theme.useless_gap = dpi(4)
 theme.titlebars_enabled = true
+
 -- ########################################################################
 -- ########################################################################
 -- ########################################################################
@@ -60,7 +71,7 @@ theme.titlebars_enabled = true
 
 -- Primary
 theme.primary = mat_colors.purple
---theme.primary.hue_500 = '#8AB4F8' --#003f6b
+-- theme.primary.hue_500 = '#8AB4F8' --#003f6b
 
 -- Accent
 theme.accent = mat_colors[config['accent']] or mat_colors.hue_purple
@@ -75,16 +86,20 @@ theme.primary = loadtheme(theme.primary, config, 'primary_')
 theme.accent = loadtheme(theme.accent, config, 'accent_')
 theme.background = loadtheme(theme.background, config, 'background_')
 
-theme.background.hue_800 = theme.background.hue_800 .. (config['background_transparent'] or '66') --99
+theme.background.hue_800 = theme.background.hue_800 ..
+                               (config['background_transparent'] or '66') -- 99
 
 if config['background_800'] ~= nil then
-    theme.background.hue_800 = '#' .. config['background_800'] .. (config['background_transparent'] or '66')
+    theme.background.hue_800 = '#' .. config['background_800'] ..
+                                   (config['background_transparent'] or '66')
 end
 
-theme.background.hue_900 = theme.background.hue_900 .. (config['background_transparent'] or '66') -- 121e25
+theme.background.hue_900 = theme.background.hue_900 ..
+                               (config['background_transparent'] or '66') -- 121e25
 
 if config['background_900'] ~= nil then
-    theme.background.hue_900 = '#' .. config['background_900'] .. (config['background_transparent'] or '66')
+    theme.background.hue_900 = '#' .. config['background_900'] ..
+                                   (config['background_transparent'] or '66')
 end
 
 local awesome_overrides = function(_)
@@ -93,7 +108,4 @@ end
 -- ########################################################################
 -- ########################################################################
 -- ########################################################################
-return {
-    theme = theme,
-    awesome_overrides = awesome_overrides
-}
+return {theme = theme, awesome_overrides = awesome_overrides}

@@ -8,6 +8,7 @@
         "client",
         "modkey",
         "s",
-        "root"
+        "root",
+        "center"
     ]
 }

@@ -81,11 +81,28 @@ theme.primary = theme.foreground
 theme.accent = theme.xcolor17
 
 theme.text = theme.foreground
-
+theme.titlebar_size = 24
 -- system stat charts in settings app
 theme.cpu_bar = theme.xcolor1
 theme.ram_bar = theme.xcolor2
 theme.disk_bar = theme.xcolor3
+
+-- Titlebar Icons
+-- ==============================================================================
+
+theme.titlebar_close_button_normal = theme.icons .. 'titlebar/window-close-normal.svg'
+theme.titlebar_close_button_focus = theme.icons .. 'titlebar/window-close.svg'
+
+theme.titlebar_minimize_button_normal = theme.icons .. 'titlebar/go-down.svg'
+theme.titlebar_minimize_button_focus = theme.icons .. 'titlebar/go-down.svg'
+
+
+theme.titlebar_maximize_button_normal = theme.icons .. 'titlebar/go-up.svg'
+theme.titlebar_maximize_button_focus = theme.icons .. 'titlebar/go-up.svg'
+
+
+
+
 -- ########################################################################
 -- ########################################################################
 -- ########################################################################
@@ -94,7 +111,6 @@ local awesome_overrides = function(awesome_theme)
 
     awesome_theme.icons = awesome_theme.dir .. '/icons/'
 
-    local resultset = lines_from(os.getenv('HOME') .. '/.config/awesome/electric-tantra/theme')
     awesome_theme.wallpaper = theme_dir .. '/background.png'
     awesome_theme.font = 'agave Nerd Font Mono Bold'
     awesome_theme.title_font = 'agave Nerd Font Mono Bold   18'
@@ -264,6 +280,7 @@ local awesome_overrides = function(awesome_theme)
     awesome_theme.border_color = theme.xcolor0
     awesome_theme.snap_bg = theme.xbackground .. '99'
 end
+
 return {
     theme = theme,
     awesome_overrides = awesome_overrides

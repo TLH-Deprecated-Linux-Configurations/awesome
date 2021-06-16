@@ -2,12 +2,10 @@
 -- |      |  |__|.-----.-----.|  |_
 -- |   ---|  |  ||  -__|     ||   _|
 -- |______|__|__||_____|__|__||____|
-
 --  ______         __
 -- |   __ \.--.--.|  |.-----.-----.
 -- |      <|  |  ||  ||  -__|__ --|
 -- |___|__||_____||__||_____|_____|
-
 -- ########################################################################
 -- ########################################################################
 -- ########################################################################
@@ -19,15 +17,11 @@ local config_float = floating
 -- ########################################################################
 -- ########################################################################
 -- ########################################################################
-local function getItem(item)
-    return config[item] or nil
-end
+local function getItem(item) return config[item] or nil end
 -- ########################################################################
 -- ########################################################################
 -- ########################################################################
-local function getItemFloat(item)
-    return config_float[item] or nil
-end
+local function getItemFloat(item) return config_float[item] or nil end
 -- ########################################################################
 -- ########################################################################
 -- ########################################################################
@@ -37,9 +31,7 @@ local function getFloatingWindow()
     local iterator = {'Steam'}
     local item = getItemFloat(name)
     if item ~= nil and type(item) == 'table' then
-        for _, value in ipairs(item) do
-            table.insert(iterator, value)
-        end
+        for _, value in ipairs(item) do table.insert(iterator, value) end
     elseif item ~= nil and type(item) == 'string' then
         table.insert(iterator, item)
     end
@@ -54,9 +46,7 @@ local function getTitlebarWindow()
     local iterator = {'Steam'}
     local item = getItem(name)
     if item ~= nil and type(item) == 'table' then
-        for _, value in ipairs(item) do
-            table.insert(iterator, value)
-        end
+        for _, value in ipairs(item) do table.insert(iterator, value) end
     elseif item ~= nil and type(item) == 'string' then
         table.insert(iterator, item)
     end
@@ -79,10 +69,7 @@ awful.rules.rules = {
     {
         rule = {},
         except_any = {
-            instance = {
-                'nm-connection-editor',
-                'file_progress'
-            },
+            instance = {'nm-connection-editor', 'file_progress'},
             class = 'Xfdesktop'
         },
         properties = {
@@ -90,7 +77,7 @@ awful.rules.rules = {
             keys = client_keys,
             buttons = client_buttons,
             screen = awful.screen.preferred,
-            placement = awful.placement.no_overlap + awful.placement.no_offscreen,
+            placement = awful.placement.no_offscreen,
             floating = false,
             maximized = false,
             above = false,
@@ -100,10 +87,10 @@ awful.rules.rules = {
             maximized_horizontal = false,
             maximized_vertical = false,
             titlebars_enabled = true,
-            skip_decoration = false
+            skip_decoration = false,
+            raise = false
         }
-    },
-    {
+    }, {
         rule_any = {name = {'QuakeTerminal'}},
         properties = {skip_decoration = false, titlebars_enabled = true}
     },
@@ -112,12 +99,7 @@ awful.rules.rules = {
     -- ########################################################################
     -- Custom
     {
-        rule_any = {
-            class = {
-                'feh',
-                'Lxpolkit'
-            }
-        },
+        rule_any = {class = {'feh', 'Lxpolkit'}},
         properties = {
             skip_decoration = false,
             titlebars_enabled = true,
@@ -137,21 +119,10 @@ awful.rules.rules = {
                 'pinentry'
             },
             class = {
-                'Arandr',
-                'Blueman-manager',
-                'Gpick',
-                'Kruler',
-                'MessageWin', -- kalarm.
-                'Sxiv',
-                'Tor Browser', -- Needs a fixed window size to avoid fingerprinting by screen size.
-                'Wpa_gui',
-                'veromix',
-                'mini panel',
-                'Popup',
-                'popup',
-                'dialog',
-                'Dialog',
-                'xtightvncviewer'
+                'Arandr', 'Blueman-manager', 'Gpick', 'Kruler', 'MessageWin', -- kalarm.
+                'Sxiv', 'Tor Browser', -- Needs a fixed window size to avoid fingerprinting by screen size.
+                'Wpa_gui', 'veromix', 'mini panel', 'Popup', 'popup', 'dialog',
+                'Dialog', 'xtightvncviewer'
             },
             -- Note that the name property shown in xprop might be set slightly after creation of the client
             -- and the name shown there might not match defined rules here.
@@ -168,29 +139,24 @@ awful.rules.rules = {
         },
         properties = {
             floating = true,
+
             ontop = true,
             shape = function()
                 return function(cr, w, h)
                     gears.shape.rounded_rect(cr, w, h, 12)
                 end
             end,
-            placement = awful.placement.centered,
-            raise = true
+            placement = awful.placement.centered + awful.placement.no_offscreen,
+            raise = true,
+            visible = true
         }
     },
     -- ########################################################################
     -- ########################################################################
     -- ########################################################################
     {
-        rule_any = {
-            class = {
-                'xlunch-fullscreen'
-            }
-        },
-        properties = {
-            fullscreen = true,
-            ontop = true
-        }
+        rule_any = {class = {'xlunch-fullscreen'}},
+        properties = {fullscreen = true, ontop = true}
     },
     -- ########################################################################
     -- ########################################################################
@@ -217,9 +183,7 @@ awful.rules.rules = {
     -- Instances
     -- Network Manager Editor
     {
-        rule = {
-            instance = 'nm-connection-editor'
-        },
+        rule = {instance = 'nm-connection-editor'},
         properties = {
             ontop = true,
             floating = true,
@@ -235,9 +199,7 @@ awful.rules.rules = {
     -- ########################################################################
     -- For nemo progress bar when copying or moving
     {
-        rule = {
-            instance = 'file_progress'
-        },
+        rule = {instance = 'file_progress'},
         properties = {
             ontop = true,
             floating = true,
@@ -252,9 +214,7 @@ awful.rules.rules = {
     -- ########################################################################
     -- ########################################################################
     {
-        rule_any = {
-            class = {'Xephyr'}
-        },
+        rule_any = {class = {'Xephyr'}},
         properties = {
             floating = true,
             placement = awful.placement.centered,
@@ -280,14 +240,7 @@ awful.rules.rules = {
     -- ########################################################################
     -- ########################################################################
 
-    {
-        rule_any = {
-            class = no_titlebar,
-            properties = {
-                titlebars_enabled = false
-            }
-        }
-    },
+    {rule_any = {class = no_titlebar, properties = {titlebars_enabled = false}}},
     -- ########################################################################
     -- ########################################################################
     -- ########################################################################
@@ -312,8 +265,11 @@ awful.rules.rules = {
         except_any = {type = {'dialog'}},
         properties = {
             floating = true,
-            placement = awful.placement.centered,
+            placement = awful.placement.centered + awful.placement.no_offscreen,
             ontop = true,
+            raise = true,
+            focus = awful.client.focus.filter,
+
             drawBackdrop = true
         }
     },
@@ -325,15 +281,13 @@ awful.rules.rules = {
     {
         rule_any = {
             class = {
-                'Pinentry-gtk-2',
-                'pinentry-gtk-2',
-                'Pinentry-gtk',
+                'Pinentry-gtk-2', 'pinentry-gtk-2', 'Pinentry-gtk',
                 'pinentry-gtk'
             }
         },
         properties = {
 
-        floating = true,
+            floating = true,
             placement = awful.placement.centered,
             ontop = true,
             drawBackdrop = true
