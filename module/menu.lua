@@ -8,7 +8,6 @@
 local gears = require('gears')
 local beautiful = require('beautiful')
 local apps = require('configuration.apps')
-local icons = require('theme.icons')
 local hotkeys_popup = require('awful.hotkeys_popup').widget
 
 local mousedrag = nil

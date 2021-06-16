@@ -5,6 +5,9 @@
     "Lua.diagnostics.globals": [
         "awesome",
         "mouse",
-        "client"
+        "client",
+        "modkey",
+        "s",
+        "root"
     ]
 }

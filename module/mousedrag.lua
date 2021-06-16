@@ -88,21 +88,7 @@ local function calculate(sx, sy, ex, ey)
         height = height
     }
 end
--- ########################################################################
--- ########################################################################
--- ########################################################################
--- check if 2 rectangles are colliding
-local function collides(icon, computation)
-    if (computation.x >= icon.x + icon.width) or (icon.x >= computation.x + computation.width) then
-        return false
-    end
 
-    if (computation.y >= icon.y + icon.height) or (icon.y >= computation.y + computation.height) then
-        return false
-    end
-
-    return true
-end
 --#############################################################
 -- ########################################################################
 -- ########################################################################

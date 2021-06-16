@@ -20,7 +20,6 @@ local scrollbox = require('lib.scrollbox')
 local animate = require('lib.animations').createAnimObject
 local profilebox = require('lib.profilebox')
 local button = require('lib.button')
-local hardware = require('lib.hardware-check')
 local HOME = os.getenv('HOME')
 
 local keyconfig = require('configuration.keys.mod')

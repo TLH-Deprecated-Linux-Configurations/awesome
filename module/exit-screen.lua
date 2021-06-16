@@ -42,6 +42,7 @@ awful.spawn.easy_async_with_shell(
     function(stdout)
         if stdout then
             -- Remove new line
+            ---@diagnostic disable-next-line: unused-local
             local username
 
             user_name:set_markup(text)

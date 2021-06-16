@@ -10,18 +10,16 @@ local installed = require('lib.hardware-check').has_package_installed
 local menubar = require('menubar')
 local icons = require('theme.icons')
 local desktop_icon = require('widget.desktop_icon')
-local apps = require('configuration.apps')
 
 local show_installer = installed('installer')
 
 local icon = menubar.utils.lookup_icon('calamares') or icons.logo
-local tutorial_icon = menubar.utils.lookup_icon('preferences-desktop-theme') or icons.logo
 local settings_icon = menubar.utils.lookup_icon('preferences-desktop-theme') or icons.logo
 
 if show_installer then
     desktop_icon.create_icon(
         icon,
-        i18n.translate('Installer'),
+        'Installer',
         0,
         function()
             print('Starting installer')
@@ -33,7 +31,7 @@ if show_installer then
     -- ########################################################################
     desktop_icon.create_icon(
         settings_icon,
-        i18n.translate('Settings'),
+        'Settings',
         1,
         function()
             print('Opening settings application')
