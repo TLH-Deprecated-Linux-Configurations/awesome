@@ -1,14 +1,14 @@
 -- This file holds general configuration parameters and functions you can use
-local HOME = os.getenv("HOME")
-local filesystem = require("gears.filesystem")
-local file_exists = require("lib.file").exists
+local HOME = os.getenv('HOME')
+local filesystem = require('gears.filesystem')
+local file_exists = require('lib.file').exists
 
 -- We add *_startup_delay to most polls
 -- to separate the runtime
 -- Otherwise all polls will run at the same time creating a peak of cpu usage
 -- By spreading them out using delays we get lower cpu usage
 
-local config = {
+local config_functions = {
     package_timeout = 180, -- how frequently we want to check if there are new updates in seconds
     battery_timeout = 20, -- How frequently we want to check our battery status in seconds
     player_reaction_time = 0.01, -- The time for the music player to respond to our play/pause action
@@ -26,18 +26,18 @@ local config = {
     cpu_poll = 5, -- how often do we check the current cpu status
     cpu_startup_delay = 9,
     garbage_collection_cycle = 2 * 60, -- collect garbage every x seconds
-    colors_config = HOME .. "/.config/awesome/electric-tantra/colors.conf",
-    icons_config = HOME .. "/.config/awesome/electric-tantra/icons.conf",
-    logo = HOME .. "/.config/awesome/theme/icons/logo.svg",
+    colors_config = HOME .. '/.config/awesome/electric-tantra/colors.conf',
+    icons_config = HOME .. '/.config/awesome/electric-tantra/icons.conf',
+    logo = HOME .. '/.config/awesome/theme/icons/logo.svg',
     getComptonFile = function()
-        local userfile = HOME .. "/.config/picom.conf"
+        local userfile = HOME .. '/.config/picom.conf'
         if (file_exists(userfile)) then
             return userfile
         end
-        return filesystem.get_configuration_dir() .. "/external/picom.conf "
+        return filesystem.get_configuration_dir() .. '/external/picom.conf '
     end,
-    aboutText = "the Electric Tantra Linux " ..
-        os.date("%Y") .. "\n\n" .. i18n.translate("The Linux Environment of Thomas Leon Highbaugh") .. " "
+    aboutText = 'the Electric Tantra Linux ' ..
+        os.date('%Y') .. '\n\n' .. i18n.translate('The Linux Environment of Thomas Leon Highbaugh') .. ' '
 }
 
-return config
+return config_functions

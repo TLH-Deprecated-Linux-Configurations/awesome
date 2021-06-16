@@ -12,7 +12,7 @@
 local naughty = require('naughty')
 
 local icons = require('theme.icons')
-local config = require('config')
+local config = require('configuration.functions')
 local battery_function = require('lib.function.battery')
 local gears = require('gears')
 

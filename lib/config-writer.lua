@@ -9,8 +9,8 @@
 -- @tdemod lib.config-writer
 ---------------------------------------------------------------------------
 
-local parser = require("parser")
-local file_handle = require("lib.file")
+local parser = require('configuration.parser')
+local file_handle = require('lib.file')
 
 --- Update an entry in a configuration file
 -- @tparam string file The path to the file, can be both absolute or relative.
@@ -28,26 +28,26 @@ local function update_entry(file, field, value)
     local parsed = parser(file)
     -- our field doesn't exist, let's add it
     if parsed[field] == nil then
-        print("Appending file")
-        file_handle.write(file, "\n" .. field .. '="' .. value .. '"\n')
+        print('Appending file')
+        file_handle.write(file, '\n' .. field .. '="' .. value .. '"\n')
         return true
     end
     -- our field already exists, we need to alter them
     local lines = file_handle.lines(file)
-    local result = ""
+    local result = ''
     for i, line in ipairs(lines) do
-        if string.match(line, "^ *" .. field .. ' *= *[\'"].*[\'"]') then
+        if string.match(line, '^ *' .. field .. " *= *['\"].*['\"]") then
             result = result .. field .. '="' .. value .. '"\n'
         else
             -- otherwise a lot of newlines will appear in the config file
             if not (i == #lines) then
-                result = result .. line .. "\n"
+                result = result .. line .. '\n'
             else
                 result = result .. line
             end
         end
     end
-    print("Overwriting file")
+    print('Overwriting file')
     return file_handle.overwrite(file, result)
 end
 

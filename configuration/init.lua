@@ -12,5 +12,7 @@
 -- ########################################################################
 return {
     keys = require('configuration.keys'),
-    apps = require('configuration.apps')
+    apps = require('configuration.apps'),
+    functions = require('configurations.functions'),
+    global_var = require('configuration.global_var')
 }

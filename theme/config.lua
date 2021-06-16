@@ -7,4 +7,4 @@
 -- |   ---||  _  |     |   _|  ||  _  |  |  |   _|  _  ||   _|  ||  _  |     |
 -- |______||_____|__|__|__| |__||___  |_____|__| |___._||____|__||_____|__|__|
 --                              |_____|
-return require('parser')(require('config').colors_config)
+return require('configuration.parser')(require('configuration.functions').colors_config)

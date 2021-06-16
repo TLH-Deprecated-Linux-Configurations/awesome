@@ -7,7 +7,7 @@
 -- ########################################################################
 -- ########################################################################
 local filesystem = require 'gears.filesystem'
-local config = require 'config'
+local config = require 'configuration.functions'
 local hardware = require 'lib.hardware-check'
 -- ########################################################################
 -- ########################################################################
@@ -53,7 +53,6 @@ return {
             HOME ..
                 '/.config/awesome/bin/applauncher.sh ' ..
                     screen.primary.dpi .. ' ' .. filesystem.get_configuration_dir(),
-
         -- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
         rofiwindowswitch = 'bash ' .. HOME .. '/.config/awesome/application-switch.sh' .. ' ' .. screen.primary.dpi,
         -- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~

@@ -7,7 +7,7 @@
 -- ########################################################################
 -- ########################################################################
 local icons = require('theme.icons')
-local config = require('parser')(os.getenv('HOME') .. '/.config/awesome/electric-tantra/tags.conf')
+local config = require('configuration.parser')(os.getenv('HOME') .. '/.config/awesome/electric-tantra/tags.conf')
 local menubar = require('menubar')
 local bling = require('lib.bling')
 -- ########################################################################

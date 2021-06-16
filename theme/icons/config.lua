@@ -1,2 +1,1 @@
-
-return require("parser")(require("config").icons_config)
+return require('configuration.parser')(require('configuration.functions').icons_config)

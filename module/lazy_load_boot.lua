@@ -18,7 +18,7 @@ require('module.menu')
 -- ########################################################################
 -- restore the last state
 require('module.state')
-require('tutorial')
+require('widget.tutorial')
 
 require('module.dev-widget-update')
 -- ########################################################################
