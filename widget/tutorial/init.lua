@@ -128,9 +128,9 @@ require('gears').timer.start_new(
     function()
         naughty.notify(
             {
-                app_name = 'New User Tutorial',
-                title = 'New User Tutorial',
-                message = "Each letter in the word 'Awesomewm' represents a workspace.",
+                app_name = 'User Tutorial',
+                title = 'User Tutorial',
+                message = "Each letter in the word 'AWESOMEWM' located on the bar represents a workspace and serves as a button to move to that workspace. Note workspaces are assigned individually to each screen if you have multiple monitors",
                 timeout = 0,
                 position = 'top_left'
             }
