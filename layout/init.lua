@@ -6,10 +6,13 @@
 -- ########################################################################
 -- ########################################################################
 -- ########################################################################
-local bottom_panel = require "layout.bottom-panel"
+local bottom_panel = require 'layout.bottom-panel'
 -- Create a wibox for each screen and add it
-awful.screen.connect_for_each_screen(function(s) s.bottom_panel =
-    bottom_panel(s) end)
+awful.screen.connect_for_each_screen(
+    function(s)
+        s.bottom_panel = bottom_panel(s)
+    end
+)
 -- ########################################################################
 -- ########################################################################
 -- ########################################################################
@@ -17,7 +20,7 @@ awful.screen.connect_for_each_screen(function(s) s.bottom_panel =
 local function updateBarsVisibility()
     for s in screen do
         if s.selected_tag then
-            local fullscreen = s.selected_tag.fullscreenMode
+            local fullscreen = s.selected_tag
             -- Order matter here for shadow
             if s.bottom_panel then
                 s.bottom_panel.visible = not fullscreen
@@ -28,5 +31,9 @@ end
 -- ########################################################################
 -- ########################################################################
 -- ########################################################################
-_G.tag.connect_signal("property::selected",
-                      function(_) updateBarsVisibility() end)
+_G.tag.connect_signal(
+    'property::selected',
+    function(_)
+        updateBarsVisibility()
+    end
+)

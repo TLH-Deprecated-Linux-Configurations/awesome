@@ -9,6 +9,7 @@
         "modkey",
         "s",
         "root",
-        "center"
+        "center",
+        "screen"
     ]
 }

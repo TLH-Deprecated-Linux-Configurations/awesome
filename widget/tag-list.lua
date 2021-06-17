@@ -3,6 +3,7 @@ local wibox = require('wibox')
 local dpi = require('beautiful').xresources.apply_dpi
 local clickable_container = require('widget.clickable-container')
 local beautiful = require('beautiful')
+local modkey = require('configuration.keys.mod').modkey
 --- Common method to create buttons.
 -- @tab buttons
 -- @param object
@@ -75,13 +76,7 @@ local function list_update(w, buttons, label, data, objects)
 
             bgb:buttons(create_buttons(buttons, o))
 
-            data[o] = {
-                ib = ib,
-                tb = tb,
-                bgb = bgb,
-                tbm = tbm,
-                ibm = ibm
-            }
+            data[o] = {ib = ib, tb = tb, bgb = bgb, tbm = tbm, ibm = ibm}
         end
 
         local text, bg, bg_image, icon, args = label(o, tb)
@@ -143,20 +138,6 @@ local tag_list = function(s)
                     if _G.client.focus then
                         _G.client.focus:toggle_tag(t)
                     end
-                end
-            ),
-            awful.button(
-                {},
-                4,
-                function(t)
-                    awful.tag.viewprev(t.screen)
-                end
-            ),
-            awful.button(
-                {},
-                5,
-                function(t)
-                    awful.tag.viewnext(t.screen)
                 end
             )
         ),

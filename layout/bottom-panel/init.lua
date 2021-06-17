@@ -9,9 +9,9 @@ local awful = require('awful')
 local beautiful = require('beautiful')
 local wibox = require('wibox')
 local gears = require('gears')
-local icons = require('theme.icons')
+
 local dpi = beautiful.xresources.apply_dpi
-local clickable_container = require('widget.clickable-container')
+
 local task_list = require('widget.task-list')
 local tag_list = require('widget.tag-list')
 local hardware = require('lib.hardware-check')
@@ -37,7 +37,7 @@ local bottom_panel = function(s)
             ontop = true,
             screen = s,
             position = 'bottom',
-            height = dpi(38), -- 48
+            height = dpi(42), -- 48
             width = s.geometry.width - offsetx,
             x = s.geometry.x + offsetx,
             y = s.geometry.y,
@@ -45,13 +45,11 @@ local bottom_panel = function(s)
             bg = beautiful.bg_normal .. '88',
             fg = beautiful.fg_normal,
             struts = {
-                bottom = dpi(38) -- 48
+                bottom = dpi(42) -- 48
             }
         }
     )
-    panel:struts {
-        bottom = dpi(38)
-    }
+    panel:struts {bottom = dpi(42)}
 
     panel:connect_signal(
         'mouse::enter',
@@ -129,11 +127,7 @@ local bottom_panel = function(s)
             {
                 layout = wibox.layout.fixed.horizontal,
                 spacing = dpi(2),
-                {
-                    s.systray,
-                    margins = dpi(2),
-                    widget = wibox.container.margin
-                },
+                {s.systray, margins = dpi(2), widget = wibox.container.margin},
                 s.about,
                 s.screen_rec,
                 s.network,
@@ -153,6 +147,48 @@ local bottom_panel = function(s)
     -- ########################################################################
     -- ########################################################################
     -- ########################################################################
+
+    -- Invisible trigger that enables the bottom_panel
+    local panel_trigger =
+        awful.wibar(
+        {
+            screen = s,
+            position = 'bottom',
+            height = dpi(1),
+            ontop = true,
+            width = s.geometry.width,
+            bg = '#00000000',
+            visible = true
+        }
+    )
+
+    -- Show panel and hide trigger
+    panel_trigger:connect_signal(
+        'mouse::enter',
+        function()
+            panel.visible = true
+            panel_trigger.visible = false
+        end
+    )
+    -- Hide panel and show trigger
+    panel:connect_signal(
+        'mouse::leave',
+        function()
+            panel.visible = false
+            panel_trigger.visible = true
+        end
+    )
+
+    -- hide panel when client is fullscreen
+    local function change_panel_visibility(client)
+        if client.screen == s then
+            panel.ontop = not client.fullscreen
+        end
+    end
+
+    -- connect panel visibility function to relevant signals
+    client.connect_signal('property::fullscreen', change_panel_visibility)
+    client.connect_signal('focus', change_panel_visibility)
     return panel
 end
 -- ########################################################################
