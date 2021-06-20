@@ -1,3 +1,14 @@
+--[[
+ POSIX library for Lua 5.1, 5.2 & 5.3.
+ Copyright (C) 2020 Gary V. Vaughan
+]]
+--[[--
+ Private argument checking helpers.
+
+ Undocumented internal helpers for bitwise operations on Lua 5.3+.
+
+ @module posix._bitwise
+]]
 
 
 return {
