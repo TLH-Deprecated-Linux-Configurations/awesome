@@ -4,8 +4,8 @@ local beautiful = require('beautiful')
 local dpi = require('beautiful').xresources.apply_dpi
 local clickable_container = require('widget.material.clickable-container')
 
-local active_button = '#ffffff' .. '40'
-local inactive_button = '#ffffff' .. '20'
+local active_button = '#f4f4f7' .. '40'
+local inactive_button = '#f4f4f7' .. '20'
 
 local notif_text =
     wibox.widget {

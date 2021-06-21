@@ -1,48 +1,19 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <!-- Created with Inkscape (http://www.inkscape.org/) -->
 
-<svg
-   version="1.1"
-   id="svg2"
-   width="51.200001"
-   height="51.200001"
-   viewBox="0 0 51.200001 51.200001"
-   sodipodi:docname="firefox.svg"
-   inkscape:version="1.1 (c4e8f9ed74, 2021-05-24)"
+<svg version="1.1" id="svg2" width="51.200001" height="51.200001" viewBox="0 0 51.200001 51.200001"
+   sodipodi:docname="firefox.svg" inkscape:version="1.1 (c4e8f9ed74, 2021-05-24)"
    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
-   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
-   xmlns:xlink="http://www.w3.org/1999/xlink"
-   xmlns="http://www.w3.org/2000/svg"
-   xmlns:svg="http://www.w3.org/2000/svg">
-  <defs
-     id="defs6" />
-  <sodipodi:namedview
-     id="namedview4"
-     pagecolor="#ffffff"
-     bordercolor="#666666"
-     borderopacity="1.0"
-     inkscape:pageshadow="2"
-     inkscape:pageopacity="0.0"
-     inkscape:pagecheckerboard="0"
-     showgrid="false"
-     inkscape:zoom="16.933593"
-     inkscape:cx="25.6"
-     inkscape:cy="25.6"
-     inkscape:window-width="972"
-     inkscape:window-height="976"
-     inkscape:window-x="964"
-     inkscape:window-y="36"
-     inkscape:window-maximized="0"
-     inkscape:current-layer="g8" />
-  <g
-     inkscape:groupmode="layer"
-     inkscape:label="Image"
-     id="g8">
-    <image
-       width="51.200001"
-       height="51.200001"
-       preserveAspectRatio="none"
-       xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAYAAABXAvmHAAABhGlDQ1BJQ0MgcHJvZmlsZQAAKJF9
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd" xmlns:xlink="http://www.w3.org/1999/xlink"
+   xmlns="http://www.w3.org/2000/svg" xmlns:svg="http://www.w3.org/2000/svg">
+   <defs id="defs6" />
+   <sodipodi:namedview id="namedview4" pagecolor="#f4f4f7" bordercolor="#666666" borderopacity="1.0"
+      inkscape:pageshadow="2" inkscape:pageopacity="0.0" inkscape:pagecheckerboard="0" showgrid="false"
+      inkscape:zoom="16.933593" inkscape:cx="25.6" inkscape:cy="25.6" inkscape:window-width="972"
+      inkscape:window-height="976" inkscape:window-x="964" inkscape:window-y="36" inkscape:window-maximized="0"
+      inkscape:current-layer="g8" />
+   <g inkscape:groupmode="layer" inkscape:label="Image" id="g8">
+      <image width="51.200001" height="51.200001" preserveAspectRatio="none" xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAYAAABXAvmHAAABhGlDQ1BJQ0MgcHJvZmlsZQAAKJF9
 kT1Iw1AUhU9btaItDnYQcchQnSyIFnHUKhShQqgVWnUweekfNGlIUlwcBdeCgz+LVQcXZ10dXAVB
 8AfEzc1J0UVKvC8ptIjxweV9nPfO4b77AH+jwlSzawJQNctIJxNCNrcqBF/Rg36EqeISM/U5UUzB
 c33dw8f3uxjP8r735woreZMBPoF4lumGRbxBPL1p6Zz3iSOsJCnE58TjBjVI/Mh12eU3zkWH/Twz
@@ -103,7 +74,6 @@ Z/Pv+BXT2dnZR4qi+Is8zx93MyNnMRx/u6xcZB1jDKSU/vMXGyNCyH8HQfC5xWLxbz/0t5SLxeKG
 tfaJcRx/mXP+7NtTd+PFre97dF0HKaUv4r7vsdvtbnOb53XxPUrp023bPnK3m79nL/k2m80HAfy2
 lPJxQsjPE0Lyi2zjTvt8RGiDIPhe0zTfCoLgm+M4/ssDDzxg3zcvuo+Pj9kwDA8BOASwzLJs2fe9
 opQeSynfSpLkxfvuu2/zk/8YOb++DzQflduaSdIVAAAAAElFTkSuQmCC
-"
-       id="image10" />
-  </g>
+" id="image10" />
+   </g>
 </svg>

@@ -1,11 +1,5 @@
 #!/bin/bash 
 
-
-#!/usr/bin/env bash
-
-
-
-
 killall xidlehook
 
 timeone=${1:-120}

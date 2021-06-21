@@ -16,7 +16,7 @@ configuration {
     background-entry:               #3c3f4c66;
     background-alt:                 #3c3f4c66;
     foreground:                     #f2f2f2EE;
-    foreground-selected:            #ffffffFF;
+    foreground-selected:            #f4f4f7FF;
     urgent:                         #ff3d8166;
     urgent-selected:                #ff3d8166;
 }

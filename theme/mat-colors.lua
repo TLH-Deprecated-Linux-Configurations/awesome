@@ -22,8 +22,8 @@ return {
         hue_700 = '#f7f65e',
         hue_800 = '#f6f554',
         hue_900 = '#f5f342',
-        hue_A100 = '#ffffff',
-        hue_A200 = '#ffffff',
+        hue_A100 = '#f4f4f7',
+        hue_A200 = '#f4f4f7',
         hue_A400 = '#ffffdf',
         hue_A700 = '#fffec6'
     },
@@ -98,8 +98,8 @@ return {
         hue_700 = '#6f53ff',
         hue_800 = '#6549ff',
         hue_900 = '#5237ff',
-        hue_A100 = '#ffffff',
-        hue_A200 = '#ffffff',
+        hue_A100 = '#f4f4f7',
+        hue_A200 = '#f4f4f7',
         hue_A400 = '#e5e1ff',
         hue_A700 = '#cec8ff'
     },
@@ -155,7 +155,7 @@ return {
         hue_700 = '#ff1f97',
         hue_800 = '#ff198d',
         hue_900 = '#ff0f7d',
-        hue_A100 = '#ffffff',
+        hue_A100 = '#f4f4f7',
         hue_A200 = '#fff7fb',
         hue_A400 = '#ffc4dd',
         hue_A700 = '#ffabce'
@@ -174,8 +174,8 @@ return {
         hue_700 = '#72ffd8',
         hue_800 = '#68ffd3',
         hue_900 = '#55ffcb',
-        hue_A100 = '#ffffff',
-        hue_A200 = '#ffffff',
+        hue_A100 = '#f4f4f7',
+        hue_A200 = '#f4f4f7',
         hue_A400 = '#fafffd',
         hue_A700 = '#e0fff5'
     },
@@ -193,10 +193,10 @@ return {
         hue_700 = '#ecff99',
         hue_800 = '#e9ff90',
         hue_900 = '#e5ff7f',
-        hue_A100 = '#ffffff',
-        hue_A200 = '#ffffff',
-        hue_A400 = '#ffffff',
-        hue_A700 = '#ffffff'
+        hue_A100 = '#f4f4f7',
+        hue_A200 = '#f4f4f7',
+        hue_A400 = '#f4f4f7',
+        hue_A700 = '#f4f4f7'
     },
     -- ########################################################################
     -- ########################################################################
@@ -212,7 +212,7 @@ return {
         hue_700 = '#089cff',
         hue_800 = '#0693ff',
         hue_900 = '#0383ff',
-        hue_A100 = '#ffffff',
+        hue_A100 = '#f4f4f7',
         hue_A200 = '#f2f8ff',
         hue_A400 = '#bfdcff',
         hue_A700 = '#a6cfff'
@@ -231,7 +231,7 @@ return {
         hue_700 = '#00e4ff',
         hue_800 = '#00e1ff',
         hue_900 = '#00dbff',
-        hue_A100 = '#ffffff',
+        hue_A100 = '#f4f4f7',
         hue_A200 = '#f2fdff',
         hue_A400 = '#bff5ff',
         hue_A700 = '#a6f1ff'
@@ -250,7 +250,7 @@ return {
         hue_700 = '#788aaf',
         hue_800 = '#6e80a7',
         hue_900 = '#5b6e99',
-        hue_A100 = '#ffffff',
+        hue_A100 = '#f4f4f7',
         hue_A200 = '#d1dfff',
         hue_A400 = '#9ebbff',
         hue_A700 = '#85aaff'
@@ -269,7 +269,7 @@ return {
         hue_700 = '#ff2f6e',
         hue_800 = '#ff2764',
         hue_900 = '#ff1a51',
-        hue_A100 = '#ffffff',
+        hue_A100 = '#f4f4f7',
         hue_A200 = '#fffefe',
         hue_A400 = '#ffcbd6',
         hue_A700 = '#ffb2c2'
@@ -288,7 +288,7 @@ return {
         hue_700 = '#00ffc0',
         hue_800 = '#00ffb9',
         hue_900 = '#00ffad',
-        hue_A100 = '#ffffff',
+        hue_A100 = '#f4f4f7',
         hue_A200 = '#f2fffa',
         hue_A400 = '#bfffe8',
         hue_A700 = '#a6ffdf'
@@ -307,7 +307,7 @@ return {
         hue_700 = '#00f9e3',
         hue_800 = '#00f8df',
         hue_900 = '#00f6d9',
-        hue_A100 = '#ffffff',
+        hue_A100 = '#f4f4f7',
         hue_A200 = '#eafffc',
         hue_A400 = '#b7fff5',
         hue_A700 = '#9dfff2'
@@ -326,10 +326,10 @@ return {
         hue_700 = '#f1f1f5',
         hue_800 = '#efeff3',
         hue_900 = '#ececf1',
-        hue_A100 = '#ffffff',
-        hue_A200 = '#ffffff',
-        hue_A400 = '#ffffff',
-        hue_A700 = '#ffffff'
+        hue_A100 = '#f4f4f7',
+        hue_A200 = '#f4f4f7',
+        hue_A400 = '#f4f4f7',
+        hue_A700 = '#f4f4f7'
     },
     -- ########################################################################
     -- ########################################################################
@@ -402,8 +402,8 @@ return {
         hue_700 = '#a2b1cf',
         hue_800 = '#99a9ca',
         hue_900 = '#8a9bc0',
-        hue_A100 = '#ffffff',
-        hue_A200 = '#ffffff',
+        hue_A100 = '#f4f4f7',
+        hue_A200 = '#f4f4f7',
         hue_A400 = '#ecf2ff',
         hue_A700 = '#d3e1ff'
     },

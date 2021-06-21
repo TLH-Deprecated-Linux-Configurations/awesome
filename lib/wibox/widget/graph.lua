@@ -22,11 +22,11 @@ local ipairs = ipairs
 local math = math
 local table = table
 local type = type
-local color = require("gears.color")
-local base = require("wibox.widget.base")
-local beautiful = require("beautiful")
+local color = require('gears.color')
+local base = require('wibox.widget.base')
+local beautiful = require('beautiful')
 
-local graph = { mt = {} }
+local graph = {mt = {}}
 
 --- Set the graph border_width.
 --
@@ -154,15 +154,26 @@ local graph = { mt = {} }
 -- @beautiful beautiful.graph_border_color
 -- @param color
 
-local properties = { "width", "height", "border_color", "stack",
-                     "stack_colors", "color", "background_color",
-                     "max_value", "scale", "min_value", "step_shape",
-                     "step_spacing", "step_width", "border_width" }
+local properties = {
+    'width',
+    'height',
+    'border_color',
+    'stack',
+    'stack_colors',
+    'color',
+    'background_color',
+    'max_value',
+    'scale',
+    'min_value',
+    'step_shape',
+    'step_spacing',
+    'step_width',
+    'border_width'
+}
 
 function graph.draw(_graph, _, cr, width, height)
     local max_value = _graph._private.max_value
-    local min_value = _graph._private.min_value or (
-        _graph._private.scale and math.huge or 0)
+    local min_value = _graph._private.min_value or (_graph._private.scale and math.huge or 0)
     local values = _graph._private.values
 
     local step_shape = _graph._private.step_shape
@@ -173,7 +184,7 @@ function graph.draw(_graph, _, cr, width, height)
     cr:set_line_width(bw)
 
     -- Draw the background first
-    cr:set_source(color(_graph._private.background_color or beautiful.graph_bg or "#000000aa"))
+    cr:set_source(color(_graph._private.background_color or beautiful.graph_bg or '#000000aa'))
     cr:paint()
 
     -- Account for the border width
@@ -181,12 +192,11 @@ function graph.draw(_graph, _, cr, width, height)
 
     if _graph._private.border_color then
         cr:translate(bw, bw)
-        width, height = width - 2*bw, height - 2*bw
+        width, height = width - 2 * bw, height - 2 * bw
     end
 
     -- Draw a stacked graph
     if _graph._private.stack then
-
         if _graph._private.scale then
             for _, v in ipairs(values) do
                 for _, sv in ipairs(v) do
@@ -211,7 +221,7 @@ function graph.draw(_graph, _, cr, width, height)
                         local value = stack_values[#stack_values - i] + rel_i
                         cr:move_to(rel_x, height * (1 - (rel_i / max_value)))
                         cr:line_to(rel_x, height * (1 - (value / max_value)))
-                        cr:set_source(color(col or beautiful.graph_fg or "#ff0000"))
+                        cr:set_source(color(col or beautiful.graph_fg or '#ff0000'))
                         cr:stroke()
                         rel_i = value
                     end
@@ -236,12 +246,12 @@ function graph.draw(_graph, _, cr, width, height)
             for i = 0, #values - 1 do
                 local value = values[#values - i]
                 if value >= 0 then
-                    local x = i*step_width + ((i-1)*step_spacing) + 0.5
+                    local x = i * step_width + ((i - 1) * step_spacing) + 0.5
                     value = (value - min_value) / max_value
                     cr:move_to(x, height * (1 - value))
 
                     if step_shape then
-                        cr:translate(step_width + (i>1 and step_spacing or 0), height * (1 - value))
+                        cr:translate(step_width + (i > 1 and step_spacing or 0), height * (1 - value))
                         step_shape(cr, step_width, height)
                         cr:translate(0, -(height * (1 - value)))
                     elseif step_width > 1 then
@@ -251,7 +261,7 @@ function graph.draw(_graph, _, cr, width, height)
                     end
                 end
             end
-            cr:set_source(color(_graph._private.color or beautiful.graph_fg or "#ff0000"))
+            cr:set_source(color(_graph._private.color or beautiful.graph_fg or '#ff0000'))
 
             if step_shape or step_width > 1 then
                 cr:fill()
@@ -259,7 +269,6 @@ function graph.draw(_graph, _, cr, width, height)
                 cr:stroke()
             end
         end
-
     end
 
     -- Undo the cr:translate() for the border and step shapes
@@ -268,11 +277,11 @@ function graph.draw(_graph, _, cr, width, height)
     -- Draw the border last so that it overlaps already drawn values
     if _graph._private.border_color then
         -- We decremented these by two above
-        width, height = width + 2*bw, height + 2*bw
+        width, height = width + 2 * bw, height + 2 * bw
 
         -- Draw the border
-        cr:rectangle(bw/2, bw/2, width - bw, height - bw)
-        cr:set_source(color(_graph._private.border_color or beautiful.graph_border_color or "#ffffff"))
+        cr:rectangle(bw / 2, bw / 2, width - bw, height - bw)
+        cr:set_source(color(_graph._private.border_color or beautiful.graph_border_color or '#f4f4f7'))
         cr:stroke()
     end
 end
@@ -296,9 +305,7 @@ function graph:add_value(value, group)
     end
 
     if self._private.stack and group then
-        if not  self._private.values[group]
-        or type(self._private.values[group]) ~= "table"
-        then
+        if not self._private.values[group] or type(self._private.values[group]) ~= 'table' then
             self._private.values[group] = {}
         end
         values = self._private.values[group]
@@ -306,14 +313,16 @@ function graph:add_value(value, group)
     table.insert(values, value)
 
     local border_width = 0
-    if self._private.border_color then border_width = self._private.border_width*2 end
+    if self._private.border_color then
+        border_width = self._private.border_width * 2
+    end
 
     -- Ensure we never have more data than we can draw
     while #values > self._private.width - border_width do
         table.remove(values, 1)
     end
 
-    self:emit_signal("widget::redraw_needed")
+    self:emit_signal('widget::redraw_needed')
     return self
 end
 
@@ -322,7 +331,7 @@ end
 -- @method clear
 function graph:clear()
     self._private.values = {}
-    self:emit_signal("widget::redraw_needed")
+    self:emit_signal('widget::redraw_needed')
     return self
 end
 
@@ -335,8 +344,8 @@ end
 function graph:set_height(height)
     if height >= 5 then
         self._private.height = height
-        self:emit_signal("widget::layout_changed")
-        self:emit_signal("property::height", height)
+        self:emit_signal('widget::layout_changed')
+        self:emit_signal('property::height', height)
     end
     return self
 end
@@ -350,26 +359,26 @@ end
 function graph:set_width(width)
     if width >= 5 then
         self._private.width = width
-        self:emit_signal("widget::layout_changed")
-        self:emit_signal("property::width", width)
+        self:emit_signal('widget::layout_changed')
+        self:emit_signal('property::width', width)
     end
     return self
 end
 
 -- Build properties function
 for _, prop in ipairs(properties) do
-    if not graph["set_" .. prop] then
-        graph["set_" .. prop] = function(_graph, value)
+    if not graph['set_' .. prop] then
+        graph['set_' .. prop] = function(_graph, value)
             if _graph._private[prop] ~= value then
                 _graph._private[prop] = value
-                _graph:emit_signal("widget::redraw_needed")
-                _graph:emit_signal("property::"..prop, value)
+                _graph:emit_signal('widget::redraw_needed')
+                _graph:emit_signal('property::' .. prop, value)
             end
             return _graph
         end
     end
-    if not graph["get_" .. prop] then
-        graph["get_" .. prop] = function(_graph)
+    if not graph['get_' .. prop] then
+        graph['get_' .. prop] = function(_graph)
             return _graph._private[prop]
         end
     end
@@ -387,24 +396,26 @@ function graph.new(args)
     local width = args.width or 100
     local height = args.height or 20
 
-    if width < 5 or height < 5 then return end
+    if width < 5 or height < 5 then
+        return
+    end
 
     local _graph = base.make_widget(nil, nil, {enable_properties = true})
 
-    _graph._private.width     = width
-    _graph._private.height    = height
-    _graph._private.values    = {}
+    _graph._private.width = width
+    _graph._private.height = height
+    _graph._private.values = {}
     _graph._private.max_value = 1
 
     -- Set methods
-    _graph.add_value = graph["add_value"]
-    _graph.clear = graph["clear"]
+    _graph.add_value = graph['add_value']
+    _graph.clear = graph['clear']
     _graph.draw = graph.draw
     _graph.fit = graph.fit
 
     for _, prop in ipairs(properties) do
-        _graph["set_" .. prop] = graph["set_" .. prop]
-        _graph["get_" .. prop] = graph["get_" .. prop]
+        _graph['set_' .. prop] = graph['set_' .. prop]
+        _graph['get_' .. prop] = graph['get_' .. prop]
     end
 
     return _graph

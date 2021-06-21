@@ -108,7 +108,7 @@ local content =
     wibox.widget {
     action_name,
     wibox.container.margin(widget_button, 0, 0, dpi(5), dpi(5)),
-    bg = '#ffffff20',
+    bg = '#f4f4f720',
     shape = gears.shape.rect,
     widget = wibox.container.background(),
     layout = wibox.layout.ratio.horizontal

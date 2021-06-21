@@ -227,7 +227,7 @@ local screen_rec_res_txtbox =
         {
             {
                 id = 'res_tbox',
-                markup = '<span foreground="#FFFFFF66">' .. '1920x1080' .. '</span>',
+                markup = '<span foreground="#f4f4f766">' .. '1920x1080' .. '</span>',
                 font = 'agave Nerd Font Mono Bold  16',
                 align = 'left',
                 valign = 'center',
@@ -266,7 +266,7 @@ local screen_rec_fps_txtbox =
         {
             {
                 id = 'fps_tbox',
-                markup = '<span foreground="#FFFFFF66">' .. '30' .. '</span>',
+                markup = '<span foreground="#f4f4f766">' .. '30' .. '</span>',
                 font = 'agave Nerd Font Mono Bold  16',
                 align = 'left',
                 valign = 'center',
@@ -305,7 +305,7 @@ local screen_rec_offset_txtbox =
         {
             {
                 id = 'offset_tbox',
-                markup = '<span foreground="#FFFFFF66">' .. '0,0' .. '</span>',
+                markup = '<span foreground="#f4f4f766">' .. '0,0' .. '</span>',
                 font = 'agave Nerd Font Mono Bold  16',
                 ellipsize = 'start',
                 align = 'left',

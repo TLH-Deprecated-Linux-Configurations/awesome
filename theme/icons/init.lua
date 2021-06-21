@@ -1,64 +1,58 @@
+local HOME = os.getenv('HOME')
 
-local HOME = os.getenv("HOME")
-
-local leftpanel_icon_theme = "tos" -- Available Themes: 'lines', 'original', 'macos'
-local lit_dir = HOME .. "/.config/awesome/theme/icons/themes/" .. leftpanel_icon_theme
-
-local dir = HOME .. "/.config/awesome/theme/icons"
-local config = require("theme.icons.config")
-local theme = require("theme.icons.dark-light")
+local dir = HOME .. '/.config/awesome/theme/icons/'
 
 return {
-  --tags
-  chrome = theme(config["browser"] or lit_dir .. "/firefox.svg"),
-  code = theme(config["code"] or lit_dir .. "/code.svg"),
-  social = theme(config["social"] or dir .. "/forum.svg"),
-  folder = theme(config["folder"] or lit_dir .. "/folder.svg"),
-  music = theme(config["music"] or lit_dir .. "/music.svg"),
-  game = theme(config["game"] or lit_dir .. "/google-controller.svg"),
-  lab = theme(config["lab"] or lit_dir .. "/flask.svg"),
-  terminal = theme(config["terminal"] or lit_dir .. "/terminal.svg"),
-  art = theme(config["art"] or lit_dir .. "/art.svg"),
-  --others
-  menu = theme(config["menu"] or lit_dir .. "/menu.svg"),
-  logo = dir .. "/logo.svg",
-  settings = theme(config["settings"] or dir .. "/settings.svg"),
-  close = theme(config["close"] or dir .. "/close.svg"),
-  logout = theme(config["logout"] or dir .. "/logout.svg"),
-  sleep = theme(config["sleep"] or dir .. "/power-sleep.svg"),
-  power = theme(config["power"] or dir .. "/power.svg"),
-  lock = theme(config["lock"] or dir .. "/lock.svg"),
-  restart = theme(config["restart"] or dir .. "/restart.svg"),
-  search = theme(config["search"] or dir .. "/magnify.svg"),
-  monitor = theme(config["monitor"] or dir .. "/laptop.svg"),
-  wifi = theme(config["wifi"] or dir .. "/wifi.svg"),
-  wifi_off = theme(config["wifi_off"] or dir .. "/wifi_off.svg"),
-  volume = theme(config["volume"] or dir .. "/volume-high.svg"),
-  microphone = theme(config["microphone"] or dir .. "/microphone.svg"),
-  muted = theme(config["muted"] or dir .. "/volume-mute.svg"),
-  brightness = theme(config["brightness"] or dir .. "/brightness-7.svg"),
-  chart = theme(config["chart"] or dir .. "/chart-areaspline.svg"),
-  memory = theme(config["memory"] or dir .. "/memory.svg"),
-  harddisk = theme(config["harddisk"] or dir .. "/harddisk.svg"),
-  thermometer = theme(config["thermometer"] or dir .. "/thermometer.svg"),
-  plus = theme(config["plus"] or dir .. "/plus.svg"),
-  minus = theme(config["minus"] or dir .. "/minus.svg"),
-  network = theme(config["network"] or dir .. "/network.svg"),
-  upload = theme(config["upload"] or dir .. "/upload.svg"),
-  download = theme(config["download"] or dir .. "/download.svg"),
-  warning = theme(config["warning"] or dir .. "/warning.svg"),
-  lan = theme(config["lan"] or dir .. "/lan.svg"),
-  lan_off = theme(config["lan_off"] or dir .. "/lan_off.svg"),
-  calendar = theme(config["calendar"] or dir .. "/calendar.svg"),
-  brush = theme(config["brush"] or dir .. "/brush.svg"),
-  bluetooth = theme(config["bluetooth"] or dir .. "/bluetooth.svg"),
-  bluetooth_off = theme(config["bluetooth_off"] or dir .. "/bluetooth-off.svg"),
-  bios = theme(config["bios"] or dir .. "/bios.svg"),
-  package = theme(HOME .. ".config/awesome/widget/package-updater/icons/package.svg"),
-  about = theme(dir .. "/info.svg"),
-  mouse = theme(dir .. "/mouse.svg"),
-  user = theme(dir .. "/user.svg"),
-  qr_code = theme(dir .. "/qr_code.svg"),
-  --png's
-  unknown = theme(dir .. "/noicon.svg")
+    --tags
+    chrome = dir .. '/firefox.svg',
+    code = dir .. '/code.svg',
+    social = dir .. '/forum.svg',
+    folder = dir .. '/folder.svg',
+    music = dir .. '/music.svg',
+    game = dir .. '/google-controller.svg',
+    lab = dir .. '/flask.svg',
+    terminal = dir .. '/terminal.svg',
+    art = dir .. '/art.svg',
+    --others
+    menu = dir .. '/menu.svg',
+    logo = dir .. '/logo.svg',
+    settings = dir .. '/settings.svg',
+    close = dir .. '/close.svg',
+    logout = dir .. '/logout.svg',
+    sleep = dir .. '/power-sleep.svg',
+    power = dir .. '/power.svg',
+    lock = dir .. '/lock.svg',
+    restart = dir .. '/restart.svg',
+    search = dir .. '/magnify.svg',
+    monitor = dir .. '/laptop.svg',
+    wifi = dir .. '/wifi.svg',
+    wifi_off = dir .. '/wifi_off.svg',
+    volume = dir .. '/volume-high.svg',
+    microphone = dir .. '/microphone.svg',
+    muted = dir .. '/volume-mute.svg',
+    brightness = dir .. '/brightness-7.svg',
+    chart = dir .. '/chart-areaspline.svg',
+    memory = dir .. '/memory.svg',
+    harddisk = dir .. '/harddisk.svg',
+    thermometer = dir .. '/thermometer.svg',
+    plus = dir .. '/plus.svg',
+    minus = dir .. '/minus.svg',
+    network = dir .. '/network.svg',
+    upload = dir .. '/upload.svg',
+    download = dir .. '/download.svg',
+    warning = dir .. '/warning.svg',
+    lan = dir .. '/lan.svg',
+    lan_off = dir .. '/lan_off.svg',
+    calendar = dir .. '/calendar.svg',
+    brush = dir .. '/brush.svg',
+    bluetooth = dir .. '/bluetooth.svg',
+    bluetooth_off = dir .. '/bluetooth-off.svg',
+    bios = dir .. '/bios.svg',
+    package = HOME .. '.config/awesome/widget/package-updater/icons/package.svg',
+    about = dir .. '/info.svg',
+    mouse = dir .. '/mouse.svg',
+    user = dir .. '/user.svg',
+    qr_code = dir .. '/qr_code.svg',
+    --png's
+    unknown = dir .. '/noicon.svg'
 }

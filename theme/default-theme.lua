@@ -70,7 +70,7 @@ theme.xcolor17 = '#b2bfd9'
 theme.xcolor18 = '#22262d'
 theme.xcolor19 = '#727f96'
 -- Custom
-theme.custom = '#ffffff'
+theme.custom = '#f4f4f7'
 -- ########################################################################
 -- ########################################################################
 -- ########################################################################
@@ -96,12 +96,8 @@ theme.titlebar_close_button_focus = theme.icons .. 'titlebar/window-close.svg'
 theme.titlebar_minimize_button_normal = theme.icons .. 'titlebar/go-down.svg'
 theme.titlebar_minimize_button_focus = theme.icons .. 'titlebar/go-down.svg'
 
-
 theme.titlebar_maximize_button_normal = theme.icons .. 'titlebar/go-up.svg'
 theme.titlebar_maximize_button_focus = theme.icons .. 'titlebar/go-up.svg'
-
-
-
 
 -- ########################################################################
 -- ########################################################################

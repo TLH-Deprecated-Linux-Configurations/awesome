@@ -74,7 +74,7 @@ ruled.notification.connect_signal(
             },
             properties = {
                 bg = '#ff0000',
-                fg = '#ffffff',
+                fg = '#f4f4f7',
                 margin = dpi(16),
                 position = 'top_right',
                 implicit_timeout = 10

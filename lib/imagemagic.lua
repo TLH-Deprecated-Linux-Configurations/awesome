@@ -17,15 +17,15 @@
 -- @copyright 2020 Tom Meyers
 -- @tdemod lib.imagemagic
 ---------------------------------------------------------------------------
-local hardware = require("lib.hardware-check")
+local hardware = require('lib.hardware-check')
 
-local is_installed = hardware.has_package_installed("imagemagick")
+local is_installed = hardware.has_package_installed('imagemagick')
 
-local LOG_ERROR = "\27[0;31m[ ERROR "
+local LOG_ERROR = '\27[0;31m[ ERROR '
 
 local function check()
     if not is_installed then
-        print("Cannot use imagemagic api, it is not installed!", LOG_ERROR)
+        print('Cannot use imagemagic api, it is not installed!', LOG_ERROR)
     end
     return not is_installed
 end
@@ -46,11 +46,11 @@ local function scale(input, width, height, output, callback)
     if check() then
         return
     end
-    local cmd = "convert '" .. input .. "' -resize " .. width .. "x" .. height .. "\\! '" .. output .. "'"
+    local cmd = "convert '" .. input .. "' -resize " .. width .. 'x' .. height .. "\\! '" .. output .. "'"
     awful.spawn.easy_async_with_shell(
         cmd,
         function()
-            print("Finished converting image " .. input .. " to " .. width .. "x" .. height)
+            print('Finished converting image ' .. input .. ' to ' .. width .. 'x' .. height)
             callback()
         end
     )
@@ -74,7 +74,7 @@ local function grayscale(input, output, callback)
     awful.spawn.easy_async_with_shell(
         cmd,
         function()
-            print("Finished converting image " .. input .. " to grayscale")
+            print('Finished converting image ' .. input .. ' to grayscale')
             callback()
         end
     )
@@ -87,7 +87,7 @@ end
 -- @tparam callback function The function to trigger when the image is made transparent
 -- @staticfct transparent
 -- @usage
---    lib.imagemagic.transparent("file.png", "out.png", "#FFFFFF", function()
+--    lib.imagemagic.transparent("file.png", "out.png", "#f4f4f7", function()
 --        print("Finished making the image transparent")
 --    end)
 local function transparent(input, output, color, callback)
@@ -99,7 +99,7 @@ local function transparent(input, output, color, callback)
     awful.spawn.easy_async_with_shell(
         cmd,
         function()
-            print("Finished color " .. color .. " to be transparent in " .. input)
+            print('Finished color ' .. color .. ' to be transparent in ' .. input)
             callback()
         end
     )
@@ -128,7 +128,7 @@ local function compress(input, output, rate, callback)
     awful.spawn.easy_async_with_shell(
         cmd,
         function()
-            print("Finished compressing " .. input)
+            print('Finished compressing ' .. input)
             callback()
         end
     )
@@ -152,7 +152,7 @@ local function convert(input, output, callback)
     awful.spawn.easy_async_with_shell(
         cmd,
         function()
-            print("Finished converting from " .. input .. " to " .. output)
+            print('Finished converting from ' .. input .. ' to ' .. output)
             callback()
         end
     )

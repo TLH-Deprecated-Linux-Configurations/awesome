@@ -13,7 +13,7 @@ configuration {
     background-entry:               #00000033;
     background-alt:                 #f2f2f215;
     foreground:                     #f2f2f2EE;
-    foreground-selected:            #ffffffFF;
+    foreground-selected:            #f4f4f7FF;
     urgent:                         #E91E6366;
     urgent-selected:                #E91E6377;
 }

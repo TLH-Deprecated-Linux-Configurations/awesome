@@ -116,7 +116,7 @@ local content =
     wibox.widget {
     settingsName,
     wibox.container.margin(compton_button, 0, 0, dpi(5), dpi(5)),
-    bg = '#ffffff20',
+    bg = '#f4f4f720',
     shape = gears.shape.rounded_rect,
     widget = wibox.container.background(settingsName),
     layout = wibox.layout.ratio.horizontal

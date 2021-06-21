@@ -97,7 +97,7 @@ if [ -z "$1" ] || { [ "$1" != 'full' ] && [ "$1" != 'full_blank' ] && [ "$1" != 
 	./snapshot area
 	./snapshot full
 	./snapshot window
-	./snapshot window #FFFFFF
+	./snapshot window #f4f4f7
 	./snapshot window_blank
 
     "

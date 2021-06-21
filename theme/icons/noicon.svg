@@ -1,48 +1,18 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <!-- Created with Inkscape (http://www.inkscape.org/) -->
 
-<svg
-   version="1.1"
-   id="svg2"
-   width="64"
-   height="64"
-   viewBox="0 0 64 64"
-   sodipodi:docname="noicon.svg"
-   inkscape:version="1.1 (c4e8f9ed74, 2021-05-24)"
-   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
-   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
-   xmlns:xlink="http://www.w3.org/1999/xlink"
-   xmlns="http://www.w3.org/2000/svg"
-   xmlns:svg="http://www.w3.org/2000/svg">
-  <defs
-     id="defs6" />
-  <sodipodi:namedview
-     id="namedview4"
-     pagecolor="#ffffff"
-     bordercolor="#666666"
-     borderopacity="1.0"
-     inkscape:pageshadow="2"
-     inkscape:pageopacity="0.0"
-     inkscape:pagecheckerboard="0"
-     showgrid="false"
-     inkscape:zoom="13.546875"
-     inkscape:cx="32"
-     inkscape:cy="32"
-     inkscape:window-width="972"
-     inkscape:window-height="998"
-     inkscape:window-x="964"
-     inkscape:window-y="36"
-     inkscape:window-maximized="0"
-     inkscape:current-layer="g8" />
-  <g
-     inkscape:groupmode="layer"
-     inkscape:label="Image"
-     id="g8">
-    <image
-       width="64"
-       height="64"
-       preserveAspectRatio="none"
-       xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAYAAABXAvmHAAAKiHpUWHRSYXcgcHJvZmlsZSB0eXBl
+<svg version="1.1" id="svg2" width="64" height="64" viewBox="0 0 64 64" sodipodi:docname="noicon.svg"
+   inkscape:version="1.1 (c4e8f9ed74, 2021-05-24)" xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd" xmlns:xlink="http://www.w3.org/1999/xlink"
+   xmlns="http://www.w3.org/2000/svg" xmlns:svg="http://www.w3.org/2000/svg">
+   <defs id="defs6" />
+   <sodipodi:namedview id="namedview4" pagecolor="#f4f4f7" bordercolor="#666666" borderopacity="1.0"
+      inkscape:pageshadow="2" inkscape:pageopacity="0.0" inkscape:pagecheckerboard="0" showgrid="false"
+      inkscape:zoom="13.546875" inkscape:cx="32" inkscape:cy="32" inkscape:window-width="972"
+      inkscape:window-height="998" inkscape:window-x="964" inkscape:window-y="36" inkscape:window-maximized="0"
+      inkscape:current-layer="g8" />
+   <g inkscape:groupmode="layer" inkscape:label="Image" id="g8">
+      <image width="64" height="64" preserveAspectRatio="none" xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAYAAABXAvmHAAAKiHpUWHRSYXcgcHJvZmlsZSB0eXBl
 IGV4aWYAAHjatVlZluSqDvxnFXcJFiCG5TCec3fwln9DAjunypq6X2VX2ulyglCEQoHbjP/9O80/
 +HE5euM5ppBDOPDjs8+24CQd66fqOx1e3/XH7T/h88N1c/3B4pK73Zntvj5wHee0P+c9CZ33nwOd
 J1Rwxrc/lLKv18frdQ9o0/NAOwJHa+aj7y/sgZzdEfn1ue2IQk7xYWm97Zn9vpRuv95FGzhQ9Hj3
@@ -162,7 +132,6 @@ B+UGDhEYFRfgF/cAAAAZdEVYdENvbW1lbnQAQ3JlYXRlZCB3aXRoIEdJTVBXgQ4XAAAAwElEQVRo
 rUAkSi1rN0YiXUgNRCgADUQ4gOFPoGsKvSWJ9nLWplJBR+DzDRW/BWXcS2VE00yhKadRy+bUUqYS
 zXyoEkKbh5YQuoFBAbzMQwA8zZsDeJsP0Qfc38SWu28xlsioO28K4JH3oU7AcqLlNEpR1AQvMuSL
 izFKAAIQgAAE4DRKUd+6AdXlTEjpQLAYAAAAAElFTkSuQmCC
-"
-       id="image10" />
-  </g>
+" id="image10" />
+   </g>
 </svg>
