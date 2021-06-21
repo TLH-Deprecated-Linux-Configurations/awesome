@@ -17,21 +17,27 @@ local config_float = floating
 -- ########################################################################
 -- ########################################################################
 -- ########################################################################
-local function getItem(item) return config[item] or nil end
+local function getItem(item)
+    return config[item] or nil
+end
 -- ########################################################################
 -- ########################################################################
 -- ########################################################################
-local function getItemFloat(item) return config_float[item] or nil end
+local function getItemFloat(item)
+    return config_float[item] or nil
+end
 -- ########################################################################
 -- ########################################################################
 -- ########################################################################
 local function getFloatingWindow()
     local name = 'float'
     -- Add default applications that are always floating
-    local iterator = {'Steam'}
+    local iterator = {'Steam', 'QuakeTerminal'}
     local item = getItemFloat(name)
     if item ~= nil and type(item) == 'table' then
-        for _, value in ipairs(item) do table.insert(iterator, value) end
+        for _, value in ipairs(item) do
+            table.insert(iterator, value)
+        end
     elseif item ~= nil and type(item) == 'string' then
         table.insert(iterator, item)
     end
@@ -46,7 +52,9 @@ local function getTitlebarWindow()
     local iterator = {'Steam'}
     local item = getItem(name)
     if item ~= nil and type(item) == 'table' then
-        for _, value in ipairs(item) do table.insert(iterator, value) end
+        for _, value in ipairs(item) do
+            table.insert(iterator, value)
+        end
     elseif item ~= nil and type(item) == 'string' then
         table.insert(iterator, item)
     end
@@ -90,7 +98,8 @@ awful.rules.rules = {
             skip_decoration = false,
             raise = false
         }
-    }, {
+    },
+    {
         rule_any = {name = {'QuakeTerminal'}},
         properties = {skip_decoration = false, titlebars_enabled = true}
     },
@@ -119,10 +128,21 @@ awful.rules.rules = {
                 'pinentry'
             },
             class = {
-                'Arandr', 'Blueman-manager', 'Gpick', 'Kruler', 'MessageWin', -- kalarm.
-                'Sxiv', 'Tor Browser', -- Needs a fixed window size to avoid fingerprinting by screen size.
-                'Wpa_gui', 'veromix', 'mini panel', 'Popup', 'popup', 'dialog',
-                'Dialog', 'xtightvncviewer'
+                'Arandr',
+                'Blueman-manager',
+                'Gpick',
+                'Kruler',
+                'MessageWin', -- kalarm.
+                'Sxiv',
+                'Tor Browser', -- Needs a fixed window size to avoid fingerprinting by screen size.
+                'Wpa_gui',
+                'veromix',
+                'mini panel',
+                'Popup',
+                'popup',
+                'dialog',
+                'Dialog',
+                'xtightvncviewer'
             },
             -- Note that the name property shown in xprop might be set slightly after creation of the client
             -- and the name shown there might not match defined rules here.
@@ -139,7 +159,6 @@ awful.rules.rules = {
         },
         properties = {
             floating = true,
-
             ontop = true,
             shape = function()
                 return function(cr, w, h)
@@ -162,21 +181,21 @@ awful.rules.rules = {
     -- ########################################################################
     -- ########################################################################
     -- Dialogs
-    -- {
-    --     rule_any = {type = {'dialog'}, class = {'Wicd-client.py', 'calendar.google.com'}},
-    --     properties = {
-    --         placement = awful.placement.centered,
-    --         ontop = true,
-    --         floating = true,
-    --         drawBackdrop = false, -- TRUE if you want to add blur backdrop
-    --         shape = function()
-    --             return function(cr, w, h)
-    --                 gears.shape.rounded_rect(cr, w, h, 12)
-    --             end
-    --         end,
-    --         skip_decoration = false
-    --     }
-    -- },
+    {
+        rule_any = {type = {'dialog'}, class = {'Wicd-client.py', 'calendar.google.com'}},
+        properties = {
+            placement = awful.placement.centered,
+            ontop = true,
+            floating = true,
+            drawBackdrop = false, -- TRUE if you want to add blur backdrop
+            shape = function()
+                return function(cr, w, h)
+                    gears.shape.rounded_rect(cr, w, h, 12)
+                end
+            end,
+            skip_decoration = false
+        }
+    },
     -- ########################################################################
     -- ########################################################################
     -- ########################################################################
@@ -269,7 +288,6 @@ awful.rules.rules = {
             ontop = true,
             raise = true,
             focus = awful.client.focus.filter,
-
             drawBackdrop = true
         }
     },
@@ -281,12 +299,13 @@ awful.rules.rules = {
     {
         rule_any = {
             class = {
-                'Pinentry-gtk-2', 'pinentry-gtk-2', 'Pinentry-gtk',
+                'Pinentry-gtk-2',
+                'pinentry-gtk-2',
+                'Pinentry-gtk',
                 'pinentry-gtk'
             }
         },
         properties = {
-
             floating = true,
             placement = awful.placement.centered,
             ontop = true,
@@ -296,22 +315,4 @@ awful.rules.rules = {
     -- -- ########################################################################
     -- -- ########################################################################
     -- -- ########################################################################
-
-    -- {
-    --     {
-    --         rule = {class = 'Xfdesktop'},
-    --         properties = {
-    --             sticky = true,
-    --             skip_taskbar = true,
-    --             border_width = 0,
-    --             floating = true,
-    --             below = true,
-    --             fullscreen = true,
-    --             maximized = true,
-    --             titlebars_enabled = false
-    --             --keys = {}
-    --             --tag = '7'
-    --         }
-    --     }
-    -- }
 }

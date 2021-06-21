@@ -266,7 +266,7 @@ return function()
             )
             if general['screen_timeout'] == '1' or general['screen_timeout'] == nil then
                 awful.spawn('pkill -f bin/autolock.sh')
-                awful.spawn('sh /etc/xdg/tde/bin/autolock.sh ' .. tostring(value))
+                awful.spawn('sh ~/.config/awesome/bin/autolock.sh ' .. tostring(value))
             end
         end,
         function()

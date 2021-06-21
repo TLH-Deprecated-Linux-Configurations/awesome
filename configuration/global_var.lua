@@ -1,7 +1,17 @@
+--  _______ __         __           __      ___ ___              __         __     __
+-- |     __|  |.-----.|  |--.---.-.|  |    |   |   |.---.-.----.|__|.---.-.|  |--.|  |.-----.-----.
+-- |    |  |  ||  _  ||  _  |  _  ||  |    |   |   ||  _  |   _||  ||  _  ||  _  ||  ||  -__|__ --|
+-- |_______|__||_____||_____|___._||__|     \_____/ |___._|__|  |__||___._||_____||__||_____|_____|
+
+-- ########################################################################
+-- ########################################################################
+-- ########################################################################
 local hardware = require('lib.hardware-check')
 local is_weak = hardware.isWeakHardware()
 local beautiful = require('beautiful')
-
+-- ########################################################################
+-- ########################################################################
+-- ########################################################################
 -- general conf is used by sentry (to opt out of it)
 general = require('configuration.parser')(os.getenv('HOME') .. '/.config/awesome/electric-tantra/general.conf')
 
@@ -10,12 +20,16 @@ i18n.init('en')
 
 awful = require('awful')
 awful.screen.set_auto_dpi_enabled(true)
-
+-- ########################################################################
+-- ########################################################################
+-- ########################################################################
 plugins = require('configuration.parser')(os.getenv('HOME') .. '/.config/awesome/electric-tantra/plugins.conf')
 tags = require('configuration.parser')(os.getenv('HOME') .. '/.config/awesome/electric-tantra/tags.conf')
 keys = require('configuration.parser')(os.getenv('HOME') .. '/.config/awesome/electric-tantra/keys.conf')
 floating = require('configuration.parser')(os.getenv('HOME') .. '/.config/awesome/electric-tantra/floating.conf')
-
+-- ########################################################################
+-- ########################################################################
+-- ########################################################################
 -- dynamic variables are defined here
 -- update the value through this setter, making sure that the animation speed is disabled on weak hardware
 _G.update_anim_speed = function(value)
@@ -25,11 +39,18 @@ _G.update_anim_speed = function(value)
     end
     _G.anim_speed = value
 end
-
+-- ########################################################################
+-- ########################################################################
+-- ########################################################################
 _G.update_anim_speed(tonumber(general['animation_speed'] or '0.3'))
-
+-- ########################################################################
+-- ########################################################################
+-- ########################################################################
 -- Theme
 beautiful.init(require('theme'))
+-- ########################################################################
+-- ########################################################################
+-- ########################################################################
 --plugins
 require('widget.user-profile')
 require('widget.social-media')

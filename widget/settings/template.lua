@@ -23,7 +23,7 @@ return function()
     view.left = m
     view.right = m
 
-    local title = wibox.widget.textbox(i18n.translate('About'))
+    local title = wibox.widget.textbox('About')
     title.font = beautiful.title_font
     title.forced_height = settings_index + m + m
 
@@ -65,7 +65,7 @@ return function()
                 layout = wibox.container.place,
                 valign = 'center',
                 halign = 'center',
-                wibox.widget.textbox(i18n.translate('test'))
+                wibox.widget.textbox('test')
             }
         }
     }

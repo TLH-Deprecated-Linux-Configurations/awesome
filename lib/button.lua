@@ -35,7 +35,7 @@ return function(body, callback, bNo_center, enter_callback, leave_callback, no_u
     local button = wibox.container.background()
     local color = beautiful.xcolor4
     local bIsHovered = false
-    button.bg = color.hue_600
+    button.bg = beautiful.bg_focus
     button.shape = rounded()
     button.forced_height = dpi(40)
 
@@ -49,10 +49,7 @@ return function(body, callback, bNo_center, enter_callback, leave_callback, no_u
     -- button.emulate_hover()
     button.emulate_hover = function()
         bIsHovered = true
-        button.bg = color.hue_800
-        if enter_callback then
-            enter_callback(button)
-        end
+        button.bg = beautiful.xcolor7
     end
 
     --- Emulate a hover unfocus event
@@ -61,7 +58,7 @@ return function(body, callback, bNo_center, enter_callback, leave_callback, no_u
     -- button.emulate_focus_loss()
     button.emulate_focus_loss = function()
         bIsHovered = false
-        button.bg = color.hue_600
+        button.bg = beautiful.bg_normal .. '00'
         if leave_callback then
             leave_callback(button)
         end

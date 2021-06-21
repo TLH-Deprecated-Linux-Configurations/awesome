@@ -1,17 +1,16 @@
-
--- this file is the "daemon" part that hooks directly into TDE
+-- this file is the "daemon" part that hooks directly into the window manager
 -- A helper script should use this file as the following:
 -- tde-client "_G.dev_widget_refresh('the.import.location.of.the.new.widget')"
 -- This will update the widget that is in that file
 -- you can hook this up to an inotify script to auto load the widget :)
 
-local awful = require("awful")
-local wibox = require("wibox")
-local beautiful = require("beautiful")
+local awful = require('awful')
+local wibox = require('wibox')
+local beautiful = require('beautiful')
 local dpi = beautiful.xresources.apply_dpi
-local filehandle = require("lib.file")
-local icons = require("theme.icons")
-local gears = require("gears")
+local filehandle = require('lib.file')
+local icons = require('theme.icons')
+local gears = require('gears')
 
 local m = dpi(10)
 local dev_widget_update_close_height = dpi(60)
@@ -20,7 +19,7 @@ local dev_widget_update_height = dpi(900)
 
 -- Create dev_widget on every screen
 screen.connect_signal(
-    "request::desktop_decoration",
+    'request::desktop_decoration',
     function(scr)
         local function get_x_offset()
             local width = scr.workarea.width
@@ -37,8 +36,8 @@ screen.connect_signal(
             ontop = true,
             screen = scr,
             visible = false,
-            bg = "#00000000",
-            type = "dock",
+            bg = '#00000000',
+            type = 'dock',
             x = scr.geometry.x,
             y = scr.geometry.y,
             width = scr.geometry.width,
@@ -50,8 +49,8 @@ screen.connect_signal(
             {
                 ontop = true,
                 visible = false,
-                type = "toolbar",
-                bg = beautiful.background.hue_800,
+                type = 'toolbar',
+                bg = beautiful.bg_normal,
                 width = dev_widget_update_width,
                 height = dev_widget_update_height,
                 x = scr.workarea.x + get_x_offset(),
@@ -65,11 +64,11 @@ screen.connect_signal(
 
         _G.dev_widget_refresh = function(widget_path)
             local original_path = package.path
-            local require_str = "calendar-widget"
+            local require_str = 'calendar-widget'
 
             if widget_path then
                 local dir = filehandle.dirname(widget_path)
-                package.path = dir .. "?.lua;" .. dir .. "?/?.lua;" .. package.path
+                package.path = dir .. '?.lua;' .. dir .. '?/?.lua;' .. package.path
                 require_str = filehandle.basename(widget_path)
             end
             view_container:reset()
@@ -87,7 +86,7 @@ screen.connect_signal(
             -- as it is a developer widget and can cause memory and cpu leaks
             view_container:reset()
             -- we also perform a garbage collection cycle as we don't know what happens with the widget
-            collectgarbage("collect")
+            collectgarbage('collect')
         end
 
         backdrop:buttons(awful.util.table.join(awful.button({}, 1, close_hub)))
@@ -96,7 +95,7 @@ screen.connect_signal(
         close.forced_height = dev_widget_update_close_height
         close:buttons(gears.table.join(awful.button({}, 1, close_hub)))
 
-        local close_button = wibox.container.place(close, "right")
+        local close_button = wibox.container.place(close, 'right')
 
         hub:setup {
             layout = wibox.layout.fixed.vertical,

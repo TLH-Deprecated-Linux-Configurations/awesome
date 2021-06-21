@@ -29,7 +29,7 @@ return function()
     view.left = m
     view.right = m
 
-    local title = wibox.widget.textbox(i18n.translate('Mouse Settings'))
+    local title = wibox.widget.textbox('Mouse Settings')
     title.font = beautiful.title_font
     title.forced_height = settings_index + m + m
 
@@ -120,7 +120,7 @@ return function()
                         forced_height = dpi(30) + (m * 2),
                         {
                             layout = wibox.layout.align.horizontal,
-                            wibox.container.margin(wibox.widget.textbox(i18n.translate('Mouse Speed')), 0, m),
+                            wibox.container.margin(wibox.widget.textbox('Mouse Speed'), 0, m),
                             mouse_slider
                         }
                     },
@@ -135,7 +135,7 @@ return function()
                         forced_height = dpi(30) + (m * 2),
                         {
                             layout = wibox.layout.align.horizontal,
-                            wibox.container.margin(wibox.widget.textbox(i18n.translate('Mouse Acceleration')), 0, m),
+                            wibox.container.margin(wibox.widget.textbox('Mouse Acceleration'), 0, m),
                             mouse_accel_slider
                         }
                     },
@@ -150,7 +150,7 @@ return function()
                         forced_height = dpi(30) + (m * 2),
                         {
                             layout = wibox.layout.align.horizontal,
-                            wibox.container.margin(wibox.widget.textbox(i18n.translate('Natural Scrolling')), 0, m),
+                            wibox.container.margin(wibox.widget.textbox('Natural Scrolling'), 0, m),
                             nil,
                             natural_scrolling_checkbox
                         }

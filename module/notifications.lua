@@ -259,7 +259,7 @@ naughty.connect_signal(
                                                     margins = beautiful.notification_margin,
                                                     widget = wibox.container.margin
                                                 },
-                                                bg = theme.hue_900 .. beautiful.background_transparency,
+                                                bg = beautiful.bg_normal .. beautiful.background_transparency,
                                                 widget = wibox.container.background
                                             },
                                             {
@@ -317,7 +317,7 @@ naughty.connect_signal(
                     width = dpi(250),
                     widget = wibox.container.constraint
                 },
-                bg = beautiful.background.hue_800,
+                bg = beautiful.bg_normal,
                 shape = gears.shape.rounded_rect,
                 widget = wibox.container.background
             }

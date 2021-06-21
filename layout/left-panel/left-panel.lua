@@ -72,15 +72,15 @@ local left_panel_func = function()
         height = s.geometry.height,
         x = s.geometry.x,
         y = s.geometry.y,
-        bg = beautiful.background.hue_800,
+        bg = beautiful.bg_normal .. beautiful.background_transparency,
         fg = beautiful.fg_normal
     }
     -- ########################################################################
     -- ########################################################################
     -- ########################################################################
     signals.connect_background_theme_changed(
-        function(theme)
-            left_panel.bg = theme.hue_800 .. beautiful.background_transparency
+        function()
+            left_panel.bg = beautiful.bg_normal .. beautiful.background_transparency
         end
     )
     -- ########################################################################
@@ -481,8 +481,6 @@ local left_panel_func = function()
                     wibox.widget {
                         wibox.widget {
                             exit_button,
-                            bg = beautiful.bg_modal,
-                            --beautiful.background.hue_800,
                             widget = wibox.container.background,
                             shape = function(cr, w, h)
                                 gears.shape.rounded_rect(cr, w, h, 12)

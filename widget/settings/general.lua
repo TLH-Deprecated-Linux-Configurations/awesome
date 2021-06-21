@@ -1,13 +1,13 @@
---  _______                                __       
--- |     __|.-----.-----.-----.----.---.-.|  |      
--- |    |  ||  -__|     |  -__|   _|  _  ||  |      
--- |_______||_____|__|__|_____|__| |___._||__|      
-                                                 
---  _______         __   __   __                    
+--  _______                                __
+-- |     __|.-----.-----.-----.----.---.-.|  |
+-- |    |  ||  -__|     |  -__|   _|  _  ||  |
+-- |_______||_____|__|__|_____|__| |___._||__|
+
+--  _______         __   __   __
 -- |     __|.-----.|  |_|  |_|__|.-----.-----.-----.
 -- |__     ||  -__||   _|   _|  ||     |  _  |__ --|
 -- |_______||_____||____|____|__||__|__|___  |_____|
---                                     |_____|      
+--                                     |_____|
 local awful = require('awful')
 local wibox = require('wibox')
 local gears = require('gears')
@@ -168,7 +168,7 @@ return function()
     view.left = m
     view.right = m
 
-    local title = wibox.widget.textbox(i18n.translate('General'))
+    local title = wibox.widget.textbox('General')
     title.font = beautiful.title_font
     title.forced_height = settings_index + m + m
 
@@ -204,40 +204,40 @@ return function()
         wibox.widget {
         layout = wibox.layout.flex.vertical,
         create_checkbox(
-            i18n.translate('Audio popup'),
-            i18n.translate("Enable the 'pop' sound when changing the audio"),
+            'Audio popup',
+            "Enable the 'pop' sound when changing the audio",
             general['audio_change_sound'] == '1',
             'audio_change_sound'
         ),
         create_checkbox(
-            i18n.translate('Titlebar drawing'),
-            i18n.translate('Draw the titlebar above every application'),
+            'Titlebar drawing',
+            'Draw the titlebar above every application',
             general['draw_mode'] == 'full',
             'draw_mode',
             'full',
             'none'
         ),
         create_checkbox(
-            i18n.translate('Screen timeout'),
-            i18n.translate('Put the system in sleep mode after a period of inactivity'),
+            'Screen timeout',
+            'Put the system in sleep mode after a period of inactivity',
             general['screen_timeout'] == '1' or general['screen_timeout'] == nil,
             'screen_timeout'
         ),
         create_checkbox(
-            i18n.translate('Weak Hardware'),
-            i18n.translate("Disable a lot of the 'nice' features in order to reduce hardware consumption"),
+            'Weak Hardware',
+            "Disable a lot of the 'nice' features in order to reduce hardware consumption",
             general['weak_hardware'] == '1',
             'weak_hardware'
         ),
         create_checkbox(
-            i18n.translate('Autofocus'),
-            i18n.translate('Automatically make the focus follow the mouse without clicking'),
+            'Autofocus',
+            'Automatically make the focus follow the mouse without clicking',
             general['autofocus'] == '1',
             'autofocus'
         ),
         create_checkbox(
-            i18n.translate('Minimize Network Usage'),
-            i18n.translate('Disable a lot of network utilities to reduce network usage'),
+            'Minimize Network Usage',
+            'Disable a lot of network utilities to reduce network usage',
             general['minimize_network_usage'] == '1',
             'minimize_network_usage'
         )
@@ -246,10 +246,8 @@ return function()
     local multi_option_widget =
         wibox.widget {
         create_multi_option_array(
-            i18n.translate('Window screenshot mode'),
-            i18n.translate(
-                'when making a screenshot of a window, you can either show the screenshot or make a pretty version with some shadows, and your theme color'
-            ),
+            'Window screenshot mode',
+            'when making a screenshot of a window, you can either show the screenshot or make a pretty version with some shadows, and your theme color',
             {'shadow', 'none'},
             general['window_screen_mode'] or 'shadow',
             'window_screen_mode'
@@ -260,7 +258,7 @@ return function()
     local slider_widget =
         wibox.widget {
         create_option_slider(
-            i18n.translate('Animation Speed'),
+            'Animation Speed',
             0,
             1.5,
             0.05,
@@ -281,9 +279,6 @@ return function()
 
     local slider_card = card()
     slider_card.update_body(wibox.container.margin(slider_widget, dpi(10), dpi(10), dpi(3), dpi(3)))
-
-    local break_card = card()
-    break_card.update_body(wibox.container.margin(break_widget, dpi(10), dpi(10), dpi(3), dpi(3)))
 
     view:setup {
         layout = wibox.container.background,
@@ -307,8 +302,6 @@ return function()
             wibox.container.margin(multi_option_card, dpi(10), dpi(10)),
             separator,
             wibox.container.margin(slider_card, dpi(10), dpi(10)),
-            separator,
-            wibox.container.margin(break_card, dpi(10), dpi(10)),
             separator,
             wibox.container.margin(save, m, m, m, m)
         }

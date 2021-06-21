@@ -6,7 +6,7 @@
 # author: xero <x@xero.nu> http://xero.nu
 # requires: i3lock-color, imagemagick, scrot
 
-scrot /tmp/lock.png
+maim /tmp/lock.png
 convert /tmp/lock.png /tmp/lock.jpg
 file=/tmp/lock.jpg
 
@@ -23,10 +23,7 @@ steps=$(shuf -i 40-70 -n 1)
 for i in $(seq 1 $steps); do datamosh "$file"; done
 
 GLITCHICON=${GLITCHICON:=""}
-PARAM=(--bar-indicator --bar-position h --bar-direction 1 --redraw-thread -t ""
-	--bar-step 50 --bar-width 250 --bar-base-width 50 --bar-max-height 100 --bar-periodic-step 50
-	--bar-color 00000077 --keyhlcolor 00666666 --ringvercolor cc87875f --wrongcolor ffff0000
-	--veriftext="" --wrongtext="" --noinputtext="")
+PARAM=(	--radius 160 --ring-width 50.0 --wrong-text="nope!" --greeter-text="the Electric Tantra Linux"  )
 
 LOCK=()
 while read LINE; do
@@ -52,3 +49,5 @@ file=/tmp/lock.png
 convert "$file" "${LOCK[@]}" "$file"
 
 i3lock -n "${PARAM[@]}" -i "$file" >/dev/null 2>&1
+
+rm -rvf "$file"

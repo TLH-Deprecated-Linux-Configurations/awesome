@@ -122,7 +122,7 @@ local function send_plugin_error(msg)
     print('SETTINGS APP: ' .. msg, err)
     naughty.notification(
         {
-            title = i18n.translate('Plugin error'),
+            title = 'Plugin error',
             urgency = 'critical',
             message = msg,
             timeout = 10
@@ -282,18 +282,12 @@ local function make_view(i, t, v, a)
         end,
         nil,
         true,
-        nil,
+        nil
         -- when hover is lost we make the button transparent
-        function(curr_btn)
-            if curr_btn.active == false then
-                curr_btn.bg = beautiful.transparent
-            end
-        end
     )
     btn.forced_height = m + settings_index + m
 
     btn.activate = function()
-        btn.emulate_focus_loss()
     end
 
     return {link = btn, view = view, title = title}
@@ -335,7 +329,7 @@ local function make_nav()
     -- ########################################################################
     local rule = wibox.container.background()
     rule.forced_height = 1
-    rule.bg = beautiful.background.hue_800
+    rule.bg = beautiful.bg_normal
     rule.widget = wibox.widget.base.empty_widget()
 
     signals.connect_background_theme_changed(
@@ -348,34 +342,22 @@ local function make_nav()
     -- ########################################################################
     table.insert(
         root.elements.settings_views,
-        make_view(icons.settings, i18n.translate('General'), require('widget.settings.general')())
+        make_view(icons.settings, 'General', require('widget.settings.general')())
     )
 
     table.insert(
         root.elements.settings_views,
-        make_view(icons.wifi, i18n.translate('Connections'), require('widget.settings.connections')())
+        make_view(icons.wifi, 'Connections', require('widget.settings.connections')())
     )
 
+    table.insert(root.elements.settings_views, make_view(icons.chart, 'System', require('widget.settings.system')()))
     table.insert(
         root.elements.settings_views,
-        make_view(icons.chart, i18n.translate('System'), require('widget.settings.system')())
+        make_view(icons.monitor, 'Display', require('widget.settings.display')())
     )
-    table.insert(
-        root.elements.settings_views,
-        make_view(icons.monitor, i18n.translate('Display'), require('widget.settings.display')())
-    )
-    table.insert(
-        root.elements.settings_views,
-        make_view(icons.volume, i18n.translate('Media'), require('widget.settings.media')())
-    )
-    table.insert(
-        root.elements.settings_views,
-        make_view(icons.mouse, i18n.translate('Mouse'), require('widget.settings.mouse')())
-    )
-    table.insert(
-        root.elements.settings_views,
-        make_view(icons.about, i18n.translate('About'), require('widget.settings.about')())
-    )
+    table.insert(root.elements.settings_views, make_view(icons.volume, 'Media', require('widget.settings.media')()))
+    table.insert(root.elements.settings_views, make_view(icons.mouse, 'Mouse', require('widget.settings.mouse')()))
+    table.insert(root.elements.settings_views, make_view(icons.about, 'About', require('widget.settings.about')()))
     -- ########################################################################
     -- ########################################################################
     -- ########################################################################
@@ -420,15 +402,13 @@ local function make_nav()
         root.elements.settings_views
     )
 
-    local red = require('theme.mat-colors').red
     local power =
         button(
         wibox.widget.imagebox(icons.power),
         function()
             root.elements.settings.close()
             _G.exit_screen_show()
-        end,
-        red
+        end
     )
     -- ########################################################################
     -- ########################################################################
@@ -462,7 +442,7 @@ return function()
             ontop = true,
             visible = false,
             type = 'toolbar',
-            bg = beautiful.background.hue_800,
+            bg = beautiful.bg_normal,
             width = settings_width,
             height = settings_height,
             screen = scrn

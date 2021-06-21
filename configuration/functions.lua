@@ -1,3 +1,12 @@
+--  _______                    __   __
+-- |    ___|.--.--.-----.----.|  |_|__|.-----.-----.-----.
+-- |    ___||  |  |     |  __||   _|  ||  _  |     |__ --|
+-- |___|    |_____|__|__|____||____|__||_____|__|__|_____|
+
+-- ########################################################################
+-- ########################################################################
+-- ########################################################################
+
 -- This file holds general configuration parameters and functions you can use
 local HOME = os.getenv('HOME')
 local filesystem = require('gears.filesystem')
@@ -7,7 +16,9 @@ local file_exists = require('lib.file').exists
 -- to separate the runtime
 -- Otherwise all polls will run at the same time creating a peak of cpu usage
 -- By spreading them out using delays we get lower cpu usage
-
+-- ########################################################################
+-- ########################################################################
+-- ########################################################################
 local config_functions = {
     package_timeout = 180, -- how frequently we want to check if there are new updates in seconds
     battery_timeout = 20, -- How frequently we want to check our battery status in seconds
@@ -29,6 +40,9 @@ local config_functions = {
     colors_config = HOME .. '/.config/awesome/electric-tantra/colors.conf',
     icons_config = HOME .. '/.config/awesome/electric-tantra/icons.conf',
     logo = HOME .. '/.config/awesome/theme/icons/logo.svg',
+    -- ########################################################################
+    -- ########################################################################
+    -- ########################################################################
     getComptonFile = function()
         local userfile = HOME .. '/.config/picom.conf'
         if (file_exists(userfile)) then
@@ -36,8 +50,11 @@ local config_functions = {
         end
         return filesystem.get_configuration_dir() .. '/external/picom.conf '
     end,
+    -- ########################################################################
+    -- ########################################################################
+    -- ########################################################################
     aboutText = 'the Electric Tantra Linux ' ..
-        os.date('%Y') .. '\n\n' .. i18n.translate('The Linux Environment of Thomas Leon Highbaugh') .. ' '
+        os.date('%Y') .. '\n\n' .. 'The Linux Environment of Thomas Leon Highbaugh' .. ' '
 }
 
 return config_functions

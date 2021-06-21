@@ -103,13 +103,13 @@ return function()
     disk_value.font = beautiful.font
     disk_value.visible = false
 
-    local ram_key = wibox.widget.textbox(i18n.translate('RAM'))
+    local ram_key = wibox.widget.textbox('RAM')
     ram_key.font = beautiful.font
 
-    local cpu_key = wibox.widget.textbox(i18n.translate('CPU'))
+    local cpu_key = wibox.widget.textbox('CPU')
     cpu_key.font = beautiful.font
 
-    local disk_key = wibox.widget.textbox(i18n.translate('Disk'))
+    local disk_key = wibox.widget.textbox('Disk')
     disk_key.font = beautiful.font
 
     ram:connect_signal(
@@ -226,10 +226,10 @@ return function()
     local pac_icon = wibox.container.margin(wibox.widget.imagebox(icons.package), dpi(12), dpi(12), dpi(12), dpi(12))
     pac_icon.forced_height = settings_index + m + m
 
-    local pac_title = wibox.widget.textbox(i18n.translate('System Updates'))
+    local pac_title = wibox.widget.textbox('System Updates')
     pac_title.font = beautiful.title_font
 
-    local pac_value = wibox.widget.textbox(i18n.translate('None available'))
+    local pac_value = wibox.widget.textbox('None available')
     pac_value.font = beautiful.title_font
 
     pac.update_body(

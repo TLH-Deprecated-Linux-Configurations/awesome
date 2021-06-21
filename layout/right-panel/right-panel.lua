@@ -84,8 +84,8 @@ local right_panel = function()
     }
 
     signals.connect_background_theme_changed(
-        function(theme)
-            panel.bg = theme.hue_800 .. beautiful.background_transparency
+        function()
+            panel.bg = beautiful.bg_modal .. beautiful.background_transparency
         end
     )
 
@@ -270,6 +270,7 @@ local right_panel = function()
     -- Hide this panel when app dashboard is called.
     function panel:HideDashboard()
         closePanel()
+        collectgarbage('collect')
     end
 
     function panel:toggle()
@@ -278,6 +279,7 @@ local right_panel = function()
             openPanel()
         else
             closePanel()
+            collectgarbage('collect')
         end
     end
 

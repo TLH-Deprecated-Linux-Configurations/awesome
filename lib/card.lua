@@ -69,7 +69,7 @@ local titled_card = function(title, height)
     -- @usage -- This will change the title to hello
     -- card.update_title("hello")
     widget.update_title = function(updated_title)
-        header.text = i18n.translate(updated_title)
+        header.text = updated_title
     end
 
     --- Update the body of the card

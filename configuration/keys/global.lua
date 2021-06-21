@@ -234,6 +234,8 @@ local globalKeys =
             group = i18n.translate('Launcher')
         }
     ),
+
+    
     --#############################################################################
 
     awful.key(
@@ -449,26 +451,6 @@ local globalKeys =
         'x',
         _G.awesome.quit,
         {description = i18n.translate('quit awesome'), group = i18n.translate('awesome')}
-    ),
-    --#############################################################################
-
-    awful.key(
-        {altkey, 'Shift'},
-        'l',
-        function()
-            awful.tag.incmwfact(0.05)
-        end,
-        {description = i18n.translate('increase master width factor'), group = i18n.translate('Layout')}
-    ),
-    --#############################################################################
-
-    awful.key(
-        {altkey, 'Shift'},
-        'h',
-        function()
-            awful.tag.incmwfact(-0.05)
-        end,
-        {description = i18n.translate('decrease master width factor'), group = i18n.translate('Layout')}
     ),
     --#############################################################################
 
@@ -729,40 +711,7 @@ local globalKeys =
         end,
         {description = i18n.translate('go to the next song'), group = i18n.translate('Hardware')}
     ),
-    --#############################################################################
 
-    -- keys for keyboards without xf86 keys
-    awful.key(
-        {modkey},
-        't',
-        function()
-            print('toggeling music')
-            awful.spawn('playerctl play-pause')
-        end,
-        {description = i18n.translate('toggle music'), group = i18n.translate('Hardware')}
-    ),
-    --#############################################################################
-
-    awful.key(
-        {modkey},
-        'k',
-        function()
-            print('Previous song')
-            awful.spawn('playerctl previous')
-        end,
-        {description = i18n.translate('go to the previous song'), group = i18n.translate('Hardware')}
-    ),
-    --#############################################################################
-
-    awful.key(
-        {modkey},
-        'n',
-        function()
-            print('Next song')
-            awful.spawn('playerctl next')
-        end,
-        {description = i18n.translate('go to the next song'), group = i18n.translate('Hardware')}
-    ),
     --#############################################################################
 
     awful.key(

@@ -3,7 +3,7 @@
 -- |       ||  -__|  _  |  ||  _  |
 -- |__|_|__||_____|_____|__||___._|
 
---                                     -- ########################################################################
+-- ########################################################################
 -- ########################################################################
 -- ########################################################################
 local awful = require('awful')
@@ -63,7 +63,7 @@ return function()
     view.left = m
     view.right = m
 
-    local title = wibox.widget.textbox(i18n.translate('Media'))
+    local title = wibox.widget.textbox('Media')
     title.font = beautiful.title_font
     title.forced_height = settings_index + m + m
 
@@ -86,14 +86,14 @@ return function()
         )
     )
 
-    local vol_heading = wibox.widget.textbox(i18n.translate('Volume'))
+    local vol_heading = wibox.widget.textbox('Volume')
     vol_heading.font = beautiful.font
 
-    local vol_footer = wibox.widget.textbox(i18n.translate('test'))
+    local vol_footer = wibox.widget.textbox('test')
     vol_footer.font = beautiful.font
     vol_footer.align = 'right'
 
-    local mic_footer = wibox.widget.textbox(i18n.translate('test'))
+    local mic_footer = wibox.widget.textbox('test')
     mic_footer.font = beautiful.font
     mic_footer.align = 'right'
     -- ########################################################################
@@ -193,7 +193,7 @@ return function()
         if #sink_children.children == 0 then
             sink_children:add(
                 wibox.widget {
-                    text = i18n.translate('No extra output found'),
+                    text = 'No extra output found',
                     align = 'center',
                     valign = 'center',
                     font = beautiful.font,
@@ -205,7 +205,7 @@ return function()
         if #source_children.children == 0 then
             source_children:add(
                 wibox.widget {
-                    text = i18n.translate('No extra input found'),
+                    text = 'No extra input found',
                     align = 'center',
                     valign = 'center',
                     font = beautiful.font,
@@ -401,7 +401,7 @@ return function()
         wibox.container.margin(
         wibox.widget {
             widget = wibox.widget.textbox,
-            text = i18n.translate('Audio list'),
+            text = 'Audio list',
             font = 'agave Nerd Font Mono Bold  24'
         },
         dpi(20),
@@ -414,7 +414,7 @@ return function()
         wibox.container.margin(
         wibox.widget {
             widget = wibox.widget.textbox,
-            text = i18n.translate('Application list'),
+            text = 'Application list',
             font = 'agave Nerd Font Mono Bold  24'
         },
         dpi(20),

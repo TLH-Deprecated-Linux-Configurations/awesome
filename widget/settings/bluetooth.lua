@@ -299,7 +299,7 @@ return function()
     scrollbox_body = scrollbox(connections)
     view:setup {
         layout = wibox.container.background,
-        bg = beautiful.background.hue_800 .. '00',
+        bg = beautiful.bg_normal .. '00',
         --fg = config.colors.xf,
         {
             layout = wibox.layout.align.vertical,
