@@ -12,59 +12,12 @@
 local gears = require('gears')
 local client_keys = require('configuration.client.keys')
 local client_buttons = require('configuration.client.buttons')
-local config = tags
-local config_float = floating
+local awful = require('awful')
+
 -- ########################################################################
 -- ########################################################################
 -- ########################################################################
-local function getItem(item)
-    return config[item] or nil
-end
--- ########################################################################
--- ########################################################################
--- ########################################################################
-local function getItemFloat(item)
-    return config_float[item] or nil
-end
--- ########################################################################
--- ########################################################################
--- ########################################################################
-local function getFloatingWindow()
-    local name = 'float'
-    -- Add default applications that are always floating
-    local iterator = {'Steam', 'QuakeTerminal'}
-    local item = getItemFloat(name)
-    if item ~= nil and type(item) == 'table' then
-        for _, value in ipairs(item) do
-            table.insert(iterator, value)
-        end
-    elseif item ~= nil and type(item) == 'string' then
-        table.insert(iterator, item)
-    end
-    return iterator
-end
--- ########################################################################
--- ########################################################################
--- ########################################################################
-local function getTitlebarWindow()
-    local name = 'no_titlebar'
-    -- Add default applications that are always floating
-    local iterator = {'Steam'}
-    local item = getItem(name)
-    if item ~= nil and type(item) == 'table' then
-        for _, value in ipairs(item) do
-            table.insert(iterator, value)
-        end
-    elseif item ~= nil and type(item) == 'string' then
-        table.insert(iterator, item)
-    end
-    return iterator
-end
--- ########################################################################
--- ########################################################################
--- ########################################################################
-local floater = getFloatingWindow()
-local no_titlebar = getTitlebarWindow()
+
 -- ########################################################################
 -- ########################################################################
 -- ########################################################################

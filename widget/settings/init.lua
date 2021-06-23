@@ -334,7 +334,7 @@ local function make_nav()
 
     signals.connect_background_theme_changed(
         function(theme)
-            rule.bg = theme.hue_800 .. beautiful.background_transparency
+            rule.bg = beautiful.bg_focus .. beautiful.background_transparency
         end
     )
     -- ########################################################################
@@ -453,7 +453,7 @@ return function()
     -- ########################################################################
     signals.connect_background_theme_changed(
         function(theme)
-            hub.bg = theme.hue_800 .. beautiful.background_transparency
+            hub.bg = beautiful.bg_focus .. beautiful.background_transparency
         end
     )
     -- ########################################################################

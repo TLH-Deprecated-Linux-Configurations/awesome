@@ -8,7 +8,7 @@
 local watch = require('awful.widget.watch')
 local wibox = require('wibox')
 local dpi = require('beautiful').xresources.apply_dpi
-local theme = require('theme.icons.dark-light')
+local theme = require('theme.icons')
 local split = require('lib.function.common').split
 local card = require('lib.card')
 local HOME = os.getenv('HOME')
@@ -68,7 +68,7 @@ local covid_icon_widget =
     wibox.widget {
     {
         id = 'icon',
-        image = theme(PATH_TO_ICONS .. 'corona' .. '.svg'),
+        image = PATH_TO_ICONS .. 'corona' .. '.svg',
         resize = true,
         forced_height = dpi(45),
         forced_width = dpi(45),

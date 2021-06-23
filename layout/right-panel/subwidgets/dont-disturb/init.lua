@@ -7,7 +7,7 @@ local checkbox = require('lib.checkbox')
 local HOME = os.getenv('HOME')
 local beautiful = require('beautiful')
 local PATH_TO_ICONS = HOME .. '/.config/awesome/widget/notification-center/icons/'
-local theme = require('theme.icons.dark-light')
+local theme = require('theme.icons')
 
 _G.dont_disturb = false
 
@@ -42,7 +42,7 @@ box =
 local dont_disturb_icon =
     wibox.widget {
     {
-        image = theme(PATH_TO_ICONS .. 'dont-disturb' .. '.svg'),
+        image = PATH_TO_ICONS .. 'dont-disturb' .. '.svg',
         widget = wibox.widget.imagebox,
         resize = true
     },

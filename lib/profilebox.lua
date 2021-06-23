@@ -17,9 +17,9 @@
 -- @supermodule wibox.widget.base
 ---------------------------------------------------------------------------
 
-local wibox = require("wibox")
-local rounded = require("lib.widget.rounded")
-local theme = require("theme.icons.dark-light")
+local wibox = require('wibox')
+local rounded = require('lib.widget.rounded')
+local theme = require('theme.icons')
 
 --- Create a slider widget
 -- @tparam string picture The picture to set in the profilebox
@@ -43,14 +43,14 @@ return function(picture, diameter, clicked_callback, tooltip_callback)
         forced_height = diameter
     }
 
-    widget:set_image(theme(picture))
+    widget:set_image(theme.user)
     widget:connect_signal(
-        "button::press",
+        'button::press',
         function(_, _, _, button)
             clicked_callback(button)
         end
     )
-    if tooltip_callback ~= nil and type(tooltip_callback) == "function" then
+    if tooltip_callback ~= nil and type(tooltip_callback) == 'function' then
         awful.tooltip {
             objects = {widget},
             timer_function = tooltip_callback
@@ -63,7 +63,7 @@ return function(picture, diameter, clicked_callback, tooltip_callback)
     -- @usage -- This change the picture to image.png
     -- slider.update("/path/to/a/new/image.png")
     widget.update = function(file)
-        widget:set_image(theme(file))
+        widget:set_image(file)
     end
     return widget
 end

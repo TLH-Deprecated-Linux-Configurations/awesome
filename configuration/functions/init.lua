@@ -38,7 +38,6 @@ local config_functions = {
     cpu_startup_delay = 9,
     garbage_collection_cycle = 2 * 60, -- collect garbage every x seconds
     colors_config = HOME .. '/.config/awesome/electric-tantra/colors.conf',
-    icons_config = HOME .. '/.config/awesome/electric-tantra/icons.conf',
     logo = HOME .. '/.config/awesome/theme/icons/logo.svg',
     -- ########################################################################
     -- ########################################################################

@@ -15,7 +15,7 @@ local beautiful = require('beautiful')
 local clickable_container = require('widget.material.clickable-container')
 local HOME = os.getenv('HOME')
 local PATH_TO_ICONS = HOME .. '/.config/awesome/widget/social-media/icons/'
-local theme = require('theme.icons.dark-light')
+local theme = require('theme.icons')
 -- ########################################################################
 -- ########################################################################
 -- ########################################################################
@@ -43,7 +43,7 @@ local reddit_widget =
     wibox.widget {
     {
         id = 'icon',
-        image = theme(PATH_TO_ICONS .. 'reddit' .. '.svg'),
+        image = PATH_TO_ICONS .. 'reddit.svg',
         widget = wibox.widget.imagebox,
         resize = true
     },
@@ -77,7 +77,7 @@ local facebook_widget =
     wibox.widget {
     {
         id = 'icon',
-        image = theme(PATH_TO_ICONS .. 'facebook' .. '.svg'),
+        image = PATH_TO_ICONS .. 'facebook.svg',
         widget = wibox.widget.imagebox,
         resize = true
     },
@@ -111,7 +111,7 @@ local twitter_widget =
     wibox.widget {
     {
         id = 'icon',
-        image = theme(PATH_TO_ICONS .. 'twitter' .. '.svg'),
+        image = PATH_TO_ICONS .. 'twitter' .. '.svg',
         widget = wibox.widget.imagebox,
         resize = true
     },
@@ -145,7 +145,7 @@ local instagram_widget =
     wibox.widget {
     {
         id = 'icon',
-        image = theme(PATH_TO_ICONS .. 'instagram' .. '.svg'),
+        image = PATH_TO_ICONS .. 'instagram.svg',
         widget = wibox.widget.imagebox,
         resize = true
     },

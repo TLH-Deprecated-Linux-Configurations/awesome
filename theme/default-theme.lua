@@ -13,9 +13,6 @@ local dpi = require('beautiful').xresources.apply_dpi
 local xresources = require('beautiful.xresources')
 local xrdb = xresources.get_current_theme()
 local gtk = require('beautiful.gtk')
-local config = require('theme.config')
-local filehandle = require('lib.file')
-local file_exists = filehandle.exists
 -- ########################################################################
 -- ########################################################################
 -- ########################################################################
@@ -24,22 +21,8 @@ theme.icons = theme_dir .. '/icons/'
 theme.font = 'agave Nerd Font Mono Bold 10'
 theme.monitor_font = 'agave Nerd Font Mono Bold 50'
 theme.gtk = gtk.get_theme_variables()
-theme.background_transparency = config['background_transparent'] or '66'
--- ########################################################################
--- ########################################################################
--- ########################################################################
--- get all lines from a file, returns an empty
--- list/table if the file does not exist
-local function lines_from(file)
-    if not file_exists(file) then
-        return '/usr/share/backgrounds/background.png'
-    end
-    local lines = {}
-    for line in io.lines(file) do
-        lines[#lines + 1] = line
-    end
-    return lines
-end
+theme.background_transparency = '66'
+
 -- ########################################################################
 -- ########################################################################
 -- ########################################################################
@@ -141,7 +124,7 @@ local awesome_overrides = function(awesome_theme)
     -- Borders
     awesome_theme.border_width = dpi(1)
     awesome_theme.border_normal = theme.background
-    awesome_theme.border_focus = awesome_theme.primary.hue_300
+    awesome_theme.border_focus = theme.xcolor15
     awesome_theme.border_marked = theme.xcolor7
     -- ########################################################################
     -- ########################################################################

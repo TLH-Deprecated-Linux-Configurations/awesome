@@ -3,7 +3,7 @@ local clickable_container = require('widget.material.clickable-container')
 local gears = require('gears')
 local dpi = require('beautiful').xresources.apply_dpi
 local config = require('configuration.functions')
-local theme = require('theme.icons.dark-light')
+local theme = require('theme.icons')
 local filehandle = require('lib.file')
 local signals = require('module.signals')
 
@@ -85,7 +85,7 @@ gears.timer {
         if interface_res == nil then
             connected = false
             signals.emit_wifi_status(false)
-            widget.icon:set_image(theme(PATH_TO_ICONS .. widgetIconName .. '-off' .. '.svg'))
+            widget.icon:set_image(PATH_TO_ICONS .. widgetIconName .. '-off' .. '.svg')
             return
         end
 
@@ -100,10 +100,10 @@ gears.timer {
             -- Update popup text
             local wifi_strength_rounded = math.floor(wifi_strength / 25 + 0.5)
             widgetIconName = widgetIconName .. '-' .. wifi_strength_rounded
-            widget.icon:set_image(theme(PATH_TO_ICONS .. widgetIconName .. '.svg'))
+            widget.icon:set_image(PATH_TO_ICONS .. widgetIconName .. '.svg')
         else
             connected = false
-            widget.icon:set_image(theme(PATH_TO_ICONS .. widgetIconName .. '-off' .. '.svg'))
+            widget.icon:set_image(PATH_TO_ICONS .. widgetIconName .. '-off' .. '.svg')
         end
         if (connected and (essid == 'N/A' or essid == nil)) then
             grabText()

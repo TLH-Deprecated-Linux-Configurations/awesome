@@ -24,9 +24,7 @@ awful.screen.set_auto_dpi_enabled(true)
 -- ########################################################################
 -- ########################################################################
 plugins = require('configuration.parser')(os.getenv('HOME') .. '/.config/awesome/electric-tantra/plugins.conf')
-tags = require('configuration.parser')(os.getenv('HOME') .. '/.config/awesome/electric-tantra/tags.conf')
 keys = require('configuration.parser')(os.getenv('HOME') .. '/.config/awesome/electric-tantra/keys.conf')
-floating = require('configuration.parser')(os.getenv('HOME') .. '/.config/awesome/electric-tantra/floating.conf')
 -- ########################################################################
 -- ########################################################################
 -- ########################################################################

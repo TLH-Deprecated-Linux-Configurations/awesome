@@ -332,7 +332,7 @@ return function()
         timeout = 20,
         callback = function()
             print('Refreshing')
-            refresh(true)
+            refresh()
         end
     }
     -- ########################################################################
@@ -344,7 +344,7 @@ return function()
         -- disable our discovery
         awful.spawn(
             [[sh -c '
-    killall bluetoothctl; 
+    killall bluetoothctl;
     bluetoothctl scan off;
     bluetoothctl pairable off;
     bluetoothctl discoverable off;

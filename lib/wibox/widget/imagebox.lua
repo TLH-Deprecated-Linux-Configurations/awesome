@@ -52,7 +52,6 @@ local rsvg_handle_cache = setmetatable({}, { __mode = 'v' })
 
 ---Load rsvg handle form image file
 ---@tparam string file Path to svg file.
----@return Rsvg handle
 local function load_rsvg_handle(file)
     if not Rsvg then return end
 

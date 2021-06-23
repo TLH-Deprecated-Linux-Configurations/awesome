@@ -9,7 +9,7 @@ local dpi = require('beautiful').xresources.apply_dpi
 local clickable_container = require('widget.material.clickable-container')
 
 local widget_icon_dir = HOME .. '/.config/awesome/widget/screen-recorder/icons/'
-local theme = require('theme.icons.dark-light')
+local theme = require('theme.icons')
 
 local record_tbl = {}
 
@@ -17,7 +17,7 @@ local record_tbl = {}
 
 local screen_rec_toggle_imgbox =
     wibox.widget {
-    image = theme(widget_icon_dir .. 'start-recording-button' .. '.svg'),
+    image = widget_icon_dir .. 'start-recording-button' .. '.svg',
     resize = true,
     widget = wibox.widget.imagebox
 }
@@ -45,7 +45,7 @@ local screen_rec_countdown_txt =
 
 local screen_rec_main_imgbox =
     wibox.widget {
-    image = theme(widget_icon_dir .. 'recorder-off' .. '.svg'),
+    image = widget_icon_dir .. 'recorder-off' .. '.svg',
     resize = true,
     widget = wibox.widget.imagebox
 }
@@ -73,7 +73,7 @@ local screen_rec_main_button =
 
 local screen_rec_audio_imgbox =
     wibox.widget {
-    image = theme(widget_icon_dir .. 'audio' .. '.svg'),
+    image = widget_icon_dir .. 'audio' .. '.svg',
     resize = true,
     widget = wibox.widget.imagebox
 }
@@ -103,7 +103,7 @@ local screen_rec_audio_button =
 
 local screen_rec_close_imgbox =
     wibox.widget {
-    image = theme(widget_icon_dir .. 'close-screen' .. '.svg'),
+    image = widget_icon_dir .. 'close-screen' .. '.svg',
     resize = true,
     widget = wibox.widget.imagebox
 }
@@ -133,7 +133,7 @@ local screen_rec_close_button =
 
 local screen_rec_settings_imgbox =
     wibox.widget {
-    image = theme(widget_icon_dir .. 'settings' .. '.svg'),
+    image = widget_icon_dir .. 'settings' .. '.svg',
     resize = true,
     widget = wibox.widget.imagebox
 }
@@ -165,7 +165,7 @@ local screen_rec_settings_button =
 
 local screen_rec_back_imgbox =
     wibox.widget {
-    image = theme(widget_icon_dir .. 'back' .. '.svg'),
+    image = widget_icon_dir .. 'back' .. '.svg',
     resize = true,
     widget = wibox.widget.imagebox
 }
@@ -372,7 +372,7 @@ screen.connect_signal(
 
         signals.connect_background_theme_changed(
             function(new_theme)
-                s.recorder_screen.bg = new_theme.hue_800 .. beautiful.background_transparency
+                s.recorder_screen.bg = new_beautiful.bg_focus .. beautiful.background_transparency
             end
         )
 

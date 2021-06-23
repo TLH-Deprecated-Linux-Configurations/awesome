@@ -33,3 +33,7 @@ local widget = function(widget)
 ```
 
 Which you may think is a little over zealous or I chop things up in a way that doesn't help you,which is fine. I suggest you do at least something like this for your own understanding of what is going on in the code and keeping things neat and tidy in your own configuration according to your own methodology.
+
+## Work in Progress
+
+There is still a lot left to do with this configuration, not the least of which involves detangling some of the configurations (undecided on if I want to totally remove the settings application modal, since the only one that is useful) 

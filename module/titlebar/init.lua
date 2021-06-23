@@ -26,7 +26,7 @@ local draw_mode = 'full'
 
 local beautiful = require('beautiful')
 local get_font_height = beautiful.get_font_height
-local primary_color = beautiful.xcolor4
+
 -- Widgets
 local imagebox = wibox.widget.imagebox
 local textbox = wibox.widget.textbox

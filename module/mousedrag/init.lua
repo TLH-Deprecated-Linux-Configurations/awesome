@@ -31,7 +31,7 @@ signals.connect_primary_theme_changed(
     function(new_theme)
         theme = new_theme
         if box ~= nil then
-            box.bg = theme.hue_800 .. '44'
+            box.bg = beautiful.bg_focus .. '44'
             box.border_color = theme.hue_600
         end
     end
@@ -48,7 +48,7 @@ local function createBox(x, y, width, height)
             x = x,
             y = y,
             type = 'dock',
-            bg = theme.hue_800 .. '44',
+            bg = beautiful.bg_focus .. '44',
             border_width = dpi(1),
             border_color = theme.hue_600,
             width = width,

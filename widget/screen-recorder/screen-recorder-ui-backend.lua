@@ -1,7 +1,7 @@
 -- TODO FIX THIS MAKE IT WORK
 local gears = require('gears')
 local beautiful = require('beautiful')
-local theme = require('theme.icons.dark-light')
+local theme = require('theme.icons')
 local home = os.getenv('HOME')
 local dpi = beautiful.xresources.apply_dpi
 
@@ -449,8 +449,8 @@ local sr_recording_start = function()
     sr_screen_loc.visible = false
 
     -- Manipulate UIs
-    sr_toggle_imgbox:set_image(theme(widget_icon_dir .. 'recording-button' .. '.svg'))
-    sr_main_imgbox:set_image(theme(widget_icon_dir .. 'recorder-on' .. '.svg'))
+    sr_toggle_imgbox:set_image(widget_icon_dir .. 'recording-button' .. '.svg')
+    sr_main_imgbox:set_image(widget_icon_dir .. 'recorder-on' .. '.svg')
 
     sr_start_recording(status_audio)
 end
@@ -462,8 +462,8 @@ local sr_recording_stop = function()
     status_audio = false
 
     -- Manipulate UIs
-    sr_toggle_imgbox:set_image(theme(widget_icon_dir .. 'start-recording-button' .. '.svg'))
-    sr_main_imgbox:set_image(theme(widget_icon_dir .. 'recorder-off' .. '.svg'))
+    sr_toggle_imgbox:set_image(widget_icon_dir .. 'start-recording-button' .. '.svg')
+    sr_main_imgbox:set_image(widget_icon_dir .. 'recorder-off' .. '.svg')
 
     sr_stop_recording()
 end
@@ -490,7 +490,7 @@ local counter_timer = function()
                 sr_countdown_text:emit_signal('widget::redraw_needed')
                 return false
             else
-                sr_main_imgbox:set_image(theme(widget_icon_dir .. 'recorder-countdown' .. '.svg'))
+                sr_main_imgbox:set_image(widget_icon_dir .. 'recorder-countdown' .. '.svg')
 
                 sr_countdown_text.opacity = 1.0
                 sr_countdown_text:set_text(tostring(seconds))
@@ -512,7 +512,7 @@ local sr_countdown_stop = function()
 
     status_countdown = false
 
-    sr_main_imgbox:set_image(theme(widget_icon_dir .. 'recorder-off' .. '.svg'))
+    sr_main_imgbox:set_image(widget_icon_dir .. 'recorder-off' .. '.svg')
 
     sr_countdown_text.opacity = 0.0
     sr_countdown_text:emit_signal('widget::redraw_needed')

@@ -8,7 +8,7 @@ local clickable_container = require('widget.material.clickable-container')
 local gears = require('gears')
 local dpi = require('beautiful').xresources.apply_dpi
 local apps = require('configuration.apps')
-local theme = require('theme.icons.dark-light')
+local theme = require('theme.icons')
 local HOME = os.getenv('HOME')
 -- acpi sample outputs
 -- Battery 0: Discharging, 75%, 01:51:38 remaining
@@ -47,7 +47,7 @@ widget_button:buttons(
 -- ########################################################################
 -- ########################################################################
 -- ########################################################################
-widget.icon:set_image(theme(PATH_TO_ICONS .. 'search' .. '.svg'))
+widget.icon:set_image(PATH_TO_ICONS .. 'search' .. '.svg')
 
 -- To use colors from beautiful theme put
 -- following lines in rc.lua before require("battery"):

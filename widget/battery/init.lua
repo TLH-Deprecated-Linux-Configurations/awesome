@@ -16,7 +16,7 @@ local gears = require 'gears'
 local clickable_container = require 'widget.material.clickable-container'
 local dpi = require 'beautiful'.xresources.apply_dpi
 local widget_icon_dir = HOME .. '/.config/awesome/widget/battery/icons/'
-local theme = require 'theme.icons.dark-light'
+local theme = require 'theme.icons'
 -- ########################################################################
 -- ########################################################################
 -- ########################################################################
@@ -26,7 +26,7 @@ local return_button = function()
         nil,
         {
             id = 'icon',
-            image = theme(widget_icon_dir .. 'battery-standard' .. '.svg'),
+            image = widget_icon_dir .. 'battery-standard' .. '.svg',
             widget = wibox.widget.imagebox,
             resize = true
         },
@@ -182,7 +182,7 @@ local return_button = function()
                 icon_name = icon_name .. '-fully-charged'
             end
         end
-        battery_imagebox.icon:set_image(gears.surface.load(theme(widget_icon_dir .. icon_name .. '.svg')))
+        battery_imagebox.icon:set_image(gears.surface.load(widget_icon_dir .. icon_name .. '.svg'))
     end
     -- ########################################################################
     -- ########################################################################
@@ -209,7 +209,7 @@ local return_button = function()
                 battery_percentage_text.visible = false
                 battery_tooltip:set_text(i18n.translate 'No battery detected!')
                 battery_imagebox.icon:set_image(
-                    gears.surface.load(theme(widget_icon_dir .. 'battery-unknown' .. '.svg'))
+                    gears.surface.load(widget_icon_dir .. 'battery-unknown' .. '.svg')
                 )
                 return
             end

@@ -48,7 +48,7 @@ return {
     bluetooth = dir .. '/bluetooth.svg',
     bluetooth_off = dir .. '/bluetooth-off.svg',
     bios = dir .. '/bios.svg',
-    package = HOME .. '.config/awesome/widget/package-updater/icons/package.svg',
+    package = dir .. '/package.svg',
     about = dir .. '/info.svg',
     mouse = dir .. '/mouse.svg',
     user = dir .. '/user.svg',

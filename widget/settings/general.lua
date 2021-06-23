@@ -76,7 +76,7 @@ local function create_multi_option_array(name, tooltip, options, default, config
                     widget.bg = beautiful.bg_modal
                     widget.active = false
                 end
-                option_widget.bg = primary_theme.hue_800
+                option_widget.bg = primary_beautiful.bg_focus
                 option_widget.active = true
                 configWriter.update_entry(configFile, configOption, option)
             end,

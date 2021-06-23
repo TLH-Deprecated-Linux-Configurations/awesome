@@ -10,7 +10,7 @@ local gears = require('gears')
 local wibox = require('wibox')
 local dpi = require('beautiful').xresources.apply_dpi
 local signals = require('module.signals')
-
+local beautiful = require('beautiful')
 local vol_osd = require('widget.volume.volume-slider-osd')
 -- ########################################################################
 -- ########################################################################
@@ -77,7 +77,7 @@ awful.screen.connect_for_each_screen(
                 layout = wibox.layout.fixed.vertical
             },
             -- The real background color
-            bg = '#000000' .. '66',
+            bg = beautiful.xcolor0 .. '66',
             -- The real, anti-aliased shape
             shape = gears.shape.rounded_rect,
             widget = wibox.container.background()
@@ -87,7 +87,7 @@ awful.screen.connect_for_each_screen(
         -- ########################################################################
         local hideOSD =
             gears.timer {
-            timeout = 5,
+            timeout = 25,
             autostart = true,
             single_shot = true,
             callback = function()

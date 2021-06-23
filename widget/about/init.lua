@@ -23,10 +23,10 @@ local signals = require('module.signals')
 
 local height = dpi(320)
 local width = dpi(480)
-local theme = require('theme.icons.dark-light')
+local theme = require('theme.icons')
 local HOME = os.getenv('HOME')
 
-local icon = theme(HOME .. '/.config/awesome/widget/about/icons/info.svg')
+local icon = HOME .. '/.config/awesome/widget/about/icons/info.svg'
 
 local aboutPage
 local aboutBackdrop
@@ -83,7 +83,7 @@ screen.connect_signal(
         -- ########################################################################
         signals.connect_background_theme_changed(
             function(new_theme)
-                aboutPage.bg = new_theme.hue_800 .. beautiful.background_transparency
+                aboutPage.bg = new_beautiful.bg_focus .. beautiful.background_transparency
             end
         )
 
