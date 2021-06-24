@@ -17,7 +17,7 @@ local clickable_container = require('widget.material.clickable-container')
 
 local icons = require('theme.icons')
 
-local config = require('configuration.functions')
+local config = require('module.functions')
 local animate = require('lib.animations').createAnimObject
 local signals = require('module.signals')
 

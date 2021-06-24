@@ -17,7 +17,7 @@ local dpi = require('beautiful').xresources.apply_dpi
 local mat_list_item = require('widget.material.list-item')
 local checkbox = require('lib.checkbox')
 
-local config = require('configuration.functions')
+local config = require('module.functions')
 
 -- ########################################################################
 -- Command ################################################################

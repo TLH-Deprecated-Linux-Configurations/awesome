@@ -10,7 +10,7 @@ local wibox = require 'wibox'
 local HOME = os.getenv 'HOME'
 local naughty = require 'naughty'
 local beautiful = require 'beautiful'
-local config = require 'configuration.functions'
+local config = require 'module.functions'
 local file = require 'lib.file'
 local gears = require 'gears'
 local clickable_container = require 'widget.material.clickable-container'
@@ -208,9 +208,7 @@ local return_button = function()
                 battery_widget.spacing = dpi(0)
                 battery_percentage_text.visible = false
                 battery_tooltip:set_text(i18n.translate 'No battery detected!')
-                battery_imagebox.icon:set_image(
-                    gears.surface.load(widget_icon_dir .. 'battery-unknown' .. '.svg')
-                )
+                battery_imagebox.icon:set_image(gears.surface.load(widget_icon_dir .. 'battery-unknown' .. '.svg'))
                 return
             end
             update_battery(status)

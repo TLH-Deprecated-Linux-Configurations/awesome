@@ -17,7 +17,7 @@ local gears = require('gears')
 local common = require('lib.function.common')
 local delayed_timer = require('lib.function.delayed-timer')
 
-local config = require('configuration.functions')
+local config = require('module.functions')
 -- ########################################################################
 -- ########################################################################
 -- ########################################################################
