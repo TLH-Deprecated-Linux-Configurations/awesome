@@ -32,4 +32,19 @@ To give you a better sense of what is what, that one might better gleam by examp
 | clickable-container | widget | clicking is interacting, right? | 
 | application-switcher | module | core functionality |
 | titlebar | module | core functionality  |
-| 
+
+As I wrote this, I first attempted to find an English definition of what is a widget in AwesomeWM but I found no such text, making me reflect on the differences between the code and rationalize a need to refactor these two directories as there are a lot more fringe cases than I would prefer. I have already moved the right and left bars to layout for purposes of making the arrangement more logically categorized but will spend some time eliminating fringe cases like if titlebar should be a module (or alternatively if taglist and tasklist should be modules with it)
+
+### External vs. Bin
+`external` is for configuration files that relate to specific programs as well as a glitched lockscreen shell script I did not write (but due to substantial modifications may actually move as otherwise it wouldn't even work). The reason the glitched lockscreen is not in bin is because it is technically a configuration file specific to i3lock. Whereas the `bin` directory is for general shell scripts I am maintaining in order to add some essential functionality easily into Awesome, and in each case may move to using Lua to provide this functionality in time just haven't gotten around to fighting with Lua over it yet considering what a pain that can be. 
+
+### Themes and Widgets/*/icons
+
+While the `theme` directory has a subdirectory that specifically contains icons, I have also appreciated and continued Meyers practice of including icons within the widgets themselves as this lends itself best to making them modular, as youhave the needed icons right there and need only adapt their location (which usually won't even break the configuration if there are not dozens of these errors, usually this configuration throws two or so such errors if run with awmtt which is a program that allows you to test your configuration with Xephyr). 
+
+In the future I may include a copy of each icons from the widgets in the icons the theme provides as well, as my grandfather always said, "Two is one and one is none" which is a nugget of truth I try to live by and useful in this context but as of yet this project is still ongoing. 
+
+### Lib
+In `lib` there are a lot of files, haphazardly organized, that are entirely the work of Meyers that I have not modified and result from the process of me teasing out of **TDE** a single directory to house the configurations as Meyers uses several different system level directories and programs to achieve the same result (with alot more features I don't find useful but others may enjoy). Within lib are also all of the other dependencies I have required, including copies of the basic libraries used by awesome. They are included as copies of the code itself, as submodules proved a fickle and prone to issues with breaking while in the present method I am able to achieve a more stable experience by including code that is a known version with bugs I need not worry about multiplying at random times. 
+
+In time, I expect portions of the **TDE** files to end up becoming a regular part of the configuration as modifying much of them is necessary still and when I do this, I tend to move them into the main configuration as I substantially modify them in the process by adding comment bars, titles and changing portions of the code to make it fit better into the assumptions of this configuration which differ widely from Meyers. 
