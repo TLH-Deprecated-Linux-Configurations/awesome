@@ -1,17 +1,18 @@
----------------------------------------------------------------------------
--- This module exposes an api to manipulate mouse events through libinput
---
--- Useful functional for setting mouse acceleration, natural scrolling, mouse speed and more
---
--- @author Tom Meyers
--- @copyright 2020 Tom Meyers
--- @tdemod lib.mouse
------------------
+--  _______
+-- |   |   |.-----.--.--.-----.-----.
+-- |       ||  _  |  |  |__ --|  -__|
+-- |__|_|__||_____|_____|_____|_____|
 
+-- ########################################################################
+-- ########################################################################
+-- ########################################################################
+-- This module enables the changing of the mouse settings
 local execute = require('lib.hardware-check').execute
 local split = require('lib.function.common').split
 local signals = require('module.signals')
-
+-- ########################################################################
+-- ########################################################################
+-- ########################################################################
 local function _isValidInput(name, identifiers)
     name = name:lower()
     for _, match in ipairs(identifiers) do
@@ -22,7 +23,9 @@ local function _isValidInput(name, identifiers)
     end
     return true
 end
-
+-- ########################################################################
+-- ########################################################################
+-- ########################################################################
 local function _extractInfoFromXinputLine(line)
     local splitted_line = split(line, '%s')
     local i = 3
@@ -35,7 +38,9 @@ local function _extractInfoFromXinputLine(line)
             id = -1
         }
     end
-
+    -- ########################################################################
+    -- ########################################################################
+    -- ########################################################################
     for index, value in ipairs(splitted_line) do
         if index > 2 then
             if string.find(value, 'id=') == nil then
@@ -52,7 +57,9 @@ local function _extractInfoFromXinputLine(line)
         id = tonumber(id) or 0
     }
 end
-
+-- ########################################################################
+-- ########################################################################
+-- ########################################################################
 --- Returns a table of all mouse input devices ranging from trackpads, to mouses to trackpoints
 -- @treturn table The table containing a field with the id and canonical name
 -- @staticfct getInputDevices
@@ -67,12 +74,15 @@ local function getInputDevices()
         'touch system',
         'touchscreen',
         'dp%-[0-9]+'
-        -- TODO: find other pointer that should not be in the list, find them using xinput --list
     }
-
+    -- ########################################################################
+    -- ########################################################################
+    -- ########################################################################
     local xinput = execute('xinput --list')
     xinput = split(xinput, '\n')
-
+    -- ########################################################################
+    -- ########################################################################
+    -- ########################################################################
     local bIsCorePointer = false
     local result = {}
     for _, line in ipairs(xinput) do
@@ -90,7 +100,9 @@ local function getInputDevices()
 
     return result
 end
-
+-- ########################################################################
+-- ########################################################################
+-- ########################################################################
 --- Set the acceleration of a specific input device through xinput
 -- @tparam number id the identifier of the mouse @see getInputDevices
 -- @tparam number speed The acceleration speed of the mouse, 1.0 means no acceleration and anything above indicates faster speed than default as a multiplier
@@ -110,7 +122,9 @@ local function setAcceleration(id, speed)
     elseif speed < 0 then
         speed = 0
     end
-
+    -- ########################################################################
+    -- ########################################################################
+    -- ########################################################################
     local cmd = string.format("xinput set-prop %d 'libinput Accel Speed' %.1f", id, speed)
     print('Setting mouse acceleration speed: ' .. cmd)
     execute(cmd)
@@ -122,7 +136,9 @@ local function setAcceleration(id, speed)
         }
     )
 end
-
+-- ########################################################################
+-- ########################################################################
+-- ########################################################################
 --- Set the acceleration of a specific input device through xinput
 -- @tparam number id the identifier of the mouse @see getInputDevices
 -- @tparam number speed The default speed of the mouse, 1.0 means standard libinput speed anything larger is faster, anything smaller is slower (minimum speed is 0.01)
@@ -142,7 +158,9 @@ local function setMouseSpeed(id, speed)
     elseif speed < 0.05 then
         speed = 0.05
     end
-
+    -- ########################################################################
+    -- ########################################################################
+    -- ########################################################################
     local cmd =
         string.format("xinput set-prop %d 'Coordinate Transformation Matrix' %.1f 0 0 0 %.1f 0 0 0 1", id, speed, speed)
     print('Setting mouse speed: ' .. cmd)
@@ -155,7 +173,9 @@ local function setMouseSpeed(id, speed)
         }
     )
 end
-
+-- ########################################################################
+-- ########################################################################
+-- ########################################################################
 --- Enable/Disable natural scrolling for the mouse
 -- @tparam number id the identifier of the mouse @see getInputDevices
 -- @tparam number bIsNaturalScrolling Enable or Disable natural scrolling for the mouse
@@ -169,12 +189,16 @@ local function setNaturalScrolling(id, bIsNaturalScrolling)
     if type(bIsNaturalScrolling) ~= 'boolean' then
         return
     end
-
+    -- ########################################################################
+    -- ########################################################################
+    -- ########################################################################
     local naturalScrolling = 0
     if bIsNaturalScrolling then
         naturalScrolling = 1
     end
-
+    -- ########################################################################
+    -- ########################################################################
+    -- ########################################################################
     local cmd = string.format("xinput set-prop %d 'libinput Natural Scrolling Enabled' %d", id, naturalScrolling)
     print('Setting mouse natural scrolling: ' .. cmd)
     execute(cmd)
@@ -186,9 +210,9 @@ local function setNaturalScrolling(id, bIsNaturalScrolling)
         }
     )
 end
-
--- TODO: implement scrolling speed as well
-
+-- ########################################################################
+-- ########################################################################
+-- ########################################################################
 return {
     getInputDevices = getInputDevices,
     setAcceleration = setAcceleration,

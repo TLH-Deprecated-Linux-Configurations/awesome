@@ -12,7 +12,7 @@
 local signals = require('module.signals')
 local serialize = require('lib.serialize')
 local filehandle = require('lib.file')
-local mouse = require('lib.mouse')
+local mouse = require('configuration.mouse')
 local volume = require('lib.volume')
 
 local file = os.getenv('HOME') .. '/.cache/awesome/settings_state.json'
