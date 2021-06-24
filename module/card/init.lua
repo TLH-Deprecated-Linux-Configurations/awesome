@@ -1,34 +1,36 @@
--- Create a new card widget
---
---
+--  ______                __
+-- |      |.---.-.----.--|  |
+-- |   ---||  _  |   _|  _  |
+-- |______||___._|__| |_____|
+
+-- ########################################################################
+-- ########################################################################
+-- ########################################################################
+-- Creates a new card widget
 --    -- card with a title and body
 --    local card = lib.card("title")
 --    card.update_body(lib.textbox("body"))
---
--- ![Card](../images/card.png)
---
--- @author Tom Meyers
--- @copyright 2020 Tom Meyers
--- @tdewidget lib.card
--- @supermodule wibox.widget.base
----------------------------------------------------------------------------
 
-local wibox = require("wibox")
-local beautiful = require("beautiful")
-local gears = require("gears")
+local wibox = require('wibox')
+local beautiful = require('beautiful')
+local gears = require('gears')
 local dpi = beautiful.xresources.apply_dpi
-
-local header_font = "SFNS Display Regular 14"
+-- ########################################################################
+-- ########################################################################
+-- ########################################################################
+local header_font = 'agave Nerd Font Mono Bold 14'
 local bg = beautiful.bg_modal
 local bg_title = beautiful.bg_modal_title
-
+-- ########################################################################
+-- ########################################################################
+-- ########################################################################
 local titled_card = function(title, height)
     local header =
         wibox.widget {
         text = i18n.translate(title),
         font = header_font,
-        align = "center",
-        valign = "center",
+        align = 'center',
+        valign = 'center',
         widget = wibox.widget.textbox
     }
 

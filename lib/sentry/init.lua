@@ -7,9 +7,9 @@
 -- @copyright 2014-2017 CloudFlare, Inc.
 -- @license BSD 3-clause (see LICENSE file)
 
-local util = require("lib.sentry.util")
-local filehandle = require("lib.file")
-local cjson = require("cjson")
+local util = require('lib.sentry.util')
+local filehandle = require('module.file')
+local cjson = require('cjson')
 
 local _M = {}
 _M._VERSION = util._VERSION
@@ -54,11 +54,11 @@ local function get_culprit(level)
     local culprit
 
     level = level + 1
-    local info = debug_getinfo(level, "Snl")
+    local info = debug_getinfo(level, 'Snl')
     if info.name then
         culprit = info.name
     else
-        culprit = info.short_src .. ":" .. info.linedefined
+        culprit = info.short_src .. ':' .. info.linedefined
     end
 
     return culprit
@@ -96,25 +96,25 @@ end
 
 -- it is in app if the filename is not /usr/share/awesome
 local function isInApp(filename, index)
-    local find = "/usr/share/tde"
+    local find = '/usr/share/tde'
     local result = not (filename:sub(1, #find) == find)
-    index = index or ""
-    print(filename .. ":" .. tostring(index) .. " IsInApp: " .. tostring(result))
+    index = index or ''
+    print(filename .. ':' .. tostring(index) .. ' IsInApp: ' .. tostring(result))
     return result
 end
 
 -- returns if the given file is a plugin or not
 local function isInPlugin(filename)
     -- find the base plugin directory
-    local basePluginDir = os.getenv("HOME") .. "/.config/tde/"
+    local basePluginDir = os.getenv('HOME') .. '/.config/tde/'
     return filename:sub(1, #basePluginDir) == basePluginDir
 end
 
 local function validateSourceFile(source)
-    if source:sub(1, 1) == "@" then
+    if source:sub(1, 1) == '@' then
         return source:sub(2, #source)
     end
-    return ""
+    return ''
 end
 
 local function backtrace(level)
@@ -124,7 +124,7 @@ local function backtrace(level)
     local isPlugin = false
     while true do
         -- +3 is done because we offset the stacktrace by 3 function (all of which are used to log the error and are not related to the error itself)
-        local info = debug_getinfo(level + 3, "Snl")
+        local info = debug_getinfo(level + 3, 'Snl')
         if not info then
             break
         end
@@ -141,7 +141,7 @@ local function backtrace(level)
             1,
             {
                 filename = filename,
-                ["function"] = info.name,
+                ['function'] = info.name,
                 lineno = info.currentline,
                 context_line = line,
                 pre_context = pre,
@@ -152,7 +152,7 @@ local function backtrace(level)
 
         level = level + 1
     end
-    print("Is in plugin?: " .. tostring(isPlugin))
+    print('Is in plugin?: ' .. tostring(isPlugin))
     return {frames = frames}, isPlugin
 end
 
@@ -178,12 +178,12 @@ local function capture_error_handler(err)
     local ok, json_exception = pcall(error_catcher, err)
     if not ok then
         -- when failed, json_exception is error message
-        util.errlog("failed to run exception catcher: " .. tostring(json_exception))
+        util.errlog('failed to run exception catcher: ' .. tostring(json_exception))
         -- try to return something anyway (error message with no culprit and
         -- no stacktrace
         json_exception = {
             message = err,
-            culprit = "???",
+            culprit = '???',
             exception = {{value = err}}
         }
     end
@@ -208,11 +208,11 @@ _M.capture_error_handler = capture_error_handler
 -- }
 function _M.new(conf)
     local obj = {
-        sender = assert(conf.sender, "sender is required"),
-        level = conf.level or "error",
-        logger = conf.logger or "root",
-        release = conf.release or os.getenv("SENTRY_RELEASE"),
-        environment = conf.environment or os.getenv("SENTRY_ENVIRONMENT"),
+        sender = assert(conf.sender, 'sender is required'),
+        level = conf.level or 'error',
+        logger = conf.logger or 'root',
+        release = conf.release or os.getenv('SENTRY_RELEASE'),
+        environment = conf.environment or os.getenv('SENTRY_ENVIRONMENT'),
         tags = conf.tags or nil,
         extra = conf.extra or nil
     }
@@ -224,7 +224,7 @@ end
 -- The default implementation just returns `"undefined"`, users are encouraged
 -- to override this to something more sensible.
 function _M.get_server_name()
-    return os.getenv("USER")
+    return os.getenv('USER')
 end
 
 local function merge_tables(msg, root)
@@ -297,9 +297,9 @@ function TDE_mt:captureException(exception, conf)
     local trace, plugin = backtrace(trace_level)
 
     if plugin then
-        conf.tags = merge_tables({application_type = "plugin"}, conf.tags)
+        conf.tags = merge_tables({application_type = 'plugin'}, conf.tags)
     else
-        conf.tags = merge_tables({application_type = "tde-main"}, conf.tags)
+        conf.tags = merge_tables({application_type = 'tde-main'}, conf.tags)
     end
 
     exception[1].stacktrace = trace
@@ -385,7 +385,7 @@ function TDE_mt:send_report(json, conf)
     json.event_id = event_id
     json.timestamp = iso8601()
     json.level = self.level
-    json.platform = "lua"
+    json.platform = 'lua'
     json.logger = self.logger
     json.release = self.release
     json.environment = self.environment
@@ -408,7 +408,7 @@ function TDE_mt:send_report(json, conf)
     local ok, err = self.sender:send(json_str)
 
     if not ok then
-        util.errlog("Failed to send to Sentry: ", err, " ", json_str)
+        util.errlog('Failed to send to Sentry: ', err, ' ', json_str)
         return nil, err
     end
     return json.event_id

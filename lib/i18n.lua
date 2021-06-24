@@ -30,38 +30,38 @@
 -- @tdemod lib.i18n
 ---------------------------------------------------------------------------
 
-local filehandle = require("lib.file")
-local common = require("lib.function.common")
-local gears = require("gears")
-local err = "\27[0;31m[ ERROR "
-local warn = "\27[0;33m[ WARN "
+local filehandle = require('module.file')
+local common = require('lib.function.common')
+local gears = require('gears')
+local err = '\27[0;31m[ ERROR '
+local warn = '\27[0;33m[ WARN '
 
-local system_language = "en"
+local system_language = 'en'
 local translations = {}
 local init_loaded = false
-local translationsPath = gears.filesystem.get_configuration_dir() .. "/lib/translations"
+local translationsPath = gears.filesystem.get_configuration_dir() .. '/lib/translations'
 
 local function detect_system_language()
-    local envLang = os.getenv("LANG") or "en_US.UTF-8"
-    if envLang == "" then
-        system_language = "en"
+    local envLang = os.getenv('LANG') or 'en_US.UTF-8'
+    if envLang == '' then
+        system_language = 'en'
     else
-        system_language = common.split(envLang, "_")[1] or "en"
+        system_language = common.split(envLang, '_')[1] or 'en'
     end
 end
 
 local function _init(default)
-    local translation_file = translationsPath .. "/" .. system_language .. ".lua"
-    local translation_file_default = translationsPath .. "/" .. default .. ".lua"
+    local translation_file = translationsPath .. '/' .. system_language .. '.lua'
+    local translation_file_default = translationsPath .. '/' .. default .. '.lua'
 
     if filehandle.exists(translation_file) then
         translations = require(system_language)
     elseif filehandle.exists(translation_file_default) then
-        print("I18N - translation file " .. tostring(translation_file) .. " doesn't exist, can't initialize", err)
+        print('I18N - translation file ' .. tostring(translation_file) .. " doesn't exist, can't initialize", err)
         translations = require(default)
     else
         print(
-            "I18N - translation file " ..
+            'I18N - translation file ' ..
                 tostring(translation_file_default) .. " doesn't exist (fallback), can't initialize",
             err
         )
@@ -77,7 +77,7 @@ end
 -- i18n.init("en")
 local function init(default)
     if init_loaded then
-        print("I18N - already initialized, aborting", err)
+        print('I18N - already initialized, aborting', err)
         return false
     end
     detect_system_language()
@@ -96,12 +96,12 @@ end
 -- i18n.translate("hello") -- becomes hallo if the system language is dutch
 local function translate(str)
     if not init_loaded then
-        print("I18N - Cannot translate before initializing i18n use i18n.init() ", warn)
+        print('I18N - Cannot translate before initializing i18n use i18n.init() ', warn)
     end
     -- TDE treads all input strings into translation as English
     -- We always translate from English to an unknown language
     -- This statement bypasses the overhead of translating (because we don't need to translate)
-    if system_language == "en" then
+    if system_language == 'en' then
         return str
     end
 
@@ -142,7 +142,7 @@ end
 -- @usage -- Update the language to English
 -- i18n.set_system_language("en")
 local function set_system_language(lang)
-    print("I18N - setting system language to " .. lang)
+    print('I18N - setting system language to ' .. lang)
     system_language = lang
     _init(system_language)
 end
@@ -150,8 +150,8 @@ end
 -- Undocumented function (don't show this to the user)
 -- This disables the colored output so that
 local function _disable_color()
-    err = "[ ERROR "
-    warn = "[ WARN "
+    err = '[ ERROR '
+    warn = '[ WARN '
 end
 return {
     init = init,

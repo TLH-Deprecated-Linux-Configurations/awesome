@@ -8,7 +8,7 @@
 --
 local signals = require('module.signals')
 local hardware = require('lib.hardware-check')
-local filehandle = require('lib.file')
+local filehandle = require('module.file')
 local config = require('module.functions')
 local delayed_timer = require('lib.function.delayed-timer')
 local statvfs = require('posix.sys.statvfs').statvfs

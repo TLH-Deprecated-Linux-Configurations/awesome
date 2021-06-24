@@ -4,7 +4,7 @@ local gears = require('gears')
 local dpi = require('beautiful').xresources.apply_dpi
 local config = require('module.functions')
 local theme = require('theme.icons')
-local filehandle = require('lib.file')
+local filehandle = require('module.file')
 local signals = require('module.signals')
 
 -- acpi sample outputs

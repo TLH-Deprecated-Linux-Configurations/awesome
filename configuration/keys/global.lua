@@ -15,7 +15,7 @@ local config = require('configuration.keys.mod')
 local modkey = config.modKey
 local altkey = config.altKey
 local apps = require('configuration.apps')
-local xrandr = require('lib.xrandr')
+local xrandr = require('module.xrandr')
 local signals = require('module.signals')
 local volume = require('lib.volume')
 -- ########################################################################
@@ -234,8 +234,6 @@ local globalKeys =
             group = i18n.translate('Launcher')
         }
     ),
-
-    
     --#############################################################################
 
     awful.key(
@@ -711,7 +709,6 @@ local globalKeys =
         end,
         {description = i18n.translate('go to the next song'), group = i18n.translate('Hardware')}
     ),
-
     --#############################################################################
 
     awful.key(

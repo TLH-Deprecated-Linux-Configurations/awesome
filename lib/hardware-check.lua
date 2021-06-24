@@ -31,8 +31,8 @@
 -- @tdemod lib.hardware-check
 ---------------------------------------------------------------------------
 
-local fileHandle = require("lib.file")
-local batteryHandle = require("lib.function.battery")
+local fileHandle = require('module.file')
+local batteryHandle = require('lib.function.battery')
 
 --- Executes a shell command on the main thread, This is dangerous and should be avoided as it blocks input!!
 -- @tparam cmd string The command to execute
@@ -41,8 +41,8 @@ local batteryHandle = require("lib.function.battery")
 -- @usage -- This returns Tuple<"hello", 0>
 -- lib.hardware-check.execute("echo hello")
 local function osExecute(cmd)
-    local handle = assert(io.popen(cmd, "r"))
-    local commandOutput = assert(handle:read("*a"))
+    local handle = assert(io.popen(cmd, 'r'))
+    local commandOutput = assert(handle:read('*a'))
     local returnTable = {handle:close()}
     return commandOutput, returnTable[3] -- rc[3] contains returnCode
 end
@@ -67,7 +67,7 @@ end
 -- @usage -- This True if a network card with wifi exists
 -- lib.hardware-check.hasWifi()
 local function wifi()
-    return fileHandle.exists("/proc/net/wireless")
+    return fileHandle.exists('/proc/net/wireless')
 end
 
 --- Check to see the hardware has a network card with bluetooth support
@@ -76,12 +76,12 @@ end
 -- @usage -- This True if a network card exists with bluetooth support
 -- lib.hardware-check.hasBluetooth()
 local function bluetooth()
-    local _, returnValue = osExecute("systemctl is-active bluetooth")
+    local _, returnValue = osExecute('systemctl is-active bluetooth')
     -- only check if a bluetooth controller is found if the bluetooth service is active
     -- Otherwise the system will hang
     if returnValue == 0 then
         -- list all present controllers
-        local _, returnValue2 = osExecute("bluetoothctl list")
+        local _, returnValue2 = osExecute('bluetoothctl list')
         return returnValue2 == 0
     end
     return false
@@ -94,10 +94,10 @@ end
 -- @usage -- This True for TOS based systems
 -- lib.hardware-check.has_package_installed("linux-tos")
 local function has_package_installed(name)
-    if name == "" or not (type(name) == "string") then
+    if name == '' or not (type(name) == 'string') then
         return false
     end
-    local _, returnValue = osExecute("pacman -Q " .. name)
+    local _, returnValue = osExecute('pacman -Q ' .. name)
     return returnValue == 0
 end
 
@@ -107,7 +107,7 @@ end
 -- @usage -- This True if ffmpeg is installed (a video processor)
 -- lib.hardware-check.hasFfmpeg()
 local function ffmpeg()
-    return has_package_installed("ffmpeg")
+    return has_package_installed('ffmpeg')
 end
 
 --- Check to see the hardware has a sound card installed
@@ -129,9 +129,9 @@ local function getDefaultIP()
     -- we create a socket to 0.0.0.1 as that ip is guaranteed to be in the default gateway
     -- however we never send a packet as that would leek user data
     -- and would't work in private networks
-    local socket = require("socket").udp()
-    socket:setpeername("0.0.0.1", 81)
-    local ip = socket:getsockname() or "0.0.0.0"
+    local socket = require('socket').udp()
+    socket:setpeername('0.0.0.1', 81)
+    local ip = socket:getsockname() or '0.0.0.0'
     return ip
 end
 
@@ -142,15 +142,15 @@ end
 -- lib.hardware-check.getRamInfo()
 local function getRamInfo()
     local length = 24
-    local stdout = fileHandle.lines("/proc/meminfo")
+    local stdout = fileHandle.lines('/proc/meminfo')
     if #stdout < length then
         return
     end
-    local total = tonumber(string.gmatch(stdout[1], "%d+")())
-    local free = tonumber(string.gmatch(stdout[2], "%d+")())
-    local buffer = tonumber(string.gmatch(stdout[4], "%d+")())
-    local cache = tonumber(string.gmatch(stdout[5], "%d+")())
-    local sReclaimable = tonumber(string.gmatch(stdout[24], "%d+")())
+    local total = tonumber(string.gmatch(stdout[1], '%d+')())
+    local free = tonumber(string.gmatch(stdout[2], '%d+')())
+    local buffer = tonumber(string.gmatch(stdout[4], '%d+')())
+    local cache = tonumber(string.gmatch(stdout[5], '%d+')())
+    local sReclaimable = tonumber(string.gmatch(stdout[24], '%d+')())
 
     -- the used ram in kB
     local used = total - free - buffer - cache - sReclaimable
@@ -166,15 +166,15 @@ end
 -- @usage -- For example, 8 (cores), 16 (threads), "AMD Ryzen 7 PRO 5800X", 3000(MHz)
 -- lib.hardware-check.getCpuInfo()
 local function getCpuInfo()
-    local stdout = fileHandle.lines("/proc/cpuinfo")
+    local stdout = fileHandle.lines('/proc/cpuinfo')
 
-    local name = string.gmatch(stdout[5], ": (.*)$")()
-    local frequency = string.gmatch(stdout[8], "%d+")()
+    local name = string.gmatch(stdout[5], ': (.*)$')()
+    local frequency = string.gmatch(stdout[8], '%d+')()
 
     -- find all cpu's (some systems have multi cpu setups)
     local processors = {}
     for index, line in ipairs(stdout) do
-        if string.find(line, "^processor[%s]+:") then
+        if string.find(line, '^processor[%s]+:') then
             table.insert(processors, index)
         end
     end
@@ -182,7 +182,7 @@ local function getCpuInfo()
     local threads = #processors
     -- TODO: cores is calculated correctly for hardware with one cpu
     -- However, when using multiple cpu's it only shows the core count of the first
-    local cores = tonumber(string.gmatch(stdout[13], "%d+")()) or threads
+    local cores = tonumber(string.gmatch(stdout[13], '%d+')()) or threads
     return cores, threads, name, tonumber(frequency)
 end
 

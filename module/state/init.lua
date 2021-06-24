@@ -11,7 +11,7 @@
 
 local signals = require('module.signals')
 local serialize = require('lib.serialize')
-local filehandle = require('lib.file')
+local filehandle = require('module.file')
 local mouse = require('module.mouse')
 local volume = require('lib.volume')
 

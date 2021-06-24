@@ -12,9 +12,9 @@ local wibox = require('wibox')
 local gears = require('gears')
 local beautiful = require('beautiful')
 local icons = require('theme.icons')
-local file = require('lib.file')
+local file = require('module.file')
 local signals = require('module.signals')
-local card = require('lib.card')
+local card = require('module.card')
 
 local dpi = beautiful.xresources.apply_dpi
 -- ########################################################################

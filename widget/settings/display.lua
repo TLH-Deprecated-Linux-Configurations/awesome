@@ -16,18 +16,18 @@ local wibox = require('wibox')
 local gears = require('gears')
 local beautiful = require('beautiful')
 local rounded = require('lib.widget.rounded')
-local filesystem = require('lib.file')
+local filesystem = require('module.file')
 local icons = require('theme.icons')
 local signals = require('module.signals')
 local dpi = beautiful.xresources.apply_dpi
 local configWriter = require('lib.config-writer')
 local datetime = require('lib.function.datetime')
-local filehandle = require('lib.file')
+local filehandle = require('module.file')
 local imagemagic = require('lib.imagemagic')
-local xrandr_menu = require('lib.xrandr').menu
+local xrandr_menu = require('module.xrandr').menu
 local scrollbox = require('lib.scrollbox')
 local slider = require('lib.slider')
-local card = require('lib.card')
+local card = require('module.card')
 local button = require('lib.button')
 -- ########################################################################
 -- ########################################################################

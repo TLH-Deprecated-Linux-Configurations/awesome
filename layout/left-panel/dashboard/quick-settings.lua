@@ -9,7 +9,7 @@
 local wibox = require('wibox')
 local beautiful = require('beautiful')
 local dpi = beautiful.xresources.apply_dpi
-local card = require('lib.card')
+local card = require('module.card')
 
 local quick_settings_card = card('Volume')
 -- ########################################################################

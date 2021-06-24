@@ -12,7 +12,7 @@ local beautiful = require('beautiful')
 local icons = require('theme.icons')
 local mouse = require('module.mouse')
 local slider = require('lib.slider')
-local card = require('lib.card')
+local card = require('module.card')
 local checkbox = require('lib.checkbox')
 local scrollbox = require('lib.scrollbox')
 

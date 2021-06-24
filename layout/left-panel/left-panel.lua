@@ -18,7 +18,7 @@ local mat_icon = require('widget.material.icon')
 local signals = require('module.signals')
 local animate = require('lib.animations').createAnimObject
 local seperator_widget = require('lib.separator')
-local card = require('lib.card')
+local card = require('module.card')
 local button = require('lib.button')
 
 local get_screen = require('lib.function.common').focused_screen

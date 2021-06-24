@@ -10,7 +10,7 @@
 ---------------------------------------------------------------------------
 
 local parser = require('module.parser')
-local file_handle = require('lib.file')
+local file_handle = require('module.file')
 
 --- Update an entry in a configuration file
 -- @tparam string file The path to the file, can be both absolute or relative.
@@ -19,7 +19,7 @@ local file_handle = require('lib.file')
 -- @treturn bool if the write was successful
 -- @staticfct update_entry
 -- @usage -- This will create the content in hallo.txt to var=value
--- lib.file.update_entry("hallo.txt", "var", "value")
+-- module.file.update_entry("hallo.txt", "var", "value")
 local function update_entry(file, field, value)
     if not file_handle.exists(file) then
         return false

@@ -28,7 +28,7 @@
 -- @supermodule print
 ---------------------------------------------------------------------------
 
-local filehandle = require('lib.file')
+local filehandle = require('module.file')
 local time = require('socket').gettime
 -- store the old print variable into echo
 echo = print

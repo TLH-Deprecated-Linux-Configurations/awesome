@@ -8,7 +8,7 @@ local awful = require('awful')
 local wibox = require('wibox')
 local beautiful = require('beautiful')
 local dpi = beautiful.xresources.apply_dpi
-local filehandle = require('lib.file')
+local filehandle = require('module.file')
 local icons = require('theme.icons')
 local gears = require('gears')
 

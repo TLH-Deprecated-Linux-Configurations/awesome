@@ -19,7 +19,7 @@
 -- @tdemod lib.function.battery
 ---------------------------------------------------------------------------
 
-local filehandle = require("lib.file")
+local filehandle = require('module.file')
 
 --- Check if a battery exists
 -- @return string The percentage of the battery
@@ -28,10 +28,10 @@ local filehandle = require("lib.file")
 -- lib.function.battery.getBatteryPath() -- return location of the battery state
 local function getBatteryPath()
     -- check if battery 0 or 1 exists
-    local battery_base_dir = "/sys/class/power_supply"
+    local battery_base_dir = '/sys/class/power_supply'
     local data = filehandle.list_dir(battery_base_dir)
     for _, item in ipairs(data) do
-        if string.find(filehandle.basename(item), "BAT") ~= nil then
+        if string.find(filehandle.basename(item), 'BAT') ~= nil then
             return item
         end
     end
@@ -46,8 +46,8 @@ end
 local function isBatteryCharging()
     local battery = getBatteryPath()
     if battery then
-        local value = filehandle.string(battery .. "/status"):gsub("\n", "")
-        if value == "Charging" then
+        local value = filehandle.string(battery .. '/status'):gsub('\n', '')
+        if value == 'Charging' then
             return true
         end
     end
@@ -67,9 +67,9 @@ local function getBatteryPercentage()
     end
 
     -- battery exists, lets get the percentage back
-    local value = filehandle.string(battery .. "/capacity")
+    local value = filehandle.string(battery .. '/capacity')
     if value then
-        value = value:gsub("\n", "")
+        value = value:gsub('\n', '')
         return tonumber(value)
     end
     -- something went wrong parsing the value

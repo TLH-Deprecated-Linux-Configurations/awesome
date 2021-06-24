@@ -19,7 +19,7 @@ local split = require('lib.function.common').split
 local signals = require('module.signals')
 local mat_icon_button = require('widget.material.icon-button')
 local mat_icon = require('widget.material.icon')
-local card = require('lib.card')
+local card = require('module.card')
 local naughty = require('naughty')
 local execute = require('lib.hardware-check').execute
 local scrollbox = require('lib.scrollbox')
@@ -51,7 +51,7 @@ local function loading()
     local text =
         wibox.widget {
         text = i18n.translate('Connecting...'),
-        font = 'SFNS Display Regular 24',
+        font = 'agave Nerd Font Mono Bold 24',
         align = 'center',
         valign = 'center',
         widget = wibox.widget.textbox,

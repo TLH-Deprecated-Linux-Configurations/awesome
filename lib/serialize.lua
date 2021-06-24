@@ -19,8 +19,8 @@
 -- @tdemod lib.serialize
 ---------------------------------------------------------------------------
 
-local json = require("cjson")
-local filehandle = require("lib.file")
+local json = require('cjson')
+local filehandle = require('module.file')
 
 --- Serialize tables into a string representation
 -- @tparam table tbl the table to serialize

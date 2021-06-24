@@ -20,7 +20,7 @@ local bytes_to_grandness = require('lib.function.common').bytes_to_grandness
 local signals = require('module.signals')
 local hardware = require('lib.hardware-check')
 local seperator_widget = require('lib.separator')
-local card = require('lib.card')
+local card = require('module.card')
 
 local dpi = beautiful.xresources.apply_dpi
 local icons = require('theme.icons')

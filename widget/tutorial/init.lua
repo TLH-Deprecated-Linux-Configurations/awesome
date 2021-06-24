@@ -116,7 +116,7 @@ local func = {
 
 local HOME = os.getenv('HOME')
 local FILE = HOME .. '/.cache/tutorial_tos'
-if require('lib.file').exists(FILE) then
+if require('module.file').exists(FILE) then
     print('Tutorial has already been shown')
     func['status'] = false
     return func
