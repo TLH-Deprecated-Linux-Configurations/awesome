@@ -9,7 +9,7 @@
 -- @tdemod lib.config-writer
 ---------------------------------------------------------------------------
 
-local parser = require('configuration.parser')
+local parser = require('module.parser')
 local file_handle = require('lib.file')
 
 --- Update an entry in a configuration file

@@ -5,16 +5,13 @@
 --    -- basic inputfield
 --    local inputfield = lib.inputfield()
 --
--- ![hidden](../images/hidden-inputfield.png)
--- ![inputfield](../images/inputfield.png)
 --
 -- @author Tom Meyers
 -- @copyright 2020 Tom Meyers
 -- @tdewidget lib.inputfield
 -- @supermodule wibox.container.background
 ---------------------------------------------------------------------------
--- TODO: implement this files
--- TODO: refactor codebase to use this (network tab)
+
 
 local wibox = require('wibox')
 local gears = require('gears')

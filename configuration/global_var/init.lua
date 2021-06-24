@@ -13,7 +13,7 @@ local beautiful = require('beautiful')
 -- ########################################################################
 -- ########################################################################
 -- general conf is used by sentry (to opt out of it)
-general = require('configuration.parser')(os.getenv('HOME') .. '/.config/awesome/electric-tantra/general.conf')
+general = require('module.parser')(os.getenv('HOME') .. '/.config/awesome/electric-tantra/general.conf')
 
 i18n = require('lib.i18n')
 i18n.init('en')
@@ -23,8 +23,8 @@ awful.screen.set_auto_dpi_enabled(true)
 -- ########################################################################
 -- ########################################################################
 -- ########################################################################
-plugins = require('configuration.parser')(os.getenv('HOME') .. '/.config/awesome/electric-tantra/plugins.conf')
-keys = require('configuration.parser')(os.getenv('HOME') .. '/.config/awesome/electric-tantra/keys.conf')
+plugins = require('module.parser')(os.getenv('HOME') .. '/.config/awesome/electric-tantra/plugins.conf')
+keys = require('module.parser')(os.getenv('HOME') .. '/.config/awesome/electric-tantra/keys.conf')
 -- ########################################################################
 -- ########################################################################
 -- ########################################################################
