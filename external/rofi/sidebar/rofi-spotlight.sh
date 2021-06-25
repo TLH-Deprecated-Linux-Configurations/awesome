@@ -7,13 +7,13 @@
 # -- @script rofi-spotlight.sh
 # ----------------------------------------------------------------------------
 
-TMP_DIR="/tmp/tos-rofi/${USER}/"
+TMP_DIR="/tmp/rofi/${USER}/"
 
 PREV_LOC_FILE="${TMP_DIR}rofi_fb_prevloc"
 CURRENT_FILE="${TMP_DIR}rofi_fb_current_file"
 
 MY_PATH="$(dirname "${0}")"
-CONF_DIR="$HOME/.local/share/tos/rofi"
+CONF_DIR="$HOME/.local/share/rofi"
 HIST_FILE="$CONF_DIR/history.rs"
 
 [[ ! -d "$CONF_DIR" ]] && mkdir -p "$CONF_DIR"
@@ -129,7 +129,6 @@ then
 	echo ":web <search_query> to also to gets search suggestions"
 	echo ":webbro <search_query> to search directly from your browser"
 	echo "Examples:"
-	echo "	!how to install tos linux"
 	echo "	:web how to install bedrock linux"
 	echo "	:webbro how to install wine in windowsxp"
 

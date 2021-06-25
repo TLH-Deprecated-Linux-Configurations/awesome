@@ -20,7 +20,7 @@ local slider = require('lib.slider')
 local seperator_widget = require('lib.separator')
 local signals = require('module.signals')
 local card = require('module.card')
-local button = require('lib.button')
+local button = require('module.button')
 local checkbox = require('lib.checkbox')
 local datetime = require('lib.function.datetime')
 

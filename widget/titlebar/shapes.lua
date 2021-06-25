@@ -1,10 +1,9 @@
-
 -- => Shapes
 -- Provides utility functions for handling cairo shapes and geometry
 -- ============================================================
 --
-local lgi = require("lgi")
-local colors = require("module.titlebar.colors")
+local lgi = require('lgi')
+local colors = require('widget.titlebar.colors')
 local hex2rgb = colors.hex2rgb
 local cairo = lgi.cairo
 local math = math
@@ -28,8 +27,8 @@ end
 
 -- Returns a circle of the specified size filled with the specified color
 local function circle_filled(color, size)
-    color = color or "#fefefa"
-    local surface = cairo.ImageSurface.create("ARGB32", size, size)
+    color = color or '#fefefa'
+    local surface = cairo.ImageSurface.create('ARGB32', size, size)
     local cr = cairo.Context.create(surface)
     cr:arc(size / 2, size / 2, size / 2, rad(0), rad(360))
     cr:set_source_rgba(hex2rgb(color))
@@ -59,14 +58,14 @@ end
 local function flip(surface, axis)
     local width = surface:get_width()
     local height = surface:get_height()
-    local flipped = cairo.ImageSurface.create("ARGB32", width, height)
+    local flipped = cairo.ImageSurface.create('ARGB32', width, height)
     local cr = cairo.Context.create(flipped)
     local source_pattern = cairo.Pattern.create_for_surface(surface)
-    if axis == "horizontal" then
+    if axis == 'horizontal' then
         source_pattern.matrix = cairo.Matrix {xx = -1, yy = 1, x0 = width}
-    elseif axis == "vertical" then
+    elseif axis == 'vertical' then
         source_pattern.matrix = cairo.Matrix {xx = 1, yy = -1, y0 = height}
-    elseif axis == "both" then
+    elseif axis == 'both' then
         source_pattern.matrix =
             cairo.Matrix {
             xx = -1,
@@ -86,7 +85,7 @@ end
 local function create_corner_top_left(args)
     local radius = args.radius
     local height = args.height
-    local surface = cairo.ImageSurface.create("ARGB32", radius, height)
+    local surface = cairo.ImageSurface.create('ARGB32', radius, height)
     local cr = cairo.Context.create(surface)
     -- Create the corner shape and fill it with a gradient
     local radius_offset = 1 -- To soften the corner
@@ -136,7 +135,7 @@ end
 local function create_edge_top_middle(args)
     local height = args.height
     local width = args.width
-    local surface = cairo.ImageSurface.create("ARGB32", width, height)
+    local surface = cairo.ImageSurface.create('ARGB32', width, height)
     local cr = cairo.Context.create(surface)
     -- Create the background shape and fill it with a gradient
     cr:rectangle(0, 0, width, height)
@@ -163,7 +162,7 @@ local function create_edge_left(args)
     local height = args.height
     local width = 2
     -- height = height or 1080
-    local surface = cairo.ImageSurface.create("ARGB32", width, height)
+    local surface = cairo.ImageSurface.create('ARGB32', width, height)
     local cr = cairo.Context.create(surface)
     cr:rectangle(0, 0, 2, args.height)
     cr:set_source_rgb(hex2rgb(args.client_color))
@@ -188,24 +187,24 @@ end
 
 local function set_font(cr, font)
     cr:set_font_size(font.size)
-    cr:select_font_face(font.font or "Inter", font.italic and 1 or 0, font.bold and 1 or 0)
+    cr:select_font_face(font.font or 'Inter', font.italic and 1 or 0, font.bold and 1 or 0)
 end
 
 local function text_label(args)
-    local surface = cairo.ImageSurface.create("ARGB32", 1, 1)
+    local surface = cairo.ImageSurface.create('ARGB32', 1, 1)
     local cr = cairo.Context.create(surface)
     set_font(cr, args.font)
     local text = args.text
     local kern = args.font.kerning or 0
     local ext = cr:text_extents(text)
-    surface = cairo.ImageSurface.create("ARGB32", ext.width + string.len(text) * kern, ext.height)
+    surface = cairo.ImageSurface.create('ARGB32', ext.width + string.len(text) * kern, ext.height)
     cr = cairo.Context.create(surface)
     set_font(cr, args.font)
     cr:move_to(0, ext.height)
     cr:set_source_rgb(hex2rgb(args.color))
     -- cr:show_text(text)
     text:gsub(
-        ".",
+        '.',
         function(c)
             -- do something with c
             cr:show_text(c)

@@ -1,7 +1,7 @@
 local dirExists = require('module.file').dir_exists
 local naughty = require('naughty')
 local icons = require('theme.icons')
-local ERROR = require('lib.logger').error
+local ERROR = require('module.logger').error
 
 local function getItem(item)
     return plugins[item] or nil

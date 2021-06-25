@@ -48,7 +48,7 @@ return {
     bluetooth = dir .. '/bluetooth.svg',
     bluetooth_off = dir .. '/bluetooth-off.svg',
     bios = dir .. '/bios.svg',
-    package = dir .. '/package.svg',
+    package = dir .. 'download.svg',
     about = dir .. '/info.svg',
     mouse = dir .. '/mouse.svg',
     user = dir .. '/user.svg',

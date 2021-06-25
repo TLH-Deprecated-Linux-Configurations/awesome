@@ -1,63 +1,56 @@
----------------------------------------------------------------------------
--- This module overrides the existing print function.
---
--- The new print function also logs everything to `$HOME/.cache/tde/stdout.log`
--- This module describes the new api of the print function.
---
--- Assume you want to print something:
---
---    print("This is a print message")
---
--- This gets printed out to stdout and written to `$HOME/.cache/tde/stdout.log`
---
--- You can give the user one of four logtypes: error, warning, debug and info.
--- The default logtype is info.
---
--- To get the logtype you must do the following:
---
---    local logger = require("lib.logger")
---    print("This is an error"       , logger.error)
---    print("This is a warning"      , logger.warn)
---    print("This is a debug message", logger.debug)
---    print("This is an info message", logger.info) -- by default you can omit logger.info
---
---
--- @author Tom Meyers
--- @copyright 2020 Tom Meyers
--- @tdemod lib.logger
--- @supermodule print
----------------------------------------------------------------------------
-
+--  _____
+-- |     |_.-----.-----.-----.-----.----.
+-- |       |  _  |  _  |  _  |  -__|   _|
+-- |_______|_____|___  |___  |_____|__|
+--               |_____|_____|
+-- ########################################################################
+-- ########################################################################
+-- ########################################################################
 local filehandle = require('module.file')
 local time = require('socket').gettime
 -- store the old print variable into echo
 echo = print
-
+-- ########################################################################
+-- ########################################################################
+-- ########################################################################
 -- color coded log messages
 
 --- Indicate that this print message is an error
 -- @property error
 -- @param string
 local LOG_ERROR = '\27[0;31m[ ERROR '
+-- ########################################################################
+-- ########################################################################
+-- ########################################################################
 --- Indicate that this print message is a warning
 -- @property warn
 -- @param string
 local LOG_WARN = '\27[0;33m[ WARN '
+-- ########################################################################
+-- ########################################################################
+-- ########################################################################
 --- Indicate that this print message is a debug message
 -- @property debug
 -- @param string
 local LOG_DEBUG = '\27[0;35m[ DEBUG '
+-- ########################################################################
+-- ########################################################################
+-- ########################################################################
 --- Indicate that this print message is an info message
 -- @property info
 -- @param string
 local LOG_INFO = '\27[0;32m[ INFO '
-
+-- ########################################################################
+-- ########################################################################
+-- ########################################################################
 local dir = os.getenv('HOME') .. '/.cache/awesome'
 local filename = dir .. '/stdout.log'
 local filename_error = dir .. '/error.log'
 
 filehandle.overwrite(filename, '')
-
+-- ########################################################################
+-- ########################################################################
+-- ########################################################################
 -- helper function to convert a table to a string
 -- WARN: For internal use only, this should never be exposed to the end user
 -- usage: local string = pretty_print_table({})
@@ -70,6 +63,9 @@ local function table_to_string(tbl, depth, indent)
         end
         return ''
     end
+    -- ########################################################################
+    -- ########################################################################
+    -- ########################################################################
     local formatting = string.rep('  ', indent)
     local result = '{\n'
     for k, v in pairs(tbl) do
@@ -84,13 +80,18 @@ local function table_to_string(tbl, depth, indent)
             end
         end
     end
+    -- ########################################################################
+    -- ########################################################################
+    -- ########################################################################
     -- edge case initial indentation requires manually adding ending bracket
     if indent == 1 then
         return result .. '}'
     end
     return result
 end
-
+-- ########################################################################
+-- ########################################################################
+-- ########################################################################
 --- The default lua print message is overridden
 -- @tparam string arg The string to print
 -- @tparam[opt] enum log_type The type of log message
@@ -112,14 +113,18 @@ print = function(arg, log_type, depth)
     end
 
     local log = log_type or LOG_INFO
-
+    -- ########################################################################
+    -- ########################################################################
+    -- ########################################################################
     -- effective logging
     local file = io.open(filename, 'a')
     local file_error
     if log == LOG_ERROR then
         file_error = io.open(filename_error, 'a')
     end
-
+    -- ########################################################################
+    -- ########################################################################
+    -- ########################################################################
     local out = os.date('%H:%M:%S') .. '.' .. math.floor(time() * 10000) % 10000
     local statement = log .. out:gsub('\n', '') .. ' ]\27[0m '
     for line in arg:gmatch('[^\r\n]+') do
@@ -140,7 +145,9 @@ print = function(arg, log_type, depth)
         file_error:close()
     end
 end
-
+-- ########################################################################
+-- ########################################################################
+-- ########################################################################
 return {
     warn = LOG_WARN,
     error = LOG_ERROR,

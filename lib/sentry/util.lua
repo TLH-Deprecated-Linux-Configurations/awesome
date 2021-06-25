@@ -14,11 +14,11 @@ local string_match = string.match
 local math_random = math.random
 local os_date = os.date
 
-local loglevel = require("lib.logger").error
+local loglevel = require('module.logger').error
 
 local _M = {}
 
-local _VERSION = "1.0.0"
+local _VERSION = '1.0.0'
 _M._VERSION = _VERSION
 
 --- Used to log errors during reporting.
@@ -36,7 +36,7 @@ function _M.generate_event_id()
     -- Some version of Lua can only generate random integers up to 2^31, so we are limited to 7
     -- hex-digits per call
     return string_format(
-        "%07x%07x%07x%07x%04x",
+        '%07x%07x%07x%07x%04x',
         math_random(0, 0xfffffff),
         math_random(0, 0xfffffff),
         math_random(0, 0xfffffff),
@@ -52,15 +52,15 @@ function _M.iso8601()
     -- os.date/os.time to format the date/time because timezone
     -- problems occur
 
-    local t = os_date("!*t")
+    local t = os_date('!*t')
     return string_format(
-        "%04d-%02d-%02dT%02d:%02d:%02d",
-        t["year"],
-        t["month"],
-        t["day"],
-        t["hour"],
-        t["min"],
-        t["sec"]
+        '%04d-%02d-%02dT%02d:%02d:%02d',
+        t['year'],
+        t['month'],
+        t['day'],
+        t['hour'],
+        t['min'],
+        t['sec']
     )
 end
 
@@ -69,15 +69,15 @@ local iso8601 = _M.iso8601
 -- parse_host_port: parse long host ("127.0.0.1:2222")
 -- to host ("127.0.0.1") and port (2222)
 local function parse_host_port(protocol, host)
-    local i = string_find(host, ":")
+    local i = string_find(host, ':')
     if not i then
-        return host, protocol == "https" and 443 or 80
+        return host, protocol == 'https' and 443 or 80
     end
 
     local port_str = string_sub(host, i + 1)
     local port = tonumber(port_str)
     if not port then
-        return nil, nil, "illegal port: " .. port_str
+        return nil, nil, 'illegal port: ' .. port_str
     end
 
     return string_sub(host, 1, i - 1), port
@@ -107,16 +107,16 @@ function _M.parse_dsn(dsn, obj)
         obj = {}
     end
 
-    assert(type(obj) == "table")
+    assert(type(obj) == 'table')
 
     -- '{PROTOCOL}://{PUBLIC_KEY}@{HOST}/{PATH}{PROJECT_ID}'
     obj.protocol, obj.public_key, obj.long_host, obj.path, obj.project_id =
-        string_match(dsn, "^([^:]+)://([^:]+)@([^/]+)(.*/)(.+)$")
+        string_match(dsn, '^([^:]+)://([^:]+)@([^/]+)(.*/)(.+)$')
 
     if not obj.protocol then
         -- '{PROTOCOL}://{PUBLIC_KEY}:{SECRET_KEY}@{HOST}/{PATH}{PROJECT_ID}'
         obj.protocol, obj.public_key, obj.secret_key, obj.long_host, obj.path, obj.project_id =
-            string_match(dsn, "^([^:]+)://([^:]+):([^@]+)@([^/]+)(.*/)(.+)$")
+            string_match(dsn, '^([^:]+)://([^:]+):([^@]+)@([^/]+)(.*/)(.+)$')
     end
 
     if obj.protocol and obj.public_key and obj.long_host and obj.project_id then
@@ -129,13 +129,13 @@ function _M.parse_dsn(dsn, obj)
         obj.host = host
         obj.port = port
 
-        obj.request_uri = string_format("%sapi/%s/store/", obj.path, obj.project_id)
-        obj.server = string_format("%s://%s:%d%s", obj.protocol, obj.host, obj.port, obj.request_uri)
+        obj.request_uri = string_format('%sapi/%s/store/', obj.path, obj.project_id)
+        obj.server = string_format('%s://%s:%d%s', obj.protocol, obj.host, obj.port, obj.request_uri)
 
         return obj
     end
 
-    return nil, "failed to parse DSN string"
+    return nil, 'failed to parse DSN string'
 end
 
 --- Generate a Sentry compliant `X-Sentry-Auth` header value.
@@ -144,16 +144,16 @@ end
 function _M.generate_auth_header(dsn_object)
     if not dsn_object.secret_key then
         return string_format(
-            "Sentry sentry_version=6, sentry_client=%s, sentry_timestamp=%s, sentry_key=%s",
-            "TDE-sender/" .. _VERSION,
+            'Sentry sentry_version=6, sentry_client=%s, sentry_timestamp=%s, sentry_key=%s',
+            'TDE-sender/' .. _VERSION,
             iso8601(),
             dsn_object.public_key
         )
     end
 
     return string_format(
-        "Sentry sentry_version=6, sentry_client=%s, sentry_timestamp=%s, sentry_key=%s, sentry_secret=%s",
-        "TDE-sender/" .. _VERSION,
+        'Sentry sentry_version=6, sentry_client=%s, sentry_timestamp=%s, sentry_key=%s, sentry_secret=%s',
+        'TDE-sender/' .. _VERSION,
         iso8601(),
         dsn_object.public_key,
         dsn_object.secret_key

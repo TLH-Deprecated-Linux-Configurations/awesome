@@ -15,10 +15,10 @@ local signals = require('module.signals')
 local slider = require('lib.slider')
 local card = require('module.card')
 local volume = require('lib.volume')
-local button = require('lib.button')
+local button = require('module.button')
 local mat_icon_button = require('widget.material.icon-button')
 local mat_icon = require('widget.material.icon')
-local sound = require('lib.sound')
+local sound = require('module.sound')
 local scrollbox = require('lib.scrollbox')
 
 local dpi = beautiful.xresources.apply_dpi

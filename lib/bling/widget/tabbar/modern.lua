@@ -6,13 +6,13 @@ local xresources = require('beautiful.xresources')
 local dpi = xresources.apply_dpi
 local helpers = require(tostring(...):match('.*bling') .. '.helpers')
 
-local bg_normal = beautiful.tabbar_bg_normal or beautiful.bg_normal or '#f4f4f7'
-local fg_normal = beautiful.tabbar_fg_normal or beautiful.fg_normal or '#000000'
-local bg_focus = beautiful.tabbar_bg_focus or beautiful.bg_focus or '#000000'
+local bg_normal = beautiful.tabbar_bg_normal or beautiful.xcolor0 or '#f4f4f7'
+local fg_normal = beautiful.tabbar_fg_normal or beautiful.xforeground or '#22262d'
+local bg_focus = beautiful.tabbar_bg_focus or beautiful.xcolor0 or '#3c3f4c'
 local fg_focus = beautiful.tabbar_fg_focus or beautiful.fg_focus or '#f4f4f7'
 local font = beautiful.tabbar_font or beautiful.font or 'Hack 15'
-local size = beautiful.tabbar_size or dpi(40)
-local border_radius = beautiful.mstab_border_radius or beautiful.border_radius or 6
+local size = beautiful.tabbar_size or dpi(20)
+local border_radius = 1
 local position = beautiful.tabbar_position or 'top'
 local close_color = beautiful.tabbar_color_close or beautiful.xcolor1 or '#f9929b'
 local min_color = beautiful.tabbar_color_min or beautiful.xcolor3 or '#fbdf90'
@@ -94,13 +94,13 @@ local function create(c, focused_bool, buttons)
         wibox.widget {
         {
             awful.widget.clienticon(c),
-            top = dpi(6),
-            left = dpi(15),
-            bottom = dpi(6),
+            top = dpi(0),
+            left = dpi(5),
+            bottom = dpi(0),
             widget = wibox.container.margin
         },
         text_temp,
-        nill,
+        nil,
         expand = 'none',
         layout = wibox.layout.align.horizontal
     }
@@ -110,9 +110,9 @@ local function create(c, focused_bool, buttons)
             wibox.widget {
             {
                 awful.widget.clienticon(c),
-                top = dpi(6),
-                left = dpi(15),
-                bottom = dpi(6),
+                top = dpi(0),
+                left = dpi(5),
+                bottom = dpi(0),
                 widget = wibox.container.margin
             },
             text_temp,
@@ -135,7 +135,7 @@ local function create(c, focused_bool, buttons)
                 shape = helpers.shape.prrect(border_radius, true, true, false, false),
                 widget = wibox.container.background
             },
-            top = dpi(8),
+            top = dpi(3),
             widget = wibox.container.margin
         }
 
@@ -150,7 +150,7 @@ local function create(c, focused_bool, buttons)
                 shape = helpers.shape.prrect(border_radius, false, false, true, true),
                 widget = wibox.container.background
             },
-            bottom = dpi(8),
+            bottom = dpi(3),
             widget = wibox.container.margin
         }
 

@@ -19,7 +19,7 @@ local signals = require('module.signals')
 local animate = require('lib.animations').createAnimObject
 local seperator_widget = require('lib.separator')
 local card = require('module.card')
-local button = require('lib.button')
+local button = require('module.button')
 
 local get_screen = require('lib.function.common').focused_screen
 

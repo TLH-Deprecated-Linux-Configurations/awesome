@@ -1,13 +1,13 @@
 -- Create a new button widget
 --
 --
---    local button = lib.button(dpi(20))
+--    local button = module.button(dpi(20))
 --
 -- ![Button](../images/button.png)
 --
 -- @author Tom Meyers
 -- @copyright 2020 Tom Meyers
--- @tdewidget lib.button
+-- @tdewidget module.button
 -- @supermodule wibox.container.background
 ---------------------------------------------------------------------------
 local wibox = require('wibox')
@@ -28,7 +28,7 @@ local dpi = beautiful.xresources.apply_dpi
 -- @treturn widget The button widget
 -- @staticfct button
 -- @usage -- This will create a button that is red
--- local button = lib.button(function()
+-- local button = module.button(function()
 --    print("Clicked")
 -- end, require("theme.mat-colors").red)
 return function(body, callback, bNo_center, enter_callback, leave_callback, no_update)

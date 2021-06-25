@@ -70,13 +70,13 @@ local pixbuf_get_from_window = gdk.pixbuf_get_from_window
 -- => nice
 -- ============================================================
 -- Colors
-local colors = require('module.titlebar.colors')
+local colors = require('widget.titlebar.colors')
 local color_darken = colors.darken
 local color_lighten = colors.lighten
 local is_contrast_acceptable = colors.is_contrast_acceptable
 local relative_luminance = colors.relative_luminance
 -- Shapes
-local shapes = require('module.titlebar.shapes')
+local shapes = require('widget.titlebar.shapes')
 local create_corner_top_left = shapes.create_corner_top_left
 local create_edge_top_middle = shapes.create_edge_top_middle
 local gradient = shapes.duotone_gradient_vertical
@@ -190,7 +190,7 @@ _private.sticky_color = beautiful.xcolor4
 
 -- => Saving and loading of color rules
 -- ============================================================
-local t = require('module.titlebar.table')
+local t = require('widget.titlebar.table')
 -- luacheck: ignore 142 143
 table.save = t.save
 -- luacheck: ignore 142 143

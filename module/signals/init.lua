@@ -247,7 +247,7 @@ end
 -- @tparam string value The distribution name
 -- @staticfct emit_distro
 -- @usage -- notify other components when the distro changed
--- lib.signals.emit_distro("TOS Linux")
+
 connections.emit_distro = function(value)
     awesome.emit_signal('distro::changed', value)
 end

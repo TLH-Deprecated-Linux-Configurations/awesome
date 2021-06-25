@@ -77,24 +77,7 @@ local function setup_state(state)
     signals.emit_brightness(math.max(state.brightness, 5))
     signals.emit_do_not_disturb(state.do_not_disturb or false)
     signals.emit_oled_mode(state.oled_mode or false)
-    -- execute xrandr script
-    awesome.connect_signal(
-        'startup',
-        function()
-            awful.spawn.easy_async(
-                "sh -c 'which autorandr && autorandr --load tde'",
-                function()
-                end
-            )
-            signals.connect_refresh_screen(
-                function()
-                    -- update our wallpaper
-                    awful.spawn("sh -c 'tos theme set $(tos theme active)'")
-                    --awful.spawn("sh -c 'which autorandr && autorandr --load tde'")
-                end
-            )
-        end
-    )
+
     -- find all mouse peripheral that are currently attached to the machine
     if state.mouse then
         local devices = mouse.getInputDevices()

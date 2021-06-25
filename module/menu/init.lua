@@ -25,18 +25,18 @@ local terminal = apps.default.terminal
 local web_browser = os.getenv('BROWSER') or apps.default.web_browser
 local file_manager = apps.default.file_manager
 local text_editor = apps.default.editor
-local editor_cmd = terminal .. ' -e ' .. (os.getenv('EDITOR') or 'vim')
+local editor_cmd = terminal .. ' -e ' .. (os.getenv('EDITOR') or 'nvim')
 -- ########################################################################
 -- ########################################################################
 -- ########################################################################
 beautiful.menu_font = 'agave Nerd Font Mono Bold 12'
 beautiful.menu_height = 34
 beautiful.menu_width = 180
-beautiful.menu_bg_focus = beautiful.bg_normal -- add a bit of transparency
-beautiful.menu_bg_normal = '#00000044'
+beautiful.menu_bg_focus = beautiful.bg_focus -- add a bit of transparency
+beautiful.menu_bg_normal = beautiful.bg_normal .. '44'
 beautiful.menu_submenu = '➤'
 beautiful.menu_border_width = 20
-beautiful.menu_border_color = '#00000075'
+beautiful.menu_border_color = beautiful.bg_normal .. '44'
 -- ########################################################################
 -- ########################################################################
 -- ########################################################################

@@ -21,8 +21,8 @@ local icons = require('theme.icons')
 local mat_icon_button = require('widget.material.icon-button')
 local mat_icon = require('widget.material.icon')
 local card = require('module.card')
-local inputfield = require('lib.inputfield')
-local tde_button = require('lib.button')
+local inputfield = require('module.inputfield')
+local tde_button = require('module.button')
 local signals = require('module.signals')
 local scrollbox = require('lib.scrollbox')
 local network = require('lib.network')
@@ -112,14 +112,14 @@ local function make_network_widget(ssid, active)
                     -- try to connect without a password
                     if active_text == '' then
                         awful.spawn.easy_async(
-                            'tos network connect ' .. ssid,
+                            'network connect ' .. ssid,
                             function(_)
                                 refresh()
                             end
                         )
                     else
                         awful.spawn.easy_async(
-                            'tos network connect ' .. ssid .. ' password ' .. active_text,
+                            'network connect ' .. ssid .. ' password ' .. active_text,
                             function(_)
                                 refresh()
                             end

@@ -7,7 +7,7 @@
 -- ########################################################################
 -- ########################################################################
 local signals = require('module.signals')
-local sound = require('lib.sound')
+local sound = require('module.sound')
 local time = require('socket').gettime
 local volume = require('lib.volume')
 

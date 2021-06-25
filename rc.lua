@@ -13,7 +13,7 @@
 pcall(require, 'luarocks.loader')
 -- ########################################################################
 require('lib.luapath')
-require('lib.logger')
+require('module.logger')
 print('Booting up...')
 -- ########################################################################
 require('configuration.global_var')
@@ -23,7 +23,7 @@ require('awful.autofocus')
 require('module.notifications')
 -- ########################################################################
 
-require('module.titlebar')()
+require('widget.titlebar')()
 require('module.backdrop')
 -- ########################################################################
 -- Layout

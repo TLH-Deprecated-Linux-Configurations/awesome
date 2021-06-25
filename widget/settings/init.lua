@@ -14,12 +14,12 @@ local dpi = beautiful.xresources.apply_dpi
 local icons = require('theme.icons')
 local naughty = require('naughty')
 local plugins = require('lib.plugin-loader')('settings')
-local err = require('lib.logger').error
+local err = require('module.logger').error
 local signals = require('module.signals')
 local scrollbox = require('lib.scrollbox')
 local animate = require('lib.animations').createAnimObject
 local profilebox = require('lib.profilebox')
-local button = require('lib.button')
+local button = require('module.button')
 local HOME = os.getenv('HOME')
 
 local keyconfig = require('configuration.keys.mod')

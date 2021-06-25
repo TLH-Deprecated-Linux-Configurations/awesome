@@ -1,3 +1,27 @@
+--[[
+--MIT License
+--
+--Copyright (c) 2019 manilarome
+--Copyright (c) 2020 Tom Meyers
+--
+--Permission is hereby granted, free of charge, to any person obtaining a copy
+--of this software and associated documentation files (the "Software"), to deal
+--in the Software without restriction, including without limitation the rights
+--to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+--copies of the Software, and to permit persons to whom the Software is
+--furnished to do so, subject to the following conditions:
+--
+--The above copyright notice and this permission notice shall be included in all
+--copies or substantial portions of the Software.
+--
+--THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+--IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+--FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+--AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+--LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+--OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+--SOFTWARE.
+]]
 ---------------------------------------------------------------------------
 -- Lua wrapper around imagemagic.
 --
@@ -9,13 +33,13 @@
 -- This can be solved by creating a "thumbnail" of the image, the syntax looks as followed
 --
 --    -- scale the image to 300x200 pixels and store it in out.png
---    lib.imagemagic.scale("file.png", 300, 200, "out.png", function()
+--    lib-tde.imagemagic.scale("file.png", 300, 200, "out.png", function()
 --        print("Finished scaling image")
 --    end)
 --
 -- @author Tom Meyers
 -- @copyright 2020 Tom Meyers
--- @tdemod lib.imagemagic
+-- @tdemod lib-tde.imagemagic
 ---------------------------------------------------------------------------
 local hardware = require('lib.hardware-check')
 
@@ -38,7 +62,7 @@ end
 -- @tparam callback function The function to trigger when the image is scaled
 -- @staticfct scale
 -- @usage
---    lib.imagemagic.scale("file.png", 300, 200, "out.png", function()
+--    lib-tde.imagemagic.scale("file.png", 300, 200, "out.png", function()
 --        print("Finished scaling image")
 --    end)
 local function scale(input, width, height, output, callback)
@@ -62,7 +86,7 @@ end
 -- @tparam callback function The function to trigger when the image is generated
 -- @staticfct grayscale
 -- @usage
---    lib.imagemagic.grayscale("file.png", "gray.png", function()
+--    lib-tde.imagemagic.grayscale("file.png", "gray.png", function()
 --        print("Finished generating a grayscale image")
 --    end)
 local function grayscale(input, output, callback)
@@ -87,7 +111,7 @@ end
 -- @tparam callback function The function to trigger when the image is made transparent
 -- @staticfct transparent
 -- @usage
---    lib.imagemagic.transparent("file.png", "out.png", "#f4f4f7", function()
+--    lib-tde.imagemagic.transparent("file.png", "out.png", "#FFFFFF", function()
 --        print("Finished making the image transparent")
 --    end)
 local function transparent(input, output, color, callback)
@@ -112,7 +136,7 @@ end
 -- @tparam callback function The function to trigger when the image is compressed
 -- @staticfct compress
 -- @usage
---    lib.imagemagic.compress("file.png", "out.png", 85, function()
+--    lib-tde.imagemagic.compress("file.png", "out.png", 85, function()
 --        print("Finished compressing image")
 --    end)
 local function compress(input, output, rate, callback)
@@ -140,7 +164,7 @@ end
 -- @tparam callback function The function to trigger when the image is converted
 -- @staticfct convert
 -- @usage
---    lib.imagemagic.convert("file.png", "file.jpg", function()
+--    lib-tde.imagemagic.convert("file.png", "file.jpg", function()
 --        print("Finished converting image")
 --    end)
 local function convert(input, output, callback)

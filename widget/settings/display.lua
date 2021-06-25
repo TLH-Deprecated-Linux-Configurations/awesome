@@ -23,12 +23,12 @@ local dpi = beautiful.xresources.apply_dpi
 local configWriter = require('lib.config-writer')
 local datetime = require('lib.function.datetime')
 local filehandle = require('module.file')
-local imagemagic = require('lib.imagemagic')
+local imagemagic = require('module.imagemagic')
 local xrandr_menu = require('module.xrandr').menu
 local scrollbox = require('lib.scrollbox')
 local slider = require('lib.slider')
 local card = require('module.card')
-local button = require('lib.button')
+local button = require('module.button')
 -- ########################################################################
 -- ########################################################################
 -- ########################################################################
@@ -136,7 +136,7 @@ local function make_mon(wall, id, fullwall, disable_number)
             -- we check if button == 1 for a left mouse button (this way scrolling still works)
             if Display_Mode == WALLPAPER_MODE and btn == 1 then
                 awful.spawn.easy_async(
-                    'tos theme set ' .. fullwall,
+                    'theme set ' .. fullwall,
                     function()
                         Display_Mode = NORMAL_MODE
                         refresh()
@@ -480,7 +480,7 @@ return function()
         changewall.visible = true
         screenLayoutBtn.visible = true
         awful.spawn.with_line_callback(
-            'tos theme active',
+            'theme active',
             {
                 stdout = function(o)
                     table.insert(screens, o)
