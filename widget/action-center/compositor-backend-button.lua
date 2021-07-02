@@ -15,7 +15,7 @@ local wibox = require('wibox')
 local gears = require('gears')
 local dpi = require('beautiful').xresources.apply_dpi
 local mat_list_item = require('widget.material.list-item')
-local checkbox = require('lib.checkbox')
+local checkbox = require('module.checkbox')
 
 local config = require('module.functions')
 

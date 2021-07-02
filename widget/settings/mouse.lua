@@ -13,7 +13,7 @@ local icons = require('theme.icons')
 local mouse = require('module.mouse')
 local slider = require('lib.slider')
 local card = require('module.card')
-local checkbox = require('lib.checkbox')
+local checkbox = require('module.checkbox')
 local scrollbox = require('lib.scrollbox')
 
 local dpi = beautiful.xresources.apply_dpi

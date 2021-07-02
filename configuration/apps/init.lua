@@ -16,11 +16,11 @@ local hardware = require 'lib.hardware-check'
 local beautiful = require 'beautiful'
 local color = beautiful.xforeground
 local HOME = os.getenv 'HOME'
-local picom = 'picom -b --dbus --experimental-backends --config ' .. config.getComptonFile()
+local picom = 'picom -b --dbus --experimental-backends --config ' ..
+                  config.getComptonFile()
 -- if the user has weak hardware then don't use picom with it's blur effects
-if general['weak_hardware'] == '1' or hardware.isWeakHardware() then
-    picom = ''
-end
+if general['weak_hardware'] == '1' or hardware.isWeakHardware() then picom = '' end
+package.loaded["awful.hotkeys_popup.keys.tmux"] = {}
 -- ########################################################################
 -- ########################################################################
 -- ########################################################################
@@ -35,31 +35,26 @@ return {
         -- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
         file_manager = 'thunar',
         -- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-        rofi = 'rofi -dpi ' ..
-            screen.primary.dpi ..
-                ' -show "Global Search" -modi "Global Search":' ..
-                    HOME ..
-                        '/.config/awesome/external/rofi/sidebar/rofi-spotlight.sh -theme ' ..
-                            HOME .. '/.config/awesome/external/rofi/sidebar/rofi.rasi',
+        rofi = 'rofi -dpi ' .. screen.primary.dpi ..
+            ' -show "Global Search" -modi "Global Search":' .. HOME ..
+            '/.config/awesome/external/rofi/sidebar/rofi-spotlight.sh -theme ' ..
+            HOME .. '/.config/awesome/external/rofi/sidebar/rofi.rasi',
         -- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-        web = 'rofi -dpi ' ..
-            screen.primary.dpi ..
-                ' -show Search -modi Search:' ..
-                    HOME ..
-                        '/external/rofi/search.py' ..
-                            ' -theme ' .. HOME .. '/.config/awesome/external/rofi/sidebar/rofi.rasi',
+        web = 'rofi -dpi ' .. screen.primary.dpi ..
+            ' -show Search -modi Search:' .. HOME .. '/external/rofi/search.py' ..
+            ' -theme ' .. HOME ..
+            '/.config/awesome/external/rofi/sidebar/rofi.rasi',
         -- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-        rofiappmenu = 'bash ' ..
-            HOME ..
-                '/.config/awesome/bin/applauncher.sh ' ..
-                    screen.primary.dpi .. ' ' .. filesystem.get_configuration_dir(),
+        rofiappmenu = 'bash ' .. HOME .. '/.config/awesome/bin/applauncher.sh ' ..
+            screen.primary.dpi .. ' ' .. filesystem.get_configuration_dir(),
         -- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-        rofiwindowswitch = 'bash ' .. HOME .. '/.config/awesome/application-switch.sh' .. ' ' .. screen.primary.dpi,
+        rofiwindowswitch = 'bash ' .. HOME ..
+            '/.config/awesome/application-switch.sh' .. ' ' ..
+            screen.primary.dpi,
         -- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-        roficlipboard = 'rofi -dpi ' ..
-            screen.primary.dpi ..
-                ' -modi "clipboard:greenclip print" -show clipboard -theme ' ..
-                    HOME .. '/.config/awesome/external/rofi/appmenu/drun.rasi',
+        roficlipboard = 'rofi -dpi ' .. screen.primary.dpi ..
+            ' -modi "clipboard:greenclip print" -show clipboard -theme ' .. HOME ..
+            '/.config/awesome/external/rofi/appmenu/drun.rasi',
         -- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
         rofiwifimenu = 'bash ' .. HOME .. 'wifi.sh' .. ' ' .. screen.primary.dpi,
         -- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -78,10 +73,8 @@ return {
         -- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
         'xfce4-power-manager', -- Power manager
         -- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-        'xfsettingsd',
-        -- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-        'xrdb $HOME/.Xresources',
-        -- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+        'xfsettingsd', -- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+        'xrdb $HOME/.Xresources', -- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
         'xsetroot -cursor_name left_ptr',
         -- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
         'xcape -e "Super_L=Super_L|Control_L|Escape"'
@@ -91,19 +84,25 @@ return {
     -- ########################################################################
     -- ########################################################################
     bins = {
-        coverUpdate = require 'lib.extractcover'.extractalbum,
+        coverUpdate = require'lib.extractcover'.extractalbum,
         -- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-        full_screenshot = 'sh /.config/awesome/bin/snapshot.sh full "' .. color .. '"',
+        full_screenshot = 'sh /.config/awesome/bin/snapshot.sh full "' .. color ..
+            '"',
         -- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-        full_blank_screenshot = 'sh ' .. HOME .. ' /.config/awesome/bin/snapshot.sh full_blank',
+        full_blank_screenshot = 'sh ' .. HOME ..
+            ' /.config/awesome/bin/snapshot.sh full_blank',
         -- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-        area_screenshot = 'sh ' .. HOME .. '/.config/awesome/bin/snapshot.sh area ' .. color .. '"',
+        area_screenshot = 'sh ' .. HOME ..
+            '/.config/awesome/bin/snapshot.sh area ' .. color .. '"',
         -- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-        area_blank_screenshot = 'sh ' .. HOME .. '/.config/awesome/bin/snapshot.sh area_blank',
+        area_blank_screenshot = 'sh ' .. HOME ..
+            '/.config/awesome/bin/snapshot.sh area_blank',
         -- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-        window_screenshot = 'sh ' .. HOME .. '/.config/awesome/bin/snapshot.sh" window ' .. color .. '"',
+        window_screenshot = 'sh ' .. HOME ..
+            '/.config/awesome/bin/snapshot.sh" window ' .. color .. '"',
         -- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-        window_blank_screenshot = 'sh ' .. HOME .. '/.config/awesome/bin/snapshot.sh window_blank'
+        window_blank_screenshot = 'sh ' .. HOME ..
+            '/.config/awesome/bin/snapshot.sh window_blank'
         -- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     }
 }

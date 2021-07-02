@@ -23,7 +23,7 @@
 --SOFTWARE.
 ]]
 local profile_runner = require("profiler.isolation_runner")
-local filehandle = require("lib-tde.file")
+local filehandle = require("module.file")
 
 local function profile_tde()
     local _, out = profile_runner.run_rc_config_in_xephyr(os.getenv("PWD") .. "/profiler/runtime.lua")

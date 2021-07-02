@@ -23,8 +23,8 @@
 --SOFTWARE.
 ]]
 local profile = require("profiler.profile")
-local delayed_timer = require("lib-tde.function.delayed-timer")
-local filehandle = require("lib-tde.file")
+local delayed_timer = require("lib.function.delayed-timer")
+local filehandle = require("module.file")
 
 local originalPrint = print
 print = function(_)

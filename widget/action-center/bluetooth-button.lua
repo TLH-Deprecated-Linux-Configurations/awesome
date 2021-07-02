@@ -15,7 +15,7 @@ local gears = require('gears')
 local dpi = require('beautiful').xresources.apply_dpi
 local mat_list_item = require('widget.material.list-item')
 local signals = require('module.signals')
-local checkbox = require('lib.checkbox')
+local checkbox = require('module.checkbox')
 
 -- ########################################################################
 -- Functionality ##########################################################

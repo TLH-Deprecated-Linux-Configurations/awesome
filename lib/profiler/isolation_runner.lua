@@ -22,7 +22,7 @@
 --OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 --SOFTWARE.
 ]]
-local hardware = require("tde.lib-tde.hardware-check")
+local hardware = require("lib.hardware-check")
 
 _G.DISPLAY_ID = 100
 

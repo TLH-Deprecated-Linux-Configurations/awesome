@@ -2,7 +2,6 @@
 -- |   |   |.---.-.----.--|  |.--.--.--.---.-.----.-----.
 -- |       ||  _  |   _|  _  ||  |  |  |  _  |   _|  -__|
 -- |___|___||___._|__| |_____||________|___._|__| |_____|
-
 --  ______ __                __
 -- |      |  |--.-----.----.|  |--.
 -- |   ---|     |  -__|  __||    <
@@ -11,7 +10,7 @@
 -- ########################################################################
 -- ########################################################################
 local fileHandle = require('module.file')
-local batteryHandle = require('lib.function.battery')
+local batteryHandle = require('module.battery')
 -- ########################################################################
 -- ########################################################################
 -- ########################################################################
@@ -43,9 +42,7 @@ end
 -- @staticfct hasBattery
 -- @usage -- This True if it is a laptop
 -- lib.hardware-check.hasBattery()
-local function battery()
-    return batteryHandle.getBatteryPath() ~= nil
-end
+local function battery() return batteryHandle.getBatteryPath() ~= nil end
 -- ########################################################################
 -- ########################################################################
 -- ########################################################################
@@ -54,9 +51,7 @@ end
 -- @staticfct hasWifi
 -- @usage -- This True if a network card with wifi exists
 -- lib.hardware-check.hasWifi()
-local function wifi()
-    return fileHandle.exists('/proc/net/wireless')
-end
+local function wifi() return fileHandle.exists('/proc/net/wireless') end
 -- ########################################################################
 -- ########################################################################
 -- ########################################################################
@@ -85,9 +80,7 @@ end
 -- @staticfct has_package_installed
 -- lib.hardware-check.has_package_installed("linux-tos")
 local function has_package_installed(name)
-    if name == '' or not (type(name) == 'string') then
-        return false
-    end
+    if name == '' or not (type(name) == 'string') then return false end
     local _, returnValue = osExecute('pacman -Q ' .. name)
     return returnValue == 0
 end
@@ -99,9 +92,7 @@ end
 -- @staticfct hasFfmpeg
 -- @usage -- This True if ffmpeg is installed (a video processor)
 -- lib.hardware-check.hasFfmpeg()
-local function ffmpeg()
-    return has_package_installed('ffmpeg')
-end
+local function ffmpeg() return has_package_installed('ffmpeg') end
 -- ########################################################################
 -- ########################################################################
 -- ########################################################################
@@ -142,9 +133,7 @@ end
 local function getRamInfo()
     local length = 24
     local stdout = fileHandle.lines('/proc/meminfo')
-    if #stdout < length then
-        return
-    end
+    if #stdout < length then return end
     local total = tonumber(string.gmatch(stdout[1], '%d+')())
     local free = tonumber(string.gmatch(stdout[2], '%d+')())
     local buffer = tonumber(string.gmatch(stdout[4], '%d+')())
@@ -215,20 +204,17 @@ end
 -- @usage -- Returns The frequency of the display panel in Hertz, for example 60 Hz
 -- lib.hardware-check.getDisplayFrequency()
 local function getDisplayFrequency()
-    local out, rc = osExecute("xrandr -q --current | grep -o '[0-9\\.]*\\*' | awk '{printf $1}' | tr -d '*'")
+    local out, rc = osExecute(
+                        "xrandr -q --current | grep -o '[0-9\\.]*\\*' | awk '{printf $1}' | tr -d '*'")
     -- In case nothing works return the default
-    if not (rc == 0) then
-        return 60
-    end
+    if not (rc == 0) then return 60 end
     -- ########################################################################
     -- ########################################################################
     -- ########################################################################
     -- make sure the number is in a valid range
     -- Current display don't exceed 1000 Hz so that should be a sane value
     local number = tonumber(out) or 60
-    if number < 1 or number > 1000 then
-        return 60
-    end
+    if number < 1 or number > 1000 then return 60 end
     return number
 end
 -- ########################################################################
