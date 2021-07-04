@@ -11,5 +11,8 @@
         "root",
         "center",
         "screen"
+    ],
+    "Lua.diagnostics.disable": [
+        "undefined-field"
     ]
 }
