@@ -1,5 +1,5 @@
 configuration {
-	font:                       	"agave Nerd Font Mono Bold";
+	font:                       	"agave Nerd Font Mono Bold 12";
 	show-icons:                		true;
 	fullscreen:                     false;
 	sidebar-mode:               	true;

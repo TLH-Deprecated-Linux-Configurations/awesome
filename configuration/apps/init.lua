@@ -56,7 +56,8 @@ return {
             ' -modi "clipboard:greenclip print" -show clipboard -theme ' .. HOME ..
             '/.config/awesome/external/rofi/appmenu/drun.rasi',
         -- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-        rofiwifimenu = 'bash ' .. HOME .. 'wifi.sh' .. ' ' .. screen.primary.dpi,
+        rofiwifimenu = 'bash ' .. HOME .. '.config/awesome/bin/wifi.sh' .. ' ' ..
+            screen.primary.dpi,
         -- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
         lock = 'bash ' .. HOME .. '/.config/awesome/external/i3lock/blur.sh',
         -- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~

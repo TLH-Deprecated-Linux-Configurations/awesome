@@ -6,29 +6,29 @@
 -- ########################################################################
 -- ########################################################################
 -- ########################################################################
-require('awful.autofocus')
-local hotkeys_popup = require('awful.hotkeys_popup').widget
-local has_package_installed = require('lib.hardware-check').has_package_installed
-require('awful.hotkeys_popup.keys')
+require("awful.autofocus")
+local hotkeys_popup = require("awful.hotkeys_popup").widget
+local has_package_installed = require("lib.hardware-check").has_package_installed
+require("awful.hotkeys_popup.keys")
 
-local config = require('configuration.keys.mod')
+local config = require("configuration.keys.mod")
 local modkey = config.modKey
 local altkey = config.altKey
-local apps = require('configuration.apps')
-local xrandr = require('module.xrandr')
-local signals = require('module.signals')
-local volume = require('lib.volume')
+local apps = require("configuration.apps")
+local xrandr = require("module.xrandr")
+local signals = require("module.signals")
+local volume = require("lib.volume")
 -- ########################################################################
 -- ########################################################################
 -- ########################################################################
 -- returns true if we cannot create a screenshot
 local function send_notification_if_maim_missing()
-    if not has_package_installed('maim') then
-        require('naughty').notification(
+    if not has_package_installed("maim") then
+        require("naughty").notification(
             {
-                title = i18n.translate('Cannot create screenshot'),
-                message = i18n.translate('maim is not installed'),
-                app_name = i18n.translate('Package Notifier')
+                title = i18n.translate("Cannot create screenshot"),
+                message = i18n.translate("maim is not installed"),
+                app_name = i18n.translate("Package Notifier")
             }
         )
         return true
@@ -40,480 +40,560 @@ end
 -- ########################################################################
 -- Key bindings
 local globalKeys =
-    awful.util.table.join(
-    -- Hotkeys
+    awful.util.table.join( -- Hotkeys
     awful.key(
         {modkey},
-        'F1',
+        "F1",
         hotkeys_popup.show_help,
         {
-            description = i18n.translate('Show Key Bindings'),
-            group = i18n.translate('Awesome')
+            description = i18n.translate("Show Key Bindings"),
+            group = i18n.translate("Awesome")
         }
     ),
-    --#############################################################################
+    -- #############################################################################
 
     -- Custom Keys
     awful.key(
         {modkey},
-        'y',
+        "y",
         function()
             xrandr.xrandr()
         end,
         {
-            description = i18n.translate('Launch Screen Layout Selector'),
-            group = i18n.translate('Launcher')
+            description = i18n.translate("Launch Screen Layout Selector"),
+            group = i18n.translate("Launcher")
         }
     ),
-    --#############################################################################
+    -- #############################################################################
 
     awful.key(
         {modkey},
-        'Return',
+        "Return",
         function()
-            print('Spawning terminal')
+            print("Spawning terminal")
             awful.spawn(apps.default.terminal)
         end,
-        {description = i18n.translate('Open Terminal'), group = i18n.translate('Launcher')}
+        {
+            description = i18n.translate("Open Terminal"),
+            group = i18n.translate("Launcher")
+        }
     ),
-    --#############################################################################
+    -- #############################################################################
 
     awful.key(
         {modkey},
-        'b',
+        "b",
         function()
-            print('Spawning rofi window switcher')
+            print("Spawning rofi window switcher")
             awful.spawn(apps.default.rofiwindowswitch)
         end,
         {
-            description = i18n.translate('Open a Window Switcher'),
-            group = i18n.translate('Launcher')
+            description = i18n.translate("Open a Window Switcher"),
+            group = i18n.translate("Launcher")
         }
     ),
-    --#############################################################################
+    -- #############################################################################
 
     -- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     awful.key(
-        {modkey, 'Control'},
-        'Escape',
+        {modkey, "Control"},
+        "Escape",
         function()
-            print('Spawning rofi app menu')
+            print("Spawning rofi app menu")
             awful.spawn(apps.default.rofiappmenu)
         end,
         {
-            description = i18n.translate('Open Rofi'),
-            group = i18n.translate('Launcher')
+            description = i18n.translate("Open Rofi"),
+            group = i18n.translate("Launcher")
         }
     ),
-    --#############################################################################
+    -- #############################################################################
 
-    --#############################################################################
+    -- #############################################################################
     awful.key(
         {modkey},
-        'F2',
+        "F2",
         function()
-            awful.spawn('firefox')
+            awful.spawn("firefox")
         end,
         {
-            description = 'Launch Firefox',
-            group = 'Launcher'
+            description = "Launch Firefox",
+            group = "Launcher"
         }
     ),
-    --#############################################################################
+    -- #############################################################################
     awful.key(
-        {modkey, 'Shift'},
-        'F2',
+        {modkey, "Shift"},
+        "F2",
         function()
-            awful.spawn('buku_run')
+            awful.spawn("buku_run")
         end,
         {
-            description = 'Launch Buku Rofi Menu',
-            group = 'Launcher'
+            description = "Launch Buku Rofi Menu",
+            group = "Launcher"
         }
     ),
-    --#############################################################################
+    -- #############################################################################
 
     awful.key(
-        {modkey, 'Control'},
-        'F2',
+        {modkey, "Control"},
+        "F2",
         function()
-            awful.spawn('chrome')
+            awful.spawn("chrome")
         end,
         {
-            description = 'Launch Chrome',
-            group = 'Launcher'
+            description = "Launch Chrome",
+            group = "Launcher"
         }
     ),
-    --#############################################################################
-
-    --#############################################################################
+    -- #############################################################################
 
     awful.key(
         {modkey},
-        'F3',
+        "F3",
         function()
-            awful.spawn('thunar')
+            awful.spawn("thunar")
         end,
         {
-            description = 'Launch File Manager',
-            group = 'Launcher'
+            description = "Launch File Manager",
+            group = "Launcher"
         }
     ),
-    --#############################################################################
+    -- #############################################################################
 
     awful.key(
-        {modkey, 'Control'},
-        'F3',
+        {modkey, "Control"},
+        "F3",
         function()
-            awful.spawn('gksu caja')
+            awful.spawn("gksu caja")
         end,
         {
-            description = 'Launch File Manager as Root',
-            group = 'Launcher'
+            description = "Launch File Manager as Root",
+            group = "Launcher"
         }
     ),
-    --#############################################################################
+    -- #############################################################################
 
     awful.key(
-        {modkey, 'Shift'},
-        'F3',
+        {modkey, "Shift"},
+        "F3",
         function()
-            awful.spawn('kitty -e ranger')
+            awful.spawn("kitty -e ranger")
         end,
         {
-            description = 'Launch Terminal File Manager',
-            group = 'Launcher'
+            description = "Launch Terminal File Manager",
+            group = "Launcher"
         }
     ),
-    --#############################################################################
+    -- #############################################################################
     awful.key(
         {modkey},
-        'F4',
+        "F4",
         function()
-            awful.spawn.easy_async_with_shell('~/.config/awesome/configuration/rofi/fontawesome_menu/fontawesome-menu')
+            awful.spawn.easy_async_with_shell("~/.config/awesome/external/rofi/fontawesome_menu/fontawesome-menu")
         end,
         {
-            description = 'Copy Font - Awesome Icons to Clipboard',
-            group = 'Launcher'
+            description = "Copy Font - Awesome Icons to Clipboard",
+            group = "Launcher"
         }
-    ), --#############################################################################
+    ), -- #############################################################################
     awful.key(
-        {modkey, 'Control'},
-        'F4',
+        {modkey, "Control"},
+        "F4",
         function()
-            awful.spawn.easy_async_with_shell('bin/emojipick')
+            awful.spawn.easy_async_with_shell("bin/emojipick")
         end,
-        {
-            description = 'Copy bin/emojis to Clipboard',
-            group = 'Launcher'
-        }
+        {description = "Copy bin/emojis to Clipboard", group = "Launcher"}
     ),
-    --#############################################################################
+    -- #############################################################################
     awful.key(
         {modkey},
-        'F5',
+        "F5",
         function()
-            awful.spawn('arandr')
+            awful.spawn("arandr")
         end,
         {
-            description = 'open display configuration application',
-            group = 'Launcher'
+            description = "open display configuration application",
+            group = "Launcher"
         }
     ),
-    --#############################################################################
+    -- #############################################################################
 
     -- Dropdown application
     awful.key(
         {modkey},
-        'F12',
+        "F12",
         function()
             _G.toggle_quake()
         end,
         {
-            description = i18n.translate('dropdown terminal'),
-            group = i18n.translate('Launcher')
+            description = i18n.translate("dropdown terminal"),
+            group = i18n.translate("Launcher")
         }
     ),
-    --#############################################################################
+    -- #############################################################################
 
     awful.key(
-        {'Control', 'Mod1'},
-        'Delete',
+        {"Control", "Mod1"},
+        "Delete",
         function()
-            print('Opening system monitor')
-            awful.spawn('gnome-system-monitor')
+            print("Opening system monitor")
+            awful.spawn.easy_async_with_shell("htop")
         end,
-        {description = i18n.translate('Open system monitor'), group = i18n.translate('Launcher')}
+        {
+            description = i18n.translate("Open system monitor"),
+            group = i18n.translate("Launcher")
+        }
     ),
-    --#############################################################################
+    -- #############################################################################
 
     awful.key(
-        {'Mod1'},
-        'Tab',
+        {"Mod1"},
+        "Tab",
         function()
-            print('Tabbing between applications')
-            _G.switcher.switch(1, 'Mod1', 'Alt_L', 'Shift', 'Tab')
+            print("Tabbing between applications")
+            _G.switcher.switch(1, "Mod1", "Alt_L", "Shift", "Tab")
         end,
-        {description = i18n.translate('Tab between applications'), group = i18n.translate('Laucher')}
+        {
+            description = i18n.translate("Tab between applications"),
+            group = i18n.translate("Laucher")
+        }
     ),
-    --#############################################################################
+    -- #############################################################################
 
     awful.key(
-        {'Mod1', 'Shift'},
-        'Tab',
+        {"Mod1", "Shift"},
+        "Tab",
         function()
-            print('Reverse tabbing between applications')
-            _G.switcher.switch(-1, 'Mod1', 'Alt_L', 'Shift', 'Tab')
+            print("Reverse tabbing between applications")
+            _G.switcher.switch(-1, "Mod1", "Alt_L", "Shift", "Tab")
         end,
-        {description = i18n.translate('Tab between applications in reverse order'), group = i18n.translate('Laucher')}
+        {
+            description = i18n.translate("Tab between applications in reverse order"),
+            group = i18n.translate("Laucher")
+        }
     ),
-    --#############################################################################
-    --#############################################################################
+    -- #############################################################################
+    -- #############################################################################
     -- Client resize master
     awful.key(
         {modkey},
-        'Right',
+        "Right",
         function()
             awful.tag.incmwfact(0.05)
         end,
-        {description = 'increase master width factor', group = 'Layout'}
+        {
+            description = "increase master width factor",
+            group = "Layout"
+        }
     ),
-    --#############################################################################
+    -- #############################################################################
     awful.key(
         {modkey},
-        'Left',
+        "Left",
         function()
             awful.tag.incmwfact(-0.05)
         end,
-        {description = 'decrease master width factor', group = 'Layout'}
+        {
+            description = "decrease master width factor",
+            group = "Layout"
+        }
     ),
-    --#############################################################################
+    -- #############################################################################
     -- Increase/Decrease numbers of master
     awful.key(
         {modkey},
-        'Up',
+        "Up",
         function()
             awful.tag.incnmaster(1, nil, true)
         end,
-        {description = 'increase the number of master clients', group = 'Layout'}
+        {
+            description = "increase the number of master clients",
+            group = "Layout"
+        }
     ),
-    --#############################################################################
+    -- #############################################################################
     awful.key(
         {modkey},
-        'Down',
+        "Down",
         function()
             awful.tag.incnmaster(-1, nil, true)
         end,
-        {description = 'decrease the number of master clients', group = 'Layout'}
+        {
+            description = "decrease the number of master clients",
+            group = "Layout"
+        }
     ),
-    --#############################################################################
+    -- #############################################################################
 
     -- Screen Shots
     -- Screen Shot and Save
     awful.key(
         {},
-        'Print',
+        "Print",
         function()
-            print('Taking a full screenshot')
+            print("Taking a full screenshot")
             if not send_notification_if_maim_missing() then
-                awful.spawn('snap full')
+                awful.spawn("snap full")
             end
         end
     ),
-    --#############################################################################
+    -- #############################################################################
 
     -- Screen Shot Area and Save
     awful.key(
         {modkey},
-        'Print',
+        "Print",
         function()
-            print('Taking an area screenhot')
+            print("Taking an area screenhot")
             if not send_notification_if_maim_missing() then
-                awful.spawn('snap area')
+                awful.spawn("snap area")
             end
         end
     ),
-    --#############################################################################
+    -- #############################################################################
 
     -- Toggle System Tray
     awful.key(
         {modkey},
-        '=',
+        "=",
         function()
-            print('Toggeling systray visibility')
+            print("Toggeling systray visibility")
             awful.screen.focused().systray.visible = not awful.screen.focused().systray.visible
         end,
-        {description = i18n.translate('Toggle systray visibility'), group = i18n.translate('custom')}
+        {
+            description = i18n.translate("Toggle systray visibility"),
+            group = i18n.translate("custom")
+        }
     ),
-    --#############################################################################
+    -- #############################################################################
 
     -- Tag browsing
     awful.key(
         {modkey},
-        'w',
+        "w",
         awful.tag.viewprev,
-        {description = i18n.translate('view previous'), group = i18n.translate(i18n.translate('tag'))}
+        {
+            description = i18n.translate("view previous"),
+            group = i18n.translate(i18n.translate("tag"))
+        }
     ),
-    --#############################################################################
+    -- #############################################################################
 
     awful.key(
         {modkey},
-        'a',
+        "a",
         awful.tag.viewnext,
-        {description = i18n.translate('view next'), group = i18n.translate(i18n.translate('tag'))}
+        {
+            description = i18n.translate("view next"),
+            group = i18n.translate(i18n.translate("tag"))
+        }
     ),
-    --#############################################################################
+    -- #############################################################################
 
     -- Default client focus
     awful.key(
-        {modkey, 'Shift'},
-        'w',
+        {modkey, "Shift"},
+        "w",
         function()
             awful.client.focus.byidx(1)
         end,
-        {description = i18n.translate('focus next by index'), group = i18n.translate('Client')}
+        {
+            description = i18n.translate("focus next by index"),
+            group = i18n.translate("Client")
+        }
     ),
-    --#############################################################################
+    -- #############################################################################
 
     awful.key(
-        {modkey, 'Shift'},
-        'a',
+        {modkey, "Shift"},
+        "a",
         function()
             awful.client.focus.byidx(-1)
         end,
-        {description = i18n.translate('focus previous by index'), group = i18n.translate('Client')}
+        {
+            description = i18n.translate("focus previous by index"),
+            group = i18n.translate("Client")
+        }
     ),
-    --#############################################################################
+    -- #############################################################################
 
     awful.key(
         {modkey},
-        'g',
+        "g",
         function()
-            print('Showing action center')
+            print("Showing action center")
             _G.screen.primary.left_panel:toggle(true)
         end,
-        {description = i18n.translate('Open Control panel'), group = i18n.translate('Launcher')}
+        {
+            description = i18n.translate("Open Control panel"),
+            group = i18n.translate("Launcher")
+        }
     ),
-    --#############################################################################
+        -- #############################################################################
 
-    awful.key({modkey}, 'u', awful.client.urgent.jumpto, {description = 'jump to urgent client', group = 'Client'}),
+        awful.key(
+            {modkey},
+            "h",
+            function()
+                print("Toggeling right panel")
+                if _G.screen.primary.right_panel ~= nil then
+                    _G.screen.primary.right_panel:toggle()
+                end
+            end,
+            {
+                description = i18n.translate("Open Notification Center"),
+                group = i18n.translate("Launcher")
+            }
+        ),
+    -- #############################################################################
+
     awful.key(
         {modkey},
-        'Tab',
+        "u",
+        awful.client.urgent.jumpto,
+        {
+            description = "jump to urgent client",
+            group = "Client"
+        }
+    ),
+    -- #############################################################################
+
+    awful.key(
+        {modkey},
+        "Tab",
         function()
             awful.client.focus.history.previous()
             if _G.client.focus then
                 _G.client.focus:raise()
             end
         end,
-        {description = i18n.translate('go back'), group = i18n.translate('Client')}
+        {
+            description = i18n.translate("go back"),
+            group = i18n.translate("Client")
+        }
     ),
-    --#############################################################################
+    -- #############################################################################
 
     -- Programs
     awful.key(
         {modkey},
-        'l',
+        "l",
         function()
-            print('Locking screen')
+            print("Locking screen")
             awful.spawn(apps.default.lock)
         end,
-        {description = i18n.translate('lock the screen'), group = i18n.translate('hotkeys')}
+        {
+            description = i18n.translate("lock the screen"),
+            group = i18n.translate("hotkeys")
+        }
     ),
-    --#############################################################################
 
-    awful.key(
-        {modkey},
-        'h',
-        function()
-            print('Toggeling right panel')
-            if _G.screen.primary.right_panel ~= nil then
-                _G.screen.primary.right_panel:toggle()
-            end
-        end,
-        {description = i18n.translate('Open Notification Center'), group = i18n.translate('Launcher')}
-    ),
-    --#############################################################################
+    -- #############################################################################
 
     -- Standard program
     awful.key(
         {modkey},
-        'r',
+        "r",
         _G.awesome.restart,
-        {description = i18n.translate('reload awesome'), group = i18n.translate('awesome')}
+        {
+            description = i18n.translate("reload awesome"),
+            group = i18n.translate("awesome")
+        }
     ),
-    --#############################################################################
+    -- #############################################################################
 
     awful.key(
-        {modkey, 'Control'},
-        'x',
+        {modkey, "Control"},
+        "x",
         _G.awesome.quit,
-        {description = i18n.translate('quit awesome'), group = i18n.translate('awesome')}
+        {
+            description = i18n.translate("quit awesome"),
+            group = i18n.translate("awesome")
+        }
     ),
-    --#############################################################################
+    -- #############################################################################
 
     awful.key(
-        {modkey, 'Shift'},
-        'h',
+        {modkey, "Shift"},
+        "h",
         function()
             awful.tag.incnmaster(1, nil, true)
         end,
-        {description = i18n.translate('increase the number of master clients'), group = i18n.translate('Layout')}
+        {
+            description = i18n.translate("increase the number of master clients"),
+            group = i18n.translate("Layout")
+        }
     ),
-    --#############################################################################
+    -- #############################################################################
 
     awful.key(
-        {modkey, 'Shift'},
-        'l',
+        {modkey, "Shift"},
+        "l",
         function()
             awful.tag.incnmaster(-1, nil, true)
         end,
-        {description = i18n.translate('decrease the number of master clients'), group = i18n.translate('Layout')}
+        {
+            description = i18n.translate("decrease the number of master clients"),
+            group = i18n.translate("Layout")
+        }
     ),
-    --#############################################################################
+    -- #############################################################################
 
     awful.key(
-        {modkey, 'Control'},
-        'h',
+        {modkey, "Control"},
+        "h",
         function()
             awful.tag.incnplugplug(1, nil, true)
         end,
-        {description = i18n.translate('increase the number of columns'), group = i18n.translate('Layout')}
+        {
+            description = i18n.translate("increase the number of columns"),
+            group = i18n.translate("Layout")
+        }
     ),
-    --#############################################################################
+    -- #############################################################################
 
     awful.key(
-        {modkey, 'Control'},
-        'l',
+        {modkey, "Control"},
+        "l",
         function()
             awful.tag.incncol(-1, nil, true)
         end,
-        {description = i18n.translate('decrease the number of columns'), group = i18n.translate('Layout')}
+        {
+            description = i18n.translate("decrease the number of columns"),
+            group = i18n.translate("Layout")
+        }
     ),
-    --#############################################################################
+    -- #############################################################################
 
     awful.key(
         {modkey},
-        'space',
+        "space",
         function()
             awful.layout.inc(1)
         end,
-        {description = i18n.translate('select next'), group = i18n.translate('Layout')}
+        {
+            description = i18n.translate("select next"),
+            group = i18n.translate("Layout")
+        }
     ),
-    --#############################################################################
+    -- #############################################################################
 
     awful.key(
-        {modkey, 'Shift'},
-        'space',
+        {modkey, "Shift"},
+        "space",
         function()
             awful.layout.inc(-1)
         end,
-        {description = i18n.translate('select previous'), group = i18n.translate('Layout')}
+        {
+            description = i18n.translate("select previous"),
+            group = i18n.translate("Layout")
+        }
     ),
-    --#############################################################################
+    -- #############################################################################
     awful.key(
         {modkey},
-        'n',
+        "n",
         function()
             -- The client currently has the input focus, so it cannot be
             -- minimized, since minimized clients can't have the focus.
@@ -522,11 +602,11 @@ local globalKeys =
                 c.minimized = true
             end
         end,
-        {description = 'minimize', group = 'Client'}
+        {description = "minimize", group = "Client"}
     ),
     awful.key(
-        {modkey, 'Control'},
-        'n',
+        {modkey, "Control"},
+        "n",
         function()
             local c = awful.client.restore()
             -- Focus restored client
@@ -535,23 +615,26 @@ local globalKeys =
                 c:raise()
             end
         end,
-        {description = i18n.translate('restore minimized'), group = i18n.translate('Client')}
+        {
+            description = i18n.translate("restore minimized"),
+            group = i18n.translate("Client")
+        }
     ),
-    --#############################################################################
+    -- #############################################################################
 
     -- Brightness
     awful.key(
         {},
-        'XF86MonBrightnessUp',
+        "XF86MonBrightnessUp",
         function()
-            print('Increasing brightness')
+            print("Increasing brightness")
             if (_G.oled) then
-                awful.spawn('brightness -a 5 -F')
+                awful.spawn("brightness -a 5 -F")
             else
-                awful.spawn('brightness -s 100 -F') -- reset pixel values when using backlight
-                awful.spawn('brightness -a 5')
+                awful.spawn("brightness -s 100 -F") -- reset pixel values when using backlight
+                awful.spawn("brightness -a 5")
             end
-            awesome.emit_signal('widget::brightness')
+            awesome.emit_signal("widget::brightness")
             if _G.toggleBriOSD ~= nil then
                 _G.toggleBriOSD(true)
             end
@@ -559,22 +642,25 @@ local globalKeys =
                 _G.UpdateBrOSD()
             end
         end,
-        {description = i18n.translate('+10%'), group = i18n.translate(i18n.translate('Hardware'))}
+        {
+            description = i18n.translate("+10%"),
+            group = i18n.translate(i18n.translate("Hardware"))
+        }
     ),
-    --#############################################################################
+    -- #############################################################################
 
     awful.key(
         {},
-        'XF86MonBrightnessDown',
+        "XF86MonBrightnessDown",
         function()
-            print('Decreasing brightness')
+            print("Decreasing brightness")
             if (_G.oled) then
-                awful.spawn('brightness -d 5 -F')
+                awful.spawn("brightness -d 5 -F")
             else
-                awful.spawn('brightness -s 100 -F') -- reset pixel values when using backlight
-                awful.spawn('brightness -d 5')
+                awful.spawn("brightness -s 100 -F") -- reset pixel values when using backlight
+                awful.spawn("brightness -d 5")
             end
-            awesome.emit_signal('widget::brightness')
+            awesome.emit_signal("widget::brightness")
             if _G.toggleBriOSD ~= nil then
                 _G.toggleBriOSD(true)
             end
@@ -582,205 +668,253 @@ local globalKeys =
                 _G.UpdateBrOSD()
             end
         end,
-        {description = i18n.translate('-10%'), group = i18n.translate(i18n.translate('Hardware'))}
+        {
+            description = i18n.translate("-10%"),
+            group = i18n.translate(i18n.translate("Hardware"))
+        }
     ),
-    --#############################################################################
+    -- #############################################################################
 
     -- ALSA volume control
     awful.key(
         {},
-        'XF86AudioRaiseVolume',
+        "XF86AudioRaiseVolume",
         function()
-            print('Raising volume')
+            print("Raising volume")
             volume.inc_volume()
             signals.emit_volume_update()
         end,
-        {description = i18n.translate('volume up'), group = i18n.translate(i18n.translate('Hardware'))}
+        {
+            description = i18n.translate("volume up"),
+            group = i18n.translate(i18n.translate("Hardware"))
+        }
     ),
-    --#############################################################################
+    -- #############################################################################
 
     awful.key(
         {},
-        'XF86AudioLowerVolume',
+        "XF86AudioLowerVolume",
         function()
-            print('Lowering volume')
+            print("Lowering volume")
             volume.dec_volume()
             signals.emit_volume_update()
         end,
-        {description = i18n.translate('volume down'), group = i18n.translate(i18n.translate('Hardware'))}
+        {
+            description = i18n.translate("volume down"),
+            group = i18n.translate(i18n.translate("Hardware"))
+        }
     ),
-    --#############################################################################
+    -- #############################################################################
 
     awful.key(
         {},
-        'XF86AudioMute',
+        "XF86AudioMute",
         function()
-            print('Toggeling volume')
+            print("Toggeling volume")
             volume.toggle_master()
             signals.emit_volume_update()
         end,
-        {description = i18n.translate('toggle mute'), group = i18n.translate(i18n.translate('Hardware'))}
+        {
+            description = i18n.translate("toggle mute"),
+            group = i18n.translate(i18n.translate("Hardware"))
+        }
     ),
-    --#############################################################################
+    -- #############################################################################
 
     awful.key(
         {},
-        'XF86AudioNext',
+        "XF86AudioNext",
         function()
-            print('Pressed Audio Next')
+            print("Pressed Audio Next")
         end,
-        {description = 'toggle mute', group = i18n.translate('Hardware')}
+        {
+            description = "toggle mute",
+            group = i18n.translate("Hardware")
+        }
     ),
-    --#############################################################################
+    -- #############################################################################
 
     awful.key(
         {modkey},
-        'Escape',
+        "Escape",
         function()
-            print('Showing exit screen')
+            print("Showing exit screen")
             _G.exit_screen_show()
         end,
-        {description = i18n.translate('toggle exit screen'), group = i18n.translate(i18n.translate('Hardware'))}
+        {
+            description = i18n.translate("toggle exit screen"),
+            group = i18n.translate(i18n.translate("Hardware"))
+        }
     ),
-    --#############################################################################
+    -- #############################################################################
 
     awful.key(
         {},
-        'XF86PowerOff',
+        "XF86PowerOff",
         function()
-            print('Showing exit screen')
+            print("Showing exit screen")
             _G.exit_screen_show()
         end,
-        {description = i18n.translate('toggle exit screen'), group = i18n.translate(i18n.translate('Hardware'))}
+        {
+            description = i18n.translate("toggle exit screen"),
+            group = i18n.translate(i18n.translate("Hardware"))
+        }
     ),
-    --#############################################################################
+    -- #############################################################################
 
     awful.key(
         {},
-        'XF86Display',
+        "XF86Display",
         function()
-            print('Spawning arandr')
-            awful.spawn('arandr')
+            print("Spawning arandr")
+            awful.spawn("arandr")
         end,
-        {description = i18n.translate('arandr'), group = 'hotkeys'}
+        {description = i18n.translate("arandr"), group = "hotkeys"}
     ),
-    --#############################################################################
+    -- #############################################################################
 
     -- Music player keys
     awful.key(
         {},
-        'XF86AudioPlay',
+        "XF86AudioPlay",
         function()
-            print('toggeling music')
-            awful.spawn('playerctl play-pause')
+            print("toggeling music")
+            awful.spawn("playerctl play-pause")
         end,
-        {description = i18n.translate('toggle music'), group = i18n.translate('Hardware')}
+        {
+            description = i18n.translate("toggle music"),
+            group = i18n.translate("Hardware")
+        }
     ),
-    --#############################################################################
+    -- #############################################################################
 
     awful.key(
         {},
-        'XF86AudioPause',
+        "XF86AudioPause",
         function()
-            print('toggeling music')
-            awful.spawn('playerctl play-pause')
+            print("toggeling music")
+            awful.spawn("playerctl play-pause")
         end,
-        {description = i18n.translate('toggle music'), group = i18n.translate('Hardware')}
+        {
+            description = i18n.translate("toggle music"),
+            group = i18n.translate("Hardware")
+        }
     ),
-    --#############################################################################
+    -- #############################################################################
 
     awful.key(
         {},
-        'XF86AudioPrev',
+        "XF86AudioPrev",
         function()
-            print('Previous song')
-            awful.spawn('playerctl previous')
+            print("Previous song")
+            awful.spawn("playerctl previous")
         end,
-        {description = i18n.translate('go to the previous song'), group = i18n.translate('Hardware')}
+        {
+            description = i18n.translate("go to the previous song"),
+            group = i18n.translate("Hardware")
+        }
     ),
-    --#############################################################################
+    -- #############################################################################
 
     awful.key(
         {},
-        'XF86AudioNext',
+        "XF86AudioNext",
         function()
-            print('Next song')
-            awful.spawn('playerctl next')
+            print("Next song")
+            awful.spawn("playerctl next")
         end,
-        {description = i18n.translate('go to the next song'), group = i18n.translate('Hardware')}
+        {
+            description = i18n.translate("go to the next song"),
+            group = i18n.translate("Hardware")
+        }
     ),
-    --#############################################################################
+    -- #############################################################################
 
     awful.key(
         {},
-        'Print',
+        "Print",
         function()
-            print('Taking a full screenshot')
+            print("Taking a full screenshot")
             if not send_notification_if_maim_missing() then
-                if general['window_screen_mode'] == 'none' then
+                if general["window_screen_mode"] == "none" then
                     awful.spawn(apps.bins.full_blank_screenshot)
                 else
                     awful.spawn(apps.bins.full_screenshot)
                 end
             end
         end,
-        {description = i18n.translate('fullscreen screenshot'), group = i18n.translate('Utility')}
+        {
+            description = i18n.translate("fullscreen screenshot"),
+            group = i18n.translate("Utility")
+        }
     ),
-    --#############################################################################
+    -- #############################################################################
 
     awful.key(
         {modkey},
-        'Print',
+        "Print",
         function()
-            print('Taking an area screenshot')
+            print("Taking an area screenshot")
             if not send_notification_if_maim_missing() then
-                if general['window_screen_mode'] == 'none' then
+                if general["window_screen_mode"] == "none" then
                     awful.spawn(apps.bins.area_blank_screenshot)
                 else
                     awful.spawn(apps.bins.area_screenshot)
                 end
             end
         end,
-        {description = i18n.translate('area/selected screenshot'), group = i18n.translate('Utility')}
+        {
+            description = i18n.translate("area/selected screenshot"),
+            group = i18n.translate("Utility")
+        }
     ),
-    --#############################################################################
+    -- #############################################################################
 
     awful.key(
-        {modkey, 'Shift'},
-        'Print',
+        {modkey, "Shift"},
+        "Print",
         function()
-            print('Taking a screenshot of a window')
+            print("Taking a screenshot of a window")
             if not send_notification_if_maim_missing() then
-                if general['window_screen_mode'] == 'none' then
+                if general["window_screen_mode"] == "none" then
                     awful.spawn(apps.bins.window_blank_screenshot)
                 else
                     awful.spawn(apps.bins.window_screenshot)
                 end
             end
         end,
-        {description = i18n.translate('window screenshot'), group = i18n.translate('Utility')}
+        {
+            description = i18n.translate("window screenshot"),
+            group = i18n.translate("Utility")
+        }
     ),
-    --#############################################################################
+    -- #############################################################################
 
     awful.key(
         {modkey},
-        'p',
+        "p",
         function()
-            print('Opening rofi clipboard')
+            print("Opening rofi clipboard")
             awful.spawn(apps.default.roficlipboard)
         end,
-        {description = i18n.translate('Show clipboard history'), group = i18n.translate('Utility')}
+        {
+            description = i18n.translate("Show clipboard history"),
+            group = i18n.translate("Utility")
+        }
     ),
-    --#############################################################################
+    -- #############################################################################
 
     awful.key(
         {modkey},
-        's',
+        "s",
         function()
-            print('Opening settings application')
+            print("Opening settings application")
             root.elements.settings.enable_view_by_index(-1, mouse.screen)
         end,
-        {description = i18n.translate('Open settings application'), group = 'Launcher'}
+        {
+            description = i18n.translate("Open settings application"),
+            group = "Launcher"
+        }
     )
 )
 
@@ -789,15 +923,14 @@ for i = 1, 9 do
     -- Hack to only show tags 1 and 9 in the shortcut window
     globalKeys =
         awful.util.table.join(
-        globalKeys,
-        -- View tag only.
+        globalKeys, -- View tag only.
         awful.key(
             {modkey},
-            '#' .. i + 9,
+            "#" .. i + 9,
             function()
                 local screen = awful.screen.focused()
                 local tag = screen.tags[i]
-                print('Going to tag: ' .. i)
+                print("Going to tag: " .. i)
                 if _G.clear_desktop_selection then
                     _G.clear_desktop_selection()
                 end
@@ -806,16 +939,16 @@ for i = 1, 9 do
                 end
             end
         ),
-        --#############################################################################
+        -- #############################################################################
 
         -- Toggle tag display.
         awful.key(
-            {modkey, 'Control'},
-            '#' .. i + 9,
+            {modkey, "Control"},
+            "#" .. i + 9,
             function()
                 local screen = awful.screen.focused()
                 local tag = screen.tags[i]
-                print('Toggeling tag: ' .. i)
+                print("Toggeling tag: " .. i)
                 if _G.clear_desktop_selection then
                     _G.clear_desktop_selection()
                 end
@@ -824,14 +957,14 @@ for i = 1, 9 do
                 end
             end
         ),
-        --#############################################################################
+        -- #############################################################################
 
         -- Move client to tag.
         awful.key(
-            {modkey, 'Shift'},
-            '#' .. i + 9,
+            {modkey, "Shift"},
+            "#" .. i + 9,
             function()
-                print('Moving client to tag: ' .. i)
+                print("Moving client to tag: " .. i)
                 if _G.clear_desktop_selection then
                     _G.clear_desktop_selection()
                 end
@@ -844,14 +977,14 @@ for i = 1, 9 do
                 end
             end
         ),
-        --#############################################################################
+        -- #############################################################################
 
         -- Toggle tag on focused client.
         awful.key(
-            {modkey, 'Control', 'Shift'},
-            '#' .. i + 9,
+            {modkey, "Control", "Shift"},
+            "#" .. i + 9,
             function()
-                print('Toggeling tag ' .. i .. ' focused client')
+                print("Toggeling tag " .. i .. " focused client")
                 if _G.clear_desktop_selection then
                     _G.clear_desktop_selection()
                 end

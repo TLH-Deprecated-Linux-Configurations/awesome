@@ -2,7 +2,6 @@
 -- |     __|  |.-----.|  |--.---.-.|  |    |   |   |.---.-.----.|__|.---.-.|  |--.|  |.-----.-----.
 -- |    |  |  ||  _  ||  _  |  _  ||  |    |   |   ||  _  |   _||  ||  _  ||  _  ||  ||  -__|__ --|
 -- |_______|__||_____||_____|___._||__|     \_____/ |___._|__|  |__||___._||_____||__||_____|_____|
-
 -- ###############################################
 -- ###############################################
 -- ###############################################
@@ -13,7 +12,8 @@ local beautiful = require('beautiful')
 -- ###############################################
 -- ###############################################
 -- general conf is used by sentry (to opt out of it)
-general = require('module.parser')(os.getenv('HOME') .. '/.config/awesome/electric-tantra/general.conf')
+general = require('module.parser')(os.getenv('HOME') ..
+                                       '/.config/awesome/electric-tantra/general.conf')
 
 i18n = require('lib.i18n')
 i18n.init('en')
@@ -23,8 +23,10 @@ awful.screen.set_auto_dpi_enabled(true)
 -- ###############################################
 -- ###############################################
 -- ###############################################
-plugins = require('module.parser')(os.getenv('HOME') .. '/.config/awesome/electric-tantra/plugins.conf')
-keys = require('module.parser')(os.getenv('HOME') .. '/.config/awesome/electric-tantra/keys.conf')
+plugins = require('module.parser')(os.getenv('HOME') ..
+                                       '/.config/awesome/electric-tantra/plugins.conf')
+keys = require('module.parser')(os.getenv('HOME') ..
+                                    '/.config/awesome/electric-tantra/keys.conf')
 -- ###############################################
 -- ###############################################
 -- ###############################################
@@ -49,7 +51,7 @@ beautiful.init(require('theme'))
 -- ###############################################
 -- ###############################################
 -- ###############################################
---plugins
+-- plugins
 require('widget.user-profile')
 require('widget.social-media')
 require('widget.sars-cov-2')

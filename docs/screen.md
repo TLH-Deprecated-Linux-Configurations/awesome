@@ -1,0 +1,9 @@
+# Screen Layout and Default Window Layout
+
+## On Screen Items 
+
+The bottom bar, which I prefer to having a top bar (and recently moved away from using a top and bottom bar) functions as the hub of the window manager, displaying which workspace the user is on, what windows are on the screen in, various system applets and icons to bring up the left and right panels. By default, the bottom bar is hidden until the user navigates the mouse to the bottom of the screen (its set to appear when the mouse enters the last row of pixels) as this maximizes the viewing screen without the need for a microscopic bottom bar as would otherwise be necessary and prevent the user from appreciating the design elements at play such as the use of the letters of "awesomewm" as the names of the various tags in the font that the window manager uses on its official site (thanks to the otherwise useless documentation for that much).
+
+Pressing the gear icon to the far left of the bottom bar reveals the left bar, which provides system information and a means of accessing a settings widget which can further configure the window manager within a deliberately constrained set of options. More options, while possible and relatively easily ported into the configuration, exceed the scope of the configuration's intention as my default environment where I find having such a swath of options unnecessary as I have a general approach to many of these options I always take and thus configurable options I don't need only add to the debugging nightmare. 
+
+Pressing the menu icon on the far right of the panel reveals the right panel, which shows notifications on one tab and a set of useful widgets on the other such as a calculator, a COVID-19 tracker and links to various sites I find helpful to have available at a few keypresses (<kbd>mod4</kbd> + <kbd>h</kbd> brings up the right panel for instance)
