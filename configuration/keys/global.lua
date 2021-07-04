@@ -299,6 +299,8 @@ local globalKeys =
         {modkey},
         "Right",
         function()
+            print("Increasing Width")
+
             awful.tag.incmwfact(0.05)
         end,
         {
@@ -311,6 +313,8 @@ local globalKeys =
         {modkey},
         "Left",
         function()
+            print("Decreasing Width")
+
             awful.tag.incmwfact(-0.05)
         end,
         {
@@ -324,6 +328,8 @@ local globalKeys =
         {modkey},
         "Up",
         function()
+            print("Decreasing Number of Master Clients")
+
             awful.tag.incnmaster(1, nil, true)
         end,
         {
@@ -336,6 +342,8 @@ local globalKeys =
         {modkey},
         "Down",
         function()
+            print("Decreasing Number of Master Clients")
+
             awful.tag.incnmaster(-1, nil, true)
         end,
         {
@@ -415,6 +423,7 @@ local globalKeys =
         {modkey, "Shift"},
         "w",
         function()
+            print("Focusing Next By Index")
             awful.client.focus.byidx(1)
         end,
         {
@@ -428,6 +437,7 @@ local globalKeys =
         {modkey, "Shift"},
         "a",
         function()
+            print("Focusing Prior By Index")
             awful.client.focus.byidx(-1)
         end,
         {
@@ -482,6 +492,8 @@ local globalKeys =
         {modkey},
         "Tab",
         function()
+            print("Backing Up By Index")
+
             awful.client.focus.history.previous()
             if _G.client.focus then
                 _G.client.focus:raise()
@@ -528,32 +540,6 @@ local globalKeys =
         {
             description = "quit awesome",
             group = "awesome"
-        }
-    ),
-    -- #############################################################################
-
-    awful.key(
-        {modkey, "Shift"},
-        "h",
-        function()
-            awful.tag.incnmaster(1, nil, true)
-        end,
-        {
-            description = "increase the number of master clients",
-            group = "Layout"
-        }
-    ),
-    -- #############################################################################
-
-    awful.key(
-        {modkey, "Shift"},
-        "l",
-        function()
-            awful.tag.incnmaster(-1, nil, true)
-        end,
-        {
-            description = "decrease the number of master clients",
-            group = "Layout"
         }
     ),
     -- #############################################################################
@@ -641,7 +627,48 @@ local globalKeys =
         }
     ),
     -- #############################################################################
+    -- Thanks to the Arch Wiki for this snippet, mitigating
+    -- the bar not appearing issues that hiding it would
+    -- otherwise guarentee
 
+    awful.key(
+        {modkey},
+        "c",
+        function()
+            screen = awful.screen.focused()
+            screen.bottom_panel.visible = not screen.bottom_panel.visible
+        end,
+        {description = "Toggle Bottom Bar", group = "Awesome"}
+    ),
+    -- #############################################################################
+
+    awful.key(
+        {modkey},
+        "p",
+        function()
+            print("Opening rofi clipboard")
+            awful.spawn(apps.default.roficlipboard)
+        end,
+        {
+            description = "Show clipboard history",
+            group = "Utility"
+        }
+    ),
+    -- #############################################################################
+
+    awful.key(
+        {modkey},
+        "s",
+        function()
+            print("Opening settings application")
+            root.elements.settings.enable_view_by_index(-1, mouse.screen)
+        end,
+        {
+            description = "Open settings application",
+            group = "Launcher"
+        }
+    ),
+    -- #############################################################################
     -- Brightness
     awful.key(
         {},
@@ -740,20 +767,6 @@ local globalKeys =
         }
     ),
     -- #############################################################################
-    -- Thanks to the Arch Wiki for this snippet, mitigating
-    -- the bar not appearing issues that hiding it would
-    -- otherwise guarentee
-
-    awful.key(
-        {modkey},
-        "c",
-        function()
-            screen = awful.screen.focused()
-            screen.bottom_panel.visible = not screen.bottom_panel.visible
-        end,
-        {description = "Toggle Bottom Bar", group = "Awesome"}
-    ),
-    -- #############################################################################
 
     awful.key(
         {},
@@ -843,7 +856,7 @@ local globalKeys =
             awful.spawn("playerctl previous")
         end,
         {
-            description = "go to the previous song",
+            description = "Previous Song",
             group = "Hardware"
         }
     ),
@@ -857,7 +870,7 @@ local globalKeys =
             awful.spawn("playerctl next")
         end,
         {
-            description = "go to the next song",
+            description = "Next Song",
             group = "Hardware"
         }
     ),
@@ -877,7 +890,7 @@ local globalKeys =
             end
         end,
         {
-            description = "fullscreen screenshot",
+            description = "Fullscreen Screenshot",
             group = "Utility"
         }
     ),
@@ -897,7 +910,7 @@ local globalKeys =
             end
         end,
         {
-            description = "area/selected screenshot",
+            description = "Area/selected Screenshot",
             group = "Utility"
         }
     ),
@@ -917,40 +930,11 @@ local globalKeys =
             end
         end,
         {
-            description = "window screenshot",
+            description = "Window Screenshot",
             group = "Utility"
-        }
-    ),
-    -- #############################################################################
-
-    awful.key(
-        {modkey},
-        "p",
-        function()
-            print("Opening rofi clipboard")
-            awful.spawn(apps.default.roficlipboard)
-        end,
-        {
-            description = "Show clipboard history",
-            group = "Utility"
-        }
-    ),
-    -- #############################################################################
-
-    awful.key(
-        {modkey},
-        "s",
-        function()
-            print("Opening settings application")
-            root.elements.settings.enable_view_by_index(-1, mouse.screen)
-        end,
-        {
-            description = "Open settings application",
-            group = "Launcher"
         }
     )
 )
-
 -- Bind all key numbers to tags.
 for i = 1, 9 do
     -- Hack to only show tags 1 and 9 in the shortcut window
