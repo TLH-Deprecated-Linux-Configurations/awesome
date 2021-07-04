@@ -69,7 +69,7 @@ signals.connect_wifi_status(
 -- ########################################################################
 local settingsName =
     wibox.widget {
-    text = i18n.translate('Wireless Connection'),
+    text = ('Wireless Connection'),
     font = 'agave Nerd Font Mono Bold  10',
     align = 'left',
     widget = wibox.widget.textbox

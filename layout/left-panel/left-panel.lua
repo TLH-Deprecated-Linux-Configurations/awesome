@@ -5,31 +5,30 @@
 -- ########################################################################
 -- ########################################################################
 -- ########################################################################
-local wibox = require('wibox')
-local gears = require('gears')
-local beautiful = require('beautiful')
-local icons = require('theme.icons')
-local scrollbox = require('lib.scrollbox')
+local wibox = require("wibox")
+local gears = require("gears")
+local beautiful = require("beautiful")
+local icons = require("theme.icons")
+local scrollbox = require("lib.scrollbox")
 
-local apps = require('configuration.apps')
-local dpi = require('beautiful').xresources.apply_dpi
-local mat_list_item = require('widget.material.list-item')
-local mat_icon = require('widget.material.icon')
-local signals = require('module.signals')
-local animate = require('lib.animations').createAnimObject
-local seperator_widget = require('lib.separator')
-local card = require('module.card')
-local button = require('module.button')
+local apps = require("configuration.apps")
+local dpi = require("beautiful").xresources.apply_dpi
+local mat_list_item = require("widget.material.list-item")
+local mat_icon = require("widget.material.icon")
+local signals = require("module.signals")
+local animate = require("lib.animations").createAnimObject
+local seperator_widget = require("lib.separator")
+local card = require("module.card")
+local button = require("module.button")
 
-local get_screen = require('lib.function.common').focused_screen
+local get_screen = require("lib.function.common").focused_screen
 
-local keyconfig = require('configuration.keys.mod')
+local keyconfig = require("configuration.keys.mod")
 local modKey = keyconfig.modKey
 
 -- body gets populated with a scrollbox widget once generated
 local body = {}
 
-local plugins = require('lib.plugin-loader')('settings')
 -- ########################################################################
 -- ########################################################################
 -- ########################################################################
@@ -45,8 +44,8 @@ local left_panel_func = function()
         wibox {
         ontop = true,
         screen = s,
-        bg = '#00000000',
-        type = 'dock',
+        bg = "#00000000",
+        type = "dock",
         x = s.geometry.x,
         y = s.geometry.y,
         width = s.geometry.width,
@@ -87,7 +86,7 @@ local left_panel_func = function()
     -- ########################################################################
     -- ########################################################################
     screen.connect_signal(
-        'removed',
+        "removed",
         function(removed)
             if s == removed then
                 s = get_screen()
@@ -100,7 +99,7 @@ local left_panel_func = function()
     -- this is called when we need to update the screen
     signals.connect_refresh_screen(
         function()
-            print('Refreshing action center')
+            print("Refreshing action center")
 
             if left_panel == nil then
                 return
@@ -132,7 +131,7 @@ local left_panel_func = function()
         if grabber then
             grabber:start()
         end
-        left_panel:emit_signal('opened')
+        left_panel:emit_signal("opened")
 
         s = get_screen()
         -- ########################################################################
@@ -147,7 +146,7 @@ local left_panel_func = function()
             _G.anim_speed,
             left_panel,
             {opacity = 1, x = s.geometry.x},
-            'outCubic',
+            "outCubic",
             function()
                 update_backdrop_location()
             end
@@ -171,7 +170,7 @@ local left_panel_func = function()
             _G.anim_speed,
             left_panel,
             {opacity = 0, x = s.geometry.x - left_panel_width},
-            'outCubic',
+            "outCubic",
             function()
                 left_panel.visible = false
 
@@ -179,7 +178,7 @@ local left_panel_func = function()
                 if grabber then
                     grabber:stop()
                 end
-                left_panel:emit_signal('closed')
+                left_panel:emit_signal("closed")
                 update_backdrop_location()
 
                 -- reset the scrollbox
@@ -195,7 +194,7 @@ local left_panel_func = function()
         keybindings = {
             awful.key {
                 modifiers = {},
-                key = 'Escape',
+                key = "Escape",
                 on_press = function()
                     left_panel.opened = false
                     closeleft_panel()
@@ -211,8 +210,8 @@ local left_panel_func = function()
             }
         },
         -- Note that it is using the key name and not the modifier name.
-        stop_key = 'Escape',
-        stop_event = 'release'
+        stop_key = "Escape",
+        stop_event = "release"
     }
     -- ########################################################################
     -- ########################################################################
@@ -230,15 +229,15 @@ local left_panel_func = function()
         keybindings = {
             awful.key {
                 modifiers = {},
-                key = 'Escape',
+                key = "Escape",
                 on_press = function()
                     left_panel:close()
                 end
             }
         },
         -- Note that it is using the key name and not the modifier name.
-        stop_key = 'Escape',
-        stop_event = 'release'
+        stop_key = "Escape",
+        stop_event = "release"
     }
     -- ########################################################################
     -- ########################################################################
@@ -313,8 +312,8 @@ local left_panel_func = function()
             widget = mat_icon
         },
         wibox.widget {
-            text = 'Change Application Scaling',
-            font = 'agave Nerd Font Mono Bold  12',
+            text = "Change Application Scaling",
+            font = "agave Nerd Font Mono Bold  12",
             widget = wibox.widget.textbox,
             align = center
         },
@@ -347,8 +346,8 @@ local left_panel_func = function()
             widget = mat_icon
         },
         wibox.widget {
-            text = 'Full settings application',
-            font = 'agave Nerd Font Mono Bold 12',
+            text = "Full settings application",
+            font = "agave Nerd Font Mono Bold 12",
             widget = wibox.widget.textbox,
             align = center
         },
@@ -382,8 +381,8 @@ local left_panel_func = function()
             widget = mat_icon
         },
         wibox.widget {
-            text = 'Connect to a wireless network',
-            font = 'agave Nerd Font Mono Bold  12',
+            text = "Connect to a wireless network",
+            font = "agave Nerd Font Mono Bold  12",
             widget = wibox.widget.textbox,
             align = center
         },
@@ -421,18 +420,18 @@ local left_panel_func = function()
     -- ########################################################################
     -- ########################################################################
     -- ########################################################################
-    local separator = seperator_widget(10, 'vertical', 0)
+    local separator = seperator_widget(20, "vertical", 0)
 
-    local topSeparator = seperator_widget(20, 'horizontal', 0)
+    local topSeparator = seperator_widget(20, "horizontal", 0)
 
-    local bottomSeparator = seperator_widget(5, 'horizontal', 0)
+    local bottomSeparator = seperator_widget(5, "horizontal", 0)
     -- ########################################################################
     -- ########################################################################
     -- ########################################################################
     local function settings_plugin()
-        local network_card = card('Network Settings')
-        local screen_card = card('Screen Settings')
-        local settings_card = card('Settings application')
+        local network_card = card("Network Settings")
+        local screen_card = card("Screen Settings")
+        local settings_card = card("Settings application")
         -- ########################################################################
         -- ########################################################################
         -- ########################################################################
@@ -445,9 +444,9 @@ local left_panel_func = function()
         local table_widget =
             wibox.widget {
             topSeparator,
-            require('layout.left-panel.dashboard.quick-settings'),
-            require('layout.left-panel.dashboard.hardware-monitor')(s),
-            require('layout.left-panel.dashboard.action-center'),
+            require("layout.left-panel.dashboard.quick-settings"),
+            require("layout.left-panel.dashboard.hardware-monitor")(s),
+            require("layout.left-panel.dashboard.action-center"),
             separator,
             wibox.container.margin(network_card, dpi(20), dpi(20), dpi(20), dpi(20)),
             separator,
@@ -456,14 +455,7 @@ local left_panel_func = function()
             wibox.container.margin(settings_card, dpi(20), dpi(20), dpi(20), dpi(20)),
             layout = wibox.layout.fixed.vertical
         }
-        for _, value in ipairs(plugins) do
-            table_widget:add(
-                {
-                    wibox.container.margin(value, dpi(15), dpi(15), dpi(15), dpi(15)),
-                    layout = wibox.container.background
-                }
-            )
-        end
+
         return table_widget
     end
     -- ########################################################################
@@ -501,7 +493,7 @@ local left_panel_func = function()
     -- ########################################################################
     -- ########################################################################
     left_panel:setup {
-        expand = 'none',
+        expand = "none",
         layout = wibox.layout.fixed.vertical,
         body
     }

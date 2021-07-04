@@ -27,12 +27,15 @@ local bg_title = beautiful.bg_modal_title
 local titled_card = function(title, height)
     local header =
         wibox.widget {
-        text = i18n.translate(title),
+        text = title,
         font = header_font,
         align = 'center',
         valign = 'center',
         widget = wibox.widget.textbox
     }
+    -- ########################################################################
+-- ########################################################################
+-- ########################################################################
 
     local body_widget =
         wibox.widget {
@@ -44,7 +47,9 @@ local titled_card = function(title, height)
         widget = wibox.container.background,
         forced_height = height
     }
-
+-- ########################################################################
+-- ########################################################################
+-- ########################################################################
     local widget =
         wibox.widget {
         layout = wibox.layout.fixed.vertical,
@@ -64,7 +69,9 @@ local titled_card = function(title, height)
         nil,
         bg = bg
     }
-
+-- ########################################################################
+-- ########################################################################
+-- ########################################################################
     --- Update the title of the card
     -- @tparam string title The title of the card
     -- @staticfct update_title
@@ -73,7 +80,9 @@ local titled_card = function(title, height)
     widget.update_title = function(updated_title)
         header.text = updated_title
     end
-
+-- ########################################################################
+-- ########################################################################
+-- ########################################################################
     --- Update the body of the card
     -- @tparam widget body The widget to put in the body of the card
     -- @staticfct update_body
@@ -82,7 +91,9 @@ local titled_card = function(title, height)
     widget.update_body = function(update_body)
         body_widget.widget = update_body
     end
-
+-- ########################################################################
+-- ########################################################################
+-- ########################################################################
     --- Update the title and body
     -- @tparam string title The title of the card
     -- @tparam widget body The widget to put in the body of the card
@@ -95,7 +106,9 @@ local titled_card = function(title, height)
     end
     return widget
 end
-
+-- ########################################################################
+-- ########################################################################
+-- ########################################################################
 local bare_card = function()
     local body_widget =
         wibox.widget {
@@ -106,7 +119,9 @@ local bare_card = function()
         end,
         widget = wibox.container.background
     }
-
+-- ########################################################################
+-- ########################################################################
+-- ########################################################################
     --- Update the body of the card
     -- @tparam widget body The widget to put in the body of the card
     -- @staticfct update_body
@@ -115,7 +130,9 @@ local bare_card = function()
     body_widget.update_body = function(update_body)
         body_widget.widget = update_body
     end
-
+-- ########################################################################
+-- ########################################################################
+-- ########################################################################
     --- Update the title and body
     -- @tparam string title The title of the card
     -- @tparam widget body The widget to put in the body of the card
@@ -127,7 +144,9 @@ local bare_card = function()
     end
     return body_widget
 end
-
+-- ########################################################################
+-- ########################################################################
+-- ########################################################################
 --- Create a new card widget
 -- @tparam[opt] string title Sets the title of the card
 -- @tparam[opt] number size The height of the card

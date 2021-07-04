@@ -5,55 +5,31 @@
 -- ###############################################
 -- ###############################################
 -- ###############################################
-local hardware = require('lib.hardware-check')
-local is_weak = hardware.isWeakHardware()
-local beautiful = require('beautiful')
+local beautiful = require("beautiful")
 -- ###############################################
 -- ###############################################
 -- ###############################################
 -- general conf is used by sentry (to opt out of it)
-general = require('module.parser')(os.getenv('HOME') ..
-                                       '/.config/awesome/electric-tantra/general.conf')
-
-i18n = require('lib.i18n')
-i18n.init('en')
-
-awful = require('awful')
+general = require("module.parser")(os.getenv("HOME") .. "/.cache/awesome/general.conf")
+awful = require("awful")
 awful.screen.set_auto_dpi_enabled(true)
--- ###############################################
--- ###############################################
--- ###############################################
-plugins = require('module.parser')(os.getenv('HOME') ..
-                                       '/.config/awesome/electric-tantra/plugins.conf')
-keys = require('module.parser')(os.getenv('HOME') ..
-                                    '/.config/awesome/electric-tantra/keys.conf')
 -- ###############################################
 -- ###############################################
 -- ###############################################
 -- dynamic variables are defined here
 -- update the value through this setter, making sure that the animation speed is disabled on weak hardware
 _G.update_anim_speed = function(value)
-    if general['weak_hardware'] == '1' or is_weak then
-        _G.anim_speed = 0
-        return
-    end
     _G.anim_speed = value
 end
 -- ###############################################
 -- ###############################################
 -- ###############################################
-_G.update_anim_speed(tonumber('0.3'))
+_G.update_anim_speed(tonumber("1"))
 -- ###############################################
 -- ###############################################
 -- ###############################################
 -- Theme
-beautiful.init(require('theme'))
+beautiful.init(require("theme"))
 -- ###############################################
 -- ###############################################
 -- ###############################################
--- plugins
-require('widget.user-profile')
-require('widget.social-media')
-require('widget.sars-cov-2')
-require('widget.calculator')
-require('widget.calendar-widget')

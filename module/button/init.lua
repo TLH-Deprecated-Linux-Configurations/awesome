@@ -6,17 +6,17 @@
 -- ########################################################################
 -- ########################################################################
 -- ########################################################################
-local wibox = require('wibox')
-local rounded = require('lib.widget.rounded')
-local beautiful = require('beautiful')
-local gears = require('gears')
-local signals = require('module.signals')
+local wibox = require("wibox")
+local rounded = require("lib.widget.rounded")
+local beautiful = require("beautiful")
+local gears = require("gears")
+local signals = require("module.signals")
 local dpi = beautiful.xresources.apply_dpi
 -- ########################################################################
 -- ########################################################################
 -- ########################################################################
 --- Create a new button widget
-return function(body, callback, bNo_center,  leave_callback, no_update)
+return function(body, callback, bNo_center, leave_callback, no_update)
     local button = wibox.container.background()
     local bIsHovered = false
     button.bg = beautiful.bg_focus
@@ -25,8 +25,8 @@ return function(body, callback, bNo_center,  leave_callback, no_update)
     -- ########################################################################
     -- ########################################################################
     -- ########################################################################
-    if type(body) == 'string' then
-        body = wibox.widget.textbox(i18n.translate(body))
+    if type(body) == "string" then
+        body = wibox.widget.textbox(body)
     end
     -- ########################################################################
     -- ########################################################################
@@ -42,16 +42,13 @@ return function(body, callback, bNo_center,  leave_callback, no_update)
     --- Emulate a hover unfocus event
     button.emulate_focus_loss = function()
         bIsHovered = false
-        button.bg = beautiful.bg_normal .. '00'
-        if leave_callback then
-            leave_callback(button)
-        end
+        button.bg = beautiful.bg_normal .. "00"
     end
     -- ########################################################################
     -- ########################################################################
     -- ########################################################################
     button:connect_signal(
-        'mouse::enter',
+        "mouse::enter",
         function()
             button.emulate_hover()
         end
@@ -60,7 +57,7 @@ return function(body, callback, bNo_center,  leave_callback, no_update)
     -- ########################################################################
     -- ########################################################################
     button:connect_signal(
-        'mouse::leave',
+        "mouse::leave",
         function()
             button.emulate_focus_loss()
         end
@@ -76,7 +73,7 @@ return function(body, callback, bNo_center,  leave_callback, no_update)
     else
         button:setup {
             layout = wibox.container.place,
-            halign = 'center',
+            halign = "center",
             body
         }
     end

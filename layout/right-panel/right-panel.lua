@@ -1,33 +1,55 @@
-local wibox = require('wibox')
-local gears = require('gears')
-local beautiful = require('beautiful')
+local wibox = require("wibox")
+local gears = require("gears")
+local beautiful = require("beautiful")
 
-local dpi = require('beautiful').xresources.apply_dpi
-local clickable_container = require('widget.material.clickable-container')
-local signals = require('module.signals')
-local animate = require('lib.animations').createAnimObject
-local seperator_widget = require('lib.separator')
+local dpi = require("beautiful").xresources.apply_dpi
+local clickable_container = require("widget.material.clickable-container")
+local signals = require("module.signals")
+local animate = require("lib.animations").createAnimObject
+local seperator_widget = require("lib.separator")
 
-local keyconfig = require('configuration.keys.mod')
+local keyconfig = require("configuration.keys.mod")
 local modKey = keyconfig.modKey
 
-local scrollbox = require('lib.scrollbox')
+local scrollbox = require("lib.scrollbox")
 
--- load the notification plugins
-local plugins = require('lib.plugin-loader')('notification')
-
-local get_screen = require('lib.function.common').focused_screen
+local get_screen = require("lib.function.common").focused_screen
 
 -- body gets populated with a scrollbox widget once generated
 local body = {}
 
 local function notification_plugin()
-    local separator = seperator_widget(16, 'vertical', 0)
+    local separator = seperator_widget(16, "vertical", 0)
 
     local table_widget =
         wibox.widget {
         separator,
-        layout = wibox.layout.fixed.vertical
+        layout = wibox.layout.fixed.vertical,
+        {
+            require("widget.user-profile"),
+            wibox.container.margin(dpi(20), dpi(20), dpi(20), dpi(25)),
+            layout = wibox.layout.fixed.vertical
+        },
+        {
+            require("widget.social-media"),
+            wibox.container.margin(dpi(20), dpi(20), dpi(20), dpi(25)),
+            layout = wibox.layout.fixed.vertical
+        },
+        {
+            require("widget.sars-cov-2"),
+            wibox.container.margin(dpi(20), dpi(20), dpi(20), dpi(25)),
+            layout = wibox.layout.fixed.vertical
+        },
+        {
+            require("widget.calculator"),
+            wibox.container.margin(dpi(20), dpi(20), dpi(20), dpi(25)),
+            layout = wibox.layout.fixed.vertical
+        },
+        {
+            require("widget.calendar-widget"),
+            wibox.container.margin(dpi(20), dpi(20), dpi(20), dpi(25)),
+            layout = wibox.layout.fixed.vertical
+        }
     }
 
     local table =
@@ -36,20 +58,11 @@ local function notification_plugin()
         layout = wibox.layout.fixed.vertical,
         table_widget
     }
-
-    for _, value in ipairs(plugins) do
-        table_widget:add(
-            {
-                wibox.container.margin(value, dpi(15), dpi(15), dpi(0), dpi(10)),
-                layout = wibox.layout.fixed.vertical
-            }
-        )
-    end
     return table
 end
 
 local right_panel = function()
-    local panel_width = dpi(350)
+    local panel_width = dpi(375)
 
     local s = get_screen()
 
@@ -57,8 +70,8 @@ local right_panel = function()
         wibox {
         ontop = true,
         screen = s,
-        bg = '#00000000',
-        type = 'dock',
+        bg = "#00000000",
+        type = "dock",
         x = s.geometry.x,
         y = s.geometry.y,
         width = s.geometry.width,
@@ -79,7 +92,7 @@ local right_panel = function()
         width = panel_width,
         height = s.geometry.height,
         x = s.geometry.x + (s.geometry.width - panel_width),
-        bg = beautiful.bg_normal .. '88',
+        bg = beautiful.bg_normal .. "88",
         fg = beautiful.fg_normal
     }
 
@@ -90,7 +103,7 @@ local right_panel = function()
     )
 
     screen.connect_signal(
-        'removed',
+        "removed",
         function(removed)
             if s == removed then
                 s = get_screen()
@@ -101,7 +114,7 @@ local right_panel = function()
     -- this is called when we need to update the screen
     signals.connect_refresh_screen(
         function()
-            print('Refreshing action center')
+            print("Refreshing action center")
 
             if panel == nil then
                 return
@@ -127,14 +140,14 @@ local right_panel = function()
         }
     )
 
-    local separator = seperator_widget(15, 'horizontal', 0)
+    local separator = seperator_widget(20, "horizontal", 0)
 
     local clear_all_text =
         wibox.widget {
-        text = i18n.translate('Clear All Notifications'),
-        font = beautiful.font .. ' 10',
-        align = 'center',
-        valign = 'bottom',
+        text = "Clear All Notifications",
+        font = beautiful.font .. " 10",
+        align = "center",
+        valign = "bottom",
         widget = wibox.widget.textbox
     }
 
@@ -164,9 +177,9 @@ local right_panel = function()
         wibox.widget {
         visible = true,
         separator,
-        require('layout.right-panel.subwidgets.dont-disturb'),
+        require("layout.right-panel.subwidgets.dont-disturb"),
         {
-            expand = 'none',
+            expand = "none",
             layout = wibox.layout.align.horizontal,
             {
                 nil,
@@ -174,14 +187,14 @@ local right_panel = function()
             },
             nil,
             {
-                wibox.container.margin(clear_all_button, dpi(15), dpi(15), dpi(10), dpi(0)),
+                wibox.container.margin(clear_all_button, dpi(20), dpi(20), dpi(25), dpi(0)),
                 layout = wibox.layout.fixed.horizontal
             }
         },
         {
-            require('layout.right-panel.subwidgets.notif-generate'),
+            require("layout.right-panel.subwidgets.notif-generate"),
             wibox.widget({}),
-            margins = dpi(15),
+            margins = dpi(20),
             widget = wibox.container.margin
         },
         layout = wibox.layout.fixed.vertical
@@ -195,7 +208,7 @@ local right_panel = function()
         if grabber then
             grabber:start()
         end
-        panel:emit_signal('opened')
+        panel:emit_signal("opened")
 
         s = get_screen()
 
@@ -207,7 +220,7 @@ local right_panel = function()
             _G.anim_speed,
             panel,
             {opacity = 1, x = s.geometry.x + (s.geometry.width - panel_width)},
-            'outCubic',
+            "outCubic",
             function()
                 update_backdrop_location()
             end
@@ -227,13 +240,13 @@ local right_panel = function()
             _G.anim_speed,
             panel,
             {opacity = 0, x = s.geometry.x + s.geometry.width},
-            'outCubic',
+            "outCubic",
             function()
                 panel.visible = false
                 if grabber then
                     grabber:stop()
                 end
-                panel:emit_signal('closed')
+                panel:emit_signal("closed")
                 update_backdrop_location()
 
                 -- reset the scrollbox
@@ -247,7 +260,7 @@ local right_panel = function()
         keybindings = {
             awful.key {
                 modifiers = {},
-                key = 'Escape',
+                key = "Escape",
                 on_press = function()
                     panel.opened = false
                     closePanel()
@@ -263,14 +276,14 @@ local right_panel = function()
             }
         },
         -- Note that it is using the key name and not the modifier name.
-        stop_key = 'Escape',
-        stop_event = 'release'
+        stop_key = "Escape",
+        stop_event = "release"
     }
 
     -- Hide this panel when app dashboard is called.
     function panel:HideDashboard()
         closePanel()
-        collectgarbage('collect')
+        collectgarbage("collect")
     end
 
     function panel:toggle()
@@ -279,7 +292,7 @@ local right_panel = function()
             openPanel()
         else
             closePanel()
-            collectgarbage('collect')
+            collectgarbage("collect")
         end
     end
 
@@ -289,11 +302,11 @@ local right_panel = function()
     -- the second tuple element returns the widget section (type wibox.widget)
     -- if no element is supplied it should return the current unmodified state
     function panel:switch_mode(mode)
-        if mode == 'notif_mode' then
+        if mode == "notif_mode" then
             -- Update Content
             notification_widget.visible = true
             widgets.visible = false
-        elseif mode == 'widgets_mode' then
+        elseif mode == "widgets_mode" then
             -- Update Content
             notification_widget.visible = false
             widgets.visible = true
@@ -315,8 +328,8 @@ local right_panel = function()
 
     local headerSeparator =
         wibox.widget {
-        orientation = 'horizontal',
-        forced_height = 15,
+        orientation = "horizontal",
+        forced_height = 20,
         span_ratio = 1.0,
         opacity = 0.90,
         color = beautiful.bg_modal,
@@ -328,13 +341,13 @@ local right_panel = function()
         wibox.widget {
             separator,
             {
-                expand = 'none',
+                expand = "none",
                 layout = wibox.layout.align.horizontal,
                 {
                     nil,
                     layout = wibox.layout.fixed.horizontal
                 },
-                require('layout.right-panel.subwidgets.panel-mode-switcher'),
+                require("layout.right-panel.subwidgets.panel-mode-switcher"),
                 {
                     nil,
                     layout = wibox.layout.fixed.horizontal
@@ -354,7 +367,7 @@ local right_panel = function()
     )
 
     panel:setup {
-        expand = 'none',
+        expand = "none",
         layout = wibox.layout.fixed.vertical,
         body
     }

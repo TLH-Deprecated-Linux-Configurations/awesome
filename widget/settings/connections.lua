@@ -243,7 +243,7 @@ local function make_connection(t, n)
         wibox.widget {
         widget = wibox.widget.textbox,
         -- Holds the string "wireless", "wired" or similar
-        text = i18n.translate(t),
+        text = (t),
         font = beautiful.title_font
     }
 
@@ -278,7 +278,7 @@ return function()
     view.left = m
     view.right = m
 
-    local title = wibox.widget.textbox(i18n.translate('Connections'))
+    local title = wibox.widget.textbox(('Connections'))
     title.font = beautiful.title_font
     title.forced_height = settings_index + m + m
 
@@ -310,7 +310,7 @@ return function()
         wibox.container.margin(
         wibox.widget {
             widget = wibox.widget.textbox,
-            text = i18n.translate('Network list'),
+            text = ('Network list'),
             font = 'agave Nerd Font Mono Bold  24'
         },
         dpi(20),
@@ -380,7 +380,7 @@ return function()
             wireless.ip.text = hardware.getDefaultIP()
         else
             wireless.icon:set_image(icons.wifi_off)
-            wireless.name.text = i18n.translate('Disconnected')
+            wireless.name.text = ('Disconnected')
             wireless.ip.text = ''
         end
 
@@ -402,11 +402,11 @@ return function()
                 if (c == 0) then
                     print('Lan on')
                     wired.icon:set_image(icons.lan)
-                    wired.name.text = i18n.translate('connected')
+                    wired.name.text = ('connected')
                     wired.ip.text = hardware.getDefaultIP()
                 else
                     wired.icon:set_image(icons.lan_off)
-                    wired.name.text = i18n.translate('Disconnected')
+                    wired.name.text = ('Disconnected')
                     wired.ip.text = ''
                 end
             end

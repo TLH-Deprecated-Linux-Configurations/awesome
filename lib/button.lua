@@ -40,7 +40,7 @@ return function(body, callback, bNo_center, enter_callback, leave_callback, no_u
     button.forced_height = dpi(40)
 
     if type(body) == 'string' then
-        body = wibox.widget.textbox(i18n.translate(body))
+        body = wibox.widget.textbox(body)
     end
 
     --- Emulate a hover event

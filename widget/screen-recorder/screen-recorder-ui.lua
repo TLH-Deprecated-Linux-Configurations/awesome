@@ -9,8 +9,6 @@ local dpi = require('beautiful').xresources.apply_dpi
 local clickable_container = require('widget.material.clickable-container')
 
 local widget_icon_dir = HOME .. '/.config/awesome/widget/screen-recorder/icons/'
-local theme = require('theme.icons')
-
 local record_tbl = {}
 
 -- Panel UI
@@ -198,7 +196,7 @@ local screen_rec_back_button =
 local screen_rec_back_txt =
     wibox.widget {
     {
-        text = i18n.translate('Back'),
+        text = 'Back',
         font = 'agave Nerd Font Mono Bold  16',
         align = 'left',
         valign = 'center',
@@ -211,7 +209,7 @@ local screen_rec_back_txt =
 local screen_rec_res_txt =
     wibox.widget {
     {
-        text = i18n.translate('Resolution'),
+        text = 'Resolution',
         font = 'agave Nerd Font Mono Bold  16',
         align = 'left',
         valign = 'center',
@@ -250,7 +248,7 @@ local screen_rec_res_txtbox =
 local screen_rec_fps_txt =
     wibox.widget {
     {
-        text = i18n.translate('FPS'),
+        text = 'FPS',
         font = 'agave Nerd Font Mono Bold  16',
         align = 'left',
         valign = 'center',
@@ -289,7 +287,7 @@ local screen_rec_fps_txtbox =
 local screen_rec_offset_txt =
     wibox.widget {
     {
-        text = i18n.translate('Offset'),
+        text = 'Offset',
         font = 'agave Nerd Font Mono Bold  16',
         align = 'left',
         valign = 'center',
@@ -367,12 +365,6 @@ screen.connect_signal(
                 s.recorder_screen.y = s.geometry.y
                 s.recorder_screen.width = s.geometry.width
                 s.recorder_screen.height = s.geometry.height
-            end
-        )
-
-        signals.connect_background_theme_changed(
-            function(new_theme)
-                s.recorder_screen.bg = new_beautiful.bg_focus .. beautiful.background_transparency
             end
         )
 

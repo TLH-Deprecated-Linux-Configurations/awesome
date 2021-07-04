@@ -6,23 +6,20 @@
 -- ########################################################################
 -- ########################################################################
 -- ########################################################################
-local awful = require('awful')
-local wibox = require('wibox')
-local gears = require('gears')
-local beautiful = require('beautiful')
+local awful = require("awful")
+local wibox = require("wibox")
+local gears = require("gears")
+local beautiful = require("beautiful")
 local dpi = beautiful.xresources.apply_dpi
-local icons = require('theme.icons')
-local naughty = require('naughty')
-local plugins = require('lib.plugin-loader')('settings')
-local err = require('module.logger').error
-local signals = require('module.signals')
-local scrollbox = require('lib.scrollbox')
-local animate = require('lib.animations').createAnimObject
-local profilebox = require('lib.profilebox')
-local button = require('module.button')
-local HOME = os.getenv('HOME')
+local icons = require("theme.icons")
+local signals = require("module.signals")
+local scrollbox = require("lib.scrollbox")
+local animate = require("lib.animations").createAnimObject
+local profilebox = require("lib.profilebox")
+local button = require("module.button")
+local HOME = os.getenv("HOME")
 
-local keyconfig = require('configuration.keys.mod')
+local keyconfig = require("configuration.keys.mod")
 local modKey = keyconfig.modKey
 -- ########################################################################
 -- ########################################################################
@@ -52,7 +49,7 @@ if grabber == nil then
         keybindings = {
             awful.key {
                 modifiers = {},
-                key = 'Escape',
+                key = "Escape",
                 on_press = function()
                     if root.elements.settings then
                         root.elements.settings.close()
@@ -70,7 +67,7 @@ if grabber == nil then
             },
             awful.key {
                 modifiers = {},
-                key = 'Up',
+                key = "Up",
                 on_press = function()
                     if INDEX > 1 then
                         root.elements.settings.enable_view_by_index(INDEX - 1, mouse.screen, true)
@@ -79,7 +76,7 @@ if grabber == nil then
             },
             awful.key {
                 modifiers = {},
-                key = 'Down',
+                key = "Down",
                 on_press = function()
                     if INDEX < #root.elements.settings_views then
                         root.elements.settings.enable_view_by_index(INDEX + 1, mouse.screen, true)
@@ -87,8 +84,8 @@ if grabber == nil then
                 end
             },
             awful.key {
-                modifiers = {'Control'},
-                key = 'Tab',
+                modifiers = {"Control"},
+                key = "Tab",
                 on_press = function()
                     if INDEX < #root.elements.settings_views then
                         root.elements.settings.enable_view_by_index(INDEX + 1, mouse.screen, true)
@@ -98,8 +95,8 @@ if grabber == nil then
                 end
             },
             awful.key {
-                modifiers = {'Control', 'Shift'},
-                key = 'Tab',
+                modifiers = {"Control", "Shift"},
+                key = "Tab",
                 on_press = function()
                     if INDEX > 1 then
                         root.elements.settings.enable_view_by_index(INDEX - 1, mouse.screen, true)
@@ -110,25 +107,12 @@ if grabber == nil then
             }
         },
         -- Note that it is using the key name and not the modifier name.
-        stop_key = 'Escape',
-        stop_event = 'release'
+        stop_key = "Escape",
+        stop_event = "release"
     }
     root.elements.settings_grabber = grabber
 end
--- ########################################################################
--- ########################################################################
--- ########################################################################
-local function send_plugin_error(msg)
-    print('SETTINGS APP: ' .. msg, err)
-    naughty.notification(
-        {
-            title = 'Plugin error',
-            urgency = 'critical',
-            message = msg,
-            timeout = 10
-        }
-    )
-end
+
 -- ########################################################################
 -- ########################################################################
 -- ########################################################################
@@ -146,20 +130,20 @@ local function close_views()
     -- perform an entire garbage collection
     -- this operation is heavy
     -- however the settings app can open up a lot of images which will consume a lot of memory
-    collectgarbage('collect')
+    collectgarbage("collect")
 end
 -- ########################################################################
 -- ########################################################################
 -- ########################################################################
 local function setActiveView(i, link)
-    print('Active view: ' .. i)
+    print("Active view: " .. i)
     for index, widget in ipairs(root.elements.settings_views) do
         if index == i or widget.link == link then
             root.elements.settings_views[index].link.active = true
             root.elements.settings_views[index].link.activate()
             INDEX = index
         else
-            root.elements.settings_views[index].link.bg = beautiful.bg_modal_title .. '00'
+            root.elements.settings_views[index].link.bg = beautiful.bg_modal_title .. "00"
             root.elements.settings_views[index].link.active = false
         end
     end
@@ -178,7 +162,7 @@ local function enable_view_by_index(i, s, bNoAnimation)
     end
     if root.elements.settings_views[INDEX] then
         close_views()
-        print('Starting keygrab')
+        print("Starting keygrab")
         grabber:start()
 
         root.elements.settings_views[INDEX].view.visible = true
@@ -202,7 +186,7 @@ local function enable_view_by_index(i, s, bNoAnimation)
 
         if not (bNoAnimation == true) then
             root.elements.settings.y = s.geometry.y - settings_height
-            animate(_G.anim_speed, root.elements.settings, {y = y_height}, 'outCubic')
+            animate(_G.anim_speed, root.elements.settings, {y = y_height}, "outCubic")
         end
     end
 end
@@ -213,7 +197,7 @@ local function make_view(i, t, v, a)
     local icon = wibox.widget.imagebox(i)
     icon.forced_height = settings_index
     icon.forced_width = settings_index
-    icon.align = 'center'
+    icon.align = "center"
 
     local title = wibox.widget.textbox(t)
     if a == nil then
@@ -235,8 +219,8 @@ local function make_view(i, t, v, a)
     if (v == nil) then
         view:setup {
             layout = wibox.container.place,
-            valign = 'center',
-            halign = 'center',
+            valign = "center",
+            halign = "center",
             {
                 layout = wibox.container.background,
                 wibox.widget.textbox(t)
@@ -300,14 +284,14 @@ local function make_nav()
     nav.bg = beautiful.bg_modal_title
     nav.forced_width = settings_nw
 
-    local user = wibox.widget.textbox('')
+    local user = wibox.widget.textbox("")
     user.font = beautiful.title_font
     signals.connect_username(
         function(name)
             user.text = name
         end
     )
-    local img = HOME .. '/.config/awesome/widget/user-profile/icons/user.svg'
+    local img = HOME .. "/.config/awesome/widget/user-profile/icons/user.svg"
 
     local avatar =
         profilebox(
@@ -342,36 +326,23 @@ local function make_nav()
     -- ########################################################################
     table.insert(
         root.elements.settings_views,
-        make_view(icons.settings, 'General', require('widget.settings.general')())
+        make_view(icons.settings, "General", require("widget.settings.general")())
     )
 
     table.insert(
         root.elements.settings_views,
-        make_view(icons.wifi, 'Connections', require('widget.settings.connections')())
+        make_view(icons.wifi, "Connections", require("widget.settings.connections")())
     )
 
-    table.insert(root.elements.settings_views, make_view(icons.chart, 'System', require('widget.settings.system')()))
+    table.insert(root.elements.settings_views, make_view(icons.chart, "System", require("widget.settings.system")()))
     table.insert(
         root.elements.settings_views,
-        make_view(icons.monitor, 'Display', require('widget.settings.display')())
+        make_view(icons.monitor, "Display", require("widget.settings.display")())
     )
-    table.insert(root.elements.settings_views, make_view(icons.volume, 'Media', require('widget.settings.media')()))
-    table.insert(root.elements.settings_views, make_view(icons.mouse, 'Mouse', require('widget.settings.mouse')()))
-    table.insert(root.elements.settings_views, make_view(icons.about, 'About', require('widget.settings.about')()))
-    -- ########################################################################
-    -- ########################################################################
-    -- ########################################################################
-    for _, value in ipairs(plugins) do
-        if value.icon == nil then
-            send_plugin_error('Settings app plugin is missing icon')
-        elseif value.name == nil then
-            send_plugin_error('Settings app plugin is missing name')
-        elseif value.wibox == nil then
-            send_plugin_error('Settings app plugin is missing widget')
-        else
-            table.insert(root.elements.settings_views, make_view(value.icon, value.name, value.wibox))
-        end
-    end
+    table.insert(root.elements.settings_views, make_view(icons.volume, "Media", require("widget.settings.media")()))
+    table.insert(root.elements.settings_views, make_view(icons.mouse, "Mouse", require("widget.settings.mouse")()))
+    table.insert(root.elements.settings_views, make_view(icons.about, "About", require("widget.settings.about")()))
+
     -- ########################################################################
     -- ########################################################################
     -- ########################################################################
@@ -441,7 +412,7 @@ return function()
         {
             ontop = true,
             visible = false,
-            type = 'toolbar',
+            type = "toolbar",
             bg = beautiful.bg_normal,
             width = settings_width,
             height = settings_height,
@@ -519,7 +490,7 @@ return function()
             _G.anim_speed,
             hub,
             {y = scrn.geometry.y - settings_height},
-            'outCubic',
+            "outCubic",
             function()
                 hub.visible = false
             end

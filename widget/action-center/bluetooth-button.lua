@@ -10,12 +10,12 @@
 -- ########################################################################
 -- Initialization #########################################################
 -- ########################################################################
-local wibox = require('wibox')
-local gears = require('gears')
-local dpi = require('beautiful').xresources.apply_dpi
-local mat_list_item = require('widget.material.list-item')
-local signals = require('module.signals')
-local checkbox = require('module.checkbox')
+local wibox = require("wibox")
+local gears = require("gears")
+local dpi = require("beautiful").xresources.apply_dpi
+local mat_list_item = require("widget.material.list-item")
+local signals = require("module.signals")
+local checkbox = require("module.checkbox")
 
 -- ########################################################################
 -- Functionality ##########################################################
@@ -71,16 +71,16 @@ local widget_button =
 
 awful.tooltip {
     objects = {widget_button},
-    mode = 'outside',
-    align = 'right',
+    mode = "outside",
+    align = "right",
     timer_function = function()
         if action_status == true then
-            return i18n.translate('Bluetooth Enabled')
+            return "Bluetooth Enabled"
         else
-            return i18n.translate('Bluetooth Disabled')
+            return "Bluetooth Disabled"
         end
     end,
-    preferred_positions = {'right', 'left', 'top', 'bottom'}
+    preferred_positions = {"right", "left", "top", "bottom"}
 }
 
 -- ########################################################################
@@ -98,9 +98,9 @@ signals.connect_bluetooth_status(
 
 local action_name =
     wibox.widget {
-    text = i18n.translate('Bluetooth Connection'),
-    font = 'SFNS Display 11',
-    align = 'left',
+    text = "Bluetooth Connection",
+    font = "agave Nerd Font Mono Boldy 11",
+    align = "left",
     widget = wibox.widget.textbox
 }
 
@@ -108,7 +108,7 @@ local content =
     wibox.widget {
     action_name,
     wibox.container.margin(widget_button, 0, 0, dpi(5), dpi(5)),
-    bg = '#f4f4f720',
+    bg = "#f4f4f720",
     shape = gears.shape.rect,
     widget = wibox.container.background(),
     layout = wibox.layout.ratio.horizontal

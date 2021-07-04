@@ -50,7 +50,7 @@ local function loading()
     connections.children = {}
     local text =
         wibox.widget {
-        text = i18n.translate('Connecting...'),
+        text = ('Connecting...'),
         font = 'agave Nerd Font Mono Bold 24',
         align = 'center',
         valign = 'center',
@@ -65,8 +65,8 @@ end
 local function notify(title, msg)
     naughty.notification(
         {
-            title = i18n.translate('Bluetooth'),
-            text = i18n.translate(title) .. '\n<span weight="bold">' .. msg .. '</span>',
+            title = ('Bluetooth'),
+            text = (title) .. '\n<span weight="bold">' .. msg .. '</span>',
             timeout = 5,
             urgency = 'critical',
             icon = icons.warning
@@ -211,26 +211,26 @@ local function make_bluetooth_widget(tbl)
         buttons:add(unpair_btn)
         awful.tooltip {
             objects = {unpair_btn},
-            text = i18n.translate('Forget ') .. name
+            text = ('Forget ') .. name
         }
     else
         buttons:add(pair_btn)
         awful.tooltip {
             objects = {pair_btn},
-            text = i18n.translate('Pair with ') .. name
+            text = ('Pair with ') .. name
         }
     end
     if connected then
         buttons:add(disconnect_btn)
         awful.tooltip {
             objects = {disconnect_btn},
-            text = i18n.translate('Disconnect from ') .. name
+            text = ('Disconnect from ') .. name
         }
     else
         buttons:add(connect_btn)
         awful.tooltip {
             objects = {connect_btn},
-            text = i18n.translate('Connect to ') .. name
+            text = ('Connect to ') .. name
         }
     end
     -- ########################################################################
@@ -274,7 +274,7 @@ return function()
     view.left = m
     view.right = m
 
-    local title = wibox.widget.textbox(i18n.translate('Bluetooth'))
+    local title = wibox.widget.textbox('Bluetooth')
     title.font = beautiful.title_font
     title.forced_height = settings_index + m + m
 

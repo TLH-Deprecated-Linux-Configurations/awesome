@@ -18,7 +18,6 @@ local dpi = beautiful.xresources.apply_dpi
 local clickable_container = require('widget.material.clickable-container')
 local HOME = os.getenv('HOME')
 local widget_icon_dir = HOME .. '.config/awesome/widget/calculator/icons/'
-local theme = require('theme.icons')
 -- ########################################################################
 -- ########################################################################
 -- ########################################################################

@@ -190,7 +190,7 @@ local function xrandr()
     local noti =
         naughty.notify(
         {
-            title = i18n.translate('Screen System'),
+            title = 'Screen System',
             text = label,
             icon = icon_path,
             timeout = 4,

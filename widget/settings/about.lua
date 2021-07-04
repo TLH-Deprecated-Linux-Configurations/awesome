@@ -24,6 +24,7 @@ local card = require('module.card')
 
 local dpi = beautiful.xresources.apply_dpi
 local icons = require('theme.icons')
+
 -- ########################################################################
 -- Settings ###############################################################
 -- ########################################################################
@@ -95,7 +96,7 @@ return function()
     local separator = seperator_widget(settings_index / 1.5)
 
     local container = wibox.layout.fixed.vertical()
-    local device_name, device_text = generate_setting_panel(i18n.translate('Name'))
+    local device_name, device_text = generate_setting_panel('Name')
 
     signals.connect_username(
         function(value)
@@ -103,7 +104,7 @@ return function()
         end
     )
 
-    local memory_name, memory_text = generate_setting_panel(i18n.translate('Memory'))
+    local memory_name, memory_text = generate_setting_panel('Memory')
 
     signals.connect_ram_total(
         function(value)
@@ -112,13 +113,13 @@ return function()
     )
 
     local _, threads, _processor_name = hardware.getCpuInfo()
-    local processor_name, processor_text = generate_setting_panel(i18n.translate('Processor'))
+    local processor_name, processor_text = generate_setting_panel('Processor')
     processor_text.text = _processor_name
 
-    local processor_cores, processor_cores_text = generate_setting_panel(i18n.translate('Processor Core Count'))
+    local processor_cores, processor_cores_text = generate_setting_panel('Processor Core Count')
     processor_cores_text.text = tostring(threads)
 
-    local graphics_name, graphics_text = generate_setting_panel(i18n.translate('Graphics'))
+    local graphics_name, graphics_text = generate_setting_panel('Graphics')
     -- gathered from https://github.com/dylanaraps/neofetch/blob/master/neofetch#L2401
     local value, _ =
         execute(
@@ -126,7 +127,7 @@ return function()
     )
     graphics_text.text = value
 
-    local disk_name, disk_text = generate_setting_panel(i18n.translate('Disk capacity'))
+    local disk_name, disk_text = generate_setting_panel('Disk capacity')
 
     signals.connect_disk_space(
         function(payload)
@@ -135,11 +136,11 @@ return function()
         end
     )
 
-    local display_freq_name, display_freq_text = generate_setting_panel(i18n.translate('Display refresh rate'))
+    local display_freq_name, display_freq_text = generate_setting_panel('Display refresh rate')
 
     display_freq_text.text = tostring(hardware.getDisplayFrequency()) .. ' Hz'
 
-    local os_name_name, os_name_text = generate_setting_panel(i18n.translate('OS Name'))
+    local os_name_name, os_name_text = generate_setting_panel('OS Name')
     os_name_text.text = 'the Electric Tantra Linux'
 
     signals.connect_distro(
@@ -148,11 +149,11 @@ return function()
         end
     )
 
-    local os_type_name, os_type_text = generate_setting_panel(i18n.translate('OS Type'))
+    local os_type_name, os_type_text = generate_setting_panel('OS Type')
     local out, _ = execute('uname -m')
     os_type_text.text = out
 
-    local windowing_system_name, windowing_system_text = generate_setting_panel(i18n.translate('Windowing system'))
+    local windowing_system_name, windowing_system_text = generate_setting_panel('Windowing system')
     -- TDE currently only supports X11
     windowing_system_text.text = 'X11'
 

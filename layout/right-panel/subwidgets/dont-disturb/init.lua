@@ -7,7 +7,6 @@ local checkbox = require('module.checkbox')
 local HOME = os.getenv('HOME')
 local beautiful = require('beautiful')
 local PATH_TO_ICONS = HOME .. '/.config/awesome/widget/notification-center/icons/'
-local theme = require('theme.icons')
 
 _G.dont_disturb = false
 
@@ -16,7 +15,7 @@ local box
 
 local dont_disturb_text =
     wibox.widget {
-    text = i18n.translate('Do Not Disturb'),
+    text = 'Do Not Disturb',
     font = beautiful.font .. ' 12',
     align = 'left',
     widget = wibox.widget.textbox

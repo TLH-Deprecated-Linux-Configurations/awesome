@@ -1,18 +1,18 @@
-local wibox = require('wibox')
-local gears = require('gears')
-local beautiful = require('beautiful')
-local dpi = require('beautiful').xresources.apply_dpi
-local clickable_container = require('widget.material.clickable-container')
+local wibox = require("wibox")
+local gears = require("gears")
+local beautiful = require("beautiful")
+local dpi = require("beautiful").xresources.apply_dpi
+local clickable_container = require("widget.material.clickable-container")
 
-local active_button = '#f4f4f7' .. '40'
-local inactive_button = '#f4f4f7' .. '20'
+local active_button = "#f4f4f7" .. "40"
+local inactive_button = "#f4f4f7" .. "20"
 
 local notif_text =
     wibox.widget {
-    text = i18n.translate('Notifications'),
-    font = beautiful.font .. ' 12',
-    align = 'center',
-    valign = 'center',
+    text = "Notifications",
+    font = beautiful.font .. " 12",
+    align = "center",
+    valign = "center",
     widget = wibox.widget.textbox
 }
 
@@ -31,10 +31,10 @@ local wrap_notif =
 
 local widgets_text =
     wibox.widget {
-    text = i18n.translate('Widgets'),
-    font = beautiful.font .. ' 12',
-    align = 'center',
-    valign = 'center',
+    text = "Widgets",
+    font = beautiful.font .. " 12",
+    align = "center",
+    valign = "center",
     widget = wibox.widget.textbox
 }
 
@@ -53,7 +53,7 @@ local wrap_widget =
 
 local switcher =
     wibox.widget {
-    expand = 'none',
+    expand = "none",
     layout = wibox.layout.fixed.horizontal,
     {
         wrap_notif,
@@ -66,13 +66,13 @@ local switcher =
 }
 
 local function switch_mode(right_panel_mode)
-    if right_panel_mode == 'notif_mode' then
+    if right_panel_mode == "notif_mode" then
         -- Update button color
         wrap_notif.bg = active_button
         wrap_widget.bg = inactive_button
         -- Change panel content of right-panel.lua
         _G.screen.primary.right_panel:switch_mode(right_panel_mode)
-    elseif right_panel_mode == 'widgets_mode' then
+    elseif right_panel_mode == "widgets_mode" then
         -- Update button color
         wrap_notif.bg = inactive_button
         wrap_widget.bg = active_button
@@ -88,7 +88,7 @@ notif_button:buttons(
             1,
             nil,
             function()
-                switch_mode('notif_mode')
+                switch_mode("notif_mode")
             end
         )
     )
@@ -101,7 +101,7 @@ widgets_button:buttons(
             1,
             nil,
             function()
-                switch_mode('widgets_mode')
+                switch_mode("widgets_mode")
             end
         )
     )

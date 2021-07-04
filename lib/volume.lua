@@ -5,22 +5,19 @@
 -- ########################################################################
 -- ########################################################################
 -- ########################################################################
-local hardware = require('lib.hardware-check')
+local hardware = require("lib.hardware-check")
 local execute = hardware.execute
-local split = require('lib.function.common').split
+local split = require("lib.function.common").split
 -- ########################################################################
 -- ########################################################################
 -- ########################################################################
-local err = '\27[0;31m[ ERROR '
+local err = "\27[0;31m[ ERROR "
 
-local function _should_control_via_software()
-    return not (general['disable_software_volume_control'] == '1')
-end
 -- ########################################################################
 -- ########################################################################
 -- ########################################################################
 local function _extract_pa_ctl_state(command, id, port, description, hasID)
-    local res = split(execute('pactl list ' .. command), '\n')
+    local res = split(execute("pactl list " .. command), "\n")
     local lastPort
     local lastSink
     local lastDescription
@@ -58,7 +55,7 @@ local function _extract_pa_ctl_state(command, id, port, description, hasID)
         -- ########################################################################
         -- ########################################################################
         -- ########################################################################
-        local sinkId = value:match('Name: (.*)$')
+        local sinkId = value:match("Name: (.*)$")
         if sinkId ~= nil and hasID then
             lastSinkId = sinkId
         end
@@ -130,11 +127,11 @@ end
 --    end)
 local function get_volume(callback)
     awful.spawn.easy_async_with_shell(
-        'amixer -D pulse get Master',
+        "amixer -D pulse get Master",
         function(out)
-            local muted = string.find(out, 'off')
-            local volume = tonumber(string.match(out, '(%d?%d?%d)%%')) or 0
-            callback(volume, muted ~= nil or muted == 'off')
+            local muted = string.find(out, "off")
+            local volume = tonumber(string.match(out, "(%d?%d?%d)%%")) or 0
+            callback(volume, muted ~= nil or muted == "off")
         end
     )
 end
@@ -146,9 +143,7 @@ end
 -- @usage -- Increase the current volume level
 --    inc_volume()
 local function inc_volume()
-    if _should_control_via_software() then
-        awful.spawn('amixer -D pulse sset Master 5%+')
-    end
+    awful.spawn("amixer -D pulse sset Master 5%+")
 end
 -- ########################################################################
 -- ########################################################################
@@ -158,9 +153,7 @@ end
 -- @usage -- Decrease the current volume level
 --    dec_volume()
 local function dec_volume()
-    if _should_control_via_software() then
-        awful.spawn('amixer -D pulse sset Master 5%-')
-    end
+    awful.spawn("amixer -D pulse sset Master 5%-")
 end
 -- ########################################################################
 -- ########################################################################
@@ -170,9 +163,7 @@ end
 -- @usage -- Toggle the muted state
 --    toggle_master()
 local function toggle_master()
-    if _should_control_via_software() then
-        awful.spawn('amixer -D pulse set Master 1+ toggle')
-    end
+    awful.spawn("amixer -D pulse set Master 1+ toggle")
 end
 -- ########################################################################
 -- ########################################################################
@@ -183,14 +174,10 @@ end
 -- @usage -- Set the master channel to mute
 --   set_muted_state(true)
 local function set_muted_state(bIsMuted)
-    if _should_control_via_software() then
-        if bIsMuted then
-            awful.spawn('amixer -D pulse sset Master off')
-        else
-            awful.spawn('amixer -D pulse sset Master on')
-        end
+    if bIsMuted then
+        awful.spawn("amixer -D pulse sset Master off")
     else
-        awful.spawn('amixer -D pulse sset Master on')
+        awful.spawn("amixer -D pulse sset Master on")
     end
 end
 -- ########################################################################
@@ -205,19 +192,18 @@ end
 --        print("Current volume level of application" .. sink.name ..": " .. tostring(percentage))
 --    end)
 local function get_application_volume(sink, callback)
-    -- TODO: get the input state from pactl list
     awful.spawn.easy_async_with_shell(
-        'pactl list sink-inputs',
+        "pactl list sink-inputs",
         function(out)
-            local splitted = split(out, '\n')
+            local splitted = split(out, "\n")
             local is_in_sink = false
             for _, value in ipairs(splitted) do
-                if value:match('Sink Input #' .. tostring(sink)) ~= nil then
+                if value:match("Sink Input #" .. tostring(sink)) ~= nil then
                     is_in_sink = true
                 end
 
-                if is_in_sink and value:match('Volume: .*$') ~= nil then
-                    local volume = value:match('Volume: .* (%d+)%% / .*$')
+                if is_in_sink and value:match("Volume: .*$") ~= nil then
+                    local volume = value:match("Volume: .* (%d+)%% / .*$")
                     callback(tonumber(volume) or 0)
                     return
                 end
@@ -235,7 +221,7 @@ end
 -- @usage -- Set the volume to max (of application with sink #75)
 --    set_volume(75, 100)
 local function set_application_volume(sink, value)
-    execute('pactl set-sink-input-volume ' .. tostring(sink) .. ' ' .. tostring(math.floor(value)) .. '%')
+    execute("pactl set-sink-input-volume " .. tostring(sink) .. " " .. tostring(math.floor(value)) .. "%")
 end
 -- ########################################################################
 -- ########################################################################
@@ -246,11 +232,8 @@ end
 -- @usage -- Set the volume to max
 --    set_volume(100)
 local function set_volume(value)
-    if _should_control_via_software() then
-        awful.spawn('pactl set-sink-volume @DEFAULT_SINK@ ' .. tostring(math.floor(value)) .. '%')
-    else
-        awful.spawn('pactl set-sink-volume @DEFAULT_SINK@ 100%')
-    end
+    awful.spawn("pactl set-sink-volume @DEFAULT_SINK@ " .. tostring(math.floor(value)) .. "%")
+    awful.spawn("pactl set-sink-volume @DEFAULT_SINK@ 100%")
 end
 -- ########################################################################
 -- ########################################################################
@@ -260,7 +243,7 @@ end
 -- @usage -- Returns an iterable table containing all sinks
 --    get_sinks() --  returns a list of sinks
 local function get_sinks()
-    return _extract_pa_ctl_state('sinks', 'Sink #(.*)$', 'Active Port: (.*)$', 'Description: (.*)$')
+    return _extract_pa_ctl_state("sinks", "Sink #(.*)$", "Active Port: (.*)$", "Description: (.*)$")
 end
 -- ########################################################################
 -- ########################################################################
@@ -271,8 +254,8 @@ end
 --    get_applications() --  returns a list of application
 local function get_applications()
     return _extract_pa_ctl_state(
-        'sink-inputs',
-        'Sink Input #(.*)$',
+        "sink-inputs",
+        "Sink Input #(.*)$",
         'media.name = "(.*)"$',
         'application.name = "(.*)"$',
         false
@@ -287,10 +270,10 @@ end
 -- @usage -- Set our default sync to match the first device
 --    set_default_sink(get_sinks()[1].sink)
 local function set_default_sink(sink)
-    if not (type(sink) == 'number') then
-        print('set_active_sink expects a number', err)
+    if not (type(sink) == "number") then
+        print("set_active_sink expects a number", err)
     end
-    execute('pactl set-default-sink ' .. sink)
+    execute("pactl set-default-sink " .. sink)
 end
 -- ########################################################################
 -- ########################################################################
@@ -309,9 +292,9 @@ local function get_default_sink()
     -- ########################################################################
     -- ########################################################################
     -- find the sinkId of the default sync
-    local out = split(execute('pactl info'), '\n')
+    local out = split(execute("pactl info"), "\n")
     for _, line in ipairs(out) do
-        local match = line:match('Default Sink: (.*)')
+        local match = line:match("Default Sink: (.*)")
         if match ~= nil then
             sinkID = match
         end
@@ -335,7 +318,7 @@ end
 -- @usage -- Returns an iterable table containing all sources
 --    get_sources() --  returns a list of sources
 local function get_sources()
-    return _extract_pa_ctl_state('sources', 'Source #(.*)$', 'Active Port: (.*)$', 'Description: (.*)$')
+    return _extract_pa_ctl_state("sources", "Source #(.*)$", "Active Port: (.*)$", "Description: (.*)$")
 end
 -- ########################################################################
 -- ########################################################################
@@ -346,10 +329,10 @@ end
 -- @usage -- Set our default source to match the first device
 --    set_default_source(get_sources()[1].sink)
 local function set_default_source(source)
-    if not (type(source) == 'number') then
-        print('set_active_source expects a number', err)
+    if not (type(source) == "number") then
+        print("set_active_source expects a number", err)
     end
-    execute('pactl set-default-source ' .. source)
+    execute("pactl set-default-source " .. source)
 end
 -- ########################################################################
 -- ########################################################################
@@ -368,9 +351,9 @@ local function get_default_source()
     -- ########################################################################
     -- ########################################################################
     -- find the sinkId of the default sync
-    local out = split(execute('pactl info'), '\n')
+    local out = split(execute("pactl info"), "\n")
     for _, line in ipairs(out) do
-        local match = line:match('Default Source: (.*)')
+        local match = line:match("Default Source: (.*)")
         if match ~= nil then
             sourceID = match
         end
@@ -391,14 +374,14 @@ end
 -- ########################################################################
 -- reset the pipewire server
 local function _reset_pipewire()
-    awful.spawn('systemctl --user restart pipewire')
+    awful.spawn("systemctl --user restart pipewire")
 end
 -- ########################################################################
 -- ########################################################################
 -- ########################################################################
 -- reset the pulseaudio server
 local function _reset_pulseaudio()
-    awful.spawn('pulseaudio -k && pulseaudio --start')
+    awful.spawn("pulseaudio -k && pulseaudio --start")
 end
 -- ########################################################################
 -- ########################################################################
@@ -408,13 +391,13 @@ end
 -- @usage -- Reset the entire audio server (temporarily breaks audio)
 --    reset_server()
 local function reset_server()
-    local bIsPipewire = hardware.has_package_installed('pipewire')
+    local bIsPipewire = hardware.has_package_installed("pipewire")
     if bIsPipewire then
         _reset_pipewire()
     else
         _reset_pulseaudio()
     end
-    print('Resetting audio server')
+    print("Resetting audio server")
 end
 -- ########################################################################
 -- ########################################################################

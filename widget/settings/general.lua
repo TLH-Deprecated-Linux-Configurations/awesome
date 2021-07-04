@@ -8,21 +8,20 @@
 -- |__     ||  -__||   _|   _|  ||     |  _  |__ --|
 -- |_______||_____||____|____|__||__|__|___  |_____|
 --                                     |_____|
-local awful = require('awful')
-local wibox = require('wibox')
-local gears = require('gears')
-local beautiful = require('beautiful')
-local configWriter = require('lib.config-writer')
-local configFile = os.getenv('HOME') .. '/.config/awesome/electrictantra/general.conf'
+local awful = require("awful")
+local wibox = require("wibox")
+local gears = require("gears")
+local beautiful = require("beautiful")
+local configWriter = require("lib.config-writer")
+local configFile = os.getenv("HOME") .. "/.cache/awesome/general.conf"
 local dpi = beautiful.xresources.apply_dpi
-local icons = require('theme.icons')
-local slider = require('lib.slider')
-local seperator_widget = require('lib.separator')
-local signals = require('module.signals')
-local card = require('module.card')
-local button = require('module.button')
-local checkbox = require('module.checkbox')
-local datetime = require('lib.function.datetime')
+local icons = require("theme.icons")
+local slider = require("lib.slider")
+local seperator_widget = require("lib.separator")
+local signals = require("module.signals")
+local card = require("module.card")
+local button = require("module.button")
+local checkbox = require("module.checkbox")
 
 local m = dpi(5)
 local settings_index = dpi(40)
@@ -71,12 +70,12 @@ local function create_multi_option_array(name, tooltip, options, default, config
             button(
             option,
             function()
-                print('Pressed button')
+                print("Pressed button")
                 for _, widget in pairs(button_widgets[name]) do
                     widget.bg = beautiful.bg_modal
                     widget.active = false
                 end
-                option_widget.bg = primary_beautiful.bg_focus
+                option_widget.bg = beautiful.bg_focus
                 option_widget.active = true
                 configWriter.update_entry(configFile, configOption, option)
             end,
@@ -111,9 +110,9 @@ local function create_checkbox(name, tooltip, checked, configOption, on, off)
         checkbox(
         checked,
         function(box_checked)
-            local value = off or '0'
+            local value = off or "0"
             if box_checked then
-                value = on or '1'
+                value = on or "1"
             end
             configWriter.update_entry(configFile, configOption, value)
         end,
@@ -168,7 +167,7 @@ return function()
     view.left = m
     view.right = m
 
-    local title = wibox.widget.textbox('General')
+    local title = wibox.widget.textbox("General")
     title.font = beautiful.title_font
     title.forced_height = settings_index + m + m
 
@@ -190,9 +189,9 @@ return function()
 
     local save =
         button(
-        'Update',
+        "Update",
         function()
-            print('Saving general settings')
+            print("Saving general settings")
             -- reload TDE
             awesome.restart()
         end
@@ -203,54 +202,29 @@ return function()
     local checkbox_widget =
         wibox.widget {
         layout = wibox.layout.flex.vertical,
+        create_checkbox("Audio popup", "Enable the 'pop' sound when changing the audio", "audio_change_sound"),
+        create_checkbox("Titlebar drawing", "Draw the titlebar above every application", "draw_mode", "full", "none"),
+        create_checkbox("Screen timeout", "Put the system in sleep mode after a period of inactivity", "screen_timeout"),
         create_checkbox(
-            'Audio popup',
-            "Enable the 'pop' sound when changing the audio",
-            general['audio_change_sound'] == '1',
-            'audio_change_sound'
-        ),
-        create_checkbox(
-            'Titlebar drawing',
-            'Draw the titlebar above every application',
-            general['draw_mode'] == 'full',
-            'draw_mode',
-            'full',
-            'none'
-        ),
-        create_checkbox(
-            'Screen timeout',
-            'Put the system in sleep mode after a period of inactivity',
-            general['screen_timeout'] == '1' or general['screen_timeout'] == nil,
-            'screen_timeout'
-        ),
-        create_checkbox(
-            'Weak Hardware',
+            "Weak Hardware",
             "Disable a lot of the 'nice' features in order to reduce hardware consumption",
-            general['weak_hardware'] == '1',
-            'weak_hardware'
+            "weak_hardware" == 0
         ),
+        create_checkbox("Autofocus", "Automatically make the focus follow the mouse without clicking", "autofocus"),
         create_checkbox(
-            'Autofocus',
-            'Automatically make the focus follow the mouse without clicking',
-            general['autofocus'] == '1',
-            'autofocus'
-        ),
-        create_checkbox(
-            'Minimize Network Usage',
-            'Disable a lot of network utilities to reduce network usage',
-            general['minimize_network_usage'] == '1',
-            'minimize_network_usage'
+            "Minimize Network Usage",
+            "Disable a lot of network utilities to reduce network usage",
+            "minimize_network_usage" == 0
         )
     }
 
     local multi_option_widget =
         wibox.widget {
         create_multi_option_array(
-            'Window screenshot mode',
-            'when making a screenshot of a window, you can either show the screenshot or make a pretty version with some shadows, and your theme color',
-            {'shadow', 'none'},
-            general['window_screen_mode'] or 'shadow',
-            'window_screen_mode'
+            "Window screenshot mode",
+            "when making a screenshot of a window, you can either show the screenshot or make a pretty version with some shadows, and your theme color",
+            {"shadow", "none"},
+            "window_screen_mode" == "shadow"
         ),
         layout = wibox.layout.flex.vertical
     }
@@ -258,12 +232,12 @@ return function()
     local slider_widget =
         wibox.widget {
         create_option_slider(
-            'Animation Speed',
+            "Animation Speed",
             0,
             1.5,
             0.05,
-            'animation_speed',
-            tonumber(general['window_screen_mode']) or _G.anim_speed,
+            "animation_speed",
+            _G.anim_speed,
             function(value)
                 _G.update_anim_speed(value)
             end

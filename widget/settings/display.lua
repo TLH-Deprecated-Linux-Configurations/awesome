@@ -11,24 +11,24 @@
 -- ########################################################################
 -- ########################################################################
 -- ########################################################################
-local awful = require('awful')
-local wibox = require('wibox')
-local gears = require('gears')
-local beautiful = require('beautiful')
-local rounded = require('lib.widget.rounded')
-local filesystem = require('module.file')
-local icons = require('theme.icons')
-local signals = require('module.signals')
+local awful = require("awful")
+local wibox = require("wibox")
+local gears = require("gears")
+local beautiful = require("beautiful")
+local rounded = require("lib.widget.rounded")
+local filesystem = require("module.file")
+local icons = require("theme.icons")
+local signals = require("module.signals")
 local dpi = beautiful.xresources.apply_dpi
-local configWriter = require('lib.config-writer')
-local datetime = require('lib.function.datetime')
-local filehandle = require('module.file')
-local imagemagic = require('module.imagemagic')
-local xrandr_menu = require('module.xrandr').menu
-local scrollbox = require('lib.scrollbox')
-local slider = require('lib.slider')
-local card = require('module.card')
-local button = require('module.button')
+local configWriter = require("lib.config-writer")
+local datetime = require("lib.function.datetime")
+local filehandle = require("module.file")
+local imagemagic = require("module.imagemagic")
+local xrandr_menu = require("module.xrandr").menu
+local scrollbox = require("lib.scrollbox")
+local slider = require("lib.slider")
+local card = require("module.card")
+local button = require("module.button")
 -- ########################################################################
 -- ########################################################################
 -- ########################################################################
@@ -40,7 +40,7 @@ local settings_index = dpi(40)
 local settings_height = dpi(900)
 
 local tempDisplayDir = filehandle.mktempdir()
-local monitorScaledImage = ''
+local monitorScaledImage = ""
 
 local active_pallet = beautiful.xcolor4
 
@@ -90,8 +90,8 @@ local function make_screen_layout(wall, label)
             wibox.container.place(monitor),
             {
                 layout = wibox.container.place,
-                valign = 'center',
-                halign = 'center',
+                valign = "center",
+                halign = "center",
                 {
                     layout = wibox.container.background,
                     fg = beautiful.fg_normal,
@@ -131,30 +131,30 @@ local function make_mon(wall, id, fullwall, disable_number)
     }
     monitor:set_image(wall)
     monitor:connect_signal(
-        'button::press',
+        "button::press",
         function(_, _, _, btn)
             -- we check if button == 1 for a left mouse button (this way scrolling still works)
             if Display_Mode == WALLPAPER_MODE and btn == 1 then
                 awful.spawn.easy_async(
-                    'theme set ' .. fullwall,
+                    "theme set " .. fullwall,
                     function()
                         Display_Mode = NORMAL_MODE
                         refresh()
-                        local themeFile = os.getenv('HOME') .. '/.config/awesome/theme'
+                        local themeFile = os.getenv("HOME") .. "/.config/awesome/theme"
                         -- our theme file exists
                         if filesystem.exists(themeFile) then
-                            local newContent = ''
+                            local newContent = ""
                             for _, line in ipairs(filesystem.lines(themeFile)) do
                                 -- if the line is a file then it is a picture, otherwise it is a configuration option
                                 if not filesystem.exists(line) then
-                                    newContent = newContent .. line .. '\n'
+                                    newContent = newContent .. line .. "\n"
                                 end
                             end
                             newContent = newContent .. fullwall
                             filesystem.overwrite(themeFile, newContent)
                         end
                         -- collect the garbage to remove the image cache from memory
-                        collectgarbage('collect')
+                        collectgarbage("collect")
                     end
                 )
             end
@@ -171,8 +171,8 @@ local function make_mon(wall, id, fullwall, disable_number)
             wibox.container.place(monitor),
             {
                 layout = wibox.container.place,
-                valign = 'center',
-                halign = 'center',
+                valign = "center",
+                halign = "center",
                 {
                     layout = wibox.container.background,
                     fg = beautiful.fg_normal,
@@ -199,7 +199,7 @@ return function()
     view.right = m
     view.bottom = m
 
-    local title = wibox.widget.textbox(i18n.translate('Display'))
+    local title = wibox.widget.textbox(("Display"))
     title.font = beautiful.title_font
     title.forced_height = settings_index + m + m
 
@@ -236,10 +236,10 @@ return function()
         0,
         function(value)
             if _G.oled then
-                awful.spawn('brightness -s ' .. tostring(value) .. ' -F')
+                awful.spawn("brightness -s " .. tostring(value) .. " -F")
             else
-                awful.spawn('brightness -s 100 -F') -- reset pixel values when using backlight
-                awful.spawn('brightness -s ' .. tostring(value))
+                awful.spawn("brightness -s 100 -F") -- reset pixel values when using backlight
+                awful.spawn("brightness -s " .. tostring(value))
             end
         end
     )
@@ -255,44 +255,28 @@ return function()
         10,
         600,
         1,
-        tonumber(general['screen_on_time']) or 120,
+        600,
         function(value)
-            print('Updated screen time: ' .. tostring(value) .. 'sec')
-            general['screen_on_time'] = tostring(value)
+            print("Updated screen time: " .. tostring(value) .. "sec")
+            general["screen_on_time"] = tostring(value)
             configWriter.update_entry(
-                os.getenv('HOME') .. '/.config/tos/general.conf',
-                'screen_on_time',
+                os.getenv("HOME") .. "/.cache/awesome/general.conf",
+                "screen_on_time",
                 tostring(value)
             )
-            if general['screen_timeout'] == '1' or general['screen_timeout'] == nil then
-                awful.spawn('pkill -f bin/autolock.sh')
-                awful.spawn('sh ~/.config/awesome/bin/autolock.sh ' .. tostring(value))
+            if general["screen_timeout"] == "1" or general["screen_timeout"] == nil then
+                awful.spawn("pkill -f bin/autolock.sh")
+                awful.spawn("sh ~/.config/awesome/bin/autolock.sh " .. tostring(value))
             end
         end,
         function()
-            return datetime.numberInSecToMS(tonumber(general['screen_on_time']) or 120) ..
-                i18n.translate(' before sleeping')
+            return datetime.numberInSecToMS(300) .. (" before sleeping")
         end
     )
-
-    local changewall =
-        button(
-        'Change wallpaper',
-        function()
-            if not (Display_Mode == WALLPAPER_MODE) then
-                Display_Mode = WALLPAPER_MODE
-            else
-                Display_Mode = NORMAL_MODE
-            end
-            refresh()
-        end
-    )
-    changewall.top = m
-    changewall.bottom = m
 
     local screenLayoutBtn =
         button(
-        'Screen Layout',
+        "Screen Layout",
         function()
             if not (Display_Mode == XRANDR_MODE) then
                 Display_Mode = XRANDR_MODE
@@ -325,7 +309,7 @@ return function()
                 margins = m,
                 {
                     font = beautiful.font,
-                    text = i18n.translate('Brightness'),
+                    text = ("Brightness"),
                     widget = wibox.widget.textbox
                 }
             },
@@ -346,7 +330,7 @@ return function()
                 margins = m,
                 {
                     font = beautiful.font,
-                    text = i18n.translate('Screen on time'),
+                    text = ("Screen on time"),
                     widget = wibox.widget.textbox
                 }
             },
@@ -395,11 +379,6 @@ return function()
                 {
                     layout = wibox.container.margin,
                     top = m,
-                    changewall
-                },
-                {
-                    layout = wibox.container.margin,
-                    top = m,
                     screenLayoutBtn
                 }
             },
@@ -418,36 +397,29 @@ return function()
 
             local width = dpi(300)
             local height = (width / 16) * 9
-            local scaledImage = tempDisplayDir .. '/' .. base
+            local scaledImage = tempDisplayDir .. "/" .. base
             if user then
-                scaledImage = tempDisplayDir .. '/user-' .. base
+                scaledImage = tempDisplayDir .. "/user-" .. base
             end
-            if filesystem.exists(scaledImage) and Display_Mode == WALLPAPER_MODE then
-                layout:add(make_mon(scaledImage, k, v, true))
-                if done then
-                    done(user, table, k)
-                end
-            else
-                -- We use imagemagick to generate a "thumbnail"
-                -- This is done to save memory consumption
-                -- However note that our cache (tempDisplayDir) is stored in ram
-                imagemagic.scale(
-                    v,
-                    width,
-                    height,
-                    scaledImage,
-                    function()
-                        if filesystem.exists(scaledImage) and Display_Mode == WALLPAPER_MODE then
-                            layout:add(make_mon(scaledImage, k, v, true))
-                        else
-                            print('Something went wrong scaling ' .. v)
-                        end
-                        if done then
-                            done(user, table, k)
-                        end
+            -- We use imagemagick to generate a "thumbnail"
+            -- This is done to save memory consumption
+            -- However note that our cache (tempDisplayDir) is stored in ram
+            imagemagic.scale(
+                v,
+                width,
+                height,
+                scaledImage,
+                function()
+                    if filesystem.exists(scaledImage) and Display_Mode == WALLPAPER_MODE then
+                        layout:add(make_mon(scaledImage, k, v, true))
+                    else
+                        print("Something went wrong scaling " .. v)
                     end
-                )
-            end
+                    if done then
+                        done(user, table, k)
+                    end
+                end
+            )
         else
             -- in case the entry is a directory and not a file
             if done then
@@ -459,7 +431,7 @@ return function()
     local recursive_monitor_load_func
 
     local function loadMonitors()
-        local usr_files = filesystem.list_dir('/usr/share/backgrounds/tos')
+        local usr_files = filesystem.list_dir("/usr/share/backgrounds")
 
         recursive_monitor_load_func = function(bool, table, i)
             if i < #table then
@@ -468,7 +440,7 @@ return function()
             end
         end
         load_monitor(1, usr_files, recursive_monitor_load_func, false)
-        local pictures = os.getenv('HOME') .. '/Pictures/'
+        local pictures = os.getenv("HOME") .. "/Pictures/"
         if filesystem.dir_exists(pictures) then
             local home_dir = filesystem.list_dir_full(pictures)
             -- true to tell the function that these are user pictures
@@ -480,7 +452,7 @@ return function()
         changewall.visible = true
         screenLayoutBtn.visible = true
         awful.spawn.with_line_callback(
-            'theme active',
+            "theme active",
             {
                 stdout = function(o)
                     table.insert(screens, o)
@@ -495,7 +467,7 @@ return function()
 
                         local width = dpi(600)
                         local height = (width / 16) * 9
-                        monitorScaledImage = tempDisplayDir .. '/monitor-' .. base
+                        monitorScaledImage = tempDisplayDir .. "/monitor-" .. base
                         if filesystem.exists(monitorScaledImage) then
                             layout:add(make_mon(monitorScaledImage, k, v))
                         else
@@ -557,7 +529,7 @@ return function()
                 button(
                 widget,
                 function()
-                    print('Executing: ' .. cmd)
+                    print("Executing: " .. cmd)
                     awful.spawn.easy_async_with_shell(
                         cmd,
                         function()
@@ -579,10 +551,10 @@ return function()
         layout:reset()
         body:reset()
         -- remove all images from memory (to save memory space)
-        collectgarbage('collect')
+        collectgarbage("collect")
 
         awful.spawn.easy_async_with_shell(
-            'brightness -g',
+            "brightness -g",
             function(o)
                 brightness:set_value(math.floor(tonumber(255)))
             end

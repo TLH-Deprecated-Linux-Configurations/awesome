@@ -66,20 +66,6 @@ local globalKeys =
     ),
     -- #############################################################################
 
-    awful.key(
-        {modkey},
-        "b",
-        function()
-            print("Spawning rofi window switcher")
-            awful.spawn(apps.default.rofiwindowswitch)
-        end,
-        {
-            description = "Open a Window Switcher",
-            group = "Launcher"
-        }
-    ),
-    -- #############################################################################
-
     -- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     awful.key(
         {modkey, "Control"},
@@ -390,6 +376,20 @@ local globalKeys =
         {
             description = "Toggle Systray Visibility",
             group = "custom"
+        }
+    ),
+    -- #############################################################################
+
+    awful.key(
+        {modkey},
+        "b",
+        function()
+            print("Spawning rofi window switcher")
+            awful.spawn(apps.default.rofiwindowswitch)
+        end,
+        {
+            description = "Open a Window Switcher",
+            group = "Launcher"
         }
     ),
     -- #############################################################################
@@ -879,11 +879,7 @@ local globalKeys =
         function()
             print("Taking A Full Screenshot")
             if not send_notification_if_maim_missing() then
-                if general["window_screen_mode"] == "none" then
-                    awful.spawn(apps.bins.full_blank_screenshot)
-                else
-                    awful.spawn(apps.bins.full_screenshot)
-                end
+                awful.spawn(apps.bins.full_screenshot)
             end
         end,
         {
@@ -899,11 +895,7 @@ local globalKeys =
         function()
             print("Taking An Area Screenshot")
             if not send_notification_if_maim_missing() then
-                if general["window_screen_mode"] == "none" then
-                    awful.spawn(apps.bins.area_blank_screenshot)
-                else
-                    awful.spawn(apps.bins.area_screenshot)
-                end
+                awful.spawn(apps.bins.area_screenshot)
             end
         end,
         {
@@ -919,11 +911,7 @@ local globalKeys =
         function()
             print("Taking A Screenshot Of A Window")
             if not send_notification_if_maim_missing() then
-                if general["window_screen_mode"] == "none" then
-                    awful.spawn(apps.bins.window_blank_screenshot)
-                else
-                    awful.spawn(apps.bins.window_screenshot)
-                end
+                awful.spawn(apps.bins.window_blank_screenshot)
             end
         end,
         {

@@ -34,7 +34,7 @@ return function()
     -- ########################################################################
     -- ########################################################################
     -- ########################################################################
-    local title = wibox.widget.textbox(i18n.translate('System'))
+    local title = wibox.widget.textbox(('System'))
     title.font = beautiful.title_font
     title.forced_height = settings_index + m + m
     -- ########################################################################
@@ -338,7 +338,7 @@ return function()
     local hostName =
         wibox.widget {
         font = beautiful.title_font,
-        text = i18n.translate('Hostname: ') .. file.string('/etc/hostname'):gsub('%\n', ''),
+        text = ('Hostname: ') .. file.string('/etc/hostname'):gsub('%\n', ''),
         widget = wibox.widget.textbox
     }
     -- ########################################################################
@@ -347,7 +347,7 @@ return function()
     local uptime =
         wibox.widget {
         font = beautiful.title_font,
-        text = i18n.translate('Uptime: unknown'),
+        text = ('Uptime: unknown'),
         widget = wibox.widget.textbox
     }
     -- ########################################################################
@@ -355,7 +355,7 @@ return function()
     -- ########################################################################
     signals.connect_distro(
         function(value)
-            osName.text = i18n.translate('OS: ') .. value
+            osName.text = ('OS: ') .. value
         end
     )
     -- ########################################################################
@@ -363,7 +363,7 @@ return function()
     -- ########################################################################
     signals.connect_uptime(
         function(value)
-            uptime.text = i18n.translate('Uptime: ') .. value
+            uptime.text = ('Uptime: ') .. value
         end
     )
     -- ########################################################################
@@ -371,7 +371,7 @@ return function()
     -- ########################################################################
     signals.connect_kernel(
         function(value)
-            kernelVersion.text = i18n.translate('Kernel: ') .. value
+            kernelVersion.text = ('Kernel: ') .. value
         end
     )
     -- ########################################################################
@@ -424,7 +424,7 @@ return function()
     -- ########################################################################
     signals.connect_packages_to_update(
         function(value)
-            pac_value.text = i18n.translate('Packages to update: ') .. value
+            pac_value.text = ('Packages to update: ') .. value
         end
     )
     -- ########################################################################

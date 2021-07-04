@@ -89,11 +89,11 @@ return function()
     local vol_heading = wibox.widget.textbox('Volume')
     vol_heading.font = beautiful.font
 
-    local vol_footer = wibox.widget.textbox('test')
+    local vol_footer = wibox.widget.textbox('Test')
     vol_footer.font = beautiful.font
     vol_footer.align = 'right'
 
-    local mic_footer = wibox.widget.textbox('test')
+    local mic_footer = wibox.widget.textbox('Test')
     mic_footer.font = beautiful.font
     mic_footer.align = 'right'
     -- ########################################################################
@@ -193,7 +193,7 @@ return function()
         if #sink_children.children == 0 then
             sink_children:add(
                 wibox.widget {
-                    text = 'No extra output found',
+                    text = 'No Extra Output Found',
                     align = 'center',
                     valign = 'center',
                     font = beautiful.font,
@@ -205,7 +205,7 @@ return function()
         if #source_children.children == 0 then
             source_children:add(
                 wibox.widget {
-                    text = 'No extra input found',
+                    text = 'No Extra Input Found',
                     align = 'center',
                     valign = 'center',
                     font = beautiful.font,
