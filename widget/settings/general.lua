@@ -205,17 +205,7 @@ return function()
         create_checkbox("Audio popup", "Enable the 'pop' sound when changing the audio", "audio_change_sound"),
         create_checkbox("Titlebar drawing", "Draw the titlebar above every application", "draw_mode", "full", "none"),
         create_checkbox("Screen timeout", "Put the system in sleep mode after a period of inactivity", "screen_timeout"),
-        create_checkbox(
-            "Weak Hardware",
-            "Disable a lot of the 'nice' features in order to reduce hardware consumption",
-            "weak_hardware" == 0
-        ),
-        create_checkbox("Autofocus", "Automatically make the focus follow the mouse without clicking", "autofocus"),
-        create_checkbox(
-            "Minimize Network Usage",
-            "Disable a lot of network utilities to reduce network usage",
-            "minimize_network_usage" == 0
-        )
+        create_checkbox("Autofocus", "Automatically make the focus follow the mouse without clicking", "autofocus")
     }
 
     local multi_option_widget =
