@@ -5,15 +5,15 @@
 -- ########################################################################
 -- ########################################################################
 -- ########################################################################
-local wibox = require('wibox')
-local clickable_container = require('widget.material.clickable-container')
-local gears = require('gears')
-local beautiful = require('beautiful')
-local dpi = require('beautiful').xresources.apply_dpi
-local config = require('module.functions')
-local signals = require('module.signals')
-local delayed_timer = require('lib.function.delayed-timer')
-local icons = require('theme.icons')
+local wibox = require("wibox")
+local clickable_container = require("widget.material.clickable-container")
+local gears = require("gears")
+local beautiful = require("beautiful")
+local dpi = require("beautiful").xresources.apply_dpi
+local config = require("module.functions")
+local signals = require("module.settings.signals")
+local delayed_timer = require("lib.function.delayed-timer")
+local icons = require("theme.icons")
 -- ########################################################################
 -- ########################################################################
 -- ########################################################################
@@ -26,7 +26,7 @@ local checker
 local widget =
     wibox.widget {
     {
-        id = 'icon',
+        id = "icon",
         widget = wibox.widget.imagebox,
         resize = true
     },
@@ -43,8 +43,8 @@ widget_button:buttons(
             1,
             nil,
             function()
-                print('Opening blueman-manager')
-                awful.spawn('blueman-manager')
+                print("Opening blueman-manager")
+                awful.spawn("blueman-manager")
             end
         )
     )
@@ -57,16 +57,16 @@ widget_button:buttons(
 awful.tooltip(
     {
         objects = {widget_button},
-        mode = 'outside',
-        align = 'right',
+        mode = "outside",
+        align = "right",
         timer_function = function()
             if checker ~= nil then
-                return ('Bluetooth is on')
+                return ("Bluetooth is on")
             else
-                return ('Bluetooth is off')
+                return ("Bluetooth is off")
             end
         end,
-        preferred_positions = {'right', 'left', 'top', 'bottom'}
+        preferred_positions = {"right", "left", "top", "bottom"}
     }
 )
 
@@ -84,22 +84,22 @@ delayed_timer(
     config.bluetooth_poll,
     function()
         awful.spawn.easy_async_with_shell(
-            'bluetoothctl --monitor list',
+            "bluetoothctl --monitor list",
             function(stdout)
                 -- Check if there  bluetooth
-                checker = stdout:match('Controller') -- If 'Controller' string is detected on stdout
+                checker = stdout:match("Controller") -- If 'Controller' string is detected on stdout
                 local widgetIconName
 
                 local status = (checker ~= nil)
                 signals.emit_bluetooth_status(status)
 
                 if status then
-                    widgetIconName = 'bluetooth'
+                    widgetIconName = "bluetooth"
                 else
-                    widgetIconName = 'bluetooth-off'
+                    widgetIconName = "bluetooth-off"
                 end
                 widget.icon:set_image(icons[widgetIconName])
-                print('Polling bluetooth status')
+                print("Polling bluetooth status")
             end
         )
     end,

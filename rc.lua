@@ -12,19 +12,19 @@
 -- found (e.g. lgi). If LuaRocks is not installed, do nothing.
 pcall(require, "luarocks.loader")
 -- ########################################################################
-require("module.luapath")
-require("module.logger")
+require("module.functions.luapath")
+require("module.functions.logger")
 print("Booting up...")
 -- ########################################################################
 require("configuration.global_var")
 require("awful.autofocus")
 -- ########################################################################
 -- We load in the notifications before loading anything else so we get errors to display appropiately
-require("module.notifications")
+require("module.settings.notifications")
 -- ########################################################################
 
 require("widget.titlebar")()
-require("module.backdrop")
+require("module.ui-components.backdrop")
 -- ########################################################################
 -- Layout
 require("layout")
@@ -37,8 +37,8 @@ require("configuration.tags")
 _G.root.keys(require("configuration.keys.global"))
 
 -- ########################################################################
-require("module.bootup_configuration")
-require("module.lazy_load_boot")
+require("module.settings.bootup_configuration")
+require("module.settings.lazy_load_boot")
 
 -- remove all images from memory (to save memory space)
 collectgarbage("collect")

@@ -15,9 +15,9 @@ local apps = require("configuration.apps")
 local dpi = require("beautiful").xresources.apply_dpi
 local mat_list_item = require("widget.material.list-item")
 local mat_icon = require("widget.material.icon")
-local signals = require("module.signals")
+local signals = require("module.settings.signals")
 local animate = require("lib.animations").createAnimObject
-local seperator_widget = require("module.separator")
+local seperator_widget = require("module.ui-components.separator")
 local card = require("module.ui-components.card")
 local button = require("module.ui-components.button")
 

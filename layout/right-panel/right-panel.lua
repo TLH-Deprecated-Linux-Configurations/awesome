@@ -4,9 +4,9 @@ local beautiful = require("beautiful")
 
 local dpi = require("beautiful").xresources.apply_dpi
 local clickable_container = require("widget.material.clickable-container")
-local signals = require("module.signals")
+local signals = require("module.settings.signals")
 local animate = require("lib.animations").createAnimObject
-local seperator_widget = require("module.separator")
+local seperator_widget = require("module.ui-components.separator")
 
 local keyconfig = require("configuration.keys.mod")
 local modKey = keyconfig.modKey

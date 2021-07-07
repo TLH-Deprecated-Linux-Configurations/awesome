@@ -15,11 +15,11 @@ local awful = require("awful")
 local wibox = require("wibox")
 local gears = require("gears")
 local beautiful = require("beautiful")
-local execute = require("module.hardware-check").execute
+local execute = require("module.hardware.hardware-check").execute
 local bytes_to_grandness = require("lib.function.common").bytes_to_grandness
-local signals = require("module.signals")
-local hardware = require("module.hardware-check")
-local seperator_widget = require("module.separator")
+local signals = require("module.settings.signals")
+local hardware = require("module.hardware.hardware-check")
+local seperator_widget = require("module.ui-components.separator")
 local card = require("module.ui-components.card")
 
 local dpi = beautiful.xresources.apply_dpi

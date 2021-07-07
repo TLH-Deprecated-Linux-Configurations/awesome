@@ -6,9 +6,9 @@
 -- ########################################################################
 -- ########################################################################
 --
-local signals = require("module.signals")
-local hardware = require("module.hardware-check")
-local filehandle = require("module.file")
+local signals = require("module.settings.signals")
+local hardware = require("module.hardware.hardware-check")
+local filehandle = require("module.functions.file")
 local config = require("module.functions")
 local delayed_timer = require("lib.function.delayed-timer")
 local statvfs = require("posix.sys.statvfs").statvfs

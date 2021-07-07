@@ -8,16 +8,16 @@
 -- ########################################################################
 require("awful.autofocus")
 local hotkeys_popup = require("awful.hotkeys_popup").widget
-local has_package_installed = require("module.hardware-check").has_package_installed
+local has_package_installed = require("module.hardware.hardware-check").has_package_installed
 require("awful.hotkeys_popup.keys")
 
 local config = require("configuration.keys.mod")
 local modkey = config.modKey
 local altkey = config.altKey
 local apps = require("configuration.apps")
-local xrandr = require("module.xrandr")
-local signals = require("module.signals")
-local volume = require("module.volume")
+local xrandr = require("module.hardware.xrandr")
+local signals = require("module.settings.signals")
+local volume = require("module.hardware.volume")
 -- ########################################################################
 -- ########################################################################
 -- ########################################################################

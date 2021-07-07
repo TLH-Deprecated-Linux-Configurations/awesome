@@ -12,7 +12,7 @@ local gtable = require("gears.table")
 local setmetatable = setmetatable
 local beautiful = require("beautiful")
 local dpi = beautiful.xresources.apply_dpi
-local signals = require("module.signals")
+local signals = require("module.settings.signals")
 
 -- Commons requirements
 local wibox = require("wibox")

@@ -16,12 +16,12 @@ local gears = require("gears")
 local beautiful = require("beautiful")
 local icons = require("theme.icons")
 local split = require("lib.function.common").split
-local signals = require("module.signals")
+local signals = require("module.settings.signals")
 local mat_icon_button = require("widget.material.icon-button")
 local mat_icon = require("widget.material.icon")
 local card = require("module.ui-components.card")
 local naughty = require("naughty")
-local execute = require("module.hardware-check").execute
+local execute = require("module.hardware.hardware-check").execute
 local scrollbox = require("module.ui-components.scrollbox")
 
 local dpi = beautiful.xresources.apply_dpi

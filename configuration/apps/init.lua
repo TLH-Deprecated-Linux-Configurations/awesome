@@ -8,7 +8,7 @@
 -- ########################################################################
 local filesystem = require "gears.filesystem"
 local config = require "module.functions"
-local hardware = require "module.hardware-check"
+local hardware = require "module.hardware.hardware-check"
 -- ########################################################################
 -- ########################################################################
 -- ########################################################################

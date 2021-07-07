@@ -1,26 +1,26 @@
-local wibox = require('wibox')
-local clickable_container = require('widget.material.clickable-container')
-local gears = require('gears')
-local dpi = require('beautiful').xresources.apply_dpi
-local config = require('module.functions')
-local theme = require('theme.icons')
-local filehandle = require('module.file')
-local signals = require('module.signals')
+local wibox = require("wibox")
+local clickable_container = require("widget.material.clickable-container")
+local gears = require("gears")
+local dpi = require("beautiful").xresources.apply_dpi
+local config = require("module.functions")
+local theme = require("theme.icons")
+local filehandle = require("module.functions.file")
+local signals = require("module.settings.signals")
 
 -- acpi sample outputs
 -- Battery 0: Discharging, 75%, 01:51:38 remaining
 -- Battery 0: Charging, 53%, 00:57:43 until charged
-local HOME = os.getenv('HOME')
-local PATH_TO_ICONS = HOME .. '/.config/awesome/widget/wifi/icons/'
-local interface = 'wlp2s01'
+local HOME = os.getenv("HOME")
+local PATH_TO_ICONS = HOME .. "/.config/awesome/widget/wifi/icons/"
+local interface = "wlp2s01"
 
 local connected = false
-local essid = 'N/A'
+local essid = "N/A"
 
 local widget =
     wibox.widget {
     {
-        id = 'icon',
+        id = "icon",
         widget = wibox.widget.imagebox,
         resize = true
     },
@@ -35,7 +35,7 @@ widget_button:buttons(
             1,
             nil,
             function()
-                awful.spawn('nm-connection-editor')
+                awful.spawn("nm-connection-editor")
             end
         )
     )
@@ -45,16 +45,16 @@ widget_button:buttons(
 awful.tooltip(
     {
         objects = {widget_button},
-        mode = 'outside',
-        align = 'right',
+        mode = "outside",
+        align = "right",
         timer_function = function()
             if connected then
-                return ('Connected to ') .. essid
+                return ("Connected to ") .. essid
             else
-                return ('Wireless network is disconnected')
+                return ("Wireless network is disconnected")
             end
         end,
-        preferred_positions = {'right', 'left', 'top', 'bottom'},
+        preferred_positions = {"right", "left", "top", "bottom"},
         margin_leftright = dpi(8),
         margin_topbottom = dpi(8)
     }
@@ -63,13 +63,13 @@ awful.tooltip(
 local function grabText()
     if connected then
         awful.spawn.easy_async(
-            'iw dev ' .. interface .. ' link',
+            "iw dev " .. interface .. " link",
             function(stdout)
-                essid = stdout:match('SSID:(.-)\n')
+                essid = stdout:match("SSID:(.-)\n")
                 if (essid == nil) then
-                    essid = 'N/A'
+                    essid = "N/A"
                 end
-                print('Network essid: ' .. essid)
+                print("Network essid: " .. essid)
             end
         )
     end
@@ -80,32 +80,32 @@ gears.timer {
     call_now = true,
     autostart = true,
     callback = function()
-        local widgetIconName = 'wifi-strength'
-        local interface_res = filehandle.lines('/proc/net/wireless')[3]
+        local widgetIconName = "wifi-strength"
+        local interface_res = filehandle.lines("/proc/net/wireless")[3]
         if interface_res == nil then
             connected = false
             signals.emit_wifi_status(false)
-            widget.icon:set_image(PATH_TO_ICONS .. widgetIconName .. '-off' .. '.svg')
+            widget.icon:set_image(PATH_TO_ICONS .. widgetIconName .. "-off" .. ".svg")
             return
         end
 
-        local interface_name, _, link = interface_res:match('(%w+):%s+(%d+)%s+(%d+)')
+        local interface_name, _, link = interface_res:match("(%w+):%s+(%d+)%s+(%d+)")
 
         interface = interface_name
-        filehandle.overwrite('/tmp/interface.txt', interface_name)
+        filehandle.overwrite("/tmp/interface.txt", interface_name)
 
         local wifi_strength = (tonumber(link) / 70) * 100
         if (wifi_strength ~= nil) then
             connected = true
             -- Update popup text
             local wifi_strength_rounded = math.floor(wifi_strength / 25 + 0.5)
-            widgetIconName = widgetIconName .. '-' .. wifi_strength_rounded
-            widget.icon:set_image(PATH_TO_ICONS .. widgetIconName .. '.svg')
+            widgetIconName = widgetIconName .. "-" .. wifi_strength_rounded
+            widget.icon:set_image(PATH_TO_ICONS .. widgetIconName .. ".svg")
         else
             connected = false
-            widget.icon:set_image(PATH_TO_ICONS .. widgetIconName .. '-off' .. '.svg')
+            widget.icon:set_image(PATH_TO_ICONS .. widgetIconName .. "-off" .. ".svg")
         end
-        if (connected and (essid == 'N/A' or essid == nil)) then
+        if (connected and (essid == "N/A" or essid == nil)) then
             grabText()
         end
         signals.emit_wifi_status(connected)
@@ -113,7 +113,7 @@ gears.timer {
 }
 
 widget:connect_signal(
-    'mouse::enter',
+    "mouse::enter",
     function()
         grabText()
     end

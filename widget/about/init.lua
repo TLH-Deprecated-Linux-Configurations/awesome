@@ -5,28 +5,28 @@
 -- ########################################################################
 -- Initialization #########################################################
 -- ########################################################################
-local beautiful = require('beautiful')
-local gears = require('gears')
+local beautiful = require("beautiful")
+local gears = require("gears")
 
-local wibox = require('wibox')
+local wibox = require("wibox")
 
-local naughty = require('naughty')
-local dpi = require('beautiful').xresources.apply_dpi
+local naughty = require("naughty")
+local dpi = require("beautiful").xresources.apply_dpi
 
-local clickable_container = require('widget.material.clickable-container')
+local clickable_container = require("widget.material.clickable-container")
 
-local icons = require('theme.icons')
+local icons = require("theme.icons")
 
-local config = require('module.functions')
-local animate = require('lib.animations').createAnimObject
-local signals = require('module.signals')
+local config = require("module.functions")
+local animate = require("lib.animations").createAnimObject
+local signals = require("module.settings.signals")
 
 local height = dpi(320)
 local width = dpi(480)
-local theme = require('theme.icons')
-local HOME = os.getenv('HOME')
+local theme = require("theme.icons")
+local HOME = os.getenv("HOME")
 
-local icon = HOME .. '/.config/awesome/widget/about/icons/info.svg'
+local icon = HOME .. "/.config/awesome/widget/about/icons/info.svg"
 
 local aboutPage
 local aboutBackdrop
@@ -34,16 +34,16 @@ local aboutBackdrop
 -- Widget #################################################################
 -- ########################################################################
 screen.connect_signal(
-    'request::desktop_decoration',
+    "request::desktop_decoration",
     function(s)
         -- Create the box
 
         aboutPage =
             wibox {
-            bg = beautiful.bg_normal .. 'bb',
+            bg = beautiful.bg_normal .. "bb",
             visible = false,
             ontop = true,
-            type = 'normal',
+            type = "normal",
             height = height,
             width = width,
             x = s.geometry.x + s.geometry.width / 2 - (width / 2),
@@ -54,7 +54,7 @@ screen.connect_signal(
         }
 
         screen.connect_signal(
-            'removed',
+            "removed",
             function(removed)
                 if s == removed then
                     aboutPage.visible = false
@@ -67,7 +67,7 @@ screen.connect_signal(
         -- ########################################################################
         signals.connect_refresh_screen(
             function()
-                print('Refreshing about page')
+                print("Refreshing about page")
 
                 if not s.valid or aboutPage == nil then
                     return
@@ -92,8 +92,8 @@ screen.connect_signal(
             ontop = true,
             visible = false,
             screen = s,
-            bg = '#00000000',
-            type = 'dock',
+            bg = "#00000000",
+            type = "dock",
             x = s.geometry.x,
             y = s.geometry.y,
             width = s.geometry.width,
@@ -107,14 +107,14 @@ local grabber =
     keybindings = {
         awful.key {
             modifiers = {},
-            key = 'Escape',
+            key = "Escape",
             on_press = function()
                 aboutBackdrop.visible = false
                 animate(
                     _G.anim_speed,
                     aboutPage,
                     {y = aboutPage.screen.geometry.y - aboutPage.height},
-                    'outCubic',
+                    "outCubic",
                     function()
                         aboutPage.visible = false
                     end
@@ -123,8 +123,8 @@ local grabber =
         }
     },
     -- Note that it is using the key name and not the modifier name.
-    stop_key = 'Escape',
-    stop_event = 'release'
+    stop_key = "Escape",
+    stop_event = "release"
 }
 -- ########################################################################
 -- Controls ###############################################################
@@ -139,7 +139,7 @@ local function toggleAbout()
             _G.anim_speed,
             aboutPage,
             {y = aboutPage.screen.geometry.y + aboutPage.screen.geometry.height / 2 - (aboutPage.height / 2)},
-            'outCubic'
+            "outCubic"
         )
     else
         grabber:stop()
@@ -148,7 +148,7 @@ local function toggleAbout()
             _G.anim_speed,
             aboutPage,
             {y = aboutPage.screen.geometry.y - aboutPage.height},
-            'outCubic',
+            "outCubic",
             function()
                 aboutPage.visible = false
             end
@@ -175,7 +175,7 @@ aboutBackdrop:buttons(
 local widget =
     wibox.widget {
     {
-        id = 'icon',
+        id = "icon",
         image = icon,
         widget = wibox.widget.imagebox,
         resize = true
@@ -188,7 +188,7 @@ local widget =
 local browserWidget =
     wibox.widget {
     {
-        id = 'icon',
+        id = "icon",
         image = icons.logo,
         widget = wibox.widget.imagebox,
         resize = true
@@ -204,7 +204,7 @@ widget_button:buttons(
             1,
             nil,
             function()
-                print('Showing Who Is To Blame')
+                print("Showing Who Is To Blame")
                 toggleAbout()
             end
         )
@@ -222,14 +222,14 @@ browserOpen:buttons(
             nil,
             function()
                 print("Opening the developer's portfolio site in your browser")
-                awful.spawn.easy_async_with_shell('$BROWSER https://thomasleonhighbaugh.me')
+                awful.spawn.easy_async_with_shell("$BROWSER https://thomasleonhighbaugh.me")
                 toggleAbout()
                 naughty.notify(
                     {
                         title = "Who's Responsible for this Mess?",
                         message = "Opened the developer's portfolio homepage",
                         timeout = 10,
-                        position = 'top_right'
+                        position = "top_right"
                     }
                 )
             end
@@ -238,13 +238,13 @@ browserOpen:buttons(
 )
 
 aboutPage:setup {
-    expand = 'none',
+    expand = "none",
     {
         browserOpen,
         wibox.widget {
             text = config.aboutText,
-            font = 'agave Nerd Font Mono Bold  10',
-            align = 'center',
+            font = "agave Nerd Font Mono Bold  10",
+            align = "center",
             widget = wibox.widget.textbox
         },
         layout = wibox.layout.fixed.horizontal,

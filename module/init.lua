@@ -8,12 +8,12 @@
 -- ########################################################################
 -- Init all modules
 require("module.settings")
-require("module.auto-start")
+require("module.settings.auto-start")
 require("widget.exit-screen")
 require("module.ui-components.quake-terminal")
-require("module.brightness-slider-osd")
-require("module.volume-slider-osd")
-require("module.volume_manager")
-_G.switcher = require("module.application-switch")
+require("module.hardware.brightness-slider-osd")
+require("module.hardware.volume-slider-osd")
+require("module.hardware.volume_manager")
+_G.switcher = require("module.ui-components.application-switch")
 
-require("module.battery-notifier")
+require("module.hardware.battery-notifier")

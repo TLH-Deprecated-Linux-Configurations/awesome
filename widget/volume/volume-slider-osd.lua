@@ -8,8 +8,8 @@ local mat_list_item = require("widget.material.list-item")
 local slider = require("module.ui-components.slider")
 local mat_icon_button = require("widget.material.icon-button")
 local icons = require("theme.icons")
-local signal = require("module.signals")
-local volume = require("module.volume")
+local signal = require("module.settings.signals")
+local volume = require("module.hardware.volume")
 
 local slider_osd =
     slider(

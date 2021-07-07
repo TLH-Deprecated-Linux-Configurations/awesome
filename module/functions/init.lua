@@ -8,9 +8,9 @@
 -- ########################################################################
 
 -- This file holds general configuration parameters and functions you can use
-local HOME = os.getenv('HOME')
-local filesystem = require('gears.filesystem')
-local file_exists = require('module.file').exists
+local HOME = os.getenv("HOME")
+local filesystem = require("gears.filesystem")
+local file_exists = require("module.functions.file").exists
 
 -- We add *_startup_delay to most polls
 -- to separate the runtime
@@ -37,23 +37,23 @@ local config_functions = {
     cpu_poll = 5, -- how often do we check the current cpu status
     cpu_startup_delay = 9,
     garbage_collection_cycle = 2 * 60, -- collect garbage every x seconds
-    colors_config = HOME .. '/.config/awesome/electric-tantra/colors.conf',
-    logo = HOME .. '/.config/awesome/theme/icons/logo.svg',
+    colors_config = HOME .. "/.config/awesome/electric-tantra/colors.conf",
+    logo = HOME .. "/.config/awesome/theme/icons/logo.svg",
     -- ########################################################################
     -- ########################################################################
     -- ########################################################################
     getComptonFile = function()
-        local userfile = HOME .. '/.config/picom.conf'
+        local userfile = HOME .. "/.config/picom.conf"
         if (file_exists(userfile)) then
             return userfile
         end
-        return filesystem.get_configuration_dir() .. '/external/picom.conf '
+        return filesystem.get_configuration_dir() .. "/external/picom.conf "
     end,
     -- ########################################################################
     -- ########################################################################
     -- ########################################################################
-    aboutText = 'the Electric Tantra Linux ' ..
-        os.date('%Y') .. '\n\n' .. 'The Linux Environment of Thomas Leon Highbaugh' .. ' '
+    aboutText = "the Electric Tantra Linux " ..
+        os.date("%Y") .. "\n\n" .. "The Linux Environment of Thomas Leon Highbaugh" .. " "
 }
 
 return config_functions

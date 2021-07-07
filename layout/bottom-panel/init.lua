@@ -14,7 +14,7 @@ local dpi = beautiful.xresources.apply_dpi
 
 local task_list = require("widget.task-list")
 local tag_list = require("widget.tag-list")
-local hardware = require("module.hardware-check")
+local hardware = require("module.hardware.hardware-check")
 -- ########################################################################
 -- ########################################################################
 -- ########################################################################

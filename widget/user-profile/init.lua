@@ -10,8 +10,8 @@ local PATH_TO_ICONS = HOME .. "/.config/awesome/widget/user-profile/icons/"
 
 local PATH_TO_CACHE_ICON = os.getenv("HOME") .. "/.cache/awesome/user-icons/"
 
-local signals = require("module.signals")
-local filehandle = require("module.file")
+local signals = require("module.settings.signals")
+local filehandle = require("module.functions.file")
 
 local user_card = card()
 

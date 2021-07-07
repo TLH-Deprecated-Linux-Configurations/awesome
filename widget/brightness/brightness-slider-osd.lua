@@ -5,7 +5,7 @@ local slider = require("module.ui-components.slider")
 local mat_icon_button = require("widget.material.icon-button")
 local icons = require("theme.icons")
 local spawn = require("awful.spawn")
-local signals = require("module.signals")
+local signals = require("module.settings.signals")
 
 local slider_osd =
     slider(

@@ -10,7 +10,7 @@ local beautiful = require("beautiful")
 -- ###############################################
 -- ###############################################
 -- general conf is used by sentry (to opt out of it)
-general = require("module.parser")(os.getenv("HOME") .. "/.cache/awesome/general.conf")
+general = require("module.functions.parser")(os.getenv("HOME") .. "/.cache/awesome/general.conf")
 awful = require("awful")
 awful.screen.set_auto_dpi_enabled(true)
 -- ###############################################

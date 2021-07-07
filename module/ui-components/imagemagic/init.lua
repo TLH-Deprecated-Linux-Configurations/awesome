@@ -41,7 +41,7 @@
 -- @copyright 2020 Tom Meyers
 -- @tdemod lib-tde.imagemagic
 ---------------------------------------------------------------------------
-local hardware = require("module.hardware-check")
+local hardware = require("module.hardware.hardware-check")
 
 local is_installed = hardware.has_package_installed("imagemagick")
 
