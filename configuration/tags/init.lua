@@ -6,16 +6,18 @@
 -- ########################################################################
 -- ########################################################################
 -- ########################################################################
-local bling = require('lib.bling')
+local bling = require("lib.bling")
+local lain = require("lib.lain")
 -- ########################################################################
 -- ########################################################################
 -- ########################################################################
 tag.connect_signal(
-    'request::default_layouts',
+    "request::default_layouts",
     function()
         awful.layout.append_default_layouts(
             {
                 bling.layout.mstab,
+                lain.layout.centerwork,
                 awful.layout.suit.tile,
                 awful.layout.suit.spiral.dwindle,
                 awful.layout.suit.floating,
@@ -35,7 +37,7 @@ awful.screen.connect_for_each_screen(
     function(s)
         -- Each screen has its own tag table.
 
-        local tag_names = {'A', 'W', 'E', 'S', 'O', 'M', 'E', 'W', 'M'}
+        local tag_names = {"A", "W", "E", "S", "O", "M", "E", "W", "M"}
         for idx, name in ipairs(tag_names) do
             local selected = false
             if idx == 1 then
@@ -58,19 +60,20 @@ awful.screen.connect_for_each_screen(
             filter = awful.widget.taglist.filter.all,
             buttons = taglist_buttons
         }
+        return tags
     end
 )
 -- ########################################################################
 -- ########################################################################
 -- ########################################################################
 _G.tag.connect_signal(
-    'property::layout',
+    "property::layout",
     function(t)
-        local currentLayout = awful.tag.getproperty(t, 'layout')
+        local currentLayout = awful.tag.getproperty(t, "layout")
         if (currentLayout == awful.layout.suit.max) then
             t.gap = 2
         else
-            t.gap = awful.tag.getproperty(t, 'gap') or 4
+            t.gap = awful.tag.getproperty(t, "gap") or 4
         end
         t.master_count = 2
     end

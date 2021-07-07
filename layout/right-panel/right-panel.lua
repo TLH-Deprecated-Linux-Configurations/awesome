@@ -6,12 +6,12 @@ local dpi = require("beautiful").xresources.apply_dpi
 local clickable_container = require("widget.material.clickable-container")
 local signals = require("module.signals")
 local animate = require("lib.animations").createAnimObject
-local seperator_widget = require("lib.separator")
+local seperator_widget = require("module.separator")
 
 local keyconfig = require("configuration.keys.mod")
 local modKey = keyconfig.modKey
 
-local scrollbox = require("lib.scrollbox")
+local scrollbox = require("module.ui-components.scrollbox")
 
 local get_screen = require("lib.function.common").focused_screen
 

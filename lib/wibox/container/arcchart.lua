@@ -7,8 +7,7 @@
 --@DOC_wibox_container_defaults_arcchart_EXAMPLE@
 -- @author Emmanuel Lepage Vallee &lt;elv1313@gmail.com&gt;
 -- @copyright 2013 Emmanuel Lepage Vallee
--- @containermod wibox.container.arcchart
--- @supermodule wibox.widget.base
+-- @classmod wibox.container.arcchart
 ---------------------------------------------------------------------------
 
 local setmetatable = setmetatable
@@ -23,15 +22,12 @@ local arcchart = { mt = {} }
 
 --- The progressbar border background color.
 -- @beautiful beautiful.arcchart_border_color
--- @param color
 
 --- The progressbar foreground color.
 -- @beautiful beautiful.arcchart_color
--- @param color
 
 --- The progressbar border width.
 -- @beautiful beautiful.arcchart_border_width
--- @param number
 
 --- The padding between the outline and the progressbar.
 -- @beautiful beautiful.arcchart_paddings
@@ -192,22 +188,30 @@ end
 --- The widget to wrap in a radial proggressbar.
 -- @property widget
 -- @tparam widget widget The widget
--- @interface container
 
-arcchart.set_widget = base.set_widget_common
+function arcchart:set_widget(widget)
+    if widget then
+        base.check_widget(widget)
+    end
+    self._private.widget = widget
+    self:emit_signal("widget::layout_changed")
+end
 
+--- Get the children elements.
+-- @treturn table The children
 function arcchart:get_children()
     return {self._private.widget}
 end
 
+--- Replace the layout children
+-- This layout only accept one children, all others will be ignored
+-- @tparam table children A table composed of valid widgets
 function arcchart:set_children(children)
     self._private.widget = children and children[1]
     self:emit_signal("widget::layout_changed")
 end
 
 --- Reset this layout. The widget will be removed and the rotation reset.
--- @method reset
--- @interface container
 function arcchart:reset()
     self:set_widget(nil)
 end
@@ -229,59 +233,38 @@ end
 -- @tparam[opt=0] number paddings.bottom
 -- @tparam[opt=0] number paddings.left
 -- @tparam[opt=0] number paddings.right
--- @emits [opt=bob] property::paddings When the `paddings` changes.
--- @emitstparam property::paddings widget self The object being modified.
--- @emitstparam property::paddings table paddings The new paddings.
--- @usebeautiful beautiful.arcchart_paddings Fallback value when the object
---  `paddings` isn't specified.
 
 --- The border background color.
 --@DOC_wibox_container_arcchart_border_color_EXAMPLE@
 -- @property border_color
--- @tparam color border_color
--- @propemits true false
--- @propbeautiful
 
 --- The arcchart values foreground colors.
 --@DOC_wibox_container_arcchart_color_EXAMPLE@
 -- @property colors
 -- @tparam table values An ordered set of colors for each value in arcchart.
--- @propemits true false
--- @propbeautiful
 
 --- The border width.
---
 --@DOC_wibox_container_arcchart_border_width_EXAMPLE@
---
 -- @property border_width
 -- @tparam[opt=3] number border_width
--- @propemits true false
--- @propbeautiful
 
 --- The minimum value.
 -- @property min_value
--- @tparam number min_value
--- @propemits true false
 
 --- The maximum value.
 -- @property max_value
--- @tparam number max_value
--- @propemits true false
 
 --- The radial background.
 --@DOC_wibox_container_arcchart_bg_EXAMPLE@
 -- @property bg
--- @tparam color bg
+-- @param color
 -- @see gears.color
--- @propemits true false
--- @propbeautiful
 
 --- The value.
 --@DOC_wibox_container_arcchart_value_EXAMPLE@
 -- @property value
 -- @tparam number value Between min_value and max_value
 -- @see values
--- @propemits true false
 
 --- The values.
 -- The arcchart is designed to display multiple values at once. Each will be
@@ -289,33 +272,29 @@ end
 --@DOC_wibox_container_arcchart_values_EXAMPLE@
 -- @property values
 -- @tparam table values An ordered set of values.
--- @propemits true false
 -- @see value
 
 --- If the chart has rounded edges.
 --@DOC_wibox_container_arcchart_rounded_edge_EXAMPLE@
 -- @property rounded_edge
--- @tparam[opt=false] boolean rounded_edge
--- @propemits true false
+-- @param[opt=false] boolean
 
 --- The arc thickness.
 --@DOC_wibox_container_arcchart_thickness_EXAMPLE@
 -- @property thickness
--- @propemits true false
--- @tparam number thickness
+-- @param number
 
 --- The (radiant) angle where the first value start.
 --@DOC_wibox_container_arcchart_start_angle_EXAMPLE@
 -- @property start_angle
--- @tparam[opt=math.pi] number start_angle A number between 0 and 2*math.pi
--- @propemits true false
+-- @param[opt=math.pi] number A number between 0 and 2*math.pi
 
 for _, prop in ipairs {"border_width", "border_color", "paddings", "colors",
     "rounded_edge", "bg", "thickness", "values", "min_value", "max_value",
     "start_angle" } do
     arcchart["set_"..prop] = function(self, value)
         self._private[prop] = value
-        self:emit_signal("property::"..prop, value)
+        self:emit_signal("property::"..prop)
         self:emit_signal("widget::redraw_needed")
     end
     arcchart["get_"..prop] = function(self)
@@ -340,8 +319,8 @@ function arcchart:set_value(value)
 end
 
 --- Returns a new arcchart layout.
--- @tparam[opt] wibox.widget widget The widget to display.
--- @constructorfct wibox.container.arcchart
+-- @param[opt] widget The widget to display.
+-- @function wibox.container.arcchart
 local function new(widget)
     local ret = base.make_widget(nil, nil, {
         enable_properties = true,
@@ -357,6 +336,10 @@ end
 function arcchart.mt:__call(...)
     return new(...)
 end
+
+--@DOC_widget_COMMON@
+
+--@DOC_object_COMMON@
 
 return setmetatable(arcchart, arcchart.mt)
 

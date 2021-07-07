@@ -13,10 +13,10 @@ local beautiful = require("beautiful")
 local dpi = beautiful.xresources.apply_dpi
 local icons = require("theme.icons")
 local signals = require("module.signals")
-local scrollbox = require("lib.scrollbox")
+local scrollbox = require("module.ui-components.scrollbox")
 local animate = require("lib.animations").createAnimObject
-local profilebox = require("lib.profilebox")
-local button = require("module.button")
+local profilebox = require("module.ui-components.profilebox")
+local button = require("module.ui-components.button")
 local HOME = os.getenv("HOME")
 
 local keyconfig = require("configuration.keys.mod")

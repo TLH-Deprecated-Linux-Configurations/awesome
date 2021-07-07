@@ -5,16 +5,16 @@
 -- ########################################################################
 -- ########################################################################
 -- ########################################################################
-local awful = require('awful')
-local beautiful = require('beautiful')
-local wibox = require('wibox')
-local gears = require('gears')
+local awful = require("awful")
+local beautiful = require("beautiful")
+local wibox = require("wibox")
+local gears = require("gears")
 
 local dpi = beautiful.xresources.apply_dpi
 
-local task_list = require('widget.task-list')
-local tag_list = require('widget.tag-list')
-local hardware = require('lib.hardware-check')
+local task_list = require("widget.task-list")
+local tag_list = require("widget.tag-list")
+local hardware = require("module.hardware-check")
 -- ########################################################################
 -- ########################################################################
 -- ########################################################################
@@ -36,13 +36,13 @@ local bottom_panel = function(s)
         {
             ontop = true,
             screen = s,
-            position = 'bottom',
+            position = "bottom",
             height = dpi(42), -- 48
             width = s.geometry.width - offsetx,
             x = s.geometry.x + offsetx,
             y = s.geometry.y,
             stretch = false,
-            bg = beautiful.bg_normal .. '88',
+            bg = beautiful.bg_normal .. "88",
             fg = beautiful.fg_normal,
             struts = {
                 bottom = dpi(42) -- 48
@@ -52,11 +52,11 @@ local bottom_panel = function(s)
     panel:struts {bottom = dpi(42)}
 
     panel:connect_signal(
-        'mouse::enter',
+        "mouse::enter",
         function()
             local w = mouse.current_wibox
             if w then
-                w.cursor = 'left_ptr'
+                w.cursor = "left_ptr"
             end
         end
     )
@@ -69,7 +69,7 @@ local bottom_panel = function(s)
                 widget,
                 border_width = dpi(3),
                 border_color = beautiful.xcolor0,
-                bg = beautiful.bg_normal .. '99',
+                bg = beautiful.bg_normal .. "99",
                 shape = function(cr, w, h)
                     gears.shape.rounded_rect(cr, w, h, dpi(3))
                 end,
@@ -98,38 +98,38 @@ local bottom_panel = function(s)
     -- ########################################################################
     -- ########################################################################
     -- ########################################################################
-    s.control_center_toggle = build_widget(require('layout.left-panel'))
+    s.control_center_toggle = build_widget(require("layout.left-panel"))
 
-    s.screen_rec = build_widget(require('widget.screen-recorder')())
-    s.bluetooth = build_widget(show_widget_or_default('widget.bluetooth', hardware.hasBluetooth()))
-    s.network = build_widget(show_widget_or_default('widget.wifi', hardware.hasWifi()))
-    local layout_box = build_widget(require('widget.layoutbox')(s))
-    s.battery = build_widget(show_widget_or_default('widget.battery', hardware.hasBattery(), true))
-    s.notification_center = build_widget(require('layout.right-panel'))
-    s.about = build_widget(require('widget.about'))
-    s.mytextclock = build_widget(require('widget.clock'))
+    s.bluetooth = build_widget(show_widget_or_default("widget.bluetooth", hardware.hasBluetooth()))
+    s.network = build_widget(show_widget_or_default("widget.wifi", hardware.hasWifi()))
+    local layout_box = build_widget(require("widget.layoutbox")(s))
+    s.battery = build_widget(show_widget_or_default("widget.battery", hardware.hasBattery(), true))
+    s.notification_center = build_widget(require("layout.right-panel"))
+    s.mytextclock = build_widget(require("widget.clock"))
+
     -- ########################################################################
     -- ########################################################################
     -- ########################################################################
     panel:setup {
         {
             layout = wibox.layout.align.horizontal,
-            expand = 'none',
-            position = 'bottom',
+            expand = false,
+            position = "bottom",
             {
-                layout = wibox.layout.align.horizontal,
+                layout = wibox.layout.fixed.horizontal,
                 spacing = dpi(2),
                 s.control_center_toggle,
                 tag_list(s),
-                task_list(s)
+                task_list(s),
+                left = dpi(5),
+                right = dpi(5),
+                widget = wibox.container.margin
             },
             nil,
             {
                 layout = wibox.layout.fixed.horizontal,
                 spacing = dpi(2),
                 {s.systray, margins = dpi(2), widget = wibox.container.margin},
-                s.about,
-                s.screen_rec,
                 s.network,
                 s.bluetooth,
                 s.battery,
@@ -153,18 +153,18 @@ local bottom_panel = function(s)
         awful.wibar(
         {
             screen = s,
-            position = 'bottom',
+            position = "bottom",
             height = dpi(1),
             ontop = true,
             width = s.geometry.width,
-            bg = '#00000000',
+            bg = "#00000000",
             visible = true
         }
     )
 
     -- Show panel and hide trigger
     panel_trigger:connect_signal(
-        'mouse::enter',
+        "mouse::enter",
         function()
             panel.visible = true
             panel_trigger.visible = false
@@ -172,7 +172,7 @@ local bottom_panel = function(s)
     )
     -- Hide panel and show trigger
     panel:connect_signal(
-        'mouse::leave',
+        "mouse::leave",
         function()
             panel.visible = false
             panel_trigger.visible = true
@@ -187,8 +187,8 @@ local bottom_panel = function(s)
     end
 
     -- connect panel visibility function to relevant signals
-    client.connect_signal('property::fullscreen', change_panel_visibility)
-    client.connect_signal('focus', change_panel_visibility)
+    client.connect_signal("property::fullscreen", change_panel_visibility)
+    client.connect_signal("focus", change_panel_visibility)
     return panel
 end
 -- ########################################################################

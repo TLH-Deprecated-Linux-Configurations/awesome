@@ -1,12 +1,11 @@
 ---------------------------------------------------------------------------
--- A container capable of changing the background color, foreground color and
+-- A container capable of changing the background color, foreground color
 -- widget shape.
 --
 --@DOC_wibox_container_defaults_background_EXAMPLE@
 -- @author Uli Schlachter
 -- @copyright 2010 Uli Schlachter
--- @containermod wibox.container.background
--- @supermodule wibox.widget.base
+-- @classmod wibox.container.background
 ---------------------------------------------------------------------------
 
 local base = require("wibox.widget.base")
@@ -22,61 +21,6 @@ local type = type
 local unpack = unpack or table.unpack -- luacheck: globals unpack (compatibility with Lua 5.1)
 
 local background = { mt = {} }
-
--- The Cairo SVG backend doesn't support surface as patterns correctly.
--- The result is both glitchy and blocky. It is also impossible to introspect.
--- Calling this function replace the normal code path is a "less correct", but
--- more widely compatible version.
-function background._use_fallback_algorithm()
-    background.before_draw_children = function(self, _, cr, width, height)
-        local bw    = self._private.shape_border_width or 0
-        local shape = self._private.shape or gshape.rectangle
-
-        if bw > 0 then
-            cr:translate(bw, bw)
-            width, height = width - 2*bw, height - 2*bw
-        end
-
-        shape(cr, width, height)
-
-        if bw > 0 then
-            cr:save() --Save to avoid messing with the original source
-            cr:set_line_width(bw)
-            cr:set_source(color(self._private.shape_border_color or self._private.foreground or beautiful.fg_normal))
-            cr:stroke_preserve()
-            cr:restore()
-        end
-
-        if self._private.background then
-            cr:save() --Save to avoid messing with the original source
-            cr:set_source(self._private.background)
-            cr:fill_preserve()
-            cr:restore()
-        end
-
-        cr:translate(-bw, -bw)
-        cr:clip()
-
-        if self._private.foreground then
-            cr:set_source(self._private.foreground)
-        end
-    end
-    background.after_draw_children = function(self, _, cr, width, height)
-        local bw    = self._private.shape_border_width or 0
-        local shape = self._private.shape or gshape.rectangle
-
-        if bw > 0 then
-            cr:save()
-            cr:translate(bw, bw)
-            width, height = width - 2*bw, height - 2*bw
-            shape(cr, width, height)
-            cr:set_line_width(bw)
-            cr:set_source(color(self._private.shape_border_color or self._private.foreground or beautiful.fg_normal))
-            cr:stroke()
-            cr:restore()
-        end
-    end
-end
 
 -- Make sure a surface pattern is freed *now*
 local function dispose_pattern(pattern)
@@ -217,31 +161,38 @@ end
 --- The widget displayed in the background widget.
 -- @property widget
 -- @tparam widget widget The widget to be disaplayed inside of the background
---  area.
--- @interface container
+--  area
 
-background.set_widget = base.set_widget_common
+function background:set_widget(widget)
+    if widget then
+        base.check_widget(widget)
+    end
+    self._private.widget = widget
+    self:emit_signal("widget::layout_changed")
+end
 
 function background:get_widget()
     return self._private.widget
 end
 
+-- Get children element
+-- @treturn table The children
 function background:get_children()
     return {self._private.widget}
 end
 
+-- Replace the layout children
+-- This layout only accept one children, all others will be ignored
+-- @tparam table children A table composed of valid widgets
 function background:set_children(children)
     self:set_widget(children[1])
 end
 
 --- The background color/pattern/gradient to use.
---
 --@DOC_wibox_container_background_bg_EXAMPLE@
---
 -- @property bg
--- @tparam color bg A color string, pattern or gradient
+-- @param bg A color string, pattern or gradient
 -- @see gears.color
--- @propemits true false
 
 function background:set_bg(bg)
     if bg then
@@ -250,7 +201,6 @@ function background:set_bg(bg)
         self._private.background = nil
     end
     self:emit_signal("widget::redraw_needed")
-    self:emit_signal("property::bg", bg)
 end
 
 function background:get_bg()
@@ -258,12 +208,9 @@ function background:get_bg()
 end
 
 --- The foreground (text) color/pattern/gradient to use.
---
 --@DOC_wibox_container_background_fg_EXAMPLE@
---
 -- @property fg
--- @tparam color fg A color string, pattern or gradient
--- @propemits true false
+-- @param fg A color string, pattern or gradient
 -- @see gears.color
 
 function background:set_fg(fg)
@@ -273,7 +220,6 @@ function background:set_fg(fg)
         self._private.foreground = nil
     end
     self:emit_signal("widget::redraw_needed")
-    self:emit_signal("property::fg", fg)
 end
 
 function background:get_fg()
@@ -285,19 +231,15 @@ end
 -- Use `set_shape` to set additional shape paramaters.
 --
 --@DOC_wibox_container_background_shape_EXAMPLE@
---
 -- @property shape
--- @tparam gears.shape|function shape A function taking a context, width and height as arguments
+-- @param shape A function taking a context, width and height as arguments
 -- @see gears.shape
 -- @see set_shape
 
 --- Set the background shape.
 --
--- Any other arguments will be passed to the shape function.
---
--- @method set_shape
--- @tparam gears.shape|function shape A function taking a context, width and height as arguments
--- @propemits true false
+-- Any other arguments will be passed to the shape function
+-- @param shape A function taking a context, width and height as arguments
 -- @see gears.shape
 -- @see shape
 function background:set_shape(shape, ...)
@@ -308,7 +250,6 @@ function background:set_shape(shape, ...)
     self._private.shape = shape
     self._private.shape_args = {...}
     self:emit_signal("widget::redraw_needed")
-    self:emit_signal("property::shape", shape)
 end
 
 function background:get_shape()
@@ -318,10 +259,8 @@ end
 --- When a `shape` is set, also draw a border.
 --
 -- See `wibox.container.background.shape` for an usage example.
---
 -- @deprecatedproperty shape_border_width
 -- @tparam number width The border width
--- @renamedin 4.4 border_width
 -- @see border_width
 
 --- Add a border of a specific width.
@@ -331,8 +270,6 @@ end
 -- See `wibox.container.background.shape` for an usage example.
 -- @property border_width
 -- @tparam[opt=0] number width The border width.
--- @propemits true false
--- @introducedin 4.4
 -- @see border_color
 
 function background:set_border_width(width)
@@ -340,7 +277,6 @@ function background:set_border_width(width)
 
     self._private.shape_border_width = width
     self:emit_signal("widget::redraw_needed")
-    self:emit_signal("property::border_width", width)
 end
 
 function background:get_border_width()
@@ -364,11 +300,8 @@ end
 --- When a `shape` is set, also draw a border.
 --
 -- See `wibox.container.background.shape` for an usage example.
---
 -- @deprecatedproperty shape_border_color
--- @usebeautiful beautiful.fg_normal Fallback when 'fg' and `border_color` aren't set.
--- @tparam[opt=self._private.foreground] color fg The border color, pattern or gradient
--- @renamedin 4.4 border_color
+-- @param[opt=self._private.foreground] fg The border color, pattern or gradient
 -- @see gears.color
 -- @see border_color
 
@@ -376,10 +309,7 @@ end
 --
 -- See `wibox.container.background.shape` for an usage example.
 -- @property border_color
--- @tparam[opt=self._private.foreground] color fg The border color, pattern or gradient
--- @propemits true false
--- @usebeautiful beautiful.fg_normal Fallback when 'fg' and `border_color` aren't set.
--- @introducedin 4.4
+-- @param[opt=self._private.foreground] fg The border color, pattern or gradient
 -- @see gears.color
 -- @see border_width
 
@@ -388,7 +318,6 @@ function background:set_border_color(fg)
 
     self._private.shape_border_color = fg
     self:emit_signal("widget::redraw_needed")
-    self:emit_signal("property::border_color", fg)
 end
 
 function background:get_border_color()
@@ -429,28 +358,24 @@ end
 -- * *inner*: Squeeze the size of the content by the border width.
 --
 -- @property border_strategy
--- @tparam[opt="none"] string border_strategy
+-- @param[opt="none"] string
 
 function background:set_border_strategy(value)
     self._private.border_strategy = value
     self:emit_signal("widget::layout_changed")
-    self:emit_signal("property::border_strategy", value)
 end
 
---- The background image to use.
---
+--- The background image to use
 -- If `image` is a function, it will be called with `(context, cr, width, height)`
 -- as arguments. Any other arguments passed to this method will be appended.
---
 -- @property bgimage
--- @tparam string|surface|function image A background image or a function
+-- @param image A background image or a function
 -- @see gears.surface
 
 function background:set_bgimage(image, ...)
     self._private.bgimage = type(image) == "function" and image or surface.load(image)
     self._private.bgimage_args = {...}
     self:emit_signal("widget::redraw_needed")
-    self:emit_signal("property::bgimage", image)
 end
 
 function background:get_bgimage()
@@ -461,11 +386,10 @@ end
 --
 -- A background container applies a background and foreground color
 -- to another widget.
---
--- @tparam[opt] widget widget The widget to display.
--- @tparam[opt] color bg The background to use for that widget.
--- @tparam[opt] gears.shape|function shape A `gears.shape` compatible shape function
--- @constructorfct wibox.container.background
+-- @param[opt] widget The widget to display.
+-- @param[opt] bg The background to use for that widget.
+-- @param[opt] shape A `gears.shape` compatible shape function
+-- @function wibox.container.background
 local function new(widget, bg, shape)
     local ret = base.make_widget(nil, nil, {
         enable_properties = true,
@@ -484,6 +408,10 @@ end
 function background.mt:__call(...)
     return new(...)
 end
+
+--@DOC_widget_COMMON@
+
+--@DOC_object_COMMON@
 
 return setmetatable(background, background.mt)
 

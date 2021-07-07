@@ -1,12 +1,12 @@
-local wibox = require('wibox')
-local dpi = require('beautiful').xresources.apply_dpi
-local mat_list_item = require('widget.material.list-item')
-local signals = require('module.signals')
-local card = require('module.card')
-local checkbox = require('module.checkbox')
-local HOME = os.getenv('HOME')
-local beautiful = require('beautiful')
-local PATH_TO_ICONS = HOME .. '/.config/awesome/widget/notification-center/icons/'
+local wibox = require("wibox")
+local dpi = require("beautiful").xresources.apply_dpi
+local mat_list_item = require("widget.material.list-item")
+local signals = require("module.signals")
+local card = require("module.ui-components.card")
+local checkbox = require("module.ui-components.checkbox")
+local HOME = os.getenv("HOME")
+local beautiful = require("beautiful")
+local PATH_TO_ICONS = HOME .. "/.config/awesome/widget/notification-center/icons/"
 
 _G.dont_disturb = false
 
@@ -15,9 +15,9 @@ local box
 
 local dont_disturb_text =
     wibox.widget {
-    text = 'Do Not Disturb',
-    font = beautiful.font .. ' 12',
-    align = 'left',
+    text = "Do Not Disturb",
+    font = beautiful.font .. " 12",
+    align = "left",
     widget = wibox.widget.textbox
 }
 
@@ -41,7 +41,7 @@ box =
 local dont_disturb_icon =
     wibox.widget {
     {
-        image = PATH_TO_ICONS .. 'dont-disturb' .. '.svg',
+        image = PATH_TO_ICONS .. "dont-disturb" .. ".svg",
         widget = wibox.widget.imagebox,
         resize = true
     },

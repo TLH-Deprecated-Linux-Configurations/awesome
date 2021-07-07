@@ -6,8 +6,7 @@
 -- @author Grigory Mishchenko &lt;grishkokot@gmail.com&gt;
 -- @author Emmanuel Lepage Vallee &lt;elv1313@gmail.com&gt;
 -- @copyright 2015 Grigory Mishchenko, 2016 Emmanuel Lepage Vallee
--- @widgetmod wibox.widget.slider
--- @supermodule wibox.widget.base
+-- @classmod wibox.widget.slider
 ---------------------------------------------------------------------------
 
 local setmetatable = setmetatable
@@ -31,8 +30,6 @@ local slider = {mt={}}
 --
 -- @property handle_shape
 -- @tparam[opt=gears shape rectangle] gears.shape shape
--- @propemits true false
--- @propbeautiful
 -- @see gears.shape
 
 --- The slider handle color.
@@ -40,9 +37,7 @@ local slider = {mt={}}
 --@DOC_wibox_widget_slider_handle_color_EXAMPLE@
 --
 -- @property handle_color
--- @propbeautiful
--- @tparam color handle_color
--- @propemits true false
+-- @param color
 
 --- The slider handle margins.
 --
@@ -54,32 +49,24 @@ local slider = {mt={}}
 -- @tparam[opt=0] number margins.right
 -- @tparam[opt=0] number margins.top
 -- @tparam[opt=0] number margins.bottom
--- @propemits true false
--- @propbeautiful
 
 --- The slider handle width.
 --
 --@DOC_wibox_widget_slider_handle_width_EXAMPLE@
 --
 -- @property handle_width
--- @tparam number handle_width
--- @propemits true false
--- @propbeautiful
+-- @param number
 
 --- The handle border_color.
 --
 --@DOC_wibox_widget_slider_handle_border_EXAMPLE@
 --
 -- @property handle_border_color
--- @tparam color handle_border_color
--- @propemits true false
--- @propbeautiful
+-- @param color
 
 --- The handle border width.
 -- @property handle_border_width
--- @tparam[opt=0] number handle_border_width
--- @propemits true false
--- @propbeautiful
+-- @param[opt=0]  number
 
 --- The bar (background) shape.
 --
@@ -87,8 +74,6 @@ local slider = {mt={}}
 --
 -- @property bar_shape
 -- @tparam[opt=gears shape rectangle] gears.shape shape
--- @propemits true false
--- @propbeautiful
 -- @see gears.shape
 
 --- The bar (background) height.
@@ -96,28 +81,14 @@ local slider = {mt={}}
 --@DOC_wibox_widget_slider_bar_height_EXAMPLE@
 --
 -- @property bar_height
--- @tparam number bar_height
--- @propbeautiful
--- @propemits true false
+-- @param number
 
 --- The bar (background) color.
 --
 --@DOC_wibox_widget_slider_bar_color_EXAMPLE@
 --
 -- @property bar_color
--- @tparam color bar_color
--- @propbeautiful
--- @propemits true false
-
---- The bar (active) color.
---
---@DOC_wibox_widget_slider_bar_active_color_EXAMPLE@
---
--- Only works when both `bar_active_color` and `bar_color` are passed as hex color string
--- @property bar_active_color
--- @tparam color bar_active_color
--- @propbeautiful
--- @propemits true false
+-- @param color
 
 --- The bar (background) margins.
 --
@@ -129,22 +100,17 @@ local slider = {mt={}}
 -- @tparam[opt=0] number margins.right
 -- @tparam[opt=0] number margins.top
 -- @tparam[opt=0] number margins.bottom
--- @propbeautiful
--- @propemits true false
 
 --- The bar (background) border width.
 -- @property bar_border_width
--- @tparam[opt=0] number bar_border_width
--- @propemits true false
+-- @param[opt=0] numbergb
 
 --- The bar (background) border_color.
 --
 --@DOC_wibox_widget_slider_bar_border_EXAMPLE@
 --
 -- @property bar_border_color
--- @tparam color bar_border_color
--- @propbeautiful
--- @propemits true false
+-- @param color
 
 --- The slider value.
 --
@@ -153,70 +119,54 @@ local slider = {mt={}}
 --@DOC_wibox_widget_slider_value_EXAMPLE@
 --
 -- @property value
--- @tparam[opt=0] number value
--- @propemits true false
+-- @param[opt=0] number
 
 --- The slider minimum value.
---
 -- @property minimum
--- @tparam[opt=0] number minimum
--- @propemits true false
+-- @param[opt=0] number
 
 --- The slider maximum value.
---
 -- @property maximum
--- @tparam[opt=100] number maximum
--- @propemits true false
+-- @param[opt=100] number
 
 --- The bar (background) border width.
---
 -- @beautiful beautiful.slider_bar_border_width
 -- @param number
 
 --- The bar (background) border color.
---
 -- @beautiful beautiful.slider_bar_border_color
 -- @param color
 
 --- The handle border_color.
---
 -- @beautiful beautiful.slider_handle_border_color
 -- @param color
 
 --- The handle border width.
---
 -- @beautiful beautiful.slider_handle_border_width
 -- @param number
 
---- The handle width.
---
+--- The handle .
 -- @beautiful beautiful.slider_handle_width
 -- @param number
 
---- The handle color.
---
 -- @beautiful beautiful.slider_handle_color
 -- @param color
 
 --- The handle shape.
---
 -- @beautiful beautiful.slider_handle_shape
 -- @tparam[opt=gears shape rectangle] gears.shape shape
 -- @see gears.shape
 
 --- The bar (background) shape.
---
 -- @beautiful beautiful.slider_bar_shape
 -- @tparam[opt=gears shape rectangle] gears.shape shape
 -- @see gears.shape
 
 --- The bar (background) height.
---
 -- @beautiful beautiful.slider_bar_height
 -- @param number
 
 --- The bar (background) margins.
---
 -- @beautiful beautiful.slider_bar_margins
 -- @tparam[opt={}] table margins
 -- @tparam[opt=0] number margins.left
@@ -225,7 +175,6 @@ local slider = {mt={}}
 -- @tparam[opt=0] number margins.bottom
 
 --- The slider handle margins.
---
 -- @beautiful beautiful.slider_handle_margins
 -- @tparam[opt={}] table margins
 -- @tparam[opt=0] number margins.left
@@ -234,16 +183,8 @@ local slider = {mt={}}
 -- @tparam[opt=0] number margins.bottom
 
 --- The bar (background) color.
---
 -- @beautiful beautiful.slider_bar_color
 -- @param color
-
---- The bar (active) color.
---
--- Only works when both `beautiful.slider_bar_color` and `beautiful.slider_bar_active_color` are hex color strings
--- @beautiful beautiful.slider_bar_active_color
--- @param color
-
 
 local properties = {
     -- Handle
@@ -258,7 +199,6 @@ local properties = {
     bar_shape            = shape.rectangle,
     bar_height           = false,
     bar_color            = false,
-    bar_active_color     = false,
     bar_margins          = {},
     bar_border_width     = 0,
     bar_border_color     = false,
@@ -276,7 +216,7 @@ for prop in pairs(properties) do
         self._private[prop] = value
 
         if changed then
-            self:emit_signal("property::"..prop, value)
+            self:emit_signal("property::"..prop)
             self:emit_signal("widget::redraw_needed")
         end
     end
@@ -298,7 +238,7 @@ function slider:set_value(value)
     self._private.value = value
 
     if changed then
-        self:emit_signal( "property::value", value)
+        self:emit_signal( "property::value"       )
         self:emit_signal( "widget::redraw_needed" )
     end
 end
@@ -312,33 +252,11 @@ local function get_extremums(self)
 end
 
 function slider:draw(_, cr, width, height)
-    local value = self._private.value or self._private.min or 0
-
-    local maximum = self._private.maximum
-        or properties.maximum
-
-    local minimum = self._private.minimum
-        or properties.minimum
-
-    local range = maximum - minimum
-    local active_rate = (value - minimum) / range
-
-    local handle_height, handle_width = height, self._private.handle_width
-        or beautiful.slider_handle_width
-        or math.floor(height/2)
-
-    local handle_border_width = self._private.handle_border_width
-        or beautiful.slider_handle_border_width
-        or properties.handle_border_width or 0
-
     local bar_height = self._private.bar_height
 
     -- If there is no background, then skip this
     local bar_color = self._private.bar_color
         or beautiful.slider_bar_color
-
-    local bar_active_color = self._private.bar_active_color
-        or beautiful.slider_bar_active_color
 
     if bar_color then
         cr:set_source(color(bar_color))
@@ -363,7 +281,7 @@ function slider:draw(_, cr, width, height)
         end
     else
         bar_height = bar_height or beautiful.slider_bar_height or height
-        y_offset   = math.floor((height - bar_height)/2)
+        y_offset   = (height - bar_height)/2
     end
 
 
@@ -378,19 +296,6 @@ function slider:draw(_, cr, width, height)
         or properties.bar_border_width
 
     bar_shape(cr, width - x_offset - right_margin, bar_height or height)
-
-    if bar_active_color and type(bar_color) == "string" and type(bar_active_color) == "string" then
-        local bar_active_width = math.floor(
-            active_rate * (width - x_offset - right_margin)
-            - (handle_width - handle_border_width/2) * (active_rate - 0.5)
-        )
-        cr:set_source(color.create_pattern{
-            type        = "linear",
-            from        = {0,0},
-            to          = {bar_active_width, 0},
-            stops       = {{0.99, bar_active_color}, {0.99, bar_color}}
-        })
-    end
 
     if bar_color then
         if bar_border_width == 0 then
@@ -429,6 +334,10 @@ function slider:draw(_, cr, width, height)
         cr:set_source(color(handle_color))
     end
 
+    local handle_height, handle_width = height, self._private.handle_width
+        or beautiful.slider_handle_width
+        or height/2
+
     local handle_shape = self._private.handle_shape
         or beautiful.slider_handle_shape
         or properties.handle_shape
@@ -453,11 +362,17 @@ function slider:draw(_, cr, width, height)
         end
     end
 
+    local value = self._private.value or self._private.min or 0
+
     -- Get the widget size back to it's non-transfored value
     local min, _, interval = get_extremums(self)
-    local rel_value = math.floor(((value-min)/interval) * (width-handle_width))
+    local rel_value = ((value-min)/interval) * (width-handle_width)
 
     cr:translate(x_offset + rel_value, y_offset)
+
+    local handle_border_width = self._private.handle_border_width
+        or beautiful.slider_handle_border_width
+        or properties.handle_border_width or 0
 
     handle_shape(cr, handle_width, handle_height)
 
@@ -522,7 +437,7 @@ end
 
 --- Create a slider widget.
 -- @tparam[opt={}] table args
--- @constructorfct wibox.widget.slider
+-- @function wibox.widget.slider
 local function new(args)
     local ret = base.make_widget(nil, nil, {
         enable_properties = true,
@@ -537,9 +452,13 @@ local function new(args)
     return ret
 end
 
-function slider.mt:__call(...)
+function slider.mt:__call(_, ...)
     return new(...)
 end
+
+--@DOC_widget_COMMON@
+
+--@DOC_object_COMMON@
 
 return setmetatable(slider, slider.mt)
 

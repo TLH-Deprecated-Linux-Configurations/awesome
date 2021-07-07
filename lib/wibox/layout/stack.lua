@@ -11,8 +11,7 @@
 --@DOC_wibox_layout_defaults_stack_EXAMPLE@
 -- @author Emmanuel Lepage Vallee
 -- @copyright 2016 Emmanuel Lepage Vallee
--- @layoutmod wibox.layout.stack
--- @supermodule wibox.layout.fixed
+-- @classmod wibox.layout.stack
 ---------------------------------------------------------------------------
 
 local base  = require("wibox.widget.base" )
@@ -23,48 +22,39 @@ local gtable  = require("gears.table")
 
 local stack = {mt={}}
 
---- Add some widgets to the given stack layout.
---
--- @tparam widget ... Widgets that should be added (must at least be one)
--- @method add
--- @interface layout
+--@DOC_fixed_COMMON@
 
---- Remove a widget from the layout.
---
+--- Add some widgets to the given stack layout
+-- @param layout The layout you are modifying.
+-- @tparam widget ... Widgets that should be added (must at least be one)
+-- @name add
+-- @class function
+
+--- Remove a widget from the layout
 -- @tparam index The widget index to remove
 -- @treturn boolean index If the operation is successful
--- @method remove
--- @interface layout
+-- @name remove
+-- @class function
 
---- Insert a new widget in the layout at position `index`.
---
+--- Insert a new widget in the layout at position `index`
 -- @tparam number index The position
--- @tparam widget widget The widget
+-- @param widget The widget
 -- @treturn boolean If the operation is successful
--- @method insert
--- @emits widget::inserted
--- @emitstparam widget::inserted widget self The fixed layout.
--- @emitstparam widget::inserted widget widget index The inserted widget.
--- @emitstparam widget::inserted number count The widget count.
--- @interface layout
+-- @name insert
+-- @class function
 
---- Remove one or more widgets from the layout.
---
+--- Remove one or more widgets from the layout
 -- The last parameter can be a boolean, forcing a recursive seach of the
 -- widget(s) to remove.
---
--- @tparam widget widget ... Widgets that should be removed (must at least be one)
+-- @param widget ... Widgets that should be removed (must at least be one)
 -- @treturn boolean If the operation is successful
--- @method remove_widgets
--- @interface layout
+-- @name remove_widgets
+-- @class function
 
 --- Add spacing around the widget, similar to the margin container.
---
 --@DOC_wibox_layout_stack_spacing_EXAMPLE@
 -- @property spacing
 -- @tparam number spacing Spacing between widgets.
--- @propemits true false
--- @interface layout
 
 function stack:layout(_, width, height)
     local result = {}
@@ -96,11 +86,8 @@ function stack:fit(context, orig_width, orig_height)
     return math.min(max_w, orig_width), math.min(max_h, orig_height)
 end
 
---- If only the first stack widget is drawn.
---
+--- If only the first stack widget is drawn
 -- @property top_only
--- @tparam boolean top_only
--- @propemits true false
 
 function stack:get_top_only()
     return self._private.top_only
@@ -108,28 +95,22 @@ end
 
 function stack:set_top_only(top_only)
     self._private.top_only = top_only
-    self:emit_signal("widget::layout_changed")
-    self:emit_signal("property::top_only", top_only)
 end
 
---- Raise a widget at `index` to the top of the stack.
---
--- @method raise
+--- Raise a widget at `index` to the top of the stack
 -- @tparam number index the widget index to raise
 function stack:raise(index)
-    if (not index) or (not self._private.widgets[index]) then return end
+    if (not index) or self._private.widgets[index] then return end
 
     local w = self._private.widgets[index]
     table.remove(self._private.widgets, index)
-    table.insert(self._private.widgets, 1, w)
+    table.insert(self._private.widgets, w)
 
     self:emit_signal("widget::layout_changed")
 end
 
---- Raise the first instance of `widget`.
---
--- @method raise_widget
--- @tparam widget widget The widget to raise
+--- Raise the first instance of `widget`
+-- @param widget The widget to raise
 -- @tparam[opt=false] boolean recursive Also look deeper in the hierarchy to
 --   find the widget
 function stack:raise_widget(widget, recursive)
@@ -155,9 +136,7 @@ end
 --@DOC_wibox_layout_stack_offset_EXAMPLE@
 --
 -- @property horizontal_offset
--- @tparam number horizontal_offset
--- @propemits true false
--- @see vertial_offset
+-- @param number
 
 --- Add an vertical offset to each layers.
 --
@@ -165,33 +144,21 @@ end
 -- layers offsets.
 --
 -- @property vertial_offset
--- @tparam number vertial_offset
--- @propemits true false
+-- @param number
 -- @see horizontal_offset
 
 function stack:set_horizontal_offset(value)
     self._private.h_offset = value
     self:emit_signal("widget::layout_changed")
-    self:emit_signal("property::horizontal_offset", value)
-end
-
-function stack:get_horizontal_offset()
-    return self._private.h_offset
 end
 
 function stack:set_vertical_offset(value)
     self._private.v_offset = value
     self:emit_signal("widget::layout_changed")
-    self:emit_signal("property::vertical_offset", value)
-end
-
-function stack:get_vertical_offset()
-    return self._private.v_offset
 end
 
 --- Create a new stack layout.
---
--- @constructorfct wibox.layout.stack
+-- @function wibox.layout.stack
 -- @treturn widget A new stack layout
 
 local function new(...)
@@ -205,11 +172,13 @@ local function new(...)
     return ret
 end
 
-function stack.mt:__call(...)
+function stack.mt:__call(_, ...)
     return new(...)
 end
 
---@DOC_fixed_COMMON@
+--@DOC_widget_COMMON@
+
+--@DOC_object_COMMON@
 
 return setmetatable(stack, stack.mt)
 -- vim: filetype=lua:expandtab:shiftwidth=4:tabstop=8:softtabstop=4:textwidth=80

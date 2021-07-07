@@ -3,12 +3,12 @@
 -- |  |  |  ||  ||   _|  |    |  _  |  |  ||   _|   _|  _  |     |
 -- |________||__||__| |__|    |_____|_____||____|____|_____|__|__|
 
-local wibox = require('wibox')
-local gears = require('gears')
-local mat_list_item = require('widget.material.list-item')
-local signals = require('module.signals')
-local checkbox = require('module.checkbox')
-local beautiful = require('beautiful')
+local wibox = require("wibox")
+local gears = require("gears")
+local mat_list_item = require("widget.material.list-item")
+local signals = require("module.signals")
+local checkbox = require("module.ui-components.checkbox")
+local beautiful = require("beautiful")
 local dpi = beautiful.xresources.apply_dpi
 
 local mode
@@ -18,11 +18,11 @@ local mode
 
 local function update_wifi()
     if (mode == false) then
-        awful.spawn('nmcli r wifi off')
+        awful.spawn("nmcli r wifi off")
         awful.spawn("notify-send 'Airplane Mode Enabled'")
         signals.emit_wifi_status(false)
     else
-        awful.spawn('nmcli r wifi on')
+        awful.spawn("nmcli r wifi on")
         awful.spawn("notify-send 'Initializing WI-FI'")
         signals.emit_wifi_status(true)
     end
@@ -43,16 +43,16 @@ local wifi_button =
 awful.tooltip(
     {
         objects = {wifi_button},
-        mode = 'outside',
-        align = 'right',
+        mode = "outside",
+        align = "right",
         timer_function = function()
             if mode then
-                return 'WI-FI is ON'
+                return "WI-FI is ON"
             else
-                return 'Airplane Mode'
+                return "Airplane Mode"
             end
         end,
-        preferred_positions = {'right', 'left', 'top', 'bottom'}
+        preferred_positions = {"right", "left", "top", "bottom"}
     }
 )
 -- ########################################################################
@@ -69,9 +69,9 @@ signals.connect_wifi_status(
 -- ########################################################################
 local settingsName =
     wibox.widget {
-    text = ('Wireless Connection'),
-    font = 'agave Nerd Font Mono Bold  10',
-    align = 'left',
+    text = ("Wireless Connection"),
+    font = "agave Nerd Font Mono Bold  10",
+    align = "left",
     widget = wibox.widget.textbox
 }
 -- ########################################################################
@@ -81,7 +81,7 @@ local content =
     wibox.widget {
     settingsName,
     wibox.container.margin(wifi_button, 0, 0, dpi(5), dpi(5)),
-    bg = '#8b9scbe20',
+    bg = "#8b9scbe20",
     shape = gears.shape.rounded_rect,
     widget = wibox.container.background(settingsName),
     layout = wibox.layout.ratio.horizontal

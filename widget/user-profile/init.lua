@@ -1,17 +1,17 @@
 -- YOU CAN UPDATE YOUR PROFILE PICTURE USING `mugshot` package
 -- Will use default user.svg if there's no user image in /var/lib/...
 
-local wibox = require('wibox')
-local dpi = require('beautiful').xresources.apply_dpi
-local profilebox = require('lib.profilebox')
-local card = require('module.card')
-local HOME = os.getenv('HOME')
-local PATH_TO_ICONS = HOME .. '/.config/awesome/widget/user-profile/icons/'
+local wibox = require("wibox")
+local dpi = require("beautiful").xresources.apply_dpi
+local profilebox = require("module.ui-components.profilebox")
+local card = require("module.ui-components.card")
+local HOME = os.getenv("HOME")
+local PATH_TO_ICONS = HOME .. "/.config/awesome/widget/user-profile/icons/"
 
-local PATH_TO_CACHE_ICON = os.getenv('HOME') .. '/.cache/awesome/user-icons/'
+local PATH_TO_CACHE_ICON = os.getenv("HOME") .. "/.cache/awesome/user-icons/"
 
-local signals = require('module.signals')
-local filehandle = require('module.file')
+local signals = require("module.signals")
+local filehandle = require("module.file")
 
 local user_card = card()
 
@@ -20,7 +20,7 @@ filehandle.dir_create(PATH_TO_CACHE_ICON)
 
 local profile_imagebox =
     profilebox(
-    PATH_TO_ICONS .. 'user' .. '.svg',
+    PATH_TO_ICONS .. "user" .. ".svg",
     dpi(90),
     function(_)
     end
@@ -28,22 +28,22 @@ local profile_imagebox =
 
 local profile_name =
     wibox.widget {
-    align = 'right',
-    valign = 'bottom',
+    align = "right",
+    valign = "bottom",
     widget = wibox.widget.textbox
 }
 
 local distro_name =
     wibox.widget {
-    align = 'right',
-    valign = 'center',
+    align = "right",
+    valign = "center",
     widget = wibox.widget.textbox
 }
 
 local uptime_time =
     wibox.widget {
-    align = 'right',
-    valign = 'center',
+    align = "right",
+    valign = "center",
     widget = wibox.widget.textbox
 }
 
@@ -51,7 +51,7 @@ local function init()
     -- get the username
     signals.connect_username(
         function(name)
-            profile_name.markup = '<span font="agave Nerd Font Mono Bold 24">' .. name .. '</span>'
+            profile_name.markup = '<span font="agave Nerd Font Mono Bold 24">' .. name .. "</span>"
         end
     )
 
@@ -63,13 +63,13 @@ local function init()
 
     signals.connect_distro(
         function(distroname)
-            distro_name.markup = '<span font="agave Nerd Font Mono Bold  16">' .. distroname .. '</span>'
+            distro_name.markup = '<span font="agave Nerd Font Mono Bold  16">' .. distroname .. "</span>"
         end
     )
 
     signals.connect_uptime(
         function(time)
-            uptime_time.markup = '<span font="agave Nerd Font Mono Bold  8">' .. time .. '</span>'
+            uptime_time.markup = '<span font="agave Nerd Font Mono Bold  8">' .. time .. "</span>"
         end
     )
 end

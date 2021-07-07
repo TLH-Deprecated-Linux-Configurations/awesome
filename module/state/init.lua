@@ -9,13 +9,13 @@
 -- This module listens for events and stores then
 -- This makes certain data persistent
 
-local signals = require('module.signals')
-local serialize = require('lib.serialize')
-local filehandle = require('module.file')
-local mouse = require('module.mouse')
-local volume = require('lib.volume')
+local signals = require("module.signals")
+local serialize = require("module.serialize")
+local filehandle = require("module.file")
+local mouse = require("module.mouse")
+local volume = require("module.volume")
 
-local file = os.getenv('HOME') .. '/.cache/awesome/settings_state.json'
+local file = os.getenv("HOME") .. "/.cache/awesome/settings_state.json"
 -- ########################################################################
 -- ########################################################################
 -- ########################################################################
@@ -45,7 +45,7 @@ end
 -- ########################################################################
 -- ########################################################################
 local function save(table)
-    print('Updating state into: ' .. file)
+    print("Updating state into: " .. file)
     serialize.serialize_to_file(file, table)
 end
 -- ########################################################################
@@ -58,7 +58,7 @@ local function setup_state(state)
     -- ########################################################################
     -- ########################################################################
     -- set the volume
-    print('Setting volume: ' .. state.volume)
+    print("Setting volume: " .. state.volume)
     volume.set_volume(state.volume or 0)
     signals.emit_volume_update()
     -- ########################################################################
@@ -66,10 +66,10 @@ local function setup_state(state)
     -- ########################################################################
     -- set the brightness
     if (_G.oled) then
-        awful.spawn('brightness -s ' .. math.max(state.brightness, 5) .. ' -F') -- toggle pixel values
+        awful.spawn("brightness -s " .. math.max(state.brightness, 5) .. " -F") -- toggle pixel values
     else
-        awful.spawn('brightness -s 100 -F') -- reset pixel values
-        awful.spawn('brightness -s ' .. math.max(state.brightness, 5))
+        awful.spawn("brightness -s 100 -F") -- reset pixel values
+        awful.spawn("brightness -s " .. math.max(state.brightness, 5))
     end
     -- ########################################################################
     -- ########################################################################
@@ -96,7 +96,7 @@ end
 -- ########################################################################
 -- load the initial state
 -- luacheck: ignore 121
-save_state = load()
+local save_state = load()
 setup_state(save_state)
 
 -- xinput id's are not persistent across reboots
@@ -148,7 +148,7 @@ signals.connect_volume_is_muted(
 -- ########################################################################
 signals.connect_brightness(
     function(value)
-        print('Brightness value: ' .. value)
+        print("Brightness value: " .. value)
         save_state.brightness = value
         save(save_state)
     end
@@ -158,7 +158,7 @@ signals.connect_brightness(
 -- ########################################################################
 signals.connect_exit(
     function()
-        print('Shutting down, grabbing last state')
+        print("Shutting down, grabbing last state")
         awful.spawn("sh -c 'which autorandr && autorandr --force'")
         save(save_state)
     end
@@ -169,7 +169,7 @@ signals.connect_exit(
 -- mouse related signals
 signals.connect_mouse_speed(
     function(tbl)
-        print('Saving mouse id: ' .. tbl.id .. ' to speed value: ' .. tbl.speed)
+        print("Saving mouse id: " .. tbl.id .. " to speed value: " .. tbl.speed)
         local id = get_mouse_state_id(tbl.id)
         if id ~= nil then
             save_state.mouse[id].speed = tbl.speed
@@ -182,7 +182,7 @@ signals.connect_mouse_speed(
 -- ########################################################################
 signals.connect_mouse_acceleration(
     function(tbl)
-        print('Saving mouse id: ' .. tbl.id .. ' to accel value: ' .. tbl.speed)
+        print("Saving mouse id: " .. tbl.id .. " to accel value: " .. tbl.speed)
         local id = get_mouse_state_id(tbl.id)
         if id ~= nil then
             save_state.mouse[id].accel = tbl.speed
@@ -195,7 +195,7 @@ signals.connect_mouse_acceleration(
 -- ########################################################################
 signals.connect_do_not_disturb(
     function(bDoNotDisturb)
-        print('Changed do not disturb: ' .. tostring(bDoNotDisturb))
+        print("Changed do not disturb: " .. tostring(bDoNotDisturb))
         save_state.do_not_disturb = bDoNotDisturb
         save(save_state)
     end
@@ -205,7 +205,7 @@ signals.connect_do_not_disturb(
 -- ########################################################################
 signals.connect_oled_mode(
     function(bIsOledMode)
-        print('Changed oled mode to: ' .. tostring(bIsOledMode))
+        print("Changed oled mode to: " .. tostring(bIsOledMode))
         save_state.oled_mode = bIsOledMode
         save(save_state)
     end
@@ -215,7 +215,7 @@ signals.connect_oled_mode(
 -- ########################################################################
 signals.connect_mouse_natural_scrolling(
     function(tbl)
-        print('Saving mouse id: ' .. tbl.id .. ' to natural scrolling state: ' .. tostring(tbl.state))
+        print("Saving mouse id: " .. tbl.id .. " to natural scrolling state: " .. tostring(tbl.state))
         local id = get_mouse_state_id(tbl.id)
         if id ~= nil then
             save_state.mouse[id].natural_scroll = tbl.state

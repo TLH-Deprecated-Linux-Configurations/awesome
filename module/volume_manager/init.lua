@@ -6,10 +6,10 @@
 -- ########################################################################
 -- ########################################################################
 -- ########################################################################
-local signals = require('module.signals')
-local sound = require('module.sound')
-local time = require('socket').gettime
-local volume = require('lib.volume')
+local signals = require("module.signals")
+local sound = require("module.sound")
+local time = require("socket").gettime
+local volume = require("module.volume")
 
 local startup = true
 local prev_time = 0

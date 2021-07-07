@@ -1,46 +1,9 @@
 ---------------------------------------------------------------------------
 --- Text clock widget.
 --
--- The `wibox.widget.textclock` widget is part of the Awesome WM's widget
--- system (see @{03-declarative-layout.md}).
---
--- This widget displays a text clock formatted by the
--- [GLib Date Time format](https://developer.gnome.org/glib/stable/glib-GDateTime.html#g-date-time-format)
--- and [GTimeZone](https://developer.gnome.org/glib/stable/glib-GTimeZone.html#g-time-zone-new).
---
--- The `wibox.widget.textclock` inherits from `wibox.widget.textbox`. It means
--- that, once created, the user will receive a derivated instance of
--- `wibox.widget.textbox` associated with a private `gears.timer` to manage
--- timed updates of the displayed clock.
---
--- Use a `wibox.widget.textclock`
--- ---
---
--- @DOC_wibox_widget_defaults_textclock_EXAMPLE@
---
--- Alternatively, you can declare the `textclock` widget using the
--- declarative pattern (Both codes are strictly equivalent):
---
--- @DOC_wibox_widget_declarative-pattern_textclock_EXAMPLE@
---
--- The GLib DateTime format
--- ---
---
--- The time displayed by the textclock widget can be formated by the GLib
--- DateTime format.
---
--- Here is a short list with commonly used format specifiers (extracted from
--- the Glib API references):
---
---@DOC_glib_timedate_format_COMMON@
---
--- You can read more on the GLib DateTime format in the
--- [GLib documentation](https://developer.gnome.org/glib/stable/glib-GDateTime.html#g-date-time-format).
---
 -- @author Julien Danjou &lt;julien@danjou.info&gt;
 -- @copyright 2009 Julien Danjou
--- @widgetmod wibox.widget.textclock
--- @supermodule wibox.widget.textbox
+-- @classmod wibox.widget.textclock
 ---------------------------------------------------------------------------
 
 local setmetatable = setmetatable
@@ -65,12 +28,9 @@ if source_date_epoch and os.getenv("SOURCE_DIRECTORY") then
     end
 end
 
---- Set the clock's format.
---
--- For information about the format specifiers, see
--- [the GLib docs](https://developer.gnome.org/glib/stable/glib-GDateTime.html#g-date-time-format).
+--- Set the clock's format
 -- @property format
--- @tparam string format The new time format. This can contain pango markup.
+-- @tparam string format The new time format.  This can contain pango markup
 
 function textclock:set_format(format)
     self._private.format = format
@@ -81,10 +41,7 @@ function textclock:get_format()
     return self._private.format
 end
 
---- Set the clock's timezone.
---
--- e.g. "Z" for UTC, "±hh:mm" or "Europe/Amsterdam". See
--- [GTimeZone](https://developer.gnome.org/glib/stable/glib-GTimeZone.html#g-time-zone-new).
+--- Set the clock's timezone
 -- @property timezone
 -- @tparam string timezone
 
@@ -98,10 +55,9 @@ function textclock:get_timezone()
     return self._private.tzid
 end
 
---- Set the clock's refresh rate.
---
+--- Set the clock's refresh rate
 -- @property refresh
--- @tparam number refresh How often the clock is updated, in seconds
+-- @tparam number How often the clock is updated, in seconds
 
 function textclock:set_refresh(refresh)
     self._private.refresh = refresh or self._private.refresh
@@ -113,8 +69,6 @@ function textclock:get_refresh()
 end
 
 --- Force a textclock to update now.
---
--- @method force_update
 function textclock:force_update()
     self._timer:emit_signal("timeout")
 end
@@ -127,11 +81,13 @@ end
 
 --- Create a textclock widget. It draws the time it is in a textbox.
 --
--- @tparam[opt=" %a %b %d&comma; %H:%M "] string format The time [format](#format).
+-- @tparam[opt=" %a %b %d, %H:%M "] string format The time format.
 -- @tparam[opt=60] number refresh How often to update the time (in seconds).
--- @tparam[opt=local timezone] string timezone The [timezone](#timezone) to use.
+-- @tparam[opt=local timezone] string timezone The timezone to use,
+--   e.g. "Z" for UTC, "±hh:mm" or "Europe/Amsterdam". See
+--   https://developer.gnome.org/glib/stable/glib-GTimeZone.html#g-time-zone-new.
 -- @treturn table A textbox widget.
--- @constructorfct wibox.widget.textclock
+-- @function wibox.widget.textclock
 local function new(format, refresh, tzid)
     local w = textbox()
     gtable.crush(w, textclock, true)
@@ -162,6 +118,10 @@ end
 function textclock.mt:__call(...)
     return new(...)
 end
+
+--@DOC_widget_COMMON@
+
+--@DOC_object_COMMON@
 
 return setmetatable(textclock, textclock.mt)
 

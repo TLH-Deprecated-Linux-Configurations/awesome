@@ -8,7 +8,7 @@
 -- ########################################################################
 local filesystem = require "gears.filesystem"
 local config = require "module.functions"
-local hardware = require "lib.hardware-check"
+local hardware = require "module.hardware-check"
 -- ########################################################################
 -- ########################################################################
 -- ########################################################################
@@ -16,7 +16,6 @@ local hardware = require "lib.hardware-check"
 local beautiful = require "beautiful"
 local color = beautiful.xforeground
 local HOME = os.getenv "HOME"
-
 
 package.loaded["awful.hotkeys_popup.keys.tmux"] = {}
 -- ########################################################################
@@ -87,7 +86,6 @@ return {
     -- ########################################################################
     -- ########################################################################
     bins = {
-        coverUpdate = require "lib.extractcover".extractalbum,
         -- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
         full_screenshot = 'sh /.config/awesome/bin/snapshot.sh full "' .. color .. '"',
         -- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~

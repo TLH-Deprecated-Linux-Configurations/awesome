@@ -5,16 +5,16 @@
 -- ########################################################################
 -- ########################################################################
 -- ########################################################################
-local awful = require('awful')
-local wibox = require('wibox')
-local gears = require('gears')
-local beautiful = require('beautiful')
-local icons = require('theme.icons')
-local mouse = require('module.mouse')
-local slider = require('lib.slider')
-local card = require('module.card')
-local checkbox = require('module.checkbox')
-local scrollbox = require('lib.scrollbox')
+local awful = require("awful")
+local wibox = require("wibox")
+local gears = require("gears")
+local beautiful = require("beautiful")
+local icons = require("theme.icons")
+local mouse = require("module.mouse")
+local slider = require("module.ui-components.slider")
+local card = require("module.ui-components.card")
+local checkbox = require("module.ui-components.checkbox")
+local scrollbox = require("module.ui-components.scrollbox")
 
 local dpi = beautiful.xresources.apply_dpi
 
@@ -29,7 +29,7 @@ return function()
     view.left = m
     view.right = m
 
-    local title = wibox.widget.textbox('Mouse Settings')
+    local title = wibox.widget.textbox("Mouse Settings")
     title.font = beautiful.title_font
     title.forced_height = settings_index + m + m
 
@@ -120,7 +120,7 @@ return function()
                         forced_height = dpi(30) + (m * 2),
                         {
                             layout = wibox.layout.align.horizontal,
-                            wibox.container.margin(wibox.widget.textbox('Mouse Speed'), 0, m),
+                            wibox.container.margin(wibox.widget.textbox("Mouse Speed"), 0, m),
                             mouse_slider
                         }
                     },
@@ -135,7 +135,7 @@ return function()
                         forced_height = dpi(30) + (m * 2),
                         {
                             layout = wibox.layout.align.horizontal,
-                            wibox.container.margin(wibox.widget.textbox('Mouse Acceleration'), 0, m),
+                            wibox.container.margin(wibox.widget.textbox("Mouse Acceleration"), 0, m),
                             mouse_accel_slider
                         }
                     },
@@ -150,7 +150,7 @@ return function()
                         forced_height = dpi(30) + (m * 2),
                         {
                             layout = wibox.layout.align.horizontal,
-                            wibox.container.margin(wibox.widget.textbox('Natural Scrolling'), 0, m),
+                            wibox.container.margin(wibox.widget.textbox("Natural Scrolling"), 0, m),
                             nil,
                             natural_scrolling_checkbox
                         }
@@ -183,7 +183,7 @@ return function()
                 accel_speed = _G.save_state.mouse[device.name].accel or 0
                 natural_scrolling = _G.save_state.mouse[device.name].natural_scroll or false
             end
-            print('Setting the default value of the mouse to: ' .. speed)
+            print("Setting the default value of the mouse to: " .. speed)
             layout:add(make_mouse(device.id, device.name, speed, accel_speed, natural_scrolling))
         end
     end

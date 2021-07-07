@@ -29,7 +29,7 @@
 ---------------------------------------------------------------------------
 
 local gears = require("gears")
-local hardware = require("lib.hardware-check")
+local hardware = require("module.hardware-check")
 local tween = require("lib.animations.tween")
 
 -- we refresh at display frequency or 24 the lowest one frequency (thus the highest delay)

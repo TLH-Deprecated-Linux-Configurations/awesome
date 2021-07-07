@@ -11,21 +11,21 @@
 -- ########################################################################
 -- ########################################################################
 -- ########################################################################
-local awful = require('awful')
-local wibox = require('wibox')
-local gears = require('gears')
-local beautiful = require('beautiful')
-local hardware = require('lib.hardware-check')
-local file = require('module.file')
-local icons = require('theme.icons')
-local mat_icon_button = require('widget.material.icon-button')
-local mat_icon = require('widget.material.icon')
-local card = require('module.card')
-local inputfield = require('module.inputfield')
-local tde_button = require('module.button')
-local signals = require('module.signals')
-local scrollbox = require('lib.scrollbox')
-local network = require('lib.network')
+local awful = require("awful")
+local wibox = require("wibox")
+local gears = require("gears")
+local beautiful = require("beautiful")
+local hardware = require("module.hardware-check")
+local file = require("module.file")
+local icons = require("theme.icons")
+local mat_icon_button = require("widget.material.icon-button")
+local mat_icon = require("widget.material.icon")
+local card = require("module.ui-components.card")
+local inputfield = require("module.inputfield")
+local tde_button = require("module.ui-components.button")
+local signals = require("module.signals")
+local scrollbox = require("module.ui-components.scrollbox")
+local network = require("module.network")
 
 local dpi = beautiful.xresources.apply_dpi
 
@@ -35,7 +35,7 @@ local settings_width = dpi(1100)
 local settings_height = dpi(900)
 local settings_nw = dpi(260)
 
-local active_text = ''
+local active_text = ""
 
 local static_connections = {}
 local password_fields = {}
@@ -45,7 +45,7 @@ local scrollbox_body
 local refresh = function()
 end
 
-local qr_code_image = ''
+local qr_code_image = ""
 local bIsShowingNetworkTab = true
 
 local active_pallet = beautiful.xcolor4
@@ -64,8 +64,8 @@ signals.connect_exit(
 
 -- returns the filename of the qr code image
 local function generate_qr_code(ssid, password)
-    local qr_text = 'WIFI:T:WPA;S:' .. ssid .. ';P:' .. password .. ';;'
-    local output = '/tmp/qrcode' .. ssid .. '.png'
+    local qr_text = "WIFI:T:WPA;S:" .. ssid .. ";P:" .. password .. ";;"
+    local output = "/tmp/qrcode" .. ssid .. ".png"
     hardware.execute("qrencode -l L -v 1 -m 1 -s 9 -o '" .. output .. "' '" .. qr_text .. "'")
     qr_code_image = output
 end
@@ -97,7 +97,7 @@ end
 
 local function make_network_widget(ssid, active)
     -- make sure ssid is not nil
-    ssid = ssid or ''
+    ssid = ssid or ""
 
     local box = card()
 
@@ -110,16 +110,16 @@ local function make_network_widget(ssid, active)
                 nil,
                 function()
                     -- try to connect without a password
-                    if active_text == '' then
+                    if active_text == "" then
                         awful.spawn.easy_async(
-                            'network connect ' .. ssid,
+                            "network connect " .. ssid,
                             function(_)
                                 refresh()
                             end
                         )
                     else
                         awful.spawn.easy_async(
-                            'network connect ' .. ssid .. ' password ' .. active_text,
+                            "network connect " .. ssid .. " password " .. active_text,
                             function(_)
                                 refresh()
                             end
@@ -148,14 +148,14 @@ local function make_network_widget(ssid, active)
             tde_button(
             wibox.widget.imagebox(icons.qr_code),
             function()
-                print('Generating qr code')
+                print("Generating qr code")
                 local passwd =
                     string.gsub(
                     hardware.execute(
                         "nmcli --show-secrets -g 802-11-wireless-security.psk connection show id '" .. ssid .. "'"
                     ),
-                    '\n',
-                    ''
+                    "\n",
+                    ""
                 )
                 generate_qr_code(ssid, passwd)
                 bIsShowingNetworkTab = false
@@ -204,9 +204,9 @@ local function make_connection(t, n)
     local conx = card()
 
     local i
-    local wireless = 'wireless'
-    local bluetooth = 'bluetooth'
-    local wired = 'wired'
+    local wireless = "wireless"
+    local bluetooth = "bluetooth"
+    local wired = "wired"
 
     if t == wireless then
         i = icons.wifi
@@ -217,10 +217,10 @@ local function make_connection(t, n)
     else
         i = icons.lan_off
     end
-    if n == 'disconnected' and t == wireless then
+    if n == "disconnected" and t == wireless then
         i = icons.wifi_off
     end
-    if n == 'disconnected' and t == wired then
+    if n == "disconnected" and t == wired then
         i = icons.lan_off
     end
     local icon =
@@ -250,7 +250,7 @@ local function make_connection(t, n)
     local address =
         wibox.widget {
         widget = wibox.widget.textbox,
-        text = '',
+        text = "",
         font = beautiful.title_font
     }
 
@@ -278,7 +278,7 @@ return function()
     view.left = m
     view.right = m
 
-    local title = wibox.widget.textbox(('Connections'))
+    local title = wibox.widget.textbox(("Connections"))
     title.font = beautiful.title_font
     title.forced_height = settings_index + m + m
 
@@ -304,14 +304,14 @@ return function()
 
     local connections = wibox.layout.fixed.vertical()
 
-    local wireless = make_connection('wireless')
-    local wired = make_connection('wired')
+    local wireless = make_connection("wireless")
+    local wired = make_connection("wired")
     local network_settings =
         wibox.container.margin(
         wibox.widget {
             widget = wibox.widget.textbox,
-            text = ('Network list'),
-            font = 'agave Nerd Font Mono Bold  24'
+            text = ("Network list"),
+            font = "agave Nerd Font Mono Bold  24"
         },
         dpi(20),
         0,
@@ -331,7 +331,7 @@ return function()
 
     view:setup {
         layout = wibox.container.background,
-        bg = beautiful.bg_normal .. '00',
+        bg = beautiful.bg_normal .. "00",
         --fg = config.colors.xf,
         {
             layout = wibox.layout.align.vertical,
@@ -349,8 +349,8 @@ return function()
             },
             {
                 layout = wibox.container.place,
-                valign = 'top',
-                halign = 'center',
+                valign = "top",
+                halign = "center",
                 scrollbox_body
             }
         }
@@ -360,7 +360,7 @@ return function()
         network.get_ssid_list(
             function(list)
                 for _, value in pairs(list) do
-                    connections:add(make_network_widget(value['ssid'], value['active']))
+                    connections:add(make_network_widget(value["ssid"], value["active"]))
                 end
             end
         )
@@ -368,20 +368,20 @@ return function()
 
     refresh = function()
         password_fields = {}
-        local interface = file.string('/tmp/interface.txt')
+        local interface = file.string("/tmp/interface.txt")
 
         if scrollbox_body then
             scrollbox_body.reset()
         end
 
-        if hardware.hasWifi() and not (interface == '') then
+        if hardware.hasWifi() and not (interface == "") then
             wireless.icon:set_image(icons.wifi)
             wireless.name.text = interface
             wireless.ip.text = hardware.getDefaultIP()
         else
             wireless.icon:set_image(icons.wifi_off)
-            wireless.name.text = ('Disconnected')
-            wireless.ip.text = ''
+            wireless.name.text = ("Disconnected")
+            wireless.ip.text = ""
         end
 
         -- Always try to populate network list, even when it is not possible
@@ -397,17 +397,17 @@ return function()
         end
 
         awful.spawn.easy_async_with_shell(
-            "sh -c 'ip link | grep \": en\" | grep \" UP \"'",
+            'sh -c \'ip link | grep ": en" | grep " UP "\'',
             function(_, _, _, c)
                 if (c == 0) then
-                    print('Lan on')
+                    print("Lan on")
                     wired.icon:set_image(icons.lan)
-                    wired.name.text = ('connected')
+                    wired.name.text = ("connected")
                     wired.ip.text = hardware.getDefaultIP()
                 else
                     wired.icon:set_image(icons.lan_off)
-                    wired.name.text = ('Disconnected')
-                    wired.ip.text = ''
+                    wired.name.text = ("Disconnected")
+                    wired.ip.text = ""
                 end
             end
         )

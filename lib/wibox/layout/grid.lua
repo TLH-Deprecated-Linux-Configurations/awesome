@@ -13,8 +13,7 @@
 --@DOC_wibox_layout_defaults_grid_EXAMPLE@
 -- @author getzze
 -- @copyright 2017 getzze
--- @layoutmod wibox.layout.grid
--- @supermodule wibox.widget.base
+-- @classmod wibox.layout.grid
 ---------------------------------------------------------------------------
 
 local setmetatable = setmetatable
@@ -223,7 +222,6 @@ local function find_widget(widgets_table, widget)
 end
 
 --- Get the number of rows and columns occupied by the widgets in the grid.
--- @method get_dimension
 -- @treturn number,number The number of rows and columns
 function grid:get_dimension()
     return self._private.num_rows, self._private.num_cols
@@ -250,7 +248,6 @@ end
 
 --- Find the next available cell to insert a widget.
 -- The grid is browsed according to the `orientation`.
--- @method get_next_empty
 -- @tparam[opt=1] number hint_row The row coordinate of the last occupied cell.
 -- @tparam[opt=1] number hint_column The column coordinate of the last occupied cell.
 -- @return number,number The row,column coordinate of the next empty cell
@@ -284,27 +281,23 @@ end
 
 
 --- Add some widgets to the given grid layout.
---
--- The widgets are assumed to span one cell.
---
--- @method add
+-- The widgets are assumed to span one cell
 -- @param ... Widgets that should be added (must at least be one)
 function grid:add(...)
     local args = { n=select('#', ...), ... }
     assert(args.n > 0, "need at least one widget to add")
     local row, column
     for i=1, args.n do
+        local w = args[i]
         -- Get the next empty coordinate to insert the widget
         row, column = self:get_next_empty(row, column)
-        self:add_widget_at(args[i], row, column, 1, 1)
+        self:add_widget_at(w, row, column, 1, 1)
     end
 end
 
 --- Add a widget to the grid layout at specific coordinate.
 --
 --@DOC_wibox_layout_grid_add_EXAMPLE@
---
--- @method add_widget_at
 -- @param child Widget that should be added
 -- @tparam number row Row number for the top left corner of the widget
 -- @tparam number col Column number for the top left corner of the widget
@@ -317,7 +310,6 @@ function grid:add_widget_at(child, row, col, row_span, col_span)
     col_span = (col_span and col_span > 0) and col_span or 1
 
     -- check if the object is a widget
-    child = base.make_widget_from_value(child)
     base.check_widget(child)
 
     -- test if the new widget superpose with existing ones
@@ -349,7 +341,6 @@ function grid:add_widget_at(child, row, col, row_span, col_span)
 end
 
 --- Remove one or more widgets from the layout.
--- @method remove
 -- @param ... Widgets that should be removed (must at least be one)
 -- @treturn boolean If the operation is successful
 function grid:remove(...)
@@ -375,8 +366,6 @@ end
 --- Remove widgets at the coordinates.
 --
 --@DOC_wibox_layout_grid_remove_EXAMPLE@
---
--- @method remove_widgets_at
 -- @tparam number row The row coordinate of the widget to remove
 -- @tparam number col The column coordinate of the widget to remove
 -- @tparam[opt=1] number row_span The number of rows the area to remove spans.
@@ -399,7 +388,6 @@ function grid:remove_widgets_at(row, col, row_span, col_span)
 end
 
 --- Return the coordinates of the widget.
--- @method get_widget_position
 -- @param widget The widget
 -- @treturn table The `position` table of the coordinates in the grid, with
 -- fields `row`, `col`, `row_span` and `col_span`.
@@ -417,7 +405,6 @@ end
 
 
 --- Return the widgets at the coordinates.
--- @method get_widgets_at
 -- @tparam number row The row coordinate of the widget
 -- @tparam number col The column coordinate of the widget
 -- @tparam[opt=1] number row_span The number of rows to span.
@@ -440,7 +427,6 @@ function grid:get_widgets_at(row, col, row_span, col_span)
 end
 
 --- Replace old widget by new widget, spanning the same columns and rows.
--- @method replace_widget
 -- @param old The widget to remove
 -- @param new The widget to add
 -- @treturn boolean If the operation is successful (widget found)
@@ -508,8 +494,6 @@ end
 --- Insert column at index.
 --
 --@DOC_wibox_layout_grid_insert_column_EXAMPLE@
---
--- @method insert_column
 -- @tparam number|nil index Insert the new column at index. If `nil`, the column is added at the end.
 -- @treturn number The index of the inserted column
 function grid:insert_column(index)
@@ -524,9 +508,8 @@ function grid:insert_column(index)
 end
 
 --- Extend column at index.
---@DOC_wibox_layout_grid_extend_column_EXAMPLE@
 --
--- @method extend_column
+--@DOC_wibox_layout_grid_extend_column_EXAMPLE@
 -- @tparam number|nil index Extend the column at index. If `nil`, the last column is extended.
 -- @treturn number The index of the extended column
 function grid:extend_column(index)
@@ -543,8 +526,6 @@ end
 --- Remove column at index.
 --
 --@DOC_wibox_layout_grid_remove_column_EXAMPLE@
---
--- @method remove_column
 -- @tparam number|nil index Remove column at index. If `nil`, the last column is removed.
 -- @treturn number The index of the removed column
 function grid:remove_column(index)
@@ -561,8 +542,6 @@ end
 --- Insert row at index.
 --
 -- see `insert_column`
---
--- @method insert_row
 -- @tparam number|nil index Insert the new row at index. If `nil`, the row is added at the end.
 -- @treturn number The index of the inserted row
 function grid:insert_row(index)
@@ -579,8 +558,6 @@ end
 --- Extend row at index.
 --
 -- see `extend_column`
---
--- @method extend_row
 -- @tparam number|nil index Extend the row at index. If `nil`, the last row is extended.
 -- @treturn number The index of the extended row
 function grid:extend_row(index)
@@ -597,8 +574,6 @@ end
 --- Remove row at index.
 --
 -- see `remove_column`
---
--- @method remove_row
 -- @tparam number|nil index Remove row at index. If `nil`, the last row is removed.
 -- @treturn number The index of the removed row
 function grid:remove_row(index)
@@ -622,7 +597,7 @@ function grid:get_children()
     return ret
 end
 
--- Add list of children to the layout.
+-- Add list of children to the layout
 function grid:set_children(children)
     self:reset()
     if #children > 0 then
@@ -693,7 +668,7 @@ end
 -- getting the common property returns the directional property
 -- defined by the `orientation` property
 for _, prop in ipairs(dir_properties) do
-    for _,dir in ipairs{"horizontal", "vertical"} do
+    for _,dir in ipairs{"horizontal_, vertical_"} do
         local dir_prop = dir .. "_" .. prop
         grid["set_"..dir_prop] = function(self, value)
             if self._private[dir_prop] ~= value then
@@ -862,7 +837,6 @@ end
 -- Remove all widgets and reset row and column counts
 --
 -- **Signal:** widget::reset
--- @method reset
 function grid:reset()
     self._private.widgets = {}
     -- reset the number of columns and rows to the forced value or to 0
@@ -886,7 +860,7 @@ end
 --
 -- A grid layout sets widgets in a grids of custom number of rows and columns.
 -- @tparam[opt="y"] string orientation The preferred grid extension direction.
--- @constructorfct wibox.layout.grid
+-- @function wibox.layout.grid
 local function new(orientation)
     -- Preference for vertical direction: fill rows first, extend grid with new row
     local dir = (orientation == "horizontal"or orientation == "vertical")
@@ -925,7 +899,7 @@ end
 -- up to `forced_num_rows`. Then the next column is filled, creating it if it doesn't exist.
 -- @tparam number|nil forced_num_rows Forced number of rows (`nil` for automatic).
 -- @tparam widget ... Widgets that should be added to the layout.
--- @constructorfct wibox.layout.grid.horizontal
+-- @function wibox.layout.grid.horizontal
 function grid.horizontal(forced_num_rows, widget, ...)
     local ret = new("horizontal")
     ret:set_forced_num_rows(forced_num_rows)
@@ -943,7 +917,7 @@ end
 -- up to `forced_num_cols`. Then the next row is filled, creating it if it doesn't exist.
 -- @tparam number|nil forced_num_cols Forced number of columns (`nil` for automatic).
 -- @tparam widget ... Widgets that should be added to the layout.
--- @constructorfct wibox.layout.grid.vertical
+-- @function wibox.layout.grid.vertical
 function grid.vertical(forced_num_cols, widget, ...)
     local ret = new("vertical")
     ret:set_forced_num_cols(forced_num_cols)
@@ -960,7 +934,9 @@ function grid.mt:__call(...)
     return new(...)
 end
 
---@DOC_fixed_COMMON@
+--@DOC_widget_COMMON@
+
+--@DOC_object_COMMON@
 
 return setmetatable(grid, grid.mt)
 

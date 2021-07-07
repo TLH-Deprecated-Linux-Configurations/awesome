@@ -6,20 +6,20 @@
 -- ########################################################################
 -- ########################################################################
 -- ########################################################################
-local gears = require('gears')
-local beautiful = require('beautiful')
+local gears = require("gears")
+local beautiful = require("beautiful")
 
 -- Create a wibox for each screen and add it
 awful.screen.connect_for_each_screen(
     function(s)
         -- If wallpaper is a function, call it with the screen
         if beautiful.wallpaper then
-            if type(beautiful.wallpaper) == 'string' then
-                if beautiful.wallpaper:sub(1, #'#') == '#' then
+            if type(beautiful.wallpaper) == "string" then
+                if beautiful.wallpaper:sub(1, #"#") == "#" then
                     gears.wallpaper.set(beautiful.wallpaper)
-                elseif beautiful.wallpaper:sub(1, #'/') == '/' then
+                elseif beautiful.wallpaper:sub(1, #"/") == "/" then
                     gears.wallpaper.maximized(beautiful.wallpaper, s)
-                    print('Setting wallpaper: ' .. beautiful.wallpaper)
+                    print("Setting wallpaper: " .. beautiful.wallpaper)
                 end
             else
                 beautiful.wallpaper(s)
@@ -32,7 +32,7 @@ awful.screen.connect_for_each_screen(
 -- ########################################################################
 -- Signal function to execute when a new client appears.
 _G.client.connect_signal(
-    'manage',
+    "manage",
     function(c)
         -- Set the windows at the slave,
         -- i.e. put it at the end of others instead of setting it master.
@@ -52,19 +52,17 @@ _G.client.connect_signal(
 -- ########################################################################
 -- ########################################################################
 -- Enable sloppy focus, so that focus follows mouse.
-if general['autofocus'] == '1' then
-    _G.client.connect_signal(
-        'mouse::enter',
-        function(c)
-            c:emit_signal('request::activate', 'mouse_enter', {raise = true})
-        end
-    )
-end
+_G.client.connect_signal(
+    "mouse::enter",
+    function(c)
+        c:emit_signal("request::activate", "mouse_enter", {raise = true})
+    end
+)
 -- ########################################################################
 -- ########################################################################
 -- ########################################################################
 _G.client.connect_signal(
-    'focus',
+    "focus",
     function(c)
         c.border_color = beautiful.border_focus
     end
@@ -73,7 +71,7 @@ _G.client.connect_signal(
 -- ########################################################################
 -- ########################################################################
 _G.client.connect_signal(
-    'unfocus',
+    "unfocus",
     function(c)
         c.border_color = beautiful.border_normal
     end

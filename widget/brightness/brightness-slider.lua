@@ -1,12 +1,12 @@
 -- TODO make this work
-local wibox = require('wibox')
-local mat_list_item = require('widget.material.list-item')
-local slider = require('lib.slider')
-local mat_icon_button = require('widget.material.icon-button')
-local icons = require('theme.icons')
-local signals = require('module.signals')
+local wibox = require("wibox")
+local mat_list_item = require("widget.material.list-item")
+local slider = require("module.ui-components.slider")
+local mat_icon_button = require("widget.material.icon-button")
+local icons = require("theme.icons")
+local signals = require("module.signals")
 
-local spawn = require('awful.spawn')
+local spawn = require("awful.spawn")
 
 local brightness_slider =
     slider(
@@ -19,10 +19,10 @@ local brightness_slider =
             _G.brightness2.update(value)
         end
         if (_G.oled) then
-            spawn('brightness -s ' .. value .. ' -F') -- toggle pixel values
+            spawn("brightness -s " .. value .. " -F") -- toggle pixel values
         else
-            spawn('brightness -s 100 -F') -- reset pixel values
-            spawn('brightness -s ' .. value)
+            spawn("brightness -s 100 -F") -- reset pixel values
+            spawn("brightness -s " .. value)
         end
     end
 )
@@ -33,14 +33,14 @@ local update = function()
     awful.spawn.easy_async_with_shell(
         [[grep -q on ~/.cache/oled && brightness -g -F || brightness -g]],
         function(stdout)
-            local brightness = string.match(stdout, '(%d+)')
+            local brightness = string.match(stdout, "(%d+)")
             signals.emit_brightness(tonumber(brightness))
         end
     )
 end
 
 awesome.connect_signal(
-    'widget::brightness',
+    "widget::brightness",
     function(_)
         update()
     end

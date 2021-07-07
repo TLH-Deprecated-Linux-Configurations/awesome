@@ -9,7 +9,7 @@ local wibox = require("wibox")
 local gears = require("gears")
 local beautiful = require("beautiful")
 local icons = require("theme.icons")
-local scrollbox = require("lib.scrollbox")
+local scrollbox = require("module.ui-components.scrollbox")
 
 local apps = require("configuration.apps")
 local dpi = require("beautiful").xresources.apply_dpi
@@ -17,9 +17,9 @@ local mat_list_item = require("widget.material.list-item")
 local mat_icon = require("widget.material.icon")
 local signals = require("module.signals")
 local animate = require("lib.animations").createAnimObject
-local seperator_widget = require("lib.separator")
-local card = require("module.card")
-local button = require("module.button")
+local seperator_widget = require("module.separator")
+local card = require("module.ui-components.card")
+local button = require("module.ui-components.button")
 
 local get_screen = require("lib.function.common").focused_screen
 

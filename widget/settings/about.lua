@@ -11,19 +11,19 @@
 -- ########################################################################
 -- Initialization #########################################################
 -- ########################################################################
-local awful = require('awful')
-local wibox = require('wibox')
-local gears = require('gears')
-local beautiful = require('beautiful')
-local execute = require('lib.hardware-check').execute
-local bytes_to_grandness = require('lib.function.common').bytes_to_grandness
-local signals = require('module.signals')
-local hardware = require('lib.hardware-check')
-local seperator_widget = require('lib.separator')
-local card = require('module.card')
+local awful = require("awful")
+local wibox = require("wibox")
+local gears = require("gears")
+local beautiful = require("beautiful")
+local execute = require("module.hardware-check").execute
+local bytes_to_grandness = require("lib.function.common").bytes_to_grandness
+local signals = require("module.signals")
+local hardware = require("module.hardware-check")
+local seperator_widget = require("module.separator")
+local card = require("module.ui-components.card")
 
 local dpi = beautiful.xresources.apply_dpi
-local icons = require('theme.icons')
+local icons = require("theme.icons")
 
 -- ########################################################################
 -- Settings ###############################################################
@@ -47,9 +47,9 @@ local function generate_setting_panel(title)
     local name =
         wibox.widget {
         widget = wibox.widget.textbox,
-        text = 'Unknown',
+        text = "Unknown",
         font = beautiful.font,
-        fg = beautiful.fg_normal .. 'AA'
+        fg = beautiful.fg_normal .. "AA"
     }
     local container = card()
     container.forced_width = settings_width - (settings_nw * 2)
@@ -71,7 +71,7 @@ return function()
     view.left = m
     view.right = m
 
-    local title = wibox.widget.textbox('About')
+    local title = wibox.widget.textbox("About")
     title.font = beautiful.title_font
     title.forced_height = settings_index + m + m
 
@@ -96,7 +96,7 @@ return function()
     local separator = seperator_widget(settings_index / 1.5)
 
     local container = wibox.layout.fixed.vertical()
-    local device_name, device_text = generate_setting_panel('Name')
+    local device_name, device_text = generate_setting_panel("Name")
 
     signals.connect_username(
         function(value)
@@ -104,7 +104,7 @@ return function()
         end
     )
 
-    local memory_name, memory_text = generate_setting_panel('Memory')
+    local memory_name, memory_text = generate_setting_panel("Memory")
 
     signals.connect_ram_total(
         function(value)
@@ -113,35 +113,35 @@ return function()
     )
 
     local _, threads, _processor_name = hardware.getCpuInfo()
-    local processor_name, processor_text = generate_setting_panel('Processor')
+    local processor_name, processor_text = generate_setting_panel("Processor")
     processor_text.text = _processor_name
 
-    local processor_cores, processor_cores_text = generate_setting_panel('Processor Core Count')
+    local processor_cores, processor_cores_text = generate_setting_panel("Processor Core Count")
     processor_cores_text.text = tostring(threads)
 
-    local graphics_name, graphics_text = generate_setting_panel('Graphics')
+    local graphics_name, graphics_text = generate_setting_panel("Graphics")
     -- gathered from https://github.com/dylanaraps/neofetch/blob/master/neofetch#L2401
     local value, _ =
         execute(
-        "lspci -mm | awk -F '\\\"|\\\" \\\"|\\\\(' '/\"Display|\"3D|\"VGA/ {a[$0] = $1 \" \" $3 \" \" $4} END {for(i in a) {if(!seen[a[i]]++) print a[i]}}' | head -n1"
+        'lspci -mm | awk -F \'\\"|\\" \\"|\\\\(\' \'/"Display|"3D|"VGA/ {a[$0] = $1 " " $3 " " $4} END {for(i in a) {if(!seen[a[i]]++) print a[i]}}\' | head -n1'
     )
     graphics_text.text = value
 
-    local disk_name, disk_text = generate_setting_panel('Disk capacity')
+    local disk_name, disk_text = generate_setting_panel("Disk capacity")
 
     signals.connect_disk_space(
         function(payload)
-            print('Updating disk space')
+            print("Updating disk space")
             disk_text.text = payload
         end
     )
 
-    local display_freq_name, display_freq_text = generate_setting_panel('Display refresh rate')
+    local display_freq_name, display_freq_text = generate_setting_panel("Display refresh rate")
 
-    display_freq_text.text = tostring(hardware.getDisplayFrequency()) .. ' Hz'
+    display_freq_text.text = tostring(hardware.getDisplayFrequency()) .. " Hz"
 
-    local os_name_name, os_name_text = generate_setting_panel('OS Name')
-    os_name_text.text = 'the Electric Tantra Linux'
+    local os_name_name, os_name_text = generate_setting_panel("OS Name")
+    os_name_text.text = "the Electric Tantra Linux"
 
     signals.connect_distro(
         function(payload)
@@ -149,15 +149,15 @@ return function()
         end
     )
 
-    local os_type_name, os_type_text = generate_setting_panel('OS Type')
-    local out, _ = execute('uname -m')
+    local os_type_name, os_type_text = generate_setting_panel("OS Type")
+    local out, _ = execute("uname -m")
     os_type_text.text = out
 
-    local windowing_system_name, windowing_system_text = generate_setting_panel('Windowing system')
+    local windowing_system_name, windowing_system_text = generate_setting_panel("Windowing system")
     -- TDE currently only supports X11
-    windowing_system_text.text = 'X11'
+    windowing_system_text.text = "X11"
 
-    require('widget.settings.info-gather')
+    require("widget.settings.info-gather")
 
     container:add(device_name)
 
@@ -194,14 +194,14 @@ return function()
             },
             {
                 layout = wibox.container.place,
-                valign = 'top',
-                halign = 'center',
+                valign = "top",
+                halign = "center",
                 logo
             },
             {
                 layout = wibox.container.place,
-                valign = 'top',
-                halign = 'center',
+                valign = "top",
+                halign = "center",
                 wibox.container.margin(container, 0, 0, 0, m * 3)
             }
         }

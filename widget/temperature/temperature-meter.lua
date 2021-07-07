@@ -1,17 +1,17 @@
-local wibox = require('wibox')
-local mat_list_item = require('widget.material.list-item')
-local mat_slider = require('lib.progress_bar')
-local mat_icon = require('widget.material.icon')
-local icons = require('theme.icons')
-local dpi = require('beautiful').xresources.apply_dpi
-local config = require('module.functions')
-local file = require('module.file')
-local signals = require('module.signals')
-local delayed_timer = require('lib.function.delayed-timer')
-local beautiful = require('beautiful')
+local wibox = require("wibox")
+local mat_list_item = require("widget.material.list-item")
+local mat_slider = require("module.ui-components.progress_bar")
+local mat_icon = require("widget.material.icon")
+local icons = require("theme.icons")
+local dpi = require("beautiful").xresources.apply_dpi
+local config = require("module.functions")
+local file = require("module.file")
+local signals = require("module.signals")
+local delayed_timer = require("lib.function.delayed-timer")
+local beautiful = require("beautiful")
 local noNetwork = true
-local gears = require('gears')
-local vicious = require('lib.vicious')
+local gears = require("gears")
+local vicious = require("lib.vicious")
 signals.connect_wifi_status(
     function(status)
         noNetwork = not status
@@ -34,19 +34,19 @@ delayed_timer(
         if noNetwork then
             return
         end
-        local stdout = file.string('/sys/class/thermal/thermal_zone0/temp') or ''
-        if stdout == '' then
+        local stdout = file.string("/sys/class/thermal/thermal_zone0/temp") or ""
+        if stdout == "" then
             return
         end
-        local temp = stdout:match('(%d+)')
+        local temp = stdout:match("(%d+)")
         slider:set_value((temp / 1000) / max_temp * 100)
-        print('Current temperature: ' .. (temp / 1000) .. ' °C')
+        print("Current temperature: " .. (temp / 1000) .. " °C")
     end,
     config.temp_startup_delay
 )
 local widget_icon =
     wibox.widget {
-    id = 'icon',
+    id = "icon",
     image = icons.thermometer,
     forced_width = 36,
     forced_height = 36,
@@ -55,8 +55,8 @@ local widget_icon =
 
 local temp = wibox.widget.textbox()
 vicious.cache(vicious.widgets.thermal)
-vicious.register(temp, vicious.widgets.thermal, '$1°C', 4, 'thermal_zone0')
-temp.font = beautiful.font .. ' 14'
+vicious.register(temp, vicious.widgets.thermal, "$1°C", 4, "thermal_zone0")
+temp.font = beautiful.font .. " 14"
 
 local temperature_meter =
     wibox.widget {
@@ -74,7 +74,7 @@ local temperature_meter =
         widget = wibox.container.margin
     },
     shape = gears.shape.rounded_rect,
-    bg = beautiful.bg_normal .. '77',
+    bg = beautiful.bg_normal .. "77",
     shape_border_color = beautiful.bg_normal,
     shape_border_width = dpi(3),
     widget = wibox.container.background

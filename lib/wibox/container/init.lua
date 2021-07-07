@@ -9,6 +9,7 @@ local base = require("wibox.widget.base")
 
 return setmetatable({
     rotate = require("wibox.container.rotate");
+    scale = require("wibox.container.scale");
     margin = require("wibox.container.margin");
     mirror = require("wibox.container.mirror");
     constraint = require("wibox.container.constraint");
@@ -17,7 +18,8 @@ return setmetatable({
     radialprogressbar = require("wibox.container.radialprogressbar");
     arcchart = require("wibox.container.arcchart");
     place = require("wibox.container.place");
-    tile = require("wibox.container.tile");
+    conditional = require("wibox.container.conditional");
+    template = require("wibox.container.template");
 }, {__call = function(_, args) return base.make_widget_declarative(args) end})
 
 -- vim: filetype=lua:expandtab:shiftwidth=4:tabstop=8:softtabstop=4:textwidth=80

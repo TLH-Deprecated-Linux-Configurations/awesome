@@ -20,15 +20,15 @@ local filesystem = require("module.file")
 local icons = require("theme.icons")
 local signals = require("module.signals")
 local dpi = beautiful.xresources.apply_dpi
-local configWriter = require("lib.config-writer")
+local configWriter = require("module.config-writer")
 local datetime = require("lib.function.datetime")
 local filehandle = require("module.file")
-local imagemagic = require("module.imagemagic")
+local imagemagic = require("module.ui-components.imagemagic")
 local xrandr_menu = require("module.xrandr").menu
-local scrollbox = require("lib.scrollbox")
-local slider = require("lib.slider")
-local card = require("module.card")
-local button = require("module.button")
+local scrollbox = require("module.ui-components.scrollbox")
+local slider = require("module.ui-components.slider")
+local card = require("module.ui-components.card")
+local button = require("module.ui-components.button")
 -- ########################################################################
 -- ########################################################################
 -- ########################################################################

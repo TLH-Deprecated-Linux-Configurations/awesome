@@ -1,4 +1,5 @@
 ---------------------------------------------------------------------------
+--
 -- A circular progressbar wrapper.
 --
 -- If no child `widget` is set, then the radialprogressbar will take all the
@@ -7,8 +8,7 @@
 --@DOC_wibox_container_defaults_radialprogressbar_EXAMPLE@
 -- @author Emmanuel Lepage Vallee &lt;elv1313@gmail.com&gt;
 -- @copyright 2013 Emmanuel Lepage Vallee
--- @containermod wibox.container.radialprogressbar
--- @supermodule wibox.widget.base
+-- @classmod wibox.container.radialprogressbar
 ---------------------------------------------------------------------------
 
 local setmetatable = setmetatable
@@ -23,19 +23,13 @@ local default_outline_width  = 2
 local radialprogressbar = { mt = {} }
 
 --- The progressbar border background color.
---
 -- @beautiful beautiful.radialprogressbar_border_color
--- @param color
 
 --- The progressbar foreground color.
---
 -- @beautiful beautiful.radialprogressbar_color
--- @param color
 
 --- The progressbar border width.
---
 -- @beautiful beautiful.radialprogressbar_border_width
--- @param number
 
 --- The padding between the outline and the progressbar.
 -- @beautiful beautiful.radialprogressbar_paddings
@@ -129,26 +123,32 @@ function radialprogressbar:fit(context, width, height)
 end
 
 --- The widget to wrap in a radial proggressbar.
---
 -- @property widget
 -- @tparam widget widget The widget
--- @interface container
 
-radialprogressbar.set_widget = base.set_widget_common
+function radialprogressbar:set_widget(widget)
+    if widget then
+        base.check_widget(widget)
+    end
+    self._private.widget = widget
+    self:emit_signal("widget::layout_changed")
+end
 
+--- Get the children elements
+-- @treturn table The children
 function radialprogressbar:get_children()
     return {self._private.widget}
 end
 
+--- Replace the layout children
+-- This layout only accept one children, all others will be ignored
+-- @tparam table children A table composed of valid widgets
 function radialprogressbar:set_children(children)
     self._private.widget = children and children[1]
     self:emit_signal("widget::layout_changed")
 end
 
 --- Reset this container.
---
--- @method reset
--- @interface container
 function radialprogressbar:reset()
     self:set_widget(nil)
 end
@@ -163,7 +163,6 @@ for _,v in ipairs {"left", "right", "top", "bottom"} do
 end
 
 --- The padding between the outline and the progressbar.
---
 --@DOC_wibox_container_radialprogressbar_padding_EXAMPLE@
 -- @property paddings
 -- @tparam[opt=0] table|number paddings A number or a table
@@ -171,15 +170,11 @@ end
 -- @tparam[opt=0] number paddings.bottom
 -- @tparam[opt=0] number paddings.left
 -- @tparam[opt=0] number paddings.right
--- @propbeautiful
--- @propemits false false
 
 --- The progressbar value.
---
 --@DOC_wibox_container_radialprogressbar_value_EXAMPLE@
 -- @property value
--- @tparam number value Between min_value and max_value.
--- @propemits true false
+-- @tparam number value Between min_value and max_value
 
 function radialprogressbar:set_value(val)
     if not val then self._percent = 0; return end
@@ -194,50 +189,32 @@ function radialprogressbar:set_value(val)
 
     self._percent = val/delta
     self:emit_signal("widget::redraw_needed")
-    self:emit_signal("property::value", val)
 end
 
 --- The border background color.
---
 --@DOC_wibox_container_radialprogressbar_border_color_EXAMPLE@
 -- @property border_color
--- @tparam color border_color
--- @propbeautiful
--- @propemits true false
 
 --- The border foreground color.
---
 --@DOC_wibox_container_radialprogressbar_color_EXAMPLE@
 -- @property color
--- @tparam color color
--- @propbeautiful
--- @propemits true false
 
 --- The border width.
---
 --@DOC_wibox_container_radialprogressbar_border_width_EXAMPLE@
 -- @property border_width
 -- @tparam[opt=3] number border_width
--- @propbeautiful
--- @propemits true false
 
 --- The minimum value.
---
 -- @property min_value
--- @tparam number min_value
--- @propemits true false
 
 --- The maximum value.
---
 -- @property max_value
--- @tparam number max_value
--- @propemits true false
 
 for _, prop in ipairs {"max_value", "min_value", "border_color", "color",
     "border_width", "paddings"} do
     radialprogressbar["set_"..prop] = function(self, value)
         self._private[prop] = value
-        self:emit_signal("property::"..prop, value)
+        self:emit_signal("property::"..prop)
         self:emit_signal("widget::redraw_needed")
     end
     radialprogressbar["get_"..prop] = function(self)
@@ -257,13 +234,10 @@ function radialprogressbar:set_paddings(val)
     self:emit_signal("widget::layout_changed")
 end
 
---- Returns a new radialprogressbar layout.
---
--- A radialprogressbar layout  radialprogressbars a given widget. Use `.widget`
--- to set the widget.
---
--- @tparam[opt] widget widget The widget to display.
--- @constructorfct wibox.container.radialprogressbar
+--- Returns a new radialprogressbar layout. A radialprogressbar layout
+-- radialprogressbars a given widget. Use `.widget` to set the widget.
+-- @param[opt] widget The widget to display.
+-- @function wibox.container.radialprogressbar
 local function new(widget)
     local ret = base.make_widget(nil, nil, {
         enable_properties = true,
@@ -278,9 +252,13 @@ local function new(widget)
     return ret
 end
 
-function radialprogressbar.mt:__call(...)
+function radialprogressbar.mt:__call(_, ...)
     return new(...)
 end
+
+--@DOC_widget_COMMON@
+
+--@DOC_object_COMMON@
 
 return setmetatable(radialprogressbar, radialprogressbar.mt)
 

@@ -10,19 +10,19 @@
 -- ########################################################################
 -- ########################################################################
 -- ########################################################################
-local awful = require('awful')
-local wibox = require('wibox')
-local gears = require('gears')
-local beautiful = require('beautiful')
-local icons = require('theme.icons')
-local split = require('lib.function.common').split
-local signals = require('module.signals')
-local mat_icon_button = require('widget.material.icon-button')
-local mat_icon = require('widget.material.icon')
-local card = require('module.card')
-local naughty = require('naughty')
-local execute = require('lib.hardware-check').execute
-local scrollbox = require('lib.scrollbox')
+local awful = require("awful")
+local wibox = require("wibox")
+local gears = require("gears")
+local beautiful = require("beautiful")
+local icons = require("theme.icons")
+local split = require("lib.function.common").split
+local signals = require("module.signals")
+local mat_icon_button = require("widget.material.icon-button")
+local mat_icon = require("widget.material.icon")
+local card = require("module.ui-components.card")
+local naughty = require("naughty")
+local execute = require("module.hardware-check").execute
+local scrollbox = require("module.ui-components.scrollbox")
 
 local dpi = beautiful.xresources.apply_dpi
 -- ########################################################################
@@ -50,10 +50,10 @@ local function loading()
     connections.children = {}
     local text =
         wibox.widget {
-        text = ('Connecting...'),
-        font = 'agave Nerd Font Mono Bold 24',
-        align = 'center',
-        valign = 'center',
+        text = ("Connecting..."),
+        font = "agave Nerd Font Mono Bold 24",
+        align = "center",
+        valign = "center",
         widget = wibox.widget.textbox,
         forced_height = settings_height - settings_index
     }
@@ -65,10 +65,10 @@ end
 local function notify(title, msg)
     naughty.notification(
         {
-            title = ('Bluetooth'),
-            text = (title) .. '\n<span weight="bold">' .. msg .. '</span>',
+            title = ("Bluetooth"),
+            text = (title) .. '\n<span weight="bold">' .. msg .. "</span>",
             timeout = 5,
-            urgency = 'critical',
+            urgency = "critical",
             icon = icons.warning
         }
     )
@@ -95,16 +95,16 @@ local function make_bluetooth_widget(tbl)
                 1,
                 nil,
                 function()
-                    print('Disconnecting from: ' .. name)
+                    print("Disconnecting from: " .. name)
                     local cmd = "bluetoothctl disconnect '" .. mac .. "'"
-                    print('Executing command: ' .. cmd)
+                    print("Executing command: " .. cmd)
                     loading()
                     awful.spawn.easy_async(
                         cmd,
                         function(out, _, _, code)
-                            print('Bluetooth connection result: ' .. out)
+                            print("Bluetooth connection result: " .. out)
                             if not (code == 0) then
-                                notify('Disconnection failed', out)
+                                notify("Disconnection failed", out)
                             end
                             refresh()
                         end
@@ -124,16 +124,16 @@ local function make_bluetooth_widget(tbl)
                 1,
                 nil,
                 function()
-                    print('Connect to bluetooth using the name: ' .. name)
+                    print("Connect to bluetooth using the name: " .. name)
                     local cmd = "bluetoothctl connect '" .. mac .. "'"
-                    print('Executing command: ' .. cmd)
+                    print("Executing command: " .. cmd)
                     loading()
                     awful.spawn.easy_async(
                         cmd,
                         function(out, _, _, code)
-                            print('Bluetooth connection result: ' .. out)
+                            print("Bluetooth connection result: " .. out)
                             if not (code == 0) then
-                                notify('Connection failed', out)
+                                notify("Connection failed", out)
                             end
                             refresh()
                         end
@@ -153,16 +153,16 @@ local function make_bluetooth_widget(tbl)
                 1,
                 nil,
                 function()
-                    print('Pairing to ' .. name)
+                    print("Pairing to " .. name)
                     local cmd = "bluetoothctl pair '" .. mac .. "'"
-                    print('Executing command: ' .. cmd)
+                    print("Executing command: " .. cmd)
                     loading()
                     awful.spawn.easy_async(
                         cmd,
                         function(out, _, _, code)
-                            print('Bluetooth pairing result: ' .. out)
+                            print("Bluetooth pairing result: " .. out)
                             if not (code == 0) then
-                                notify('Pairing failed', out)
+                                notify("Pairing failed", out)
                             end
                             awful.spawn("bluetoothctl trust '" .. mac .. "'")
                             refresh()
@@ -183,7 +183,7 @@ local function make_bluetooth_widget(tbl)
                 1,
                 nil,
                 function()
-                    print('unpairing to ' .. name)
+                    print("unpairing to " .. name)
                     local cmd = "bluetoothctl untrust '" .. mac .. "'"
                     local cmd2 = "bluetoothctl remove '" .. mac .. "'"
                     loading()
@@ -211,26 +211,26 @@ local function make_bluetooth_widget(tbl)
         buttons:add(unpair_btn)
         awful.tooltip {
             objects = {unpair_btn},
-            text = ('Forget ') .. name
+            text = ("Forget ") .. name
         }
     else
         buttons:add(pair_btn)
         awful.tooltip {
             objects = {pair_btn},
-            text = ('Pair with ') .. name
+            text = ("Pair with ") .. name
         }
     end
     if connected then
         buttons:add(disconnect_btn)
         awful.tooltip {
             objects = {disconnect_btn},
-            text = ('Disconnect from ') .. name
+            text = ("Disconnect from ") .. name
         }
     else
         buttons:add(connect_btn)
         awful.tooltip {
             objects = {connect_btn},
-            text = ('Connect to ') .. name
+            text = ("Connect to ") .. name
         }
     end
     -- ########################################################################
@@ -274,7 +274,7 @@ return function()
     view.left = m
     view.right = m
 
-    local title = wibox.widget.textbox('Bluetooth')
+    local title = wibox.widget.textbox("Bluetooth")
     title.font = beautiful.title_font
     title.forced_height = settings_index + m + m
 
@@ -299,7 +299,7 @@ return function()
     scrollbox_body = scrollbox(connections)
     view:setup {
         layout = wibox.container.background,
-        bg = beautiful.bg_normal .. '00',
+        bg = beautiful.bg_normal .. "00",
         --fg = config.colors.xf,
         {
             layout = wibox.layout.align.vertical,
@@ -317,8 +317,8 @@ return function()
             },
             {
                 layout = wibox.container.place,
-                valign = 'top',
-                halign = 'center',
+                valign = "top",
+                halign = "center",
                 scrollbox_body
             }
         }
@@ -331,7 +331,7 @@ return function()
         autostart = true,
         timeout = 20,
         callback = function()
-            print('Refreshing')
+            print("Refreshing")
             refresh()
         end
     }
@@ -339,7 +339,7 @@ return function()
     -- ########################################################################
     -- ########################################################################
     local stop_view = function()
-        print('Stopping bluetooth advertisment')
+        print("Stopping bluetooth advertisment")
         timer:stop()
         -- disable our discovery
         awful.spawn(
@@ -376,7 +376,7 @@ return function()
     local function check_data()
         -- only generate the list if both commands completed
         if #devices > 0 and #paired_devices > 0 then
-            local stdout, _ = execute('bluetoothctl info')
+            local stdout, _ = execute("bluetoothctl info")
             for _, value in ipairs(devices) do
                 connections:add(
                     make_bluetooth_widget(
@@ -399,7 +399,7 @@ return function()
             scrollbox_body.reset()
         end
         if bIsTimer == nil then
-            print('Starting bluetooth advertisment')
+            print("Starting bluetooth advertisment")
             awful.spawn("sh -c 'bluetoothctl scan on; bluetoothctl pairable on; bluetoothctl discoverable on'")
         elseif timer.started == nil then
             timer:start()
@@ -413,10 +413,10 @@ return function()
         paired_devices = {}
 
         awful.spawn.easy_async_with_shell(
-            'bluetoothctl devices',
+            "bluetoothctl devices",
             function(out)
-                for _, value in ipairs(split(out, '\n')) do
-                    local mac, name = string.match(value, '^Device ([A-F0-9:]+) (.*)$')
+                for _, value in ipairs(split(out, "\n")) do
+                    local mac, name = string.match(value, "^Device ([A-F0-9:]+) (.*)$")
                     if name == nil then
                         name = mac
                     end
@@ -437,10 +437,10 @@ return function()
         -- ########################################################################
         -- ########################################################################
         awful.spawn.easy_async_with_shell(
-            'bluetoothctl paired-devices',
+            "bluetoothctl paired-devices",
             function(out)
-                for _, value in ipairs(split(out, '\n')) do
-                    local mac = string.match(value, '^Device ([A-F0-9:]+) .*$') or split(value, ' ')[2]
+                for _, value in ipairs(split(out, "\n")) do
+                    local mac = string.match(value, "^Device ([A-F0-9:]+) .*$") or split(value, " ")[2]
                     if mac ~= nil then
                         paired_devices[mac] = true
                     end

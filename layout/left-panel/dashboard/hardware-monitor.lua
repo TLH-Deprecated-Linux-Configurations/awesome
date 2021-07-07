@@ -7,22 +7,22 @@
 -- ########################################################################
 -- ########################################################################
 
-local wibox = require('wibox')
-local beautiful = require('beautiful')
+local wibox = require("wibox")
+local beautiful = require("beautiful")
 local dpi = beautiful.xresources.apply_dpi
-local card = require('module.card')
+local card = require("module.ui-components.card")
 -- ########################################################################
 -- ########################################################################
 -- ########################################################################
 local function build(screen)
-    local hardware_card = card('Hardware monitor')
+    local hardware_card = card("Hardware monitor")
 
-    local cpu = require('widget.cpu.cpu-meter')
-    local ram = require('widget.ram.ram-meter')
-    local temp = require('widget.temperature.temperature-meter')
-    local drive = require('widget.harddrive.harddrive-meter')
-    local network_up = require('widget.network.network-meter')(true, screen)
-    local network_down = require('widget.network.network-meter')(false, screen)
+    local cpu = require("widget.cpu.cpu-meter")
+    local ram = require("widget.ram.ram-meter")
+    local temp = require("widget.temperature.temperature-meter")
+    local drive = require("widget.harddrive.harddrive-meter")
+    local network_up = require("widget.network.network-meter")(true, screen)
+    local network_down = require("widget.network.network-meter")(false, screen)
     -- ########################################################################
     -- ########################################################################
     -- ########################################################################

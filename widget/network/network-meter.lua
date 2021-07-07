@@ -6,18 +6,18 @@
 -- ########################################################################
 -- ########################################################################
 -- ########################################################################
-local wibox = require('wibox')
-local mat_list_item = require('widget.material.list-item')
-local mat_slider = require('lib.progress_bar')
-local mat_icon = require('widget.material.icon')
-local icons = require('theme.icons')
-local dpi = require('beautiful').xresources.apply_dpi
-local filehandle = require('module.file')
-local gears = require('gears')
-local common = require('lib.function.common')
-local delayed_timer = require('lib.function.delayed-timer')
+local wibox = require("wibox")
+local mat_list_item = require("widget.material.list-item")
+local mat_slider = require("module.ui-components.progress_bar")
+local mat_icon = require("widget.material.icon")
+local icons = require("theme.icons")
+local dpi = require("beautiful").xresources.apply_dpi
+local filehandle = require("module.file")
+local gears = require("gears")
+local common = require("lib.function.common")
+local delayed_timer = require("lib.function.delayed-timer")
 
-local config = require('module.functions')
+local config = require("module.functions")
 -- ########################################################################
 -- ########################################################################
 -- ########################################################################
@@ -36,15 +36,15 @@ local network_meter_down
 -- ########################################################################
 -- ########################################################################
 -- ########################################################################
-if filehandle.exists('/tmp/interface.txt') then
-    interface = filehandle.string('/tmp/interface.txt'):gsub('\n', '')
+if filehandle.exists("/tmp/interface.txt") then
+    interface = filehandle.string("/tmp/interface.txt"):gsub("\n", "")
 end
 local value_up =
     wibox.widget {
-    markup = '...',
-    align = 'center',
-    valign = 'center',
-    font = 'agave Nerd Font Mono Bold 14',
+    markup = "...",
+    align = "center",
+    valign = "center",
+    font = "agave Nerd Font Mono Bold 14",
     widget = wibox.widget.textbox
 }
 -- ########################################################################
@@ -52,10 +52,10 @@ local value_up =
 -- ########################################################################
 local value_down =
     wibox.widget {
-    markup = '...',
-    align = 'center',
-    valign = 'center',
-    font = 'agave Nerd Font Mono Bold 14',
+    markup = "...",
+    align = "center",
+    valign = "center",
+    font = "agave Nerd Font Mono Bold 14",
     widget = wibox.widget.textbox
 }
 -- ########################################################################
@@ -94,8 +94,8 @@ local function _draw_results(download, upload)
     -- ########################################################################
     -- ########################################################################
     -- ########################################################################
-    print('Network download: ' .. download_text)
-    print('Network upload: ' .. upload_text)
+    print("Network download: " .. download_text)
+    print("Network upload: " .. upload_text)
 end
 -- ########################################################################
 -- ########################################################################
@@ -105,7 +105,7 @@ delayed_timer(
     function()
         -- sanitizing the interface
         if interface == nil then
-            interface = filehandle.string('/tmp/interface.txt'):gsub('\n', '')
+            interface = filehandle.string("/tmp/interface.txt"):gsub("\n", "")
             return
         end
         -- ########################################################################
@@ -113,8 +113,8 @@ delayed_timer(
         -- ########################################################################
         counter = counter + 1
 
-        local valueRX = filehandle.string('/sys/class/net/' .. interface .. '/statistics/rx_bytes'):gsub('\n', '')
-        local valueTX = filehandle.string('/sys/class/net/' .. interface .. '/statistics/tx_bytes'):gsub('\n', '')
+        local valueRX = filehandle.string("/sys/class/net/" .. interface .. "/statistics/rx_bytes"):gsub("\n", "")
+        local valueTX = filehandle.string("/sys/class/net/" .. interface .. "/statistics/tx_bytes"):gsub("\n", "")
         -- ########################################################################
         -- ########################################################################
         -- ########################################################################

@@ -1,5 +1,5 @@
 ---------------------------------------------------------------------------
--- A calendar widget.
+-- A calendar widget
 --
 -- This module defines two widgets: a month calendar and a year calendar
 --
@@ -21,7 +21,7 @@
 --
 -- @author getzze
 -- @copyright 2017 getzze
--- @widgetmod wibox.widget.calendar
+-- @classmod wibox.widget.calendar
 ---------------------------------------------------------------------------
 
 
@@ -352,7 +352,7 @@ end
 -- @tparam number|nil date.day Date day
 -- @tparam[opt="Monospace 10"] string font Font of the calendar
 -- @treturn widget The month calendar widget
--- @constructorfct wibox.widget.calendar.month
+-- @function wibox.widget.calendar.month
 function calendar.month(date, font)
     return get_calendar("month", date, font)
 end
@@ -368,11 +368,14 @@ end
 -- @tparam number|nil date.day Date day
 -- @tparam[opt="Monospace 10"] string font Font of the calendar
 -- @treturn widget The year calendar widget
--- @constructorfct wibox.widget.calendar.year
+-- @function wibox.widget.calendar.year
 function calendar.year(date, font)
     return get_calendar("year", date, font)
 end
 
+function calendar.mt.__call(_, ...)
+    return calendar.month(...)
+end
 
 return setmetatable(calendar, calendar.mt)
 

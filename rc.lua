@@ -12,7 +12,7 @@
 -- found (e.g. lgi). If LuaRocks is not installed, do nothing.
 pcall(require, "luarocks.loader")
 -- ########################################################################
-require("lib.luapath")
+require("module.luapath")
 require("module.logger")
 print("Booting up...")
 -- ########################################################################

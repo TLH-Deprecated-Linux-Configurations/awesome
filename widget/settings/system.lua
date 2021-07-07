@@ -7,14 +7,14 @@
 -- ########################################################################
 -- ########################################################################
 --
-local awful = require('awful')
-local wibox = require('wibox')
-local gears = require('gears')
-local beautiful = require('beautiful')
-local icons = require('theme.icons')
-local file = require('module.file')
-local signals = require('module.signals')
-local card = require('module.card')
+local awful = require("awful")
+local wibox = require("wibox")
+local gears = require("gears")
+local beautiful = require("beautiful")
+local icons = require("theme.icons")
+local file = require("module.file")
+local signals = require("module.signals")
+local card = require("module.ui-components.card")
 
 local dpi = beautiful.xresources.apply_dpi
 -- ########################################################################
@@ -34,7 +34,7 @@ return function()
     -- ########################################################################
     -- ########################################################################
     -- ########################################################################
-    local title = wibox.widget.textbox(('System'))
+    local title = wibox.widget.textbox(("System"))
     title.font = beautiful.title_font
     title.forced_height = settings_index + m + m
     -- ########################################################################
@@ -65,8 +65,8 @@ return function()
     -- ########################################################################
     -- ########################################################################
     local scale = wibox.layout.align.vertical()
-    local scale_max = wibox.widget.textbox('100%')
-    local scale_min = wibox.widget.textbox('0%')
+    local scale_max = wibox.widget.textbox("100%")
+    local scale_min = wibox.widget.textbox("0%")
     scale_max.font = beautiful.font
     scale_min.font = beautiful.font
     scale.first = scale_max
@@ -78,7 +78,7 @@ return function()
     -- ########################################################################
     local ram_progress = wibox.widget.progressbar()
     ram_progress.max_value = 100
-    ram_progress.background_color = beautiful.bg_modal .. '00'
+    ram_progress.background_color = beautiful.bg_modal .. "00"
     ram_progress.color = beautiful.xcolor6
     ram_progress.value = 0
     ram_progress.bar_shape = function(c, w, h)
@@ -89,7 +89,7 @@ return function()
     -- ########################################################################
     local cpu_progress = wibox.widget.progressbar()
     cpu_progress.max_value = 100
-    cpu_progress.background_color = beautiful.bg_modal .. '00'
+    cpu_progress.background_color = beautiful.bg_modal .. "00"
     cpu_progress.color = beautiful.xcolor1
     cpu_progress.value = 0
     cpu_progress.bar_shape = function(c, w, h)
@@ -100,7 +100,7 @@ return function()
     -- ########################################################################
     local disk_progress = wibox.widget.progressbar()
     disk_progress.max_value = 100
-    disk_progress.background_color = beautiful.bg_modal .. '00'
+    disk_progress.background_color = beautiful.bg_modal .. "00"
     disk_progress.color = beautiful.xcolor4
     disk_progress.value = 0
     disk_progress.bar_shape = function(c, w, h)
@@ -109,9 +109,9 @@ return function()
     -- ########################################################################
     -- ########################################################################
     -- ########################################################################
-    local ram = wibox.container.rotate(ram_progress, 'east')
-    local cpu = wibox.container.rotate(cpu_progress, 'east')
-    local disk = wibox.container.rotate(disk_progress, 'east')
+    local ram = wibox.container.rotate(ram_progress, "east")
+    local cpu = wibox.container.rotate(cpu_progress, "east")
+    local disk = wibox.container.rotate(disk_progress, "east")
     -- ########################################################################
     -- ########################################################################
     -- ########################################################################
@@ -133,23 +133,23 @@ return function()
     -- ########################################################################
     -- ########################################################################
     -- ########################################################################
-    local ram_key = wibox.widget.textbox('RAM')
+    local ram_key = wibox.widget.textbox("RAM")
     ram_key.font = beautiful.font
     -- ########################################################################
     -- ########################################################################
     -- ########################################################################
-    local cpu_key = wibox.widget.textbox('CPU')
+    local cpu_key = wibox.widget.textbox("CPU")
     cpu_key.font = beautiful.font
     -- ########################################################################
     -- ########################################################################
     -- ########################################################################
-    local disk_key = wibox.widget.textbox('Disk')
+    local disk_key = wibox.widget.textbox("Disk")
     disk_key.font = beautiful.font
     -- ########################################################################
     -- ########################################################################
     -- ########################################################################
     ram:connect_signal(
-        'mouse::enter',
+        "mouse::enter",
         function()
             ram_value.visible = true
         end
@@ -158,7 +158,7 @@ return function()
     -- ########################################################################
     -- ########################################################################
     ram:connect_signal(
-        'mouse::leave',
+        "mouse::leave",
         function()
             ram_value.visible = false
         end
@@ -167,7 +167,7 @@ return function()
     -- ########################################################################
     -- ########################################################################
     cpu:connect_signal(
-        'mouse::enter',
+        "mouse::enter",
         function()
             cpu_value.visible = true
         end
@@ -176,7 +176,7 @@ return function()
     -- ########################################################################
     -- ########################################################################
     cpu:connect_signal(
-        'mouse::leave',
+        "mouse::leave",
         function()
             cpu_value.visible = false
         end
@@ -185,7 +185,7 @@ return function()
     -- ########################################################################
     -- ########################################################################
     disk:connect_signal(
-        'mouse::enter',
+        "mouse::enter",
         function()
             disk_value.visible = true
         end
@@ -194,7 +194,7 @@ return function()
     -- ########################################################################
     -- ########################################################################
     disk:connect_signal(
-        'mouse::leave',
+        "mouse::leave",
         function()
             disk_value.visible = false
         end
@@ -234,17 +234,17 @@ return function()
                             {
                                 layout = wibox.layout.stack,
                                 ram,
-                                {layout = wibox.container.place, valign = 'bottom', ram_value}
+                                {layout = wibox.container.place, valign = "bottom", ram_value}
                             },
                             {
                                 layout = wibox.layout.stack,
                                 cpu,
-                                {layout = wibox.container.place, valign = 'bottom', cpu_value}
+                                {layout = wibox.container.place, valign = "bottom", cpu_value}
                             },
                             {
                                 layout = wibox.layout.stack,
                                 disk,
-                                {layout = wibox.container.place, valign = 'bottom', disk_value}
+                                {layout = wibox.container.place, valign = "bottom", disk_value}
                             }
                         }
                     }
@@ -278,7 +278,7 @@ return function()
                 {},
                 1,
                 function()
-                    local term = os.getenv('TERMINAL') or 'kitty'
+                    local term = os.getenv("TERMINAL") or "kitty"
                     awful.spawn(term .. ' -e "system-updater"')
                 end
             )
@@ -292,12 +292,12 @@ return function()
     -- ########################################################################
     -- ########################################################################
     -- ########################################################################
-    local pac_title = wibox.widget.textbox('System Updates')
+    local pac_title = wibox.widget.textbox("System Updates")
     pac_title.font = beautiful.title_font
     -- ########################################################################
     -- ########################################################################
     -- ########################################################################
-    local pac_value = wibox.widget.textbox('None available')
+    local pac_value = wibox.widget.textbox("None available")
     pac_value.font = beautiful.title_font
     -- ########################################################################
     -- ########################################################################
@@ -320,7 +320,7 @@ return function()
     local osName =
         wibox.widget {
         font = beautiful.title_font,
-        text = 'OS: unknown',
+        text = "OS: unknown",
         widget = wibox.widget.textbox
     }
     -- ########################################################################
@@ -329,7 +329,7 @@ return function()
     local kernelVersion =
         wibox.widget {
         font = beautiful.title_font,
-        text = 'Kernel: unknown',
+        text = "Kernel: unknown",
         widget = wibox.widget.textbox
     }
     -- ########################################################################
@@ -338,7 +338,7 @@ return function()
     local hostName =
         wibox.widget {
         font = beautiful.title_font,
-        text = ('Hostname: ') .. file.string('/etc/hostname'):gsub('%\n', ''),
+        text = ("Hostname: ") .. file.string("/etc/hostname"):gsub("%\n", ""),
         widget = wibox.widget.textbox
     }
     -- ########################################################################
@@ -347,7 +347,7 @@ return function()
     local uptime =
         wibox.widget {
         font = beautiful.title_font,
-        text = ('Uptime: unknown'),
+        text = ("Uptime: unknown"),
         widget = wibox.widget.textbox
     }
     -- ########################################################################
@@ -355,7 +355,7 @@ return function()
     -- ########################################################################
     signals.connect_distro(
         function(value)
-            osName.text = ('OS: ') .. value
+            osName.text = ("OS: ") .. value
         end
     )
     -- ########################################################################
@@ -363,7 +363,7 @@ return function()
     -- ########################################################################
     signals.connect_uptime(
         function(value)
-            uptime.text = ('Uptime: ') .. value
+            uptime.text = ("Uptime: ") .. value
         end
     )
     -- ########################################################################
@@ -371,7 +371,7 @@ return function()
     -- ########################################################################
     signals.connect_kernel(
         function(value)
-            kernelVersion.text = ('Kernel: ') .. value
+            kernelVersion.text = ("Kernel: ") .. value
         end
     )
     -- ########################################################################
@@ -416,7 +416,7 @@ return function()
     signals.connect_ram_usage(
         function(value)
             ram_progress:set_value(value)
-            ram_value.text = value .. '%'
+            ram_value.text = value .. "%"
         end
     )
     -- ########################################################################
@@ -424,7 +424,7 @@ return function()
     -- ########################################################################
     signals.connect_packages_to_update(
         function(value)
-            pac_value.text = ('Packages to update: ') .. value
+            pac_value.text = ("Packages to update: ") .. value
         end
     )
     -- ########################################################################
@@ -433,7 +433,7 @@ return function()
     signals.connect_cpu_usage(
         function(value)
             cpu_progress:set_value(value)
-            cpu_value.text = value .. '%'
+            cpu_value.text = value .. "%"
         end
     )
     -- ########################################################################
@@ -442,7 +442,7 @@ return function()
     signals.connect_disk_usage(
         function(value)
             disk_progress:set_value(value)
-            disk_value.text = value .. '%'
+            disk_value.text = value .. "%"
         end
     )
     -- ########################################################################

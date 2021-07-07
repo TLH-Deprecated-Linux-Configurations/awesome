@@ -3,8 +3,7 @@
 --@DOC_wibox_layout_defaults_flex_EXAMPLE@
 -- @author Uli Schlachter
 -- @copyright 2010 Uli Schlachter
--- @layoutmod wibox.layout.flex
--- @supermodule wibox.layout.fixed
+-- @classmod wibox.layout.flex
 ---------------------------------------------------------------------------
 
 local base = require("wibox.widget.base")
@@ -16,50 +15,39 @@ local gtable = require("gears.table")
 
 local flex = {}
 
--- {{{ Override inherited properties we want to hide
+--@DOC_fixed_COMMON@
 
---- From `wibox.layout.fixed`.
--- @property fill_space
--- @tparam boolean fill_space
--- @propemits true false
--- @hidden
+--- Replace the layout children
+-- @tparam table children A table composed of valid widgets
+-- @name set_children
+-- @class function
 
--- }}}
+--- Add some widgets to the given fixed layout
+-- @param layout The layout you are modifying.
+-- @tparam widget ... Widgets that should be added (must at least be one)
+-- @name add
+-- @class function
 
---- Add some widgets to the given fixed layout.
---
--- @tparam widget ... Widgets that should be added (must at least be one).
--- @method add
--- @interface layout
+--- Remove a widget from the layout
+-- @tparam index The widget index to remove
+-- @treturn boolean index If the operation is successful
+-- @name remove
+-- @class function
 
---- Remove a widget from the layout.
---
--- @tparam index The widget index to remove.
--- @treturn boolean index If the operation is successful.
--- @method remove
--- @interface layout
-
---- Remove one or more widgets from the layout.
---
+--- Remove one or more widgets from the layout
 -- The last parameter can be a boolean, forcing a recursive seach of the
 -- widget(s) to remove.
---
--- @tparam widget ... Widgets that should be removed (must at least be one).
--- @treturn boolean If the operation is successful.
--- @method remove_widgets
--- @interface layout
-
---- Insert a new widget in the layout at position `index`.
---
--- @tparam number index The position
--- @tparam widget widget The widget
+-- @param widget ... Widgets that should be removed (must at least be one)
 -- @treturn boolean If the operation is successful
--- @method insert
--- @emits widget::inserted
--- @emitstparam widget::inserted widget self The fixed layout.
--- @emitstparam widget::inserted widget widget index The inserted widget.
--- @emitstparam widget::inserted number count The widget count.
--- @interface layout
+-- @name remove_widgets
+-- @class function
+
+--- Insert a new widget in the layout at position `index`
+-- @tparam number index The position
+-- @param widget The widget
+-- @treturn boolean If the operation is successful
+-- @name insert
+-- @class function
 
 --- The widget used to fill the spacing between the layout elements.
 --
@@ -68,9 +56,7 @@ local flex = {}
 --@DOC_wibox_layout_flex_spacing_widget_EXAMPLE@
 --
 -- @property spacing_widget
--- @tparam widget spacing_widget
--- @propemits true false
--- @interface layout
+-- @param widget
 
 --- Add spacing between each layout widgets.
 --
@@ -78,7 +64,6 @@ local flex = {}
 --
 -- @property spacing
 -- @tparam number spacing Spacing between widgets.
--- @propemits true false
 
 function flex:layout(_, width, height)
     local result = {}
@@ -170,18 +155,14 @@ function flex:fit(context, orig_width, orig_height)
 end
 
 --- Set the maximum size the widgets in this layout will take.
---
 --That is, maximum width for horizontal and maximum height for vertical.
---
 -- @property max_widget_size
--- @tparam number max_widget_size
--- @propemits true false
+-- @param number
 
 function flex:set_max_widget_size(val)
     if self._private.max_widget_size ~= val then
         self._private.max_widget_size = val
         self:emit_signal("widget::layout_changed")
-        self:emit_signal("property::max_widget_size", val)
     end
 end
 
@@ -195,29 +176,25 @@ local function get_layout(dir, widget1, ...)
     return ret
 end
 
---- Returns a new horizontal flex layout.
---
--- A flex layout shares the available space.
--- equally among all widgets. Widgets can be added via `:add(widget)`.
---
+--- Returns a new horizontal flex layout. A flex layout shares the available space
+-- equally among all widgets. Widgets can be added via :add(widget).
 -- @tparam widget ... Widgets that should be added to the layout.
--- @constructorfct wibox.layout.flex.horizontal
+-- @function wibox.layout.flex.horizontal
 function flex.horizontal(...)
     return get_layout("horizontal", ...)
 end
 
---- Returns a new vertical flex layout.
---
--- A flex layout shares the available space
--- equally among all widgets. Widgets can be added via `:add(widget)`.
---
+--- Returns a new vertical flex layout. A flex layout shares the available space
+-- equally among all widgets. Widgets can be added via :add(widget).
 -- @tparam widget ... Widgets that should be added to the layout.
--- @constructorfct wibox.layout.flex.vertical
+-- @function wibox.layout.flex.vertical
 function flex.vertical(...)
     return get_layout("vertical", ...)
 end
 
---@DOC_fixed_COMMON@
+--@DOC_widget_COMMON@
+
+--@DOC_object_COMMON@
 
 return flex
 

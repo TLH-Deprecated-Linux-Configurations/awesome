@@ -1,11 +1,11 @@
 -- TODO make this work
-local wibox = require('wibox')
-local mat_list_item = require('widget.material.list-item')
-local slider = require('lib.slider')
-local mat_icon_button = require('widget.material.icon-button')
-local icons = require('theme.icons')
-local spawn = require('awful.spawn')
-local signals = require('module.signals')
+local wibox = require("wibox")
+local mat_list_item = require("widget.material.list-item")
+local slider = require("module.ui-components.slider")
+local mat_icon_button = require("widget.material.icon-button")
+local icons = require("theme.icons")
+local spawn = require("awful.spawn")
+local signals = require("module.signals")
 
 local slider_osd =
     slider(
@@ -18,20 +18,20 @@ local slider_osd =
             signals.emit_brightness(tonumber(value))
         end
         if (_G.oled) then
-            spawn('brightness -s ' .. math.max(value, 5) .. ' -F') -- toggle pixel values
+            spawn("brightness -s " .. math.max(value, 5) .. " -F") -- toggle pixel values
         else
-            spawn('brightness -s 100 -F') -- reset pixel values
-            spawn('brightness -s ' .. math.max(value, 5))
+            spawn("brightness -s 100 -F") -- reset pixel values
+            spawn("brightness -s " .. math.max(value, 5))
         end
     end
 )
 _G.brightness2 = slider_osd
 
 slider_osd:connect_signal(
-    'button::press',
+    "button::press",
     function()
         slider_osd:connect_signal(
-            'property::value',
+            "property::value",
             function()
                 _G.toggleBriOSD(true)
             end
@@ -42,17 +42,17 @@ slider_osd:connect_signal(
 local function UpdateBrOSD()
     if (_G.oled) then
         awful.spawn.easy_async_with_shell(
-            'brightness -g -F',
+            "brightness -g -F",
             function(stdout)
-                local brightness = string.match(stdout, '(%d+)')
+                local brightness = string.match(stdout, "(%d+)")
                 slider_osd.update(tonumber(brightness))
             end
         )
     else
         awful.spawn.easy_async_with_shell(
-            'brightness -g',
+            "brightness -g",
             function(stdout)
-                local brightness = string.match(stdout, '(%d+)')
+                local brightness = string.match(stdout, "(%d+)")
                 slider_osd.update(tonumber(brightness))
             end
         )

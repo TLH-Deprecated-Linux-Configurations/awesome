@@ -6,15 +6,15 @@
 -- ########################################################################
 -- ########################################################################
 -- ########################################################################
-local wibox = require('wibox')
-local beautiful = require('beautiful')
+local wibox = require("wibox")
+local beautiful = require("beautiful")
 local dpi = beautiful.xresources.apply_dpi
 
-local card = require('module.card')
+local card = require("module.ui-components.card")
 
-local action_card = card('Action Center')
+local action_card = card("Action Center")
 
-local actionWidget = require('widget.action-center')
+local actionWidget = require("widget.action-center")
 
 action_card.update_body(actionWidget)
 

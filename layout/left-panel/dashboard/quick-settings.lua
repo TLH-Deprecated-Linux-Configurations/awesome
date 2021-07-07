@@ -6,16 +6,16 @@
 -- ########################################################################
 -- ########################################################################
 -- ########################################################################
-local wibox = require('wibox')
-local beautiful = require('beautiful')
+local wibox = require("wibox")
+local beautiful = require("beautiful")
 local dpi = beautiful.xresources.apply_dpi
-local card = require('module.card')
+local card = require("module.ui-components.card")
 
-local quick_settings_card = card('Volume')
+local quick_settings_card = card("Volume")
 -- ########################################################################
 -- ########################################################################
 -- ########################################################################
-local volSlider = require('widget.volume.volume-slider')
+local volSlider = require("widget.volume.volume-slider")
 local body =
     wibox.widget {
     volSlider,

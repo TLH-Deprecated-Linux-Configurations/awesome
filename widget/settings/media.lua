@@ -6,20 +6,20 @@
 -- ########################################################################
 -- ########################################################################
 -- ########################################################################
-local awful = require('awful')
-local wibox = require('wibox')
-local gears = require('gears')
-local beautiful = require('beautiful')
-local icons = require('theme.icons')
-local signals = require('module.signals')
-local slider = require('lib.slider')
-local card = require('module.card')
-local volume = require('lib.volume')
-local button = require('module.button')
-local mat_icon_button = require('widget.material.icon-button')
-local mat_icon = require('widget.material.icon')
-local sound = require('module.sound')
-local scrollbox = require('lib.scrollbox')
+local awful = require("awful")
+local wibox = require("wibox")
+local gears = require("gears")
+local beautiful = require("beautiful")
+local icons = require("theme.icons")
+local signals = require("module.signals")
+local slider = require("module.ui-components.slider")
+local card = require("module.ui-components.card")
+local volume = require("module.volume")
+local button = require("module.ui-components.button")
+local mat_icon_button = require("widget.material.icon-button")
+local mat_icon = require("widget.material.icon")
+local sound = require("module.sound")
+local scrollbox = require("module.ui-components.scrollbox")
 
 local dpi = beautiful.xresources.apply_dpi
 -- ########################################################################
@@ -38,12 +38,12 @@ local scrollbox_body = {}
 local refresh = function()
 end
 
-local mic_test_start_message = 'Test microphone'
-local mic_test_stop_message = 'Stop'
+local mic_test_start_message = "Test microphone"
+local mic_test_stop_message = "Stop"
 local mic_test_pid = -1
 
 local function kill_mic_pid()
-    local cmd = 'pkill -P ' .. tostring(mic_test_pid)
+    local cmd = "pkill -P " .. tostring(mic_test_pid)
     print(cmd)
     awful.spawn(cmd)
     mic_test_pid = -1
@@ -63,7 +63,7 @@ return function()
     view.left = m
     view.right = m
 
-    local title = wibox.widget.textbox('Media')
+    local title = wibox.widget.textbox("Media")
     title.font = beautiful.title_font
     title.forced_height = settings_index + m + m
 
@@ -86,16 +86,16 @@ return function()
         )
     )
 
-    local vol_heading = wibox.widget.textbox('Volume')
+    local vol_heading = wibox.widget.textbox("Volume")
     vol_heading.font = beautiful.font
 
-    local vol_footer = wibox.widget.textbox('Test')
+    local vol_footer = wibox.widget.textbox("Test")
     vol_footer.font = beautiful.font
-    vol_footer.align = 'right'
+    vol_footer.align = "right"
 
-    local mic_footer = wibox.widget.textbox('Test')
+    local mic_footer = wibox.widget.textbox("Test")
     mic_footer.font = beautiful.font
-    mic_footer.align = 'right'
+    mic_footer.align = "right"
     -- ########################################################################
     -- ########################################################################
     -- ########################################################################
@@ -130,7 +130,7 @@ return function()
                     1,
                     nil,
                     function()
-                        print('Setting default sink to: ' .. obj.sink)
+                        print("Setting default sink to: " .. obj.sink)
                         set_function(obj.sink)
                         refresh()
                     end
@@ -193,9 +193,9 @@ return function()
         if #sink_children.children == 0 then
             sink_children:add(
                 wibox.widget {
-                    text = 'No Extra Output Found',
-                    align = 'center',
-                    valign = 'center',
+                    text = "No Extra Output Found",
+                    align = "center",
+                    valign = "center",
                     font = beautiful.font,
                     widget = wibox.widget.textbox
                 }
@@ -205,9 +205,9 @@ return function()
         if #source_children.children == 0 then
             source_children:add(
                 wibox.widget {
-                    text = 'No Extra Input Found',
-                    align = 'center',
-                    valign = 'center',
+                    text = "No Extra Input Found",
+                    align = "center",
+                    valign = "center",
                     font = beautiful.font,
                     widget = wibox.widget.textbox
                 }
@@ -220,7 +220,7 @@ return function()
         sink_children:add(
             wibox.container.margin(
                 button(
-                    'Test speaker',
+                    "Test speaker",
                     function()
                         sound()
                     end
@@ -240,7 +240,7 @@ return function()
                         function()
                             -- record audio using arecord and pipe it into aplay
                             -- we use a buffer size of 10 ms for recording and playback as that has almost no delay, but still allows recording
-                            local cmd = 'arecord -f cd - -B 10000 | aplay -B 10000'
+                            local cmd = "arecord -f cd - -B 10000 | aplay -B 10000"
                             -- start the process and get the pid
                             mic_test_pid = awful.spawn("sh -c '" .. cmd .. "'")
                             refresh()
@@ -255,10 +255,10 @@ return function()
             source_children:add(wibox.container.margin(button(mic_test_stop_message, kill_mic_pid), m, m, m))
         end
 
-        local sink_widget = card('Output')
+        local sink_widget = card("Output")
         sink_widget.update_body(wibox.container.margin(sink_children, m, m, m, m))
 
-        local source_widget = card('Input')
+        local source_widget = card("Input")
 
         source_widget.update_body(wibox.container.margin(source_children, m, m, m, m))
 
@@ -289,7 +289,7 @@ return function()
             app.sink,
             function(value)
                 if not (app_vol_slider.value == value) then
-                    print('Detected the volume: ' .. value)
+                    print("Detected the volume: " .. value)
                     app_vol_slider.update(value)
                 end
             end
@@ -340,10 +340,10 @@ return function()
         local sources = volume.get_sources()
 
         if not (sink.name == nil) then
-            vol_footer.markup = 'Output: <span font="' .. beautiful.font .. '">' .. sink.name .. '</span>'
+            vol_footer.markup = 'Output: <span font="' .. beautiful.font .. '">' .. sink.name .. "</span>"
         end
         if not (source.name == nil) then
-            mic_footer.markup = 'Input: <span font="' .. beautiful.font .. '">' .. source.name .. '</span>'
+            mic_footer.markup = 'Input: <span font="' .. beautiful.font .. '">' .. source.name .. "</span>"
         end
 
         -- for example when no audio driver is found
@@ -401,8 +401,8 @@ return function()
         wibox.container.margin(
         wibox.widget {
             widget = wibox.widget.textbox,
-            text = 'Audio list',
-            font = 'agave Nerd Font Mono Bold  24'
+            text = "Audio list",
+            font = "agave Nerd Font Mono Bold  24"
         },
         dpi(20),
         0,
@@ -414,8 +414,8 @@ return function()
         wibox.container.margin(
         wibox.widget {
             widget = wibox.widget.textbox,
-            text = 'Application list',
-            font = 'agave Nerd Font Mono Bold  24'
+            text = "Application list",
+            font = "agave Nerd Font Mono Bold  24"
         },
         dpi(20),
         0,
@@ -430,7 +430,7 @@ return function()
             volume_card,
             wibox.container.margin(
                 button(
-                    'Reset Audio Server',
+                    "Reset Audio Server",
                     function()
                         volume.reset_server()
                     end

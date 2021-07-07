@@ -12,16 +12,15 @@ local capi = {
     root = root,
     screen = screen
 }
-local beautiful = require('beautiful')
-local base = require('wibox.widget.base')
-local cairo = require('lgi').cairo
-local color = require('gears.color')
-local object = require('gears.object')
-local surface = require('gears.surface')
-local timer = require('gears.timer')
-local grect = require('gears.geometry').rectangle
-local matrix = require('gears.matrix')
-local hierarchy = require('wibox.hierarchy')
+local beautiful = require("beautiful")
+local cairo = require("lgi").cairo
+local color = require("gears.color")
+local object = require("gears.object")
+local surface = require("gears.surface")
+local timer = require("gears.timer")
+local grect =  require("gears.geometry").rectangle
+local matrix = require("gears.matrix")
+local hierarchy = require("wibox.hierarchy")
 local unpack = unpack or table.unpack -- luacheck: globals unpack (compatibility with Lua 5.1)
 
 local visible_drawables = {}
@@ -45,12 +44,12 @@ local function get_widget_context(self)
     end
 
     local context = self._widget_context
-    local dpi = s and s.dpi or 96
+    local dpi = s.dpi
     if (not context) or context.screen ~= s or context.dpi ~= dpi then
         context = {
             screen = s,
             dpi = dpi,
-            drawable = self
+            drawable = self,
         }
         for k, v in pairs(self._widget_context_skeleton) do
             context[k] = v
@@ -64,30 +63,25 @@ local function get_widget_context(self)
 end
 
 local function do_redraw(self)
-    if not self.drawable.valid then
-        return
-    end
-    if self._forced_screen and not self._forced_screen.valid then
-        return
-    end
+    if not self.drawable.valid then return end
+    if self._forced_screen and not self._forced_screen.valid then return end
 
     local surf = surface.load_silently(self.drawable.surface, false)
     -- The surface can be nil if the drawable's parent was already finalized
-    if not surf then
-        return
-    end
+    if not surf then return end
     local cr = cairo.Context(surf)
-    local geom = self.drawable:geometry()
+    local geom = self.drawable:geometry();
     local x, y, width, height = geom.x, geom.y, geom.width, geom.height
     local context = get_widget_context(self)
 
     -- Relayout
     if self._need_relayout or self._need_complete_repaint then
         self._need_relayout = false
-        if self._widget_hierarchy and self._widget then
+        if self._widget_hierarchy and self.widget then
             local had_systray = systray_widget and self._widget_hierarchy:get_count(systray_widget) > 0
 
-            self._widget_hierarchy:update(context, self._widget, width, height, self._dirty_area)
+            self._widget_hierarchy:update(context,
+                self.widget, width, height, self._dirty_area)
 
             local has_systray = systray_widget and self._widget_hierarchy:get_count(systray_widget) > 0
             if had_systray and not has_systray then
@@ -95,18 +89,10 @@ local function do_redraw(self)
             end
         else
             self._need_complete_repaint = true
-            if self._widget then
+            if self.widget then
                 self._widget_hierarchy_callback_arg = {}
-                self._widget_hierarchy =
-                    hierarchy.new(
-                    context,
-                    self._widget,
-                    width,
-                    height,
-                    self._redraw_callback,
-                    self._layout_callback,
-                    self._widget_hierarchy_callback_arg
-                )
+                self._widget_hierarchy = hierarchy.new(context, self.widget, width, height,
+                        self._redraw_callback, self._layout_callback, self._widget_hierarchy_callback_arg)
             else
                 self._widget_hierarchy = nil
             end
@@ -114,14 +100,9 @@ local function do_redraw(self)
 
         if self._need_complete_repaint then
             self._need_complete_repaint = false
-            self._dirty_area:union_rectangle(
-                cairo.RectangleInt {
-                    x = 0,
-                    y = 0,
-                    width = width,
-                    height = height
-                }
-            )
+            self._dirty_area:union_rectangle(cairo.RectangleInt{
+                x = 0, y = 0, width = width, height = height
+            })
         end
     end
 
@@ -163,7 +144,7 @@ local function do_redraw(self)
     -- Paint the background image
     if self.background_image then
         cr:save()
-        if type(self.background_image) == 'function' then
+        if type(self.background_image) == "function" then
             self.background_image(context, cr, width, height, unpack(self.background_image_args))
         else
             local pattern = cairo.Pattern.create_for_surface(self.background_image)
@@ -181,7 +162,7 @@ local function do_redraw(self)
 
     self.drawable:refresh()
 
-    assert(cr.status == 'SUCCESS', 'Cairo context entered error state: ' .. cr.status)
+    assert(cr.status == "SUCCESS", "Cairo context entered error state: " .. cr.status)
 end
 
 local function find_widgets(_drawable, result, _hierarchy, x, y)
@@ -201,21 +182,16 @@ local function find_widgets(_drawable, result, _hierarchy, x, y)
     local width, height = _hierarchy:get_size()
     if x1 >= 0 and y1 >= 0 and x1 <= width and y1 <= height then
         -- Get the extents of this widget in the device space
-        local x3, y3, w3, h3 = matrix.transform_rectangle(_hierarchy:get_matrix_to_device(), 0, 0, width, height)
-        table.insert(
-            result,
-            {
-                x = x3,
-                y = y3,
-                width = w3,
-                height = h3,
-                widget_width = width,
-                widget_height = height,
-                drawable = _drawable,
-                widget = _hierarchy:get_widget(),
-                hierarchy = _hierarchy
-            }
-        )
+        local x3, y3, w3, h3 = matrix.transform_rectangle(_hierarchy:get_matrix_to_device(),
+            0, 0, width, height)
+        table.insert(result, {
+            x = x3, y = y3, width = w3, height = h3,
+            widget_width = width,
+            widget_height = height,
+            drawable = _drawable,
+            widget = _hierarchy:get_widget(),
+            hierarchy = _hierarchy
+        })
     end
     for _, child in ipairs(_hierarchy:get_children()) do
         find_widgets(_drawable, result, child, x, y)
@@ -250,15 +226,11 @@ end
 
 --- Set the widget that the drawable displays
 function drawable:set_widget(widget)
-    self._widget = base.make_widget_from_value(widget)
+    self.widget = widget
 
     -- Make sure the widget gets drawn
     self._need_relayout = true
     self.draw()
-end
-
-function drawable:get_widget()
-    return rawget(self, '_widget')
 end
 
 --- Set the background of the drawable
@@ -266,10 +238,10 @@ end
 --   nil or a string that gears.color() understands.
 -- @see gears.color
 function drawable:set_bg(c)
-    c = c or '#000000'
+    c = c or "#000000"
     local t = type(c)
 
-    if t == 'string' or t == 'table' then
+    if t == "string" or t == "table" then
         c = color(c)
     end
 
@@ -282,11 +254,11 @@ function drawable:set_bg(c)
     if self._redraw_on_move ~= redraw_on_move then
         self._redraw_on_move = redraw_on_move
         if redraw_on_move then
-            self.drawable:connect_signal('property::x', self._do_complete_repaint)
-            self.drawable:connect_signal('property::y', self._do_complete_repaint)
+            self.drawable:connect_signal("property::x", self._do_complete_repaint)
+            self.drawable:connect_signal("property::y", self._do_complete_repaint)
         else
-            self.drawable:disconnect_signal('property::x', self._do_complete_repaint)
-            self.drawable:disconnect_signal('property::y', self._do_complete_repaint)
+            self.drawable:disconnect_signal("property::x", self._do_complete_repaint)
+            self.drawable:disconnect_signal("property::y", self._do_complete_repaint)
         end
     end
 
@@ -299,7 +271,7 @@ end
 -- as arguments. Any other arguments passed to this method will be appended.
 -- @param image A background image or a function
 function drawable:set_bgimage(image, ...)
-    if type(image) ~= 'function' then
+    if type(image) ~= "function" then
         image = surface(image)
     end
 
@@ -314,8 +286,8 @@ end
 --   nil or a string that gears.color() understands.
 -- @see gears.color
 function drawable:set_fg(c)
-    c = c or '#f4f4f7'
-    if type(c) == 'string' or type(c) == 'table' then
+    c = c or "#FFFFFF"
+    if type(c) == "string" or type(c) == "table" then
         c = color(c)
     end
     self.foreground_color = c
@@ -349,13 +321,13 @@ local function emit_difference(name, list, skip)
 
     for _, v in pairs(list) do
         if not in_table(skip, v) then
-            v.widget:emit_signal(name, v)
+            v.widget:emit_signal(name,v)
         end
     end
 end
 
 local function handle_leave(_drawable)
-    emit_difference('mouse::leave', _drawable._widgets_under_mouse, {})
+    emit_difference("mouse::leave", _drawable._widgets_under_mouse, {})
     _drawable._widgets_under_mouse = {}
 end
 
@@ -368,9 +340,9 @@ local function handle_motion(_drawable, x, y)
     local widgets_list = _drawable:find_widgets(x, y)
 
     -- First, "leave" all widgets that were left
-    emit_difference('mouse::leave', _drawable._widgets_under_mouse, widgets_list)
+    emit_difference("mouse::leave", _drawable._widgets_under_mouse, widgets_list)
     -- Then enter some widgets
-    emit_difference('mouse::enter', widgets_list, _drawable._widgets_under_mouse)
+    emit_difference("mouse::enter", widgets_list, _drawable._widgets_under_mouse)
 
     _drawable._widgets_under_mouse = widgets_list
 end
@@ -380,23 +352,20 @@ local function setup_signals(_drawable)
 
     local function clone_signal(name)
         -- When "name" is emitted on wibox.drawin, also emit it on wibox
-        d:connect_signal(
-            name,
-            function(_, ...)
-                _drawable:emit_signal(name, ...)
-            end
-        )
+        d:connect_signal(name, function(_, ...)
+            _drawable:emit_signal(name, ...)
+        end)
     end
-    clone_signal('button::press')
-    clone_signal('button::release')
-    clone_signal('mouse::enter')
-    clone_signal('mouse::leave')
-    clone_signal('mouse::move')
-    clone_signal('property::surface')
-    clone_signal('property::width')
-    clone_signal('property::height')
-    clone_signal('property::x')
-    clone_signal('property::y')
+    clone_signal("button::press")
+    clone_signal("button::release")
+    clone_signal("mouse::enter")
+    clone_signal("mouse::leave")
+    clone_signal("mouse::move")
+    clone_signal("property::surface")
+    clone_signal("property::width")
+    clone_signal("property::height")
+    clone_signal("property::x")
+    clone_signal("property::y")
 end
 
 function drawable.new(d, widget_context_skeleton, drawable_name)
@@ -409,7 +378,7 @@ function drawable.new(d, widget_context_skeleton, drawable_name)
     setup_signals(ret)
 
     for k, v in pairs(drawable) do
-        if type(v) == 'function' then
+        if type(v) == "function" then
             ret[k] = v
         end
     end
@@ -434,13 +403,13 @@ function drawable.new(d, widget_context_skeleton, drawable_name)
     end
 
     -- Do a full redraw if the surface changes (the new surface has no content yet)
-    d:connect_signal('property::surface', ret._do_complete_repaint)
+    d:connect_signal("property::surface", ret._do_complete_repaint)
 
     -- Do a normal redraw when the drawable moves. This will likely do nothing
     -- in most cases, but it makes us do a complete repaint when we are moved to
     -- a different screen.
-    d:connect_signal('property::x', ret.draw)
-    d:connect_signal('property::y', ret.draw)
+    d:connect_signal("property::x", ret.draw)
+    d:connect_signal("property::y", ret.draw)
 
     -- Currently we aren't redrawing on move (signals not connected).
     -- :set_bg() will later recompute this.
@@ -454,33 +423,20 @@ function drawable.new(d, widget_context_skeleton, drawable_name)
     ret._widgets_under_mouse = {}
 
     local function button_signal(name)
-        d:connect_signal(
-            name,
-            function(_, x, y, button, modifiers)
-                local widgets = ret:find_widgets(x, y)
-                for _, v in pairs(widgets) do
-                    -- Calculate x/y inside of the widget
-                    local lx, ly = v.hierarchy:get_matrix_from_device():transform_point(x, y)
-                    v.widget:emit_signal(name, lx, ly, button, modifiers, v)
-                end
+        d:connect_signal(name, function(_, x, y, button, modifiers)
+            local widgets = ret:find_widgets(x, y)
+            for _, v in pairs(widgets) do
+                -- Calculate x/y inside of the widget
+                local lx, ly = v.hierarchy:get_matrix_from_device():transform_point(x, y)
+                v.widget:emit_signal(name, lx, ly, button, modifiers,v)
             end
-        )
+        end)
     end
-    button_signal('button::press')
-    button_signal('button::release')
+    button_signal("button::press")
+    button_signal("button::release")
 
-    d:connect_signal(
-        'mouse::move',
-        function(_, x, y)
-            handle_motion(ret, x, y)
-        end
-    )
-    d:connect_signal(
-        'mouse::leave',
-        function()
-            handle_leave(ret)
-        end
-    )
+    d:connect_signal("mouse::move", function(_, x, y) handle_motion(ret, x, y) end)
+    d:connect_signal("mouse::leave", function() handle_leave(ret) end)
 
     -- Set up our callbacks for repaints
     ret._redraw_callback = function(hierar, arg)
@@ -495,14 +451,9 @@ function drawable.new(d, widget_context_skeleton, drawable_name)
         local x, y, width, height = matrix.transform_rectangle(m, hierar:get_draw_extents())
         local x1, y1 = math.floor(x), math.floor(y)
         local x2, y2 = math.ceil(x + width), math.ceil(y + height)
-        ret._dirty_area:union_rectangle(
-            cairo.RectangleInt {
-                x = x1,
-                y = y1,
-                width = x2 - x1,
-                height = y2 - y1
-            }
-        )
+        ret._dirty_area:union_rectangle(cairo.RectangleInt{
+            x = x1, y = y1, width = x2 - x1, height = y2 - y1
+        })
         ret:draw()
     end
     ret._layout_callback = function(_, arg)
@@ -522,43 +473,22 @@ function drawable.new(d, widget_context_skeleton, drawable_name)
     local mt = {}
     local orig_string = tostring(ret)
     mt.__tostring = function()
-        return string.format('%s (%s)', ret.drawable_name, orig_string)
+        return string.format("%s (%s)", ret.drawable_name, orig_string)
     end
     ret = setmetatable(ret, mt)
 
     -- Make sure the drawable is drawn at least once
     ret._do_complete_repaint()
 
-    return setmetatable(
-        ret,
-        {
-            __index = function(self, k)
-                if rawget(self, 'get_' .. k) then
-                    return rawget(self, 'get_' .. k)(self)
-                else
-                    return rawget(ret, k)
-                end
-            end,
-            __newindex = function(self, k, v)
-                if rawget(self, 'set_' .. k) then
-                    rawget(self, 'set_' .. k)(self, v)
-                else
-                    rawset(self, k, v)
-                end
-            end
-        }
-    )
+    return ret
 end
 
 -- Redraw all drawables when the wallpaper changes
-capi.awesome.connect_signal(
-    'wallpaper_changed',
-    function()
-        for d in pairs(visible_drawables) do
-            d:_do_complete_repaint()
-        end
+capi.awesome.connect_signal("wallpaper_changed", function()
+    for d in pairs(visible_drawables) do
+        d:_do_complete_repaint()
     end
-)
+end)
 
 -- Give drawables a chance to react to screen changes
 local function draw_all()
@@ -566,15 +496,10 @@ local function draw_all()
         d:draw()
     end
 end
-screen.connect_signal('property::geometry', draw_all)
-screen.connect_signal('added', draw_all)
-screen.connect_signal('removed', draw_all)
+screen.connect_signal("property::geometry", draw_all)
+screen.connect_signal("added", draw_all)
+screen.connect_signal("removed", draw_all)
 
-return setmetatable(
-    drawable,
-    {__call = function(_, ...)
-            return drawable.new(...)
-        end}
-)
+return setmetatable(drawable, { __call = function(_, ...) return drawable.new(...) end })
 
 -- vim: filetype=lua:expandtab:shiftwidth=4:tabstop=8:softtabstop=4:textwidth=80

@@ -3,8 +3,7 @@
 --@DOC_wibox_layout_defaults_fixed_EXAMPLE@
 -- @author Uli Schlachter
 -- @copyright 2010 Uli Schlachter
--- @layoutmod wibox.layout.fixed
--- @supermodule wibox.widget.base
+-- @classmod wibox.layout.fixed
 ---------------------------------------------------------------------------
 
 local unpack = unpack or table.unpack -- luacheck: globals unpack (compatibility with Lua 5.1)
@@ -21,88 +20,65 @@ local fixed = {}
 -- @param height The available height.
 function fixed:layout(context, width, height)
     local result = {}
-    local spacing = self._private.spacing or 0
+    local pos,spacing = 0, self._private.spacing
+    local spacing_widget = self._private.spacing_widget
     local is_y = self._private.dir == "y"
     local is_x = not is_y
     local abspace = math.abs(spacing)
     local spoffset = spacing < 0 and 0 or spacing
-    local widgets_nr = #self._private.widgets
-    local spacing_widget
-    local x, y = 0, 0
-
-    spacing_widget = spacing ~= 0 and self._private.spacing_widget or nil
 
     for k, v in pairs(self._private.widgets) do
-        local w, h = width - x, height - y
-
+        local x, y, w, h, _
         if is_y then
-            if k ~= widgets_nr or not self._private.fill_space then
-                h = select(2, base.fit_widget(self, context, v, w, h))
+            x, y = 0, pos
+            w, h = width, height - pos
+            if k ~= #self._private.widgets or not self._private.fill_space then
+                _, h = base.fit_widget(self, context, v, w, h);
             end
-
-            if y - spacing >= height then
-                -- pop the spacing widget added in previous iteration if used
-                if spacing_widget then
-                    table.remove(result)
-                end
-                break
-            end
+            pos = pos + h + spacing
         else
-            if k ~= widgets_nr or not self._private.fill_space then
-                w = select(1, base.fit_widget(self, context, v, w, h))
+            x, y = pos, 0
+            w, h = width - pos, height
+            if k ~= #self._private.widgets or not self._private.fill_space then
+                w, _ = base.fit_widget(self, context, v, w, h);
             end
-
-            if x - spacing >= width then
-                -- pop the spacing widget added in previous iteration if used
-                if spacing_widget then
-                    table.remove(result)
-                end
-                break
-            end
+            pos = pos + w + spacing
         end
 
-        -- Place widget
-        table.insert(result, base.place_widget_at(v, x, y, w, h))
+        if (is_y and pos-spacing > height) or
+            (is_x and pos-spacing > width) then
+            break
+        end
 
-        x = is_x and x + w + spacing or x
-        y = is_y and y + h + spacing or y
-
-        -- Add the spacing widget (if needed)
-        if k < widgets_nr and spacing_widget then
+        -- Add the spacing widget
+        if k > 1 and abspace > 0 and spacing_widget then
             table.insert(result, base.place_widget_at(
                 spacing_widget, is_x and (x - spoffset) or x, is_y and (y - spoffset) or y,
                 is_x and abspace or w, is_y and abspace or h
             ))
         end
+        table.insert(result, base.place_widget_at(v, x, y, w, h))
     end
-
     return result
 end
 
---- Add some widgets to the given layout.
---
--- @method add
--- @tparam widget ... Widgets that should be added (must at least be one).
--- @interface layout
+--- Add some widgets to the given fixed layout
+-- @param ... Widgets that should be added (must at least be one)
 function fixed:add(...)
     -- No table.pack in Lua 5.1 :-(
     local args = { n=select('#', ...), ... }
     assert(args.n > 0, "need at least one widget to add")
     for i=1, args.n do
-        local w = base.make_widget_from_value(args[i])
-        base.check_widget(w)
-        table.insert(self._private.widgets, w)
+        base.check_widget(args[i])
+        table.insert(self._private.widgets, args[i])
     end
     self:emit_signal("widget::layout_changed")
 end
 
 
---- Remove a widget from the layout.
---
--- @method remove
+--- Remove a widget from the layout
 -- @tparam number index The widget index to remove
 -- @treturn boolean index If the operation is successful
--- @interface layout
 function fixed:remove(index)
     if not index or index < 1 or index > #self._private.widgets then return false end
 
@@ -113,14 +89,11 @@ function fixed:remove(index)
     return true
 end
 
---- Remove one or more widgets from the layout.
---
+--- Remove one or more widgets from the layout
 -- The last parameter can be a boolean, forcing a recursive seach of the
 -- widget(s) to remove.
--- @method remove_widgets
--- @tparam widget ... Widgets that should be removed (must at least be one)
+-- @param widget ... Widgets that should be removed (must at least be one)
 -- @treturn boolean If the operation is successful
--- @interface layout
 function fixed:remove_widgets(...)
     local args = { ... }
 
@@ -154,13 +127,11 @@ function fixed:set_children(children)
     end
 end
 
---- Replace the first instance of `widget` in the layout with `widget2`.
--- @method replace_widget
--- @tparam widget widget The widget to replace
--- @tparam widget widget2 The widget to replace `widget` with
+--- Replace the first instance of `widget` in the layout with `widget2`
+-- @param widget The widget to replace
+-- @param widget2 The widget to replace `widget` with
 -- @tparam[opt=false] boolean recursive Digg in all compatible layouts to find the widget.
 -- @treturn boolean If the operation is successful
--- @interface layout
 function fixed:replace_widget(widget, widget2, recursive)
     local idx, l = self:index(widget, recursive)
 
@@ -241,27 +212,18 @@ end
 --@DOC_wibox_layout_fixed_spacing_widget_EXAMPLE@
 --
 -- @property spacing_widget
--- @tparam widget spacing_widget
--- @propemits true false
--- @interface layout
+-- @param widget
 
 function fixed:set_spacing_widget(wdg)
     self._private.spacing_widget = base.make_widget_from_value(wdg)
     self:emit_signal("widget::layout_changed")
-    self:emit_signal("property::spacing_widget", wdg)
 end
 
---- Insert a new widget in the layout at position `index`.
---
--- @method insert
--- @tparam number index The position.
--- @tparam widget widget The widget.
--- @treturn boolean If the operation is successful.
--- @emits widget::inserted
--- @emitstparam widget::inserted widget self The fixed layout.
--- @emitstparam widget::inserted widget widget index The inserted widget.
--- @emitstparam widget::inserted number count The widget count.
--- @interface layout
+--- Insert a new widget in the layout at position `index`
+-- **Signal:** widget::inserted The arguments are the widget and the index
+-- @tparam number index The position
+-- @param widget The widget
+-- @treturn boolean If the operation is successful
 function fixed:insert(index, widget)
     if not index or index < 1 or index > #self._private.widgets + 1 then return false end
 
@@ -273,87 +235,62 @@ function fixed:insert(index, widget)
     return true
 end
 
--- Fit the fixed layout into the given space.
+-- Fit the fixed layout into the given space
 -- @param context The context in which we are fit.
 -- @param orig_width The available width.
 -- @param orig_height The available height.
 function fixed:fit(context, orig_width, orig_height)
-    local width_left, height_left = orig_width, orig_height
-    local spacing = self._private.spacing or 0
-    local widgets_nr = #self._private.widgets
-    local is_y = self._private.dir == "y"
-    local used_max = 0
+    local width, height = orig_width, orig_height
+    local used_in_dir, used_max = 0, 0
 
-    -- when no widgets exist the function can be called with orig_width or
-    -- orig_height equal to nil. Exit early in this case.
-    if widgets_nr == 0 then
-        return 0, 0
-    end
-
-    for k, v in pairs(self._private.widgets) do
-        local w, h = base.fit_widget(self, context, v, width_left, height_left)
-        local max
-
-        if is_y then
-            max = w
-            height_left = height_left - h
+    for _, v in pairs(self._private.widgets) do
+        local w, h = base.fit_widget(self, context, v, width, height)
+        local in_dir, max
+        if self._private.dir == "y" then
+            max, in_dir = w, h
+            height = height - in_dir
         else
-            max = h
-            width_left = width_left - w
+            in_dir, max = w, h
+            width = width - in_dir
         end
-
         if max > used_max then
             used_max = max
         end
+        used_in_dir = used_in_dir + in_dir
 
-        if k < widgets_nr then
-            if is_y then
-                height_left = height_left - spacing
+        if width <= 0 or height <= 0 then
+            if self._private.dir == "y" then
+                used_in_dir = orig_height
             else
-                width_left = width_left - spacing
-            end
-        end
-
-        if width_left <= 0 or height_left <= 0 then
-            -- this complicated two lines determine whether we're out-of-space
-            -- because of spacing, or if the last widget doesn't fit in
-            if is_y then
-                 height_left = k < widgets_nr and height_left + spacing or height_left
-                 height_left = height_left < 0 and 0 or height_left
-            else
-                 width_left = k < widgets_nr and width_left + spacing or width_left
-                 width_left = width_left < 0 and 0 or width_left
+                used_in_dir = orig_width
             end
             break
         end
     end
 
-    if is_y then
-        return used_max, orig_height - height_left
-    end
+    local spacing = self._private.spacing * (#self._private.widgets-1)
 
-    return orig_width - width_left, used_max
+    if self._private.dir == "y" then
+        return used_max, used_in_dir + spacing
+    end
+    return used_in_dir + spacing, used_max
 end
 
 function fixed:reset()
     self._private.widgets = {}
     self:emit_signal("widget::layout_changed")
     self:emit_signal("widget::reseted")
-    self:emit_signal("widget::reset")
 end
 
 --- Set the layout's fill_space property. If this property is true, the last
 -- widget will get all the space that is left. If this is false, the last widget
 -- won't be handled specially and there can be space left unused.
 -- @property fill_space
--- @tparam boolean fill_space
--- @propemits true false
 
 function fixed:fill_space(val)
     if self._private.fill_space ~= val then
         self._private.fill_space = not not val
         self:emit_signal("widget::layout_changed")
-        self:emit_signal("property::fill_space", val)
     end
 end
 
@@ -380,7 +317,7 @@ end
 -- Note that widgets ignore `forced_height`. They will use the preferred/minimum width
 -- on the horizontal axis, and a stretched height on the vertical axis.
 -- @tparam widget ... Widgets that should be added to the layout.
--- @constructorfct wibox.layout.fixed.horizontal
+-- @function wibox.layout.fixed.horizontal
 function fixed.horizontal(...)
     return get_layout("x", ...)
 end
@@ -391,7 +328,7 @@ end
 -- Note that widgets ignore `forced_width`. They will use the preferred/minimum height
 -- on the vertical axis, and a stretched width on the horizontal axis.
 -- @tparam widget ... Widgets that should be added to the layout.
--- @constructorfct wibox.layout.fixed.vertical
+-- @function wibox.layout.fixed.vertical
 function fixed.vertical(...)
     return get_layout("y", ...)
 end
@@ -402,14 +339,11 @@ end
 --
 -- @property spacing
 -- @tparam number spacing Spacing between widgets.
--- @propemits true false
--- @interface layout
 
 function fixed:set_spacing(spacing)
     if self._private.spacing ~= spacing then
         self._private.spacing = spacing
         self:emit_signal("widget::layout_changed")
-        self:emit_signal("property::spacing", spacing)
     end
 end
 
@@ -418,6 +352,10 @@ function fixed:get_spacing()
 end
 
 --@DOC_fixed_COMMON@
+
+--@DOC_widget_COMMON@
+
+--@DOC_object_COMMON@
 
 return fixed
 

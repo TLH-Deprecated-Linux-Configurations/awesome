@@ -1,247 +1,94 @@
---  __                __         __ __         __
--- |  |_.---.-.-----.|  |--.    |  |__|.-----.|  |_
--- |   _|  _  |__ --||    <     |  |  ||__ --||   _|
--- |____|___._|_____||__|__|    |__|__||_____||____|
--- ########################################################################
--- ########################################################################
--- ########################################################################
-local wibox = require('wibox')
-local dpi = require('beautiful').xresources.apply_dpi
-local capi = {button = _G.button}
-local gears = require('gears')
-local clickable_container = require('widget.material.clickable-container')
-local HOME = os.getenv('HOME')
--- ########################################################################
--- ########################################################################
--- ########################################################################
-local function create_buttons(buttons, object)
-    if buttons then
-        local btns = {}
-        for _, b in ipairs(buttons) do
-            -- ########################################################################
-            -- ########################################################################
-            -- ########################################################################  -- Create a proxy button object: it will receive the real
-            -- press and release events, and will propagate them to the
-            -- button object the user provided, but with the object as
-            -- argument.
-            local btn = capi.button {modifiers = b.modifiers, button = b.button}
-            btn:connect_signal(
-                'press',
-                function()
-                    b:emit_signal('press', object)
-                end
-            )
-            -- ########################################################################
-            -- ########################################################################
-            -- ########################################################################
-            btn:connect_signal(
-                'release',
-                function()
-                    b:emit_signal('release', object)
-                end
-            )
-            btns[#btns + 1] = btn
-        end
-        -- ########################################################################
-        -- ########################################################################
-        -- ########################################################################
-        return btns
-    end
-end
--- ########################################################################
--- ########################################################################
--- ########################################################################
-local function list_update(w, buttons, label, data, objects)
-    -- update the widgets, creating them if needed
-    w:reset()
-    for i, o in ipairs(objects) do
-        local cache = data[o]
-        local ib, cb, tb, cbm, bgb, tbm, ibm, tt, l, ll, bg_clickable
-        if cache then
-            ib = cache.ib
-            tb = cache.tb
-            bgb = cache.bgb
-            tbm = cache.tbm
-            ibm = cache.ibm
-            tt = cache.tt
-        else
-            ib = wibox.widget.imagebox()
-            tb = wibox.widget.textbox()
-            cb =
-                clickable_container(
-                wibox.container.margin(
-                    wibox.widget.imagebox(HOME .. '/.configuration/awesome/theme/icons/tag-list/tag/close.png'),
-                    4,
-                    4,
-                    4,
-                    4
-                )
-            )
-            -- ########################################################################
-            -- ########################################################################
-            -- ########################################################################
-            cb.shape = gears.shape.circle
-            cbm = wibox.container.margin(cb, dpi(0), dpi(0), dpi(0), dpi(0)) -- 4, 8 ,12 ,12 -- close button
-            cbm:buttons(
-                gears.table.join(
-                    awful.button(
-                        {},
-                        1,
-                        nil,
-                        function()
-                            o.kill(o)
-                        end
-                    )
-                )
-            )
-            bg_clickable = clickable_container()
-            bgb = wibox.container.background()
-            tbm = wibox.container.margin(tb, dpi(2), dpi(2))
-            ibm = wibox.container.margin(ib, dpi(1), dpi(1), dpi(1), dpi(1)) -- 12 is default top and bottom margin --app icon
-            l = wibox.layout.fixed.horizontal()
-            ll = wibox.layout.fixed.horizontal()
-            -- ########################################################################
-            -- ########################################################################
-            -- ########################################################################
-            -- All of this is added in a fixed widget
-            l:fill_space(true)
-            l:add(ibm)
-            l:add(tbm)
-            ll:add(l)
-            ll:add(cbm)
+local awful = require("awful")
+local gears = require("gears")
+local wibox = require("wibox")
+local beautiful = require("beautiful")
+local dpi = beautiful.xresources.apply_dpi
 
-            bg_clickable:set_widget(ll)
-            -- And all of this gets a background
-            bgb:set_widget(bg_clickable)
+local tasklist = function(s)
+    local tasklist_buttons =
+        gears.table.join(
+        awful.button(
+            {},
+            1,
+            function(c)
+                if c == client.focus then
+                    c.minimized = true
+                else
+                    c:emit_signal("request::activate", "tasklist", {raise = true})
+                end
+            end
+        ),
+        awful.button(
+            {},
+            3,
+            function()
+                awful.menu.client_list({theme = {width = 650}})
+            end
+        ),
+        awful.button(
+            {},
+            8,
+            function()
+                awful.client.focus.byidx(1)
+            end
+        ),
+        awful.button(
+            {},
+            9,
+            function()
+                awful.client.focus.byidx(-1)
+            end
+        )
+    )
 
-            l:buttons(create_buttons(buttons, o))
-            -- ########################################################################
-            -- ########################################################################
-            -- ########################################################################
-            -- Tooltip to display whole title, if it was truncated
-            tt =
-                awful.tooltip(
+    local widget_tasklist =
+        awful.widget.tasklist {
+        screen = s,
+        filter = awful.widget.tasklist.filter.currenttags,
+        buttons = tasklist_buttons,
+        layout = {
+            layout = wibox.layout.flex.horizontal
+        },
+        -- Notice that there is *NO* wibox.wibox prefix, it is a template,
+        -- not a widget instance.
+        widget_template = {
+            {
                 {
-                    objects = {tb},
-                    mode = 'inside',
-                    align = 'top',
-                    delay_show = 1
-                }
-            )
-            -- ########################################################################
-            -- ########################################################################
-            -- ########################################################################
-            data[o] = {
-                ib = ib,
-                tb = tb,
-                bgb = bgb,
-                tbm = tbm,
-                ibm = ibm,
-                tt = tt
-            }
-        end
-        -- ########################################################################
-        -- ########################################################################
-        -- ########################################################################
-        local text, bg, bg_image, icon, args = label(o, tb)
-        args = args or {}
+                    {
+                        {
+                            awful.widget.clienticon,
+                            {
+                                id = "text_role",
+                                widget = wibox.widget.textbox
+                            },
+                            spacing = dpi(2),
+                            layout = wibox.layout.fixed.horizontal
+                        },
+                        widget = wibox.layout.align.vertical
+                    },
+                    left = dpi(6),
+                    right = dpi(6),
+                    top = dpi(0),
+                    bottom = dpi(0),
+                    widget = wibox.container.margin,
+                    layout = wibox.layout.fixed.horizontal
+                },
+                shape = beautiful.panel_button_shape,
+                border_width = beautiful.btn_border_width,
+                id = "background_role",
+                border_color = beautiful.border_button,
+                widget = wibox.container.background
+            },
+            margins = dpi(0),
+            left = dpi(6),
+            right = dpi(6),
+            top = dpi(0),
+            bottom = dpi(0),
+            widget = wibox.container.margin
+        }
+    }
 
-        -- ########################################################################
-        -- ########################################################################
-        -- ########################################################################
-        -- The text might be invalid, so use pcall.
-        if text == nil or text == '' then
-            tbm:set_margins(0)
-        else
-            -- truncate when title is too long
-            local textOnly = text:match('>(.-)<')
-            if (textOnly:len() > 18) then
-                text = text:gsub('>(.-)<', '>' .. textOnly:sub(1, 15) .. '...<')
-                tt:set_text(gears.string.xml_escape(textOnly))
-                tt:add_to_object(tb)
-            else
-                tt:remove_from_object(tb)
-            end
-            if not tb:set_markup_silently(text) then
-                -- invalid markup
-                tb:set_text(text)
-            end
-        end
-        -- ########################################################################
-        -- ########################################################################
-        -- ########################################################################
-        bgb:set_bg(bg)
-        if type(bg_image) == 'function' then
-            bg_image = bg_image(tb, o, nil, objects, i)
-        end
-        bgb:set_bgimage(bg_image)
-        if icon then
-            ib.image = icon
-        else
-            ibm:set_margins(0)
-        end
-        -- ########################################################################
-        -- ########################################################################
-        -- ########################################################################
-        bgb.shape = args.shape
-        bgb.shape_border_width = args.shape_border_width
-        bgb.shape_border_color = args.shape_border_color
-        -- ########################################################################
-        -- ########################################################################
-        -- ########################################################################
-        w:add(bgb)
-    end
+    return widget_tasklist
 end
--- ########################################################################
--- ########################################################################
--- ########################################################################
-local tasklist_buttons =
-    awful.util.table.join(
-    awful.button(
-        {},
-        1,
-        function(c)
-            if c == _G.client.focus then
-                c.minimized = true
-            else
-                -- Without this, the following
-                -- :isvisible() makes no sense
-                c.minimized = false
-                if not c:isvisible() and c.first_tag then
-                    c.first_tag:view_only()
-                end
-                -- This will also un-minimize
-                -- the client, if needed
-                _G.client.focus = c
-                c:raise()
-            end
-        end
-    ),
-    -- ########################################################################
-    -- ########################################################################
-    -- ########################################################################
-    awful.button(
-        {},
-        2,
-        function(c)
-            c.kill(c)
-        end
-    )
-)
--- ########################################################################
--- ########################################################################
--- ########################################################################
-local TaskList = function(s)
-    return awful.widget.tasklist(
-        s,
-        awful.widget.tasklist.filter.currenttags,
-        tasklist_buttons,
-        {},
-        list_update,
-        wibox.layout.flex.horizontal()
-    )
-end
--- ########################################################################
--- ########################################################################
--- ########################################################################
-return TaskList
+
+return tasklist

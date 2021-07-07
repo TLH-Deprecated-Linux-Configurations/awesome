@@ -2,13 +2,11 @@
 -- @author Uli Schlachter
 -- @copyright 2010 Uli Schlachter
 -- @classmod wibox.widget.base
--- @supermodule gears.object
 ---------------------------------------------------------------------------
 
 local object = require("gears.object")
 local cache = require("gears.cache")
 local matrix = require("gears.matrix")
-local gdebug = require("gears.debug")
 local protected_call = require("gears.protected_call")
 local gtable = require("gears.table")
 local setmetatable = setmetatable
@@ -18,199 +16,24 @@ local table = table
 
 local base = {}
 
--- {{{ Properties available on all widgets
-
---- Get or set the children elements.
--- @property children
--- @tparam table children The children.
--- @baseclass wibox.widget.base
-
---- Get all direct and indirect children widgets.
--- This will scan all containers recursively to find widgets
--- Warning: This method it prone to stack overflow if there is a loop in the
--- widgets hierarchy. A hierarchy loop is when a widget, or any of its
--- children, contain (directly or indirectly) itself.
--- @property all_children
--- @tparam table children The children.
--- @baseclass wibox.widget.base
-
---- Force a widget height.
--- @property forced_height
--- @tparam number|nil height The height (`nil` for automatic)
--- @baseclass wibox.widget.base
-
---- Force a widget width.
--- @property forced_width
--- @tparam number|nil width The width (`nil` for automatic)
--- @baseclass wibox.widget.base
-
---- The widget opacity (transparency).
--- @property opacity
--- @tparam[opt=1] number opacity The opacity (between 0 and 1)
--- @baseclass wibox.widget.base
-
---- The widget visibility.
--- @property visible
--- @param boolean
--- @baseclass wibox.widget.base
-
---- The widget buttons.
---
--- The table contains a list of `awful.button` objects.
--- @property buttons
--- @param table
--- @see awful.button
--- @baseclass wibox.widget.base
-
--- }}}
-
--- {{{ Signals available on the widgets.
-
---- When the layout (size) change.
--- This signal is emitted when the previous results of `:layout()` and `:fit()`
--- are no longer valid.  Unless this signal is emitted, `:layout()` and `:fit()`
--- must return the same result when called with the same arguments.
--- @signal widget::layout_changed
--- @see widget::redraw_needed
--- @baseclass wibox.widget.base
-
---- When the widget content changed.
--- This signal is emitted when the content of the widget changes. The widget will
--- be redrawn, it is not re-layouted. Put differently, it is assumed that
--- `:layout()` and `:fit()` would still return the same results as before.
--- @signal widget::redraw_needed
--- @see widget::layout_changed
--- @baseclass wibox.widget.base
-
---- When a mouse button is pressed over the widget.
--- @signal button::press
--- @tparam table self The current object instance itself.
--- @tparam number lx The horizontal position relative to the (0,0) position in
--- the widget.
--- @tparam number ly The vertical position relative to the (0,0) position in the
--- widget.
--- @tparam number button The button number.
--- @tparam table mods The modifiers (mod4, mod1 (alt), Control, Shift)
--- @tparam table find_widgets_result The entry from the result of
--- @{wibox.drawable:find_widgets} for the position that the mouse hit.
--- @tparam wibox.drawable find_widgets_result.drawable The drawable containing
--- the widget.
--- @tparam widget find_widgets_result.widget The widget being displayed.
--- @tparam wibox.hierarchy find_widgets_result.hierarchy The hierarchy
--- managing the widget's geometry.
--- @tparam number find_widgets_result.x An approximation of the X position that
--- the widget is visible at on the surface.
--- @tparam number find_widgets_result.y An approximation of the Y position that
--- the widget is visible at on the surface.
--- @tparam number find_widgets_result.width An approximation of the width that
--- the widget is visible at on the surface.
--- @tparam number find_widgets_result.height An approximation of the height that
--- the widget is visible at on the surface.
--- @tparam number find_widgets_result.widget_width The exact width of the widget
--- in its local coordinate system.
--- @tparam number find_widgets_result.widget_height The exact height of the widget
--- in its local coordinate system.
--- @see mouse
--- @baseclass wibox.widget.base
-
---- When a mouse button is released over the widget.
--- @signal button::release
--- @tparam table self The current object instance itself.
--- @tparam number lx The horizontal position relative to the (0,0) position in
--- the widget.
--- @tparam number ly The vertical position relative to the (0,0) position in the
--- widget.
--- @tparam number button The button number.
--- @tparam table mods The modifiers (mod4, mod1 (alt), Control, Shift)
--- @tparam table find_widgets_result The entry from the result of
--- @{wibox.drawable:find_widgets} for the position that the mouse hit.
--- @tparam wibox.drawable find_widgets_result.drawable The drawable containing
--- the widget.
--- @tparam widget find_widgets_result.widget The widget being displayed.
--- @tparam wibox.hierarchy find_widgets_result.hierarchy The hierarchy
--- managing the widget's geometry.
--- @tparam number find_widgets_result.x An approximation of the X position that
--- the widget is visible at on the surface.
--- @tparam number find_widgets_result.y An approximation of the Y position that
--- the widget is visible at on the surface.
--- @tparam number find_widgets_result.width An approximation of the width that
--- the widget is visible at on the surface.
--- @tparam number find_widgets_result.height An approximation of the height that
--- the widget is visible at on the surface.
--- @tparam number find_widgets_result.widget_width The exact width of the widget
--- in its local coordinate system.
--- @tparam number find_widgets_result.widget_height The exact height of the widget
--- in its local coordinate system.
--- @see mouse
--- @baseclass wibox.widget.base
-
---- When the mouse enter a widget.
--- @signal mouse::enter
--- @tparam table self The current object instance itself.
--- @tparam table find_widgets_result The entry from the result of
--- @{wibox.drawable:find_widgets} for the position that the mouse hit.
--- @tparam wibox.drawable find_widgets_result.drawable The drawable containing
--- the widget.
--- @tparam widget find_widgets_result.widget The widget being displayed.
--- @tparam wibox.hierarchy find_widgets_result.hierarchy The hierarchy
--- managing the widget's geometry.
--- @tparam number find_widgets_result.x An approximation of the X position that
--- the widget is visible at on the surface.
--- @tparam number find_widgets_result.y An approximation of the Y position that
--- the widget is visible at on the surface.
--- @tparam number find_widgets_result.width An approximation of the width that
--- the widget is visible at on the surface.
--- @tparam number find_widgets_result.height An approximation of the height that
--- the widget is visible at on the surface.
--- @tparam number find_widgets_result.widget_width The exact width of the widget
--- in its local coordinate system.
--- @tparam number find_widgets_result.widget_height The exact height of the widget
--- in its local coordinate system.
--- @see mouse
--- @baseclass wibox.widget.base
-
---- When the mouse leave a widget.
--- @signal mouse::leave
--- @tparam table self The current object instance itself.
--- @tparam table find_widgets_result The entry from the result of
--- @{wibox.drawable:find_widgets} for the position that the mouse hit.
--- @tparam wibox.drawable find_widgets_result.drawable The drawable containing
--- the widget.
--- @tparam widget find_widgets_result.widget The widget being displayed.
--- @tparam wibox.hierarchy find_widgets_result.hierarchy The hierarchy
--- managing the widget's geometry.
--- @tparam number find_widgets_result.x An approximation of the X position that
--- the widget is visible at on the surface.
--- @tparam number find_widgets_result.y An approximation of the Y position that
--- the widget is visible at on the surface.
--- @tparam number find_widgets_result.width An approximation of the width that
--- the widget is visible at on the surface.
--- @tparam number find_widgets_result.height An approximation of the height that
--- the widget is visible at on the surface.
--- @tparam number find_widgets_result.widget_width The exact width of the widget
--- in its local coordinate system.
--- @tparam number find_widgets_result.widget_height The exact height of the widget
--- in its local coordinate system.
--- @see mouse
--- @baseclass wibox.widget.base
-
--- }}}
-
 -- {{{ Functions on widgets
 
--- Functions available on all widgets.
+--- Functions available on all widgets.
 base.widget = {}
 
-object.properties._legacy_accessors(base.widget, "buttons", nil, true, function(new_btns)
-    return new_btns[1] and (
-        type(new_btns[1]) == "button" or new_btns[1]._is_capi_button
-    ) or false
-end, true)
+--- Set/get a widget's buttons.
+-- @tab _buttons The table of buttons that is bound to the widget.
+-- @function buttons
+function base.widget:buttons(_buttons)
+    if _buttons then
+        self._private.widget_buttons = _buttons
+    end
+    return self._private.widget_buttons
+end
 
 --- Set a widget's visibility.
 -- @tparam boolean b Whether the widget is visible.
--- @method wibox.widget.base:set_visible
--- @hidden
+-- @function set_visible
 function base.widget:set_visible(b)
     if b ~= self._private.visible then
         self._private.visible = b
@@ -220,34 +43,9 @@ function base.widget:set_visible(b)
     end
 end
 
---- Add a new `awful.button` to this widget.
--- @tparam awful.button button The button to add.
--- @method wibox.widget.base:add_button
-function base.widget:add_button(button)
-    if not button then return end
-
-    -- Simple case
-    if not self._private.buttons then
-        self:set_buttons({button})
-        return
-    end
-
-    -- This could happen if something accidentally uses rawset
-    assert(self._private.buttons_formatted)
-
-    -- an `awful.button` is a tupple of `capi.button`
-    self._private.buttons_formatted = gtable.join(
-        self._private.buttons_formatted,
-        button
-    )
-
-    table.insert(self._private.buttons, button)
-end
-
 --- Is the widget visible?
 -- @treturn boolean
--- @method wibox.widget.base:get_visible
--- @hidden
+-- @function get_visible
 function base.widget:get_visible()
     return self._private.visible or false
 end
@@ -255,8 +53,7 @@ end
 --- Set a widget's opacity.
 -- @tparam number o The opacity to use (a number from 0 (transparent) to 1
 -- (opaque)).
--- @method wibox.widget.base:set_opacity
--- @hidden
+-- @function set_opacity
 function base.widget:set_opacity(o)
     if o ~= self._private.opacity then
         self._private.opacity = o
@@ -266,8 +63,7 @@ end
 
 --- Get the widget's opacity.
 -- @treturn number The opacity (between 0 (transparent) and 1 (opaque)).
--- @method wibox.widget.base:get_opacity
--- @hidden
+-- @function get_opacity
 function base.widget:get_opacity()
     return self._private.opacity
 end
@@ -275,9 +71,8 @@ end
 --- Set the widget's forced width.
 -- @tparam[opt] number width With `nil` the default mechanism of calling the
 --   `:fit` method is used.
--- @see wibox.widget.base:fit_widget
--- @method wibox.widget.base:set_forced_width
--- @hidden
+-- @see fit_widget
+-- @function set_forced_width
 function base.widget:set_forced_width(width)
     if width ~= self._private.forced_width then
         self._private.forced_width = width
@@ -293,8 +88,7 @@ end
 -- actual size is during a `mouse::enter`, `mouse::leave` or button event.
 -- @treturn[opt] number The forced width (nil if automatic).
 -- @see fit_widget
--- @method wibox.widget.base:get_forced_width
--- @hidden
+-- @function get_forced_width
 function base.widget:get_forced_width()
     return self._private.forced_width
 end
@@ -302,9 +96,8 @@ end
 --- Set the widget's forced height.
 -- @tparam[opt] number height With `nil` the default mechanism of calling the
 --   `:fit` method is used.
--- @see wibox.widget.base:fit_widget
--- @method wibox.widget.base:set_height
--- @hidden
+-- @see fit_widget
+-- @function set_height
 function base.widget:set_forced_height(height)
     if height ~= self._private.forced_height then
         self._private.forced_height = height
@@ -319,8 +112,7 @@ end
 -- If there is no forced width/height, then the only way to get the widget's
 -- actual size is during a `mouse::enter`, `mouse::leave` or button event.
 -- @treturn[opt] number The forced height (nil if automatic).
--- @method wibox.widget.base:get_forced_height
--- @hidden
+-- @function get_forced_height
 function base.widget:get_forced_height()
     return self._private.forced_height
 end
@@ -328,9 +120,8 @@ end
 --- Get the widget's direct children widgets.
 --
 -- This method should be re-implemented by the relevant widgets.
--- @treturn table children The children.
--- @method wibox.widget.base:get_children
--- @hidden
+-- @treturn table The children
+-- @function get_children
 function base.widget:get_children()
     return {}
 end
@@ -339,9 +130,8 @@ end
 --
 -- The default implementation does nothing, this must be re-implemented by
 -- all layout and container widgets.
--- @tparam table children A table composed of valid widgets.
--- @method wibox.widget.base:set_children
--- @hidden
+-- @tab children A table composed of valid widgets.
+-- @function set_children
 function base.widget:set_children(children) -- luacheck: no unused
     -- Nothing on purpose
 end
@@ -360,41 +150,17 @@ end
 --
 -- *Warning*: This method it prone to stack overflow if the widget, or any of
 -- its children, contains (directly or indirectly) itself.
--- @treturn table children The children.
--- @method wibox.widget.base:get_all_children
--- @hidden
+-- @treturn table The children
+-- @function get_all_children
 function base.widget:get_all_children()
     local ret = {}
     digg_children(ret, self)
     return ret
 end
 
---- Common implementation of the `:set_widget()` method exposed by many
--- other widgets.
---
--- Use this if your widget has no custom logic when setting the widget.
---
--- @usage
---   rawset(my_custom_widget, "set_widget", wibox.widget.base.set_widget_common)
-function base.set_widget_common(self, widget)
-    local w = widget and base.make_widget_from_value(widget)
-
-    if w then
-        base.check_widget(w)
-    end
-
-    self._private.widget = w
-
-    self:emit_signal("property::widget")
-
-    self:emit_signal("widget::layout_changed")
-end
-
 --- Emit a signal and ensure all parent widgets in the hierarchies also
--- forward the signal.
---
--- This is useful to track signals when there is a dynamic set of containers
---   and layouts wrapping the widget.
+-- forward the signal. This is useful to track signals when there is a dynamic
+-- set of containers and layouts wrapping the widget.
 --
 -- Note that this function has some flaws:
 --
@@ -409,7 +175,7 @@ end
 --
 -- @tparam string signal_name
 -- @param ... Other arguments
--- @method wibox.widget.base:emit_signal_recursive
+-- @function emit_signal_recursive
 function base.widget:emit_signal_recursive(signal_name, ...)
     -- This is a convenience wrapper, the real implementation is in the
     -- hierarchy.
@@ -419,14 +185,12 @@ end
 
 --- Get the index of a widget.
 -- @tparam widget widget The widget to look for.
--- @tparam[opt] boolean recursive Recursively check accross the sub-widgets
---   hierarchy.
--- @tparam[opt] widget ... Additional widgets to add at the end of the
---   sub-widgets hierarchy "path".
--- @treturn number The widget index.
+-- @tparam[opt] boolean recursive Also check sub-widgets?
+-- @tparam[opt] widget ... Additional widgets to add at the end of the "path"
+-- @treturn number The index.
 -- @treturn widget The parent widget.
--- @treturn table The hierarchy path between "self" and "widget".
--- @method wibox.widget.base:index
+-- @treturn table The path between "self" and "widget".
+-- @function index
 function base.widget:index(widget, recursive, ...)
     local widgets = self:get_children()
     for idx, w in ipairs(widgets) do
@@ -497,7 +261,7 @@ end
 --
 -- This gives only tight bounds if no rotations by non-multiples of 90° are
 -- used.
--- @staticfct wibox.widget.base.rect_to_device_geometry
+-- @function wibox.widget.base.rect_to_device_geometry
 function base.rect_to_device_geometry(cr, x, y, width, height)
     return matrix.transform_rectangle(cr.matrix, x, y, width, height)
 end
@@ -507,14 +271,14 @@ end
 -- This calls the widget's `:fit` callback and caches the result for later use.
 -- Never call `:fit` directly, but always through this function!
 -- @tparam widget parent The parent widget which requests this information.
--- @tparam table context The context in which we are fit.
+-- @tab context The context in which we are fit.
 -- @tparam widget widget The widget to fit (this uses
 --   `widget:fit(context, width, height)`).
 -- @tparam number width The available width for the widget.
 -- @tparam number height The available height for the widget.
 -- @treturn number The width that the widget wants to use.
 -- @treturn number The height that the widget wants to use.
--- @staticfct wibox.widget.base.fit_widget
+-- @function wibox.widget.base.fit_widget
 function base.fit_widget(parent, context, widget, width, height)
     record_dependency(parent, widget)
 
@@ -556,13 +320,13 @@ end
 -- However, normally there shouldn't be any reason why you need to use this
 -- function.
 -- @tparam widget parent The parent widget which requests this information.
--- @tparam table context The context in which we are laid out.
+-- @tab context The context in which we are laid out.
 -- @tparam widget widget The widget to layout (this uses
 --   `widget:layout(context, width, height)`).
 -- @tparam number width The available width for the widget.
 -- @tparam number height The available height for the widget.
 -- @treturn[opt] table The result from the widget's `:layout` callback.
--- @staticfct wibox.widget.base.layout_widget
+-- @function wibox.widget.base.layout_widget
 function base.layout_widget(parent, context, widget, width, height)
     record_dependency(parent, widget)
 
@@ -582,7 +346,7 @@ end
 --- Handle a button event on a widget.
 --
 -- This is used internally and should not be called directly.
--- @staticfct wibox.widget.base.handle_button
+-- @function wibox.widget.base.handle_button
 function base.handle_button(event, widget, x, y, button, modifiers, geometry)
     x = x or y -- luacheck: no unused
     local function is_any(mod)
@@ -603,7 +367,7 @@ function base.handle_button(event, widget, x, y, button, modifiers, geometry)
 
     -- Find all matching button objects.
     local matches = {}
-    for _, v in pairs(widget._private.buttons_formatted or {}) do
+    for _, v in pairs(widget._private.widget_buttons) do
         local match = true
         -- Is it the right button?
         if v.button ~= 0 and v.button ~= button then match = false end
@@ -631,10 +395,8 @@ end
 -- @tparam number height The height of the widget in its own coordinate system.
 --   That is, after applying the transformation matrix.
 -- @treturn table An opaque object that can be returned from `:layout()`.
--- @staticfct wibox.widget.base.place_widget_via_matrix
+-- @function wibox.widget.base.place_widget_via_matrix
 function base.place_widget_via_matrix(widget, mat, width, height)
-    assert(width >= 0, "A widget's width cannot be negative: " ..  tostring(width))
-    assert(height >= 0, "A widget's height cannot be negative: " ..  tostring(height))
     return {
         _widget = widget,
         _width = width,
@@ -653,7 +415,7 @@ end
 -- @tparam number height The height of the widget in its own coordinate system.
 --   That is, after applying the transformation matrix.
 -- @treturn table An opaque object that can be returned from `:layout()`.
--- @staticfct wibox.widget.base.place_widget_at
+-- @function wibox.widget.base.place_widget_at
 function base.place_widget_at(widget, x, y, width, height)
     return base.place_widget_via_matrix(widget, matrix.create_translate(x, y), width, height)
 end
@@ -708,6 +470,17 @@ local function drill(ids, content)
     -- Create layouts based on metatable's __call.
     local l = layout.is_widget and layout or layout()
 
+    -- Check if the widget added it's own element by ids
+    --FIXME #2181
+    if l and l._private and l._private.by_id then
+        for k, v in pairs(l._private.by_id) do
+            ids[k] = ids[k] or {}
+            for _, v2 in ipairs(v) do
+                table.insert(ids[k], v2)
+            end
+        end
+    end
+
     -- Get the number of children widgets (including nil widgets).
     local max, attributes, widgets = parse_table(content, l.allow_empty_widget)
 
@@ -731,34 +504,41 @@ local function drill(ids, content)
         end
     end
 
-    if widgets and max > 0 then
-        -- Add all widgets.
-        for k = 1, max do
-            -- ipairs cannot be used on sparse tables.
-            local v, id2, e = widgets[k], id, nil
-            if v then
-                -- It is another declarative container, parse it.
-                if (not v.is_widget) and (v.widget or v.layout) then
-                    e, id2 = drill(ids, v)
-                    widgets[k] = e
-                elseif (not v.is_widget) and is_callable(v) then
-                     widgets[k] = v()
-                end
-                base.check_widget(widgets[k])
-
-                -- Place the widget in the access table.
-                if id2 then
-                    l  [id2] = e
-                    ids[id2] = ids[id2] or {}
-                    table.insert(ids[id2], e)
-                end
-            end
-        end
-
-        -- Replace all children (if any) with the new ones.
-        l:set_children(widgets)
+    -- Let some containers handle the template themselves.
+    -- This can be used for use cases such as lazy loading, repeaters or
+    -- conditional loaders.
+    if l._accept_templates and l.set_templates then
+        l:set_templates(widgets)
+        return l, id
     end
 
+    -- Add all widgets.
+    for k = 1, max do
+        -- ipairs cannot be used on sparse tables.
+        local v, id2, e = widgets[k], id, nil
+        if v then
+            -- It is another declarative container, parse it.
+            if (not v.is_widget) and (v.widget or v.layout) then
+                e, id2 = drill(ids, v)
+                widgets[k] = e
+            elseif (not v.is_widget) and is_callable(v) then
+                 widgets[k] = v()
+            end
+            base.check_widget(widgets[k])
+
+            -- Place the widget in the access table.
+            if id2 then
+                l  [id2] = e
+                ids[id2] = ids[id2] or {}
+                table.insert(ids[id2], e)
+            end
+        end
+    end
+
+    -- Replace all children (if any) with the new ones.
+    if widgets then
+        l:set_children(widgets)
+    end
     return l, id
 end
 
@@ -774,9 +554,8 @@ end
 --- Set a declarative widget hierarchy description.
 --
 -- See [The declarative layout system](../documentation/03-declarative-layout.md.html).
--- @tparam table args A table containing the widget's disposition.
--- @method wibox.widget.base:setup
--- @hidden
+-- @tab args A table containing the widget's disposition.
+-- @function setup
 function base.widget:setup(args)
     local f,ids = self.set_widget or self.add or self.set_first,{}
     local w, id = drill(ids, args)
@@ -802,8 +581,8 @@ end
 --- Create a widget from a declarative description.
 --
 -- See [The declarative layout system](../documentation/03-declarative-layout.md.html).
--- @tparam table args A table containing the widgets disposition.
--- @constructorfct wibox.widget.base.make_widget_declarative
+-- @tab args A table containing the widgets disposition.
+-- @function wibox.widget.base.make_widget_declarative
 function base.make_widget_declarative(args)
     local ids = {}
 
@@ -848,22 +627,16 @@ end
 --
 -- @param wdg The value.
 -- @param[opt=nil] ... Arguments passed to the contructor (if any).
--- @constructorfct wibox.widget.base.make_widget_from_value
--- @treturn widget|nil The new widget or `nil` in case of failure.
+-- @treturn The new widget.
 function base.make_widget_from_value(wdg, ...)
-    if not wdg then return nil end
-
     local is_function, t = is_callable(wdg)
 
     if is_function then
         wdg = wdg(...)
-    elseif t == "table" then
-        wdg = wdg.is_widget and wdg or base.make_widget_declarative(wdg)
+    elseif t == "table" and not wdg.is_widget then
+        wdg = base.make_widget_declarative(wdg)
     else
-        gdebug.print_warning(
-            "The argument is not a function, table, or widget."
-        )
-        return nil
+        assert(wdg.is_widget, "The argument is not a function, table, or widget.")
     end
 
     return wdg
@@ -882,18 +655,11 @@ end
 --   and setter methods.
 -- @tparam[opt=nil] table args.class The widget class
 -- @see fit_widget
--- @constructorfct wibox.widget.base.make_widget
+-- @function wibox.widget.base.make_widget
 function base.make_widget(proxy, widget_name, args)
     args = args or {}
-
-    local prop_default = args.enable_properties ~= false
-
-    if awesome.api_level < 5 then
-        prop_default = args.enable_properties
-    end
-
     local ret = object {
-        enable_properties = prop_default,
+        enable_properties = args.enable_properties,
         class             = args.class,
     }
 
@@ -906,6 +672,9 @@ function base.make_widget(proxy, widget_name, args)
 
     -- Create a table used to store the widgets internal data.
     rawset(ret, "_private", {})
+
+    -- No buttons yet.
+    ret._private.widget_buttons = {}
 
     -- Widget is visible.
     ret._private.visible = true
@@ -961,32 +730,11 @@ function base.make_widget(proxy, widget_name, args)
     mt.__tostring = function()
         return string.format("%s (%s)", ret.widget_name, orig_string)
     end
-
-    -- Even when properties are disabled, buttons is required for backward
-    -- compatibility.
-    --TODO v6 Remove this
-    if not args.enable_properties then
-        mt.__index = function(_, key)
-            if key == "buttons" then
-                return base.widget.get_buttons(ret)
-            end
-
-            return rawget(ret, key)
-        end
-        mt.__newindex = function(_, key, value)
-            if key == "buttons" then
-                base.widget.set_buttons(ret, value)
-            else
-                rawset(ret, key, value)
-            end
-        end
-    end
-
     return setmetatable(ret, mt)
 end
 
 --- Generate an empty widget which takes no space and displays nothing.
--- @constructorfct wibox.widget.base.empty_widget
+-- @function wibox.widget.base.empty_widget
 function base.empty_widget()
     return base.make_widget()
 end
@@ -994,7 +742,7 @@ end
 --- Do some sanity checking on a widget.
 --
 -- This function raises an error if the widget is not valid.
--- @staticfct wibox.widget.base.check_widget
+-- @function wibox.widget.base.check_widget
 function base.check_widget(widget)
     assert(type(widget) == "table", "Type should be table, but is " .. tostring(type(widget)))
     assert(widget.is_widget, "Argument is not a widget!")
