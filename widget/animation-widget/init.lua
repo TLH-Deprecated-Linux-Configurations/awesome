@@ -6,16 +6,16 @@
 -- ########################################################################
 -- ########################################################################
 -- ########################################################################
-local gears = require('gears')
-local awful = require('awful')
-local wibox = require('wibox')
-local beautiful = require('beautiful')
-local animate = require('lib.animations').createAnimObject
+local gears = require("gears")
+local awful = require("awful")
+local wibox = require("wibox")
+local beautiful = require("beautiful")
+local animate = require("lib.animations").createAnimObject
 
 local dpi = beautiful.xresources.apply_dpi
 
 -- a widget container that is clickable
-local clickable_container = require('widget.material.clickable-container')
+local clickable_container = require("widget.clickable-container")
 -- ########################################################################
 -- ########################################################################
 -- ########################################################################
@@ -31,7 +31,7 @@ local offset = dpi(200)
 local widget_button =
     clickable_container(
     --dpi(14) is used to take different screen sizes into consideration
-    wibox.container.margin(wibox.widget.textbox('Press to start animating'), dpi(14), dpi(14), dpi(6), dpi(6))
+    wibox.container.margin(wibox.widget.textbox("Press to start animating"), dpi(14), dpi(14), dpi(6), dpi(6))
 )
 -- ########################################################################
 -- ########################################################################
@@ -45,8 +45,8 @@ local function bounce_animation_size(initial_offset)
             visible = true,
             x = mouse.screen.geometry.x + offset + initial_offset,
             y = mouse.screen.geometry.y + (mouse.screen.geometry.height / 2),
-            type = 'dock',
-            bg = beautiful.accent.hue_800 .. '44',
+            type = "dock",
+            bg = beautiful.accent.hue_800 .. "44",
             border_width = dpi(2),
             border_color = beautiful.accent.hue_800,
             width = dpi(100),
@@ -71,13 +71,13 @@ local function bounce_animation_size(initial_offset)
         2.5,
         rect,
         {width = end_size, height = end_size, x = endx, y = endy},
-        'inBounce',
+        "inBounce",
         function()
             animate(
                 3.5,
                 rect,
                 {width = start_size, height = start_size, x = startx, y = starty},
-                'outBounce',
+                "outBounce",
                 function()
                     rect.visible = false
                 end
@@ -97,8 +97,8 @@ local function bounce_animation_gravity(initial_offset)
             visible = true,
             x = mouse.screen.geometry.x + (offset * 2) + initial_offset,
             y = mouse.screen.geometry.y + (mouse.screen.geometry.height / 2),
-            type = 'dock',
-            bg = beautiful.accent.hue_800 .. '44',
+            type = "dock",
+            bg = beautiful.accent.hue_800 .. "44",
             border_width = dpi(2),
             border_color = beautiful.accent.hue_800,
             width = dpi(100),
@@ -120,13 +120,13 @@ local function bounce_animation_gravity(initial_offset)
         3,
         rect,
         {y = endy},
-        'inBounce',
+        "inBounce",
         function()
             animate(
                 3,
                 rect,
                 {y = starty},
-                'outBounce',
+                "outBounce",
                 function()
                     rect.visible = false
                 end
@@ -146,8 +146,8 @@ local function bounce_animation_inout(initial_offset)
             visible = true,
             x = mouse.screen.geometry.x + mouse.screen.geometry.width + initial_offset,
             y = mouse.screen.geometry.y + (mouse.screen.geometry.height / 2),
-            type = 'dock',
-            bg = beautiful.accent.hue_800 .. '44',
+            type = "dock",
+            bg = beautiful.accent.hue_800 .. "44",
             border_width = dpi(2),
             border_color = beautiful.accent.hue_800,
             width = dpi(100),
@@ -169,7 +169,7 @@ local function bounce_animation_inout(initial_offset)
         4,
         rect,
         {x = endx},
-        'inOutBack',
+        "inOutBack",
         function()
             rect.visible = false
         end

@@ -6,22 +6,22 @@
 -- ########################################################################
 -- ########################################################################
 
-local wibox = require('wibox')
-local gears = require('gears')
-local icons = require('theme.icons')
+local wibox = require("wibox")
+local gears = require("gears")
+local icons = require("theme.icons")
 
-local dpi = require('beautiful').xresources.apply_dpi
-local clickable_container = require('widget.material.clickable-container')
+local dpi = require("beautiful").xresources.apply_dpi
+local clickable_container = require("widget.clickable-container")
 
 -- Load panel rules, it will create panel for each screen
-require('layout.left-panel.panel-rules')
+require("layout.left-panel.panel-rules")
 -- ########################################################################
 -- ########################################################################
 -- ########################################################################
 local widget =
     wibox.widget {
     {
-        id = 'icon',
+        id = "icon",
         widget = wibox.widget.imagebox,
         resize = true
     },
@@ -48,7 +48,7 @@ home_button:buttons(
 -- ########################################################################
 -- ########################################################################
 _G.screen.primary.left_panel:connect_signal(
-    'opened',
+    "opened",
     function()
         widget.icon:set_image(icons.close)
         _G.menuopened = true
@@ -58,7 +58,7 @@ _G.screen.primary.left_panel:connect_signal(
 -- ########################################################################
 -- ########################################################################
 _G.screen.primary.left_panel:connect_signal(
-    'closed',
+    "closed",
     function()
         widget.icon:set_image(icons.settings)
         _G.menuopened = false

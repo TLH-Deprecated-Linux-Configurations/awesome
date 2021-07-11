@@ -27,3 +27,8 @@ Which you may think is a little over zealous or I chop things up in a way that d
 ## Work in Progress
 
 There is still a lot left to do with this configuration, not the least of which involves detangling some of the configurations (undecided on if I want to totally remove the settings application modal, since the only one that is useful)
+
+## Gallery
+
+![Rounded Corners Include the window content](./electric-tantra/corners.png)
+

@@ -20,7 +20,9 @@ return function(body, callback, bNo_center, leave_callback, no_update)
     local button = wibox.container.background()
     local bIsHovered = false
     button.bg = beautiful.bg_focus
-    button.shape = rounded()
+    button.shape = function(cr, rect_width, rect_height)
+        gears.shape.partially_rounded_rect(cr, rect_width, rect_height, true, true, true, true, 12)
+    end
     button.forced_height = dpi(40)
     -- ########################################################################
     -- ########################################################################
@@ -89,19 +91,6 @@ return function(body, callback, bNo_center, leave_callback, no_update)
         else
             button.emulate_focus_loss()
         end
-    end
-
-    if no_update == nil or no_update == false then
-        signals.connect_primary_theme_changed(
-            function(theme)
-                color = theme
-                if bIsHovered then
-                    button.emulate_hover()
-                else
-                    button.emulate_focus_loss()
-                end
-            end
-        )
     end
 
     return button

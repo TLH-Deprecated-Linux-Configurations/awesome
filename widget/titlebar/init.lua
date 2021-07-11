@@ -8,7 +8,6 @@
 Author: mu-tex
 License: MIT
 Repository: https://github.com/mut-ex/awesome-wm-nice
-Forked to fit TDE (transapancy support)
 ]] -- ============================================================
 -- local ret, lib = pcall(require, "libs")
 -- local debug = ret and lib.debug or function() end

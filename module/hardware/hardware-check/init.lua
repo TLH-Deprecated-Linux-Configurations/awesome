@@ -172,9 +172,8 @@ local function getCpuInfo()
 
     local name = string.gmatch(stdout[5], ": (.*)$")()
     local frequency = string.gmatch(stdout[8], "%d+")()
-    -- ########################################################################
-    -- ########################################################################
-    -- ########################################################################
+    local cpucmd = "top -n 1 -b | grep Cpu | awk '{usage=100-$8} END {print usage}'"
+    local out = awful.spawn(cpucmd)
     -- find all cpu's (some systems have multi cpu setups)
     local processors = {}
     for index, line in ipairs(stdout) do
@@ -182,14 +181,11 @@ local function getCpuInfo()
             table.insert(processors, index)
         end
     end
-    -- ########################################################################
-    -- ########################################################################
-    -- ########################################################################
     local threads = #processors
 
     -- However, when using multiple cpu's it only shows the core count of the first
     local cores = tonumber(string.gmatch(stdout[13], "%d+")()) or threads
-    return cores, threads, name, tonumber(frequency)
+    return cores, threads, name, tonumber(frequency), out
 end
 -- ########################################################################
 -- ########################################################################

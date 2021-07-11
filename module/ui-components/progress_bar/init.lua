@@ -118,11 +118,7 @@ local function new(args)
     -- ########################################################################
     -- ########################################################################
     -- ########################################################################
-    signals.connect_primary_theme_changed(
-        function(theme)
-            ret._private.progress_bar.color = theme.hue_500
-        end
-    )
+
 
     ret._private.read_only = false
 

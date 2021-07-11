@@ -658,7 +658,7 @@ local globalKeys =
         "s",
         function()
             print("Opening settings application")
-            root.elements.settings.enable_view_by_index(-1, mouse.screen)
+            root.elements.hub.enable_view_by_index(1, mouse.screen)
         end,
         {
             description = "Open Settings Application",

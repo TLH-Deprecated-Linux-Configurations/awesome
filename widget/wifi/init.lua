@@ -1,5 +1,5 @@
 local wibox = require("wibox")
-local clickable_container = require("widget.material.clickable-container")
+local clickable_container = require("widget.clickable-container")
 local gears = require("gears")
 local dpi = require("beautiful").xresources.apply_dpi
 local config = require("module.functions")
@@ -12,7 +12,7 @@ local signals = require("module.settings.signals")
 -- Battery 0: Charging, 53%, 00:57:43 until charged
 local HOME = os.getenv("HOME")
 local PATH_TO_ICONS = HOME .. "/.config/awesome/widget/wifi/icons/"
-local interface = "wlp2s01"
+local interface = "wlan0"
 
 local connected = false
 local essid = "N/A"

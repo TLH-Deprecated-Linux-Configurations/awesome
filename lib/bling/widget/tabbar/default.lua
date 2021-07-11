@@ -1,19 +1,19 @@
-local gears = require('gears')
-local wibox = require('wibox')
+local gears = require("gears")
+local wibox = require("wibox")
 
-local beautiful = require('beautiful')
+local beautiful = require("beautiful")
 
-local bg_normal = beautiful.tabbar_bg_normal or beautiful.bg_normal or '#f4f4f7'
-local fg_normal = beautiful.tabbar_fg_normal or beautiful.fg_normal or '#000000'
-local bg_focus = beautiful.tabbar_bg_focus or beautiful.bg_focus or '#000000'
-local fg_focus = beautiful.tabbar_fg_focus or beautiful.fg_focus or '#f4f4f7'
-local font = beautiful.tabbar_font or beautiful.font or 'Hack 15'
+local bg_normal = beautiful.tabbar_bg_normal or beautiful.bg_normal or "#f4f4f7"
+local fg_normal = beautiful.tabbar_fg_normal or beautiful.fg_normal or "#000000"
+local bg_focus = beautiful.tabbar_bg_focus or beautiful.bg_focus or "#000000"
+local fg_focus = beautiful.tabbar_fg_focus or beautiful.fg_focus or "#f4f4f7"
+local font = beautiful.tabbar_font or beautiful.font .. ' 10' or "Hack 15"
 local size = beautiful.tabbar_size or 20
-local position = beautiful.tabbar_position or 'top'
+local position = beautiful.tabbar_position or "top"
 
 local function create(c, focused_bool, buttons)
     local flexlist = wibox.layout.flex.horizontal()
-    local title_temp = c.name or c.class or '-'
+    local title_temp = c.name or c.class or "-"
     local bg_temp = bg_normal
     local fg_temp = fg_normal
     if focused_bool then
@@ -21,15 +21,15 @@ local function create(c, focused_bool, buttons)
         fg_temp = fg_focus
     end
     local text_temp = wibox.widget.textbox()
-    text_temp.align = 'center'
-    text_temp.valign = 'center'
+    text_temp.align = "center"
+    text_temp.valign = "center"
     text_temp.font = font
-    text_temp.markup = "<span foreground='" .. fg_temp .. "'>" .. title_temp .. '</span>'
+    text_temp.markup = "<span foreground='" .. fg_temp .. "'>" .. title_temp .. "</span>"
     c:connect_signal(
-        'property::name',
+        "property::name",
         function(_)
-            local title_temp = c.name or c.class or '-'
-            text_temp.markup = "<span foreground='" .. fg_temp .. "'>" .. title_temp .. '</span>'
+            local title_temp = c.name or c.class or "-"
+            text_temp.markup = "<span foreground='" .. fg_temp .. "'>" .. title_temp .. "</span>"
         end
     )
     local wid_temp =

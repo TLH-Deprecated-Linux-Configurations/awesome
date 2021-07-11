@@ -135,3 +135,4 @@ root.buttons(
         )
     )
 )
+return myawesomemenu

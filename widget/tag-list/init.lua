@@ -1,9 +1,9 @@
-local awful = require('awful')
-local wibox = require('wibox')
-local dpi = require('beautiful').xresources.apply_dpi
-local clickable_container = require('widget.clickable-container')
-local beautiful = require('beautiful')
-local modkey = require('configuration.keys.mod').modkey
+local awful = require("awful")
+local wibox = require("wibox")
+local dpi = require("beautiful").xresources.apply_dpi
+local clickable_container = require("widget.clickable-container")
+local beautiful = require("beautiful")
+local modkey = require("configuration.keys.mod").modkey
 --- Common method to create buttons.
 -- @tab buttons
 -- @param object
@@ -21,10 +21,10 @@ local function create_buttons(buttons, object)
                 modifiers = b.modifiers,
                 button = b.button,
                 on_press = function()
-                    b:emit_signal('press', object)
+                    b:emit_signal("press", object)
                 end,
                 on_release = function()
-                    b:emit_signal('release', object)
+                    b:emit_signal("release", object)
                 end
             }
             btns[#btns + 1] = btn
@@ -83,15 +83,15 @@ local function list_update(w, buttons, label, data, objects)
         args = args or {}
 
         -- The text might be invalid, so use pcall.
-        if text == nil or text == '' then
+        if text == nil or text == "" then
             tbm:set_margins(3)
         else
             if not tb:set_markup_silently(text) then
-                tb:set_markup('<i>&lt;Invalid text&gt;</i>')
+                tb:set_markup("<i>&lt;Invalid text&gt;</i>")
             end
         end
         bgb:set_bg(bg)
-        if type(bg_image) == 'function' then
+        if type(bg_image) == "function" then
             bg_image = bg_image(tb, o, nil, objects, i)
         end
         bgb:set_bgimage(bg_image)
@@ -102,7 +102,7 @@ local function list_update(w, buttons, label, data, objects)
         end
 
         bgb.shape_border_width = 0
-        bgb.shape_border_color = beautiful.background_transparency
+        bgb.shape_border_color = "00"
 
         w:add(bgb)
     end

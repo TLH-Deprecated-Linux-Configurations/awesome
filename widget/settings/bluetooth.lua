@@ -300,7 +300,7 @@ return function()
     view:setup {
         layout = wibox.container.background,
         bg = beautiful.bg_normal .. "00",
-        --fg = config.colors.xf,
+        --fg = beautiful.xforeground,
         {
             layout = wibox.layout.align.vertical,
             {

@@ -250,7 +250,7 @@ naughty.connect_signal(
                                                     margins = beautiful.notification_margin,
                                                     widget = wibox.container.margin
                                                 },
-                                                bg = beautiful.bg_normal .. beautiful.background_transparency,
+                                                bg = beautiful.bg_normal .. "00",
                                                 widget = wibox.container.background
                                             },
                                             {

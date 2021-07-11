@@ -16,7 +16,7 @@ local box
 local dont_disturb_text =
     wibox.widget {
     text = "Do Not Disturb",
-    font = beautiful.font .. " 12",
+    font = beautiful.font .. ' 10',
     align = "left",
     widget = wibox.widget.textbox
 }

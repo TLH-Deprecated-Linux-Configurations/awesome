@@ -1,22 +1,22 @@
-local awful = require('awful')
-local gears = require('gears')
-local wibox = require('wibox')
-local beautiful = require('beautiful')
-local xresources = require('beautiful.xresources')
+local awful = require("awful")
+local gears = require("gears")
+local wibox = require("wibox")
+local beautiful = require("beautiful")
+local xresources = require("beautiful.xresources")
 local dpi = xresources.apply_dpi
-local helpers = require(tostring(...):match('.*bling') .. '.helpers')
+local helpers = require(tostring(...):match(".*bling") .. ".helpers")
 
-local bg_normal = beautiful.tabbar_bg_normal or beautiful.xcolor0 or '#f4f4f7'
-local fg_normal = beautiful.tabbar_fg_normal or beautiful.xforeground or '#22262d'
-local bg_focus = beautiful.tabbar_bg_focus or beautiful.xcolor0 or '#3c3f4c'
-local fg_focus = beautiful.tabbar_fg_focus or beautiful.fg_focus or '#f4f4f7'
-local font = beautiful.tabbar_font or beautiful.font or 'Hack 15'
+local bg_normal = beautiful.tabbar_bg_normal or beautiful.xcolor0 or "#f4f4f7"
+local fg_normal = beautiful.tabbar_fg_normal or beautiful.xforeground or "#22262d"
+local bg_focus = beautiful.tabbar_bg_focus or beautiful.xcolor0 or "#3c3f4c"
+local fg_focus = beautiful.tabbar_fg_focus or beautiful.fg_focus or "#f4f4f7"
+local font = beautiful.tabbar_font or beautiful.font .. ' 10' or "Hack 15"
 local size = beautiful.tabbar_size or dpi(20)
 local border_radius = 1
-local position = beautiful.tabbar_position or 'top'
-local close_color = beautiful.tabbar_color_close or beautiful.xcolor1 or '#f9929b'
-local min_color = beautiful.tabbar_color_min or beautiful.xcolor3 or '#fbdf90'
-local float_color = beautiful.tabbar_color_float or beautiful.xcolor5 or '#ccaced'
+local position = beautiful.tabbar_position or "top"
+local close_color = beautiful.tabbar_color_close or beautiful.xcolor1 or "#f9929b"
+local min_color = beautiful.tabbar_color_min or beautiful.xcolor3 or "#fbdf90"
+local float_color = beautiful.tabbar_color_float or beautiful.xcolor5 or "#ccaced"
 
 -- Helper to create buttons
 local function create_title_button(c, color_focus, color_unfocus)
@@ -35,7 +35,7 @@ local function create_title_button(c, color_focus, color_unfocus)
         tb_color,
         width = dpi(25),
         height = dpi(25),
-        strategy = 'min',
+        strategy = "min",
         layout = wibox.layout.constraint
     }
 
@@ -47,18 +47,18 @@ local function create_title_button(c, color_focus, color_unfocus)
         end
     end
     update()
-    c:connect_signal('focus', update)
-    c:connect_signal('unfocus', update)
+    c:connect_signal("focus", update)
+    c:connect_signal("unfocus", update)
 
     tb:connect_signal(
-        'mouse::enter',
+        "mouse::enter",
         function()
-            tb_color.bg = color_focus .. '70'
+            tb_color.bg = color_focus .. "70"
         end
     )
 
     tb:connect_signal(
-        'mouse::leave',
+        "mouse::leave",
         function()
             tb_color.bg = color_focus
         end
@@ -70,7 +70,7 @@ end
 
 local function create(c, focused_bool, buttons)
     -- local flexlist = wibox.layout.flex.horizontal()
-    local title_temp = c.name or c.class or '-'
+    local title_temp = c.name or c.class or "-"
     local bg_temp = bg_normal
     local fg_temp = fg_normal
     if focused_bool then
@@ -78,15 +78,15 @@ local function create(c, focused_bool, buttons)
         fg_temp = fg_focus
     end
     local text_temp = wibox.widget.textbox()
-    text_temp.align = 'center'
-    text_temp.valign = 'center'
+    text_temp.align = "center"
+    text_temp.valign = "center"
     text_temp.font = font
-    text_temp.markup = "<span foreground='" .. fg_temp .. "'>" .. title_temp .. '</span>'
+    text_temp.markup = "<span foreground='" .. fg_temp .. "'>" .. title_temp .. "</span>"
     c:connect_signal(
-        'property::name',
+        "property::name",
         function(_)
-            local title_temp = c.name or c.class or '-'
-            text_temp.markup = "<span foreground='" .. fg_temp .. "'>" .. title_temp .. '</span>'
+            local title_temp = c.name or c.class or "-"
+            text_temp.markup = "<span foreground='" .. fg_temp .. "'>" .. title_temp .. "</span>"
         end
     )
 
@@ -101,7 +101,7 @@ local function create(c, focused_bool, buttons)
         },
         text_temp,
         nil,
-        expand = 'none',
+        expand = "none",
         layout = wibox.layout.align.horizontal
     }
 
@@ -117,7 +117,7 @@ local function create(c, focused_bool, buttons)
             },
             text_temp,
             nil,
-            expand = 'none',
+            expand = "none",
             layout = wibox.layout.align.horizontal
         }
     end
@@ -126,7 +126,7 @@ local function create(c, focused_bool, buttons)
     local left_shape = nil
     local right_shape = nil
 
-    if position == 'top' then
+    if position == "top" then
         main_content =
             wibox.widget {
             {
@@ -176,7 +176,7 @@ local function create(c, focused_bool, buttons)
                 },
                 width = border_radius + (border_radius / 2),
                 height = size,
-                strategy = 'exact',
+                strategy = "exact",
                 layout = wibox.layout.constraint
             },
             main_content,
@@ -194,7 +194,7 @@ local function create(c, focused_bool, buttons)
                 },
                 width = border_radius + (border_radius / 2),
                 height = size,
-                strategy = 'exact',
+                strategy = "exact",
                 layout = wibox.layout.constraint
             },
             layout = wibox.layout.align.horizontal

@@ -77,19 +77,6 @@ local function setup_state(state)
     signals.emit_brightness(math.max(state.brightness, 5))
     signals.emit_do_not_disturb(state.do_not_disturb or false)
     signals.emit_oled_mode(state.oled_mode or false)
-
-    -- find all mouse peripheral that are currently attached to the machine
-    if state.mouse then
-        local devices = mouse.getInputDevices()
-        for _, device in ipairs(devices) do
-            -- if they exist then set their properties
-            if state.mouse[device.name] ~= nil then
-                mouse.setAcceleration(device.id, state.mouse[device.name].accel or 0)
-                mouse.setMouseSpeed(device.id, state.mouse[device.name].speed or 1)
-                mouse.setNaturalScrolling(device.id, state.mouse[device.name].natural_scroll or false)
-            end
-        end
-    end
 end
 -- ########################################################################
 -- ########################################################################
@@ -99,30 +86,6 @@ end
 local save_state = load()
 setup_state(save_state)
 
--- xinput id's are not persistent across reboots
--- thus we map the xinput id to the device name, which is always the same
--- in case our state doesn't have the id yet we create it
-local function get_mouse_state_id(id)
-    local devices = mouse.getInputDevices()
-    -- find the name in the device range
-    local name = nil
-    for _, device in ipairs(devices) do
-        if device.id == id then
-            name = device.name
-        end
-    end
-    if save_state.mouse == nil then
-        save_state.mouse = {}
-    end
-    if name ~= nil and save_state.mouse[name] == nil then
-        save_state.mouse[name] = {
-            accel = 0,
-            speed = 1,
-            natural_scroll = false
-        }
-    end
-    return name
-end
 -- ########################################################################
 -- ########################################################################
 -- ########################################################################
@@ -163,33 +126,7 @@ signals.connect_exit(
         save(save_state)
     end
 )
--- ########################################################################
--- ########################################################################
--- ########################################################################
--- mouse related signals
-signals.connect_mouse_speed(
-    function(tbl)
-        print("Saving mouse id: " .. tbl.id .. " to speed value: " .. tbl.speed)
-        local id = get_mouse_state_id(tbl.id)
-        if id ~= nil then
-            save_state.mouse[id].speed = tbl.speed
-            save(save_state)
-        end
-    end
-)
--- ########################################################################
--- ########################################################################
--- ########################################################################
-signals.connect_mouse_acceleration(
-    function(tbl)
-        print("Saving mouse id: " .. tbl.id .. " to accel value: " .. tbl.speed)
-        local id = get_mouse_state_id(tbl.id)
-        if id ~= nil then
-            save_state.mouse[id].accel = tbl.speed
-            save(save_state)
-        end
-    end
-)
+
 -- ########################################################################
 -- ########################################################################
 -- ########################################################################
@@ -208,18 +145,5 @@ signals.connect_oled_mode(
         print("Changed oled mode to: " .. tostring(bIsOledMode))
         save_state.oled_mode = bIsOledMode
         save(save_state)
-    end
-)
--- ########################################################################
--- ########################################################################
--- ########################################################################
-signals.connect_mouse_natural_scrolling(
-    function(tbl)
-        print("Saving mouse id: " .. tbl.id .. " to natural scrolling state: " .. tostring(tbl.state))
-        local id = get_mouse_state_id(tbl.id)
-        if id ~= nil then
-            save_state.mouse[id].natural_scroll = tbl.state
-            save(save_state)
-        end
     end
 )

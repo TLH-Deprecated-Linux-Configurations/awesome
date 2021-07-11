@@ -3,7 +3,7 @@ local gears = require("gears")
 local beautiful = require("beautiful")
 
 local dpi = require("beautiful").xresources.apply_dpi
-local clickable_container = require("widget.material.clickable-container")
+local clickable_container = require("widget.clickable-container")
 local signals = require("module.settings.signals")
 local animate = require("lib.animations").createAnimObject
 local seperator_widget = require("module.ui-components.separator")
@@ -95,12 +95,6 @@ local right_panel = function()
         bg = beautiful.bg_normal .. "88",
         fg = beautiful.fg_normal
     }
-
-    signals.connect_background_theme_changed(
-        function()
-            panel.bg = beautiful.bg_modal .. beautiful.background_transparency
-        end
-    )
 
     screen.connect_signal(
         "removed",

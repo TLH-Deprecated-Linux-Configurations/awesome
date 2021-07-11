@@ -71,17 +71,10 @@ local left_panel_func = function()
         height = s.geometry.height,
         x = s.geometry.x,
         y = s.geometry.y,
-        bg = beautiful.bg_normal .. beautiful.background_transparency,
+        bg = beautiful.bg_normal .. "00",
         fg = beautiful.fg_normal
     }
-    -- ########################################################################
-    -- ########################################################################
-    -- ########################################################################
-    signals.connect_background_theme_changed(
-        function()
-            left_panel.bg = beautiful.bg_normal .. beautiful.background_transparency
-        end
-    )
+
     -- ########################################################################
     -- ########################################################################
     -- ########################################################################

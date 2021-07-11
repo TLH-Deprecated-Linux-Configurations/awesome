@@ -3,25 +3,25 @@
 -- |__     ||  -__|  _  |   _|  __||     |
 -- |_______||_____|___._|__| |____||__|__|
 
-local wibox = require('wibox')
-local clickable_container = require('widget.material.clickable-container')
-local gears = require('gears')
-local dpi = require('beautiful').xresources.apply_dpi
-local apps = require('configuration.apps')
-local theme = require('theme.icons')
-local HOME = os.getenv('HOME')
+local wibox = require("wibox")
+local clickable_container = require("widget.clickable-container")
+local gears = require("gears")
+local dpi = require("beautiful").xresources.apply_dpi
+local apps = require("configuration.apps")
+local theme = require("theme.icons")
+local HOME = os.getenv("HOME")
 -- acpi sample outputs
 -- Battery 0: Discharging, 75%, 01:51:38 remaining
 -- Battery 0: Charging, 53%, 00:57:43 until charged
 -- ########################################################################
 -- ########################################################################
 -- ########################################################################
-local PATH_TO_ICONS = HOME .. '/.config/awesome/widget/search/icons/'
+local PATH_TO_ICONS = HOME .. "/.config/awesome/widget/search/icons/"
 
 local widget =
     wibox.widget {
     {
-        id = 'icon',
+        id = "icon",
         widget = wibox.widget.imagebox,
         resize = true
     },
@@ -47,7 +47,7 @@ widget_button:buttons(
 -- ########################################################################
 -- ########################################################################
 -- ########################################################################
-widget.icon:set_image(PATH_TO_ICONS .. 'search' .. '.svg')
+widget.icon:set_image(PATH_TO_ICONS .. "search" .. ".svg")
 
 -- To use colors from beautiful theme put
 -- following lines in rc.lua before require("battery"):

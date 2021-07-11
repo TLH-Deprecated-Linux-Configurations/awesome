@@ -12,17 +12,16 @@
 -- @supermodule wibox.container.background
 ---------------------------------------------------------------------------
 
-
-local wibox = require('wibox')
-local gears = require('gears')
-local clickable_container = require('widget.material.clickable-container')
-local beautiful = require('beautiful')
+local wibox = require("wibox")
+local gears = require("gears")
+local clickable_container = require("widget.clickable-container")
+local beautiful = require("beautiful")
 local dpi = beautiful.xresources.apply_dpi
 
 local password_to_star = function(pass)
-    local str = ''
+    local str = ""
     for _ = 1, #pass do
-        str = str .. '*'
+        str = str .. "*"
     end
     return str
 end
@@ -53,7 +52,7 @@ end
 
 local reset_textbox = function(widget, active_text, hidden)
     if widget then
-        active_text = ''
+        active_text = ""
         if hidden then
             widget:set_text(password_to_star(active_text))
         else
@@ -72,14 +71,14 @@ end
 -- @usage -- This will create a basic inputfield
 -- local inputfield = lib.inputfield()
 return function(typing_callback, done_callback, hidden)
-    local active_text = ''
+    local active_text = ""
     local prev_keygrabber
 
     local textbox = wibox.widget.textbox(active_text)
     -- TODO: allow custom fonts
-    textbox.font = 'agave Nerd Font Mono Bold  16'
-    textbox.align = 'left'
-    textbox.valign = 'center'
+    textbox.font = "agave Nerd Font Mono Bold  16"
+    textbox.align = "left"
+    textbox.valign = "center"
 
     local widget =
         wibox.widget {
@@ -114,9 +113,9 @@ return function(typing_callback, done_callback, hidden)
     local input_grabber =
         awful.keygrabber {
         auto_start = true,
-        stop_event = 'release',
+        stop_event = "release",
         keypressed_callback = function(_, _, key, _)
-            if key == 'BackSpace' then
+            if key == "BackSpace" then
                 active_text = delete_key(textbox, active_text, hidden)
             end
             if #key == 1 then
@@ -127,7 +126,7 @@ return function(typing_callback, done_callback, hidden)
             end
         end,
         keyreleased_callback = function(self, _, key, _)
-            if key == 'Escape' or key == 'Return' then
+            if key == "Escape" or key == "Return" then
                 stop_grabber(self)
             end
         end
@@ -141,16 +140,16 @@ return function(typing_callback, done_callback, hidden)
                 nil,
                 function()
                     -- clear the old text
-                    active_text = ''
+                    active_text = ""
                     textbox:set_text(active_text)
 
                     if awful.keygrabber.is_running then
-                        print('Found an existing keygrabber')
+                        print("Found an existing keygrabber")
                         prev_keygrabber = awful.keygrabber.current_instance
                         prev_keygrabber:stop()
                     end
 
-                    print('Start grabbing input for inputbox')
+                    print("Start grabbing input for inputbox")
                     input_grabber:stop()
                     input_grabber:start()
                 end

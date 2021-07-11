@@ -42,7 +42,17 @@ local bottom_panel = function(s)
             x = s.geometry.x + offsetx,
             y = s.geometry.y,
             stretch = false,
-            bg = beautiful.bg_normal .. "88",
+            bg = {
+                type = "linear",
+                from = {0, 0},
+                to = {15, 15},
+                stops = {
+                    {0, beautiful.xbackground .. "33"},
+                    {0.45, beautiful.xcolor18 .. "33"},
+                    {0.85, beautiful.xbackground .. "33"},
+                    {1, beautiful.xcolor18 .. "33"}
+                }
+            },
             fg = beautiful.fg_normal,
             struts = {
                 bottom = dpi(42) -- 48
@@ -99,7 +109,7 @@ local bottom_panel = function(s)
     -- ########################################################################
     -- ########################################################################
     s.control_center_toggle = build_widget(require("layout.left-panel"))
-
+    s.app_button = build_widget(require("widget.app-button"))
     s.bluetooth = build_widget(show_widget_or_default("widget.bluetooth", hardware.hasBluetooth()))
     s.network = build_widget(show_widget_or_default("widget.wifi", hardware.hasWifi()))
     local layout_box = build_widget(require("widget.layoutbox")(s))
@@ -118,6 +128,7 @@ local bottom_panel = function(s)
             {
                 layout = wibox.layout.fixed.horizontal,
                 spacing = dpi(2),
+                s.app_button,
                 s.control_center_toggle,
                 tag_list(s),
                 task_list(s),
@@ -129,7 +140,7 @@ local bottom_panel = function(s)
             {
                 layout = wibox.layout.fixed.horizontal,
                 spacing = dpi(2),
-                {s.systray, margins = dpi(2), widget = wibox.container.margin},
+                {s.systray, margins = dpi(0), widget = wibox.container.margin},
                 s.network,
                 s.bluetooth,
                 s.battery,
@@ -140,8 +151,8 @@ local bottom_panel = function(s)
                 -- clock,
             }
         },
-        left = dpi(5),
-        right = dpi(5),
+        left = dpi(2),
+        right = dpi(2),
         widget = wibox.container.margin
     }
     -- ########################################################################

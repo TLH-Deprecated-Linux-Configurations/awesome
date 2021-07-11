@@ -12,7 +12,7 @@ local card = require("module.ui-components.card")
 
 local beautiful = require("beautiful")
 
-local clickable_container = require("widget.material.clickable-container")
+local clickable_container = require("widget.clickable-container")
 local HOME = os.getenv("HOME")
 local PATH_TO_ICONS = HOME .. "/.config/awesome/widget/social-media/icons/"
 local theme = require("theme.icons")

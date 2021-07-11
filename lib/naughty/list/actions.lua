@@ -27,11 +27,11 @@
 -- @see awful.widget.common
 ----------------------------------------------------------------------------
 
-local wibox    = require("wibox")
+local wibox = require("wibox")
 local awcommon = require("awful.widget.common")
-local abutton  = require("awful.button")
-local gtable   = require("gears.table")
-local beautiful= require("beautiful")
+local abutton = require("awful.button")
+local gtable = require("gears.table")
+local beautiful = require("beautiful")
 
 local module = {}
 
@@ -117,9 +117,16 @@ local module = {}
 -- @tparam gears.surface|string action_bgimage_selected
 -- @see gears.surface
 
-local props = {"shape_border_color", "bg_image" , "fg",
-               "shape_border_width", "underline", "bg",
-               "shape",              "icon_size",     }
+local props = {
+    "shape_border_color",
+    "bg_image",
+    "fg",
+    "shape_border_width",
+    "underline",
+    "bg",
+    "shape",
+    "icon_size"
+}
 
 -- Use a cached loop instead of an large function like the taglist and tasklist
 local function update_style(self)
@@ -129,16 +136,15 @@ local function update_style(self)
         local s = {}
 
         for _, prop in ipairs(props) do
-            if self._private.style[prop.."_"..state] ~= nil then
-                s[prop] = self._private.style[prop.."_"..state]
+            if self._private.style[prop .. "_" .. state] ~= nil then
+                s[prop] = self._private.style[prop .. "_" .. state]
             else
-                s[prop] = beautiful["notification_action_"..prop.."_"..state]
+                s[prop] = beautiful["notification_action_" .. prop .. "_" .. state]
             end
         end
 
         -- Set a fallback for the icon size to prevent them from being gigantic
-        s.icon_size = s.icon_size
-            or beautiful.get_font_height(beautiful.font) * 1.5
+        s.icon_size = s.icon_size or beautiful.get_font_height(beautiful.font) * 1.5
 
         self._private.style_cache[state] = s
     end
@@ -151,8 +157,7 @@ local function wb_label(action, self)
     local style = self._private.style_cache[action.selected and "selected" or "normal"]
 
     -- Add the underline
-    name = style.underline ~= false and
-        ("<u>"..name.."</u>") or name
+    name = style.underline ~= false and ("<u>" .. name .. "</u>") or name
 
     local icon = beautiful.notification_action_label_only ~= true and action.icon or nil
 
@@ -168,12 +173,16 @@ local function wb_label(action, self)
 end
 
 local function update(self)
-    if not self._private.layout or not self._private.notification then return end
+    if not self._private.layout or not self._private.notification then
+        return
+    end
 
     awcommon.list_update(
         self._private.layout,
         self._private.default_buttons,
-        function(o) return wb_label(o, self) end,
+        function(o)
+            return wb_label(o, self)
+        end,
         self._private.data,
         self._private.notification.actions,
         {
@@ -207,7 +216,7 @@ local actionlist = {}
 -- @property style
 -- @tparam table style
 -- @propemits true false
--- @usebeautiful beautiful.font Fallback when the `font` property isn't set.
+-- @usebeautiful beautiful.font  Fallback when the `font` property isn't set.
 -- @usebeautiful beautiful.notification_action_underline_normal Fallback.
 -- @usebeautiful beautiful.notification_action_underline_selected Fallback.
 -- @usebeautiful beautiful.notification_action_icon_only Fallback.
@@ -226,7 +235,6 @@ local actionlist = {}
 -- @usebeautiful beautiful.notification_action_fg_selected Fallback.
 -- @usebeautiful beautiful.notification_action_bgimage_normal Fallback.
 -- @usebeautiful beautiful.notification_action_bgimage_selected Fallback.
-
 
 function actionlist:set_notification(notif)
     self._private.notification = notif
@@ -282,7 +290,7 @@ end
 
 function actionlist:layout(_, width, height)
     if self._private.layout then
-        return { wibox.widget.base.place_widget_at(self._private.layout, 0, 0, width, height) }
+        return {wibox.widget.base.place_widget_at(self._private.layout, 0, 0, width, height)}
     end
 end
 
@@ -322,9 +330,14 @@ end
 local function new(_, args)
     args = args or {}
 
-    local wdg = wibox.widget.base.make_widget(nil, nil, {
-        enable_properties = true,
-    })
+    local wdg =
+        wibox.widget.base.make_widget(
+        nil,
+        nil,
+        {
+            enable_properties = true
+        }
+    )
 
     gtable.crush(wdg, actionlist, true)
 
@@ -336,8 +349,15 @@ local function new(_, args)
 
     update_style(wdg)
 
-    wdg._private.default_buttons = gtable.join(
-        abutton({ }, 1, function(a) a:invoke(args.notification) end)
+    wdg._private.default_buttons =
+        gtable.join(
+        abutton(
+            {},
+            1,
+            function(a)
+                a:invoke(args.notification)
+            end
+        )
     )
 
     return wdg

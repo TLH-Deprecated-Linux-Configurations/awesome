@@ -23,7 +23,7 @@ local dpi = require("beautiful").xresources.apply_dpi
 
 -- Commons requirements
 local wibox = require("wibox")
-local clickable_container = require("widget.material.clickable-container")
+local clickable_container = require("widget.clickable-container")
 local seperator_widget = require("module.ui-components.separator")
 -- Local declarations
 -- ########################################################################

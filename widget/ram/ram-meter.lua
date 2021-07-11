@@ -1,18 +1,18 @@
-local awful = require('awful')
-local beautiful = require('beautiful')
-local gears = require('gears')
-local watch = require('awful.widget.watch')
-local wibox = require('wibox')
-local vicious = require('lib.vicious')
+local awful = require("awful")
+local beautiful = require("beautiful")
+local gears = require("gears")
+local watch = require("awful.widget.watch")
+local wibox = require("wibox")
+local vicious = require("lib.vicious")
 local dpi = beautiful.xresources.apply_dpi
-local icons = require('theme.icons')
+local icons = require("theme.icons")
 
 local ramgraph_widget = {}
 -- memory widget
 local mem = wibox.widget.textbox()
 vicious.cache(vicious.widgets.mem)
-vicious.register(mem, vicious.widgets.mem, '$1%', 1)
-mem.font = beautiful.font .. ' 14'
+vicious.register(mem, vicious.widgets.mem, "$1%", 1)
+mem.font = beautiful.font .. " 14"
 mem.top = 5
 mem.bottom = 5
 mem.border_color = beautiful.xforeground
@@ -24,7 +24,7 @@ local function worker(user_args)
     --- Main ram widget shown on wibar
     local widget_icon =
         wibox.widget {
-        id = 'icon',
+        id = "icon",
         image = icons.memory,
         forced_width = 36,
         forced_height = 36,
@@ -46,7 +46,7 @@ local function worker(user_args)
             widget = wibox.container.margin
         },
         shape = gears.shape.rounded_rect,
-        bg = beautiful.bg_normal .. '77',
+        bg = beautiful.bg_normal .. "77",
         shape_border_color = beautiful.bg_normal,
         shape_border_width = dpi(3),
         widget = wibox.container.background
@@ -55,15 +55,15 @@ local function worker(user_args)
     local old_cursor, old_wibox
 
     ram_button:connect_signal(
-        'mouse::enter',
+        "mouse::enter",
         function(c)
             local wb = mouse.current_wibox
             old_cursor, old_wibox = wb.cursor, wb
-            wb.cursor = 'hand1'
+            wb.cursor = "hand1"
         end
     )
     ram_button:connect_signal(
-        'mouse::leave',
+        "mouse::leave",
         function(c)
             if old_wibox then
                 old_wibox.cursor = old_cursor
@@ -89,7 +89,7 @@ local function worker(user_args)
                 beautiful.xcolor5
             }
         },
-        bg = beautiful.xbackground .. 'cc',
+        bg = beautiful.xbackground .. "cc",
         shape = gears.shape.rounded_rect,
         border_color = beautiful.xforeground,
         border_width = 1,
@@ -100,7 +100,7 @@ local function worker(user_args)
     local total, used, free, shared, buff_cache, available, total_swap, used_swap, free_swap
 
     local function getPercentage(value)
-        return math.floor(value / (total + total_swap) * 100 + 0.5) .. '%'
+        return math.floor(value / (total + total_swap) * 100 + 0.5) .. "%"
     end
 
     watch(
@@ -108,15 +108,15 @@ local function worker(user_args)
         timeout,
         function(widget, stdout)
             total, used, free, shared, buff_cache, available, total_swap, used_swap, free_swap =
-                stdout:match('(%d+)%s*(%d+)%s*(%d+)%s*(%d+)%s*(%d+)%s*(%d+)%s*Swap:%s*(%d+)%s*(%d+)%s*(%d+)')
+                stdout:match("(%d+)%s*(%d+)%s*(%d+)%s*(%d+)%s*(%d+)%s*(%d+)%s*Swap:%s*(%d+)%s*(%d+)%s*(%d+)")
 
             widget.data = {used, total - used}
 
             if popup.visible then
                 popup:get_widget().data_list = {
-                    {'used ' .. getPercentage(used + used_swap), used + used_swap},
-                    {'free ' .. getPercentage(free + free_swap), free + free_swap},
-                    {'buff_cache ' .. getPercentage(buff_cache), buff_cache}
+                    {"used " .. getPercentage(used + used_swap), used + used_swap},
+                    {"free " .. getPercentage(free + free_swap), free + free_swap},
+                    {"buff_cache " .. getPercentage(buff_cache), buff_cache}
                 }
             end
         end,
@@ -130,9 +130,9 @@ local function worker(user_args)
                 1,
                 function()
                     popup:get_widget().data_list = {
-                        {'used ' .. getPercentage(used + used_swap), used + used_swap},
-                        {'free ' .. getPercentage(free + free_swap), free + free_swap},
-                        {'buff_cache ' .. getPercentage(buff_cache), buff_cache}
+                        {"used " .. getPercentage(used + used_swap), used + used_swap},
+                        {"free " .. getPercentage(free + free_swap), free + free_swap},
+                        {"buff_cache " .. getPercentage(buff_cache), buff_cache}
                     }
 
                     if popup.visible then

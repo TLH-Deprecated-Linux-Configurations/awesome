@@ -1,4 +1,4 @@
-😀 grinning face; U+1F600
+😀 grinning face; U+1Fbeautiful.modal_height
 😃 grinning face with big eyes; U+1F603
 😄 grinning face with smiling eyes; U+1F604
 😁 beaming face with smiling eyes; U+1F601
@@ -843,7 +843,7 @@
 🌛 first quarter moon face; U+1F31B
 🌜 last quarter moon face; U+1F31C
 🌡 thermometer; U+1F321
-☀ sun; U+2600
+☀ sun; U+2beautiful.modal_height
 🌝 full moon face; U+1F31D
 🌞 sun with face; U+1F31E
 ⭐ star; U+2B50

@@ -9,6 +9,7 @@
 
 -- This file holds general configuration parameters and functions you can use
 local HOME = os.getenv("HOME")
+local gears = require("gears")
 local filesystem = require("gears.filesystem")
 local file_exists = require("module.functions.file").exists
 
@@ -39,6 +40,24 @@ local config_functions = {
     garbage_collection_cycle = 2 * 60, -- collect garbage every x seconds
     colors_config = HOME .. "/.config/awesome/electric-tantra/colors.conf",
     logo = HOME .. "/.config/awesome/theme/icons/logo.svg",
+    getbrightness = gears.filesystem.get_configuration_dir() .. "bin/getbrightness.sh",
+    setbrightness = gears.filesystem.get_configuration_dir() .. "bin/setbrightness.sh",
+    ramcmd = gears.filesystem.get_configuration_dir() .. "scripts/ram.sh",
+    cpucmd = gears.filesystem.get_configuration_dir() .. "scripts/cpu.sh",
+    diskcmd = gears.filesystem.get_configuration_dir() .. "scripts/disk.sh",
+    proccmd = 'bash -c "ps -eo comm:45,%mem,%cpu --sort=-%cpu,-%mem | head -n 6"',
+    batcmd = 'bash -c "acpi -V | grep -m 1 \'Battery 1\' | awk -F, \'{print $2}\' | sed \'s/%//\'"',
+    updatescmd = 'bash -c "yay -Sup | wc -l"',
+    setvol = "pamixer --set-volume ",
+    play = "spotifycli --playpause",
+    next = "spotifycli --next",
+    prev = "spotifycli --prev",
+    artist = "spotifycli --artist",
+    song = "spotifycli --song",
+    isplaying = 'bash -c "spotifycli --playbackstatus | diff <(echo "▶") -"',
+    audiosrc = 'pamixer --list-sinks | awk -F\\" \'{print $4}\'',
+    micsrc = 'pamixer --list-sources | grep $(pacmd list-sources | grep \'*\' | awk \'{print $3}\' ) | awk -F\\" \'{print $4}\'',
+    software = "pamac-manager",
     -- ########################################################################
     -- ########################################################################
     -- ########################################################################

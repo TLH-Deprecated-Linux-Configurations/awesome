@@ -16,7 +16,7 @@ local Pango = lgi.Pango
 local PangoCairo = lgi.PangoCairo
 local setmetatable = setmetatable
 
-local textbox = { mt = {} }
+local textbox = {mt = {}}
 
 --- The textbox font.
 -- @beautiful beautiful.font
@@ -78,7 +78,7 @@ function textbox:get_preferred_size(s)
     if s then
         dpi = screen[s].dpi
     else
-        gdebug.deprecate("textbox:get_preferred_size() requires a screen argument", {deprecated_in=5, raw=true})
+        gdebug.deprecate("textbox:get_preferred_size() requires a screen argument", {deprecated_in = 5, raw = true})
         dpi = beautiful.xresources.get_dpi()
     end
 
@@ -96,7 +96,7 @@ function textbox:get_height_for_width(width, s)
     if s then
         dpi = screen[s].dpi
     else
-        gdebug.deprecate("textbox:get_preferred_size() requires a screen argument", {deprecated_in=5, raw=true})
+        gdebug.deprecate("textbox:get_preferred_size() requires a screen argument", {deprecated_in = 5, raw = true})
         dpi = beautiful.xresources.get_dpi()
     end
     return self:get_height_for_width_at_dpi(width, dpi)
@@ -109,7 +109,7 @@ end
 -- @treturn number The preferred width.
 -- @treturn number The preferred height.
 function textbox:get_preferred_size_at_dpi(dpi)
-    local max_lines = 2^20
+    local max_lines = 2 ^ 20
     setup_dpi(self, dpi)
     self._private.layout.width = -1 -- no width set
     self._private.layout.height = -max_lines -- show this many lines per paragraph
@@ -123,7 +123,7 @@ end
 -- @tparam number dpi The DPI value to render at.
 -- @treturn number The needed height.
 function textbox:get_height_for_width_at_dpi(width, dpi)
-    local max_lines = 2^20
+    local max_lines = 2 ^ 20
     setup_dpi(self, dpi)
     self._private.layout.width = Pango.units_from_double(width)
     self._private.layout.height = -max_lines -- show this many lines per paragraph
@@ -202,7 +202,7 @@ end
 -- @param mode Where should long lines be shortened? "start", "middle" or "end"
 
 function textbox:set_ellipsize(mode)
-    local allowed = { none = "NONE", start = "START", middle = "MIDDLE", ["end"] = "END" }
+    local allowed = {none = "NONE", start = "START", middle = "MIDDLE", ["end"] = "END"}
     if allowed[mode] then
         if self._private.layout:get_ellipsize() == allowed[mode] then
             return
@@ -218,7 +218,7 @@ end
 -- @param mode Where to wrap? After "word", "char" or "word_char"
 
 function textbox:set_wrap(mode)
-    local allowed = { word = "WORD", char = "CHAR", word_char = "WORD_CHAR" }
+    local allowed = {word = "WORD", char = "CHAR", word_char = "WORD_CHAR"}
     if allowed[mode] then
         if self._private.layout:get_wrap() == allowed[mode] then
             return
@@ -234,7 +234,7 @@ end
 -- @param mode Where should the textbox be drawn? "top", "center" or "bottom"
 
 function textbox:set_valign(mode)
-    local allowed = { top = true, center = true, bottom = true }
+    local allowed = {top = true, center = true, bottom = true}
     if allowed[mode] then
         if self._private.valign == mode then
             return
@@ -250,7 +250,7 @@ end
 -- @param mode Where should the textbox be drawn? "left", "center" or "right"
 
 function textbox:set_align(mode)
-    local allowed = { left = "LEFT", center = "CENTER", right = "RIGHT" }
+    local allowed = {left = "LEFT", center = "CENTER", right = "RIGHT"}
     if allowed[mode] then
         if self._private.layout:get_alignment() == allowed[mode] then
             return
@@ -289,7 +289,7 @@ local function new(text, ignore_markup)
     ret:set_wrap("word_char")
     ret:set_valign("center")
     ret:set_align("left")
-    ret:set_font(beautiful and beautiful.font)
+    ret:set_font(beautiful and beautiful.font .. ' 10')
 
     if text then
         if ignore_markup then

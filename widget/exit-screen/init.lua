@@ -57,7 +57,7 @@ local buildButton = function(icon, name)
     local button_text =
         wibox.widget {
         text = name,
-        font = beautiful.font,
+        font = beautiful.font .. " 10",
         align = "center",
         valign = "center",
         widget = wibox.widget.textbox
@@ -293,14 +293,7 @@ screen.connect_signal(
                 s.exit_screen.maximum_height = s.geometry.height
             end
         )
-        -- ########################################################################
-        -- ########################################################################
-        -- ########################################################################
-        signals.connect_background_theme_changed(
-            function(theme)
-                s.exit_screen.bg = theme.bg_normal .. "88"
-            end
-        )
+
         -- ########################################################################
         -- ########################################################################
         -- ########################################################################

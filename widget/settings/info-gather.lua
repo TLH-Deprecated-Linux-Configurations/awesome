@@ -47,7 +47,7 @@ local function get_uptime()
     -- get the uptime
     awful.widget.watch(
         "uptime -p",
-        600,
+        beautiful.modal_height,
         function(_, stdout)
             local uptime = string.gsub(stdout, "%\n", "") or ""
             signals.emit_uptime(uptime)
@@ -67,6 +67,21 @@ local function get_ram_info()
             print("Ram usage: " .. usage .. "%")
         end,
         config.ram_startup_delay
+    )
+end
+
+-- ########################################################################
+-- ########################################################################
+-- ########################################################################
+local function get_cpu_info()
+    delayed_timer(
+        config.cpu_poll,
+        function()
+            local out = hardware.getCpuInfo()
+            signals.emit_cpu_usage(out)
+            print("CPU usage: " .. out .. "%")
+        end,
+        config.cpu_startup_delay
     )
 end
 -- ########################################################################
@@ -99,6 +114,7 @@ local function init()
     get_username()
     get_distro_name()
     get_uptime()
+    get_cpu_info()
     get_ram_info()
     get_disk_info()
 end

@@ -6,7 +6,7 @@
 -- ########################################################################
 -- ########################################################################
 local wibox = require("wibox")
-local clickable_container = require("widget.material.clickable-container")
+local clickable_container = require("widget.clickable-container")
 local gears = require("gears")
 local beautiful = require("beautiful")
 local dpi = require("beautiful").xresources.apply_dpi

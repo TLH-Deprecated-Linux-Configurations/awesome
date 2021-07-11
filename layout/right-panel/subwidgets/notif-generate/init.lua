@@ -1,15 +1,15 @@
-local naughty = require('naughty')
-local wibox = require('wibox')
-local gears = require('gears')
-local dpi = require('beautiful').xresources.apply_dpi
-local theme = require('theme.icons')
-local HOME = os.getenv('HOME')
-local lgi = require('lgi')
+local naughty = require("naughty")
+local wibox = require("wibox")
+local gears = require("gears")
+local dpi = require("beautiful").xresources.apply_dpi
+local theme = require("theme.icons")
+local HOME = os.getenv("HOME")
+local lgi = require("lgi")
 local Pango = lgi.Pango
 
-local beautiful = require('beautiful')
+local beautiful = require("beautiful")
 
-local PATH_TO_ICONS = HOME .. '/.config/awesome/widget/notification-center/icons/'
+local PATH_TO_ICONS = HOME .. "/.config/awesome/widget/notification-center/icons/"
 
 local notif_layout = wibox.layout.fixed.vertical(reverse)
 notif_layout.spacing = dpi(5)
@@ -21,7 +21,7 @@ local notif_icon = function(ico_image)
     local noti_icon =
         wibox.widget {
         {
-            id = 'icon',
+            id = "icon",
             resize = true,
             forced_height = dpi(45),
             forced_width = dpi(45),
@@ -36,9 +36,9 @@ end
 local notif_title = function(title)
     return wibox.widget {
         markup = gears.string.xml_escape(title),
-        font = beautiful.font .. ' 12',
-        align = 'center',
-        valign = 'center',
+        font = beautiful.font .. ' 10',
+        align = "center",
+        valign = "center",
         widget = wibox.widget.textbox
     }
 end
@@ -46,15 +46,15 @@ end
 local notif_message = function(msg)
     return wibox.widget {
         markup = msg,
-        font = beautiful.font .. ' 12',
-        align = 'center',
-        valign = 'center',
+        font = beautiful.font .. ' 10',
+        align = "center",
+        valign = "center",
         widget = wibox.widget.textbox
     }
 end
 
 -- Empty content
-local empty_title = 'All Clear'
+local empty_title = "All Clear"
 local empty_message = "There's nothing requiring your attention... Come check back later."
 
 -- The function that generates notifications in right-panel
@@ -77,7 +77,7 @@ local function notif_generate(title, message, icon, noti)
             {
                 {
                     {
-                        id = 'text_role',
+                        id = "text_role",
                         font = beautiful.font .. ' 10',
                         widget = wibox.widget.textbox
                     },
@@ -97,12 +97,12 @@ local function notif_generate(title, message, icon, noti)
     -- The layout of notification to be generated
     local notif_template =
         wibox.widget {
-        id = 'notif_template',
-        expand = 'none',
+        id = "notif_template",
+        expand = "none",
         layout = wibox.layout.fixed.vertical,
         {
             {
-                expand = 'none',
+                expand = "none",
                 layout = wibox.layout.align.horizontal,
                 {
                     nil,
@@ -125,7 +125,7 @@ local function notif_generate(title, message, icon, noti)
         },
         {
             {
-                expand = 'none',
+                expand = "none",
                 layout = wibox.layout.fixed.horizontal,
                 {
                     wibox.widget {
@@ -167,7 +167,7 @@ local function notif_generate(title, message, icon, noti)
 
     -- Delete notification if naughty.list.actions was pressed
     notif_actions:connect_signal(
-        'button::press',
+        "button::press",
         function(_, _, _, _)
             -- Don't let the user make the notification center null
             if #notif_layout.children == 1 then
@@ -175,7 +175,7 @@ local function notif_generate(title, message, icon, noti)
                 _G.notification_firstime = true
                 notif_layout:insert(
                     1,
-                    notif_generate(empty_title, empty_message, PATH_TO_ICONS .. 'dont-disturb' .. '.svg')
+                    notif_generate(empty_title, empty_message, PATH_TO_ICONS .. "dont-disturb" .. ".svg")
                 )
             else
                 notif_layout:remove_widgets(notif_template, true)
@@ -185,7 +185,7 @@ local function notif_generate(title, message, icon, noti)
 
     -- Delete notification if the generated notification was pressed
     notif_template:connect_signal(
-        'button::press',
+        "button::press",
         function(_, _, _, _)
             -- Don't let the user make the notification center null
             if #notif_layout.children == 1 then
@@ -193,7 +193,7 @@ local function notif_generate(title, message, icon, noti)
                 _G.notification_firstime = true
                 notif_layout:insert(
                     1,
-                    notif_generate(empty_title, empty_message, PATH_TO_ICONS .. 'dont-disturb' .. '.svg')
+                    notif_generate(empty_title, empty_message, PATH_TO_ICONS .. "dont-disturb" .. ".svg")
                 )
             else
                 notif_layout:remove_widgets(notif_template, true)
@@ -207,7 +207,7 @@ end
 
 -- add a message to an empty notification center
 local function add_empty()
-    notif_layout:insert(1, notif_generate(empty_title, empty_message, PATH_TO_ICONS .. 'dont-disturb' .. '.svg'))
+    notif_layout:insert(1, notif_generate(empty_title, empty_message, PATH_TO_ICONS .. "dont-disturb" .. ".svg"))
 end
 
 -- Add empty message on startup
@@ -224,7 +224,7 @@ _G.notification_clear_all = clear_all
 
 -- Check signal
 naughty.connect_signal(
-    'request::display',
+    "request::display",
     function(n)
         if _G.notification_firstime then
             -- Delete empty message if the 1st notification is generated
@@ -236,7 +236,7 @@ naughty.connect_signal(
         -- Then generate a widget based on naughty.notify data
         if n.icon == nil then
             -- if naughty sends a signal without an icon then use this instead
-            notif_layout:insert(1, notif_generate(n.title, n.message, PATH_TO_ICONS .. 'new-notif' .. '.svg', n))
+            notif_layout:insert(1, notif_generate(n.title, n.message, PATH_TO_ICONS .. "new-notif" .. ".svg", n))
         else
             -- Use the notification's icon
             notif_layout:insert(1, notif_generate(n.title, n.message, n.icon, n))

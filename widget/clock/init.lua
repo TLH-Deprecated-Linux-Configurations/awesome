@@ -1,19 +1,25 @@
-local awful = require('awful')
+--  ______ __              __
+-- |      |  |.-----.----.|  |--.
+-- |   ---|  ||  _  |  __||    <
+-- |______|__||_____|____||__|__|
+-- ########################################################################
+-- ########################################################################
+-- ########################################################################
+local wibox = require("wibox")
+local beautiful = require("beautiful")
+require("widget.calendar-widget")
+-- ########################################################################
+-- ########################################################################
+-- ########################################################################
+local clock = wibox.widget.textclock('<span font="' .. beautiful.font .. '"> %a %H:%M:%S %m/%d/%y</span>')
 
-local wibox = require('wibox')
-
--- Create a textclock widget
-local mytextclock = wibox.widget.textclock()
-
--- Add a calendar (credits to kylekewley for the original code)
-local month_calendar =
-    awful.widget.calendar_popup.month(
-    {
-        screen = s,
-        start_sunday = false,
-        week_numbers = true
-    }
+clock:connect_signal(
+    "button::press",
+    function(_, _, _, button)
+        if button == 1 then
+            cal_toggle()
+        end
+    end
 )
-month_calendar:attach(mytextclock)
 
-return mytextclock
+return clock

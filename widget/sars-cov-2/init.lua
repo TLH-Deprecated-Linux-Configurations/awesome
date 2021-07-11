@@ -31,7 +31,7 @@ local covid_deceases =
 local covid_deaths =
     wibox.widget {
     text = ("Can't retreive deaths."),
-    font = beautiful.font .. " 12",
+    font = beautiful.font .. ' 10',
     align = "left",
     valign = "center",
     widget = wibox.widget.textbox
