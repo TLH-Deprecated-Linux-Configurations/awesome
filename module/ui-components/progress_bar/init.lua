@@ -48,6 +48,8 @@ function mat_slider:get_value()
 end
 
 function mat_slider:set_read_only(value)
+    collectgarbage("collect")
+
     if self._private.read_only ~= value then
         self._private.read_only = value
         self:emit_signal("property::read_only")
@@ -118,7 +120,6 @@ local function new(args)
     -- ########################################################################
     -- ########################################################################
     -- ########################################################################
-
 
     ret._private.read_only = false
 

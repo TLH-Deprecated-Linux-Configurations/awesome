@@ -7,28 +7,31 @@
 -- ########################################################################
 --                                                                         \
 -- Default widget requirements
-local base = require('wibox.widget.base')
-local gtable = require('gears.table')
+local base = require("wibox.widget.base")
+local gtable = require("gears.table")
 local setmetatable = setmetatable
-local dpi = require('beautiful').xresources.apply_dpi
+local dpi = require("beautiful").xresources.apply_dpi
 
 -- Commons requirements
-local wibox = require('wibox')
-local gears = require('gears')
-local beautiful = require('beautiful')
+local wibox = require("wibox")
+local gears = require("gears")
+local beautiful = require("beautiful")
 -- Local declarations
 -- ########################################################################
 -- ########################################################################
 -- ########################################################################
 local mat_slider = {mt = {}}
+
 -- ########################################################################
 -- ########################################################################
 -- ########################################################################
 function mat_slider:set_value(value)
+    collectgarbage("collect")
+
     if self._private.value ~= value then
         self._private.value = value
         self._private.progress_bar:set_value(self._private.value)
-        self:emit_signal('property::value')
+        self:emit_signal("property::value")
     end
 end
 -- ########################################################################
@@ -43,8 +46,8 @@ end
 function mat_slider:set_read_only(value)
     if self._private.read_only ~= value then
         self._private.read_only = value
-        self:emit_signal('property::read_only')
-        self:emit_signal('widget::layout_changed')
+        self:emit_signal("property::read_only")
+        self:emit_signal("widget::layout_changed")
     end
 end
 -- ########################################################################
@@ -95,7 +98,7 @@ local function new(args)
         handle_width = dpi(26),
         handle_color = beautiful.xcolor6,
         handle_border_width = 1,
-        handle_border_color = '#00000012',
+        handle_border_color = "#00000012",
         minimum = 0,
         maximum = 100,
         value = 25,
@@ -108,7 +111,7 @@ local function new(args)
     -- ########################################################################
     -- ########################################################################
     ret._private.progress_bar:connect_signal(
-        'property::value',
+        "property::value",
         function()
             ret:set_value(ret._private.progress_bar.value)
         end

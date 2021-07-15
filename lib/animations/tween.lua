@@ -453,6 +453,9 @@ end
 -- Tween methods
 
 local Tween = {}
+
+collectgarbage("setpause", 100)
+collectgarbage("setstepmul", 400)
 local Tween_mt = {__index = Tween}
 
 function Tween:set(clock)

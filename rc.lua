@@ -25,6 +25,12 @@ require("module.settings.notifications")
 
 require("widget.titlebar")()
 require("module.ui-components.backdrop")
+
+local bling = require("lib.bling")
+bling.module.window_swallowing.start() -- activates window swallowing
+--bling.module.window_swallowing.stop()    -- deactivates window swallowing
+--bling.module.window_swallowing.toggle()  -- toggles window swallowing
+bling.module.flash_focus.enable()
 -- ########################################################################
 -- Layout
 require("layout")
@@ -40,5 +46,7 @@ _G.root.keys(require("configuration.keys.global"))
 require("module.settings.bootup_configuration")
 require("module.settings.lazy_load_boot")
 
--- remove all images from memory (to save memory space)
+-- remove all images from memory (to save memory space at expense of the CPU so don't go hammer time too hard)
 collectgarbage("collect")
+collectgarbage("setpause", 100)
+collectgarbage("setstepmul", 400)

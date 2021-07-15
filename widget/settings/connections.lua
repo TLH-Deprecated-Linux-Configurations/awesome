@@ -38,6 +38,9 @@ local settings_nw = dpi(260)
 local active_text = ""
 
 local static_connections = {}
+
+collectgarbage("collect")
+
 local password_fields = {}
 
 local scrollbox_body
@@ -271,11 +274,11 @@ return function()
   view.right = m
 
   local title = wibox.widget.textbox(("Connections"))
-  title.font = beautiful.font .. ' 22'
+  title.font = beautiful.font .. " 22"
   title.forced_height = settings_index + m + m
 
   local close = wibox.widget.imagebox(icons.close)
-  close.font = beautiful.font .. ' 10'
+  close.font = beautiful.font .. " 10"
   close.forced_height = 40
   close:buttons(
     gears.table.join(

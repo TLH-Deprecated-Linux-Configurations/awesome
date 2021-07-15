@@ -66,6 +66,7 @@ end
 -- module.hardware.hardware-check.hasBluetooth()
 local function bluetooth()
     local _, returnValue = osExecute("systemctl is-active bluetooth")
+
     -- only check if a bluetooth controller is found if the bluetooth service is active
     -- Otherwise the system will hang
     if returnValue == 0 then
@@ -125,6 +126,7 @@ local function getDefaultIP()
     -- we create a socket to 0.0.0.1 as that ip is guaranteed to be in the default gateway
     -- however we never send a packet as that would leek user data
     -- and would't work in private networks
+
     local socket = require("socket").udp()
     socket:setpeername("0.0.0.1", 81)
     local ip = socket:getsockname() or "0.0.0.0"
@@ -140,6 +142,7 @@ end
 -- module.hardware.hardware-check.getRamInfo()
 local function getRamInfo()
     local length = 24
+
     local stdout = fileHandle.lines("/proc/meminfo")
     if #stdout < length then
         return
@@ -174,6 +177,7 @@ local function getCpuInfo()
     local frequency = string.gmatch(stdout[8], "%d+")()
     local cpucmd = "top -n 1 -b | grep Cpu | awk '{usage=100-$8} END {print usage}'"
     local out = awful.spawn(cpucmd)
+
     -- find all cpu's (some systems have multi cpu setups)
     local processors = {}
     for index, line in ipairs(stdout) do

@@ -22,6 +22,7 @@ local function _extract_pa_ctl_state(command, id, port, description, hasID)
     local lastSink
     local lastDescription
     local lastSinkId
+    collectgarbage("collect")
 
     local result = {}
     -- ########################################################################

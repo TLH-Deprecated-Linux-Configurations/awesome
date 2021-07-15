@@ -425,4 +425,21 @@ tag.connect_signal(
     end
 )
 
+function backup()
+    local s = awful.screen.focused()
+    local c = awful.client.focus.history.get(s, 0)
+    if c then
+        client.focus = c
+        c:raise()
+    end
+end
+
+--------------------------------------------------------------------> signal ;
+
+client.connect_signal("property::minimized", backup)
+--+ attach to minimized state
+
+client.connect_signal("unmanage", backup)
+--+ attach to closed state
+
 return connections

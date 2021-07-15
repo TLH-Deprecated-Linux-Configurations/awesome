@@ -10,6 +10,8 @@
 
 -- check if a file or directory exists
 local function exists(file)
+    
+
     if not (type(file) == "string") then
         return false
     end
@@ -42,6 +44,8 @@ end
 -- @usage -- This true
 -- module.functions.file.exists("/etc/passwd")
 local function file_exists(file)
+    
+
     if type(file) ~= "string" then
         return false
     end
@@ -58,6 +62,8 @@ end
 -- @usage -- This returns file.txt
 -- module.functions.file.basename("/sys/class/power_supply/BAT0/file.txt")
 local function basename(str)
+    
+
     if type(str) == "string" then
         local libgen = require("posix.libgen")
         return libgen.basename(str)
@@ -73,6 +79,8 @@ end
 -- @usage -- This returns /sys/class/power_supply/BAT0
 -- module.functions.file.dirname("/sys/class/power_supply/BAT0/file.txt")
 local function dirname(str)
+    
+
     if type(str) == "string" then
         if string.sub(str, #str, #str) == "/" then
             return str
@@ -98,6 +106,8 @@ end
 -- @usage -- This true
 -- module.functions.file.dir_exists("/etc")
 local function dir_exists(dir)
+    
+
     if type(dir) ~= "string" then
         return false
     end
@@ -115,6 +125,8 @@ end
 -- @usage
 -- module.functions.file.dir_create(os.getenv("HOME") .. "/.cache/tde/some_dir")
 local function dir_create(path)
+    
+
     local stat = require("posix.sys.stat")
     local split = require("lib.function.common").split
     local dir = dirname(path)
@@ -146,6 +158,8 @@ end
 -- @usage -- This true
 -- module.functions.file.overwrite("hallo.txt", "this is content in the file")
 local function overwrite(file, data)
+    
+
     if type(file) ~= "string" then
         return false
     end
@@ -166,6 +180,8 @@ end
 -- @usage -- This true
 -- module.functions.file.write("hallo.txt", "this is content in the file")
 local function write(file, data)
+    
+
     if type(file) ~= "string" then
         return false
     end
@@ -187,6 +203,8 @@ end
 -- @usage -- This gives the first 100 lines of /etc/hosts and filters it by only showing lines that start with ipv4 addresses
 -- module.functions.file.lines("/etc/hosts", "[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}.*", 100) -> is of type table
 local function lines_from(file, match, head)
+    
+
     local fullMatch = "^.*$"
     match = match or fullMatch
     if not file_exists(file) then
@@ -220,6 +238,8 @@ end
 -- @usage -- This gives the first 100 lines of /etc/hosts and filters it by only showing lines that start with ipv4 addresses
 -- module.functions.file.string("/etc/hosts", "[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}.*", 100) -> is of type string
 local function getString(file, match, head)
+    
+
     local res = lines_from(file, match, head)
     if type(res) == "string" then
         return res
@@ -236,6 +256,8 @@ end
 -- @usage -- This returns a table
 -- module.functions.file.list_dir("/etc") -> {1:"/etc/passwd", 2:"/etc/shadow", 3:"/etc/hosts", ...}
 local function list_dir(str)
+    
+
     if not (type(str) == "string") then
         return {}
     end
@@ -264,6 +286,8 @@ end
 -- @usage -- This returns a table
 -- module.functions.file.list_dir_full("/etc") -> {1:"/etc/passwd", 2:"/etc/ssh/sshd_config", 3:"/etc/pacman/pacman.conf", ...}
 local function list_dir_full(str)
+    
+
     if not (type(str) == "string") then
         return {}
     end
@@ -287,6 +311,8 @@ end
 --- Function to remove a file for the filesystem
 --@param string filename the path to the file
 local function rm(filename)
+    
+
     -- make sure we don't destroy the root :-)
     if filename == "/" then
         return
@@ -305,6 +331,8 @@ end
 -- @usage -- This returns a string containing the file
 -- local file = module.functions.file.mktemp()
 local function mktemp()
+    
+
     local _, file = require("posix.stdlib").mkstemp("/tmp/tde.XXXXXX")
     return file
 end
@@ -315,6 +343,8 @@ end
 -- @usage -- This returns a string containing the directory
 -- local dir = module.functions.file.mktempdir()
 local function mktempdir()
+    
+
     local dir = require("posix.stdlib").mkdtemp("/tmp/tde.d.XXXXXX")
     return dir
 end
@@ -324,6 +354,7 @@ end
 local function log(filename)
     -- tests the functions above
     local lines = lines_from(filename)
+    
 
     -- print all line numbers and their contents
     for k, v in pairs(lines) do

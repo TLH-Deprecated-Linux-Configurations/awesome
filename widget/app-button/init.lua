@@ -18,7 +18,7 @@ local widget =
     layout = wibox.layout.align.horizontal
 }
 
-local widget_button = clickable_container(wibox.container.margin(widget, dpi(2), dpi(2), 1, 1)) -- default top bottom margin is 7
+local widget_button = clickable_container(wibox.container.margin(widget, dpi(0), dpi(0), 0, 0)) -- default top bottom margin is 7
 widget_button:buttons(
     gears.table.join(
         awful.button(
@@ -46,6 +46,6 @@ awful.tooltip(
     }
 )
 
-widget.icon:set_image(PATH_TO_ICONS .. "el-logo.svg")
+widget.icon:set_image(PATH_TO_ICONS .. "logo.svg")
 
 return widget_button

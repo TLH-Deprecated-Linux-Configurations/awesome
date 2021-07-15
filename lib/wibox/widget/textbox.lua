@@ -289,7 +289,7 @@ local function new(text, ignore_markup)
     ret:set_wrap("word_char")
     ret:set_valign("center")
     ret:set_align("left")
-    ret:set_font(beautiful and beautiful.font .. ' 10')
+    ret:set_font(beautiful and beautiful.font .. " 10")
 
     if text then
         if ignore_markup then

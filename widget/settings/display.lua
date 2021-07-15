@@ -53,6 +53,9 @@ signals.connect_exit(
 )
 
 local screens = {}
+
+collectgarbage("collect")
+
 local mon_size = {
   w = nil,
   h = nil

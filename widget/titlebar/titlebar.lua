@@ -7,22 +7,33 @@ local font = require("utils.font")
 local beautiful = require("beautiful")
 -- local helper = require("utils.helper")
 
--- local ncmpcpp = require("widgets.mpc")({ 
+-- local ncmpcpp = require("widgets.mpc")({
 --   mode = "titlebar"
 -- })
 
 local titlebar = {}
 
+collectgarbage("collect")
+
 function titlebar.button(c)
-  local buttons = gtable.join(
-    awful.button({}, 1, function()
-      c:emit_signal("request::activate", "titlebar", { raise = true })
-      awful.mouse.client.move(c)
-    end),
-    awful.button({}, 3, function()
-      c:emit_signal("request::activate", "titlebar", { raise = true })
-      awful.mouse.client.resize(c)
-    end)
+  local buttons =
+    gtable.join(
+    awful.button(
+      {},
+      1,
+      function()
+        c:emit_signal("request::activate", "titlebar", {raise = true})
+        awful.mouse.client.move(c)
+      end
+    ),
+    awful.button(
+      {},
+      3,
+      function()
+        c:emit_signal("request::activate", "titlebar", {raise = true})
+        awful.mouse.client.resize(c)
+      end
+    )
   )
   return buttons
 end
@@ -31,7 +42,7 @@ end
 --   local client_off = { 'Brave-browser', 'Lutris', 'music_n' } -- from the rc.lua
 --     for _,v in pairs(client_off) do
 --       if v == c.class then
---         return true 
+--         return true
 --       end
 --     end
 --   return false
@@ -50,16 +61,22 @@ end
 -- end
 
 local function gen_button(c, icon, fg, cmd)
-  return button({
-    fg_icon = fg, icon = font.button(icon), command = function()
-      cmd(c)
-    end
-  })
+  return button(
+    {
+      fg_icon = fg,
+      icon = font.button(icon),
+      command = function()
+        cmd(c)
+      end
+    }
+  )
 end
 
 function titlebar.button_close(c)
-  local close = function() c:kill() end
-  return gen_button(c, '', M.x.error, close)
+  local close = function()
+    c:kill()
+  end
+  return gen_button(c, "", M.x.error, close)
 end
 
 function titlebar.button_maximize(c)
@@ -67,14 +84,14 @@ function titlebar.button_maximize(c)
     c.maximized = not c.maximized
     c:raise()
   end
-  return gen_button(c, '', M.x.primary, maximize)
+  return gen_button(c, "", M.x.primary, maximize)
 end
 
 function titlebar.button_minimize(c)
   local minimize = function()
     c.minimized = true
   end
-  return gen_button(c, '', M.x.secondary, minimize)
+  return gen_button(c, "", M.x.secondary, minimize)
 end
 
 function titlebar.title(c)

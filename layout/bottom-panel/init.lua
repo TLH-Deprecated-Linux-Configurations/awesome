@@ -64,6 +64,8 @@ local bottom_panel = function(s)
     panel:connect_signal(
         "mouse::enter",
         function()
+            collectgarbage("collect")
+
             local w = mouse.current_wibox
             if w then
                 w.cursor = "left_ptr"
@@ -129,7 +131,6 @@ local bottom_panel = function(s)
                 layout = wibox.layout.fixed.horizontal,
                 spacing = dpi(2),
                 s.app_button,
-                s.control_center_toggle,
                 tag_list(s),
                 task_list(s),
                 left = dpi(5),
@@ -145,14 +146,15 @@ local bottom_panel = function(s)
                 s.bluetooth,
                 s.battery,
                 layout_box,
-                s.mytextclock,
-                s.notification_center
+                s.control_center_toggle,
+                s.notification_center,
+                s.mytextclock
 
                 -- clock,
             }
         },
-        left = dpi(2),
-        right = dpi(2),
+        left = dpi(10),
+        right = dpi(10),
         widget = wibox.container.margin
     }
     -- ########################################################################

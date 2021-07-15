@@ -34,6 +34,8 @@ local mat_list_item = {mt = {}}
 -- ########################################################################
 -- ########################################################################
 function mat_list_item:build_separator()
+    collectgarbage("collect")
+
     self._private.separator = seperator_widget(1, "horizontal", 0.08)
     self:emit_signal("widget::layout_changed")
 end

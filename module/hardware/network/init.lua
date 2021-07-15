@@ -9,6 +9,7 @@
 local split = require("lib.function.common").split
 
 local function __extract_ssid_line(line)
+    collectgarbage("collect")
     local splitted = split(line, "%s")
     local result = {
         active = false
@@ -57,6 +58,7 @@ end
 --    end
 -- end)
 local function get_ssid_list(callback)
+    collectgarbage("collect")
     awful.spawn.easy_async_with_shell(
         "nmcli dev wifi list",
         function(out)

@@ -8,6 +8,9 @@ local dpi = beautiful.xresources.apply_dpi
 local icons = require("theme.icons")
 
 local ramgraph_widget = {}
+
+collectgarbage("collect")
+
 -- memory widget
 local mem = wibox.widget.textbox()
 vicious.cache(vicious.widgets.mem)

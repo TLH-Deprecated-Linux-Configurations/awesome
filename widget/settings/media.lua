@@ -35,6 +35,8 @@ local settings_nw = dpi(260)
 -- ########################################################################
 local scrollbox_body = {}
 
+collectgarbage("collect")
+
 local refresh = function()
 end
 
@@ -64,13 +66,17 @@ return function()
   view.right = m
 
   local title = wibox.widget.textbox("Media")
-  title.font = beautiful.title_font .. ' 22'
+  title.font = beautiful.title_font .. " 22"
   title.forced_height = settings_index + m + m
 
   -- ########################################################################
   -- ########################################################################
   -- ########################################################################
   local close = wibox.widget.imagebox(icons.close)
+
+  collectgarbage("setpause", 100)
+  collectgarbage("collect")
+
   close.font = beautiful.font
   close.forced_height = 40
   close:buttons(
@@ -88,14 +94,14 @@ return function()
   )
 
   local vol_heading = wibox.widget.textbox("Volume")
-  vol_heading.font = beautiful.font .. ' 10'
+  vol_heading.font = beautiful.font .. " 10"
 
   local vol_footer = wibox.widget.textbox("Test")
-  vol_footer.font = beautiful.font .. ' 10'
+  vol_footer.font = beautiful.font .. " 10"
   vol_footer.align = "right"
 
   local mic_footer = wibox.widget.textbox("Test")
-  mic_footer.font = beautiful.font .. ' 10'
+  mic_footer.font = beautiful.font .. " 10"
   mic_footer.align = "right"
   -- ########################################################################
   -- ########################################################################

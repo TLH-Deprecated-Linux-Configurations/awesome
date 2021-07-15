@@ -412,6 +412,8 @@ return function()
         devices = {}
         paired_devices = {}
 
+            collectgarbage("collect")
+
         awful.spawn.easy_async_with_shell(
             "bluetoothctl devices",
             function(out)

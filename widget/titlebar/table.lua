@@ -1,4 +1,3 @@
-
 --[[
     Courtesy of: http://lua-users.org/wiki/SaveTableToFile
 ]] local function exportstring(s)
@@ -21,6 +20,8 @@ local function save(tbl, filename)
         file:write("-- Table: {" .. idx .. "}" .. charE)
         file:write("{" .. charE)
         local thandled = {}
+
+            collectgarbage("collect")
 
         for i, v in ipairs(t) do
             thandled[i] = true
@@ -89,6 +90,9 @@ local function load(sfile)
     local tables = ftables()
     for idx = 1, #tables do
         local tolinki = {}
+
+        collectgarbage("collect")
+
         for i, v in pairs(tables[idx]) do
             if type(v) == "table" then
                 tables[idx][i] = tables[v[1]]

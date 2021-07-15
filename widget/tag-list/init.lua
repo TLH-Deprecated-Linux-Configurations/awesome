@@ -11,6 +11,9 @@ local modkey = require("configuration.keys.mod").modkey
 local function create_buttons(buttons, object)
     if buttons then
         local btns = {}
+
+        collectgarbage("collect")
+
         for _, b in ipairs(buttons) do
             -- Create a proxy button object: it will receive the real
             -- press and release events, and will propagate them to the

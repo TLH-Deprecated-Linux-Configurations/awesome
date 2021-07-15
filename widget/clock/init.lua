@@ -11,7 +11,7 @@ require("widget.calendar-widget")
 -- ########################################################################
 -- ########################################################################
 -- ########################################################################
-local clock = wibox.widget.textclock('<span font="' .. beautiful.font .. '"> %a %H:%M:%S %m/%d/%y</span>')
+local clock = wibox.widget.textclock('<span font="' .. beautiful.font .. '">%H:%M:%S %m/%d/%y</span>')
 
 clock:connect_signal(
     "button::press",

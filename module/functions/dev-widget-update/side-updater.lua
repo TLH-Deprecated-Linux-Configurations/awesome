@@ -40,6 +40,7 @@ screen.connect_signal(
         view_container.spacing = m
 
         _G.dev_widget_side_view_refresh = function(widget_path)
+            collectgarbage("collect")
             local original_path = package.path
             local require_str = "calendar-widget"
 

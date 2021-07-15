@@ -19,6 +19,8 @@ local get_screen = require("lib.function.common").focused_screen
 local body = {}
 
 local function notification_plugin()
+    
+
     local separator = seperator_widget(16, "vertical", 0)
 
     local table_widget =
@@ -277,7 +279,7 @@ local right_panel = function()
     -- Hide this panel when app dashboard is called.
     function panel:HideDashboard()
         closePanel()
-        collectgarbage("collect")
+        
     end
 
     function panel:toggle()
@@ -286,7 +288,7 @@ local right_panel = function()
             openPanel()
         else
             closePanel()
-            collectgarbage("collect")
+            
         end
     end
 

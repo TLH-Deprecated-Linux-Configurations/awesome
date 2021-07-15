@@ -86,7 +86,7 @@ screen.connect_signal(
             -- as it is a developer widget and can cause memory and cpu leaks
             view_container:reset()
             -- we also perform a garbage collection cycle as we don't know what happens with the widget
-            collectgarbage("collect")
+            
         end
 
         backdrop:buttons(awful.util.table.join(awful.button({}, 1, close_hub)))

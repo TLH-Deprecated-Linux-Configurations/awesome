@@ -10,6 +10,8 @@ local file_exists = require("module.functions.file").exists
 local split = require("lib.function.common").split
 
 local function extract(line)
+    
+
     local splitted = split(line, "=")
     if splitted[1] == nil or splitted[2] == nil then
         return nil
@@ -20,6 +22,8 @@ end
 -- ########################################################################
 -- ########################################################################
 local function parse_file(file)
+    
+
     local lines = {}
     for line in io.lines(file) do
         if not (line:sub(1, 1) == "#") then

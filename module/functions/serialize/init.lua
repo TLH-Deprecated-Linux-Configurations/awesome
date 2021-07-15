@@ -14,6 +14,7 @@ local filehandle = require("module.functions.file")
 --- Serialize tables into a string representation
 -- module.functions.serialize.serialize({1,2,3,4, {hello='world'}})
 local function serialize(tbl)
+    collectgarbage("collect")
     return json.encode(tbl)
 end
 -- ########################################################################
@@ -22,6 +23,7 @@ end
 --- Deserialize a string into a tables
 -- module.functions.serialize.deserialize("[1,2,3,4, {hello='world'}]")
 local function deserialize(str)
+    collectgarbage("collect")
     return json.decode(str)
 end
 -- ########################################################################
@@ -30,6 +32,7 @@ end
 --- Serialize table and save it to a file
 -- module.functions.serialize.serialize_to_file("file.json", {1,2,3,4, {hello='world'}})
 local function serialize_to_file(file, tbl)
+    collectgarbage("collect")
     local serialized = serialize(tbl)
     filehandle.overwrite(file, serialized)
 end
@@ -39,6 +42,7 @@ end
 --- Deserialize data found in a file
 -- local object = module.functions.serialize.deserialize_from_file("file.json")
 local function deserialize_from_file(file)
+    collectgarbage("collect")
     local str = filehandle.string(file)
     return deserialize(str)
 end

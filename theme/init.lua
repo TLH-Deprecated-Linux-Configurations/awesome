@@ -23,15 +23,10 @@ local theme_assets = require("beautiful.theme_assets")
 -- ########################################################################
 -- ########################################################################
 local theme = {}
-theme.icons = theme_dir .. "/icons/"
-theme.font = "SF Mono Powerline Bold"
-theme.monitor_font = "SF Mono Powerline Bold 50"
-theme.gtk = gtk.get_theme_variables()
 
 -- ########################################################################
 -- ########################################################################
 -- ########################################################################
-theme.background_transparency = "66"
 
 -- Colors Pallets
 -- Load ~/.Xresources colors and set fallback colors
@@ -61,23 +56,27 @@ theme.xcolor18 = "#383a47"
 theme.xcolor19 = "#555e70"
 theme.xcolor20 = "#727f96"
 theme.xcolor21 = "#555566"
+theme.background_transparency = "66"
 
 -- Custom
-theme.custom = "#f4f4f7"
+theme.custom = theme.xcolor15
 
 theme.transparent = "#00000000"
 
+-- gtk theme
+theme.gtk = gtk.get_theme_variables()
+
 -- ########################################################################
 -- ########################################################################
 -- ########################################################################
+-- Color assignment (used within various files)
+-- TODO eliminate this section
 -- Primary
-theme.primary = theme.foreground
+theme.primary = theme.xforeground
 
 -- Accent
 theme.accent = theme.xcolor20
 
-theme.text = theme.foreground
-theme.titlebar_size = 24
 -- system stat charts in settings app
 theme.cpu_bar = theme.xcolor1
 theme.ram_bar = theme.xcolor2
@@ -86,20 +85,35 @@ theme.disk_bar = theme.xcolor3
 -- ########################################################################
 -- ########################################################################
 -- ########################################################################
+
+-- Basic Theme Set Up
 theme.dir = theme_dir
-
+theme.titlebar_size = 24
 theme.icons = theme.dir .. "/icons/"
-
 theme.wallpaper = theme_dir .. "/background.png"
-theme.font = "SF Mono Powerline Bold"
+
+-- ########################################################################
+-- ########################################################################
+-- ########################################################################
+
+-- Fonts
+theme.font = "SF Mono Powerline Bold "
 theme.monitor_font = "SF Mono Powerline Bold 50"
 theme.title_font = "SF Mono Powerline Bold 18"
 -- ########################################################################
 -- ########################################################################
 -- ########################################################################
+
+-- Modal variables
 theme.modal_width = dpi(1200)
 theme.modal_height = dpi(800)
 
+-- ########################################################################
+-- ########################################################################
+-- ########################################################################
+
+-- Foreground Colors
+theme.text = theme.foreground
 theme.fg_white = theme.xcolo15
 theme.fg_black = theme.xcolor17
 theme.fg_normal = theme.xcolor15
@@ -111,12 +125,14 @@ theme.fg_minimize = theme.foreground
 -- ########################################################################
 -- ########################################################################
 -- ########################################################################
+
+-- Background colors (cannot be linear gradients for whatever reason)
 theme.bg_focus = theme.xcolor18
 theme.bg_urgent = theme.xcolor1
 theme.bg_systray = theme.xcolor18
-theme.bg_modal = theme.xcolor18
-theme.bg_modal_title = theme.xcolor18
-theme.bg_settings_display_number = theme.fg_black .. "70"
+theme.bg_modal = theme.xcolor0 .. "99"
+theme.bg_modal_title = theme.xcolor0 .. "99"
+theme.bg_settings_display_number = theme.xbackground .. "70"
 theme.bg_normal = theme.background
 theme.bg_button = theme.xbackground
 theme.bg_widget = theme.xcolor0
@@ -124,6 +140,7 @@ theme.bg_widget = theme.xcolor0
 -- ########################################################################
 -- ########################################################################
 -- ########################################################################
+
 -- Notification
 theme.notification_position = "top_right"
 theme.notification_bg = theme.transparent
@@ -136,8 +153,9 @@ theme.notification_icon_size = dpi(32)
 -- ########################################################################
 -- ########################################################################
 -- ########################################################################
+
 -- Gap
-theme.useless_gap = dpi(3)
+theme.useless_gap = dpi(4)
 theme.gap_single_client = true
 
 -- ########################################################################
@@ -151,13 +169,14 @@ theme.groups_radius = dpi(9)
 -- ########################################################################
 -- ########################################################################
 -- ########################################################################
--- Menu
 
+-- Menu
 theme.menu_height = dpi(16)
 theme.menu_width = dpi(160)
 -- ########################################################################
 -- ########################################################################
 -- ########################################################################
+
 -- Tooltips
 theme.tooltip_bg = {
     type = "linear",
@@ -176,11 +195,12 @@ theme.tooltip_border_width = 0
 theme.tooltip_shape = function(cr, w, h)
     gears.shape.rounded_rect(cr, w, h, dpi(6))
 end
--- ########################################################################
--- ########################################################################
--- ########################################################################
--- Layout
 
+-- ########################################################################
+-- ########################################################################
+-- ########################################################################
+
+-- Layout
 theme.layout_max = theme.icons .. "layouts/arrow-expand-all.png"
 theme.layout_tile = theme.icons .. "layouts/view-quilt.png"
 theme.layout_dwindle = theme.icons .. "layouts/dwindle.png"
@@ -189,10 +209,12 @@ theme.layout_fairv = theme.icons .. "layouts/fair.png"
 theme.layout_fairh = theme.icons .. "layouts/fairh.png"
 theme.layout_magnifier = theme.icons .. "layouts/magnifier.png"
 theme.layout_mstab = theme.icons .. "layouts/mstab.png"
+
 -- ########################################################################
 -- ########################################################################
 -- ########################################################################
--- buttons
+-- TODO eliminate this section
+-- Buttons
 theme.border_button = theme.xcolor0
 theme.button_active = theme.color5
 theme.button_active_alt = theme.xcolor4
@@ -200,6 +222,7 @@ theme.button_active_alt = theme.xcolor4
 -- ########################################################################
 -- ########################################################################
 -- ########################################################################
+
 -- Tasklist
 -- Background
 theme.tasklist_font = theme.font
@@ -214,6 +237,7 @@ theme.tasklist_bg_normal = {
         {1, theme.xcolor19 .. "66"}
     }
 }
+
 theme.tasklist_bg_focus = {
     type = "linear",
     from = {0, 0},
@@ -237,7 +261,7 @@ theme.tasklist_bg_urgent = {
         {1, theme.xcolor19 .. "66"}
     }
 }
-
+-- foreground
 theme.tasklist_fg_focus = theme.xcolor15
 theme.tasklist_fg_urgent = theme.xcolor1
 theme.tasklist_fg_normal = theme.foreground
@@ -310,7 +334,7 @@ theme.taglist_bg = {
 }
 
 theme.taglist_fg_volatile = theme.xcolor11
-theme.taglist_font = "awesomewm-font 20"
+theme.taglist_font = "awesomewm-font 23"
 local taglist_square_size = dpi(0)
 theme.taglist_squares_sel = theme_assets.taglist_squares_sel(taglist_square_size, theme.xforeground)
 theme.taglist_squares_unsel = theme_assets.taglist_squares_unsel(taglist_square_size, theme.fg_normal)
@@ -347,6 +371,7 @@ theme.border_color = theme.xcolor0 .. "00"
 -- ########################################################################
 -- ########################################################################
 -- ########################################################################
+
 -- Margins and paddings
 theme.notification_margin = dpi(2)
 theme.widget_margin = dpi(1)
@@ -356,24 +381,23 @@ theme.widget_margin = dpi(1)
 theme.is_enable_titlebar = true
 
 -- ####################################################################
--- shapes
 -- ####################################################################
+-- TODO use beautiful.[whatever from below] over other shape solutions present in configuration
 theme.btn_xs_shape = function(cr, height, width)
     gears.shape.rounded_rect(cr, height, width, 2)
 end
 
 theme.btn_lg_shape = function(cr, height, width)
-    gears.shape.rounded_rect(cr, height, width, 4)
+    gears.shape.rounded_rect(cr, height, width, 8)
 end
 
 theme.widget_shape = function(cr, height, width)
-    gears.shape.rounded_rect(cr, height, width, 4)
+    gears.shape.rounded_rect(cr, height, width, 8)
 end
 theme.panel_button_shape = function(cr, height, width)
-    gears.shape.rounded_rect(cr, height, width, 4)
+    gears.shape.rounded_rect(cr, height, width, 8)
 end
 -- ####################################################################
--- MStab Configuration
 -- ####################################################################
 theme.mstab_tabbar_style = "modern"
 theme.mstab_bar_ontop = false -- whether you want to allow the bar to be ontop of clients
@@ -395,12 +419,13 @@ theme.snapper_gap = dpi(12)
 -- ########################################################################
 -- ########################################################################
 -- ########################################################################
+
 -- Notification
 theme.notification_font = theme.font
 theme.notification_bg = {
     type = "linear",
     from = {0, 0},
-    to = {15, 15},
+    to = {125, 125},
     stops = {
         {0, theme.xbackground .. "66"},
         {0.45, theme.xcolor0 .. "66"},
@@ -410,7 +435,7 @@ theme.notification_bg = {
 }
 theme.notification_fg = theme.fg_normal
 theme.notification_shape = function(cr, width, height)
-    gears.shape.rounded_rect(cr, width, height, 6)
+    gears.shape.rounded_rect(cr, width, height, 8)
 end
 
 theme.notification_width = dpi(165)
@@ -434,6 +459,8 @@ theme.bg_systray = {
         {1, theme.xcolor19 .. "66"}
     }
 }
+theme.dont_swallow_classname_list = {"firefox", "Gimp"} -- list of class names that should not be swallowed
+theme.dont_swallow_filter_activated = true
 
 -- Generate Awesome icon:
 theme.awesome_icon = theme_assets.awesome_icon(theme.menu_height, theme.bg_focus, theme.fg_focus)

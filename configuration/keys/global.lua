@@ -23,6 +23,8 @@ local volume = require("module.hardware.volume")
 -- ########################################################################
 -- returns true if we cannot create a screenshot
 local function send_notification_if_maim_missing()
+    
+
     if not has_package_installed("maim") then
         require("naughty").notification(
             {

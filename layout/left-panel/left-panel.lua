@@ -33,6 +33,8 @@ local body = {}
 -- ########################################################################
 -- ########################################################################
 local left_panel_func = function()
+    
+
     -- set the panel width equal to the rofi settings
     -- the rofi width is defined in configuration/rofi/sidebar/rofi.rasi
     -- under the section window-> width
@@ -55,6 +57,8 @@ local left_panel_func = function()
     -- ########################################################################
     -- ########################################################################
     local function update_backdrop_location()
+        
+
         backdrop.x = s.geometry.x
         backdrop.y = s.geometry.y
         backdrop.width = s.geometry.width
@@ -67,11 +71,11 @@ local left_panel_func = function()
         wibox {
         ontop = true,
         screen = s,
+        bg = beautiful.xbackground .. "66",
         width = left_panel_width,
         height = s.geometry.height,
         x = s.geometry.x,
         y = s.geometry.y,
-        bg = beautiful.bg_normal .. "00",
         fg = beautiful.fg_normal
     }
 
@@ -132,6 +136,7 @@ local left_panel_func = function()
         -- ########################################################################
         -- start the animations
         left_panel.x = s.geometry.x - left_panel_width
+        left_panel.bg = beautiful.xbackground .. "66"
         left_panel.y = s.geometry.y
         left_panel.height = s.geometry.height
         left_panel.opacity = 0
@@ -150,13 +155,11 @@ local left_panel_func = function()
     -- ########################################################################
     local closeleft_panel = function()
         s = get_screen()
-        -- ########################################################################
-        -- ########################################################################
-        -- ########################################################################
         -- start the animations
         left_panel.x = s.geometry.x
         left_panel.y = s.geometry.y
         left_panel.height = s.geometry.height
+        left_panel.bg = beautiful.xbackground .. "66"
         left_panel.opacity = 0.88
         backdrop.visible = false
         animate(
@@ -166,16 +169,12 @@ local left_panel_func = function()
             "outCubic",
             function()
                 left_panel.visible = false
-
                 -- Change to notify mode on close
                 if grabber then
                     grabber:stop()
                 end
                 left_panel:emit_signal("closed")
                 update_backdrop_location()
-
-                -- reset the scrollbox
-                body:reset()
             end
         )
     end
@@ -439,7 +438,6 @@ local left_panel_func = function()
             topSeparator,
             require("layout.left-panel.dashboard.quick-settings"),
             require("layout.left-panel.dashboard.hardware-monitor")(s),
-            require("layout.left-panel.dashboard.action-center"),
             separator,
             wibox.container.margin(network_card, dpi(20), dpi(20), dpi(20), dpi(20)),
             separator,
@@ -455,33 +453,32 @@ local left_panel_func = function()
     -- ########################################################################
     -- ########################################################################
     body =
-        scrollbox(
         wibox.widget {
-            layout = wibox.layout.align.vertical,
-            separator,
-            settings_plugin(),
-            wibox.container.margin(
-                {
-                    layout = wibox.layout.fixed.vertical,
+        layout = wibox.layout.align.vertical,
+        separator,
+        settings_plugin(),
+        wibox.container.margin(
+            {
+                layout = wibox.layout.fixed.vertical,
+                wibox.widget {
                     wibox.widget {
-                        wibox.widget {
-                            exit_button,
-                            widget = wibox.container.background,
-                            shape = function(cr, w, h)
-                                gears.shape.rounded_rect(cr, w, h, 12)
-                            end
-                        },
-                        widget = mat_list_item
+                        exit_button,
+                        widget = wibox.container.background,
+                        shape = function(cr, w, h)
+                            gears.shape.rounded_rect(cr, w, h, 12)
+                        end
                     },
-                    bottomSeparator
+                    widget = mat_list_item
                 },
-                0,
-                0,
-                dpi(15),
-                dpi(15)
-            )
-        }
-    )
+                bottomSeparator
+            },
+            0,
+            0,
+            dpi(15),
+            dpi(15)
+        )
+    }
+
     -- ########################################################################
     -- ########################################################################
     -- ########################################################################

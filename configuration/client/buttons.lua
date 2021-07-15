@@ -6,7 +6,7 @@
 -- ########################################################################
 -- ########################################################################
 -- ########################################################################
-local modkey = require('configuration.keys.mod').modKey
+local modkey = require("configuration.keys.mod").modKey
 -- ########################################################################
 -- ########################################################################
 -- ########################################################################
@@ -17,7 +17,7 @@ local function getButtons()
             1,
             function(c)
                 -- only raise the focus if the app is not onboard
-                if c.name ~= 'Onboard' and c.name ~= 'onboard' then
+                if c.name ~= "Onboard" and c.name ~= "onboard" then
                     _G.client.focus = c
                     c:raise()
                 end
@@ -27,14 +27,14 @@ local function getButtons()
             {modkey},
             1,
             function(c)
-                c:activate {context = 'mouse_click', action = 'mouse_move'}
+                c:activate {context = "mouse_click", action = "mouse_move"}
             end
         ),
         awful.button(
             {modkey},
             3,
             function(c)
-                c:activate {context = 'mouse_click', action = 'mouse_resize'}
+                c:activate {context = "mouse_click", action = "mouse_resize"}
             end
         )
     )
@@ -43,7 +43,7 @@ end
 -- ########################################################################
 -- ########################################################################
 client.connect_signal(
-    'request::default_mousebindings',
+    "request::default_mousebindings",
     function()
         awful.mouse.append_client_mousebindings(
             {
@@ -51,14 +51,14 @@ client.connect_signal(
                     {modkey},
                     1,
                     function(c)
-                        c:activate {context = 'mouse_click', action = 'mouse_move'}
+                        c:activate {context = "mouse_click", action = "mouse_move"}
                     end
                 ),
                 awful.button(
                     {modkey},
                     3,
                     function(c)
-                        c:activate {context = 'mouse_click', action = 'mouse_resize'}
+                        c:activate {context = "mouse_click", action = "mouse_resize"}
                     end
                 )
             }
