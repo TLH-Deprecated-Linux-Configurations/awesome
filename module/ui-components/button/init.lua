@@ -7,10 +7,8 @@
 -- ########################################################################
 -- ########################################################################
 local wibox = require("wibox")
-local rounded = require("lib.widget.rounded")
 local beautiful = require("beautiful")
 local gears = require("gears")
-local signals = require("module.settings.signals")
 local dpi = beautiful.xresources.apply_dpi
 -- ########################################################################
 -- ########################################################################

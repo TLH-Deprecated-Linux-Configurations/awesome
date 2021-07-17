@@ -11,7 +11,10 @@
     "root",
     "center",
     "screen",
-    "backup"
+    "backup",
+    "tag",
+    "double_click_event_handler",
+    "c"
   ],
   "Lua.diagnostics.disable": [
     "undefined-field"
@@ -33,5 +36,25 @@
   "C_Cpp_Runner.excludeSearch": [],
   "C_Cpp_Runner.enableWarnings": true,
   "C_Cpp_Runner.warningsAsError": false,
-  "DockerRun.DisableDockerrc": true
+  "DockerRun.DisableDockerrc": true,
+  "DockerRun.DisableAutoGenerateConfig": true,
+  "cSpell.words": [
+    "SFPD's",
+    "awesomewm",
+    "covid",
+    "else's",
+    "hacky",
+    "htop",
+    "mstab",
+    "picom",
+    "rofi",
+    "streetturtle",
+    "submodules",
+    "subwidgets",
+    "tabbar",
+    "unixporn"
+  ],
+  "[markdown]": {
+    "editor.cursorSurroundingLines": 0
+  }
 }

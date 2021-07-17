@@ -55,8 +55,7 @@ filehandle.overwrite(filename, "")
 -- WARN: For internal use only, this should never be exposed to the end user
 -- usage: local string = pretty_print_table({})
 local function table_to_string(tbl, depth, indent)
-    collectgarbage("collect")
-    indent = indent or 1
+        indent = indent or 1
     -- limit the max size
     if indent > depth then
         if type(tbl) == "table" then

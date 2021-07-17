@@ -33,3 +33,6 @@ beautiful.init(require("theme"))
 -- ###############################################
 -- ###############################################
 -- ###############################################
+-- Fixes for Default Modules
+require("lib.fixed-align")
+require("lib.fixed-margin")

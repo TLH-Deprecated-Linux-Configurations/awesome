@@ -1,4 +1,4 @@
-package = "lain"
+package = "lib.lain"
 version = "scm-1"
 source = {
    url = "https://github.com/lcpz/lain",

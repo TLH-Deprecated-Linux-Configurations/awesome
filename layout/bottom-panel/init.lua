@@ -8,7 +8,6 @@
 local awful = require("awful")
 local beautiful = require("beautiful")
 local wibox = require("wibox")
-local gears = require("gears")
 
 local dpi = beautiful.xresources.apply_dpi
 
@@ -37,7 +36,7 @@ local bottom_panel = function(s)
             ontop = true,
             screen = s,
             position = "bottom",
-            height = dpi(42), -- 48
+            height = dpi(48), -- 48
             width = s.geometry.width - offsetx,
             x = s.geometry.x + offsetx,
             y = s.geometry.y,
@@ -48,18 +47,18 @@ local bottom_panel = function(s)
                 to = {15, 15},
                 stops = {
                     {0, beautiful.xbackground .. "33"},
-                    {0.45, beautiful.xcolor18 .. "33"},
-                    {0.85, beautiful.xbackground .. "33"},
+                    {0.45, beautiful.xcolor18 .. "66"},
+                    {0.85, beautiful.xbackground .. "66"},
                     {1, beautiful.xcolor18 .. "33"}
                 }
             },
             fg = beautiful.fg_normal,
             struts = {
-                bottom = dpi(42) -- 48
+                bottom = dpi(48)
             }
         }
     )
-    panel:struts {bottom = dpi(42)}
+    panel:struts {bottom = dpi(48)}
 
     panel:connect_signal(
         "mouse::enter",
@@ -82,9 +81,7 @@ local bottom_panel = function(s)
                 border_width = dpi(3),
                 border_color = beautiful.xcolor0,
                 bg = beautiful.bg_normal .. "99",
-                shape = function(cr, w, h)
-                    gears.shape.rounded_rect(cr, w, h, dpi(3))
-                end,
+                shape = beautiful.btn_lg_shape,
                 widget = wibox.container.background
             },
             top = dpi(1),
@@ -103,8 +100,8 @@ local bottom_panel = function(s)
             screen = s,
             widget = wibox.widget.systray
         },
-        visible = false,
-        bottom = dpi(10),
+        visible = true,
+        bottom = dpi(0),
         widget = wibox.container.margin
     }
     -- ########################################################################
@@ -132,12 +129,11 @@ local bottom_panel = function(s)
                 spacing = dpi(2),
                 s.app_button,
                 tag_list(s),
-                task_list(s),
                 left = dpi(5),
                 right = dpi(5),
                 widget = wibox.container.margin
             },
-            nil,
+            task_list(s),
             {
                 layout = wibox.layout.fixed.horizontal,
                 spacing = dpi(2),

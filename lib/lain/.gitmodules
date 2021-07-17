@@ -1,3 +1,3 @@
-[submodule "lain.wiki"]
-	path = wiki
-	url = https://github.com/lcpz/lain.wiki.git
+[submodule "lib.lain.wiki"]
+path = wiki
+url = https://github.com/lcpz/lain.wiki.git

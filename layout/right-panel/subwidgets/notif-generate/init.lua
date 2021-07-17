@@ -36,7 +36,7 @@ end
 local notif_title = function(title)
     return wibox.widget {
         markup = gears.string.xml_escape(title),
-        font = beautiful.font .. ' 10',
+        font = beautiful.font .. " 10",
         align = "center",
         valign = "center",
         widget = wibox.widget.textbox
@@ -46,7 +46,7 @@ end
 local notif_message = function(msg)
     return wibox.widget {
         markup = msg,
-        font = beautiful.font .. ' 10',
+        font = beautiful.font .. " 10",
         align = "center",
         valign = "center",
         widget = wibox.widget.textbox
@@ -78,7 +78,7 @@ local function notif_generate(title, message, icon, noti)
                 {
                     {
                         id = "text_role",
-                        font = beautiful.font .. ' 10',
+                        font = beautiful.font .. " 10",
                         widget = wibox.widget.textbox
                     },
                     widget = wibox.container.place
@@ -118,9 +118,7 @@ local function notif_generate(title, message, icon, noti)
                 -- },
             },
             bg = beautiful.bg_modal_title,
-            shape = function(cr, width, height)
-                gears.shape.partially_rounded_rect(cr, width, height, true, true, false, false, 6)
-            end,
+            shape = beautiful.widget_shape,
             widget = wibox.container.background
         },
         {
@@ -156,9 +154,7 @@ local function notif_generate(title, message, icon, noti)
                     widget = wibox.container.margin
                 },
                 bg = beautiful.bg_modal,
-                shape = function(cr, width, height)
-                    gears.shape.partially_rounded_rect(cr, width, height, false, false, true, true, 6)
-                end,
+                shape = beautiful.widget_shape,
                 widget = wibox.container.background
             },
             layout = wibox.layout.flex.horizontal

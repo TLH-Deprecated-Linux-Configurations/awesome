@@ -334,7 +334,7 @@ theme.taglist_bg = {
 }
 
 theme.taglist_fg_volatile = theme.xcolor11
-theme.taglist_font = "awesomewm-font 23"
+theme.taglist_font = "awesomewm-font 28"
 local taglist_square_size = dpi(0)
 theme.taglist_squares_sel = theme_assets.taglist_squares_sel(taglist_square_size, theme.xforeground)
 theme.taglist_squares_unsel = theme_assets.taglist_squares_unsel(taglist_square_size, theme.fg_normal)
@@ -388,7 +388,7 @@ theme.btn_xs_shape = function(cr, height, width)
 end
 
 theme.btn_lg_shape = function(cr, height, width)
-    gears.shape.rounded_rect(cr, height, width, 8)
+    gears.shape.rounded_rect(cr, height, width, 3)
 end
 
 theme.widget_shape = function(cr, height, width)
@@ -397,13 +397,17 @@ end
 theme.panel_button_shape = function(cr, height, width)
     gears.shape.rounded_rect(cr, height, width, 8)
 end
+
+theme.window_shape = function(cr, w, h)
+    gears.shape.rounded_rect(cr, w, h, 24)
+end
 -- ####################################################################
 -- ####################################################################
 theme.mstab_tabbar_style = "modern"
 theme.mstab_bar_ontop = false -- whether you want to allow the bar to be ontop of clients
 theme.mstab_bar_padding = dpi(0) -- how much padding there should be between clients and your tabbar
 theme.mstab_dont_resize_slaves = false
-theme.mstab_bar_height = dpi(10)
+theme.mstab_bar_height = dpi(15)
 
 -- ########################################################################
 -- ########################################################################
@@ -459,8 +463,6 @@ theme.bg_systray = {
         {1, theme.xcolor19 .. "66"}
     }
 }
-theme.dont_swallow_classname_list = {"firefox", "Gimp"} -- list of class names that should not be swallowed
-theme.dont_swallow_filter_activated = true
 
 -- Generate Awesome icon:
 theme.awesome_icon = theme_assets.awesome_icon(theme.menu_height, theme.bg_focus, theme.fg_focus)

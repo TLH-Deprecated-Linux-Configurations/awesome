@@ -8,22 +8,23 @@
 -- ########################################################################
 local bling = require("lib.bling")
 local lain = require("lib.lain")
+
 -- ########################################################################
 -- ########################################################################
 -- ########################################################################
-tag.connect_signal(
+_G.tag.connect_signal(
     "request::default_layouts",
     function()
         awful.layout.append_default_layouts(
             {
                 bling.layout.mstab,
+                awful.layout.suit.max,
                 lain.layout.centerwork,
                 awful.layout.suit.tile,
                 awful.layout.suit.spiral.dwindle,
                 awful.layout.suit.floating,
                 awful.layout.suit.fair,
                 awful.layout.suit.magnifier,
-                awful.layout.suit.max,
                 awful.layout.suit.fair.horizontal
             }
         )

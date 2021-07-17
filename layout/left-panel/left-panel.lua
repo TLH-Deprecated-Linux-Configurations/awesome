@@ -33,8 +33,6 @@ local body = {}
 -- ########################################################################
 -- ########################################################################
 local left_panel_func = function()
-    
-
     -- set the panel width equal to the rofi settings
     -- the rofi width is defined in configuration/rofi/sidebar/rofi.rasi
     -- under the section window-> width
@@ -57,8 +55,6 @@ local left_panel_func = function()
     -- ########################################################################
     -- ########################################################################
     local function update_backdrop_location()
-        
-
         backdrop.x = s.geometry.x
         backdrop.y = s.geometry.y
         backdrop.width = s.geometry.width
@@ -464,9 +460,7 @@ local left_panel_func = function()
                     wibox.widget {
                         exit_button,
                         widget = wibox.container.background,
-                        shape = function(cr, w, h)
-                            gears.shape.rounded_rect(cr, w, h, 12)
-                        end
+                        shape = beautiful.window_shape
                     },
                     widget = mat_list_item
                 },

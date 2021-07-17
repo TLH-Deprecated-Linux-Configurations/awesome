@@ -10,7 +10,7 @@ local inactive_button = "#f4f4f7" .. "20"
 local notif_text =
     wibox.widget {
     text = "Notifications",
-    font = beautiful.font .. ' 10',
+    font = beautiful.font .. " 10",
     align = "center",
     valign = "center",
     widget = wibox.widget.textbox
@@ -23,16 +23,14 @@ local wrap_notif =
     notif_button,
     forced_width = dpi(140),
     bg = active_button,
-    shape = function(cr, width, height)
-        gears.shape.partially_rounded_rect(cr, width, height, true, false, false, true, 6)
-    end,
+    shape = beautiful.widget_shape,
     widget = wibox.container.background
 }
 
 local widgets_text =
     wibox.widget {
     text = "Widgets",
-    font = beautiful.font .. ' 10',
+    font = beautiful.font .. " 10",
     align = "center",
     valign = "center",
     widget = wibox.widget.textbox
@@ -45,9 +43,7 @@ local wrap_widget =
     widgets_button,
     forced_width = dpi(140),
     bg = inactive_button,
-    shape = function(cr, width, height)
-        gears.shape.partially_rounded_rect(cr, width, height, false, true, true, false, 6)
-    end,
+    shape = beautiful.widget_shape,
     widget = wibox.container.background
 }
 

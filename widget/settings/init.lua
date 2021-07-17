@@ -164,14 +164,9 @@ local function make_nav()
   rule.bg = beautiful.xbackground .. "66"
   rule.widget = wibox.widget.base.empty_widget()
 
-  table.insert(
-    root.elements.hub_views,
-    make_view(icons.settings, "notifications", require("widget.settings.notifications")())
-  )
-  table.insert(root.elements.hub_views, make_view(icons.bluetooth, "bluetooth", require("widget.settings.bluetooth")()))
-  table.insert(root.elements.hub_views, make_view(icons.calendar, "calendar", require("widget.settings.calendar")()))
-  table.insert(root.elements.hub_views, make_view(icons.wifi, "connections", require("widget.settings.connections")()))
   table.insert(root.elements.hub_views, make_view(icons.memory, "system", require("widget.settings.system")()))
+
+  table.insert(root.elements.hub_views, make_view(icons.wifi, "connections", require("widget.settings.connections")()))
   table.insert(root.elements.hub_views, make_view(icons.brush, "display", require("widget.settings.display")()))
   table.insert(root.elements.hub_views, make_view(icons.music, "media", require("widget.settings.media")()))
 
@@ -253,7 +248,7 @@ return function()
       ontop = true,
       visible = false,
       type = "toolbar",
-      bg = beautiful.bg_modal .. "66",
+      bg = beautiful.bg_modal .. "aa",
       width = beautiful.modal_width,
       height = beautiful.modal_height,
       screen = awful.screen.primary

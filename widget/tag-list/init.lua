@@ -1,24 +1,30 @@
+--  __                __ __         __
+-- |  |_.---.-.-----.|  |__|.-----.|  |_
+-- |   _|  _  |  _  ||  |  ||__ --||   _|
+-- |____|___._|___  ||__|__||_____||____|
+--            |_____|
 local awful = require("awful")
 local wibox = require("wibox")
 local dpi = require("beautiful").xresources.apply_dpi
 local clickable_container = require("widget.clickable-container")
-local beautiful = require("beautiful")
+
 local modkey = require("configuration.keys.mod").modkey
+local altkey = require("configuration.keys.mod").altkey
+
+-- ########################################################################
+-- ########################################################################
+-- ########################################################################
 --- Common method to create buttons.
--- @tab buttons
--- @param object
--- @return table
 local function create_buttons(buttons, object)
     if buttons then
         local btns = {}
-
-        collectgarbage("collect")
+        -- ########################################################################
+        -- ########################################################################
+        -- ########################################################################
 
         for _, b in ipairs(buttons) do
             -- Create a proxy button object: it will receive the real
-            -- press and release events, and will propagate them to the
-            -- button object the user provided, but with the object as
-            -- argument.
+            -- press and release events
             local btn =
                 awful.button {
                 modifiers = b.modifiers,
@@ -35,7 +41,9 @@ local function create_buttons(buttons, object)
         return btns
     end
 end
-
+-- ########################################################################
+-- ########################################################################
+-- ########################################################################
 local function list_update(w, buttons, label, data, objects)
     -- update the widgets, creating them if needed
     w:reset()
@@ -81,7 +89,9 @@ local function list_update(w, buttons, label, data, objects)
 
             data[o] = {ib = ib, tb = tb, bgb = bgb, tbm = tbm, ibm = ibm}
         end
-
+        -- ########################################################################
+        -- ########################################################################
+        -- ########################################################################
         local text, bg, bg_image, icon, args = label(o, tb)
         args = args or {}
 
@@ -110,7 +120,9 @@ local function list_update(w, buttons, label, data, objects)
         w:add(bgb)
     end
 end
-
+-- ########################################################################
+-- ########################################################################
+-- ########################################################################
 local tag_list = function(s)
     return awful.widget.taglist(
         s,
@@ -123,8 +135,9 @@ local tag_list = function(s)
                     t:view_only()
                 end
             ),
+            -- Seems like a great idea, until it fires randomly even without mod4 depressed. So I added alt to it
             awful.button(
-                {modkey},
+                {modkey, altkey},
                 1,
                 function(t)
                     if _G.client.focus then
@@ -143,10 +156,14 @@ local tag_list = function(s)
                     end
                 end
             )
+            --Absolutely NO SCROLLING MAKING THE TAGS CHANGE THAT IS THE MOST AWFUL PAIN IN MY *&^
         ),
         {},
         list_update,
         wibox.layout.fixed.horizontal()
     )
 end
+-- ########################################################################
+-- ########################################################################
+-- ########################################################################
 return tag_list

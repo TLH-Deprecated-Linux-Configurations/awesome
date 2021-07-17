@@ -26,11 +26,6 @@ require("module.settings.notifications")
 require("widget.titlebar")()
 require("module.ui-components.backdrop")
 
-local bling = require("lib.bling")
-bling.module.window_swallowing.start() -- activates window swallowing
---bling.module.window_swallowing.stop()    -- deactivates window swallowing
---bling.module.window_swallowing.toggle()  -- toggles window swallowing
-bling.module.flash_focus.enable()
 -- ########################################################################
 -- Layout
 require("layout")

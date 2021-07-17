@@ -6,11 +6,11 @@
 -- ########################################################################
 -- ########################################################################
 -- ########################################################################
-local wibox = require('wibox')
-local awful = require('awful')
-local beautiful = require('beautiful')
+local wibox = require("wibox")
+local awful = require("awful")
+local beautiful = require("beautiful")
 local dpi = beautiful.xresources.apply_dpi
-local clickable_container = require('widget.clickable-container')
+local clickable_container = require("widget.clickable-container")
 -- ########################################################################
 -- ########################################################################
 -- ########################################################################
@@ -19,7 +19,7 @@ local layout_box = function(s)
         wibox.widget {
         {
             awful.widget.layoutbox(s),
-            margins = dpi(1),
+            margins = dpi(8),
             widget = wibox.container.margin
         },
         widget = clickable_container
