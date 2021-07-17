@@ -1,7 +1,3 @@
---  _______ __
--- |_     _|  |--.-----.--------.-----.
---   |   | |     |  -__|        |  -__|
---   |___| |__|__|_____|__|__|__|_____|
 
 -- ########################################################################
 -- ########################################################################
@@ -130,8 +126,8 @@ theme.fg_minimize = theme.foreground
 theme.bg_focus = theme.xcolor18
 theme.bg_urgent = theme.xcolor1
 theme.bg_systray = theme.xcolor18
-theme.bg_modal = theme.xcolor0 .. "99"
-theme.bg_modal_title = theme.xcolor0 .. "99"
+theme.bg_modal = theme.xcolor0 .. "66"
+theme.bg_modal_title = theme.xcolor0 .. "66"
 theme.bg_settings_display_number = theme.xbackground .. "70"
 theme.bg_normal = theme.background
 theme.bg_button = theme.xbackground
@@ -183,10 +179,10 @@ theme.tooltip_bg = {
     from = {0, 0},
     to = {95, 95},
     stops = {
-        {0, theme.xbackground .. "99"},
-        {0.45, theme.xcolor7 .. "99"},
-        {0.85, theme.xcolor18 .. "99"},
-        {1, theme.xbackground .. "99"}
+        {0, theme.xbackground .. "66"},
+        {0.45, theme.xcolor7 .. "66"},
+        {0.85, theme.xcolor18 .. "66"},
+        {1, theme.xbackground .. "66"}
     }
 }
 
@@ -288,10 +284,10 @@ theme.taglist_bg_occupied = {
     from = {0, 0},
     to = {-35, -35},
     stops = {
-        {0, theme.xcolor0 .. "99"},
-        {0.45, theme.xcolor7 .. "99"},
-        {0.85, theme.xcolor21 .. "99"},
-        {1, theme.xcolor19 .. "99"}
+        {0, theme.xcolor0 .. "66"},
+        {0.45, theme.xcolor7 .. "66"},
+        {0.85, theme.xcolor21 .. "66"},
+        {1, theme.xcolor19 .. "66"}
     }
 }
 theme.taglist_bg_urgent = {
@@ -310,10 +306,10 @@ theme.taglist_bg_focus = {
     from = {0, 0},
     to = {115, 15},
     stops = {
-        {0, theme.xbackground .. "99"},
-        {0.45, theme.xcolor7 .. "99"},
-        {0.85, theme.xcolor21 .. "99"},
-        {1, theme.xcolor19 .. "99"}
+        {0, theme.xbackground .. "66"},
+        {0.45, theme.xcolor7 .. "66"},
+        {0.85, theme.xcolor21 .. "66"},
+        {1, theme.xcolor19 .. "66"}
     }
 }
 theme.taglist_fg_focus = theme.xcolor15
@@ -326,10 +322,10 @@ theme.taglist_bg = {
     from = {0, 0},
     to = {65, 65},
     stops = {
-        {0, theme.xbackground .. "99"},
-        {0.45, theme.xcolor7 .. "99"},
-        {0.85, theme.xcolor18 .. "99"},
-        {1, theme.xbackground .. "99"}
+        {0, theme.xbackground .. "66"},
+        {0.45, theme.xcolor7 .. "66"},
+        {0.85, theme.xcolor18 .. "66"},
+        {1, theme.xbackground .. "66"}
     }
 }
 

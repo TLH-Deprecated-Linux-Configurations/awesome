@@ -80,7 +80,7 @@ local bottom_panel = function(s)
                 widget,
                 border_width = dpi(3),
                 border_color = beautiful.xcolor0,
-                bg = beautiful.bg_normal .. "99",
+                bg = beautiful.bg_normal .. "66",
                 shape = beautiful.btn_lg_shape,
                 widget = wibox.container.background
             },
