@@ -11,7 +11,7 @@
 -- Look into awesome-freedesktop for more information
 local HOME = os.getenv("HOME")
 
-require("module.ui-components.menu")
+require("module.interface.menu")
 
 -- ########################################################################
 -- ########################################################################

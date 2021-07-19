@@ -8,7 +8,7 @@
 local wibox = require("wibox")
 local gears = require("gears")
 local dpi = require("beautiful").xresources.apply_dpi
-local card = require("module.ui-components.card")
+local card = require("module.interface.card")
 
 local beautiful = require("beautiful")
 

@@ -10,7 +10,7 @@ local gears = require("gears")
 local awful = require("awful")
 local wibox = require("wibox")
 local beautiful = require("beautiful")
-local animate = require("lib.animations").createAnimObject
+local animate = require("module.interface.animations").createAnimObject
 
 local dpi = beautiful.xresources.apply_dpi
 

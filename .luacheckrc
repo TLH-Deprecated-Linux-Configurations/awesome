@@ -20,6 +20,8 @@ files[".luacheckrc"].ignore = {"111", "112", "131"}
 files["**"].ignore = {"631", "613", "112", "122"}
 
 exclude_files = {
+    ".luacheckrc",
+    "lib/*",
     "lib/lib-lua/cjson/util.lua",
     "lib/lib-lua/ltn12.lua",
     "lib/lib-lua/mime.lua",
@@ -51,7 +53,7 @@ exclude_files = {
     "lib/lib-lua/ssl.lua",
     "lib/lib-lua/ssl/https.lua",
     -- contains a lot of globals
-    "tests/**",
+    "tests/**"
     --"plugins/**",
 }
 
@@ -59,6 +61,7 @@ exclude_files = {
 read_globals = {
     "awesome",
     "button",
+    "client",
     "dbus",
     "drawable",
     "drawin",
@@ -102,7 +105,7 @@ globals = {
     "print",
     "echo",
     "desktop_icons",
-    "awesome",
+    "awesome"
 }
 
 -- Enable cache (uses .luacheckcache relative to this rc file).

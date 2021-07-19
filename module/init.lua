@@ -10,10 +10,10 @@
 require("module.settings")
 require("module.settings.auto-start")
 require("widget.exit-screen")
-require("module.ui-components.quake-terminal")
+require("module.interface.quake-terminal")
 require("module.hardware.brightness-slider-osd")
 require("module.hardware.volume-slider-osd")
 require("module.hardware.volume_manager")
-_G.switcher = require("module.ui-components.application-switch")
+_G.switcher = require("module.interface.application-switch")
 
 require("module.hardware.battery-notifier")

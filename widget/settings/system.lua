@@ -14,7 +14,7 @@ local beautiful = require("beautiful")
 local icons = require("theme.icons")
 local file = require("module.functions.file")
 local signals = require("module.settings.signals")
-local card = require("module.ui-components.card")
+local card = require("module.interface.card")
 
 local dpi = beautiful.xresources.apply_dpi
 -- ########################################################################

@@ -12,14 +12,14 @@ local gears = require("gears")
 local beautiful = require("beautiful")
 local icons = require("theme.icons")
 local signals = require("module.settings.signals")
-local slider = require("module.ui-components.slider")
-local card = require("module.ui-components.card")
+local slider = require("module.interface.slider")
+local card = require("module.interface.card")
 local volume = require("module.hardware.volume")
-local button = require("module.ui-components.button")
+local button = require("module.interface.button")
 local mat_icon_button = require("widget.material.icon-button")
 local mat_icon = require("widget.material.icon")
 local sound = require("module.hardware.sound")
-local scrollbox = require("module.ui-components.scrollbox")
+local scrollbox = require("module.interface.scrollbox")
 
 local dpi = beautiful.xresources.apply_dpi
 -- ########################################################################

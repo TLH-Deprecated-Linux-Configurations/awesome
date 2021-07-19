@@ -5,13 +5,13 @@ local beautiful = require("beautiful")
 local dpi = require("beautiful").xresources.apply_dpi
 local clickable_container = require("widget.clickable-container")
 local signals = require("module.settings.signals")
-local animate = require("lib.animations").createAnimObject
-local seperator_widget = require("module.ui-components.separator")
+local animate = require("module.interface.animations").createAnimObject
+local seperator_widget = require("module.interface.separator")
 
 local keyconfig = require("configuration.keys.mod")
 local modKey = keyconfig.modKey
 
-local scrollbox = require("module.ui-components.scrollbox")
+local scrollbox = require("module.interface.scrollbox")
 
 local get_screen = require("lib.function.common").focused_screen
 
@@ -19,8 +19,6 @@ local get_screen = require("lib.function.common").focused_screen
 local body = {}
 
 local function notification_plugin()
-    
-
     local separator = seperator_widget(16, "vertical", 0)
 
     local table_widget =
@@ -279,7 +277,6 @@ local right_panel = function()
     -- Hide this panel when app dashboard is called.
     function panel:HideDashboard()
         closePanel()
-        
     end
 
     function panel:toggle()
@@ -288,7 +285,6 @@ local right_panel = function()
             openPanel()
         else
             closePanel()
-            
         end
     end
 

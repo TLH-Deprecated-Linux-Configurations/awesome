@@ -17,7 +17,7 @@ local apps = require("configuration.apps")
 local clickable_container = require("widget.clickable-container")
 local signals = require("module.settings.signals")
 
-local animate = require("lib.animations").createAnimObject
+local animate = require("module.interface.animations").createAnimObject
 -- ########################################################################
 -- ########################################################################
 -- ########################################################################

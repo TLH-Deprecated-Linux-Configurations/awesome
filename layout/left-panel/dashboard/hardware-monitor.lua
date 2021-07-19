@@ -10,7 +10,7 @@
 local wibox = require("wibox")
 local beautiful = require("beautiful")
 local dpi = beautiful.xresources.apply_dpi
-local card = require("module.ui-components.card")
+local card = require("module.interface.card")
 -- ########################################################################
 -- ########################################################################
 -- ########################################################################

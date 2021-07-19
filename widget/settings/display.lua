@@ -15,7 +15,6 @@ local awful = require("awful")
 local wibox = require("wibox")
 local gears = require("gears")
 local beautiful = require("beautiful")
-local rounded = require("lib.widget.rounded")
 local filesystem = require("module.functions.file")
 local icons = require("theme.icons")
 local signals = require("module.settings.signals")
@@ -23,12 +22,12 @@ local dpi = beautiful.xresources.apply_dpi
 local configWriter = require("module.functions.config-writer")
 local datetime = require("lib.function.datetime")
 local filehandle = require("module.functions.file")
-local imagemagic = require("module.ui-components.imagemagic")
+local imagemagic = require("module.interface.imagemagic")
 local xrandr_menu = require("module.hardware.xrandr").menu
-local scrollbox = require("module.ui-components.scrollbox")
-local slider = require("module.ui-components.slider")
-local card = require("module.ui-components.card")
-local button = require("module.ui-components.button")
+local scrollbox = require("module.interface.scrollbox")
+local slider = require("module.interface.slider")
+local card = require("module.interface.card")
+local button = require("module.interface.button")
 local functions = require("module.functions")
 
 -- ########################################################################
@@ -99,7 +98,7 @@ local function make_screen_layout(wall, label)
           layout = wibox.container.background,
           fg = beautiful.fg_normal,
           bg = beautiful.bg_settings_display_number,
-          shape = rounded(dpi(60)),
+          shape = beautiful.btn_lg_shape,
           forced_width = dpi(60),
           forced_height = dpi(60),
           wibox.container.place(

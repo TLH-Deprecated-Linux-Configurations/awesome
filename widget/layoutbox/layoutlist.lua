@@ -37,7 +37,7 @@ layout_popup =
     awful.popup {
     widget = wibox.widget {
         ll,
-        margins = dpi(24),
+        margins = dpi(12),
         widget = wibox.container.margin
     },
     border_color = beautiful.border_color,

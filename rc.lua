@@ -24,8 +24,8 @@ require("awful.autofocus")
 require("module.settings.notifications")
 -- ########################################################################
 
-require("widget.titlebar")()
-require("module.ui-components.backdrop")
+require("widget.titlebar")
+require("module.interface.backdrop")
 
 -- ########################################################################
 -- Layout

@@ -1,4 +1,3 @@
-
 -- ########################################################################
 -- ########################################################################
 -- ########################################################################
@@ -6,9 +5,9 @@
 -- configurations as is a standard site in Awesomewm configs, I have settled on a
 -- single theme because I don't really need to switch between themes anyway so having
 -- such tooling is just another thing that can cause debugging nightmares for me YMMV
-
 local filesystem = require("gears.filesystem")
 local theme_dir = filesystem.get_configuration_dir() .. "/theme"
+local tip = theme_dir .. '/icons/titlebar/'
 local gears = require("gears")
 local dpi = require("beautiful").xresources.apply_dpi
 local gtk = require("beautiful.gtk")
@@ -178,12 +177,8 @@ theme.tooltip_bg = {
     type = "linear",
     from = {0, 0},
     to = {95, 95},
-    stops = {
-        {0, theme.xbackground .. "66"},
-        {0.45, theme.xcolor7 .. "66"},
-        {0.85, theme.xcolor18 .. "66"},
-        {1, theme.xbackground .. "66"}
-    }
+    stops = {{0, theme.xbackground .. "66"}, {0.45, theme.xcolor7 .. "66"}, {0.85, theme.xcolor18 .. "66"},
+             {1, theme.xbackground .. "66"}}
 }
 
 theme.tooltip_border_color = theme.xcolor0 .. "33"
@@ -226,36 +221,24 @@ theme.tasklist_bg_normal = {
     type = "linear",
     from = {0, 0},
     to = {15, 15},
-    stops = {
-        {0, theme.xbackground .. "66"},
-        {0.45, theme.xcolor0 .. "66"},
-        {0.85, theme.xbackground .. "66"},
-        {1, theme.xcolor19 .. "66"}
-    }
+    stops = {{0, theme.xbackground .. "66"}, {0.45, theme.xcolor0 .. "66"}, {0.85, theme.xbackground .. "66"},
+             {1, theme.xcolor19 .. "66"}}
 }
 
 theme.tasklist_bg_focus = {
     type = "linear",
     from = {0, 0},
     to = {65, 65},
-    stops = {
-        {0, theme.xcolor0 .. "66"},
-        {0.45, theme.xcolor8 .. "66"},
-        {0.85, theme.xcolor16 .. "66"},
-        {1, theme.xcolor18 .. "66"}
-    }
+    stops = {{0, theme.xcolor0 .. "66"}, {0.45, theme.xcolor8 .. "66"}, {0.85, theme.xcolor16 .. "66"},
+             {1, theme.xcolor18 .. "66"}}
 }
 
 theme.tasklist_bg_urgent = {
     type = "linear",
     from = {0, 0},
     to = {65, 65},
-    stops = {
-        {0, theme.xbackground .. "66"},
-        {0.45, theme.xcolor9 .. "66"},
-        {0.85, theme.xcolor21 .. "66"},
-        {1, theme.xcolor19 .. "66"}
-    }
+    stops = {{0, theme.xbackground .. "66"}, {0.45, theme.xcolor9 .. "66"}, {0.85, theme.xcolor21 .. "66"},
+             {1, theme.xcolor19 .. "66"}}
 }
 -- foreground
 theme.tasklist_fg_focus = theme.xcolor15
@@ -267,50 +250,34 @@ theme.tasklist_fg_normal = theme.foreground
 -- ########################################################################
 -- Taglist
 theme.taglist_spacing = 1
---colors
+-- colors
 theme.taglist_bg_empty = {
     type = "linear",
     from = {0, 0},
     to = {-85, -85},
-    stops = {
-        {0, theme.xbackground .. "66"},
-        {0.45, theme.xcolor8 .. "66"},
-        {0.85, theme.xcolor16 .. "66"},
-        {1, theme.xcolor18 .. "66"}
-    }
+    stops = {{0, theme.xbackground .. "66"}, {0.45, theme.xcolor8 .. "66"}, {0.85, theme.xcolor16 .. "66"},
+             {1, theme.xcolor18 .. "66"}}
 }
 theme.taglist_bg_occupied = {
     type = "linear",
     from = {0, 0},
     to = {-35, -35},
-    stops = {
-        {0, theme.xcolor0 .. "66"},
-        {0.45, theme.xcolor7 .. "66"},
-        {0.85, theme.xcolor21 .. "66"},
-        {1, theme.xcolor19 .. "66"}
-    }
+    stops = {{0, theme.xcolor0 .. "66"}, {0.45, theme.xcolor7 .. "66"}, {0.85, theme.xcolor21 .. "66"},
+             {1, theme.xcolor19 .. "66"}}
 }
 theme.taglist_bg_urgent = {
     type = "linear",
     from = {0, 0},
     to = {35, 35},
-    stops = {
-        {0, theme.xcolor0 .. "bb"},
-        {0.45, theme.xcolor7 .. "bb"},
-        {0.85, theme.xcolor16 .. "bb"},
-        {1, theme.xcolor19 .. "bb"}
-    }
+    stops = {{0, theme.xcolor0 .. "bb"}, {0.45, theme.xcolor7 .. "bb"}, {0.85, theme.xcolor16 .. "bb"},
+             {1, theme.xcolor19 .. "bb"}}
 }
 theme.taglist_bg_focus = {
     type = "linear",
     from = {0, 0},
     to = {115, 15},
-    stops = {
-        {0, theme.xbackground .. "66"},
-        {0.45, theme.xcolor7 .. "66"},
-        {0.85, theme.xcolor21 .. "66"},
-        {1, theme.xcolor19 .. "66"}
-    }
+    stops = {{0, theme.xbackground .. "66"}, {0.45, theme.xcolor7 .. "66"}, {0.85, theme.xcolor21 .. "66"},
+             {1, theme.xcolor19 .. "66"}}
 }
 theme.taglist_fg_focus = theme.xcolor15
 theme.taglist_fg_urgent = theme.xcolor1
@@ -321,12 +288,8 @@ theme.taglist_bg = {
     type = "linear",
     from = {0, 0},
     to = {65, 65},
-    stops = {
-        {0, theme.xbackground .. "66"},
-        {0.45, theme.xcolor7 .. "66"},
-        {0.85, theme.xcolor18 .. "66"},
-        {1, theme.xbackground .. "66"}
-    }
+    stops = {{0, theme.xbackground .. "66"}, {0.45, theme.xcolor7 .. "66"}, {0.85, theme.xcolor18 .. "66"},
+             {1, theme.xbackground .. "66"}}
 }
 
 theme.taglist_fg_volatile = theme.xcolor11
@@ -337,11 +300,9 @@ theme.taglist_squares_unsel = theme_assets.taglist_squares_unsel(taglist_square_
 
 -- ########################################################################
 -- ########################################################################
-local out =
-    io.popen(
-    "if [ -f ~/.config/gtk-3.0/settings.ini ]; " ..
-        [[then grep "gtk-icon-theme-name" ~/.config/gtk-3.0/settings.ini | awk -F= '{printf $2}'; fi]]
-):read("*all")
+local out = io.popen("if [ -f ~/.config/gtk-3.0/settings.ini ]; " ..
+                         [[then grep "gtk-icon-theme-name" ~/.config/gtk-3.0/settings.ini | awk -F= '{printf $2}'; fi]]):read(
+    "*all")
 if out ~= nil then
     theme.icon_theme = out
 end
@@ -426,12 +387,8 @@ theme.notification_bg = {
     type = "linear",
     from = {0, 0},
     to = {125, 125},
-    stops = {
-        {0, theme.xbackground .. "66"},
-        {0.45, theme.xcolor0 .. "66"},
-        {0.85, theme.xbackground .. "66"},
-        {1, theme.xcolor19 .. "66"}
-    }
+    stops = {{0, theme.xbackground .. "66"}, {0.45, theme.xcolor0 .. "66"}, {0.85, theme.xbackground .. "66"},
+             {1, theme.xcolor19 .. "66"}}
 }
 theme.notification_fg = theme.fg_normal
 theme.notification_shape = function(cr, width, height)
@@ -452,15 +409,43 @@ theme.bg_systray = {
     type = "linear",
     from = {0, 0},
     to = {-55, -55},
-    stops = {
-        {0, theme.xbackground .. "66"},
-        {0.45, theme.xcolor0 .. "66"},
-        {0.85, theme.xbackground .. "66"},
-        {1, theme.xcolor19 .. "66"}
-    }
+    stops = {{0, theme.xbackground .. "66"}, {0.45, theme.xcolor0 .. "66"}, {0.85, theme.xbackground .. "66"},
+             {1, theme.xcolor19 .. "66"}}
 }
 
 -- Generate Awesome icon:
 theme.awesome_icon = theme_assets.awesome_icon(theme.menu_height, theme.bg_focus, theme.fg_focus)
+
+-- Titlebar
+theme.titlebar_size = dpi(34)
+local icon_path = gears.filesystem.get_configuration_dir() .. "theme/icons/"
+local titlebar_icon_path = icon_path .. "titlebar/"
+
+theme.titlebar_close_button_normal = titlebar_icon_path .. "close_normal.svg"
+theme.titlebar_close_button_focus = titlebar_icon_path .. "close_focus.svg"
+
+theme.titlebar_minimize_button_normal = titlebar_icon_path .. "minimize_normal.svg"
+theme.titlebar_minimize_button_focus = titlebar_icon_path .. "minimize_focus.svg"
+
+theme.titlebar_ontop_button_normal_inactive = titlebar_icon_path .. "ontop_normal_inactive.svg"
+theme.titlebar_ontop_button_focus_inactive = titlebar_icon_path .. "ontop_focus_inactive.svg"
+theme.titlebar_ontop_button_normal_active = titlebar_icon_path .. "ontop_normal_active.svg"
+theme.titlebar_ontop_button_focus_active = titlebar_icon_path .. "ontop_focus_active.svg"
+
+theme.titlebar_sticky_button_normal_inactive = titlebar_icon_path .. "sticky_normal_inactive.svg"
+theme.titlebar_sticky_button_focus_inactive = titlebar_icon_path .. "sticky_focus_inactive.svg"
+theme.titlebar_sticky_button_normal_active = titlebar_icon_path .. "sticky_normal_active.svg"
+theme.titlebar_sticky_button_focus_active = titlebar_icon_path .. "sticky_focus_active.svg"
+
+theme.titlebar_floating_button_normal_inactive = titlebar_icon_path .. "floating_normal_inactive.svg"
+theme.titlebar_floating_button_focus_inactive = titlebar_icon_path .. "floating_focus_inactive.svg"
+theme.titlebar_floating_button_normal_active = titlebar_icon_path .. "floating_normal_active.svg"
+theme.titlebar_floating_button_focus_active = titlebar_icon_path .. "floating_focus_active.svg"
+
+theme.titlebar_maximized_button_normal_inactive = titlebar_icon_path .. "maximized_normal_inactive.svg"
+theme.titlebar_maximized_button_focus_inactive = titlebar_icon_path .. "maximized_focus_inactive.svg"
+theme.titlebar_maximized_button_normal_active = titlebar_icon_path .. "maximized_normal_active.svg"
+theme.titlebar_maximized_button_focus_active = titlebar_icon_path .. "maximized_focus_active.svg"
+-- UI Groups
 
 return theme

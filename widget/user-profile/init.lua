@@ -3,8 +3,8 @@
 
 local wibox = require("wibox")
 local dpi = require("beautiful").xresources.apply_dpi
-local profilebox = require("module.ui-components.profilebox")
-local card = require("module.ui-components.card")
+local profilebox = require("module.interface.profilebox")
+local card = require("module.interface.card")
 local HOME = os.getenv("HOME")
 local PATH_TO_ICONS = HOME .. "/.config/awesome/widget/user-profile/icons/"
 

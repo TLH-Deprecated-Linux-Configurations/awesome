@@ -19,10 +19,10 @@ local split = require("lib.function.common").split
 local signals = require("module.settings.signals")
 local mat_icon_button = require("widget.material.icon-button")
 local mat_icon = require("widget.material.icon")
-local card = require("module.ui-components.card")
+local card = require("module.interface.card")
 local naughty = require("naughty")
 local execute = require("module.hardware.hardware-check").execute
-local scrollbox = require("module.ui-components.scrollbox")
+local scrollbox = require("module.interface.scrollbox")
 
 local dpi = beautiful.xresources.apply_dpi
 -- ########################################################################

@@ -1,6 +1,6 @@
 local wibox = require("wibox")
 local mat_list_item = require("widget.material.list-item")
-local slider = require("module.ui-components.slider")
+local slider = require("module.interface.slider")
 local mat_icon_button = require("widget.material.icon-button")
 local icons = require("theme.icons")
 local signals = require("module.settings.signals")
