@@ -13,8 +13,8 @@ local scrollbox = require("module.interface.scrollbox")
 
 local apps = require("configuration.apps")
 local dpi = require("beautiful").xresources.apply_dpi
-local mat_list_item = require("widget.material.list-item")
-local mat_icon = require("widget.material.icon")
+local mat_list_item = require("module.interface.material.list-item")
+local mat_icon = require("module.interface.material.icon")
 local signals = require("module.settings.signals")
 local animate = require("module.interface.animations").createAnimObject
 local seperator_widget = require("module.interface.separator")

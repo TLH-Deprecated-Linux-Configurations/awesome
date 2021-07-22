@@ -126,9 +126,9 @@ local function make_nav()
     gears.color(
     {
       type = "linear",
-      from = {0, 0},
+      from = {15, 15},
       to = {260, beautiful.modal_height},
-      stops = {{0, beautiful.xcolor7 .. "66"}, {1, beautiful.xcolor8 .. "66"}}
+      stops = {{0, beautiful.xcolor7 .. "66"}, {0.25, beautiful.xcolor20 .. '66'}, {0.5, beautiful.xcolor0 .. '66'}, {0.75, beautiful.xcolor17 .. '66'}, {1, beautiful.xcolor8 .. "66"}}
     }
   )
 
@@ -137,7 +137,7 @@ local function make_nav()
   nav.forced_width = 260
 
   local user = wibox.widget.textbox("")
-  user.font = beautiful.font .. " 08"
+  user.font = beautiful.font .. " 12"
   awful.spawn.easy_async_with_shell(
     "whoami",
     function(u)
@@ -198,7 +198,7 @@ local function make_nav()
   local power = wibox.container.background()
   power.bg = beautiful.xcolor1
   power.shape = function(cr, rect_width, rect_height)
-    gears.shape.partially_rounded_rect(cr, rect_width, rect_height, true, true, true, true, 12)
+    gears.shape.partially_rounded_rect(cr, rect_width, rect_height, true, true, true, true, 14)
   end
   power.forced_height = 40
   power:setup {
@@ -206,8 +206,8 @@ local function make_nav()
     halign = "center",
     {
       widget = wibox.widget.textbox,
-      text = "󰐥",
-      font = beautiful.font .. " 18"
+      text = "",
+      font = beautiful.font .. " 48"
     }
   }
   power:buttons(

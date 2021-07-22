@@ -36,7 +36,7 @@ local bottom_panel = function(s)
             ontop = true,
             screen = s,
             position = "bottom",
-            height = dpi(48), -- 48
+            height = dpi(38), -- 48
             width = s.geometry.width - offsetx,
             x = s.geometry.x + offsetx,
             y = s.geometry.y,
@@ -54,7 +54,7 @@ local bottom_panel = function(s)
             },
             fg = beautiful.fg_normal,
             struts = {
-                bottom = dpi(48)
+                bottom = dpi(38)
             }
         }
     )
@@ -63,8 +63,6 @@ local bottom_panel = function(s)
     panel:connect_signal(
         "mouse::enter",
         function()
-            collectgarbage("collect")
-
             local w = mouse.current_wibox
             if w then
                 w.cursor = "left_ptr"
@@ -79,13 +77,13 @@ local bottom_panel = function(s)
             {
                 widget,
                 border_width = dpi(3),
-                border_color = beautiful.xcolor0,
-                bg = beautiful.bg_normal .. "66",
+                border_color = beautiful.xcolor0 .. "33",
+                bg = beautiful.bg_normal .. "22",
                 shape = beautiful.btn_lg_shape,
                 widget = wibox.container.background
             },
-            top = dpi(1),
-            bottom = dpi(0),
+            top = dpi(2),
+            bottom = dpi(2),
             widget = wibox.container.margin
         }
     end
@@ -108,7 +106,6 @@ local bottom_panel = function(s)
     -- ########################################################################
     -- ########################################################################
     s.control_center_toggle = build_widget(require("layout.left-panel"))
-    s.app_button = build_widget(require("widget.app-button"))
     s.bluetooth = build_widget(show_widget_or_default("widget.bluetooth", hardware.hasBluetooth()))
     s.network = build_widget(show_widget_or_default("widget.wifi", hardware.hasWifi()))
     local layout_box = build_widget(require("widget.layoutbox")(s))
@@ -117,7 +114,7 @@ local bottom_panel = function(s)
     s.mytextclock = build_widget(require("widget.clock"))
 
     -- ########################################################################
-    -- ########################################################################
+    -- ### Setup Panel Widgets ################################################
     -- ########################################################################
     panel:setup {
         {
@@ -127,7 +124,7 @@ local bottom_panel = function(s)
             {
                 layout = wibox.layout.fixed.horizontal,
                 spacing = dpi(2),
-                s.app_button,
+                s.control_center_toggle,
                 tag_list(s),
                 left = dpi(5),
                 right = dpi(5),
@@ -142,7 +139,6 @@ local bottom_panel = function(s)
                 s.bluetooth,
                 s.battery,
                 layout_box,
-                s.control_center_toggle,
                 s.notification_center,
                 s.mytextclock
 
@@ -154,7 +150,7 @@ local bottom_panel = function(s)
         widget = wibox.container.margin
     }
     -- ########################################################################
-    -- ########################################################################
+    -- ### Provide the Trigger for the Bottom #################################
     -- ########################################################################
 
     -- Invisible trigger that enables the bottom_panel

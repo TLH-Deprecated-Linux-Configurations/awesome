@@ -9,7 +9,7 @@ local Pango = lgi.Pango
 
 local beautiful = require("beautiful")
 
-local PATH_TO_ICONS = HOME .. "/.config/awesome/widget/notification-center/icons/"
+local PATH_TO_ICONS = HOME .. "/.config/awesome/layout/right-panel/icons/"
 
 local notif_layout = wibox.layout.fixed.vertical(reverse)
 notif_layout.spacing = dpi(5)
@@ -169,10 +169,7 @@ local function notif_generate(title, message, icon, noti)
             if #notif_layout.children == 1 then
                 notif_layout:reset(notif_layout)
                 _G.notification_firstime = true
-                notif_layout:insert(
-                    1,
-                    notif_generate(empty_title, empty_message, PATH_TO_ICONS .. "dont-disturb" .. ".svg")
-                )
+                notif_layout:insert(1, notif_generate(empty_title, empty_message, PATH_TO_ICONS .. "dont-disturb.svg"))
             else
                 notif_layout:remove_widgets(notif_template, true)
             end
@@ -187,10 +184,7 @@ local function notif_generate(title, message, icon, noti)
             if #notif_layout.children == 1 then
                 notif_layout:reset(notif_layout)
                 _G.notification_firstime = true
-                notif_layout:insert(
-                    1,
-                    notif_generate(empty_title, empty_message, PATH_TO_ICONS .. "dont-disturb" .. ".svg")
-                )
+                notif_layout:insert(1, notif_generate(empty_title, empty_message, PATH_TO_ICONS .. "dont-disturb.svg"))
             else
                 notif_layout:remove_widgets(notif_template, true)
             end
@@ -203,7 +197,7 @@ end
 
 -- add a message to an empty notification center
 local function add_empty()
-    notif_layout:insert(1, notif_generate(empty_title, empty_message, PATH_TO_ICONS .. "dont-disturb" .. ".svg"))
+    notif_layout:insert(1, notif_generate(empty_title, empty_message, PATH_TO_ICONS .. "dont-disturb.svg"))
 end
 
 -- Add empty message on startup
@@ -232,7 +226,7 @@ naughty.connect_signal(
         -- Then generate a widget based on naughty.notify data
         if n.icon == nil then
             -- if naughty sends a signal without an icon then use this instead
-            notif_layout:insert(1, notif_generate(n.title, n.message, PATH_TO_ICONS .. "new-notif" .. ".svg", n))
+            notif_layout:insert(1, notif_generate(n.title, n.message, PATH_TO_ICONS .. "new-notif.svg", n))
         else
             -- Use the notification's icon
             notif_layout:insert(1, notif_generate(n.title, n.message, n.icon, n))

@@ -14,7 +14,7 @@ local widget =
     wibox.widget {
     {
         id = "icon",
-        image = PATH_TO_ICONS .. "notification" .. ".svg",
+        image = PATH_TO_ICONS .. "notification.svg",
         widget = wibox.widget.imagebox,
         resize = true
     },

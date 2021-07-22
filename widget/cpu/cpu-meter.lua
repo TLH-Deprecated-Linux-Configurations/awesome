@@ -99,8 +99,6 @@ end
 -- ###########################################################
 
 local function worker(user_args)
-    collectgarbage("collect")
-
     local args = user_args or {}
 
     local width = args.width or 50

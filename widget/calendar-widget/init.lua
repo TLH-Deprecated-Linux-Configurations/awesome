@@ -11,7 +11,7 @@ local awful = require("awful")
 local gears = require("gears")
 local wibox = require("wibox")
 local beautiful = require("beautiful")
--- local clickable_container = require('widget.material.clickable-container')
+-- local clickable_container = require('module.interface.material.clickable-container')
 local dpi = require("beautiful").xresources.apply_dpi
 
 awesome.register_xproperty("WM_CLASS", "string")
@@ -28,7 +28,7 @@ local function rounded_shape(size, partial)
         end
     end
 end
-styles.month = {padding = 5, bg_color = beautiful.xbackground .. "33", shape = rounded_shape(10)}
+styles.month = {padding = 5, bg_color = beautiful.xbackground .. "33", shape = rounded_shape(6)}
 styles.normal = {shape = rounded_shape(5), padding = 5}
 styles.focus = {
     fg_color = beautiful.xcolor15, -- Current day Color

@@ -34,7 +34,6 @@ local function build(widget)
         "mouse::enter",
         function()
             container.bg = beautiful.groups_bg
-            -- no idea how to get the wibox from this signal's arguments...
             local w = mouse.current_wibox
             if w then
                 old_cursor, old_wibox = w.cursor, w

@@ -8,7 +8,7 @@
 -- ########################################################################
 local bling = require("lib.bling")
 local lain = require("lib.lain")
-
+local awful = require("awful")
 -- ########################################################################
 -- ########################################################################
 -- ########################################################################
@@ -19,7 +19,6 @@ _G.tag.connect_signal(
             {
                 bling.layout.mstab,
                 awful.layout.suit.max,
-                lain.layout.centerwork,
                 awful.layout.suit.tile,
                 awful.layout.suit.spiral.dwindle,
                 awful.layout.suit.floating,

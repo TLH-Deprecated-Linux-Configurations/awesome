@@ -1,11 +1,23 @@
-local naughty = require("naughty")
+--  _______         __               __         __
+-- |_     _|.--.--.|  |_.-----.----.|__|.---.-.|  |
+--   |   |  |  |  ||   _|  _  |   _||  ||  _  ||  |
+--   |___|  |_____||____|_____|__|  |__||___._||__|
 
+-- ########################################################################
+-- ########################################################################
+-- ########################################################################
+local naughty = require("naughty")
+-- ########################################################################
+-- ## Libraries and Dependencies ##########################################
+-- ########################################################################
 local function finish()
     local HOME = os.getenv("HOME")
     local FILE = HOME .. "/.cache/tutorial_tos"
     io.open(FILE, "w"):write("tutorial is complete"):close()
 end
-
+-- ########################################################################
+-- ## Ninth Tip ###########################################################
+-- ########################################################################
 local function ninthTip()
     naughty.notify(
         {
@@ -17,7 +29,9 @@ local function ninthTip()
         }
     ):connect_signal("destroyed", finish)
 end
-
+-- ########################################################################
+-- ## Eighth Tip ##########################################################
+-- ########################################################################
 local function eightTip()
     naughty.notify(
         {
@@ -29,79 +43,96 @@ local function eightTip()
         }
     ):connect_signal("destroyed", ninthTip)
 end
-
+-- ########################################################################
+-- ## Seventh Tip #########################################################
+-- ########################################################################
 local function seventhTip()
     naughty.notify(
         {
             app_name = "New User Tutorial",
             title = "New User Tutorial",
-            message = "To go to a new workspace try mod+2, launch a program and switch back with mod+1",
+            message = "To go to a new workspace try mod+2, launch a program and switch back with mod+1. Workspace " ..
+                "represented by the letters of the word AWESOMEWM on the bottom bar.",
             timeout = 0,
             position = "top_left"
         }
     ):connect_signal("destroyed", eightTip)
 end
-
+-- ########################################################################
+-- ## Sixth Tip ###########################################################
+-- ########################################################################
 local function sixthTip()
     naughty.notify(
         {
             app_name = "New User Tutorial",
             title = "New User Tutorial",
-            message = "Click on the gear icon to access general settings.",
+            message = "Click on the gear icon to access quick settings and dash.",
             timeout = 0,
             position = "top_left"
         }
     ):connect_signal("destroyed", seventhTip)
 end
-
+-- ########################################################################
+-- ## Fifth Tip ###########################################################
+-- ########################################################################
 local function fifthTip()
     naughty.notify(
         {
             app_name = "New User Tutorial",
             title = "New User Tutorial",
-            message = "To launch applications use the windows key to bring up the application menu. Try to start a few! PS you can kill them with mod+x.",
+            message = "Got notifications that disappeared before you could react? Click the menu icon to the left of the" ..
+                " clock widget on the bottom bar",
             timeout = 0,
             position = "top_right"
         }
     ):connect_signal("destroyed", sixthTip)
 end
-
+-- ########################################################################
+-- ## Fourth Tip ##########################################################
+-- ########################################################################
 local function fourthTip()
     naughty.notify(
         {
             app_name = "New User Tutorial",
             title = "New User Tutorial",
-            message = "To kill a program use mod+q",
+            message = "To kill a program use mod+x",
             timeout = 0,
             position = "top_right"
         }
     ):connect_signal("destroyed", fifthTip)
 end
-
+-- ########################################################################
+-- ## Third Tip ##########################################################
+-- ########################################################################
 local function thirdTip()
     naughty.notify(
         {
             app_name = "New User Tutorial",
             title = "New User Tutorial",
-            message = "Try to open a few terminals and see what happens. mod+Enter to open a terminal.",
+            message = "Try to open a few terminals and see what happens. mod+Enter to open a terminal or press the" ..
+                " windows key and a system app menu will appear.",
             timeout = 0,
             position = "bottom_left"
         }
     ):connect_signal("destroyed", fourthTip)
 end
-
+-- ########################################################################
+-- ## Second Tip ##########################################################
+-- ########################################################################
 local function secondTip()
     naughty.notify(
         {
             app_name = "New User Tutorial",
             title = "New User Tutorial",
-            message = "The default window tiling layout can be changed by pressing the icon below to the left of the clock.",
+            message = "To show the bar, hover your mouse over the last row of pixels at the bottom of the screen.",
             timeout = 0,
             position = "bottom_left"
         }
     ):connect_signal("destroyed", thirdTip)
 end
-
+-- ########################################################################
+-- ########################################################################
+-- ########################################################################
 local func = {
     secondTip = secondTip,
     thirdTip = thirdTip,
@@ -113,7 +144,9 @@ local func = {
     ninthTip = ninthTip,
     finish = finish
 }
-
+-- ########################################################################
+-- ## Check to see if tutorial already ran or not #########################
+-- ########################################################################
 local HOME = os.getenv("HOME")
 local FILE = HOME .. "/.cache/tutorial_tos"
 if require("module.functions.file").exists(FILE) then
@@ -121,7 +154,9 @@ if require("module.functions.file").exists(FILE) then
     func["status"] = false
     return func
 end
-
+-- ########################################################################
+-- ########################################################################
+-- ########################################################################
 print("Showing tutorial")
 require("gears").timer.start_new(
     3,
@@ -130,9 +165,7 @@ require("gears").timer.start_new(
             {
                 app_name = "User Tutorial",
                 title = "User Tutorial",
-                message = "Each letter in the word 'AWESOMEWM' located on the bar represents a workspace and serves " ..
-                "as a button to move to that workspace. Note workspaces are assigned individually to each screen if"
-                .." you have multiple monitors",
+                message = " Click this box to proceed to the next starter tip! ",
                 timeout = 0,
                 position = "top_left"
             }

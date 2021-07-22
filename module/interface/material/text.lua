@@ -1,6 +1,14 @@
 local wibox = require("wibox")
 local beautiful = require("beautiful")
+local function new(self, ...)
+  local instance = setmetatable({}, {__index = self})
+  return instance:init(...) or instance
+end
 
+-- Function to create object in lua - used globally
+local function class(base)
+  return setmetatable({new = new}, {__call = new, __index = base})
+end
 local root_text = class()
 
 -- Code for transparency

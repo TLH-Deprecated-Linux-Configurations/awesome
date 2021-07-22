@@ -85,8 +85,8 @@ local tasklist = function(s)
                     },
                     left = dpi(6),
                     right = dpi(6),
-                    top = dpi(0),
-                    bottom = dpi(0),
+                    top = dpi(2),
+                    bottom = dpi(2),
                     widget = wibox.container.margin,
                     layout = wibox.layout.fixed.horizontal
                 },

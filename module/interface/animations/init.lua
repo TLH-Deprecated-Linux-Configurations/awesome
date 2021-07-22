@@ -13,6 +13,7 @@ local gears = require("gears")
 local hardware = require("module.hardware.hardware-check")
 local tween = require("module.interface.animations.tween")
 require("module.interface.animations.awestore")
+require("module.interface.animations.rubato")
 -- we refresh at display frequency or 24 the lowest one frequency (thus the highest delay)
 local freq = math.max(1 / 24, 1 / hardware.getDisplayFrequency())
 -- ########################################################################

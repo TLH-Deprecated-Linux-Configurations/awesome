@@ -1,8 +1,8 @@
 -- TODO make this work
 local wibox = require("wibox")
-local mat_list_item = require("widget.material.list-item")
+local mat_list_item = require("module.interface.material.list-item")
 local slider = require("module.interface.slider")
-local mat_icon_button = require("widget.material.icon-button")
+local mat_icon_button = require("module.interface.material.icon-button")
 local icons = require("theme.icons")
 local spawn = require("awful.spawn")
 local signals = require("module.settings.signals")

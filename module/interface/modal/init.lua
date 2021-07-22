@@ -3,8 +3,7 @@ local screen = require("awful.screen")
 local helper = require("module.interface.modal.helper")
 local button = require("awful.button")
 local table = require("gears.table")
-local widget = require("module.interface.widget")
-
+local beautiful = require("beautiful")
 local modal = {}
 
 function modal:init(s)
@@ -13,7 +12,7 @@ function modal:init(s)
     self.screen = s or screen.focused()
     self.height = screen.focused().geometry.height
     self.w = wibox({x = 0, y = 0, visible = false, ontop = true, type = "splash", screen = self.screen})
-    self.w.bg = M.x.on_surface .. "0A" -- 4%
+    self.w.bg = beautiful.xbackground .. "0A" -- 4%
     self.w.width = screen.focused().geometry.width
     self.w.height = self.height
     return self.w
@@ -52,7 +51,6 @@ function modal:run_center(w)
                 nil,
                 {
                     {
-                        widget.centered(w, "vertical"),
                         margins = 18,
                         widget = wibox.container.margin
                     },

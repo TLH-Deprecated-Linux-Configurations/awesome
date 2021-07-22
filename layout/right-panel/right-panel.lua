@@ -26,11 +26,6 @@ local function notification_plugin()
         separator,
         layout = wibox.layout.fixed.vertical,
         {
-            require("widget.user-profile"),
-            wibox.container.margin(dpi(20), dpi(20), dpi(20), dpi(25)),
-            layout = wibox.layout.fixed.vertical
-        },
-        {
             require("widget.social-media"),
             wibox.container.margin(dpi(20), dpi(20), dpi(20), dpi(25)),
             layout = wibox.layout.fixed.vertical
@@ -92,7 +87,7 @@ local right_panel = function()
         width = panel_width,
         height = s.geometry.height,
         x = s.geometry.x + (s.geometry.width - panel_width),
-        bg = beautiful.bg_normal .. "88",
+        bg = beautiful.bg_normal .. "66",
         fg = beautiful.fg_normal
     }
 

@@ -1,23 +1,21 @@
---  ______         __              __         __                   ________ __     __               __
+-- ______         __              __         __                   ________ __     __               __
 -- |      |.---.-.|  |.----.--.--.|  |.---.-.|  |_.-----.----.    |  |  |  |__|.--|  |.-----.-----.|  |_
 -- |   ---||  _  ||  ||  __|  |  ||  ||  _  ||   _|  _  |   _|    |  |  |  |  ||  _  ||  _  |  -__||   _|
 -- |______||___._||__||____|_____||__||___._||____|_____|__|      |________|__||_____||___  |_____||____|
---                                                                                    |_____|
+-- |_____|
 -- ########################################################################
 -- ########################################################################
 -- ########################################################################
 -- Supports keyboard input!
---  Just hover your cursor above the calculator widget and start typing
---  Stop keygrabbing by leaving the calculator
-
-local wibox = require("wibox")
-local gears = require("gears")
-local beautiful = require("beautiful")
-
+-- Just hover your cursor above the calculator widget and start typing
+-- Stop keygrabbing by leaving the calculator
+local wibox = require "wibox"
+local gears = require "gears"
+local beautiful = require "beautiful"
 local dpi = beautiful.xresources.apply_dpi
-local clickable_container = require("widget.clickable-container")
-local HOME = os.getenv("HOME")
-local widget_icon_dir = HOME .. ".config/awesome/widget/calculator/icons/"
+local clickable_container = require "widget.clickable-container"
+local HOME = os.getenv "HOME"
+local widget_icon_dir = HOME .. "/.config/awesome/widget/calculator/icons/"
 -- ########################################################################
 -- ########################################################################
 -- ########################################################################
@@ -39,7 +37,6 @@ local calculator_screen =
     margins = dpi(5),
     widget = wibox.container.margin
 }
-
 -- ########################################################################
 -- ########################################################################
 -- ########################################################################
@@ -47,7 +44,7 @@ local calculator_screen =
 -- e.g. 123,456 or 12,345 or 345
 local formatInt = function(number, seperator)
     local sign = number:sub(1, 1)
-    if (sign == "-") then
+    if sign == "-" then
         number = number:sub(2, #number)
     else
         sign = ""
@@ -110,7 +107,7 @@ local unsignedNumberFormat = function(calculation, seperator)
         out = out .. formatDigits(number, seperator)
         for opperation in string.gmatch(calculation, "[-%*%+%/%^]") do
             j = j + 1
-            if (i == j) then
+            if i == j then
                 out = out .. opperation
             end
         end
@@ -125,7 +122,7 @@ end
 -- can have a - as the first parameter
 local numberFormat = function(calculation, seperator)
     local sign = ""
-    if (calculation:sub(1, 1) == "-") then
+    if calculation:sub(1, 1) == "-" then
         sign = "-"
         calculation = calculation:sub(2, #calculation)
     end
@@ -137,14 +134,11 @@ end
 -- Evaluate
 local calculate = function()
     local calcu_screen = calculator_screen.calcu_screen
-
     local string_expression = calcu_screen.text:gsub(",", "")
     print("Calculating: " .. string_expression)
-
-    if string_expression:sub(-1):match("[%+%-%/%*%^%.]") then
+    if string_expression:sub(-1):match "[%+%-%/%*%^%.]" then
         return
     end
-
     local func = assert(load("return " .. string_expression))
     local ans = tostring(func())
     -- ########################################################################
@@ -152,7 +146,7 @@ local calculate = function()
     -- ########################################################################
     -- Convert -NaN to undefined
     if ans == "-nan" then
-        calcu_screen:set_text("undefined")
+        calcu_screen:set_text "undefined"
         return
     end
     -- ########################################################################
@@ -163,17 +157,14 @@ local calculate = function()
     calcu_screen:set_text(num)
     print("Calculator resolved to: " .. num)
 end
-
 local txt_on_screen = function()
     local screen_text = calculator_screen.calcu_screen.text
-
     return screen_text == "inf" or screen_text == "undefined" or screen_text == "SYNTAX ERROR" or #screen_text == 1
 end
 -- ########################################################################
 -- ########################################################################
 -- ########################################################################
 -- Delete the last digit in screen
-
 local delete_value = function()
     local calcu_screen = calculator_screen.calcu_screen
     -- ########################################################################
@@ -181,7 +172,7 @@ local delete_value = function()
     -- ########################################################################
     -- Set the screen text to 0 if conditions met
     if txt_on_screen() then
-        calcu_screen:set_text("0")
+        calcu_screen:set_text "0"
     else
         -- Delete the last digit
         calcu_screen:set_text(calcu_screen.text:sub(1, -2))
@@ -192,7 +183,7 @@ end
 -- ########################################################################
 -- Clear screen
 local clear_screen = function()
-    calculator_screen.calcu_screen:set_text("0")
+    calculator_screen.calcu_screen:set_text "0"
 end
 -- ########################################################################
 -- ########################################################################
@@ -206,20 +197,17 @@ local format_screen = function(value)
     -- If the screen has only 0
     if calcu_screen.text == "0" then
         -- Check if the button pressed sends a value of either +, -, /, *, ^, .
-
-        if value:sub(-1):match("[%+%/%*%^%.]") then
+        if value:sub(-1):match "[%+%/%*%^%.]" then
             calcu_screen:set_text(calcu_screen.text .. tostring(value))
         else
             calcu_screen:set_text(value)
         end
     elseif calcu_screen.text == "inf" or calcu_screen.text == "undefined" or calcu_screen.text == "SYNTAX ERROR" then
         -- Clear screen if an operator is selected
-
-        if value:sub(-1):match("[%+%/%*%^%.]") then
+        if value:sub(-1):match "[%+%/%*%^%.]" then
             clear_screen()
         else
             -- Replace screen txt with the number value pressed
-
             clear_screen()
             calcu_screen:set_text(tostring(value))
         end
@@ -228,10 +216,8 @@ local format_screen = function(value)
         -- ########################################################################
         -- ########################################################################
         -- Don't let the user to input two or more consecutive arithmetic operators and decimals
-
-        if calcu_screen.text:sub(-1):match("[%+%-%/%*%^%.]") and value:sub(-1):match("[%+%-%/%*%^%.%%]") then
+        if calcu_screen.text:sub(-1):match "[%+%-%/%*%^%.]" and value:sub(-1):match "[%+%-%/%*%^%.%%]" then
             -- Get the operator from button pressed
-
             local string_eval = calcu_screen.text:sub(-1):gsub("[%+%-%/%*%^%.]", value)
             -- ########################################################################
             -- ########################################################################
@@ -239,7 +225,6 @@ local format_screen = function(value)
             -- This will prevent the user to input consecutive operators and decimals
             -- It will replace the previous operator with the value of input
             calcu_screen:set_text(calcu_screen.text:sub(1, -2))
-
             -- Concatenate the value operator to the screen string to replace the deleted operator
             calcu_screen:set_text(calcu_screen.text .. tostring(string_eval))
         else
@@ -281,7 +266,6 @@ local build_shape = function(position, radius)
         end
     end
 end
-
 -- ########################################################################
 -- ########################################################################
 -- ########################################################################
@@ -300,13 +284,12 @@ end
 -- Build a button
 local build_button_widget = function(text, rcp, rad)
     local value = text
-
     local build_textbox =
         wibox.widget {
         {
             id = "btn_name",
             text = value,
-            font = "agave Nerd Font Mono Bold  12",
+            font = beautiful.font .. " 12",
             align = "center",
             valign = "center",
             widget = wibox.widget.textbox
@@ -314,14 +297,9 @@ local build_button_widget = function(text, rcp, rad)
         margins = dpi(5),
         widget = wibox.container.margin
     }
-
     local build_button =
         wibox.widget {
-        {
-            build_textbox,
-            margins = dpi(7),
-            widget = wibox.container.margin
-        },
+        {build_textbox, margins = dpi(7), widget = wibox.container.margin},
         widget = clickable_container
     }
     -- ########################################################################
@@ -339,7 +317,7 @@ local build_button_widget = function(text, rcp, rad)
                     elseif value == "=" then
                         -- Calculate and error handling
                         if not pcall(calculate) then
-                            calculator_screen.calcu_screen:set_text("SYNTAX ERROR")
+                            calculator_screen.calcu_screen:set_text "SYNTAX ERROR"
                         end
                     elseif value == "DEL" then
                         delete_value()
@@ -350,25 +328,20 @@ local build_button_widget = function(text, rcp, rad)
             )
         )
     )
-
     return decorate_widget(build_button, rcp, rad)
 end
-
 -- ########################################################################
 -- Keys ###################################################################
 -- ########################################################################
-
 local keygrab_running = false
-
 local kb_imagebox =
     wibox.widget {
     id = "kb_icon",
-    image = widget_icon_dir .. "kb-off" .. ".svg",
+    image = widget_icon_dir .. "kb-off.svg",
     resize = true,
     forced_height = dpi(15),
     widget = wibox.widget.imagebox
 }
-
 local kb_button_widget =
     wibox.widget {
     {
@@ -393,21 +366,21 @@ local toggle_btn_keygrab = function()
     -- started running keygrab by clicking button
     if keygrab_running and not mouse_entered_started_keygrab then
         -- started running keygrab by mouse hover
-        kb_imagebox.image = widget_icon_dir .. "kb-off" .. ".svg"
-        awesome.emit_signal("widget::calc_stop_keygrab")
+        kb_imagebox.image = widget_icon_dir .. "kb-off.svg"
+        awesome.emit_signal "widget::calc_stop_keygrab"
         keygrab_running = false
     elseif keygrab_running then
-        kb_imagebox.image = widget_icon_dir .. "kb" .. ".svg"
+        kb_imagebox.image = widget_icon_dir .. "kb.svg"
         -- ########################################################################
         -- ########################################################################
         -- ########################################################################
         -- now the button gets the main attention instead of the mouse hover
         -- this happens because we clicked on the button
-        awesome.emit_signal("widget::calc_start_keygrab")
+        awesome.emit_signal "widget::calc_start_keygrab"
         mouse_entered_started_keygrab = false
     else
-        kb_imagebox.image = widget_icon_dir .. "kb" .. ".svg"
-        awesome.emit_signal("widget::calc_start_keygrab")
+        kb_imagebox.image = widget_icon_dir .. "kb.svg"
+        awesome.emit_signal "widget::calc_start_keygrab"
         keygrab_running = true
         mouse_entered_started_keygrab = false
     end
@@ -416,7 +389,6 @@ end
 -- ########################################################################
 -- ########################################################################
 local kb_button = clickable_container(kb_button_widget)
-
 kb_button:buttons(
     gears.table.join(
         awful.button(
@@ -438,36 +410,34 @@ local calcu_keygrabber =
     stop_event = "release",
     start_callback = function()
         keygrab_running = true
-        --kb_imagebox.image = widget_icon_dir .. 'kb' .. '.svg'
+        -- kb_imagebox.image = widget_icon_dir .. 'kb' .. '.svg'
     end,
     stop_callback = function()
         keygrab_running = false
         mouse_entered_started_keygrab = false
         start_button_keygrab = false
-        kb_imagebox.image = widget_icon_dir .. "kb-off" .. ".svg"
+        kb_imagebox.image = widget_icon_dir .. "kb-off.svg"
     end,
     keypressed_callback = function(_, _, key, _)
-        if #key == 1 and (key:match("%d+") or key:match("[%+%-%/%*%^%.]")) then
+        if #key == 1 and (key:match "%d+" or key:match "[%+%-%/%*%^%.]") then
             format_screen(key)
         elseif key == "BackSpace" then
             delete_value()
         elseif key == "Escape" then
             clear_screen()
         elseif key == "x" then
-            awesome.emit_signal("widget::calc_stop_keygrab")
+            awesome.emit_signal "widget::calc_stop_keygrab"
         elseif key == "=" or key == "Return" then
             -- Calculate
             if not pcall(calculate) then
-                calculator_screen.calcu_screen:set_text("SYNTAX ERROR")
+                calculator_screen.calcu_screen:set_text "SYNTAX ERROR"
             end
         end
     end
 }
-
 -- ########################################################################
 -- UI #####################################################################
 -- ########################################################################
-
 local calculator_body =
     wibox.widget {
     layout = wibox.layout.fixed.vertical,
@@ -518,7 +488,6 @@ local calculator_body =
         build_button_widget("=", "bottom_right", beautiful.groups_radius)
     }
 }
-
 -- ########################################################################
 -- Signals ################################################################
 -- ########################################################################
@@ -533,7 +502,6 @@ calculator_body:connect_signal(
         calcu_keygrabber:start()
     end
 )
-
 calculator_body:connect_signal(
     "mouse::leave",
     function()
@@ -544,7 +512,6 @@ calculator_body:connect_signal(
         end
     end
 )
-
 awesome.connect_signal(
     "widget::calc_start_keygrab",
     function()
@@ -553,7 +520,6 @@ awesome.connect_signal(
         start_button_keygrab = true
     end
 )
-
 awesome.connect_signal(
     "widget::calc_stop_keygrab",
     function()
@@ -562,41 +528,49 @@ awesome.connect_signal(
         start_button_keygrab = false
     end
 )
-
 -- ########################################################################
 -- Tooltip ################################################################
 -- ########################################################################
-
 awful.tooltip {
     objects = {kb_button},
     mode = "outside",
     align = "right",
     delay_show = 1,
-    preferred_positions = {"right", "left", "top", "bottom"},
+    preferred_positions = {
+        "right",
+        "left",
+        "top",
+        "bottom"
+    },
     margin_leftright = dpi(8),
     margin_topbottom = dpi(8),
     markup = [[
-	<b>Tip:</b>
-	Enable keyboard support by hovering your mouse above the calculator.
-	Or toggle it on/off by pressing the keyboard button.
-	Only numbers, arithmetic operators, and decimal point is accepted.
 
-	<b>Keyboard bindings:</b>
-	<b>=</b> and <b>Return</b> to get the answer.
-	<b>BackSpace</b> to delete the last digit.
-	<b>Escape</b> clears the screen.
-	<b>x</b> stops keygrabbing.
 
-	<b>Note:</b>
-	While in keygrabbing mode, your keyboard's focus will be on the calculator.
-	So you're AwesomeWM keybinding will stop working. 
+	<b>Using the Calculator Widget:</b>
+    *
+    * 1. Hover the Mouse Above the Widget
+    * 2. Press the Button You are Hovering Over now
+    *     - This will intercept numbers and operators
+    *       while the Right Panel is Open.
 
-	<b>Stopping the keygrabbing mode:</b>
-	* Move away your cursor from the calculator. 
-	* Toggle it off using the keyboard button.
-	* Press <b>x</b>.
+    * <b>Keyboard bindings:</b>
+    * <b>=</b>, <b>Return</b> Solves Equation.
+    * <b>BackSpace</b> Deletes Last Digit.
+    * <b>Escape</b> Clear.
+    * <b>x</b> Untoggles Keygrabber.
+
+    * <b>Important:</b>
+    * While in keygrabbing mode, your keyboard's
+    * focus will be on the calculator.
+    * So you're AwesomeWM keybinding will stop working.
+
+    * <b>Stopping the keygrabbing mode:</b>
+    *
+    * 1. Move away your cursor from the calculator.
+    * 2. Toggle it off using the keyboard button.
+    *
 	]]
 }
-
 -- Return to right-panel
 return calculator_body
