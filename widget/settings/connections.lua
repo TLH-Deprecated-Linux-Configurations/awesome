@@ -303,7 +303,7 @@ return function()
     wibox.widget {
       widget = wibox.widget.textbox,
       text = ("Network list"),
-      font = "agave Nerd Font Mono Bold  24"
+      font = beautiful.font .. " 24"
     },
     dpi(20),
     0,

@@ -63,14 +63,14 @@ local function list_update(w, buttons, label, data, objects)
             tbm =
                 wibox.widget {
                 tb,
-                left = dpi(10),
-                right = dpi(10),
+                left = dpi(7),
+                right = dpi(7),
                 widget = wibox.container.margin
             }
             ibm =
                 wibox.widget {
                 ib,
-                margins = dpi(5),
+                margins = dpi(10),
                 widget = wibox.container.margin
             }
             l = wibox.layout.flex.horizontal()
@@ -135,17 +135,18 @@ local tag_list = function(s)
                     t:view_only()
                 end
             ),
-            -- Seems like a great idea, until it fires randomly even without mod4 depressed. So I added alt to it
-            awful.button(
-                {modkey, altkey},
-                1,
-                function(t)
-                    if _G.client.focus then
-                        _G.client.focus:move_to_tag(t)
-                        t:view_only()
-                    end
-                end
-            ),
+            -- Seems like a great idea, until it fires randomly even without mod4 depressed. So I comment it out because
+            -- I rarely use mod + a mouse anyway
+            -- awful.button(
+            --     {modkey, altkey},
+            --     1,
+            --     function(t)
+            --         if _G.client.focus then
+            --             _G.client.focus:move_to_tag(t)
+            --             t:view_only()
+            --         end
+            --     end
+            -- ),
             awful.button({}, 3, awful.tag.viewtoggle),
             awful.button(
                 {modkey},

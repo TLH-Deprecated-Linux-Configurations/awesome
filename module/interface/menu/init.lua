@@ -20,7 +20,7 @@ local editor_cmd = terminal .. " -e " .. (os.getenv("EDITOR") or "nvim")
 -- ########################################################################
 -- ########################################################################
 -- ########################################################################
-beautiful.menu_font = "agave Nerd Font Mono Bold 12"
+beautiful.menu_font = beautiful.font .. "12"
 beautiful.menu_height = 34
 beautiful.menu_width = 180
 beautiful.menu_bg_focus = beautiful.bg_focus -- add a bit of transparency

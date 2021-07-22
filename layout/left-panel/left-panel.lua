@@ -301,7 +301,7 @@ local left_panel_func = function()
         },
         wibox.widget {
             text = "Change Application Scaling",
-            font = "agave Nerd Font Mono Bold  12",
+            font = beautiful.font .. " 12",
             widget = wibox.widget.textbox,
             align = center
         },
@@ -335,7 +335,7 @@ local left_panel_func = function()
         },
         wibox.widget {
             text = "Full settings application",
-            font = "agave Nerd Font Mono Bold 12",
+            font = beautiful.font .. "12",
             widget = wibox.widget.textbox,
             align = center
         },
@@ -370,7 +370,7 @@ local left_panel_func = function()
         },
         wibox.widget {
             text = "Connect to a wireless network",
-            font = "agave Nerd Font Mono Bold  12",
+            font = beautiful.font .. " 12",
             widget = wibox.widget.textbox,
             align = center
         },

@@ -51,7 +51,7 @@ local function loading()
     local text =
         wibox.widget {
         text = ("Connecting..."),
-        font = "agave Nerd Font Mono Bold 24",
+        font = beautiful.font .. "24",
         align = "center",
         valign = "center",
         widget = wibox.widget.textbox,

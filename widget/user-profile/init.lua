@@ -6,6 +6,7 @@ local dpi = require("beautiful").xresources.apply_dpi
 local profilebox = require("module.interface.profilebox")
 local card = require("module.interface.card")
 local HOME = os.getenv("HOME")
+local beautiful = require("beautiful")
 local PATH_TO_ICONS = HOME .. "/.config/awesome/widget/user-profile/icons/"
 
 local PATH_TO_CACHE_ICON = os.getenv("HOME") .. "/.cache/awesome/user-icons/"
@@ -51,7 +52,7 @@ local function init()
     -- get the username
     signals.connect_username(
         function(name)
-            profile_name.markup = '<span font="agave Nerd Font Mono Bold 24">' .. name .. "</span>"
+            profile_name.markup = '<span font="' .. beautiful.font .. ' 24">' .. name .. "</span>"
         end
     )
 
@@ -63,13 +64,13 @@ local function init()
 
     signals.connect_distro(
         function(distroname)
-            distro_name.markup = '<span font="agave Nerd Font Mono Bold  16">' .. distroname .. "</span>"
+            distro_name.markup = '<span font="' .. beautiful.font .. ' 16">' .. distroname .. "</span>"
         end
     )
 
     signals.connect_uptime(
         function(time)
-            uptime_time.markup = '<span font="agave Nerd Font Mono Bold  8">' .. time .. "</span>"
+            uptime_time.markup = '<span font="' .. beautiful.font .. '8">' .. time .. "</span>"
         end
     )
 end

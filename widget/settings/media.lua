@@ -409,7 +409,7 @@ return function()
     wibox.widget {
       widget = wibox.widget.textbox,
       text = "Audio list",
-      font = "agave Nerd Font Mono Bold  24"
+      font = beautiful.font .. " 24"
     },
     dpi(20),
     0,
@@ -422,7 +422,7 @@ return function()
     wibox.widget {
       widget = wibox.widget.textbox,
       text = "Application list",
-      font = "agave Nerd Font Mono Bold  24"
+      font = beautiful.font .. " 24"
     },
     dpi(20),
     0,

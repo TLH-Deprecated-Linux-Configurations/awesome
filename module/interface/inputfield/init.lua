@@ -75,8 +75,7 @@ return function(typing_callback, done_callback, hidden)
     local prev_keygrabber
 
     local textbox = wibox.widget.textbox(active_text)
-    -- TODO: allow custom fonts
-    textbox.font = "agave Nerd Font Mono Bold  16"
+    textbox.font = beautiful.font .. " 16"
     textbox.align = "left"
     textbox.valign = "center"
 
@@ -90,7 +89,6 @@ return function(typing_callback, done_callback, hidden)
             },
             widget = clickable_container
         },
-        -- TODO: allow custom heights
         forced_height = dpi(30),
         bg = beautiful.groups_bg,
         shape = function(cr, width, height)

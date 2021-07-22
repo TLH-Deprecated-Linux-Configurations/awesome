@@ -16,8 +16,9 @@ local filehandle = require("module.functions.file")
 local gears = require("gears")
 local common = require("lib.function.common")
 local delayed_timer = require("lib.function.delayed-timer")
+local beautiful = require("beautiful")
 
-local config = require("module.functions")
+local functions = require("module.functions")
 -- ########################################################################
 -- ########################################################################
 -- ########################################################################
@@ -42,9 +43,7 @@ end
 local value_up =
     wibox.widget {
     markup = "...",
-    align = "center",
-    valign = "center",
-    font = "agave Nerd Font Mono Bold 14",
+    font = beautiful.font .. " 14",
     widget = wibox.widget.textbox
 }
 -- ########################################################################
@@ -53,9 +52,7 @@ local value_up =
 local value_down =
     wibox.widget {
     markup = "...",
-    align = "center",
-    valign = "center",
-    font = "agave Nerd Font Mono Bold 14",
+    font = beautiful.font .. " 14",
     widget = wibox.widget.textbox
 }
 -- ########################################################################
@@ -101,7 +98,7 @@ end
 -- ########################################################################
 -- ########################################################################
 delayed_timer(
-    config.network_poll,
+    functions.network_poll,
     function()
         -- sanitizing the interface
         if interface == nil then
@@ -123,8 +120,8 @@ delayed_timer(
         -- ########################################################################
         -- ########################################################################
         -- ########################################################################
-        local download = math.ceil((valueRX - last_rx) / config.network_poll)
-        local upload = math.ceil((valueTX - last_tx) / config.network_poll)
+        local download = math.ceil((valueRX - last_rx) / functions.network_poll)
+        local upload = math.ceil((valueTX - last_tx) / functions.network_poll)
         -- ########################################################################
         -- ########################################################################
         -- ########################################################################
@@ -134,71 +131,98 @@ delayed_timer(
         last_rx = valueRX
         last_tx = valueTX
     end,
-    config.netwok_startup_delay
+    functions.netwok_startup_delay
 )
 -- ########################################################################
 -- ########################################################################
 -- ########################################################################
+local widget_icon_up =
+    wibox.widget {
+    id = "icon",
+    image = icons.upload,
+    forced_width = 36,
+    forced_height = 36,
+    widget = wibox.widget.imagebox
+}
+
 local function up(screen)
     network_slider_up =
         wibox.widget {
         read_only = true,
-        forced_width = screen.geometry.width * 0.13,
-        widget = mat_slider
+        widget = mat_slider,
+        forced_height = 32,
+        forced_width = 32
     }
+
     -- ########################################################################
     -- ########################################################################
     -- ########################################################################
     network_meter_up =
         wibox.widget {
-        wibox.widget {
-            icon = icons.upload,
-            size = dpi(24),
-            widget = mat_icon
+        {
+            {
+                widget_icon_up,
+                value_up,
+                spacing = dpi(0),
+                layout = wibox.layout.flex.horizontal
+            },
+            top = dpi(2),
+            bottom = dpi(2),
+            left = dpi(0),
+            right = dpi(0),
+            widget = wibox.container.margin
         },
-        -- ########################################################################
-        -- ########################################################################
-        -- ########################################################################
-        wibox.widget {
-            network_slider_up,
-            wibox.container.margin(value_up, dpi(1), dpi(0), dpi(10), dpi(10)),
-            spacing = dpi(10),
-            layout = wibox.layout.fixed.horizontal
-        },
-        widget = mat_list_item
+        shape = gears.shape.rounded_rect,
+        bg = beautiful.bg_normal .. "77",
+        shape_border_color = beautiful.bg_normal,
+        shape_border_width = dpi(3),
+        widget = wibox.container.background
     }
     return network_meter_up
 end
 -- ########################################################################
 -- ########################################################################
 -- ########################################################################
+local widget_icon_down =
+    wibox.widget {
+    id = "icon",
+    image = icons.download,
+    forced_width = 36,
+    forced_height = 36,
+    widget = wibox.widget.imagebox
+}
 local function down(screen)
     network_slider_down =
         wibox.widget {
         read_only = true,
-        forced_width = screen.geometry.width * 0.13,
-        widget = mat_slider
+        widget = mat_slider,
+        forced_height = 32,
+        forced_width = 32
     }
+
     -- ########################################################################
     -- ########################################################################
     -- ########################################################################
     network_meter_down =
         wibox.widget {
-        wibox.widget {
-            icon = icons.download,
-            size = dpi(24),
-            widget = mat_icon
+        {
+            {
+                widget_icon_down,
+                value_down,
+                spacing = dpi(0),
+                layout = wibox.layout.flex.horizontal
+            },
+            top = dpi(2),
+            bottom = dpi(2),
+            left = dpi(0),
+            right = dpi(0),
+            widget = wibox.container.margin
         },
-        -- ########################################################################
-        -- ########################################################################
-        -- ########################################################################
-        wibox.widget {
-            network_slider_down,
-            wibox.container.margin(value_down, dpi(1), dpi(0), dpi(10), dpi(10)),
-            spacing = dpi(10),
-            layout = wibox.layout.fixed.horizontal
-        },
-        widget = mat_list_item
+        shape = gears.shape.rounded_rect,
+        bg = beautiful.bg_normal .. "77",
+        shape_border_color = beautiful.bg_normal,
+        shape_border_width = dpi(3),
+        widget = wibox.container.background
     }
     return network_meter_down
 end

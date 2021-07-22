@@ -29,7 +29,7 @@ local calculator_screen =
     {
         id = "calcu_screen",
         text = "0",
-        font = "agave Nerd Font Mono Bold   20",
+        font = beautiful.font .. "  20",
         align = "right",
         valign = "center",
         widget = wibox.widget.textbox
