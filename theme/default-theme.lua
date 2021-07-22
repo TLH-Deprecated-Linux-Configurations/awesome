@@ -327,7 +327,7 @@ local awesome_overrides = function(theme)
     theme.taglist_fg_empty = theme.xcolor15
 
     theme.taglist_fg_volatile = theme.xcolor9
-    theme.taglist_font = "awesomewm-font 22"
+    theme.taglist_font = "awesomewm-font 16"
     local taglist_square_size = dpi(0)
     theme.taglist_squares_sel = theme_assets.taglist_squares_sel(taglist_square_size, theme.xforeground)
     theme.taglist_squares_unsel = theme_assets.taglist_squares_unsel(taglist_square_size, theme.fg_normal)
@@ -464,6 +464,18 @@ local awesome_overrides = function(theme)
     theme.titlebar_size = dpi(24)
 
     -- UI Groups
+
+    theme.layout_stackLeft = theme_dir .. "/icons/layouts/stack_left.svg"
+    theme.layout_stack = theme_dir .. "/icons/layouts/stack.svg"
+    theme.layout_centermaster = theme_dir .. "/icons/layouts/centermaster.svg"
+    theme.layout_empathy = theme_dir .. "/icons/layouts/empathy.svg"
+    theme.layout_max = theme_dir .. "/icons/layouts/max.svg"
+    theme.layout_tile = theme_dir .. "/icons/layouts/tile.svg"
+    theme.layout_dwindle = theme_dir .. "/icons/layouts/dwindle.svg"
+    theme.layout_floating = theme_dir .. "/icons/layouts/floating.svg"
+    theme.layout_magnifier = theme_dir .. "/icons/layouts/magnifier.svg"
+    theme.layout_fairv = theme_dir .. "/icons/layouts/fairv.svg"
+    theme.layout_fairh = theme_dir .. "/icons/layouts/fairh.svg"
 end
 return {
     theme = theme,

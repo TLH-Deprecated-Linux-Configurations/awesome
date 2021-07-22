@@ -13,7 +13,7 @@ require("awful.hotkeys_popup.keys")
 
 local config = require("configuration.keys.mod")
 local modkey = config.modKey
-local altkey = config.altKey
+
 local apps = require("configuration.apps")
 local xrandr = require("module.hardware.xrandr")
 local signals = require("module.settings.signals")
@@ -613,7 +613,7 @@ local globalKeys =
             local c = awful.client.restore()
             -- Focus restored client
             if c then
-                _G.clXient.focus = c
+                _G.client.focus = c
                 c:raise()
             end
         end,

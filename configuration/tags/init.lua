@@ -6,9 +6,10 @@
 -- ########################################################################
 -- ########################################################################
 -- ########################################################################
-local bling = require("lib.bling")
-local lain = require("lib.lain")
 local awful = require("awful")
+local empathy = require("configuration.tags.layouts.empathy")
+local stack = require("configuration.tags.layouts.stack")
+local centermaster = require("configuration.tags.layouts.centermaster")
 -- ########################################################################
 -- ########################################################################
 -- ########################################################################
@@ -17,7 +18,9 @@ _G.tag.connect_signal(
     function()
         awful.layout.append_default_layouts(
             {
-                bling.layout.mstab,
+                stack,
+                empathy,
+                centermaster,
                 awful.layout.suit.max,
                 awful.layout.suit.tile,
                 awful.layout.suit.spiral.dwindle,
@@ -48,7 +51,7 @@ awful.screen.connect_for_each_screen(
                 name,
                 {
                     screen = s,
-                    layout = bling.layout.mstab,
+                    layout = stack,
                     selected = selected
                 }
             )
@@ -57,8 +60,7 @@ awful.screen.connect_for_each_screen(
         local tags =
             awful.widget.taglist {
             screen = s,
-            filter = awful.widget.taglist.filter.all,
-            buttons = taglist_buttons
+            filter = awful.widget.taglist.filter.all
         }
         return tags
     end
@@ -73,8 +75,8 @@ _G.tag.connect_signal(
         if (currentLayout == awful.layout.suit.max) then
             t.gap = 2
         else
-            t.gap = awful.tag.getproperty(t, "gap") or 4
+            t.gap = awful.tag.getproperty(t, "gap") or 8
         end
-        t.master_count = 2
+        t.master_count = 1
     end
 )

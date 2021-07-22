@@ -20,7 +20,7 @@ local dpi = beautiful.xresources.apply_dpi
 local icons = require("theme.icons")
 
 -- ###########################################################
--- cpu widget with resource monitor from lain
+-- cpu widget with resource monitor from vicious
 local cpu = wibox.widget.textbox()
 vicious.cache(vicious.widgets.cpu)
 vicious.register(cpu, vicious.widgets.cpu, "$1%", 4)

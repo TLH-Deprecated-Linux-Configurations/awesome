@@ -15,7 +15,7 @@ local buddylist_width = 295
 local function do_empathy(p)
     if #p.clients > 0 then
         -- The maximum number of windows per row
-        local cols = 4
+        local cols = 3
         local area = {}
         area.height = p.workarea.height
         area.width = p.workarea.width
