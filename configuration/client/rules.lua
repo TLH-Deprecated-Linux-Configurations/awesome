@@ -189,7 +189,7 @@ awful.rules.rules = { -- #######################################################
     rule_any = {
         class = {"feh", "Sxiv", "mpv", "shellweb" -- rss popup
         },
-        name = {"Save File", "Page Unresponsive", "Pages Unresponsive"}
+        name = {"Save file", "Page Unresponsive", "Pages Unresponsive"}
     },
     callback = function(c)
         awful.placement.centered(c, {

@@ -28,7 +28,7 @@ local _ENV = require 'posix._strict' {
    RLIMIT_CPU = require 'posix.sys.resource'.RLIMIT_CPU,
    RLIMIT_DATA = require 'posix.sys.resource'.RLIMIT_DATA,
    RLIMIT_FSIZE = require 'posix.sys.resource'.RLIMIT_FSIZE,
-   RLIMIT_NOFILE = require 'posix.sys.resource'.RLIMIT_NOFILE,
+   RLIMIT_NOfile = require 'posix.sys.resource'.RLIMIT_NOfile,
    RLIMIT_STACK = require 'posix.sys.resource'.RLIMIT_STACK,
    S_ISBLK = require 'posix.sys.stat'.S_ISBLK,
    S_ISCHR = require 'posix.sys.stat'.S_ISCHR,
@@ -133,7 +133,7 @@ local RLIMIT_MAP = {
    cpu = RLIMIT_CPU,
    data = RLIMIT_DATA,
    fsize = RLIMIT_FSIZE,
-   nofile = RLIMIT_NOFILE,
+   nofile = RLIMIT_NOfile,
    stack = RLIMIT_STACK,
    as = RLIMIT_AS,
 }
@@ -351,7 +351,7 @@ end
 local Pfadvise
 if posix_fadvise then
    -- When supported by underlying system
-   Pfadvise = argscheck('fadvise(FILE*, int, int, int)', function(fh, ...)
+   Pfadvise = argscheck('fadvise(file*, int, int, int)', function(fh, ...)
       return posix_fadvise(fileno(fh), ...)
    end)
 end

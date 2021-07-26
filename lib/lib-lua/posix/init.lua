@@ -23,8 +23,8 @@ local _ENV = require 'posix._strict' {
    GLOB_MARK = require 'posix.glob'.GLOB_MARK,
    O_NOCTTY = require 'posix.fcntl'.O_NOCTTY,
    O_RDWR = require 'posix.fcntl'.O_RDWR,
-   STDIN_FILENO = require 'posix.unistd'.STDIN_FILENO,
-   STDOUT_FILENO = require 'posix.unistd'.STDOUT_FILENO,
+   STDIN_fileNO = require 'posix.unistd'.STDIN_fileNO,
+   STDOUT_fileNO = require 'posix.unistd'.STDOUT_fileNO,
    _exit = require 'posix.unistd'._exit,
    access = require 'posix.unistd'.access,
    argscheck = require 'posix._base'.argscheck,
@@ -67,8 +67,8 @@ local _ENV = require 'posix._strict' {
 
 
 -- FIXME: specl-14.x breaks function environments here :(
-local GLOB_MARK, STDIN_FILENO, STDOUT_FILENO, _exit, close, errno, execp, exit, fork, glob, pipe, wait =
-   GLOB_MARK, STDIN_FILENO, STDOUT_FILENO, _exit, close, errno, execp, exit, fork, glob, pipe, wait
+local GLOB_MARK, STDIN_fileNO, STDOUT_fileNO, _exit, close, errno, execp, exit, fork, glob, pipe, wait =
+   GLOB_MARK, STDIN_fileNO, STDOUT_fileNO, _exit, close, errno, execp, exit, fork, glob, pipe, wait
 
 
 local function Peuidaccess(file, mode)
@@ -192,9 +192,9 @@ local function Ppopen(task, mode, pipe_fn)
    end
    local parent_fd, child_fd, in_fd, out_fd
    if mode == 'r' then
-      parent_fd, child_fd, in_fd, out_fd = read_fd, write_fd, STDIN_FILENO, STDOUT_FILENO
+      parent_fd, child_fd, in_fd, out_fd = read_fd, write_fd, STDIN_fileNO, STDOUT_fileNO
    elseif mode == 'w' then
-      parent_fd, child_fd, in_fd, out_fd = write_fd, read_fd, STDOUT_FILENO, STDIN_FILENO
+      parent_fd, child_fd, in_fd, out_fd = write_fd, read_fd, STDOUT_fileNO, STDIN_fileNO
    else
       error 'invalid mode'
    end

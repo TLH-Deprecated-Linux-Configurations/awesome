@@ -6,10 +6,8 @@
 -- ########################################################################
 -- ########################################################################
 local wibox = require("wibox")
-local gears = require("gears")
 local beautiful = require("beautiful")
 local icons = require("theme.icons")
-local scrollbox = require("module.interface.scrollbox")
 
 local apps = require("configuration.apps")
 local dpi = require("beautiful").xresources.apply_dpi

@@ -30,7 +30,7 @@ local menu = {}
 -- @tparam string path The directory path
 -- @treturn boolean True if path exists and is a directory
 function menu.is_dir(path)
-    return Gio.File.new_for_path(path):query_file_type({}) == "DIRECTORY"
+    return Gio.file.new_for_path(path):query_file_type({}) == "DIRECTORY"
 end
 
 -- Remove non existent paths in order to avoid issues

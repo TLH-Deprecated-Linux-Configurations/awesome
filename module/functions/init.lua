@@ -61,7 +61,7 @@ local config_functions = {
     -- ########################################################################
     -- ########################################################################
     -- ########################################################################
-    getComptonFile = function()
+    getComptonfile = function()
         local userfile = HOME .. "/.config/picom.conf"
         if (file_exists(userfile)) then
             return userfile

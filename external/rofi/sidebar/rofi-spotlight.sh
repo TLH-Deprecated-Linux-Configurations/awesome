@@ -1,5 +1,5 @@
 ----------------------------------------------------------------------------
-# --- Rofi File Browser
+# --- Rofi file Browser
 # --
 # --
 # -- @author manilarome &lt;gerome.matilla07@gmail.com&gt;
@@ -9,18 +9,18 @@
 
 TMP_DIR="/tmp/rofi/${USER}/"
 
-PREV_LOC_FILE="${TMP_DIR}rofi_fb_prevloc"
-CURRENT_FILE="${TMP_DIR}rofi_fb_current_file"
+PREV_LOC_file="${TMP_DIR}rofi_fb_prevloc"
+CURRENT_file="${TMP_DIR}rofi_fb_current_file"
 
 MY_PATH="$(dirname "${0}")"
 CONF_DIR="$HOME/.local/share/rofi"
-HIST_FILE="$CONF_DIR/history.rs"
+HIST_file="$CONF_DIR/history.rs"
 
 [[ ! -d "$CONF_DIR" ]] && mkdir -p "$CONF_DIR"
 
 OPENER=open
 TERM_EMU=${TERMINAL:-"st"}
-FILE_MANAGER=${FILE_MANAGER:-"thunar"}
+file_MANAGER=${file_MANAGER:-"thunar"}
 BLUETOOTH_SEND=blueman-sendto
 
 CUR_DIR=$HOME
@@ -33,7 +33,7 @@ declare -a SHELL_OPTIONS=(
 	"Run" "Execute in ${TERM_EMU}"
 	"Edit"
 	"Open file location in ${TERM_EMU}"
-	"Open file location in ${FILE_MANAGER}"
+	"Open file location in ${file_MANAGER}"
 	"Move to trash"
 	"Delete"
 	"Back"
@@ -42,7 +42,7 @@ declare -a SHELL_OPTIONS=(
 declare -a TEXT_OPTIONS=(
 	"Edit"
 	"Open file location in ${TERM_EMU}"
-	"Open file location in ${FILE_MANAGER}"
+	"Open file location in ${file_MANAGER}"
 	"Move to trash"
 	"Delete"
 	"Back"
@@ -51,7 +51,7 @@ declare -a TEXT_OPTIONS=(
 declare -a XCF_SVG_OPTIONS=(
 	"Open"
 	"Open file location in ${TERM_EMU}"
-	"Open file location in ${FILE_MANAGER}"
+	"Open file location in ${file_MANAGER}"
 	"Move to trash"
 	"Delete"
 	"Back"
@@ -61,7 +61,7 @@ declare -a IMAGE_OPTIONS=(
 	"Open"
 	"Send via Bluetooth"
 	"Open file location in ${TERM_EMU}"
-	"Open file location in ${FILE_MANAGER}"
+	"Open file location in ${file_MANAGER}"
 	"Move to trash"
 	"Delete"
 	"Back"
@@ -89,9 +89,9 @@ then
 fi
 
 # Create hist file if it doesn't exist
-if [ ! -f "${HIST_FILE}" ]
+if [ ! -f "${HIST_file}" ]
 then
-	touch "${HIST_FILE}"
+	touch "${HIST_file}"
 fi
 
 # Help message
@@ -117,7 +117,7 @@ then
 	echo "For more info about XDG dirs, see:"
 	echo "\`man xdg-user-dir\`"
 	echo " "
-	echo "File search syntaxes:"
+	echo "file search syntaxes:"
 	echo "!<search_query> to search for a file and web suggestions"
 	echo "?<search_query> to search parent directories"
 	echo "Examples:"
@@ -287,12 +287,12 @@ then
 	exit;
 fi
 
-# File and calls to the web search
+# file and calls to the web search
 if [ ! -z "$@" ] && ([[ "$@" == /* ]] || [[ "$@" == \?* ]] || [[ "$@" == \!* ]])
 then
 	QUERY=$@
 
-	echo "${QUERY}" >> "${HIST_FILE}"
+	echo "${QUERY}" >> "${HIST_file}"
 
 	if [[ "$@" == /* ]]
 	then
@@ -340,7 +340,7 @@ function create_notification() {
 	elif [[ "${1}" == "deleted" ]]
 	then
 		notify-send -a "Global Search" "<b>Success!</b>" \
-		'File deleted!'
+		'file deleted!'
 	elif [[ "${1}" == "trashed" ]]
 	then
 		notify-send -a "Global Search" "<b>Success!</b>" \
@@ -364,11 +364,11 @@ function navigate_to() {
 		CUR_DIR=$(readlink -e "${CUR_DIR}")
 		if [ ! -d "${CUR_DIR}" ] || [ ! -r "${CUR_DIR}" ]
 		then
-			echo "${HOME}" > "${PREV_LOC_FILE}"
+			echo "${HOME}" > "${PREV_LOC_file}"
 			create_notification "denied"
 	
 		else
-			echo "${CUR_DIR}/" > "${PREV_LOC_FILE}"
+			echo "${CUR_DIR}/" > "${PREV_LOC_file}"
 		fi
 		pushd "${CUR_DIR}" >/dev/null
 	fi
@@ -467,7 +467,7 @@ function return_xdg_dir() {
 # Show and Clear History
 if [ ! -z "$@" ] && ([[ "$@" == ":sh" ]] || [[ "$@" == ":show_hist" ]])
 then
-	hist=$(tac "${HIST_FILE}")
+	hist=$(tac "${HIST_file}")
 
 	if [ ! -n "${hist}" ]
 	then
@@ -484,7 +484,7 @@ then
 
 elif [ ! -z "$@" ] && ([[ "$@" == ":ch" ]] || [[ "$@" == ":clear_hist" ]])
 then
-	:> "${HIST_FILE}"
+	:> "${HIST_file}"
 	create_notification "cleared"
 
 	CUR_DIR="${HOME}"
@@ -508,9 +508,9 @@ then
 fi
 
 # Read last location, otherwise we default to PWD.
-if [ -f "${PREV_LOC_FILE}" ]
+if [ -f "${PREV_LOC_file}" ]
 then
-	CUR_DIR=$(cat "${PREV_LOC_FILE}")
+	CUR_DIR=$(cat "${PREV_LOC_file}")
 fi
 
 if [[ ! -z "$@" ]] && ([[ "$@" == ":h" ]] || [[ "$@" == ":hidden" ]])
@@ -532,52 +532,52 @@ if [[ ! -z "$@" ]] && [[ "${ALL_OPTIONS[*]} " == *"${1}"* ]]
 then
 	case "${1}" in
 		"Run" )
-			coproc ( eval "$(cat "${CURRENT_FILE}")" & > /dev/null 2>&1 )
+			coproc ( eval "$(cat "${CURRENT_file}")" & > /dev/null 2>&1 )
 			kill -9 $(pgrep rofi)
 			;;
 		"Execute in ${TERM_EMU}" )
-			coproc ( eval "${TERM_EMU} "$(cat "${CURRENT_FILE}")"" & > /dev/null 2>&1 )
+			coproc ( eval "${TERM_EMU} "$(cat "${CURRENT_file}")"" & > /dev/null 2>&1 )
 			kill -9 $(pgrep rofi)
 			;;
 		"Open" )
-			coproc ( eval "${OPENER} "$(cat "${CURRENT_FILE}")"" & > /dev/null 2>&1 )
+			coproc ( eval "${OPENER} "$(cat "${CURRENT_file}")"" & > /dev/null 2>&1 )
 			kill -9 $(pgrep rofi)
 			;;
 		"Open file location in ${TERM_EMU}" )
-			file_path="$(cat "${CURRENT_FILE}")"
+			file_path="$(cat "${CURRENT_file}")"
 			coproc ( ${TERM_EMU} bash -c "cd "${file_path%/*}" ; ${SHELL}" & > /dev/null 2>&1 )
 			kill -9 $(pgrep rofi)
 			;;
-		"Open file location in ${FILE_MANAGER}" )
-			file_path="$(cat "${CURRENT_FILE}")"
-			coproc ( eval "${FILE_MANAGER} "${file_path%/*}"" & > /dev/null 2>&1 )
+		"Open file location in ${file_MANAGER}" )
+			file_path="$(cat "${CURRENT_file}")"
+			coproc ( eval "${file_MANAGER} "${file_path%/*}"" & > /dev/null 2>&1 )
 			kill -9 $(pgrep rofi)
 			;;
 		"Edit" )
-			coproc ( eval "${TERM_EMU} ${EDITOR} $(cat "${CURRENT_FILE}")" & > /dev/null 2>&1 )
+			coproc ( eval "${TERM_EMU} ${EDITOR} $(cat "${CURRENT_file}")" & > /dev/null 2>&1 )
 			kill -9 $(pgrep rofi)
 			;;
 		"Move to trash" )
-			coproc( gio trash "$(cat "${CURRENT_FILE}")" & > /dev/null 2>&1 )
+			coproc( gio trash "$(cat "${CURRENT_file}")" & > /dev/null 2>&1 )
 			create_notification "trashed"
-			CUR_DIR="$(dirname $(cat "${CURRENT_FILE}"))"
+			CUR_DIR="$(dirname $(cat "${CURRENT_file}"))"
 			navigate_to
 			;;
 		"Delete" )
-			shred "$(cat "${CURRENT_FILE}")"
-			rm "$(cat "${CURRENT_FILE}")"
+			shred "$(cat "${CURRENT_file}")"
+			rm "$(cat "${CURRENT_file}")"
 			create_notification "deleted"
-			CUR_DIR="$(dirname $(cat "${CURRENT_FILE}"))"
+			CUR_DIR="$(dirname $(cat "${CURRENT_file}"))"
 			navigate_to
 			;;
 		"Send via Bluetooth" )
 			rfkill unblock bluetooth &&	bluetoothctl power on 
 			sleep 1
-			blueman-sendto "$(cat "${CURRENT_FILE}")" & > /dev/null 2>&1
+			blueman-sendto "$(cat "${CURRENT_file}")" & > /dev/null 2>&1
 			kill -9 $(pgrep rofi)
 			;;
 		"Back" )
-			CUR_DIR=$(cat "${PREV_LOC_FILE}")
+			CUR_DIR=$(cat "${PREV_LOC_file}")
 			navigate_to
 			;;
 	esac
@@ -602,7 +602,7 @@ function context_menu_icons() {
 	then
 		echo "\0icon\x1f${TERM_EMU}\n"
 
-	elif [[ "${1}" == "Open file location in ${FILE_MANAGER}" ]]
+	elif [[ "${1}" == "Open file location in ${file_MANAGER}" ]]
 	then
 		echo "\0icon\x1fblue-folder-open\n"
 
@@ -666,7 +666,7 @@ function context_menu() {
 		then
 			QUERY="${CUR_DIR//*\/\//}"
 
-			echo "${QUERY}" >> "${HIST_FILE}"
+			echo "${QUERY}" >> "${HIST_file}"
 
 			find "${HOME}" -iname *"${QUERY#!}"* -exec echo -ne \
 			"{}\0icon\x1f${MY_PATH}/icons/result.svg\n" \; 2>&1 | 
@@ -684,7 +684,7 @@ function context_menu() {
 # If argument is not a directory/folder
 if [ ! -d "${CUR_DIR}" ]
 then
-	echo "${CUR_DIR}" > "${CURRENT_FILE}"
+	echo "${CUR_DIR}" > "${CURRENT_file}"
 	context_menu
 	exit;
 fi

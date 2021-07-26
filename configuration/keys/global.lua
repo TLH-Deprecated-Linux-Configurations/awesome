@@ -134,7 +134,7 @@ local globalKeys =
             awful.spawn("thunar")
         end,
         {
-            description = "Launch File Manager",
+            description = "Launch file Manager",
             group = "Launcher"
         }
     ),
@@ -149,7 +149,7 @@ local globalKeys =
             awful.spawn("gksu thunar")
         end,
         {
-            description = "Launch File Manager as Root",
+            description = "Launch file Manager as Root",
             group = "Launcher"
         }
     ),
@@ -164,7 +164,7 @@ local globalKeys =
             awful.spawn("kitty -e ranger")
         end,
         {
-            description = "Launch Terminal File Manager",
+            description = "Launch Terminal file Manager",
             group = "Launcher"
         }
     ),
@@ -656,7 +656,7 @@ local globalKeys =
         {modkey},
         "s",
         function()
-            print("Opening settings application")
+            print("Opening settings hub")
             root.elements.hub.enable_view_by_index(1, mouse.screen)
         end,
         {

@@ -25,6 +25,6 @@ for purposes of keeping clutter in the `widgets` directory at a minimum.
 
 **Module** - These are files which add functionality to the configuration in some form. This includes widgets, but note that while all widgets are modules, not all modules are widgets.
 
-**Theme** - Files relating to the appearance of the window manager and a general suite of icons (specific icons should be included in the `widget` subdirectory local to the file calling it).
+**Theme** - files relating to the appearance of the window manager and a general suite of icons (specific icons should be included in the `widget` subdirectory local to the file calling it).
 
 **Widget** - These are files that add functionality that the user interacts with, thus a type of module. Many of these are the applications one interacts with on the bottom bar, or the various components of the two settings applications (also accessed via icons on the bottom bar).

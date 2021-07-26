@@ -12,8 +12,8 @@ local naughty = require("naughty")
 -- ########################################################################
 local function finish()
     local HOME = os.getenv("HOME")
-    local FILE = HOME .. "/.cache/tutorial_tos"
-    io.open(FILE, "w"):write("tutorial is complete"):close()
+    local file = HOME .. "/.cache/tutorial_tos"
+    io.open(file, "w"):write("tutorial is complete"):close()
 end
 -- ########################################################################
 -- ## Ninth Tip ###########################################################
@@ -148,8 +148,8 @@ local func = {
 -- ## Check to see if tutorial already ran or not #########################
 -- ########################################################################
 local HOME = os.getenv("HOME")
-local FILE = HOME .. "/.cache/tutorial_tos"
-if require("module.functions.file").exists(FILE) then
+local file = HOME .. "/.cache/tutorial_tos"
+if require("module.functions.file").exists(file) then
     print("Tutorial has already been shown")
     func["status"] = false
     return func

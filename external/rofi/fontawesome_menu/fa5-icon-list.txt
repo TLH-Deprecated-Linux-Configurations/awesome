@@ -423,29 +423,29 @@
 <span lang='Female' weight="normal" fallback="true" face='font Awesome 5 solid'>&#xf182;</span>  Female
 <span lang='fighter-jet' weight="normal" fallback="true" face='font Awesome 5 solid'>&#xf0fb;</span>  fighter-jet
 <span lang='Figma' weight="normal" fallback="true" face='font Awesome 5 brands'>&#xf799;</span>  Figma
-<span lang='File' weight="normal" fallback="true" face='font Awesome 5 solid'>&#xf15b;</span>  File
-<span lang='Alternate File' weight="normal" fallback="true" face='font Awesome 5 solid'>&#xf15c;</span>  Alternate File
-<span lang='Archive File' weight="normal" fallback="true" face='font Awesome 5 solid'>&#xf1c6;</span>  Archive File
-<span lang='Audio File' weight="normal" fallback="true" face='font Awesome 5 solid'>&#xf1c7;</span>  Audio File
-<span lang='Code File' weight="normal" fallback="true" face='font Awesome 5 solid'>&#xf1c9;</span>  Code File
-<span lang='File Contract' weight="normal" fallback="true" face='font Awesome 5 solid'>&#xf56c;</span>  File Contract
-<span lang='File CSV' weight="normal" fallback="true" face='font Awesome 5 solid'>&#xf6dd;</span>  File CSV
-<span lang='File Download' weight="normal" fallback="true" face='font Awesome 5 solid'>&#xf56d;</span>  File Download
-<span lang='Excel File' weight="normal" fallback="true" face='font Awesome 5 solid'>&#xf1c3;</span>  Excel File
-<span lang='File Export' weight="normal" fallback="true" face='font Awesome 5 solid'>&#xf56e;</span>  File Export
-<span lang='Image File' weight="normal" fallback="true" face='font Awesome 5 solid'>&#xf1c5;</span>  Image File
-<span lang='File Import' weight="normal" fallback="true" face='font Awesome 5 solid'>&#xf56f;</span>  File Import
-<span lang='File Invoice' weight="normal" fallback="true" face='font Awesome 5 solid'>&#xf570;</span>  File Invoice
-<span lang='File Invoice with US Dollar' weight="normal" fallback="true" face='font Awesome 5 solid'>&#xf571;</span>  File Invoice with US Dollar
-<span lang='Medical File' weight="normal" fallback="true" face='font Awesome 5 solid'>&#xf477;</span>  Medical File
-<span lang='Alternate Medical File' weight="normal" fallback="true" face='font Awesome 5 solid'>&#xf478;</span>  Alternate Medical File
-<span lang='PDF File' weight="normal" fallback="true" face='font Awesome 5 solid'>&#xf1c1;</span>  PDF File
-<span lang='Powerpoint File' weight="normal" fallback="true" face='font Awesome 5 solid'>&#xf1c4;</span>  Powerpoint File
-<span lang='File Prescription' weight="normal" fallback="true" face='font Awesome 5 solid'>&#xf572;</span>  File Prescription
-<span lang='File Signature' weight="normal" fallback="true" face='font Awesome 5 solid'>&#xf573;</span>  File Signature
-<span lang='File Upload' weight="normal" fallback="true" face='font Awesome 5 solid'>&#xf574;</span>  File Upload
-<span lang='Video File' weight="normal" fallback="true" face='font Awesome 5 solid'>&#xf1c8;</span>  Video File
-<span lang='Word File' weight="normal" fallback="true" face='font Awesome 5 solid'>&#xf1c2;</span>  Word File
+<span lang='file' weight="normal" fallback="true" face='font Awesome 5 solid'>&#xf15b;</span>  file
+<span lang='Alternate file' weight="normal" fallback="true" face='font Awesome 5 solid'>&#xf15c;</span>  Alternate file
+<span lang='Archive file' weight="normal" fallback="true" face='font Awesome 5 solid'>&#xf1c6;</span>  Archive file
+<span lang='Audio file' weight="normal" fallback="true" face='font Awesome 5 solid'>&#xf1c7;</span>  Audio file
+<span lang='Code file' weight="normal" fallback="true" face='font Awesome 5 solid'>&#xf1c9;</span>  Code file
+<span lang='file Contract' weight="normal" fallback="true" face='font Awesome 5 solid'>&#xf56c;</span>  file Contract
+<span lang='file CSV' weight="normal" fallback="true" face='font Awesome 5 solid'>&#xf6dd;</span>  file CSV
+<span lang='file Download' weight="normal" fallback="true" face='font Awesome 5 solid'>&#xf56d;</span>  file Download
+<span lang='Excel file' weight="normal" fallback="true" face='font Awesome 5 solid'>&#xf1c3;</span>  Excel file
+<span lang='file Export' weight="normal" fallback="true" face='font Awesome 5 solid'>&#xf56e;</span>  file Export
+<span lang='Image file' weight="normal" fallback="true" face='font Awesome 5 solid'>&#xf1c5;</span>  Image file
+<span lang='file Import' weight="normal" fallback="true" face='font Awesome 5 solid'>&#xf56f;</span>  file Import
+<span lang='file Invoice' weight="normal" fallback="true" face='font Awesome 5 solid'>&#xf570;</span>  file Invoice
+<span lang='file Invoice with US Dollar' weight="normal" fallback="true" face='font Awesome 5 solid'>&#xf571;</span>  file Invoice with US Dollar
+<span lang='Medical file' weight="normal" fallback="true" face='font Awesome 5 solid'>&#xf477;</span>  Medical file
+<span lang='Alternate Medical file' weight="normal" fallback="true" face='font Awesome 5 solid'>&#xf478;</span>  Alternate Medical file
+<span lang='PDF file' weight="normal" fallback="true" face='font Awesome 5 solid'>&#xf1c1;</span>  PDF file
+<span lang='Powerpoint file' weight="normal" fallback="true" face='font Awesome 5 solid'>&#xf1c4;</span>  Powerpoint file
+<span lang='file Prescription' weight="normal" fallback="true" face='font Awesome 5 solid'>&#xf572;</span>  file Prescription
+<span lang='file Signature' weight="normal" fallback="true" face='font Awesome 5 solid'>&#xf573;</span>  file Signature
+<span lang='file Upload' weight="normal" fallback="true" face='font Awesome 5 solid'>&#xf574;</span>  file Upload
+<span lang='Video file' weight="normal" fallback="true" face='font Awesome 5 solid'>&#xf1c8;</span>  Video file
+<span lang='Word file' weight="normal" fallback="true" face='font Awesome 5 solid'>&#xf1c2;</span>  Word file
 <span lang='Fill' weight="normal" fallback="true" face='font Awesome 5 solid'>&#xf575;</span>  Fill
 <span lang='Fill Drip' weight="normal" fallback="true" face='font Awesome 5 solid'>&#xf576;</span>  Fill Drip
 <span lang='Film' weight="normal" fallback="true" face='font Awesome 5 solid'>&#xf008;</span>  Film

@@ -11,7 +11,7 @@ idiosyncracies is making for a complicated and painful adaptation process that r
 
 Each file that I have either written myself or modified so heavily as to essentially be my own work, even if in the sense that the monster was Dr. Frankenstein's,follows a specific layout. **This is because otherwise these files can be hard to read and the comment blocks help to parse the file into appreciable chunks**. See the documentation for an example screenshot with a more detailed explanation but essentially the files follow the following format:
 
-- ASCII Art File Name Occupying 3 Lines 
+- ASCII Art file Name Occupying 3 Lines 
 - Three line comment bar
 - `require` statements pulling in necessary modules
 - three line comment bar

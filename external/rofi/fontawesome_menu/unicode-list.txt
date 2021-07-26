@@ -1098,29 +1098,29 @@
 <span lang='female___human person profile user woman' foreground='#ff99e2' weight="normal" fallback="true" face='font Awesome 5 solid'>&#xf182;</span>  Female
 <span lang='fighter-jet___airplane fast fly goose maverick plane quick top gun transportation travel' foreground='#7bfcf8' weight="normal" fallback="true" face='font Awesome 5 solid'>&#xf0fb;</span>  fighter-jet
 <span lang='figma___app design interface' foreground='#a4acf9' weight="normal" fallback="true" face='font Awesome 5 brands'>&#xf799;</span>  Figma
-<span lang='file___document new page pdf resume' foreground='#a2f9bb' weight="normal" fallback="true" face='font Awesome 5 solid'>&#xf15b;</span>  File
-<span lang='file-alt___document file-text invoice new page pdf' foreground='#cdffa8' weight="normal" fallback="true" face='font Awesome 5 solid'>&#xf15c;</span>  Alternate File
-<span lang='file-archive___.zip bundle compress compression download zip' foreground='#f46ec5' weight="normal" fallback="true" face='font Awesome 5 solid'>&#xf1c6;</span>  Archive File
-<span lang='file-audio___' foreground='#9bcbf2' weight="normal" fallback="true" face='font Awesome 5 solid'>&#xf1c7;</span>  Audio File
-<span lang='file-code___' foreground='#9effa4' weight="normal" fallback="true" face='font Awesome 5 solid'>&#xf1c9;</span>  Code File
-<span lang='file-contract___agreement binding document legal signature' foreground='#ffd2cc' weight="normal" fallback="true" face='font Awesome 5 solid'>&#xf56c;</span>  File Contract
-<span lang='file-csv___spreadsheets' foreground='#f5ffaa' weight="normal" fallback="true" face='font Awesome 5 solid'>&#xf6dd;</span>  File CSV
-<span lang='file-download___' foreground='#f9acd8' weight="normal" fallback="true" face='font Awesome 5 solid'>&#xf56d;</span>  File Download
-<span lang='file-excel___' foreground='#d3b6f9' weight="normal" fallback="true" face='font Awesome 5 solid'>&#xf1c3;</span>  Excel File
-<span lang='file-export___' foreground='#81f491' weight="normal" fallback="true" face='font Awesome 5 solid'>&#xf56e;</span>  File Export
-<span lang='file-image___' foreground='#9ef7e7' weight="normal" fallback="true" face='font Awesome 5 solid'>&#xf1c5;</span>  Image File
-<span lang='file-import___' foreground='#cfc9ff' weight="normal" fallback="true" face='font Awesome 5 solid'>&#xf56f;</span>  File Import
-<span lang='file-invoice___bill document receipt' foreground='#a1dbfc' weight="normal" fallback="true" face='font Awesome 5 solid'>&#xf570;</span>  File Invoice
-<span lang='file-invoice-dollar___$ bill document dollar-sign money receipt usd' foreground='#b8ed6a' weight="normal" fallback="true" face='font Awesome 5 solid'>&#xf571;</span>  File Invoice with US Dollar
-<span lang='file-medical___' foreground='#9eabef' weight="normal" fallback="true" face='font Awesome 5 solid'>&#xf477;</span>  Medical File
-<span lang='file-medical-alt___' foreground='#fceeae' weight="normal" fallback="true" face='font Awesome 5 solid'>&#xf478;</span>  Alternate Medical File
-<span lang='file-pdf___' foreground='#d7ed6a' weight="normal" fallback="true" face='font Awesome 5 solid'>&#xf1c1;</span>  PDF File
-<span lang='file-powerpoint___' foreground='#ffa3dd' weight="normal" fallback="true" face='font Awesome 5 solid'>&#xf1c4;</span>  Powerpoint File
-<span lang='file-prescription___drugs medical medicine rx' foreground='#fcc094' weight="normal" fallback="true" face='font Awesome 5 solid'>&#xf572;</span>  File Prescription
-<span lang='file-signature___John Hancock contract document name' foreground='#84f4be' weight="normal" fallback="true" face='font Awesome 5 solid'>&#xf573;</span>  File Signature
-<span lang='file-upload___' foreground='#89ffd0' weight="normal" fallback="true" face='font Awesome 5 solid'>&#xf574;</span>  File Upload
-<span lang='file-video___' foreground='#76d4e2' weight="normal" fallback="true" face='font Awesome 5 solid'>&#xf1c8;</span>  Video File
-<span lang='file-word___' foreground='#e4afff' weight="normal" fallback="true" face='font Awesome 5 solid'>&#xf1c2;</span>  Word File
+<span lang='file___document new page pdf resume' foreground='#a2f9bb' weight="normal" fallback="true" face='font Awesome 5 solid'>&#xf15b;</span>  file
+<span lang='file-alt___document file-text invoice new page pdf' foreground='#cdffa8' weight="normal" fallback="true" face='font Awesome 5 solid'>&#xf15c;</span>  Alternate file
+<span lang='file-archive___.zip bundle compress compression download zip' foreground='#f46ec5' weight="normal" fallback="true" face='font Awesome 5 solid'>&#xf1c6;</span>  Archive file
+<span lang='file-audio___' foreground='#9bcbf2' weight="normal" fallback="true" face='font Awesome 5 solid'>&#xf1c7;</span>  Audio file
+<span lang='file-code___' foreground='#9effa4' weight="normal" fallback="true" face='font Awesome 5 solid'>&#xf1c9;</span>  Code file
+<span lang='file-contract___agreement binding document legal signature' foreground='#ffd2cc' weight="normal" fallback="true" face='font Awesome 5 solid'>&#xf56c;</span>  file Contract
+<span lang='file-csv___spreadsheets' foreground='#f5ffaa' weight="normal" fallback="true" face='font Awesome 5 solid'>&#xf6dd;</span>  file CSV
+<span lang='file-download___' foreground='#f9acd8' weight="normal" fallback="true" face='font Awesome 5 solid'>&#xf56d;</span>  file Download
+<span lang='file-excel___' foreground='#d3b6f9' weight="normal" fallback="true" face='font Awesome 5 solid'>&#xf1c3;</span>  Excel file
+<span lang='file-export___' foreground='#81f491' weight="normal" fallback="true" face='font Awesome 5 solid'>&#xf56e;</span>  file Export
+<span lang='file-image___' foreground='#9ef7e7' weight="normal" fallback="true" face='font Awesome 5 solid'>&#xf1c5;</span>  Image file
+<span lang='file-import___' foreground='#cfc9ff' weight="normal" fallback="true" face='font Awesome 5 solid'>&#xf56f;</span>  file Import
+<span lang='file-invoice___bill document receipt' foreground='#a1dbfc' weight="normal" fallback="true" face='font Awesome 5 solid'>&#xf570;</span>  file Invoice
+<span lang='file-invoice-dollar___$ bill document dollar-sign money receipt usd' foreground='#b8ed6a' weight="normal" fallback="true" face='font Awesome 5 solid'>&#xf571;</span>  file Invoice with US Dollar
+<span lang='file-medical___' foreground='#9eabef' weight="normal" fallback="true" face='font Awesome 5 solid'>&#xf477;</span>  Medical file
+<span lang='file-medical-alt___' foreground='#fceeae' weight="normal" fallback="true" face='font Awesome 5 solid'>&#xf478;</span>  Alternate Medical file
+<span lang='file-pdf___' foreground='#d7ed6a' weight="normal" fallback="true" face='font Awesome 5 solid'>&#xf1c1;</span>  PDF file
+<span lang='file-powerpoint___' foreground='#ffa3dd' weight="normal" fallback="true" face='font Awesome 5 solid'>&#xf1c4;</span>  Powerpoint file
+<span lang='file-prescription___drugs medical medicine rx' foreground='#fcc094' weight="normal" fallback="true" face='font Awesome 5 solid'>&#xf572;</span>  file Prescription
+<span lang='file-signature___John Hancock contract document name' foreground='#84f4be' weight="normal" fallback="true" face='font Awesome 5 solid'>&#xf573;</span>  file Signature
+<span lang='file-upload___' foreground='#89ffd0' weight="normal" fallback="true" face='font Awesome 5 solid'>&#xf574;</span>  file Upload
+<span lang='file-video___' foreground='#76d4e2' weight="normal" fallback="true" face='font Awesome 5 solid'>&#xf1c8;</span>  Video file
+<span lang='file-word___' foreground='#e4afff' weight="normal" fallback="true" face='font Awesome 5 solid'>&#xf1c2;</span>  Word file
 <span lang='fill___bucket color paint paint bucket' foreground='#a5ed6f' weight="normal" fallback="true" face='font Awesome 5 solid'>&#xf575;</span>  Fill
 <span lang='fill-drip___bucket color drop paint paint bucket spill' foreground='#ff8e82' weight="normal" fallback="true" face='font Awesome 5 solid'>&#xf576;</span>  Fill Drip
 <span lang='film___movie' foreground='#af6be0' weight="normal" fallback="true" face='font Awesome 5 solid'>&#xf008;</span>  Film

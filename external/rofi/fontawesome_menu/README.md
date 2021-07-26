@@ -5,7 +5,7 @@
 SYNOPSIS
 --------
 
-`fontawesome-menu` [`-v`|`-h`] [-f *LISTFILE*] [-p PROMPT] [OUTPUT]
+`fontawesome-menu` [`-v`|`-h`] [-f *LISTfile*] [-p PROMPT] [OUTPUT]
 
 DESCRIPTION
 -----------
@@ -24,8 +24,8 @@ OPTIONS
 `-h`  
   Show help and exit.
 
-`-f` *LISTFILE*  
-  File containing objects to display in the menu. 
+`-f` *LISTfile*  
+  file containing objects to display in the menu. 
   Defaults to *fa5-icon-list.txt*. More lists can
   be found here:  
   <https://raw.githubusercontent.com/wstam88/rofi-fontawesome/> 

@@ -1,4 +1,4 @@
--- YOU CAN UPDATE YOUR PROFILE PICTURE USING `mugshot` package
+-- YOU CAN UPDATE YOUR PROfile PICTURE USING `mugshot` package
 -- Will use default user.svg if there's no user image in /var/lib/...
 
 local wibox = require("wibox")

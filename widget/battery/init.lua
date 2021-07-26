@@ -16,7 +16,6 @@ local gears = require "gears"
 local clickable_container = require "widget.clickable-container"
 local dpi = require "beautiful".xresources.apply_dpi
 local widget_icon_dir = HOME .. "/.config/awesome/widget/battery/icons/"
-local theme = require "theme.icons"
 -- ########################################################################
 -- ########################################################################
 -- ########################################################################
@@ -41,7 +40,7 @@ local return_button = function()
         wibox.widget {
         id = "percent_text",
         text = "100%",
-        font = beautiful.font .. " 9",
+        font = beautiful.font .. " 12",
         align = "center",
         valign = "center",
         visible = false,
@@ -60,16 +59,17 @@ local return_button = function()
     -- ########################################################################
     -- ########################################################################
     -- ########################################################################
-    local battery_button = clickable_container(wibox.container.margin(battery_widget, dpi(8), dpi(8), dpi(8), dpi(8)))
+    local battery_button = clickable_container(wibox.container.margin(battery_widget, dpi(6), dpi(6), dpi(6), dpi(6)))
     local battery_tooltip =
         awful.tooltip {
         objects = {battery_button},
         text = "None",
         mode = "outside",
         align = "right",
-        margin_leftright = dpi(8),
-        margin_topbottom = dpi(8),
-        font = "Mono 10",
+        margin_leftright = dpi(12),
+        margin_topbottom = dpi(12),
+        margins = dpi(16),
+        font = beautiful.font .. " 10",
         preferred_positions = {"right", "left", "top", "bottom"}
     }
     -- ########################################################################
@@ -111,7 +111,7 @@ local return_button = function()
             icon = widget_icon_dir .. "battery-alert.svg",
             app_name = "System notification",
             title = "System notification",
-            message = "Hey, I think we have a problem here. Save your work before it's to late!",
+            message = "Hey, your laptop is about to die! Better save your work while you still can.",
             urgency = "critical"
         }
     end
@@ -119,7 +119,7 @@ local return_button = function()
     -- ########################################################################
     -- ########################################################################
     local update_battery = function(status)
-        status = status:gsub("%\n", "")
+        status = status:gsub("%\n", "%\n")
         local percentage = file.string "/sys/class/power_supply/BAT0/capacity"
         -- some hardware counts from BAT1
         if percentage == "" or percentage == nil then

@@ -166,6 +166,28 @@ end
 connections.connect_distro = function(func)
     awesome.connect_signal("distro::changed", func)
 end
+
+---Request the user data
+-- @staticfct emit_request_user
+-- @see connect_username
+-- @usage -- notify other components that you want to know the user data
+-- lib-tde.signals.emit_request_user()
+connections.emit_request_user = function()
+    awesome.emit_signal("user::request", true)
+end
+
+--- Trigger a callback function some end users want's to know the user data
+-- @tparam function func The callback function that will be called when the event happens
+-- @staticfct connect_request_user
+-- @usage
+-- lib-tde.signals.connect_request_user(
+--    function ()
+--      print("Someone wants to know the user data")
+--    end)
+connections.connect_request_user = function(func)
+    awesome.connect_signal("user::request", func)
+end
+
 -- ########################################################################
 -- ########################################################################
 -- ########################################################################
@@ -425,21 +447,9 @@ tag.connect_signal(
     end
 )
 
-function backup()
-    local s = awful.screen.focused()
-    local c = awful.client.focus.history.get(s, 0)
-    if c then
-        client.focus = c
-        c:raise()
-    end
-end
-
+require("module.settings.save-floats")
 --------------------------------------------------------------------> signal ;
 
-client.connect_signal("property::minimized", backup)
---+ attach to minimized state
-
-client.connect_signal("unmanage", backup)
 --+ attach to closed state
 
 return connections

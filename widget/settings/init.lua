@@ -136,14 +136,9 @@ local function make_nav()
   nav.bg = navbg
   nav.forced_width = 260
 
-  local user = wibox.widget.textbox("")
+  local user = wibox.widget.textbox
   user.font = beautiful.font .. " 12"
-  awful.spawn.easy_async_with_shell(
-    "whoami",
-    function(u)
-      user.text = u
-    end
-  )
+  awful.spawn.easy_async_with_shell('whoami', function(u) user.text = u:gsub("^%s*(.-)%s*$", "%1") end);
 
   local avatar =
     wibox.widget {
@@ -177,10 +172,9 @@ local function make_nav()
     layout = wibox.layout.align.horizontal,
     {
       layout = wibox.container.margin,
-      right = 10,
-      avatar
+      avatar,
+      user
     },
-    user
   }
 
   local nav_container = wibox.layout.fixed.vertical()

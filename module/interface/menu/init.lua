@@ -93,7 +93,7 @@ local mymainmenu =
         before = {
             {"Terminal", terminal, menubar.utils.lookup_icon("utilities-terminal")},
             {"Web browser", web_browser, menubar.utils.lookup_icon("webbrowser-app")},
-            {"File Manager", file_manager, menubar.utils.lookup_icon("system-file-manager")},
+            {"file Manager", file_manager, menubar.utils.lookup_icon("system-file-manager")},
             {"Text Editor", text_editor, menubar.utils.lookup_icon("accessories-text-editor")}
             -- other triads can be put here
         },

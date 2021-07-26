@@ -65,8 +65,8 @@ ruled.notification.connect_signal(
                 urgency = "critical"
             },
             properties = {
-                bg = "#ff0000",
-                fg = "#f4f4f7",
+                bg = "#ff3d81",
+                fg = "#17191e",
                 margin = dpi(16),
                 position = "bottom_right",
                 implicit_timeout = 10
@@ -210,7 +210,7 @@ naughty.connect_signal(
                     },
                     bg = beautiful.groups_bg,
                     shape = gears.shape.rounded_rect,
-                    forced_height = dpi(30),
+                    forced_height = dpi(250),
                     widget = wibox.container.background
                 },
                 margins = dpi(4),

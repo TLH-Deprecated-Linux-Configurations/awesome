@@ -10,7 +10,7 @@ UPDATED="2020-09-21"
 main(){
   while getopts :vhf:o:p: option; do
     case "${option}" in
-      f) LISTFILE="${OPTARG}" ;;
+      f) LISTfile="${OPTARG}" ;;
       o) ROFI_OPTIONS="${OPTARG}" ;;
       p) ROFI_PROMPT="${OPTARG}" ;;
       v) printf '%s\n' \
@@ -21,13 +21,13 @@ main(){
     esac
   done
 
-  echo "$LISTFILE"
+  echo "$LISTfile"
 
-  LISTFILE="${LISTFILE:-$HOME/.config/awesome/external/rofi/fontawesome_menu/unicode-list.txt}"
+  LISTfile="${LISTfile:-$HOME/.config/awesome/external/rofi/fontawesome_menu/unicode-list.txt}"
   ROFI_PROMPT="${ROFI_PROMPT:-""}"
 
-  [[ ! -f "$LISTFILE" ]] \
-    && echo "$LISTFILE not found" \
+  [[ ! -f "$LISTfile" ]] \
+    && echo "$LISTfile not found" \
     && exit 1
 
   (($#>1)) && shift $((--OPTIND))
@@ -36,7 +36,7 @@ main(){
 
   output=${1:-icon}
 
-  selected="$(cat "$LISTFILE" \
+  selected="$(cat "$LISTfile" \
     | rofi ${ROFI_MAGIC} ${ROFI_OPTIONS} -p "${ROFI_PROMPT}")"
 
   # Exit if nothing is selected
@@ -132,7 +132,7 @@ about='
 SYNOPSIS
 --------
 
-`fontawesome-menu` [`-v`|`-h`] [-f *LISTFILE*] [-p PROMPT] [OUTPUT]
+`fontawesome-menu` [`-v`|`-h`] [-f *LISTfile*] [-p PROMPT] [OUTPUT]
 
 DESCRIPTION
 -----------
@@ -151,8 +151,8 @@ OPTIONS
 `-h`  
   Show help and exit.
 
-`-f` *LISTFILE*  
-  File containing objects to display in the menu. 
+`-f` *LISTfile*  
+  file containing objects to display in the menu. 
   Defaults to *fa5-icon-list.txt*. More lists can
   be found here:  
   <https://raw.githubusercontent.com/wstam88/rofi-fontawesome/> 

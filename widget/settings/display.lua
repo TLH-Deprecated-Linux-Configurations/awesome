@@ -146,18 +146,18 @@ local function make_mon(wall, id, fullwall, disable_number)
           function()
             Display_Mode = NORMAL_MODE
             refresh()
-            local themeFile = os.getenv("HOME") .. "/.config/awesome/theme"
+            local themefile = os.getenv("HOME") .. "/.config/awesome/theme"
             -- our theme file exists
-            if filesystem.exists(themeFile) then
+            if filesystem.exists(themefile) then
               local newContent = ""
-              for _, line in ipairs(filesystem.lines(themeFile)) do
+              for _, line in ipairs(filesystem.lines(themefile)) do
                 -- if the line is a file then it is a picture, otherwise it is a configuration option
                 if not filesystem.exists(line) then
                   newContent = newContent .. line .. "\n"
                 end
               end
               newContent = newContent .. fullwall
-              filesystem.overwrite(themeFile, newContent)
+              filesystem.overwrite(themefile, newContent)
             end
             -- collect the garbage to remove the image cache from memory
             collectgarbage("collect")
@@ -265,10 +265,8 @@ return function()
       print("Updated screen time: " .. tostring(value) .. "sec")
       general["screen_on_time"] = tostring(value)
       configWriter.update_entry(os.getenv("HOME") .. "/.cache/awesome/general.conf", "screen_on_time", tostring(value))
-      if general["screen_timeout"] == "1" or general["screen_timeout"] == nil then
-        awful.spawn("pkill -f bin/autolock.sh")
-        awful.spawn("sh ~/.config/awesome/bin/autolock.sh " .. tostring(value))
-      end
+      awful.spawn("pkill -f bin/autolock.sh")
+      awful.spawn("sh ~/.config/awesome/bin/autolock.sh " .. tostring(value))
     end,
     function()
       return datetime.numberInSecToMS(300) .. (" before sleeping")
