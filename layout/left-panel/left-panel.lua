@@ -7,7 +7,9 @@
 -- ########################################################################
 local wibox = require("wibox")
 local beautiful = require("beautiful")
-local icons = require("theme.icons")
+local HOME = os.getenv("HOME")
+
+local PATH_TO_ICONS = HOME .. "/.config/awesome/layout/left-panel/icons/"
 
 local apps = require("configuration.apps")
 local dpi = require("beautiful").xresources.apply_dpi
@@ -293,7 +295,7 @@ local left_panel_func = function()
     local dpi_button =
         wibox.widget {
         wibox.widget {
-            icon = icons.monitor,
+            icon = PATH_TO_ICONS .. "screen.svg",
             size = dpi(24),
             widget = mat_icon
         },
@@ -327,7 +329,7 @@ local left_panel_func = function()
     local settings_app_button =
         wibox.widget {
         wibox.widget {
-            icon = icons.settings,
+            icon = PATH_TO_ICONS .. "menu_round.svg",
             size = dpi(24),
             widget = mat_icon
         },
@@ -362,7 +364,7 @@ local left_panel_func = function()
     local wifi_button =
         wibox.widget {
         wibox.widget {
-            icon = icons.wifi,
+            icon = PATH_TO_ICONS .. "wifi.svg",
             size = dpi(24),
             widget = mat_icon
         },
@@ -393,7 +395,7 @@ local left_panel_func = function()
     -- ########################################################################
     -- ########################################################################
     -- ########################################################################
-    local exit_button_widget = wibox.widget.imagebox(icons.power)
+    local exit_button_widget = wibox.widget.imagebox(PATH_TO_ICONS .. "power.svg")
     local exit_button =
         button(
         exit_button_widget,

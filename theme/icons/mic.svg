@@ -1,1 +1,18 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><defs><style>.cls-1{fill:#17191e;opacity:0;}.cls-2{fill:#f4f4f7;}</style></defs><title>mic</title><g id="Layer_2" data-name="Layer 2"><g id="mic"><g id="mic-2" data-name="mic"><rect class="cls-1" width="24" height="24"/><path class="cls-2" d="M12,15a4,4,0,0,0,4-4V6A4,4,0,0,0,8,6v5A4,4,0,0,0,12,15Z"/><path class="cls-2" d="M19,11a1,1,0,0,0-2,0A5,5,0,0,1,7,11a1,1,0,0,0-2,0,7,7,0,0,0,6,6.92V20H8.89a.89.89,0,0,0-.89.89v.22a.89.89,0,0,0,.89.89h6.22a.89.89,0,0,0,.89-.89v-.22a.89.89,0,0,0-.89-.89H13V17.92A7,7,0,0,0,19,11Z"/></g></g></g></svg>
+<svg
+  width="24"
+  height="24"
+  viewBox="0 0 24 24"
+  fill="none"
+  xmlns="http://www.w3.org/2000/svg"
+>
+  <path
+    fill-rule="evenodd"
+    clip-rule="evenodd"
+    d="M9 4C9 2.34315 10.3431 1 12 1C13.6569 1 15 2.34315 15 4V12C15 13.6569 13.6569 15 12 15C10.3431 15 9 13.6569 9 12V4ZM13 4V12C13 12.5523 12.5523 13 12 13C11.4477 13 11 12.5523 11 12V4C11 3.44772 11.4477 3 12 3C12.5523 3 13 3.44772 13 4Z"
+    fill="#f4f4f7"
+  />
+  <path
+    d="M18 12C18 14.973 15.8377 17.441 13 17.917V21H17V23H7V21H11V17.917C8.16229 17.441 6 14.973 6 12V9H8V12C8 14.2091 9.79086 16 12 16C14.2091 16 16 14.2091 16 12V9H18V12Z"
+    fill="#f4f4f7"
+  />
+</svg>

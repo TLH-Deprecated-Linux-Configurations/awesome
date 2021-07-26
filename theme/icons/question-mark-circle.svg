@@ -1,1 +1,3 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><defs><style>.cls-1{fill:#17191e;opacity:0;}.cls-2{fill:#f4f4f7;}</style></defs><title>menu-arrow-circle</title><g id="Layer_2" data-name="Layer 2"><g id="menu-arrow-circle"><g id="menu-arrow-circle-2" data-name="menu-arrow-circle"><rect class="cls-1" width="24" height="24" transform="translate(24 24) rotate(180)"/><path class="cls-2" d="M12,2A10,10,0,1,0,22,12,10,10,0,0,0,12,2Zm0,16a1,1,0,1,1,1-1A1,1,0,0,1,12,18Zm1-5.16V14a1,1,0,0,1-2,0V12a1,1,0,0,1,1-1,1.5,1.5,0,1,0-1.5-1.5,1,1,0,0,1-2,0A3.5,3.5,0,1,1,13,12.84Z"/></g></g></g></svg>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="#f4f4f7">
+  <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-8-3a1 1 0 00-.867.5 1 1 0 11-1.731-1A3 3 0 0113 8a3.001 3.001 0 01-2 2.83V11a1 1 0 11-2 0v-1a1 1 0 011-1 1 1 0 100-2zm0 8a1 1 0 100-2 1 1 0 000 2z" clip-rule="evenodd"/>
+</svg>

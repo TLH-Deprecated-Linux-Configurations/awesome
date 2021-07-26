@@ -1,1 +1,12 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><defs><style>.cls-1{fill:#17191e;opacity:0;}.cls-2{fill:#f4f4f7;}</style></defs><title>arrow-up</title><g id="Layer_2" data-name="Layer 2"><g id="arrow-up"><g id="arrow-up-2" data-name="arrow-up"><rect class="cls-1" width="24" height="24" transform="translate(24 0) rotate(90)"/><path class="cls-2" d="M16.21,16H7.79A1.76,1.76,0,0,1,6.2,15a2.1,2.1,0,0,1,.26-2.21l4.21-5.1a1.76,1.76,0,0,1,2.66,0l4.21,5.1A2.1,2.1,0,0,1,17.8,15,1.76,1.76,0,0,1,16.21,16Z"/></g></g></g></svg>
+<svg
+  width="24"
+  height="24"
+  viewBox="0 0 24 24"
+  fill="none"
+  xmlns="http://www.w3.org/2000/svg"
+>
+  <path
+    d="M17.6568 8.96219L16.2393 10.3731L12.9843 7.10285L12.9706 20.7079L10.9706 20.7059L10.9843 7.13806L7.75404 10.3532L6.34314 8.93572L12.0132 3.29211L17.6568 8.96219Z"
+    fill="#f4f4f7"
+  />
+</svg>

@@ -1,1 +1,3 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><defs><style>.cls-1{fill:#17191e;opacity:0;}.cls-2{fill:#f4f4f7;}</style></defs><title>chevron-right</title><g id="Layer_2" data-name="Layer 2"><g id="chevron-right"><g id="chevron-right-2" data-name="chevron-right"><rect class="cls-1" width="24" height="24" transform="translate(0 24) rotate(-90)"/><path class="cls-2" d="M10.5,17a1,1,0,0,1-.71-.29,1,1,0,0,1,0-1.42L13.1,12,9.92,8.69a1,1,0,0,1,0-1.41,1,1,0,0,1,1.42,0l3.86,4a1,1,0,0,1,0,1.4l-4,4A1,1,0,0,1,10.5,17Z"/></g></g></g></svg>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="#f4f4f7">
+  <path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd"/>
+</svg>

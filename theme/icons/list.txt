@@ -1,281 +1,1055 @@
-activity.svg
-airplay.svg
-alert-circle.svg
-alert-octagon.svg
-alert-triangle.svg
-align-center.svg
-align-justify.svg
-align-left.svg
-align-right.svg
-anchor.svg
-aperture.svg
-archive.svg
-arrow-down-circle.svg
-arrow-down-left.svg
-arrow-down-right.svg
-arrow-down.svg
-arrow-left-circle.svg
-arrow-left.svg
-arrow-right-circle.svg
-arrow-right.svg
-arrow-up-circle.svg
-arrow-up-left.svg
-arrow-up-right.svg
-arrow-up.svg
-at-sign.svg
-award.svg
-bar-chart-2.svg
-bar-chart.svg
-battery-charging.svg
-battery.svg
-bell-off.svg
-bell.svg
-bluetooth.svg
-bold.svg
-book-open.svg
-book.svg
-bookmark.svg
-box.svg
-briefcase.svg
-calendar.svg
-camera-off.svg
-camera.svg
-cast.svg
-check-circle.svg
-check-square.svg
-check.svg
-chevron-down.svg
-chevron-left.svg
-chevron-right.svg
-chevron-up.svg
-chevrons-down.svg
-chevrons-left.svg
-chevrons-right.svg
-chevrons-up.svg
-chrome.svg
-circle.svg
-clipboard.svg
-clock.svg
-cloud-drizzle.svg
-cloud-lightning.svg
-cloud-off.svg
-cloud-rain.svg
-cloud-snow.svg
-cloud.svg
-code.svg
-codepen.svg
-codesandbox.svg
-coffee.svg
-columns.svg
-command.svg
-compass.svg
-copy.svg
-corner-down-left.svg
-corner-down-right.svg
-corner-left-down.svg
-corner-left-up.svg
-corner-right-down.svg
-corner-right-up.svg
-corner-up-left.svg
-corner-up-right.svg
-cpu.svg
-credit-card.svg
-crop.svg
-crosshair.svg
-database.svg
-delete.svg
-disc.svg
-dollar-sign.svg
-download-cloud.svg
-download.svg
-droplet.svg
-edit-2.svg
-edit-3.svg
-edit.svg
-external-link.svg
-eye-off.svg
-eye.svg
-facebook.svg
-fast-forward.svg
-feather.svg
-figma.svg
-file-minus.svg
-file-plus.svg
-file-text.svg
-file.svg
-film.svg
-filter.svg
-flag.svg
-folder-minus.svg
-folder-plus.svg
-folder.svg
-framer.svg
-frown.svg
-gift.svg
-git-branch.svg
-git-commit.svg
-git-merge.svg
-git-pull-request.svg
-github.svg
-gitlab.svg
-globe.svg
-grid.svg
-hard-drive.svg
-hash.svg
-headphones.svg
-heart.svg
-help-circle.svg
-hexagon.svg
-home.svg
-image.svg
-inbox.svg
-info.svg
-instagram.svg
-italic.svg
-key.svg
-layers.svg
-layout.svg
-life-buoy.svg
-link-2.svg
-link.svg
-linkedin.svg
-list.svg
-list.txt
-loader.svg
-lock.svg
-log-in.svg
-log-out.svg
-mail.svg
-map-pin.svg
-map.svg
-maximize-2.svg
-maximize.svg
-meh.svg
-menu.svg
-message-circle.svg
-message-square.svg
-mic-off.svg
-mic.svg
-minimize-2.svg
-minimize.svg
-minus-circle.svg
-minus-square.svg
-minus.svg
-monitor.svg
-moon.svg
-more-horizontal.svg
-more-vertical.svg
-mouse-pointer.svg
-move.svg
-music.svg
-navigation-2.svg
-navigation.svg
-octagon.svg
-package.svg
-paperclip.svg
-pause-circle.svg
-pause.svg
-pen-tool.svg
-percent.svg
-phone-call.svg
-phone-forwarded.svg
-phone-incoming.svg
-phone-missed.svg
-phone-off.svg
-phone-outgoing.svg
-phone.svg
-pie-chart.svg
-play-circle.svg
-play.svg
-plus-circle.svg
-plus-square.svg
-plus.svg
-pocket.svg
-power.svg
-printer.svg
-radio.svg
-refresh-ccw.svg
-refresh-cw.svg
-repeat.svg
-rewind.svg
-rotate-ccw.svg
-rotate-cw.svg
-rss.svg
-save.svg
-scissors.svg
-search.svg
-send.svg
-server.svg
-share-2.svg
-share.svg
-shield-off.svg
-shield.svg
-shopping-bag.svg
-shopping-cart.svg
-shuffle.svg
-sidebar.svg
-skip-back.svg
-skip-forward.svg
-slack.svg
-slash.svg
-sliders.svg
-smartphone.svg
-smile.svg
-speaker.svg
-square.svg
-star.svg
-stop-circle.svg
-sun.svg
-sunrise.svg
-sunset.svg
-tablet.svg
-tag.svg
-target.svg
-thermometer.svg
-thumbs-down.svg
-thumbs-up.svg
-toggle-left.svg
-toggle-right.svg
-tool.svg
-trash-2.svg
-trash.svg
-trello.svg
-trending-down.svg
-trending-up.svg
-triangle.svg
-truck.svg
-tv.svg
-twitch.svg
-twitter.svg
-type.svg
-umbrella.svg
-underline.svg
-unlock.svg
-upload-cloud.svg
-upload.svg
-user-check.svg
-user-minus.svg
-user-plus.svg
-user-x.svg
-user.svg
-users.svg
-video-off.svg
-video.svg
-voicemail.svg
-volume-1.svg
-volume-2.svg
-volume-x.svg
-volume.svg
-watch.svg
-wifi-off.svg
-wifi.svg
-wind.svg
-x-circle.svg
-x-octagon.svg
-x-square.svg
-x.svg
-youtube.svg
-zap-off.svg
-zap.svg
-zoom-in.svg
-zoom-out.svg
+abstract = dir .. "               abstract.svg",
+academic_cap = dir .. "           academic-cap.svg",    
+add_r = dir .. "               add-r.svg",
+add = dir .. "               add.svg",
+adidas = dir .. "               adidas.svg",
+adjustments = dir .. "            adjustments.svg",   
+airplane = dir .. "               airplane.svg",
+alarm = dir .. "               alarm.svg",
+album = dir .. "               album.svg",
+align_bottom = dir .. "           align-bottom.svg",    
+align_center = dir .. "           align-center.svg",    
+align_left = dir .. "             align-left.svg",  
+align_middle = dir .. "           align-middle.svg",    
+align_right = dir .. "            align-right.svg",   
+align_top = dir .. "              align-top.svg", 
+anchor = dir .. "               anchor.svg",
+android = dir .. "               android.svg",
+angular_simple = dir .. "         angular_simple.svg",      
+annotation = dir .. "             annotation.svg",  
+appcelerator = dir .. "           appcelerator.svg",    
+apple_watch = dir .. "            apple-watch.svg",   
+apple = dir .. "               apple.svg",
+appstore = dir .. "               appstore.svg",
+aptana = dir .. "               aptana.svg",
+archive = dir .. "               archive.svg",
+arrange_back = dir .. "           arrange-back.svg",    
+arrange_front = dir .. "          arrange-front.svg",     
+arrow_align_h = dir .. "          arrow-align-h.svg",     
+arrow_align_v = dir .. "          arrow-align-v.svg",     
+arrow_bottom_left_o = dir .. "    arrow-bottom-left-o.svg",           
+arrow_bottom_left_r = dir .. "    arrow-bottom-left-r.svg",           
+arrow_bottom_left = dir .. "      arrow-bottom-left.svg",         
+arrow_bottom_right_o = dir .. "   arrow-bottom-right-o.svg",            
+arrow_bottom_right_r = dir .. "   arrow-bottom-right-r.svg",            
+arrow_bottom_right = dir .. "     arrow-bottom-right.svg",          
+arrow_circle_down = dir .. "      arrow-circle-down.svg",         
+arrow_circle_left = dir .. "      arrow-circle-left.svg",         
+arrow_circle_right = dir .. "     arrow-circle-right.svg",          
+arrow_circle_up = dir .. "        arrow-circle-up.svg",       
+arrow_down_o = dir .. "           arrow-down-o.svg",    
+arrow_down_r = dir .. "           arrow-down-r.svg",    
+arrow_down = dir .. "             arrow-down.svg",  
+arrow_left_o = dir .. "           arrow-left-o.svg",    
+arrow_left_r = dir .. "           arrow-left-r.svg",    
+arrow_left = dir .. "             arrow-left.svg",  
+arrow_long_down_c = dir .. "      arrow-long-down-c.svg",         
+arrow_long_down_e = dir .. "      arrow-long-down-e.svg",         
+arrow_long_down_l = dir .. "      arrow-long-down-l.svg",         
+arrow_long_down_r = dir .. "      arrow-long-down-r.svg",         
+arrow_long_down = dir .. "        arrow-long-down.svg",       
+arrow_long_left_c = dir .. "      arrow-long-left-c.svg",         
+arrow_long_left_e = dir .. "      arrow-long-left-e.svg",         
+arrow_long_left_l = dir .. "      arrow-long-left-l.svg",         
+arrow_long_left_r = dir .. "      arrow-long-left-r.svg",         
+arrow_long_left = dir .. "        arrow-long-left.svg",       
+arrow_long_right_c = dir .. "     arrow-long-right-c.svg",          
+arrow_long_right_e = dir .. "     arrow-long-right-e.svg",          
+arrow_long_right_l = dir .. "     arrow-long-right-l.svg",          
+arrow_long_right_r = dir .. "     arrow-long-right-r.svg",          
+arrow_long_right = dir .. "       arrow-long-right.svg",        
+arrow_long_up_c = dir .. "        arrow-long-up-c.svg",       
+arrow_long_up_e = dir .. "        arrow-long-up-e.svg",       
+arrow_long_up_l = dir .. "        arrow-long-up-l.svg",       
+arrow_long_up_r = dir .. "        arrow-long-up-r.svg",       
+arrow_long_up = dir .. "          arrow-long-up.svg",     
+arrow_narrow_down = dir .. "      arrow-narrow-down.svg",         
+arrow_narrow_left = dir .. "      arrow-narrow-left.svg",         
+arrow_narrow_right = dir .. "     arrow-narrow-right.svg",          
+arrow_narrow_up = dir .. "        arrow-narrow-up.svg",       
+arrow_right_o = dir .. "          arrow-right-o.svg",     
+arrow_right_r = dir .. "          arrow-right-r.svg",     
+arrow_right = dir .. "            arrow-right.svg",   
+arrow_sm_down = dir .. "          arrow-sm-down.svg",     
+arrow_sm_left = dir .. "          arrow-sm-left.svg",     
+arrow_sm_right = dir .. "         arrow-sm-right.svg",      
+arrow_sm_up = dir .. "            arrow-sm-up.svg",   
+arrow_top_left_o = dir .. "       arrow-top-left-o.svg",        
+arrow_top_left_r = dir .. "       arrow-top-left-r.svg",        
+arrow_top_left = dir .. "         arrow-top-left.svg",      
+arrow_top_right_o = dir .. "      arrow-top-right-o.svg",         
+arrow_top_right_r = dir .. "      arrow-top-right-r.svg",         
+arrow_top_right = dir .. "        arrow-top-right.svg",       
+arrow_up_o = dir .. "             arrow-up-o.svg",  
+arrow_up_r = dir .. "             arrow-up-r.svg",  
+arrow_up = dir .. "               arrow-up.svg",
+arrows_breake_h = dir .. "        arrows-breake-h.svg",       
+arrows_breake_v = dir .. "        arrows-breake-v.svg",       
+arrows_exchange_alt_v = dir .. "  arrows-exchange-alt-v.svg",             
+arrows_exchange_alt = dir .. "    arrows-exchange-alt.svg",           
+arrows_exchange_v = dir .. "      arrows-exchange-v.svg",         
+arrows_exchange = dir .. "        arrows-exchange.svg",       
+arrows_expand_down_left = dir .. "arrows-expand-down-left.svg",               
+arrows_expand_down_right = dir .. arrows-expand-down-right.svg","               
+arrows_expand_left_alt = dir .. " arrows-expand-left-alt.svg",              
+arrows_expand_left = dir .. "     arrows-expand-left.svg",          
+arrows_expand_right_alt = dir .. "arrows-expand-right-alt.svg",               
+arrows_expand_right = dir .. "    arrows-expand-right.svg",           
+arrows_expand_up_left = dir .. "  arrows-expand-up-left.svg",             
+arrows_expand_up_right = dir .. " arrows-expand-up-right.svg",              
+arrows_expand = dir .. "          arrows-expand.svg",     
+arrows_h_alt = dir .. "           arrows-h-alt.svg",    
+arrows_h = dir .. "               arrows-h.svg",
+arrows_merge_alt_h = dir .. "     arrows-merge-alt-h.svg",          
+arrows_merge_alt_v = dir .. "     arrows-merge-alt-v.svg",          
+arrows_scroll_h = dir .. "        arrows-scroll-h.svg",       
+arrows_scroll_v = dir .. "        arrows-scroll-v.svg",       
+arrows_shrink_h = dir .. "        arrows-shrink-h.svg",       
+arrows_shrink_v = dir .. "        arrows-shrink-v.svg",       
+arrows_v_alt = dir .. "           arrows-v-alt.svg",    
+arrows_v = dir .. "               arrows-v.svg",
+assign = dir .. "               assign.svg",
+asterisk = dir .. "               asterisk.svg",
+at_symbol = dir .. "              at-symbol.svg", 
+atlasian = dir .. "               atlasian.svg",
+atlassian = dir .. "              atlassian.svg", 
+atom = dir .. "               atom.svg",
+attachment = dir .. "             attachment.svg",  
+attribution = dir .. "            attribution.svg",   
+awards = dir .. "               awards.svg",
+aws = dir .. "               aws.svg",
+backbone = dir .. "               backbone.svg",
+backspace = dir .. "              backspace.svg", 
+badge_check = dir .. "            badge-check.svg",   
+ban = dir .. "               ban.svg",
+band_aid = dir .. "               band-aid.svg",
+batterybattery
+battery_empty = dir .. "          battery-empty.svg",     
+battery_full = dir .. "           battery-full.svg",    
+battery = dir .. "               battery.svg",
+beaker = dir .. "               beaker.svg",
+bee = dir .. "               bee.svg",
+bell = dir .. "               bell.svg",
+bing_small = dir .. "             bing_small.svg",  
+bintray = dir .. "               bintray.svg",
+bitbucket = dir .. "              bitbucket.svg", 
+blackberry = dir .. "             blackberry.svg",  
+block = dir .. "               block.svg",
+bmw = dir .. "               bmw.svg",
+board = dir .. "               board.svg",
+bolt = dir .. "               bolt.svg",
+book_open = dir .. "              book-open.svg", 
+bookmark_alt = dir .. "           bookmark-alt.svg",    
+bookmark = dir .. "               bookmark.svg",
+bootstrap = dir .. "              bootstrap.svg", 
+border_all = dir .. "             border-all.svg",  
+border_bottom = dir .. "          border-bottom.svg",     
+border_left = dir .. "            border-left.svg",   
+border_right = dir .. "           border-right.svg",    
+border_style_dashed = dir .. "    border-style-dashed.svg",           
+border_style_dotted = dir .. "    border-style-dotted.svg",           
+border_style_solid = dir .. "     border-style-solid.svg",          
+border_top = dir .. "             border-top.svg",  
+bot = dir .. "               bot.svg",
+bower = dir .. "               bower.svg",
+bowl = dir .. "               bowl.svg",
+box = dir .. "               box.svg",
+boy = dir .. "               boy.svg",
+brackets = dir .. "               brackets.svg",
+briefcase = dir .. "              briefcase.svg", 
+browse = dir .. "               browse.svg",
+browser = dir .. "               browser.svg",
+brush = dir .. "               brush.svg",
+bugsense = dir .. "               bugsense.svg",
+bulb = dir .. "               bulb.svg",
+c_plus_plus = dir .. "            c-plus-plus.svg",   
+cake = dir .. "               cake.svg",
+calculator = dir .. "             calculator.svg",  
+calendar_dates = dir .. "         calendar-dates.svg",      
+calendar_due = dir .. "           calendar-due.svg",    
+calendar_next = dir .. "          calendar-next.svg",     
+calendar_today = dir .. "         calendar-today.svg",      
+calendar_two = dir .. "           calendar-two.svg",    
+calendar = dir .. "               calendar.svg",
+calibrate = dir .. "              calibrate.svg", 
+camera = dir .. "               camera.svg",
+cap = dir .. "               cap.svg",
+captions = dir .. "               captions.svg",
+card_clubs = dir .. "             card-clubs.svg",  
+card_diamonds = dir .. "          card-diamonds.svg",     
+card_hearts = dir .. "            card-hearts.svg",   
+card_spades = dir .. "            card-spades.svg",   
+carousel = dir .. "               carousel.svg",
+cash = dir .. "               cash.svg",
+cast = dir .. "               cast.svg",
+celluloid = dir .. "              celluloid.svg", 
+chanel = dir .. "               chanel.svg",
+chart_bar = dir .. "              chart-bar.svg", 
+chart_pie = dir .. "              chart-pie.svg", 
+chart_square_bar = dir .. "       chart-square-bar.svg",        
+chart = dir .. "               chart.svg",
+chat_alt_2 = dir .. "             chat-alt-2.svg",  
+chat_alt = dir .. "               chat-alt.svg",
+chat = dir .. "               chat.svg",
+check_circle = dir .. "           check-circle.svg",    
+check_o = dir .. "               check-o.svg",
+check_r = dir .. "               check-r.svg",
+check = dir .. "               check.svg",
+chevron_double_down_o = dir .. "  chevron-double-down-o.svg",             
+chevron_double_down_r = dir .. "  chevron-double-down-r.svg",             
+chevron_double_down = dir .. "    chevron-double-down.svg",           
+chevron_double_left_o = dir .. "  chevron-double-left-o.svg",             
+chevron_double_left_r = dir .. "  chevron-double-left-r.svg",             
+chevron_double_left = dir .. "    chevron-double-left.svg",           
+chevron_double_right_o = dir .. " chevron-double-right-o.svg",              
+chevron_double_right_r = dir .. " chevron-double-right-r.svg",              
+chevron_double_right = dir .. "   chevron-double-right.svg",            
+chevron_double_up_o = dir .. "    chevron-double-up-o.svg",           
+chevron_double_up_r = dir .. "    chevron-double-up-r.svg",           
+chevron_double_up = dir .. "      chevron-double-up.svg",         
+chevron_down_o = dir .. "         chevron-down-o.svg",      
+chevron_down_r = dir .. "         chevron-down-r.svg",      
+chevron_down = dir .. "           chevron-down.svg",    
+chevron_left_o = dir .. "         chevron-left-o.svg",      
+chevron_left_r = dir .. "         chevron-left-r.svg",      
+chevron_left = dir .. "           chevron-left.svg",    
+chevron_right_o = dir .. "        chevron-right-o.svg",       
+chevron_right_r = dir .. "        chevron-right-r.svg",       
+chevron_right = dir .. "          chevron-right.svg",     
+chevron_up_o = dir .. "           chevron-up-o.svg",    
+chevron_up_r = dir .. "           chevron-up-r.svg",    
+chevron_up = dir .. "             chevron-up.svg",  
+chip = dir .. "               chip.svg",
+chrome = dir .. "               chrome.svg",
+circleci = dir .. "               circleci.svg",
+cisco = dir .. "               cisco.svg",
+clapper_board = dir .. "          clapper-board.svg",     
+clipboard_check = dir .. "        clipboard-check.svg",       
+clipboard_copy = dir .. "         clipboard-copy.svg",      
+clipboard_list = dir .. "         clipboard-list.svg",      
+clipboard = dir .. "              clipboard.svg", 
+clock = dir .. "               clock.svg",
+clojure = dir .. "               clojure.svg",
+clojure_alt = dir .. "            clojure_alt.svg",   
+close_o = dir .. "               close-o.svg",
+close_r = dir .. "               close-r.svg",
+close = dir .. "               close.svg",
+cloud_download = dir .. "         cloud-download.svg",      
+cloud_upload = dir .. "           cloud-upload.svg",    
+cloud = dir .. "               cloud.svg",
+cloud9 = dir .. "               cloud9.svg",
+coda = dir .. "               coda.svg",
+code_climate = dir .. "           code-climate.svg",    
+code_slash = dir .. "             code-slash.svg",  
+code = dir .. "               code.svg",
+code_badge = dir .. "             code_badge.svg",  
+codeigniter = dir .. "            codeigniter.svg",   
+codepen = dir .. "               codepen.svg",
+codrops = dir .. "               codrops.svg",
+coffee = dir .. "               coffee.svg",
+coffeescript = dir .. "           coffeescript.svg",    
+cog = dir .. "               cog.svg",
+collage = dir .. "               collage.svg",
+collection = dir .. "             collection.svg",  
+color_bucket = dir .. "           color-bucket.svg",    
+color_picker = dir .. "           color-picker.svg",    
+color_swatch = dir .. "           color-swatch.svg",    
+comedy_central = dir .. "         comedy-central.svg",      
+comment = dir .. "               comment.svg",
+community = dir .. "              community.svg", 
+compass = dir .. "               compass.svg",
+components = dir .. "             components.svg",  
+composer = dir .. "               composer.svg",
+compress_left = dir .. "          compress-left.svg",     
+compress_right = dir .. "         compress-right.svg",      
+compress_v = dir .. "             compress-v.svg",  
+compress = dir .. "               compress.svg",
+controller = dir .. "             controller.svg",  
+copy = dir .. "               copy.svg",
+copyright = dir .. "              copyright.svg", 
+corner_double_down_left = dir .. "corner-double-down-left.svg",               
+corner_double_down_right = dir .. corner-double-down-right.svg","               
+corner_double_left_down = dir .. "corner-double-left-down.svg",               
+corner_double_left_up = dir .. "  corner-double-left-up.svg",             
+corner_double_right_down = dir .. corner-double-right-down.svg","               
+corner_double_right_up = dir .. " corner-double-right-up.svg",              
+corner_double_up_left = dir .. "  corner-double-up-left.svg",             
+corner_double_up_right = dir .. " corner-double-up-right.svg",              
+corner_down_left = dir .. "       corner-down-left.svg",        
+corner_down_right = dir .. "      corner-down-right.svg",         
+corner_left_down = dir .. "       corner-left-down.svg",        
+corner_left_up = dir .. "         corner-left-up.svg",      
+corner_right_down = dir .. "      corner-right-down.svg",         
+corner_right_up = dir .. "        corner-right-up.svg",       
+corner_up_left = dir .. "         corner-up-left.svg",      
+corner_up_right = dir .. "        corner-up-right.svg",       
+creativecommons = dir .. "        creativecommons.svg",       
+creativecommons_badge = dir .. "  creativecommons_badge.svg",             
+credit_card = dir .. "            credit-card.svg",   
+crop = dir .. "               crop.svg",
+cross = dir .. "               cross.svg",
+crowdfire = dir .. "              crowdfire.svg", 
+crown = dir .. "               crown.svg",
+css3 = dir .. "               css3.svg",
+css3_full = dir .. "              css3_full.svg", 
+css_tricks = dir .. "             css_tricks.svg",  
+cssdeck = dir .. "               cssdeck.svg",
+cube_transparent = dir .. "       cube-transparent.svg",        
+cube = dir .. "               cube.svg",
+currency_bangladeshi = dir .. "   currency-bangladeshi.svg",            
+currency_dollar = dir .. "        currency-dollar.svg",       
+currency_euro = dir .. "          currency-euro.svg",     
+currency_pound = dir .. "         currency-pound.svg",      
+currency_rupee = dir .. "         currency-rupee.svg",      
+currency_yen = dir .. "           currency-yen.svg",    
+cursor_click = dir .. "           cursor-click.svg",    
+danger = dir .. "               danger.svg",
+dark_mode = dir .. "              dark-mode.svg", 
+dart = dir .. "               dart.svg",
+data = dir .. "               data.svg",
+database = dir .. "               database.svg",
+debian = dir .. "               debian.svg",
+debug = dir .. "               debug.svg",
+designmodo = dir .. "             designmodo.svg",  
+desktop_computer = dir .. "       desktop-computer.svg",        
+desktop = dir .. "               desktop.svg",
+details_less = dir .. "           details-less.svg",    
+details_more = dir .. "           details-more.svg",    
+device_mobile = dir .. "          device-mobile.svg",     
+device_tablet = dir .. "          device-tablet.svg",     
+dialpad = dir .. "               dialpad.svg",
+dice_1 = dir .. "               dice-1.svg",
+dice_2 = dir .. "               dice-2.svg",
+dice_3 = dir .. "               dice-3.svg",
+dice_4 = dir .. "               dice-4.svg",
+dice_5 = dir .. "               dice-5.svg",
+dice_6 = dir .. "               dice-6.svg",
+digital_ocean = dir .. "          digital-ocean.svg",     
+digitalocean = dir .. "           digitalocean.svg",    
+disc = dir .. "               disc.svg",
+display_flex = dir .. "           display-flex.svg",    
+display_fullwidth = dir .. "      display-fullwidth.svg",         
+display_grid = dir .. "           display-grid.svg",    
+display_spacing = dir .. "        display-spacing.svg",       
+distribute_horizontal = dir .. "  distribute-horizontal.svg",             
+distribute_vertical = dir .. "    distribute-vertical.svg",           
+django = dir .. "               django.svg",
+dlang = dir .. "               dlang.svg",
+dock_bottom = dir .. "            dock-bottom.svg",   
+dock_left = dir .. "              dock-left.svg", 
+dock_right = dir .. "             dock-right.svg",  
+dock_window = dir .. "            dock-window.svg",   
+docker = dir .. "               docker.svg",
+doctrine = dir .. "               doctrine.svg",
+document_add = dir .. "           document-add.svg",    
+document_download = dir .. "      document-download.svg",         
+document_duplicate = dir .. "     document-duplicate.svg",          
+document_remove = dir .. "        document-remove.svg",       
+document_report = dir .. "        document-report.svg",       
+document_search = dir .. "        document-search.svg",       
+document_text = dir .. "          document-text.svg",     
+document = dir .. "               document.svg",
+dojo = dir .. "               dojo.svg",
+dolby = dir .. "               dolby.svg",
+dollar = dir .. "               dollar.svg",
+dotnet = dir .. "               dotnet.svg",
+dots_circle_horizontal = dir .. " dots-circle-horizontal.svg",              
+dots_horizontal = dir .. "        dots-horizontal.svg",       
+dots_vertical = dir .. "          dots-vertical.svg",     
+download = dir .. "               download.svg",
+dreamweaver = dir .. "            dreamweaver.svg",   
+dribbble = dir .. "               dribbble.svg",
+drive = dir .. "               drive.svg",
+drop_invert = dir .. "            drop-invert.svg",   
+drop_opacity = dir .. "           drop-opacity.svg",    
+drop = dir .. "               drop.svg",
+dropbox = dir .. "               dropbox.svg",
+drupal = dir .. "               drupal.svg",
+duplicate = dir .. "              duplicate.svg", 
+eclipse = dir .. "               eclipse.svg",
+edit_black_point = dir .. "       edit-black-point.svg",        
+edit_contrast = dir .. "          edit-contrast.svg",     
+edit_exposure = dir .. "          edit-exposure.svg",     
+edit_fade = dir .. "              edit-fade.svg", 
+edit_flip_h = dir .. "            edit-flip-h.svg",   
+edit_flip_v = dir .. "            edit-flip-v.svg",   
+edit_highlight = dir .. "         edit-highlight.svg",      
+edit_markup = dir .. "            edit-markup.svg",   
+edit_mask = dir .. "              edit-mask.svg", 
+edit_noise = dir .. "             edit-noise.svg",  
+edit_shadows = dir .. "           edit-shadows.svg",    
+edit_straight = dir .. "          edit-straight.svg",     
+edit_unmask = dir .. "            edit-unmask.svg",   
+eject = dir .. "               eject.svg",
+ember = dir .. "               ember.svg",
+emoji_happy = dir .. "            emoji-happy.svg",   
+emoji_sad = dir .. "              emoji-sad.svg", 
+enter = dir .. "               enter.svg",
+envato = dir .. "               envato.svg",
+erase = dir .. "               erase.svg",
+ereader = dir .. "               ereader.svg",
+ericsson = dir .. "               ericsson.svg",
+erlang = dir .. "               erlang.svg",
+ethernet = dir .. "               ethernet.svg",
+euro = dir .. "               euro.svg",
+eventbrite = dir .. "             eventbrite.svg",  
+exclamation_circle = dir .. "     exclamation-circle.svg",          
+exclamation = dir .. "            exclamation.svg",   
+expand = dir .. "               expand.svg",
+export = dir .. "               export.svg",
+extension_add = dir .. "          extension-add.svg",     
+extension_alt = dir .. "          extension-alt.svg",     
+extension_remove = dir .. "       extension-remove.svg",        
+extension = dir .. "              extension.svg", 
+external_link = dir .. "          external-link.svg",     
+external = dir .. "               external.svg",
+extjs = dir .. "               extjs.svg",
+eye_alt = dir .. "               eye-alt.svg",
+eye_off = dir .. "               eye-off.svg",
+eye = dir .. "               eye.svg",
+facebook = dir .. "               facebook.svg",
+fast_forward = dir .. "           fast-forward.svg",    
+feed = dir .. "               feed.svg",
+figma = dir .. "               figma.svg",
+file_add = dir .. "               file-add.svg",
+file_document = dir .. "          file-document.svg",     
+file_remove = dir .. "            file-remove.svg",   
+file = dir .. "               file.svg",
+film = dir .. "               film.svg",
+filter = dir .. "               filter.svg",
+filters = dir .. "               filters.svg",
+finger_print = dir .. "           finger-print.svg",    
+fire = dir .. "               fire.svg",
+firebase = dir .. "               firebase.svg",
+firefox = dir .. "               firefox.svg",
+flag_alt = dir .. "               flag-alt.svg",
+flag = dir .. "               flag.svg",
+folder_add = dir .. "             folder-add.svg",  
+folder_download = dir .. "        folder-download.svg",       
+folder_open = dir .. "            folder-open.svg",   
+folder_remove = dir .. "          folder-remove.svg",     
+folder = dir .. "               folder.svg",
+font_height = dir .. "            font-height.svg",   
+font_spacing = dir .. "           font-spacing.svg",    
+format_bold = dir .. "            format-bold.svg",   
+format_center = dir .. "          format-center.svg",     
+format_color = dir .. "           format-color.svg",    
+format_heading = dir .. "         format-heading.svg",      
+format_indent_decrease = dir .. " format-indent-decrease.svg",              
+format_indent_increase = dir .. " format-indent-increase.svg",              
+format_italic = dir .. "          format-italic.svg",     
+format_justify = dir .. "         format-justify.svg",      
+format_left = dir .. "            format-left.svg",   
+format_line_height = dir .. "     format-line-height.svg",          
+format_right = dir .. "           format-right.svg",    
+format_separator = dir .. "       format-separator.svg",        
+format_slash = dir .. "           format-slash.svg",    
+format_strike = dir .. "          format-strike.svg",     
+format_text = dir .. "            format-text.svg",   
+format_underline = dir .. "       format-underline.svg",        
+format_uppercase = dir .. "       format-uppercase.svg",        
+framer = dir .. "               framer.svg",
+fsharp = dir .. "               fsharp.svg",
+games = dir .. "               games.svg",
+gender_female = dir .. "          gender-female.svg",     
+gender_male = dir .. "            gender-male.svg",   
+ghost_character = dir .. "        ghost-character.svg",       
+ghost = dir .. "               ghost.svg",
+ghost_small = dir .. "            ghost_small.svg",   
+gift = dir .. "               gift.svg",
+girl = dir .. "               girl.svg",
+git_branch = dir .. "             git-branch.svg",  
+git_commit = dir .. "             git-commit.svg",  
+git_fork = dir .. "               git-fork.svg",
+git_pull = dir .. "               git-pull.svg",
+git = dir .. "               git.svg",
+git_branch = dir .. "             git_branch.svg",  
+git_commit = dir .. "             git_commit.svg",  
+git_compare = dir .. "            git_compare.svg",   
+git_merge = dir .. "              git_merge.svg", 
+git_pull_request = dir .. "       git_pull_request.svg",        
+github = dir .. "               github.svg",
+github_alt = dir .. "             github_alt.svg",  
+github_badge = dir .. "           github_badge.svg",    
+github_full = dir .. "            github_full.svg",   
+gitter = dir .. "               gitter.svg",
+glass_alt = dir .. "              glass-alt.svg", 
+glass = dir .. "               glass.svg",
+globe_alt = dir .. "              globe-alt.svg", 
+globe = dir .. "               globe.svg",
+gnu = dir .. "               gnu.svg",
+go = dir .. "               go.svg",
+google_cloud_platform = dir .. "  google-cloud-platform.svg",             
+google_tasks = dir .. "           google-tasks.svg",    
+google = dir .. "               google.svg",
+google_analytics = dir .. "       google_analytics.svg",        
+google_drive = dir .. "           google_drive.svg",    
+grails = dir .. "               grails.svg",
+groovy = dir .. "               groovy.svg",
+grunt = dir .. "               grunt.svg",
+gulp = dir .. "               gulp.svg",
+gym = dir .. "               gym.svg",
+hackernews = dir .. "             hackernews.svg",  
+hand = dir .. "               hand.svg",
+hashtag = dir .. "               hashtag.svg",
+haskell = dir .. "               haskell.svg",
+headset = dir .. "               headset.svg",
+heart = dir .. "               heart.svg",
+hello = dir .. "               hello.svg",
+heroku = dir .. "               heroku.svg",
+home_alt = dir .. "               home-alt.svg",
+home_screen = dir .. "            home-screen.svg",   
+home = dir .. "               home.svg",
+html5 = dir .. "               html5.svg",
+html5_3d_effects = dir .. "       html5_3d_effects.svg",        
+html5_connectivity = dir .. "     html5_connectivity.svg",          
+html5_device_access = dir .. "    html5_device_access.svg",           
+html5_multimedia = dir .. "       html5_multimedia.svg",        
+icecream = dir .. "               icecream.svg",
+iconsicons
+identification = dir .. "         identification.svg",      
+ie = dir .. "               ie.svg",
+if_design = dir .. "              if-design.svg", 
+illustrator = dir .. "            illustrator.svg",   
+image = dir .. "               image.svg",
+import = dir .. "               import.svg",
+inbox_in = dir .. "               inbox-in.svg",
+inbox = dir .. "               inbox.svg",
+indie_hackers = dir .. "          indie-hackers.svg",     
+infinity = dir .. "               infinity.svg",
+info = dir .. "               info.svg",
+information_circle = dir .. "     information-circle.svg",          
+inpicture = dir .. "              inpicture.svg", 
+insert_after_o = dir .. "         insert-after-o.svg",      
+insert_after_r = dir .. "         insert-after-r.svg",      
+insert_after = dir .. "           insert-after.svg",    
+insert_before_o = dir .. "        insert-before-o.svg",       
+insert_before_r = dir .. "        insert-before-r.svg",       
+insert_before = dir .. "          insert-before.svg",     
+insights = dir .. "               insights.svg",
+instagram = dir .. "              instagram.svg", 
+intellij = dir .. "               intellij.svg",
+internal = dir .. "               internal.svg",
+ionic = dir .. "               ionic.svg",
+java = dir .. "               java.svg",
+javascript = dir .. "             javascript.svg",  
+javascript_1 = dir .. "           javascript_1.svg",    
+jekyll_small = dir .. "           jekyll_small.svg",    
+jenkins = dir .. "               jenkins.svg",
+jira = dir .. "               jira.svg",
+joomla = dir .. "               joomla.svg",
+jquery_logo = dir .. "            jquery_logo.svg",   
+jquery_ui_logo = dir .. "         jquery_ui_logo.svg",      
+js_badge = dir .. "               js_badge.svg",
+key = dir .. "               key.svg",
+keyboard = dir .. "               keyboard.svg",
+keyhole = dir .. "               keyhole.svg",
+komodo = dir .. "               komodo.svg",
+krakenjs = dir .. "               krakenjs.svg",
+krakenjs_badge = dir .. "         krakenjs_badge.svg",      
+laptop = dir .. "               laptop.svg",
+laravel = dir .. "               laravel.svg",
+lastpass = dir .. "               lastpass.svg",
+layout_grid_small = dir .. "      layout-grid-small.svg",         
+layout_grid = dir .. "            layout-grid.svg",   
+layout_list = dir .. "            layout-list.svg",   
+layout_pin = dir .. "             layout-pin.svg",  
+layoutslayouts
+less = dir .. "               less.svg",
+library = dir .. "               library.svg",
+light_bulb = dir .. "             light-bulb.svg",  
+lightning_bolt = dir .. "         lightning-bolt.svg",      
+linear = dir .. "               linear.svg",
+link = dir .. "               link.svg",
+linux = dir .. "               linux.svg",
+list_tree = dir .. "              list-tree.svg", 
+list = dir .. "               list.svg",
+list.txtlist.txt
+live_photo = dir .. "             live-photo.svg",  
+loadbar_alt = dir .. "            loadbar-alt.svg",   
+loadbar_doc = dir .. "            loadbar-doc.svg",   
+loadbar_sound = dir .. "          loadbar-sound.svg",     
+loadbar = dir .. "               loadbar.svg",
+location_marker = dir .. "        location-marker.svg",       
+lock_closed = dir .. "            lock-closed.svg",   
+lock_open = dir .. "              lock-open.svg", 
+lock_unlock = dir .. "            lock-unlock.svg",   
+lock = dir .. "               lock.svg",
+log_in = dir .. "               log-in.svg",
+log_off = dir .. "               log-off.svg",
+log_out = dir .. "               log-out.svg",
+login = dir .. "               login.svg",
+logout = dir .. "               logout.svg",
+loupe = dir .. "               loupe.svg",
+magento = dir .. "               magento.svg",
+magnet = dir .. "               magnet.svg",
+mail_forward = dir .. "           mail-forward.svg",    
+mail_open = dir .. "              mail-open.svg", 
+mail_reply = dir .. "             mail-reply.svg",  
+mail = dir .. "               mail.svg",
+mailchimp = dir .. "              mailchimp.svg", 
+map = dir .. "               map.svg",
+markdown = dir .. "               markdown.svg",
+materializecss = dir .. "         materializecss.svg",      
+math_divide = dir .. "            math-divide.svg",   
+math_equal = dir .. "             math-equal.svg",  
+math_minus = dir .. "             math-minus.svg",  
+math_percent = dir .. "           math-percent.svg",    
+math_plus = dir .. "              math-plus.svg", 
+maximize_alt = dir .. "           maximize-alt.svg",    
+maximize = dir .. "               maximize.svg",
+maze = dir .. "               maze.svg",
+media_live = dir .. "             media-live.svg",  
+media_podcast = dir .. "          media-podcast.svg",     
+menu_alt_1 = dir .. "             menu-alt-1.svg",  
+menu_alt_2 = dir .. "             menu-alt-2.svg",  
+menu_alt_3 = dir .. "             menu-alt-3.svg",  
+menu_alt_4 = dir .. "             menu-alt-4.svg",  
+menu_boxed = dir .. "             menu-boxed.svg",  
+menu_cake = dir .. "              menu-cake.svg", 
+menu_cheese = dir .. "            menu-cheese.svg",   
+menu_grid_o = dir .. "            menu-grid-o.svg",   
+menu_grid_r = dir .. "            menu-grid-r.svg",   
+menu_hotdog = dir .. "            menu-hotdog.svg",   
+menu_left_alt = dir .. "          menu-left-alt.svg",     
+menu_left = dir .. "              menu-left.svg", 
+menu_motion = dir .. "            menu-motion.svg",   
+menu_oreos = dir .. "             menu-oreos.svg",  
+menu_right_alt = dir .. "         menu-right-alt.svg",      
+menu_right = dir .. "             menu-right.svg",  
+menu_round = dir .. "             menu-round.svg",  
+menu = dir .. "               menu.svg",
+merge_horizontal = dir .. "       merge-horizontal.svg",        
+merge_vertical = dir .. "         merge-vertical.svg",      
+meteor = dir .. "               meteor.svg",
+meteorfull = dir .. "             meteorfull.svg",  
+mic = dir .. "               mic.svg",
+microbit = dir .. "               microbit.svg",
+microphone = dir .. "             microphone.svg",  
+microsoft = dir .. "              microsoft.svg", 
+mini_player = dir .. "            mini-player.svg",   
+minimize_alt = dir .. "           minimize-alt.svg",    
+minimize = dir .. "               minimize.svg",
+minus_circle = dir .. "           minus-circle.svg",    
+minus_sm = dir .. "               minus-sm.svg",
+minus = dir .. "               minus.svg",
+mitlicence = dir .. "             mitlicence.svg",  
+modem = dir .. "               modem.svg",
+modernizr = dir .. "              modernizr.svg", 
+monday = dir .. "               monday.svg",
+mongodb = dir .. "               mongodb.svg",
+moon = dir .. "               moon.svg",
+mootools = dir .. "               mootools.svg",
+mootools_badge = dir .. "         mootools_badge.svg",      
+more_alt = dir .. "               more-alt.svg",
+more_o = dir .. "               more-o.svg",
+more_r = dir .. "               more-r.svg",
+more_vertical_alt = dir .. "      more-vertical-alt.svg",         
+more_vertical_o = dir .. "        more-vertical-o.svg",       
+more_vertical_r = dir .. "        more-vertical-r.svg",       
+more_vertical = dir .. "          more-vertical.svg",     
+more = dir .. "               more.svg",
+mouse = dir .. "               mouse.svg",
+move_down = dir .. "              move-down.svg", 
+move_left = dir .. "              move-left.svg", 
+move_right = dir .. "             move-right.svg",  
+move_task = dir .. "              move-task.svg", 
+move_up = dir .. "               move-up.svg",
+mozilla = dir .. "               mozilla.svg",
+msql_server = dir .. "            msql_server.svg",   
+music_note = dir .. "             music-note.svg",  
+music_speaker = dir .. "          music-speaker.svg",     
+music = dir .. "               music.svg",
+mysql = dir .. "               mysql.svg",
+nametag = dir .. "               nametag.svg",
+nancy = dir .. "               nancy.svg",
+netbeans = dir .. "               netbeans.svg",
+netmagazine = dir .. "            netmagazine.svg",   
+newspaper = dir .. "              newspaper.svg", 
+nginx = dir .. "               nginx.svg",
+nodejs = dir .. "               nodejs.svg",
+nodejs_small = dir .. "           nodejs_small.svg",    
+notes = dir .. "               notes.svg",
+notifications = dir .. "          notifications.svg",     
+npm = dir .. "               npm.svg",
+oculus = dir .. "               oculus.svg",
+office_building = dir .. "        office-building.svg",       
+onedrive = dir .. "               onedrive.svg",
+open_collective = dir .. "        open-collective.svg",       
+openshift = dir .. "              openshift.svg", 
+opensource = dir .. "             opensource.svg",  
+opera = dir .. "               opera.svg",
+options = dir .. "               options.svg",
+organisation = dir .. "           organisation.svg",    
+overflow = dir .. "               overflow.svg",
+pacman = dir .. "               pacman.svg",
+paper_airplane = dir .. "         paper-airplane.svg",      
+paper_clip = dir .. "             paper-clip.svg",  
+password = dir .. "               password.svg",
+path_back = dir .. "              path-back.svg", 
+path_crop = dir .. "              path-crop.svg", 
+path_divide = dir .. "            path-divide.svg",   
+path_exclude = dir .. "           path-exclude.svg",    
+path_front = dir .. "             path-front.svg",  
+path_intersect = dir .. "         path-intersect.svg",      
+path_outline = dir .. "           path-outline.svg",    
+path_trim = dir .. "              path-trim.svg", 
+path_unite = dir .. "             path-unite.svg",  
+patreon = dir .. "               patreon.svg",
+pause = dir .. "               pause.svg",
+paypal = dir .. "               paypal.svg",
+pen = dir .. "               pen.svg",
+pencil_alt = dir .. "             pencil-alt.svg",  
+pencil = dir .. "               pencil.svg",
+pentagon_bottom_left = dir .. "   pentagon-bottom-left.svg",            
+pentagon_bottom_right = dir .. "  pentagon-bottom-right.svg",             
+pentagon_down = dir .. "          pentagon-down.svg",     
+pentagon_left = dir .. "          pentagon-left.svg",     
+pentagon_right = dir .. "         pentagon-right.svg",      
+pentagon_top_left = dir .. "      pentagon-top-left.svg",         
+pentagon_top_right = dir .. "     pentagon-top-right.svg",          
+pentagon_up = dir .. "            pentagon-up.svg",   
+performance = dir .. "            performance.svg",   
+perl = dir .. "               perl.svg",
+pexels = dir .. "               pexels.svg",
+phone_incoming = dir .. "         phone-incoming.svg",      
+phone_missed_call = dir .. "      phone-missed-call.svg",         
+phone_outgoing = dir .. "         phone-outgoing.svg",      
+phone = dir .. "               phone.svg",
+phonegap = dir .. "               phonegap.svg",
+photograph = dir .. "             photograph.svg",  
+photoscan = dir .. "              photoscan.svg", 
+photoshop = dir .. "              photoshop.svg", 
+php = dir .. "               php.svg",
+piano = dir .. "               piano.svg",
+pill = dir .. "               pill.svg",
+pin_alt = dir .. "               pin-alt.svg",
+pin_bottom = dir .. "             pin-bottom.svg",  
+pin_top = dir .. "               pin-top.svg",
+pin = dir .. "               pin.svg",
+play_backwards = dir .. "         play-backwards.svg",      
+play_button_o = dir .. "          play-button-o.svg",     
+play_button_r = dir .. "          play-button-r.svg",     
+play_button = dir .. "            play-button.svg",   
+play_forwards = dir .. "          play-forwards.svg",     
+play_list_add = dir .. "          play-list-add.svg",     
+play_list_check = dir .. "        play-list-check.svg",       
+play_list_remove = dir .. "       play-list-remove.svg",        
+play_list_search = dir .. "       play-list-search.svg",        
+play_list = dir .. "              play-list.svg", 
+play_pause_o = dir .. "           play-pause-o.svg",    
+play_pause_r = dir .. "           play-pause-r.svg",    
+play_pause = dir .. "             play-pause.svg",  
+play_stop_o = dir .. "            play-stop-o.svg",   
+play_stop_r = dir .. "            play-stop-r.svg",   
+play_stop = dir .. "              play-stop.svg", 
+play_track_next_o = dir .. "      play-track-next-o.svg",         
+play_track_next_r = dir .. "      play-track-next-r.svg",         
+play_track_next = dir .. "        play-track-next.svg",       
+play_track_prev_o = dir .. "      play-track-prev-o.svg",         
+play_track_prev_r = dir .. "      play-track-prev-r.svg",         
+play_track_prev = dir .. "        play-track-prev.svg",       
+play = dir .. "               play.svg",
+plug = dir .. "               plug.svg",
+plus_circle = dir .. "            plus-circle.svg",   
+plus_sm = dir .. "               plus-sm.svg",
+plus = dir .. "               plus.svg",
+pocket = dir .. "               pocket.svg",
+pokemon = dir .. "               pokemon.svg",
+polaroid = dir .. "               polaroid.svg",
+poll = dir .. "               poll.svg",
+postgresql = dir .. "             postgresql.svg",  
+presentation_chart_bar = dir .. " presentation-chart-bar.svg",              
+presentation_chart_line = dir .. "presentation-chart-line.svg",               
+presentation = dir .. "           presentation.svg",    
+printer = dir .. "               printer.svg",
+product_hunt = dir .. "           product-hunt.svg",    
+profile = dir .. "               profile.svg",
+prolog = dir .. "               prolog.svg",
+pull_clear = dir .. "             pull-clear.svg",  
+push_chevron_down_o = dir .. "    push-chevron-down-o.svg",           
+push_chevron_down_r = dir .. "    push-chevron-down-r.svg",           
+push_chevron_down = dir .. "      push-chevron-down.svg",         
+push_chevron_left_o = dir .. "    push-chevron-left-o.svg",           
+push_chevron_left_r = dir .. "    push-chevron-left-r.svg",           
+push_chevron_left = dir .. "      push-chevron-left.svg",         
+push_chevron_right_o = dir .. "   push-chevron-right-o.svg",            
+push_chevron_right_r = dir .. "   push-chevron-right-r.svg",            
+push_chevron_right = dir .. "     push-chevron-right.svg",          
+push_chevron_up_o = dir .. "      push-chevron-up-o.svg",         
+push_chevron_up_r = dir .. "      push-chevron-up-r.svg",         
+push_chevron_up = dir .. "        push-chevron-up.svg",       
+push_down = dir .. "              push-down.svg", 
+push_left = dir .. "              push-left.svg", 
+push_right = dir .. "             push-right.svg",  
+push_up = dir .. "               push-up.svg",
+puzzle = dir .. "               puzzle.svg",
+python = dir .. "               python.svg",
+qr = dir .. "               qr.svg",
+qrcode = dir .. "               qrcode.svg",
+question_mark_circle = dir .. "   question-mark-circle.svg",            
+quote_o = dir .. "               quote-o.svg",
+quote = dir .. "               quote.svg",
+rackspace = dir .. "              rackspace.svg", 
+radio_check = dir .. "            radio-check.svg",   
+radio_checked = dir .. "          radio-checked.svg",     
+raphael = dir .. "               raphael.svg",
+rasberry_pi = dir .. "            rasberry_pi.svg",   
+ratio = dir .. "               ratio.svg",
+react = dir .. "               react.svg",
+read = dir .. "               read.svg",
+readme = dir .. "               readme.svg",
+receipt_refund = dir .. "         receipt-refund.svg",      
+receipt_tax = dir .. "            receipt-tax.svg",   
+record = dir .. "               record.svg",
+redhat = dir .. "               redhat.svg",
+redis = dir .. "               redis.svg",
+redo = dir .. "               redo.svg",
+refresh = dir .. "               refresh.svg",
+remote = dir .. "               remote.svg",
+remove_r = dir .. "               remove-r.svg",
+remove = dir .. "               remove.svg",
+rename = dir .. "               rename.svg",
+reorder = dir .. "               reorder.svg",
+repeat = dir .. "               repeat.svg",
+reply = dir .. "               reply.svg",
+requirejs = dir .. "              requirejs.svg", 
+responsive = dir .. "             responsive.svg",  
+rewind = dir .. "               rewind.svg",
+ring = dir .. "               ring.svg",
+ror = dir .. "               ror.svg",
+row_first = dir .. "              row-first.svg", 
+row_last = dir .. "               row-last.svg",
+rss = dir .. "               rss.svg",
+ruby = dir .. "               ruby.svg",
+ruby_rough = dir .. "             ruby_rough.svg",  
+ruler = dir .. "               ruler.svg",
+rust = dir .. "               rust.svg",
+safari = dir .. "               safari.svg",
+sand_clock = dir .. "             sand-clock.svg",  
+sass = dir .. "               sass.svg",
+save_as = dir .. "               save-as.svg",
+save = dir .. "               save.svg",
+scala = dir .. "               scala.svg",
+scale = dir .. "               scale.svg",
+scan = dir .. "               scan.svg",
+scissors = dir .. "               scissors.svg",
+screen_mirror = dir .. "          screen-mirror.svg",     
+screen_shot = dir .. "            screen-shot.svg",   
+screen_wide = dir .. "            screen-wide.svg",   
+screen = dir .. "               screen.svg",
+scriptcs = dir .. "               scriptcs.svg",
+scroll_h = dir .. "               scroll-h.svg",
+scroll_v = dir .. "               scroll-v.svg",
+scrum = dir .. "               scrum.svg",
+search_circle = dir .. "          search-circle.svg",     
+search_found = dir .. "           search-found.svg",    
+search_loading = dir .. "         search-loading.svg",      
+search = dir .. "               search.svg",
+select_o = dir .. "               select-o.svg",
+select_r = dir .. "               select-r.svg",
+select = dir .. "               select.svg",
+selector = dir .. "               selector.svg",
+senchatouch = dir .. "            senchatouch.svg",   
+server = dir .. "               server.svg",
+serverless = dir .. "             serverless.svg",  
+shape_circle = dir .. "           shape-circle.svg",    
+shape_half_circle = dir .. "      shape-half-circle.svg",         
+shape_hexagon = dir .. "          shape-hexagon.svg",     
+shape_rhombus = dir .. "          shape-rhombus.svg",     
+shape_square = dir .. "           shape-square.svg",    
+shape_triangle = dir .. "         shape-triangle.svg",      
+shape_zigzag = dir .. "           shape-zigzag.svg",    
+share = dir .. "               share.svg",
+shield_check = dir .. "           shield-check.svg",    
+shield_exclamation = dir .. "     shield-exclamation.svg",          
+shield = dir .. "               shield.svg",
+shopping_bag = dir .. "           shopping-bag.svg",    
+shopping_cart = dir .. "          shopping-cart.svg",     
+shortcut = dir .. "               shortcut.svg",
+shutterstock = dir .. "           shutterstock.svg",    
+sidebar_open = dir .. "           sidebar-open.svg",    
+sidebar_right = dir .. "          sidebar-right.svg",     
+sidebar = dir .. "               sidebar.svg",
+signal = dir .. "               signal.svg",
+size = dir .. "               size.svg",
+sizzlejs = dir .. "               sizzlejs.svg",
+sketch = dir .. "               sketch.svg",
+slack = dir .. "               slack.svg",
+sleep = dir .. "               sleep.svg",
+smart_home_boiler = dir .. "      smart-home-boiler.svg",         
+smart_home_cooker = dir .. "      smart-home-cooker.svg",         
+smart_home_heat = dir .. "        smart-home-heat.svg",       
+smart_home_light = dir .. "       smart-home-light.svg",        
+smart_home_refrigerator = dir .. "smart-home-refrigerator.svg",               
+smart_home_wash_machine = dir .. "smart-home-wash-machine.svg",               
+smartphone_chip = dir .. "        smartphone-chip.svg",       
+smartphone_ram = dir .. "         smartphone-ram.svg",      
+smartphone_shake = dir .. "       smartphone-shake.svg",        
+smartphone = dir .. "             smartphone.svg",  
+smashing_magazine = dir .. "      smashing_magazine.svg",         
+smile_mouth_open = dir .. "       smile-mouth-open.svg",        
+smile_neutral = dir .. "          smile-neutral.svg",     
+smile_no_mouth = dir .. "         smile-no-mouth.svg",      
+smile_none = dir .. "             smile-none.svg",  
+smile_sad = dir .. "              smile-sad.svg", 
+smile_upside = dir .. "           smile-upside.svg",    
+smile = dir .. "               smile.svg",
+snap_svg = dir .. "               snap_svg.svg",
+software_download = dir .. "      software-download.svg",         
+software_upload = dir .. "        software-upload.svg",       
+sort_ascending = dir .. "         sort-ascending.svg",      
+sort_az = dir .. "               sort-az.svg",
+sort_descending = dir .. "        sort-descending.svg",       
+sort_za = dir .. "               sort-za.svg",
+space_between_v = dir .. "        space-between-v.svg",       
+space_between = dir .. "          space-between.svg",     
+spark = dir .. "               spark.svg",
+sparkles = dir .. "               sparkles.svg",
+speakerphone = dir .. "           speakerphone.svg",    
+spectrum = dir .. "               spectrum.svg",
+spinner_alt = dir .. "            spinner-alt.svg",   
+spinner_two_alt = dir .. "        spinner-two-alt.svg",       
+spinner_two = dir .. "            spinner-two.svg",   
+spinner = dir .. "               spinner.svg",
+sqllite = dir .. "               sqllite.svg",
+square = dir .. "               square.svg",
+stack = dir .. "               stack.svg",
+stackoverflow = dir .. "          stackoverflow.svg",     
+star = dir .. "               star.svg",
+stark = dir .. "               stark.svg",
+status_offline = dir .. "         status-offline.svg",      
+status_online = dir .. "          status-online.svg",     
+stop = dir .. "               stop.svg",
+stopwatch = dir .. "              stopwatch.svg", 
+stories = dir .. "               stories.svg",
+streamline = dir .. "             streamline.svg",  
+studio = dir .. "               studio.svg",
+style = dir .. "               style.svg",
+stylus = dir .. "               stylus.svg",
+sublime = dir .. "               sublime.svg",
+sun = dir .. "               sun.svg",
+support = dir .. "               support.svg",
+swap_vertical = dir .. "          swap-vertical.svg",     
+swap = dir .. "               swap.svg",
+sweden = dir .. "               sweden.svg",
+swift = dir .. "               swift.svg",
+swiss = dir .. "               swiss.svg",
+switch_horizontal = dir .. "      switch-horizontal.svg",         
+switch_vertical = dir .. "        switch-vertical.svg",       
+symfony = dir .. "               symfony.svg",
+symfony_badge = dir .. "          symfony_badge.svg",     
+sync = dir .. "               sync.svg",
+tab = dir .. "               tab.svg",
+table = dir .. "               table.svg",
+tag_listtag-list
+tag = dir .. "               tag.svg",
+tally = dir .. "               tally.svg",
+tap_double = dir .. "             tap-double.svg",  
+tap_single = dir .. "             tap-single.svg",  
+techcrunch = dir .. "             techcrunch.svg",  
+template = dir .. "               template.svg",
+tennis = dir .. "               tennis.svg",
+terminal = dir .. "               terminal.svg",
+terminal_badge = dir .. "         terminal_badge.svg",      
+terrain = dir .. "               terrain.svg",
+thermometer = dir .. "            thermometer.svg",   
+thermostat = dir .. "             thermostat.svg",  
+thumb_down = dir .. "             thumb-down.svg",  
+thumb_up = dir .. "               thumb-up.svg",
+ticket = dir .. "               ticket.svg",
+tikcode = dir .. "               tikcode.svg",
+time = dir .. "               time.svg",
+timelapse = dir .. "              timelapse.svg", 
+timer = dir .. "               timer.svg",
+titlebartitlebar
+today = dir .. "               today.svg",
+toggle_off = dir .. "             toggle-off.svg",  
+toggle_on = dir .. "              toggle-on.svg", 
+toggle_square_off = dir .. "      toggle-square-off.svg",         
+toggle_square = dir .. "          toggle-square.svg",     
+toolbar_bottom = dir .. "         toolbar-bottom.svg",      
+toolbar_left = dir .. "           toolbar-left.svg",    
+toolbar_right = dir .. "          toolbar-right.svg",     
+toolbar_top = dir .. "            toolbar-top.svg",   
+toolbox = dir .. "               toolbox.svg",
+touchpad = dir .. "               touchpad.svg",
+track = dir .. "               track.svg",
+transcript = dir .. "             transcript.svg",  
+translate = dir .. "              translate.svg", 
+trash_empty = dir .. "            trash-empty.svg",   
+trash = dir .. "               trash.svg",
+travis = dir .. "               travis.svg",
+tree = dir .. "               tree.svg",
+trees = dir .. "               trees.svg",
+trello = dir .. "               trello.svg",
+trending_down = dir .. "          trending-down.svg",     
+trending_up = dir .. "            trending-up.svg",   
+trending = dir .. "               trending.svg",
+trophy = dir .. "               trophy.svg",
+truck = dir .. "               truck.svg",
+tv = dir .. "               tv.svg",
+twilio = dir .. "               twilio.svg",
+twitter = dir .. "               twitter.svg",
+typo3 = dir .. "               typo3.svg",
+ubuntu = dir .. "               ubuntu.svg",
+ui_kit = dir .. "               ui-kit.svg",
+uikit = dir .. "               uikit.svg",
+umbrella = dir .. "               umbrella.svg",
+unavailable = dir .. "            unavailable.svg",   
+unblock = dir .. "               unblock.svg",
+undo = dir .. "               undo.svg",
+unfold = dir .. "               unfold.svg",
+unity_small = dir .. "            unity_small.svg",   
+unsplash = dir .. "               unsplash.svg",
+upload = dir .. "               upload.svg",
+usb_c = dir .. "               usb-c.svg",
+usb = dir .. "               usb.svg",
+user_add = dir .. "               user-add.svg",
+user_circle = dir .. "            user-circle.svg",   
+user_group = dir .. "             user-group.svg",  
+user_list = dir .. "              user-list.svg", 
+user_remove = dir .. "            user-remove.svg",   
+user = dir .. "               user.svg",
+userlane = dir .. "               userlane.svg",
+users = dir .. "               users.svg",
+variable = dir .. "               variable.svg",
+video_camera = dir .. "           video-camera.svg",    
+view_boards = dir .. "            view-boards.svg",   
+view_cols = dir .. "              view-cols.svg", 
+view_comfortable = dir .. "       view-comfortable.svg",        
+view_day = dir .. "               view-day.svg",
+view_grid_add = dir .. "          view-grid-add.svg",     
+view_grid = dir .. "              view-grid.svg", 
+view_list = dir .. "              view-list.svg", 
+view_month = dir .. "             view-month.svg",  
+view_split = dir .. "             view-split.svg",  
+vim = dir .. "               vim.svg",
+vinyl = dir .. "               vinyl.svg",
+visualstudio = dir .. "           visualstudio.svg",    
+voicemail_o = dir .. "            voicemail-o.svg",   
+voicemail_r = dir .. "            voicemail-r.svg",   
+voicemail = dir .. "              voicemail.svg", 
+volume_off = dir .. "             volume-off.svg",  
+volume_up = dir .. "              volume-up.svg", 
+volume = dir .. "               volume.svg",
+w3c = dir .. "               w3c.svg",
+webcam = dir .. "               webcam.svg",
+webplatform = dir .. "            webplatform.svg",   
+website = dir .. "               website.svg",
+wifi = dir .. "               wifi.svg",
+windows = dir .. "               windows.svg",
+wordpress = dir .. "              wordpress.svg", 
+work_alt = dir .. "               work-alt.svg",
+x_circle = dir .. "               x-circle.svg",
+x = dir .. "               x.svg",
+yahoo = dir .. "               yahoo.svg",
+yahoo_small = dir .. "            yahoo_small.svg",   
+yeoman = dir .. "               yeoman.svg",
+yii = dir .. "               yii.svg",
+yinyang = dir .. "               yinyang.svg",
+youtube = dir .. "               youtube.svg",
+zeit = dir .. "               zeit.svg",
+zend = dir .. "               zend.svg",
+zoom_in = dir .. "               zoom-in.svg",
+zoom_out = dir .. "               zoom-out.svg",

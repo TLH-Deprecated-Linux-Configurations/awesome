@@ -1,1 +1,12 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><defs><style>.cls-1{fill:#17191e;opacity:0;}.cls-2{fill:#f4f4f7;}</style></defs><title>arrow-right</title><g id="Layer_2" data-name="Layer 2"><g id="arrow-right"><g id="arrow-right-2" data-name="arrow-right"><rect class="cls-1" width="24" height="24" transform="translate(24 24) rotate(180)"/><path class="cls-2" d="M10.46,18a2.23,2.23,0,0,1-.91-.2A1.76,1.76,0,0,1,8.5,16.21V7.79A1.76,1.76,0,0,1,9.55,6.2a2.1,2.1,0,0,1,2.21.26l5.1,4.21a1.7,1.7,0,0,1,0,2.66l-5.1,4.21A2.06,2.06,0,0,1,10.46,18Z"/></g></g></g></svg>
+<svg
+  width="24"
+  height="24"
+  viewBox="0 0 24 24"
+  fill="none"
+  xmlns="http://www.w3.org/2000/svg"
+>
+  <path
+    d="M15.0378 6.34317L13.6269 7.76069L16.8972 11.0157L3.29211 11.0293L3.29413 13.0293L16.8619 13.0157L13.6467 16.2459L15.0643 17.6568L20.7079 11.9868L15.0378 6.34317Z"
+    fill="#f4f4f7"
+  />
+</svg>

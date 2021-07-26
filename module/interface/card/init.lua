@@ -18,7 +18,7 @@ local dpi = beautiful.xresources.apply_dpi
 -- ########################################################################
 -- ########################################################################
 -- ########################################################################
-local header_font = 'agave Nerd Font Mono Bold 14'
+local header_font = beautiful.font .. ' 14'
 local bg = beautiful.bg_modal
 local bg_title = beautiful.bg_modal_title
 -- ########################################################################
@@ -31,7 +31,10 @@ local titled_card = function(title, height)
         font = header_font,
         align = 'center',
         valign = 'center',
-        widget = wibox.widget.textbox
+        widget = wibox.widget.textbox,
+        border_color = beautiful.xbackground,
+        border_width = dpi(3),
+        border_radius = dpi(12),
     }
     -- ########################################################################
 -- ########################################################################
@@ -40,7 +43,7 @@ local titled_card = function(title, height)
     local body_widget =
         wibox.widget {
         wibox.widget.base.empty_widget(),
-        bg = bg,
+
         shape = function(cr, rect_width, rect_height)
             gears.shape.partially_rounded_rect(cr, rect_width, rect_height, false, false, true, true, 6)
         end,
@@ -67,7 +70,11 @@ local titled_card = function(title, height)
         },
         body_widget,
         nil,
-        bg = bg
+        bg = bg,
+        border_color = beautiful.xbackground,
+        border_width = dpi(3),
+        border_radius = dpi(12),
+
     }
 -- ########################################################################
 -- ########################################################################
@@ -114,6 +121,9 @@ local bare_card = function()
         wibox.widget {
         wibox.widget.base.empty_widget(),
         bg = bg,
+        border_color = beautiful.xbackground,
+        border_width = dpi(3),
+        border_radius = dpi(12),
         shape = function(cr, rect_width, rect_height)
             gears.shape.partially_rounded_rect(cr, rect_width, rect_height, true, true, true, true, 6)
         end,

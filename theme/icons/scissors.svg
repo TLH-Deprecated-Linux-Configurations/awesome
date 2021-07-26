@@ -1,1 +1,4 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><defs><style>.cls-1{fill:#17191e;opacity:0;}.cls-2{fill:#f4f4f7;}</style></defs><title>scissors</title><g id="Layer_2" data-name="Layer 2"><g id="scissors"><g id="scissors-2" data-name="scissors"><rect class="cls-1" width="24" height="24"/><path class="cls-2" d="M20.21,5.71a1,1,0,1,0-1.42-1.42L12.51,10.6,9.21,7.29h0A3,3,0,0,0,9.5,6a3,3,0,1,0-3,3,3,3,0,0,0,1.29-.3h0L11.1,12l-3.29,3.3A3,3,0,0,0,6.5,15a3,3,0,1,0,3,3,3,3,0,0,0-.29-1.26ZM6.5,7a1,1,0,1,1,1-1A1,1,0,0,1,6.5,7Zm0,12a1,1,0,1,1,1-1A1,1,0,0,1,6.5,19Z"/><path class="cls-2" d="M15.21,13.29a1,1,0,0,0-1.42,1.42l5,5a1,1,0,0,0,1.42,0,1,1,0,0,0,0-1.42Z"/></g></g></g></svg>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="#f4f4f7">
+  <path fill-rule="evenodd" d="M5.5 2a3.5 3.5 0 101.665 6.58L8.585 10l-1.42 1.42a3.5 3.5 0 101.414 1.414l8.128-8.127a1 1 0 00-1.414-1.414L10 8.586l-1.42-1.42A3.5 3.5 0 005.5 2zM4 5.5a1.5 1.5 0 113 0 1.5 1.5 0 01-3 0zm0 9a1.5 1.5 0 113 0 1.5 1.5 0 01-3 0z" clip-rule="evenodd"/>
+  <path d="M12.828 11.414a1 1 0 00-1.414 1.414l3.879 3.88a1 1 0 001.414-1.415l-3.879-3.879z"/>
+</svg>

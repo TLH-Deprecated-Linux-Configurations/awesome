@@ -1,1 +1,12 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><defs><style>.cls-1{fill:#17191e;opacity:0;}.cls-2{fill:#f4f4f7;}</style></defs><title>corner-up-right</title><g id="Layer_2" data-name="Layer 2"><g id="corner-up-right"><g id="corner-up-right-2" data-name="corner-up-right"><rect class="cls-1" width="24" height="24" transform="translate(0 24) rotate(-90)"/><path class="cls-2" d="M19.78,10.38l-4-5a1,1,0,0,0-1.56,1.24L16.92,10H8a3,3,0,0,0-3,3v5a1,1,0,0,0,2,0V13a1,1,0,0,1,1-1h8.92l-2.7,3.38a1,1,0,0,0,.16,1.4A1,1,0,0,0,15,17a1,1,0,0,0,.78-.38l4-5A1,1,0,0,0,19.78,10.38Z"/></g></g></g></svg>
+<svg
+  width="24"
+  height="24"
+  viewBox="0 0 24 24"
+  fill="none"
+  xmlns="http://www.w3.org/2000/svg"
+>
+  <path
+    d="M13.3724 14.7219L14.7835 16.1391L21.1612 9.78892L14.811 3.41125L13.3937 4.82242L17.1702 8.61526L6.86461 8.59304C4.65547 8.58828 2.86076 10.3753 2.85599 12.5844L2.83875 20.5844L4.83874 20.5887L4.85599 12.5887C4.85837 11.4841 5.75573 10.5907 6.8603 10.593L17.496 10.616L13.3724 14.7219Z"
+    fill="#f4f4f7"
+  />
+</svg>

@@ -1,1 +1,12 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><defs><style>.cls-1{fill:#17191e;opacity:0;}.cls-2{fill:#f4f4f7;}</style></defs><title>corner-left-up</title><g id="Layer_2" data-name="Layer 2"><g id="corner-left-up"><g id="corner-left-up-2" data-name="corner-left-up"><rect class="cls-1" width="24" height="24" transform="translate(24 24) rotate(180)"/><path class="cls-2" d="M18,17H13a1,1,0,0,1-1-1V7.08l3.38,2.7A1,1,0,0,0,16,10a1,1,0,0,0,.78-.38,1,1,0,0,0-.16-1.4l-5-4a1,1,0,0,0-1.24,0l-5,4A1,1,0,0,0,6.62,9.78L10,7.08V16a3,3,0,0,0,3,3h5a1,1,0,0,0,0-2Z"/></g></g></g></svg>
+<svg
+  width="24"
+  height="24"
+  viewBox="0 0 24 24"
+  fill="none"
+  xmlns="http://www.w3.org/2000/svg"
+>
+  <path
+    d="M14.71 10.6254L16.1229 9.20989L9.7531 2.85181L3.39502 9.22164L4.81054 10.6346L8.59179 6.84631L8.60131 17.152C8.60335 19.3611 10.3959 21.1503 12.605 21.1483L20.605 21.1409L20.6032 19.1409L12.6032 19.1483C11.4986 19.1493 10.6023 18.2547 10.6013 17.1501L10.5915 6.51446L14.71 10.6254Z"
+    fill="#f4f4f7"
+  />
+</svg>

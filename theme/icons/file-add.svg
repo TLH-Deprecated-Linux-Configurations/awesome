@@ -1,1 +1,15 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><defs><style>.cls-1{fill:#17191e;opacity:0;}.cls-2{fill:#f4f4f7;}</style></defs><title>file-add</title><g id="Layer_2" data-name="Layer 2"><g id="file-add"><g id="file-add-2" data-name="file-add"><rect class="cls-1" width="24" height="24"/><path class="cls-2" d="M19.74,7.33l-4.44-5A1,1,0,0,0,14.56,2h-8A2.53,2.53,0,0,0,4,4.5v15A2.53,2.53,0,0,0,6.56,22H17.44A2.53,2.53,0,0,0,20,19.5V8A1,1,0,0,0,19.74,7.33ZM14,15H13v1a1,1,0,0,1-2,0V15H10a1,1,0,0,1,0-2h1V12a1,1,0,0,1,2,0v1h1a1,1,0,0,1,0,2Zm.71-7A.79.79,0,0,1,14,7.15V4l3.74,4Z"/></g></g></g></svg>
+<svg
+  width="24"
+  height="24"
+  viewBox="0 0 24 24"
+  fill="none"
+  xmlns="http://www.w3.org/2000/svg"
+>
+  <path d="M10 18V16H8V14H10V12H12V14H14V16H12V18H10Z" fill="#f4f4f7" />
+  <path
+    fill-rule="evenodd"
+    clip-rule="evenodd"
+    d="M6 2C4.34315 2 3 3.34315 3 5V19C3 20.6569 4.34315 22 6 22H18C19.6569 22 21 20.6569 21 19V9C21 5.13401 17.866 2 14 2H6ZM6 4H13V9H19V19C19 19.5523 18.5523 20 18 20H6C5.44772 20 5 19.5523 5 19V5C5 4.44772 5.44772 4 6 4ZM15 4.10002C16.6113 4.4271 17.9413 5.52906 18.584 7H15V4.10002Z"
+    fill="#f4f4f7"
+  />
+</svg>

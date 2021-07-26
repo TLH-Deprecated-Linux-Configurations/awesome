@@ -9,6 +9,9 @@
 local wibox = require("wibox")
 local gears = require("gears")
 local icons = require("theme.icons")
+local HOME = os.getenv("HOME")
+
+local PATH_TO_ICONS = HOME .. "/.config/awesome/layout/left-panel/icons/"
 
 local dpi = require("beautiful").xresources.apply_dpi
 local clickable_container = require("widget.clickable-container")
@@ -50,7 +53,7 @@ home_button:buttons(
 _G.screen.primary.left_panel:connect_signal(
     "opened",
     function()
-        widget.icon:set_image(icons.close)
+        widget.icon:set_image(PATH_TO_ICONS .. "close.svg")
         _G.menuopened = true
     end
 )
@@ -60,13 +63,13 @@ _G.screen.primary.left_panel:connect_signal(
 _G.screen.primary.left_panel:connect_signal(
     "closed",
     function()
-        widget.icon:set_image(icons.settings)
+        widget.icon:set_image(PATH_TO_ICONS .. "arrow-left-r.svg")
         _G.menuopened = false
     end
 )
 -- ########################################################################
 -- ########################################################################
 -- ########################################################################
-widget.icon:set_image(icons.settings)
+widget.icon:set_image(PATH_TO_ICONS .. "arrow-left-r.svg")
 
 return home_button

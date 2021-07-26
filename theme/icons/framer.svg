@@ -1,1 +1,10 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="#f4f4f7" stroke="#f4f4f7" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-framer"><path d="M5 16V9h14V2H5l14 14h-7m-7 0l7 7v-7m-7 0h7"></path></svg>
+<svg
+  width="24"
+  height="24"
+  viewBox="0 0 24 24"
+  fill="none"
+  xmlns="http://www.w3.org/2000/svg"
+>
+  <path d="M12 21L12 9L6 9L6 15L12 21Z" fill="#f4f4f7" fill-opacity="0.5" />
+  <path d="M18 9V3H6L12 9H6V15H18L12 9H18Z" fill="#f4f4f7" />
+</svg>

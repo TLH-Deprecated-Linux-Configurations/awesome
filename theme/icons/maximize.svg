@@ -1,1 +1,12 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><defs><style>.cls-1{fill:#17191e;opacity:0;}.cls-2{fill:#f4f4f7;}</style></defs><title>maximize</title><g id="Layer_2" data-name="Layer 2"><g id="maximize"><g id="maximize-2" data-name="maximize"><rect class="cls-1" width="24" height="24"/><path class="cls-2" d="M20.71,19.29l-3.4-3.39A7.92,7.92,0,0,0,19,11a8,8,0,1,0-8,8,7.92,7.92,0,0,0,4.9-1.69l3.39,3.4a1,1,0,0,0,1.42,0A1,1,0,0,0,20.71,19.29ZM13,12H12v1a1,1,0,0,1-2,0V12H9a1,1,0,0,1,0-2h1V9a1,1,0,0,1,2,0v1h1a1,1,0,0,1,0,2Z"/></g></g></g></svg>
+<svg
+  width="24"
+  height="24"
+  viewBox="0 0 24 24"
+  fill="none"
+  xmlns="http://www.w3.org/2000/svg"
+>
+  <path d="M3 3H9V5H5V9H3V3Z" fill="#f4f4f7" />
+  <path d="M3 21H9V19H5V15H3V21Z" fill="#f4f4f7" />
+  <path d="M15 21H21V15H19V19H15V21Z" fill="#f4f4f7" />
+  <path d="M21 3H15V5H19V9H21V3Z" fill="#f4f4f7" />
+</svg>

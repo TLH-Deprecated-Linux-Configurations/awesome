@@ -1,1 +1,16 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><defs><style>.cls-1{fill:#17191e;opacity:0;}.cls-2{fill:#f4f4f7;}</style></defs><title>log-out</title><g id="Layer_2" data-name="Layer 2"><g id="log-out"><g id="log-out-2" data-name="log-out"><rect class="cls-1" width="24" height="24" transform="translate(24 0) rotate(90)"/><path class="cls-2" d="M7,6A1,1,0,0,0,7,4H5A1,1,0,0,0,4,5V19a1,1,0,0,0,1,1H7a1,1,0,0,0,0-2H6V6Z"/><path class="cls-2" d="M20.82,11.42,18,7.42a1,1,0,0,0-1.39-.24,1,1,0,0,0-.24,1.4L18.09,11,18,11H10a1,1,0,0,0,0,2h8l-1.8,2.4a1,1,0,0,0,.2,1.4,1,1,0,0,0,.6.2,1,1,0,0,0,.8-.4l3-4A1,1,0,0,0,20.82,11.42Z"/></g></g></g></svg>
+<svg
+  width="24"
+  height="24"
+  viewBox="0 0 24 24"
+  fill="none"
+  xmlns="http://www.w3.org/2000/svg"
+>
+  <path
+    d="M8.51428 20H4.51428C3.40971 20 2.51428 19.1046 2.51428 18V6C2.51428 4.89543 3.40971 4 4.51428 4H8.51428V6H4.51428V18H8.51428V20Z"
+    fill="#f4f4f7"
+  />
+  <path
+    d="M13.8418 17.385L15.262 15.9768L11.3428 12.0242L20.4857 12.0242C21.038 12.0242 21.4857 11.5765 21.4857 11.0242C21.4857 10.4719 21.038 10.0242 20.4857 10.0242L11.3236 10.0242L15.304 6.0774L13.8958 4.6572L7.5049 10.9941L13.8418 17.385Z"
+    fill="#f4f4f7"
+  />
+</svg>

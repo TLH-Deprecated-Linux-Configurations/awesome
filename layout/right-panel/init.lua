@@ -5,7 +5,7 @@ local gears = require("gears")
 local dpi = require("beautiful").xresources.apply_dpi
 local clickable_container = require("widget.clickable-container")
 local PATH_TO_ICONS = HOME .. "/.config/awesome/layout/right-panel/icons/"
-local theme = require("theme.icons")
+
 
 -- Load panel rules, it will create panel for each screen
 require("layout.right-panel.panel-rules")
@@ -14,7 +14,7 @@ local widget =
     wibox.widget {
     {
         id = "icon",
-        image = PATH_TO_ICONS .. "notification.svg",
+        image = PATH_TO_ICONS .. "arrow-right-r.svg",
         widget = wibox.widget.imagebox,
         resize = true
     },

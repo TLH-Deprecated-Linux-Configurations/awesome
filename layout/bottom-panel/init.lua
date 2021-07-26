@@ -110,8 +110,9 @@ local bottom_panel = function(s)
     s.network = build_widget(show_widget_or_default("widget.wifi", hardware.hasWifi()))
     local layout_box = build_widget(require("widget.layoutbox")(s))
     s.battery = build_widget(show_widget_or_default("widget.battery", hardware.hasBattery(), true))
-    s.notification_center = build_widget(require("layout.right-panel"))
     s.mytextclock = build_widget(require("widget.clock"))
+    s.notification_center = build_widget(require("layout.right-panel"))
+
 
     -- ########################################################################
     -- ### Setup Panel Widgets ################################################
@@ -134,13 +135,14 @@ local bottom_panel = function(s)
             {
                 layout = wibox.layout.fixed.horizontal,
                 spacing = dpi(2),
-                {s.systray, margins = dpi(0), widget = wibox.container.margin},
+                {s.systray, margins = dpi(2), widget = wibox.container.margin},
                 s.network,
                 s.bluetooth,
                 s.battery,
                 layout_box,
+                s.mytextclock,
                 s.notification_center,
-                s.mytextclock
+
 
                 -- clock,
             }

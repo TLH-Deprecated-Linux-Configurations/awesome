@@ -17,6 +17,9 @@ return function(body, callback, bNo_center, leave_callback, no_update)
     local button = wibox.container.background()
     local bIsHovered = false
     button.bg = beautiful.bg_focus
+    button.border_color = beautiful.xbackground
+    button.border_width = dpi(3)
+    button.border_radius = dpi(12)
     button.shape = function(cr, rect_width, rect_height)
         gears.shape.partially_rounded_rect(cr, rect_width, rect_height, true, true, true, true, 12)
     end
@@ -82,7 +85,7 @@ return function(body, callback, bNo_center, leave_callback, no_update)
     -- ########################################################################
     --- Manually update the color pallet used by the button, usually used when you want the button to not follow the theming
     button.update_pallet = function(new_pallet)
-        color = new_pallet
+        button.color = new_pallet
         if bIsHovered then
             button.emulate_hover()
         else
