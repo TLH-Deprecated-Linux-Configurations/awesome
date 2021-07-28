@@ -40,9 +40,7 @@ Anyone embarking on the journey up Mordor that is AwesomeWM configurations shoul
 <h2>Table of Contents</h2>
 <ul>
 <li><a href="./definitions.md">Definitions: Starting From A Common Point of Reference</a></li>
-<li><a href="./usage.md">Usage</a></li>
-<li><a href="./screen.md">Screen Elements</a></li>
-<li><a href="./libraries.md">Libraries</a></li>
-<li><a href="./externals.md">External Program Dependencies</a></li>
+<li><a href="./interface.md">Using the Interface</a></li>
+<li><a href="./luarocks.md">LuaRocks Reference (for additional dependencies)</a></li>
 </ul>
 </div>

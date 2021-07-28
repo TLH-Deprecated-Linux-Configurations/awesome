@@ -52,7 +52,9 @@
     "submodules",
     "subwidgets",
     "tabbar",
-    "unixporn"
+    "unixporn",
+    "wibar",
+    "wibars"
   ],
   "[markdown]": {
     "editor.cursorSurroundingLines": 0
