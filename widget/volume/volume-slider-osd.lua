@@ -50,9 +50,9 @@ button:connect_signal(
 signal.connect_volume_is_muted(
     function(muted)
         if (muted) then
-            icon.image = icons.muted
+            icon.image = icons.volume_off
         else
-            icon.image = icons.volume
+            icon.image = icons.volume_up
         end
     end
 )

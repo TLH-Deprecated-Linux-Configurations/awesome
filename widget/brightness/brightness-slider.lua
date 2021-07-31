@@ -55,7 +55,7 @@ signals.connect_brightness(
 
 local icon =
     wibox.widget {
-    image = icons.brightness,
+    image = icons.sun,
     widget = wibox.widget.imagebox
 }
 

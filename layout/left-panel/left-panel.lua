@@ -67,7 +67,7 @@ local left_panel_func = function()
         wibox {
         ontop = true,
         screen = s,
-        bg = beautiful.xbackground .. "66",
+        bg = beautiful.xcolor0 .. "66",
         width = left_panel_width,
         height = s.geometry.height,
         x = s.geometry.x,
@@ -323,41 +323,7 @@ local left_panel_func = function()
             )
         )
     )
-    -- ########################################################################
-    -- ########################################################################
-    -- ########################################################################
-    local settings_app_button =
-        wibox.widget {
-        wibox.widget {
-            icon = PATH_TO_ICONS .. "menu_round.svg",
-            size = dpi(24),
-            widget = mat_icon
-        },
-        wibox.widget {
-            text = "Full settings application",
-            font = beautiful.font .. "12",
-            widget = wibox.widget.textbox,
-            align = center
-        },
-        forced_height = dpi(60),
-        clickable = true,
-        widget = mat_list_item
-    }
-    -- ########################################################################
-    -- ########################################################################
-    -- ########################################################################
-    settings_app_button:buttons(
-        awful.util.table.join(
-            awful.button(
-                {},
-                1,
-                function()
-                    closeleft_panel()
-                    root.elements.settings.enable_view_by_index(4, mouse.screen)
-                end
-            )
-        )
-    )
+
     -- ########################################################################
     -- ########################################################################
     -- ########################################################################
@@ -419,13 +385,11 @@ local left_panel_func = function()
     local function settings_plugin()
         local network_card = card("Network Settings")
         local screen_card = card("Screen Settings")
-        local settings_card = card("Settings application")
         -- ########################################################################
         -- ########################################################################
         -- ########################################################################
         network_card.update_body(wifi_button)
         screen_card.update_body(dpi_button)
-        settings_card.update_body(settings_app_button)
         -- ########################################################################
         -- ########################################################################
         -- ########################################################################
@@ -439,7 +403,6 @@ local left_panel_func = function()
             separator,
             wibox.container.margin(screen_card, dpi(20), dpi(20), dpi(20), dpi(20)),
             separator,
-            wibox.container.margin(settings_card, dpi(20), dpi(20), dpi(20), dpi(20)),
             layout = wibox.layout.fixed.vertical
         }
 

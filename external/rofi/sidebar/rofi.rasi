@@ -8,14 +8,14 @@ configuration {
 }
 
 * {
-    background:                     #00000000;
-    background-color:               #00000000;
-    background-entry:               #00000033;
-    background-alt:                 #f2f2f215;
-    foreground:                     #f2f2f2EE;
+    background:                     #17191e33;
+    background-color:               #17191e33;
+    background-entry:               #22262d33;
+    background-alt:                 #3c3f4c33;
+    foreground:                     #b2bfd9EE;
     foreground-selected:            #f4f4f7FF;
-    urgent:                         #E91E6366;
-    urgent-selected:                #E91E6377;
+    urgent:                         #ff3d8166;
+    urgent-selected:                #ff3d81aa;
 }
 
 window {

@@ -1,7 +1,7 @@
--- ########################################################################
---
---  Button
---  Description:  Provides the button functions
+--      ______         __   __
+--     |   __ \.--.--.|  |_|  |_.-----.-----.
+--     |   __ <|  |  ||   _|   _|  _  |     |
+--     |______/|_____||____|____|_____|__|__|
 -- ########################################################################
 -- ########################################################################
 -- ########################################################################
@@ -16,12 +16,12 @@ local dpi = beautiful.xresources.apply_dpi
 return function(body, callback, bNo_center, leave_callback, no_update)
     local button = wibox.container.background()
     local bIsHovered = false
-    button.bg = beautiful.bg_focus
+    button.bg = beautiful.bg_normal .. "66"
     button.border_color = beautiful.xbackground
-    button.border_width = dpi(3)
+    button.border_width = dpi(1)
     button.border_radius = dpi(12)
     button.shape = function(cr, rect_width, rect_height)
-        gears.shape.partially_rounded_rect(cr, rect_width, rect_height, true, true, true, true, 12)
+        gears.shape.partially_rounded_rect(cr, rect_width, rect_height, true, true, true, true, 3)
     end
     button.forced_height = dpi(40)
     -- ########################################################################
@@ -36,7 +36,7 @@ return function(body, callback, bNo_center, leave_callback, no_update)
     --- Emulate a hover event
     button.emulate_hover = function()
         bIsHovered = true
-        button.bg = beautiful.xcolor7
+        button.bg = beautiful.xcolor0
     end
     -- ########################################################################
     -- ########################################################################
@@ -44,7 +44,7 @@ return function(body, callback, bNo_center, leave_callback, no_update)
     --- Emulate a hover unfocus event
     button.emulate_focus_loss = function()
         bIsHovered = false
-        button.bg = beautiful.bg_normal .. "00"
+        button.bg = beautiful.bg_normal .. "66"
     end
     -- ########################################################################
     -- ########################################################################

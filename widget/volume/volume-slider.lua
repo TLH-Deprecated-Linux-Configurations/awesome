@@ -19,7 +19,7 @@ local vol_slider =
 
 local icon =
     wibox.widget {
-    image = icons.volume,
+    image = icons.volume_up,
     widget = wibox.widget.imagebox
 }
 
@@ -42,9 +42,9 @@ end
 signals.connect_volume_is_muted(
     function(muted)
         if (muted) then
-            icon.image = icons.muted
+            icon.image = icons.volume_off
         else
-            icon.image = icons.volume
+            icon.image = icons.volume_up
         end
     end
 )

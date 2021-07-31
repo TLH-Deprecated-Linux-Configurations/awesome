@@ -1,8 +1,7 @@
--- TODO make this work
 local wibox = require("wibox")
 local mat_list_item = require("module.interface.material.list-item")
 local slider = require("module.interface.slider")
-local mat_icon_button = require("module.interface.material.icon-button")
+local mat_icon_button = require("module.interface.material.icon")
 local icons = require("theme.icons")
 local spawn = require("awful.spawn")
 local signals = require("module.settings.signals")
@@ -63,11 +62,18 @@ _G.UpdateBrOSD = UpdateBrOSD
 
 local icon =
     wibox.widget {
-    image = icons.brightness,
+    image = icons.sun,
     widget = wibox.widget.imagebox
 }
 
 local button = mat_icon_button(icon)
+
+button:connect_signal(
+    "button::press",
+    function()
+        UpdateBrOSD()
+    end
+)
 
 local brightness_setting_osd =
     wibox.widget {

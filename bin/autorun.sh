@@ -14,14 +14,6 @@ if [[ "$(command -v udiskie)" ]]; then
     pgrep udiskie &>/dev/null || udiskie &>/dev/null &
 fi
 
-if [[ "$(command -v psi-notify)" ]]; then
-    pgrep psi-notify &>/dev/null || psi-notify &>/dev/null &
-fi
-
-if grep -q "bluetooth=false" ~/.config/awesome/theme; then
-    pgrep bluetoothctl &>/dev/null || bluetoothctl power off
-fi
-
 # autolock the system
 if [[ "$(command -v i3lock)" != "" && "$1" -gt "5" ]]; then
     echo "Lock screen time set to: $1 seconds"

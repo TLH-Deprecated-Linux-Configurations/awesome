@@ -53,7 +53,7 @@ home_button:buttons(
 _G.screen.primary.left_panel:connect_signal(
     "opened",
     function()
-        widget.icon:set_image(PATH_TO_ICONS .. "close.svg")
+        widget.icon:set_image(PATH_TO_ICONS .. "close-r.svg")
         _G.menuopened = true
     end
 )

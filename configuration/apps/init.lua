@@ -51,14 +51,13 @@ return {
                 "/.config/awesome/bin/applauncher.sh " ..
                     screen.primary.dpi .. " " .. filesystem.get_configuration_dir(),
         -- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-        rofiwindowswitch = "bash " .. HOME .. "/.config/awesome/application-switch.sh" .. " " .. screen.primary.dpi,
-        -- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
         roficlipboard = "rofi -dpi " ..
             screen.primary.dpi ..
                 ' -modi "clipboard:greenclip print" -show clipboard -theme ' ..
                     HOME .. "/.config/awesome/external/rofi/appmenu/drun.rasi",
         -- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-        rofiwifimenu = "bash " .. HOME .. ".config/awesome/bin/wifi.sh" .. " " .. screen.primary.dpi,
+        rofiwifimenu = "sh " .. HOME .. "/.config/awesome/bin/wifi.sh",
         -- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
         lock = "bash " .. HOME .. "/.config/awesome/external/i3lock/blur.sh",
         -- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
