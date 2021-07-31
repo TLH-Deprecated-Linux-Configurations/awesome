@@ -128,7 +128,13 @@ local function make_nav()
       type = "linear",
       from = {15, 15},
       to = {260, beautiful.modal_height},
-      stops = {{0, beautiful.xcolor7 .. "66"}, {0.25, beautiful.xcolor20 .. '66'}, {0.5, beautiful.xcolor0 .. '66'}, {0.75, beautiful.xcolor17 .. '66'}, {1, beautiful.xcolor8 .. "66"}}
+      stops = {
+        {0, beautiful.xcolor7 .. "66"},
+        {0.25, beautiful.xcolor20 .. "66"},
+        {0.5, beautiful.xcolor0 .. "66"},
+        {0.75, beautiful.xcolor17 .. "66"},
+        {1, beautiful.xcolor8 .. "66"}
+      }
     }
   )
 
@@ -138,7 +144,12 @@ local function make_nav()
 
   local user = wibox.widget.textbox
   user.font = beautiful.font .. " 12"
-  awful.spawn.easy_async_with_shell('whoami', function(u) user.text = u:gsub("^%s*(.-)%s*$", "%1") end);
+  awful.spawn.easy_async_with_shell(
+    "whoami",
+    function(u)
+      user.text = u:gsub("^%s*(.-)%s*$", "%1")
+    end
+  )
 
   local avatar =
     wibox.widget {
@@ -158,6 +169,8 @@ local function make_nav()
   rule.forced_height = 1
   rule.bg = beautiful.xbackground .. "66"
   rule.widget = wibox.widget.base.empty_widget()
+  table.insert(root.elements.hub_views, make_view(icons.info, "about", require("widget.settings.about")()))
+  table.insert(root.elements.hub_views, make_view(icons.bluetooth, "bluetooth", require("widget.settings.bluetooth")()))
 
   table.insert(root.elements.hub_views, make_view(icons.memory, "system", require("widget.settings.system")()))
 
@@ -174,7 +187,7 @@ local function make_nav()
       layout = wibox.container.margin,
       avatar,
       user
-    },
+    }
   }
 
   local nav_container = wibox.layout.fixed.vertical()

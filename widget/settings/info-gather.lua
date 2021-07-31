@@ -13,6 +13,7 @@ local config = require("module.functions")
 local delayed_timer = require("lib.function.delayed-timer")
 local statvfs = require("posix.sys.statvfs").statvfs
 local common = require("lib.function.common")
+local beautiful = require("beautiful")
 -- ########################################################################
 -- ########################################################################
 -- ########################################################################

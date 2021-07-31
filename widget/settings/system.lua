@@ -35,14 +35,14 @@ return function()
   -- ########################################################################
   -- ########################################################################
   local title = wibox.widget.textbox(("System"))
-  title.font = beautiful.font .. ' 22'
+  title.font = beautiful.font .. " 22"
   title.forced_height = settings_index + m + m
   -- ########################################################################
   -- ########################################################################
   -- ########################################################################
 
   local close = wibox.widget.imagebox(icons.close)
-  close.font = beautiful.font .. ' 08'
+  close.font = beautiful.font .. " 08"
   close.forced_height = 40
   close:buttons(
     gears.table.join(
@@ -69,8 +69,8 @@ return function()
   local scale = wibox.layout.align.vertical()
   local scale_max = wibox.widget.textbox("100%")
   local scale_min = wibox.widget.textbox("0%")
-  scale_max.font = beautiful.font .. ' 08'
-  scale_min.font = beautiful.font .. ' 08'
+  scale_max.font = beautiful.font .. " 08"
+  scale_min.font = beautiful.font .. " 08"
   scale.first = scale_max
   scale.third = scale_min
   scale.second = wibox.widget.base.empty_widget()
@@ -118,36 +118,36 @@ return function()
   -- ########################################################################
   -- ########################################################################
   local ram_value = wibox.widget.textbox()
-  ram_value.font = beautiful.font .. ' 08'
+  ram_value.font = beautiful.font .. " 08"
   ram_value.visible = false
   -- ########################################################################
   -- ########################################################################
   -- ########################################################################
   local cpu_value = wibox.widget.textbox()
-  cpu_value.font = beautiful.font .. ' 08'
+  cpu_value.font = beautiful.font .. " 08"
   cpu_value.visible = false
 
   -- ########################################################################
   -- ########################################################################
   -- ########################################################################
   local disk_value = wibox.widget.textbox()
-  disk_value.font = beautiful.font .. ' 08'
+  disk_value.font = beautiful.font .. " 08"
   disk_value.visible = false
   -- ########################################################################
   -- ########################################################################
   -- ########################################################################
   local ram_key = wibox.widget.textbox("RAM")
-  ram_key.font = beautiful.font .. ' 08'
+  ram_key.font = beautiful.font .. " 08"
   -- ########################################################################
   -- ########################################################################
   -- ########################################################################
   local cpu_key = wibox.widget.textbox("CPU")
-  cpu_key.font = beautiful.font .. ' 08'
+  cpu_key.font = beautiful.font .. " 08"
   -- ########################################################################
   -- ########################################################################
   -- ########################################################################
   local disk_key = wibox.widget.textbox("Disk")
-  disk_key.font = beautiful.font .. ' 08'
+  disk_key.font = beautiful.font .. " 08"
   -- ########################################################################
   -- ########################################################################
   -- ########################################################################

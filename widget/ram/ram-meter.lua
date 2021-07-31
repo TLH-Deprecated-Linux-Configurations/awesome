@@ -6,7 +6,7 @@ local wibox = require("wibox")
 local vicious = require("lib.vicious")
 local dpi = beautiful.xresources.apply_dpi
 local icons = require("theme.icons")
-
+local signals = require("module.settings.signals")
 local ramgraph_widget = {}
 
 collectgarbage("collect")
@@ -20,6 +20,13 @@ mem.top = 5
 mem.bottom = 5
 mem.border_color = beautiful.xforeground
 mem.border_width = 3
+
+signals.connect_ram_usage(
+    function(value)
+        mem.text = value
+    end
+)
+
 local function worker(user_args)
     local args = user_args or {}
     local timeout = args.timeout or 1
@@ -28,7 +35,7 @@ local function worker(user_args)
     local widget_icon =
         wibox.widget {
         id = "icon",
-        image = icons.memory,
+        image = icons.chip,
         forced_width = 36,
         forced_height = 36,
         widget = wibox.widget.imagebox

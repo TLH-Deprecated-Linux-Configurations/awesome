@@ -18,7 +18,7 @@ local gears = require("gears")
 local vicious = require("lib.vicious")
 local dpi = beautiful.xresources.apply_dpi
 local icons = require("theme.icons")
-
+local signals = require("module.settings.signals")
 -- ###########################################################
 -- cpu widget with resource monitor from vicious
 local cpu = wibox.widget.textbox()
@@ -33,7 +33,11 @@ local CMD =
     [[| head -11 | tail -n +2"]]
 
 -- ###########################################################
-
+signals.connect_cpu_usage(
+    function(value)
+        cpu = value
+    end
+)
 local HOME_DIR = os.getenv("HOME")
 local WIDGET_DIR = HOME_DIR .. "/.config/awesome/awesome/widget/cpu"
 
@@ -157,7 +161,7 @@ local function worker(user_args)
     local widget_icon =
         wibox.widget {
         id = "icon",
-        image = icons.bios,
+        image = icons.desktop_computer,
         forced_width = 36,
         forced_height = 36,
         widget = wibox.widget.imagebox

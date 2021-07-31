@@ -28,6 +28,7 @@ local dpi = beautiful.xresources.apply_dpi
 -- ########################################################################
 -- ########################################################################
 -- ########################################################################
+
 local m = dpi(10)
 local settings_index = dpi(40)
 local settings_height = dpi(900)
@@ -43,15 +44,13 @@ local devices = {}
 local paired_devices = {}
 
 local connections = wibox.layout.fixed.vertical()
--- ########################################################################
--- ########################################################################
--- ########################################################################
+
 local function loading()
     connections.children = {}
     local text =
         wibox.widget {
         text = ("Connecting..."),
-        font = beautiful.font .. "24",
+        font = "SFNS Display Regular 24",
         align = "center",
         valign = "center",
         widget = wibox.widget.textbox,
@@ -59,9 +58,7 @@ local function loading()
     }
     connections:add(text)
 end
--- ########################################################################
--- ########################################################################
--- ########################################################################
+
 local function notify(title, msg)
     naughty.notification(
         {
@@ -73,9 +70,7 @@ local function notify(title, msg)
         }
     )
 end
--- ########################################################################
--- ########################################################################
--- ########################################################################
+
 local function make_bluetooth_widget(tbl)
     -- make sure ssid is not nil
     local name = tbl.name or tbl.mac
@@ -84,9 +79,7 @@ local function make_bluetooth_widget(tbl)
     local connected = tbl.connected
 
     local box = card()
-    -- ########################################################################
-    -- ########################################################################
-    -- ########################################################################
+
     local disconnect_btn = mat_icon_button(mat_icon(icons.minus, dpi(25)))
     disconnect_btn:buttons(
         gears.table.join(
@@ -113,9 +106,7 @@ local function make_bluetooth_widget(tbl)
             )
         )
     )
-    -- ########################################################################
-    -- ########################################################################
-    -- ########################################################################
+
     local connect_btn = mat_icon_button(mat_icon(icons.plus, dpi(25)))
     connect_btn:buttons(
         gears.table.join(
@@ -142,9 +133,7 @@ local function make_bluetooth_widget(tbl)
             )
         )
     )
-    -- ########################################################################
-    -- ########################################################################
-    -- ########################################################################
+
     local pair_btn = mat_icon_button(mat_icon(icons.bluetooth, dpi(25)))
     pair_btn:buttons(
         gears.table.join(
@@ -172,9 +161,7 @@ local function make_bluetooth_widget(tbl)
             )
         )
     )
-    -- ########################################################################
-    -- ########################################################################
-    -- ########################################################################
+
     local unpair_btn = mat_icon_button(mat_icon(icons.bluetooth_off, dpi(25)))
     unpair_btn:buttons(
         gears.table.join(
@@ -202,9 +189,7 @@ local function make_bluetooth_widget(tbl)
             )
         )
     )
-    -- ########################################################################
-    -- ########################################################################
-    -- ########################################################################
+
     local buttons = wibox.layout.fixed.horizontal()
     -- only allow pairing if we aren't paired yet
     if paired then
@@ -233,9 +218,7 @@ local function make_bluetooth_widget(tbl)
             text = ("Connect to ") .. name
         }
     end
-    -- ########################################################################
-    -- ########################################################################
-    -- ########################################################################
+
     -- name on the left, password entry in the middle, connect button on the right
     local widget =
         wibox.widget {
@@ -254,9 +237,7 @@ local function make_bluetooth_widget(tbl)
         buttons,
         layout = wibox.layout.align.horizontal
     }
-    -- ########################################################################
-    -- ########################################################################
-    -- ########################################################################
+
     box.update_body(widget)
 
     local container = wibox.container.margin()
@@ -266,15 +247,13 @@ local function make_bluetooth_widget(tbl)
     container.widget = box
     return container
 end
--- ########################################################################
--- ########################################################################
--- ########################################################################
+
 return function()
     local view = wibox.container.margin()
     view.left = m
     view.right = m
 
-    local title = wibox.widget.textbox("Bluetooth")
+    local title = wibox.widget.textbox(("Bluetooth"))
     title.font = beautiful.title_font
     title.forced_height = settings_index + m + m
 
@@ -293,14 +272,11 @@ return function()
             )
         )
     )
-    -- ########################################################################
-    -- ########################################################################
-    -- ########################################################################
     scrollbox_body = scrollbox(connections)
     view:setup {
         layout = wibox.container.background,
-        bg = beautiful.bg_normal .. "00",
-        --fg = beautiful.xforeground,
+        bg = beautiful.xbackground .. "33",
+        --fg = config.colors.xf,
         {
             layout = wibox.layout.align.vertical,
             {
@@ -323,21 +299,17 @@ return function()
             }
         }
     }
-    -- ########################################################################
-    -- ########################################################################
-    -- ########################################################################
+
     local timer =
         gears.timer {
         autostart = true,
         timeout = 20,
         callback = function()
             print("Refreshing")
-            refresh()
+            refresh(true)
         end
     }
-    -- ########################################################################
-    -- ########################################################################
-    -- ########################################################################
+
     local stop_view = function()
         print("Stopping bluetooth advertisment")
         timer:stop()
@@ -351,18 +323,14 @@ return function()
     ']]
         )
     end
-    -- ########################################################################
-    -- ########################################################################
-    -- ########################################################################
+
     -- make sure we always gracefully shutdown
     signals.connect_exit(
         function()
             stop_view()
         end
     )
-    -- ########################################################################
-    -- ########################################################################
-    -- ########################################################################
+
     local function is_connected(mac, stdout)
         if stdout == nil then
             return false
@@ -370,9 +338,6 @@ return function()
         return (stdout:find(mac) ~= nil)
     end
 
-    -- ########################################################################
-    -- ########################################################################
-    -- ########################################################################
     local function check_data()
         -- only generate the list if both commands completed
         if #devices > 0 and #paired_devices > 0 then
@@ -391,9 +356,7 @@ return function()
             end
         end
     end
-    -- ########################################################################
-    -- ########################################################################
-    -- ########################################################################
+
     refresh = function(bIsTimer)
         if scrollbox_body then
             scrollbox_body.reset()
@@ -404,15 +367,11 @@ return function()
         elseif timer.started == nil then
             timer:start()
         end
-        -- ########################################################################
-        -- ########################################################################
-        -- ########################################################################
+
         -- remove all connections
         connections.children = {}
         devices = {}
         paired_devices = {}
-
-            collectgarbage("collect")
 
         awful.spawn.easy_async_with_shell(
             "bluetoothctl devices",
@@ -422,22 +381,18 @@ return function()
                     if name == nil then
                         name = mac
                     end
-                    if mac ~= nil then
-                        table.insert(
-                            devices,
-                            {
-                                mac = mac,
-                                name = name
-                            }
-                        )
-                    end
+                    table.insert(
+                        devices,
+                        {
+                            mac = mac,
+                            name = name
+                        }
+                    )
                 end
                 check_data()
             end
         )
-        -- ########################################################################
-        -- ########################################################################
-        -- ########################################################################
+
         awful.spawn.easy_async_with_shell(
             "bluetoothctl paired-devices",
             function(out)
@@ -453,9 +408,7 @@ return function()
             end
         )
     end
-    -- ########################################################################
-    -- ########################################################################
-    -- ########################################################################
+
     view.refresh = refresh
     view.stop_view = stop_view
     return view
