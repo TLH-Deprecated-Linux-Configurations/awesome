@@ -7,7 +7,6 @@
 -- ########################################################################
 -- ########################################################################
 -- Init all modules
-require("module.settings")
 require("module.settings.auto-start")
 require("widget.exit-screen")
 require("module.interface.quake-terminal")
