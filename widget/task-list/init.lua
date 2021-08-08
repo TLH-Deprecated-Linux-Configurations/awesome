@@ -74,11 +74,12 @@ local tasklist = function(s)
                     {
                         {
                             awful.widget.clienticon,
+                            margins = dpi(8),
                             {
                                 id = "text_role",
                                 widget = wibox.widget.textbox
                             },
-                            spacing = dpi(2),
+                            spacing = dpi(6),
                             layout = wibox.layout.fixed.horizontal
                         },
                         widget = wibox.layout.align.vertical
@@ -90,17 +91,16 @@ local tasklist = function(s)
                     widget = wibox.container.margin,
                     layout = wibox.layout.fixed.horizontal
                 },
-                shape = beautiful.panel_button_shape,
+                shape = beautiful.btn_lg_shape,
                 border_width = beautiful.btn_border_width,
                 id = "background_role",
                 border_color = beautiful.border_button,
                 widget = wibox.container.background
             },
-            margins = dpi(0),
             left = dpi(6),
             right = dpi(6),
-            top = dpi(0),
-            bottom = dpi(0),
+            top = dpi(6),
+            bottom = dpi(6),
             widget = wibox.container.margin
         }
     }

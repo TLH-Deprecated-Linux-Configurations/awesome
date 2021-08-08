@@ -113,7 +113,6 @@ local bottom_panel = function(s)
     s.mytextclock = build_widget(require("widget.clock"))
     s.notification_center = build_widget(require("layout.right-panel"))
 
-
     -- ########################################################################
     -- ### Setup Panel Widgets ################################################
     -- ########################################################################
@@ -140,9 +139,9 @@ local bottom_panel = function(s)
                 s.bluetooth,
                 s.battery,
                 layout_box,
+                --   s.screen_recorder,
                 s.mytextclock,
-                s.notification_center,
-
+                s.notification_center
 
                 -- clock,
             }

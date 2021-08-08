@@ -63,13 +63,6 @@ local awesome_overrides = function(theme)
     -- ########################################################################
     -- ########################################################################
     -- ########################################################################
-    -- Color assignment (used within various files)
-    -- TODO eliminate this section
-    -- Primary
-    theme.primary = theme.xforeground
-
-    -- Accent
-    theme.accent = theme.xcolor20
 
     -- system stat charts in settings app
     theme.cpu_bar = theme.xcolor1
@@ -84,7 +77,7 @@ local awesome_overrides = function(theme)
     theme.dir = theme_dir
     theme.titlebar_size = 24
     theme.icons = theme.dir .. "/icons/"
-    theme.wallpaper = theme_dir .. "/background.png"
+    theme.wallpaper = theme_dir .. "/wallpapers/wp33.png"
 
     -- ########################################################################
     -- ########################################################################

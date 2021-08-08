@@ -651,20 +651,6 @@ local globalKeys =
         }
     ),
     -- #############################################################################
-
-    awful.key(
-        {modkey},
-        "s",
-        function()
-            print("Opening settings hub")
-            root.elements.hub.enable_view_by_index(1, mouse.screen)
-        end,
-        {
-            description = "Open Settings Application",
-            group = "Launcher"
-        }
-    ),
-    -- #############################################################################
     -- Brightness
     awful.key(
         {},
