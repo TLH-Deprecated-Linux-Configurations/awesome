@@ -15,7 +15,6 @@ local beautiful = require("beautiful")
 local clickable_container = require("widget.clickable-container")
 local HOME = os.getenv("HOME")
 local PATH_TO_ICONS = HOME .. "/.config/awesome/widget/social-media/icons/"
-local theme = require("theme.icons")
 -- ########################################################################
 -- ########################################################################
 -- ########################################################################
@@ -73,11 +72,11 @@ reddit_button:buttons(
 -- ########################################################################
 -- ########################################################################
 -- ########################################################################
-local facebook_widget =
+local github_widget =
     wibox.widget {
     {
         id = "icon",
-        image = PATH_TO_ICONS .. "facebook.svg",
+        image = PATH_TO_ICONS .. "github_alt.svg",
         widget = wibox.widget.imagebox,
         resize = true
     },
@@ -86,8 +85,8 @@ local facebook_widget =
 -- ########################################################################
 -- ########################################################################
 -- ########################################################################
-local facebook_button = clickable_container(wibox.container.margin(facebook_widget, dpi(3), dpi(3), dpi(3), dpi(3)))
-facebook_button:buttons(
+local github_button = clickable_container(wibox.container.margin(github_widget, dpi(3), dpi(3), dpi(3), dpi(3)))
+github_button:buttons(
     gears.table.join(
         awful.button(
             {},
@@ -95,7 +94,7 @@ facebook_button:buttons(
             nil,
             function()
                 awful.spawn.easy_async_with_shell(
-                    "xdg-open https://facebook.com",
+                    "xdg-open https://github.com/Thomashighbaugh",
                     function(_)
                     end,
                     1
@@ -111,7 +110,7 @@ local twitter_widget =
     wibox.widget {
     {
         id = "icon",
-        image = PATH_TO_ICONS .. "twitter" .. ".svg",
+        image = PATH_TO_ICONS .. "twitter.svg",
         widget = wibox.widget.imagebox,
         resize = true
     },
@@ -179,7 +178,7 @@ local social_layout =
     wibox.widget {
     layout = wibox.layout.fixed.horizontal,
     spacing = dpi(25),
-    genWidget(facebook_button),
+    genWidget(github_button),
     genWidget(reddit_button),
     genWidget(twitter_button),
     genWidget(instagram_button)
