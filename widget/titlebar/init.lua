@@ -31,17 +31,6 @@ end
 -- ########################################################################
 -- ########################################################################
 -- ########################################################################
--- TODO clean this up
--- {{{ Enable THICC Title Bars only while Floating
-client.connect_signal(
-    "property::floating",
-    function(c)
-        awful.titlebar.show(c)
-    end
-)
--- ########################################################################
--- ########################################################################
--- ########################################################################
 client.connect_signal(
     "manage",
     function(c)
@@ -49,62 +38,6 @@ client.connect_signal(
     end
 )
 
--- ########################################################################
--- ########################################################################
--- ########################################################################
--- {{ Helper to create mult tb buttons
-local function create_title_button(c)
-    local tb_color =
-        wibox.widget {
-        forced_width = dpi(25),
-        forced_height = dpi(25),
-        bg = beautiful.xbackground .. "00",
-        shape = gears.shape.rounded_rect,
-        widget = wibox.container.background
-    }
-    -- ########################################################################
-    -- ########################################################################
-    -- ########################################################################
-    local tb =
-        wibox.widget {
-        tb_color,
-        width = 25,
-        height = 25,
-        bg = beautiful.xbackground .. "00",
-        strategy = "min",
-        layout = wibox.layout.constraint
-    }
-    -- ########################################################################
-    -- ########################################################################
-    -- ########################################################################
-    local function update()
-        if client.focus == c then
-            tb_color.bg = beautiful.xcolor0 .. "33"
-        else
-            tb_color.bg = beautiful.xbackground .. "00"
-        end
-    end
-    update()
-    c:connect_signal("focus", update)
-    c:connect_signal("unfocus", update)
-
-    tb:connect_signal(
-        "mouse::enter",
-        function()
-            tb_color.bg = beautiful.xbackground .. "00"
-        end
-    )
-
-    tb:connect_signal(
-        "mouse::leave",
-        function()
-            tb_color.bg = beautiful.xbackground .. "00"
-        end
-    )
-
-    tb.visible = true
-    return tb
-end
 -- ########################################################################
 -- ########################################################################
 -- ########################################################################
@@ -153,7 +86,7 @@ client.connect_signal(
                 {},
                 2,
                 function()
-                    local c = mouse.object_under_pointer()
+                    c = mouse.object_under_pointer()
                     c:kill()
                 end
             ), -- Side button up - toggle floating
@@ -161,7 +94,7 @@ client.connect_signal(
                 {},
                 9,
                 function()
-                    local c = mouse.object_under_pointer()
+                    c = mouse.object_under_pointer()
                     client.focus = c
                     -- awful.placement.centered(c,{honor_padding = true, honor_workarea=true})
                     c.floating = not c.floating
@@ -171,7 +104,7 @@ client.connect_signal(
                 {},
                 8,
                 function()
-                    local c = mouse.object_under_pointer()
+                    c = mouse.object_under_pointer()
                     client.focus = c
                     c.ontop = not c.ontop
                 end
@@ -201,11 +134,11 @@ client.connect_signal(
         local function update()
             if client.focus == c then
                 -- Changed This
-                l_reverse_corner.bg = beautiful.bg_normal .. "00"
-                r_reverse_corner.bg = beautiful.bg_normal .. "00"
+                l_reverse_corner.bg = beautiful.xbackground .. "66"
+                r_reverse_corner.bg = beautiful.xbackground .. "66"
             else
-                l_reverse_corner.bg = beautiful.bg_normal .. "00"
-                r_reverse_corner.bg = beautiful.bg_normal .. "00"
+                l_reverse_corner.bg = beautiful.xbackground .. "33"
+                r_reverse_corner.bg = beautiful.xbackground .. "33"
             end
         end
         -- ########################################################################
@@ -219,7 +152,8 @@ client.connect_signal(
             c,
             {
                 position = "top",
-                size = beautiful.titlebar_size
+                size = beautiful.titlebar_size,
+                bg = beautiful.xbackground .. "99"
             }
         ):setup {
             {
@@ -238,8 +172,7 @@ client.connect_signal(
                 {
                     -- Title
                     align = "center",
-                    widget = awful.titlebar.widget.titlewidget(c),
-                    color = beautiful.xcolor7
+                    widget = awful.titlebar.widget.titlewidget(c)
                 },
                 buttons = buttons,
                 layout = wibox.layout.flex.horizontal
@@ -248,7 +181,6 @@ client.connect_signal(
                 {
                     {
                         l_reverse_corner,
-                        bg = beautiful.xbackground,
                         shape = gears.rectangle,
                         widget = wibox.container.background
                     },
@@ -269,18 +201,14 @@ client.connect_signal(
                                 layout = wibox.layout.flex.horizontal,
                                 margins = 0
                             },
-                            margins = dpi(0),
-                            spacing = dpi(12),
-                            padding = dpi(6),
-                            left = dpi(24),
-                            right = dpi(0),
                             widget = wibox.container.margin
                         },
-                        bg = beautiful.xbackground,
                         shape = prrect(beautiful.border_radius, true, true, false, false),
                         widget = wibox.container.background
                     },
                     top = dpi(0),
+                    right = dpi(6),
+                    spacing = dpi(6),
                     widget = wibox.container.margin
                 },
                 {
@@ -300,7 +228,8 @@ client.connect_signal(
                 -- widget = wibox.container.margin
                 layout = wibox.layout.fixed.horizontal
             },
-            layout = wibox.layout.align.horizontal
+            layout = wibox.layout.align.horizontal,
+            bg = beautiful.xbackground .. "99"
         }
     end
 )
