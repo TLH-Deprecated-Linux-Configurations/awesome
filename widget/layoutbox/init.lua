@@ -26,29 +26,30 @@ local timer = require("gears.timer")
 local layoutpopup = {}
 local ll =
     awful.widget.layoutlist {
-    spacing = dpi(84),
+    spacing = dpi(96),
     base_layout = wibox.widget {
-        spacing = dpi(72),
+        spacing = dpi(96),
         forced_num_cols = 3,
         layout = wibox.layout.grid.vertical,
-        bg = beautiful.xbackground .. "33"
+        bg = beautiful.xbackground .. "66"
     },
     widget_template = {
         {
             {
                 id = "icon_role",
-                forced_height = dpi(84),
-                forced_width = dpi(84),
+                forced_height = dpi(96),
+                forced_width = dpi(96),
                 widget = wibox.widget.imagebox
             },
             margins = dpi(15),
             widget = wibox.container.margin
         },
         id = "background_role",
-        forced_width = dpi(84),
-        forced_height = dpi(84),
+        forced_width = dpi(96),
+        forced_height = dpi(96),
         shape = gears.shape.rounded_rect,
-        widget = wibox.container.background
+        widget = wibox.container.background,
+        bg = beautiful.bg_normal .. "99"
     }
 }
 
@@ -57,15 +58,16 @@ local layout_popup =
     widget = wibox.widget {
         ll,
         margins = dpi(48),
-        widget = wibox.container.margin
+        widget = wibox.container.margin,
+        ontop = true
     },
-    border_color = beautiful.xcolor0 .. "00",
-    border_width = dpi(3),
+    border_color = beautiful.xbackground .. "00",
+    border_width = dpi(0),
     placement = awful.placement.centered,
     shape = beautiful.btn_lg_shape,
     ontop = true,
     visible = false,
-    bg = beautiful.bg_normal .. "00"
+    bg = beautiful.bg_normal .. "99"
 }
 layout_popup.timer =
     gears.timer {
@@ -113,6 +115,7 @@ awful.keygrabber(
                 " ",
                 function()
                     awful.layout.set(gears.table.iterate_value(ll.layouts, ll.current_layout, -1), nil)
+                    layout_popup.visible = true
                 end
             },
             {
@@ -120,6 +123,7 @@ awful.keygrabber(
                 " ",
                 function()
                     awful.layout.set(gears.table.iterate_value(ll.layouts, ll.current_layout, 1), nil)
+                    layout_popup.visible = true
                 end
             }
         }

@@ -6,7 +6,7 @@ timeone=${1:-120}
 timetwo=${2:-10}
 timethree=${3:-10}
 timefour=${4:-60}
-timetwolock=${5:-"sh $HOME/.config/awesome/external/i3lock/blur.sh"}
+timetwolock=${5:-"sh -e $HOME/.config/awesome/external/i3lock/blur.sh"}
 #timetwolock=${5:-dm-tool lock}
 
 xidlehook \
@@ -17,10 +17,10 @@ xidlehook \
         'brightness -s $(cat /tmp/brightness)' \
         --timer "$timetwo" \
         "$timetwolock" \
+        'brightness -s $(cat /tmp/brightness)' \
+        --timer "$timethree" \
+        "xset dpms force off" \
+        'brightness -s $(cat /tmp/brightness)' \
+        --timer "$timefour" \
+        "systemctl suspend" \
         'brightness -s $(cat /tmp/brightness)'
-# --timer "$timethree" \
-# "xset dpms force off" \
-# 'brightness -s $(cat /tmp/brightness)' \
-# --timer "$timefour" \
-# "systemctl suspend" \
-# 'brightness -s $(cat /tmp/brightness)'

@@ -1,10 +1,38 @@
---  _______         __   __   __
--- |     __|.-----.|  |_|  |_|__|.-----.-----.-----.
--- |__     ||  -__||   _|   _|  ||     |  _  |__ --|
--- |_______||_____||____|____|__||__|__|___  |_____|
---                                     |_____|
--- ########################################################################
--- ########################################################################
--- ########################################################################
--- generate the settings menu
-require('widget.settings')()
+-- --  _______         __   __   __
+-- -- |     __|.-----.|  |_|  |_|__|.-----.-----.-----.
+-- -- |__     ||  -__||   _|   _|  ||     |  _  |__ --|
+-- -- |_______||_____||____|____|__||__|__|___  |_____|
+-- --                                     |_____|
+-- -- ########################################################################
+-- -- ########################################################################
+-- -- ########################################################################
+-- --  DEPRECATED BUT LEFT IN PLACE TO INSURE i DON'T LOOSE ANY ADDITIONAL FUNCTIONALITY
+-- -- TODO REMOVE THIS ONCE SURE THAT NO FUNCTIONALITY WILL BE LOST WITH SETTINGS MENU
+-- local awful = require("awful")
+-- local wibox = require("wibox")
+-- local gears = require("gears")
+-- local beautiful = require("beautiful")
+-- local filesystem = require("module.functions.file")
+-- local icons = require("theme.icons")
+-- local signals = require("module.settings.signals")
+-- local dpi = beautiful.xresources.apply_dpi
+-- local configWriter = require("module.functions.config-writer")
+-- local datetime = require("lib.function.datetime")
+-- local filehandle = require("module.functions.file")
+-- local imagemagic = require("module.interface.imagemagic")
+-- local xrandr_menu = require("module.hardware.xrandr").menu
+-- local scrollbox = require("module.interface.scrollbox")
+-- local slider = require("module.interface.slider")
+-- local card = require("module.interface.card")
+-- local button = require("module.interface.button")
+-- local functions = require("module.functions")
+-- -- require("widget.settings")()
+-- settings = {}
+-- function(value)
+--     print("Updated screen time: " .. tostring(value) .. "sec")
+--     general["screen_on_time"] = tostring(value)
+--     configWriter.update_entry(os.getenv("HOME") .. "/.cache/awesome/general.conf", "screen_on_time", tostring(value))
+--     awful.spawn("pkill -f bin/autolock.sh")
+--     awful.spawn("sh ~/.config/awesome/bin/autolock.sh " .. tostring(value))
+--   end
+--   return settings

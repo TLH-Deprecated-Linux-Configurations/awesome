@@ -16,6 +16,9 @@ local icons = require("theme.icons")
 local apps = require("configuration.apps")
 local clickable_container = require("widget.clickable-container")
 local signals = require("module.settings.signals")
+local HOME = os.getenv "HOME"
+
+local widget_icon_dir = HOME .. "/.config/awesome/widget/exit-screen/icons/"
 
 local animate = require("module.interface.animations").createAnimObject
 -- ########################################################################
@@ -41,8 +44,6 @@ awful.spawn.easy_async_with_shell(
     "whoami",
     function(stdout)
         if stdout then
-            -- Remove new line
-            ---@diagnostic disable-next-line: unused-local
             local username
 
             user_name:set_markup(text)
@@ -159,7 +160,7 @@ end
 -- ########################################################################
 -- ########################################################################
 -- ########################################################################
-local ignore = buildButton(icons.close, "Return")
+local ignore = buildButton(widget_icon_dir .. "close.svg", "Return")
 ignore:connect_signal(
     "button::release",
     function()
@@ -169,7 +170,7 @@ ignore:connect_signal(
 -- ########################################################################
 -- ########################################################################
 -- ########################################################################
-local poweroff = buildButton(icons.power, "Shutdown")
+local poweroff = buildButton(widget_icon_dir .. "power.svg", "Shutdown")
 poweroff:connect_signal(
     "button::release",
     function()
@@ -179,7 +180,7 @@ poweroff:connect_signal(
 -- ########################################################################
 -- ########################################################################
 -- ########################################################################
-local reboot = buildButton(icons.restart, "Restart")
+local reboot = buildButton(widget_icon_dir .. "restart.svg", "Restart")
 reboot:connect_signal(
     "button::release",
     function()
@@ -189,7 +190,7 @@ reboot:connect_signal(
 -- ########################################################################
 -- ########################################################################
 -- ########################################################################
-local suspend = buildButton(icons.sleep, "Sleep")
+local suspend = buildButton(widget_icon_dir .. "sleep.svg", "Sleep")
 suspend:connect_signal(
     "button::release",
     function()
@@ -199,7 +200,7 @@ suspend:connect_signal(
 -- ########################################################################
 -- ########################################################################
 -- ########################################################################
-local exit = buildButton(icons.logout, "Logout")
+local exit = buildButton(widget_icon_dir .. "logout.svg", "Logout")
 exit:connect_signal(
     "button::release",
     function()
@@ -209,7 +210,7 @@ exit:connect_signal(
 -- ########################################################################
 -- ########################################################################
 -- ########################################################################
-local lock = buildButton(icons.lock, "Lock")
+local lock = buildButton(widget_icon_dir .. "lock.svg", "Lock")
 lock:connect_signal(
     "button::release",
     function()
@@ -219,7 +220,7 @@ lock:connect_signal(
 -- ########################################################################
 -- ########################################################################
 -- ########################################################################
-local bios = buildButton(icons.bios, "BIOS")
+local bios = buildButton(widget_icon_dir .. "bios.svg", "BIOS")
 bios:connect_signal(
     "button::release",
     function()

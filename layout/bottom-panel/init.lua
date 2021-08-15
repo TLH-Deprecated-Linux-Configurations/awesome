@@ -112,7 +112,7 @@ local bottom_panel = function(s)
     s.battery = build_widget(show_widget_or_default("widget.battery", hardware.hasBattery(), true))
     s.mytextclock = build_widget(require("widget.clock"))
     s.notification_center = build_widget(require("layout.right-panel"))
-
+    -- s.screen_record = build_widget(require("widget.screen-record"))
     -- ########################################################################
     -- ### Setup Panel Widgets ################################################
     -- ########################################################################
@@ -137,6 +137,7 @@ local bottom_panel = function(s)
                 {s.systray, margins = dpi(2), widget = wibox.container.margin},
                 s.network,
                 s.bluetooth,
+                --s.screen_record,
                 s.battery,
                 layout_box,
                 --   s.screen_recorder,

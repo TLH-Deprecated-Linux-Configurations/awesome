@@ -2,8 +2,9 @@
 
 This configuration is the showcase and center that the Electric Tantra Linux system is situated around. Being the same configuration I use extensively, as well as organically, that I've tired of reassembling just picture so I've created an ISO to streamline the process, serving in its capacity in that perfect union of Shiva and Shakti that is the Electric Tantra. While words cannot encompass the meaning of this most secret of tantras the seeker must discover within, the rest of the project lends itself to documentation easily enough so this wiki will serve as diamond vimana for such.
 
-> inb4: Yes this is the most try hard awesome config, well one of them at least. 
+> inb4: Yes this is the most try hard awesome config, well one of them at least.
 
+<h2>Boring Obligatory Nonsense</h2>
 <details style="width: 45%; float:left;" ><summary> About the Documentation Wiki </summary>
 <p>This wiki should help you understand exactly how to utilize the window manager that is the underpinning of the Electric Tantra Linux, including a brief overview of the concepts that underlie its features and functionalities that I found it necessary to first understand in writing the configuration itself. This will not be an exhaustive treatment of the subject as you can find reference manuals for those purposes easily enough nor will every feature find its way into these documents as the configuration is in a state of flux, that I have tried to constrain myself from altering too much too quickly but am human and prone to error so sometimes wiki treatment of somethings will be overlooked. I apologize in advance. </p>
 
@@ -35,12 +36,17 @@ Anyone embarking on the journey up Mordor that is AwesomeWM configurations shoul
 <li><b>JavaCafe's Awesome</b> - I really like the appearance of this configuration, while differing with its author about some critical under-the-hood design decisions. He has recently moved to using NixOS, meaning his configurations are shifting towards Nix configurations entirely, so we will see how long until he so transitions his awesomewm configuration(which he says he will not be doing). His configuration, like TDE and Awesome Shell, all owe no small thanks to the Glorious Dotfiles configuration (as does this configuration obviously). </li>
 </ul>
 </details>
-
-<div style="width: 45%; float:right; margin-left: 2.5%;">
-<h2>Table of Contents</h2>
+<div style="width:100%; margin-top:5%;">
+<br/>
+<hr/>
+<hr/>
+<hr/>
+</div>
+<div style="width: 100%; float:right; margin-left: 2.5%;">
+<h2>Would You Like to Know More?</h2>
 <ul>
-<li><a href="./definitions.md">Definitions: Starting From A Common Point of Reference</a></li>
-<li><a href="./interface.md">Using the Interface</a></li>
-<li><a href="./luarocks.md">LuaRocks Reference (for additional dependencies)</a></li>
+<li><a href="./definitions.md">Important Terminology</a></li>
+<li><a href="./interface.md">Interface</a></li>
+<li><a href="./luarocks.md">LuaRocks</a></li>
 </ul>
 </div>

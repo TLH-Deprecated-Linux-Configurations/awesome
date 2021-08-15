@@ -1,12 +1,31 @@
--- TODO make this work
 local wibox = require("wibox")
 local mat_list_item = require("module.interface.material.list-item")
 local slider = require("module.interface.slider")
 local mat_icon_button = require("module.interface.material.icon-button")
 local icons = require("theme.icons")
 local signals = require("module.settings.signals")
+local functions = require("module.functions")
 
 local spawn = require("awful.spawn")
+local brightness =
+    slider(
+    0,
+    100,
+    1,
+    0,
+    function(value)
+        for k in pairs(mouse.screen.outputs) do
+            local n = (7 * value + 300) / 1000
+            awful.spawn.with_shell(functions.setbrightness .. " " .. k .. " " .. tostring(n))
+        end
+    end
+)
+
+signals.connect_brightness(
+    function(value)
+        brightness.update(tonumber(value))
+    end
+)
 
 local brightness_slider =
     slider(
