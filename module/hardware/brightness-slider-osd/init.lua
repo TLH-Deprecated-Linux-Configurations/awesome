@@ -47,7 +47,7 @@ awful.screen.connect_for_each_screen(
             function(removed)
                 if s == removed then
                     brightnessOverlay.visible = false
-                    brightnessOverlay.screen = awful.screen.focused()
+                    brightnessOverlay.screen = awful.screen.ed()
                 end
             end
         )

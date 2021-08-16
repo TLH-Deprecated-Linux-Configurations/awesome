@@ -73,7 +73,7 @@ _G.tag.connect_signal(
     function(t)
         local currentLayout = awful.tag.getproperty(t, "layout")
         if (currentLayout == awful.layout.suit.max) then
-            t.gap = 2
+            t.gap = 12
         else
             t.gap = awful.tag.getproperty(t, "gap") or 8
         end

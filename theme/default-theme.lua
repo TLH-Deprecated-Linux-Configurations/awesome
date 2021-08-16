@@ -142,8 +142,8 @@ local awesome_overrides = function(theme)
     -- ########################################################################
 
     -- Gap
-    theme.useless_gap = dpi(4)
-    theme.gap_single_client = true
+    theme.useless_gap = dpi(6)
+    theme.gap_single_client = false
 
     -- ########################################################################
     -- ########################################################################
@@ -153,6 +153,7 @@ local awesome_overrides = function(theme)
     theme.groups_title_bg = theme.bg_modal_title
     theme.groups_bg = theme.bg_modal
     theme.groups_radius = dpi(9)
+
     -- ########################################################################
     -- ########################################################################
     -- ########################################################################

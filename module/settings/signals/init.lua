@@ -447,7 +447,6 @@ tag.connect_signal(
     end
 )
 
-require("module.settings.save-floats")
 --------------------------------------------------------------------> signal ;
 
 --+ attach to closed state

@@ -53,4 +53,10 @@ Additionally, some of the default patterns are also enabled for those contexts w
 <h3>Split</h3>
 <p>This is my most used layout personally, which has replaced the `mstab` layout from the `bling` library I was importing entirely for just that one function. Not finding the tab bar on top very useful (I have the taskbar for that) and somewhat obtuse for stylistic reasons, this was a welcome change eliminating a host of instabilities in the code base for this configuration.</p>
 <p>This layout bisects the screen when a second window is open, then stacks additional windows on the right side. This I find is helpful to compare information from two screens without becoming microscopic if new windows open that prompt changes in responsiveness that may mean loosing your place and recognizes the reality **at extremely small sizes, no window is very useful**</p>
+
+<h3>Empathy</h3>
+<p>This layout creates three columns of windows before beginning a second row. This adds a more useful, in my experience, workspace than the default bisecting into infinity methodology of the typical `AwesomeWM` configuration. It then will box four windows in each corner, which if a fifth is then opened creates a top row of two windows and bottom of three. </p>
+
+<h3>Centermaster</h3>
+<p>This is a customized adaption of the `centermaster` layout from `lain` where the size of the center client that is master and primarily focused on by the user as well as the side windows are a bit better in their sizing for my screen (1920x1080 resolution on a 14 inch laptop) thus the layout is a bit more useful. It is mainly being kept, depsite the minor differences that even exist between it and `lain` because I have found I prefer layouts to be under my control if I use them at all after my issues with `bling`. </p>
 </details>

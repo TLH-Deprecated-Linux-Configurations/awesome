@@ -15,7 +15,7 @@ local ipairs = ipairs
 -- ########################################################################
 -- ########################################################################
 --  Remember client size when switching between floating and tiling.
-client.connect_signal(
+_G.client.connect_signal(
     "maximize",
     function(c)
         -- max if
@@ -33,7 +33,7 @@ client.connect_signal(
 -- ########################################################################
 -- ########################################################################
 -- ########################################################################
-client.connect_signal(
+_G.client.connect_signal(
     "manage",
     function(c)
         c.remember_geometry = {
@@ -47,7 +47,7 @@ client.connect_signal(
 -- ########################################################################
 -- ########################################################################
 -- ########################################################################
-client.connect_signal(
+_G.client.connect_signal(
     "unmanage",
     function(c)
         c.remember_geometry = nil
@@ -56,7 +56,7 @@ client.connect_signal(
 -- ########################################################################
 -- ########################################################################
 -- ########################################################################
-client.connect_signal(
+_G.client.connect_signal(
     "property::floating",
     function(c)
         if c.floating and c.remember_geometry then
@@ -80,7 +80,7 @@ tag.connect_signal(
 -- ########################################################################
 -- ########################################################################
 -- ########################################################################
-client.connect_signal(
+_G.client.connect_signal(
     "request::geometry",
     function(c, context)
         if context == "mouse.resize" and not c.fullscreen then
@@ -92,7 +92,7 @@ client.connect_signal(
 -- ########################################################################
 -- ########################################################################
 -- ########################################################################
-client.connect_signal(
+_G.client.connect_signal(
     "property::geometry",
     function(c)
         local is_floating = c.floating or (c.first_tag and c.first_tag.layout == awful.layout.suit.floating)
@@ -128,7 +128,7 @@ client.connect_signal(
 -- ########################################################################
 -- ########################################################################
 -- ########################################################################
-client.connect_signal(
+_G.client.connect_signal(
     "property::fullscreen",
     function(c)
         if c.floating and not c.fullscreen then
