@@ -28,13 +28,14 @@ local horizontal = bling.layout.horizontal
 local equal = bling.layout.equalarea
 
 -- Custom Layouts
+-- TODO add icons for these in theme
 local stack = require 'configuration.window.layouts.stack'
 local empathy = require 'configuration.window.layouts.empathy'
 local centermaster = require 'configuration.window.layouts.centermaster'
 -- ########################################################################
 -- ########################################################################
 -- ########################################################################
--- Set the layouts
+-- Set the layouts, order is the order they will be in for the tags top being first.
 
 tag.connect_signal(
     'request::default_layouts',
@@ -42,6 +43,8 @@ tag.connect_signal(
         awful.layout.append_default_layouts(
             {
                 stack,
+                empathy,
+                centermaster,
                 mstab,
                 awful.layout.suit.tile,
                 awful.layout.suit.floating,
@@ -73,7 +76,7 @@ tag.connect_signal(
 -- ########################################################################
 -- ########################################################################
 -- ########################################################################
--- Layout List Widget ---------------------------------------------------------
+-- Layout List Widget Creates a menu that  displays the layouts and indicatest the present layout and shifts towards it.
 -- List
 local ll =
     awful.widget.layoutlist {
