@@ -1,8 +1,18 @@
--- autostart.lua
--- Autostart Stuff Here
+--  _______         __                __               __
+-- |   _   |.--.--.|  |_.-----.-----.|  |_.---.-.----.|  |_
+-- |       ||  |  ||   _|  _  |__ --||   _|  _  |   _||   _|
+-- |___|___||_____||____|_____|_____||____|___._|__|  |____|
+-- ########################################################################
+-- ########################################################################
+-- ########################################################################
+-- Begins programs at window manager startup or reboot
 local awful = require('awful')
 local gears = require('gears')
-
+-- ########################################################################
+-- ########################################################################
+-- ########################################################################
+-- function to insure restart awesomewm doesn't cause a huge number of redundant
+-- rprocesses running concurrently
 local function run_once(cmd)
     local findme = cmd
     local firstspace = cmd:find(' ')
@@ -11,7 +21,9 @@ local function run_once(cmd)
     end
     awful.spawn.easy_async_with_shell(string.format('pgrep -u $USER -x %s > /dev/null || (%s)', findme, cmd))
 end
-
+-- ########################################################################
+-- ########################################################################
+-- ########################################################################
 -- LuaFormatter off
 -- Add apps to autostart here
 local autostart_apps = {
@@ -29,5 +41,3 @@ local autostart_apps = {
 for app = 1, #autostart_apps do
     run_once(autostart_apps[app])
 end
-
--- EOF ------------------------------------------------------------------------

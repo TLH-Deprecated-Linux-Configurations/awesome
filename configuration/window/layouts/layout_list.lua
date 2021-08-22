@@ -11,8 +11,14 @@ local bling = require('module.bling')
 -- ########################################################################
 -- ########################################################################
 -- ########################################################################
+-- Layout List Widget Creates a menu that  displays the layouts and indicatest
+-- the present layout and shifts towards it  using the popup functionality
+-- built into awesomewm
 local layout_list = {}
--- Layout List Widget Creates a menu that  displays the layouts and indicatest the present layout and shifts towards it.
+
+-- ########################################################################
+-- ########################################################################
+-- ########################################################################
 -- List
 local ll =
     awful.widget.layoutlist {

@@ -1,11 +1,22 @@
+--  ______         __   __                   ______               __
+-- |   __ \.-----.|  |_|  |_.-----.----.    |   __ \.-----.-----.|__|.-----.-----.
+-- |   __ <|  -__||   _|   _|  -__|   _|    |      <|  -__|__ --||  ||-- __|  -__|
+-- |______/|_____||____|____|_____|__|      |___|__||_____|_____||__||_____|_____|
+-- ########################################################################
+-- ########################################################################
+-- ########################################################################
+-- As the name implies, this helps ease the process of resizing windows
 local capi = {
     client = client,
     mouse = mouse,
     screen = screen,
     mousegrabber = mousegrabber
 }
-local awful = require('awful')
 
+local awful = require('awful')
+-- ########################################################################
+-- ########################################################################
+-- ########################################################################
 local function mouse_resize_handler(m, c)
     awful.client.incwfact(0, c) -- needed to fix normalization at start
     local start = m(capi.mouse.coords())
@@ -17,7 +28,9 @@ local function mouse_resize_handler(m, c)
     local wfact_above, wfact_below
     local jump_to = {x = x, y = y}
     local move_mwfact = false
-
+    -- ########################################################################
+    -- ########################################################################
+    -- ########################################################################
     do
         local g = m(c:geometry())
 
@@ -48,7 +61,9 @@ local function mouse_resize_handler(m, c)
             jump_to.x = mw_split
         end
     end
-
+    -- ########################################################################
+    -- ########################################################################
+    -- ########################################################################
     if idx_above then
         local t = c.screen.selected_tag
         local data = t.windowfact or {}
@@ -56,7 +71,9 @@ local function mouse_resize_handler(m, c)
         wfact_above = colfact[idx_above] or 1
         wfact_below = colfact[idx_below] or 1
     end
-
+    -- ########################################################################
+    -- ########################################################################
+    -- ########################################################################
     if idx_above and move_mwfact then
         cursor = 'cross'
     elseif idx_above then
@@ -66,7 +83,9 @@ local function mouse_resize_handler(m, c)
     else
         return false
     end
-
+    -- ########################################################################
+    -- ########################################################################
+    -- ########################################################################
     capi.mouse.coords(m(jump_to))
 
     capi.mousegrabber.run(
@@ -84,7 +103,9 @@ local function mouse_resize_handler(m, c)
             end
 
             _mouse = m(_mouse)
-
+            -- ########################################################################
+            -- ########################################################################
+            -- ########################################################################
             if pressed then
                 if move_mwfact then
                     c.screen.selected_tag.master_width_factor =
@@ -117,7 +138,9 @@ local function mouse_resize_handler(m, c)
 
     return true
 end
-
+-- ########################################################################
+-- ########################################################################
+-- ########################################################################
 awful.layout.suit.tile.mouse_resize_handler = function(c)
     return mouse_resize_handler(
         function(x)
@@ -126,6 +149,9 @@ awful.layout.suit.tile.mouse_resize_handler = function(c)
         c
     )
 end
+-- ########################################################################
+-- ########################################################################
+-- ########################################################################
 awful.layout.suit.tile.bottom.mouse_resize_handler = function(c)
     return mouse_resize_handler(
         function(q)
@@ -134,14 +160,3 @@ awful.layout.suit.tile.bottom.mouse_resize_handler = function(c)
         c
     )
 end
-
--- local old_coords = mouse.coords
-
--- mouse.coords = function(...)
---    if select(1, ...) and not(select(1, ...).blah) then
---       print("set mouse!!!")
---       print(debug.traceback())
-
---    end
---    return old_coords(...)
--- end

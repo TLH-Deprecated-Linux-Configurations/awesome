@@ -4,11 +4,11 @@
         "W111"
     ],
     "Lua.diagnostics.globals": [
-        "screen",
+        "cursor",
         "client",
-        "awesome",
-        "mouse",
         "tag",
-        "root"
+        "awesome",
+        "screen",
+        "mouse"
     ]
 }

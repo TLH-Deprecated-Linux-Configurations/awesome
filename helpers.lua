@@ -524,5 +524,3 @@ function helpers.float_and_resize(c, width, height)
 end
 
 return helpers
-
--- EOF ------------------------------------------------------------------------
