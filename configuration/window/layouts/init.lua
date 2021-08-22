@@ -1,3 +1,12 @@
+--  _____                            __
+-- |     |_.---.-.--.--.-----.--.--.|  |_.-----.
+-- |       |  _  |  |  |  _  |  |  ||   _|__ --|
+-- |_______|___._|___  |_____|_____||____|_____|
+--               |_____|
+-- ########################################################################
+-- ########################################################################
+-- ########################################################################
+-- Libraries and Modules
 local awful = require('awful')
 local gears = require('gears')
 local gfs = gears.filesystem
@@ -11,15 +20,17 @@ local bling = require('module.bling')
 -- ########################################################################
 -- ########################################################################
 -- ########################################################################
--- TODO: Split into its own file under a window directory?
--- TODO add in the split layout to replace mstab
--- Custom Layouts -------------------------------------------------------------
-
+-- Bling Provided Layouts
 local mstab = bling.layout.mstab
 local centered = bling.layout.centered
 local vertical = bling.layout.vertical
 local horizontal = bling.layout.horizontal
 local equal = bling.layout.equalarea
+
+-- Custom Layouts
+local stack = require 'configuration.window.layouts.stack'
+local empathy = require 'configuration.window.layouts.empathy'
+local centermaster = require 'configuration.window.layouts.centermaster'
 -- ########################################################################
 -- ########################################################################
 -- ########################################################################
@@ -30,6 +41,7 @@ tag.connect_signal(
     function()
         awful.layout.append_default_layouts(
             {
+                stack,
                 mstab,
                 awful.layout.suit.tile,
                 awful.layout.suit.floating,
