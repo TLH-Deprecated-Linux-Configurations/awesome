@@ -21,19 +21,19 @@ local date_text =
     widget = wibox.widget.textclock
 }
 
-date_text.markup = "<span foreground='" .. beautiful.xcolor11 .. "'>" .. date_text.text .. '</span>'
+date_text.markup = "<span foreground='" .. beautiful.xcolor15 .. "'>" .. date_text.text .. '</span>'
 
 date_text:connect_signal(
     'widget::redraw_needed',
     function()
-        date_text.markup = "<span foreground='" .. beautiful.xcolor11 .. "'>" .. date_text.text .. '</span>'
+        date_text.markup = "<span foreground='" .. beautiful.xcolor15 .. "'>" .. date_text.text .. '</span>'
     end
 )
 
 local date_icon =
     wibox.widget {
     font = beautiful.icon_font_name .. '18',
-    markup = "<span foreground='" .. beautiful.xcolor11 .. "'></span>",
+    markup = "<span foreground='" .. beautiful.xcolor7 .. "'></span>",
     align = 'center',
     valign = 'center',
     widget = wibox.widget.textbox

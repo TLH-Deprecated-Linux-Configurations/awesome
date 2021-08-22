@@ -64,7 +64,7 @@ awful.keyboard.append_global_keybindings {
     ), --
     -- ########################################################################
     awful.key(
-        {'Mod1'},
+        {'Mod1', 'Shift'},
         'Down',
         function()
             awful.client.focus.bydirection 'down'
@@ -75,7 +75,7 @@ awful.keyboard.append_global_keybindings {
     -- =========================================================================
 
     awful.key(
-        {'Mod1'},
+        {'Mod1', 'Shift'},
         'Up',
         function()
             awful.client.focus.bydirection 'up'
@@ -86,7 +86,7 @@ awful.keyboard.append_global_keybindings {
     -- =========================================================================
 
     awful.key(
-        {'Mod1'},
+        {'Mod1', 'Shift'},
         'Left',
         function()
             awful.client.focus.bydirection 'left'
@@ -97,7 +97,7 @@ awful.keyboard.append_global_keybindings {
     -- =========================================================================
 
     awful.key(
-        {'Mod1'},
+        {'Mod1', 'Shift'},
         'Right',
         function()
             awful.client.focus.bydirection 'right'
