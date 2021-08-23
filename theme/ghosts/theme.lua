@@ -36,7 +36,7 @@ theme.me = gears.surface.load_uncached(gfs.get_configuration_dir() .. 'images/me
 -- Distro Logo
 --
 -- TODO move this image to icons and icons to the theme folder, crowding the top level directory makes it more confusing but leave an images directory for screen shots
-theme.distro_logo = gears.surface.load_uncached(gfs.get_configuration_dir() .. 'images/distro.png')
+theme.distro_logo = gears.surface.load_uncached(gfs.get_configuration_dir() .. 'icons/ghosts/awesome.png')
 
 -- Icons for Notif Center
 --

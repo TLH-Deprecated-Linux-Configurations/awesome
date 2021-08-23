@@ -436,12 +436,21 @@ awful.keyboard.append_global_keybindings {
     -- =========================================================================
 
     awful.key(
-        {modkey, shift},
+        {modkey},
         'd',
         function()
             awesome.emit_signal('widgets::start::toggle', mouse.screen)
         end,
-        {description = 'show panel', group = 'Awesome'}
+        {description = 'show left panel', group = 'Awesome'}
+    ),
+    -- =========================================================================
+    awful.key(
+        {modkey, 'Shift'},
+        'd',
+        function()
+            awesome.emit_signal('widgets::dashboard::show', mouse.screen)
+        end,
+        {description = 'show dashboard', group = 'Awesome'}
     ),
     -- =========================================================================
 
@@ -480,16 +489,6 @@ awful.keyboard.append_global_keybindings {
             awful.screen.focus_relative(-1)
         end,
         {description = 'focus the previous screen', group = 'screen'}
-    ),
-    -- =========================================================================
-
-    awful.key(
-        {modkey},
-        'd',
-        function()
-            awful.spawn(launcher)
-        end,
-        {description = 'show rofi ', group = 'launcher'}
     ),
     -- =========================================================================
 

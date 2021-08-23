@@ -38,7 +38,7 @@ local panel_anim =
     awestore.tweened(
     -451,
     {
-        duration = 350,
+        duration = 650,
         easing = awestore.easing.circ_in_out
     }
 )

@@ -10,13 +10,19 @@ local helpers = require('helpers')
 
 local box_radius = beautiful.client_radius
 local box_gap = dpi(8)
-
+local function focused_screen()
+    if mouse ~= nil and mouse.screen ~= nil then
+        return mouse.screen
+    end
+    return awful.screen.focused() or screen[1]
+end
+local s = focused_screen()
 local width = 451
-local height = 1000 - beautiful.useless_gap * 2 + 76 + beautiful.widget_border_width
+local height = s.geometry.height
 
 local function create_boxed_widget(widget_to_be_boxed, width, height, bg_color)
     local box_container = wibox.container.background()
-    box_container.bg = beautiful.xbackground
+    box_container.bg = beautiful.xbackground .. '00'
     box_container.forced_height = height
     box_container.forced_width = width
     box_container.shape = helpers.rrect(box_radius)
@@ -128,7 +134,8 @@ volume:buttons(
 --- {{{ Brightness Widget
 
 local brightness_bar = require('ui.widgets.brightness_squircle')
-local brightness = format_progress_bar(brightness_bar, "<span foreground='" .. beautiful.xcolor5 .. "'><b></b></span>")
+local brightness =
+    format_progress_bar(brightness_bar, "<span foreground='" .. beautiful.xcolor15 .. "'><b></b></span>")
 
 -- local brightness = require("ui.widgets.brightness_arc")
 
@@ -139,28 +146,28 @@ local brightness = format_progress_bar(brightness_bar, "<span foreground='" .. b
 -- local ram = require("ui.widgets.ram_arc")
 
 local ram_bar = require('ui.widgets.ram_squircle')
-local ram = format_progress_bar(ram_bar, "<span foreground='" .. beautiful.xcolor3 .. "'><b></b></span>")
+local ram = format_progress_bar(ram_bar, "<span foreground='" .. beautiful.xcolor15 .. "'><b></b></span>")
 
 --- }}}
 
 --- {{{ Disk Widget
 
 local disk_bar = require('ui.widgets.disk_squircle')
-local disk = format_progress_bar(disk_bar, "<span foreground='" .. beautiful.xcolor2 .. "'><b></b></span>")
+local disk = format_progress_bar(disk_bar, "<span foreground='" .. beautiful.xcolor15 .. "'><b></b></span>")
 
 --- }}}
 
 --- {{{ Temp Widget
 
 local temp_bar = require('ui.widgets.temp_squircle')
-local temp = format_progress_bar(temp_bar, "<span foreground='" .. beautiful.xcolor1 .. "'><b></b></span>")
+local temp = format_progress_bar(temp_bar, "<span foreground='" .. beautiful.xcolor15 .. "'><b></b></span>")
 
 --- }}}
 
 --- {{{ Cpu Widget
 
 local cpu_bar = require('ui.widgets.cpu_squircle')
-local cpu = format_progress_bar(cpu_bar, "<span foreground='" .. beautiful.xcolor4 .. "'><b></b></span>")
+local cpu = format_progress_bar(cpu_bar, "<span foreground='" .. beautiful.xcolor15 .. "'><b></b></span>")
 
 --- }}}
 
@@ -188,12 +195,12 @@ local fancy_date_widget = wibox.widget.textclock('%m/%d/%Y')
 fancy_date_widget.markup =
     fancy_date_widget.text:sub(1, 3) ..
     "<span foreground='" ..
-        beautiful.xcolor12 ..
+        beautiful.xcolor7 ..
             "'>" ..
                 fancy_date_widget.text:sub(4, 6) ..
                     '</span>' ..
                         "<span foreground='" ..
-                            beautiful.xcolor6 .. "'>" .. fancy_date_widget.text:sub(7, 10) .. '</span>'
+                            beautiful.xcolor21 .. "'>" .. fancy_date_widget.text:sub(7, 10) .. '</span>'
 fancy_date_widget:connect_signal(
     'widget::redraw_needed',
     function()
@@ -215,11 +222,6 @@ fancy_date_widget.font = beautiful.font_name .. '12'
 local fancy_date = {fancy_date_widget, layout = wibox.layout.fixed.vertical}
 
 ---}}}
-
--- {{{ Music Widget
-
-local playerctl = require('ui.widgets.playerctl')
-local playerctl_box = create_boxed_widget(playerctl, 400, 145, beautiful.xcolor0)
 
 -- {{{ Info Widget
 
@@ -303,16 +305,16 @@ local ll =
         {
             {
                 id = 'icon_role',
-                forced_height = dpi(60),
-                forced_width = dpi(60),
+                forced_height = dpi(70),
+                forced_width = dpi(70),
                 widget = wibox.widget.imagebox
             },
             margins = dpi(20),
             widget = wibox.container.margin
         },
         id = 'background_role',
-        forced_width = dpi(60),
-        forced_height = dpi(60),
+        forced_width = dpi(70),
+        forced_height = dpi(70),
         widget = wibox.container.background
     }
 }
@@ -321,15 +323,14 @@ local panelWidget =
     wibox.widget {
     {
         {
+            time,
             helpers.vertical_pad(15),
-            info,
             {ll, align = 'center', widget = wibox.container.place},
             spacing = 20,
             helpers.vertical_pad(0),
             layout = wibox.layout.fixed.vertical
         },
         {sys_box, sys_box2, spacing = 1, layout = wibox.layout.fixed.vertical},
-        playerctl_box,
         notifs,
         spacing = 5,
         spacing_widget = {
@@ -346,7 +347,7 @@ local panelWidget =
     },
     left = dpi(35),
     right = dpi(35),
-    bottom = dpi(10),
+    top = dpi(50),
     widget = wibox.container.margin
 }
 
@@ -361,10 +362,10 @@ local widgetContainer =
 local widgetBG =
     wibox.widget {
     widgetContainer,
-    bg = beautiful.xbackground,
+    bg = beautiful.xbackground .. 'dd',
     border_color = beautiful.widget_border_color,
     border_width = dpi(beautiful.widget_border_width),
-    shape = helpers.prrect(dpi(0), false, true, false, false),
+    shape = helpers.prrect(dpi(3), false, true, false, false),
     widget = wibox.container.background
 }
 

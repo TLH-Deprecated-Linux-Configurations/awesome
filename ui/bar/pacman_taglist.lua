@@ -41,7 +41,7 @@ local get_taglist = function(s)
     -- The actual png icons
     -- I do have the svgs, but inkscape does a better job of scaling
     local ghost = gears.surface.load_uncached(gfs.get_configuration_dir() .. 'icons/ghosts/ghost.png')
-    local ghost_icon = gears.color.recolor_image(ghost, beautiful.xcolor6)
+    local ghost_icon = gears.color.recolor_image(ghost, beautiful.xcolor4)
     local dot = gears.surface.load_uncached(gfs.get_configuration_dir() .. 'icons/ghosts/dot.png')
     local dot_icon = gears.color.recolor_image(dot, beautiful.xcolor7)
     local pacman = gears.surface.load_uncached(gfs.get_configuration_dir() .. 'icons/ghosts/pacman.png')
@@ -86,11 +86,11 @@ local get_taglist = function(s)
                             awesome.emit_signal('bling::tag_preview::update', c3)
                             awesome.emit_signal('bling::tag_preview::visibility', s, true)
                         end
-                        if self.bg ~= beautiful.xbackground .. '60' then
+                        if self.bg ~= beautiful.xcolor0 .. '88' then
                             self.backup = self.bg
                             self.has_backup = true
                         end
-                        self.bg = beautiful.xbackground .. '60'
+                        self.bg = beautiful.xcolor0 .. '88'
                     end
                 )
                 self:connect_signal(
@@ -98,7 +98,7 @@ local get_taglist = function(s)
                     function()
                         awesome.emit_signal('bling::tag_preview::visibility', s, false)
                         if self.has_backup then
-                            self.bg = beautiful.xbackground .. '33'
+                            self.bg = beautiful.xcolor0 .. '88'
                         end
                     end
                 )
