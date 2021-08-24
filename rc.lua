@@ -1,24 +1,40 @@
--- rc.lua
+--  _______                                             ________ _______
+-- |   _   |.--.--.--.-----.-----.-----.--------.-----.|  |  |  |   |   |
+-- |       ||  |  |  |  -__|__ --|  _  |        |  -__||  |  |  |       |
+-- |___|___||________|_____|_____|_____|__|__|__|_____||________|__|_|__|
+
+-- ########################################################################
+-- ########################################################################
+-- ########################################################################
 -- If LuaRocks is installed, make sure that packages installed through it are
 -- found (e.g. lgi). If LuaRocks is not installed, do nothing.
+--
 pcall(require, 'luarocks.loader')
-
+-- ########################################################################
+-- ########################################################################
+-- ########################################################################
 -- Standard awesome library
+--
 local gfs = require('gears.filesystem')
 local awful = require('awful')
 require('awful.autofocus')
 
 -- Theme handling library
+--
 local beautiful = require('beautiful')
 
 -- Notification library
+--
 local naughty = require('naughty')
 
 local hotkeys_popup = require('awful.hotkeys_popup')
 require('awful.hotkeys_popup.keys')
-
+-- ########################################################################
+-- ########################################################################
+-- ########################################################################
 -- Check if awesome encountered an error during startup and fell back to
 -- another config (This code will only ever execute for the fallback config)
+--
 naughty.connect_signal(
     'request::display_error',
     function(message, startup)
@@ -31,7 +47,7 @@ naughty.connect_signal(
 )
 
 -- Initialize Theme
-local theme = 'ghosts'
+local theme = 'vice'
 beautiful.init(gfs.get_configuration_dir() .. 'theme/' .. theme .. '/theme.lua')
 
 -- Import Configuration

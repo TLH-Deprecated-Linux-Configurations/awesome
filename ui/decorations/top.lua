@@ -33,7 +33,7 @@ local function create_title_button(c, color_focus, color_unfocus, shp)
     tb:connect_signal(
         'mouse::enter',
         function()
-            tb.bg = color_focus
+            tb.bg = color_focus .. 55
         end
     )
     tb:connect_signal(
@@ -93,32 +93,29 @@ local get_titlebar = function(c, height, color)
             gears.shape.powerline(cr, width, height, depth)
         end
     end
-    -- ########################################################################
-    -- ########################################################################
-    -- ########################################################################
-    local close =
-        create_title_button(
-        c,
-        beautiful.xcolor1,
-        beautiful.xcolor7,
-        gears.shape.transform(cross(12, 12)):rotate_at(6, 6, math.pi / 4)
-    )
+
+    --[[
+    local close = create_title_button(c, beautiful.xcolor1, beautiful.xcolor8,
+                                      gears.shape.transform(cross(13, 13)):rotate_at(
+                                          6.5, 6.5, math.pi / 4))
+    close:connect_signal("button::press", function() c:kill() end)
+    local min = create_title_button(c, beautiful.xcolor3, beautiful.xcolor8,
+                                    ci(12, 12))
+    min:connect_signal("button::press", function() c.minimized = true end)
+    local max = create_title_button(c, beautiful.xcolor4, beautiful.xcolor8,
+                                    tri(12, 12))
+    max:connect_signal("button::press",
+                       function() c.maximized = not c.maximized end)
+                       --]]
+    local close = create_title_button(c, beautiful.xcolor1, beautiful.xcolor8 .. 55, gears.shape.squircle)
     close:connect_signal(
         'button::press',
         function()
             c:kill()
         end
     )
-    -- ########################################################################
-    -- ########################################################################
-    -- ########################################################################
-    local min =
-        create_title_button(
-        c,
-        beautiful.xcolor12,
-        beautiful.xcolor7,
-        gears.shape.transform(po(12, 12)):rotate_at(6, 6, math.pi / 2)
-    )
+
+    local min = create_title_button(c, beautiful.xcolor3, beautiful.xcolor8 .. 55, gears.shape.squircle)
 
     min:connect_signal(
         'button::press',
@@ -126,85 +123,41 @@ local get_titlebar = function(c, height, color)
             c.minimized = true
         end
     )
-    -- ########################################################################
-    -- ########################################################################
-    -- ########################################################################
-    -- Maximize button
-    local max =
-        create_title_button(
-        c,
-        beautiful.xcolor4,
-        beautiful.xcolor7,
-        gears.shape.transform(po(12, 12)):rotate_at(6, 6, math.pi / -2)
-    )
+
+    local max = create_title_button(c, beautiful.xcolor4, beautiful.xcolor8 .. 55, gears.shape.squircle)
+
     max:connect_signal(
         'button::press',
         function()
             c.maximized = not c.maximized
         end
-    )
-    -- ########################################################################
-    -- ########################################################################
-    -- ########################################################################
-    -- Below are alternative buttons you can generate for the titlebar that are all squircle.
-    -- local close = create_title_button(c, beautiful.xcolor1, beautiful.xcolor7, gears.shape.squircle)
-    -- close:connect_signal(
-    --     'button::press',
-    --     function()
-    --         c:kill()
-    --     end
-    -- )
+    ) --
 
-    -- local min = create_title_button(c, beautiful.xcolor3, beautiful.xcolor7, gears.shape.squircle)
-
-    -- min:connect_signal(
-    --     'button::press',
-    --     function()
-    --         c.minimized = true
-    --     end
-    -- )
-
-    -- local max = create_title_button(c, beautiful.xcolor4, beautiful.xcolor7, gears.shape.squircle)
-
-    -- max:connect_signal(
-    --     'button::press',
-    --     function()
-    --         c.maximized = not c.maximized
-    --     end
-    -- ) --
-    -- ########################################################################
-    -- ########################################################################
-    -- ########################################################################
-    awful.titlebar(
+    --[[
+    awful.titlebar(c, {
+        size = beautiful.border_width,
+        bg = color,
+        position = "left"
+    })
+    awful.titlebar(c, {
+        size = beautiful.border_width,
+        bg = color,
+        position = "right"
+    })
+    awful.titlebar(c, {
+        size = beautiful.border_width,
+        bg = color,
+        position = "bottom"
+    })
+    ]] awful.titlebar(
         c,
-        {
-            size = beautiful.border_width,
-            bg = color,
-            position = 'left'
-        }
-    )
-    awful.titlebar(
-        c,
-        {
-            size = beautiful.border_width,
-            bg = color,
-            position = 'right'
-        }
-    )
-    awful.titlebar(
-        c,
-        {
-            size = beautiful.border_width,
-            bg = color,
-            position = 'bottom'
-        }
-    )
-    awful.titlebar(c, {size = height, position = 'top'}):setup {
+        {size = height, bg = beautiful.xbackground .. '00', position = 'top'}
+    ):setup {
         {
             {
                 awful.widget.clienticon(c),
-                top = dpi(6),
-                bottom = dpi(6),
+                top = dpi(12),
+                bottom = dpi(12),
                 left = dpi(14),
                 widget = wibox.container.margin
             },
@@ -220,15 +173,15 @@ local get_titlebar = function(c, height, color)
             },
             {
                 {
-                    min,
                     max,
+                    min,
                     close,
                     spacing = dpi(10),
                     layout = wibox.layout.flex.horizontal
                 },
-                top = dpi(10),
-                left = dpi(7.5),
-                right = dpi(7.5),
+                top = dpi(6),
+                left = dpi(7),
+                right = dpi(7),
                 bottom = dpi(6),
                 widget = wibox.container.margin
             },
@@ -242,7 +195,12 @@ local get_titlebar = function(c, height, color)
 end
 
 local top = function(c)
-    local color = beautiful.titlebar_bg_normal
+    local color = beautiful.xbackground .. '33'
+    if c.class == 'firefox' then
+        color = beautiful.xcolor0
+    else
+        color = beautiful.titlebar_bg_normal
+    end
 
     local titlebar_height = beautiful.titlebar_size
     get_titlebar(c, titlebar_height, color)

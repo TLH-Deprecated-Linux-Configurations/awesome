@@ -263,7 +263,6 @@ function helpers.rofi_move_client_here(window)
     end
 
     for c in awful.client.iterate(win) do
-        c.minimized = false
         c:move_to_tag(mouse.screen.selected_tag)
         client.focus = c
         c:raise()
@@ -488,7 +487,6 @@ function helpers.run_or_raise(match, move, spawn_cmd, spawn_args)
     local found = false
     for c in awful.client.iterate(matcher) do
         found = true
-        c.minimized = false
         if move then
             c:move_to_tag(mouse.screen.selected_tag)
             client.focus = c

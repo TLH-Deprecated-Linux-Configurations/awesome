@@ -1,29 +1,33 @@
-local awful = require("awful")
-local wibox = require("wibox")
-local gears = require("gears")
-local beautiful = require("beautiful")
-local naughty = require("naughty")
+local awful = require('awful')
+local wibox = require('wibox')
+local gears = require('gears')
+local beautiful = require('beautiful')
+local naughty = require('naughty')
 local dpi = beautiful.xresources.apply_dpi
 
-local helpers = require("helpers")
+local helpers = require('helpers')
 
-local button = require("ui.widgets.button")
+local button = require('ui.widgets.button.button')
 
 local notifbox = {}
 
 notifbox.create = function(icon, n, width)
-    local time = os.date("%H:%M")
+    local time = os.date('%H:%M')
     local box = {}
 
-    local dismiss = button.create_image_onclick(beautiful.delete_grey_icon,
-                                                beautiful.delete_icon,
-                                                function()
-        _G.remove_notifbox(box)
-    end)
+    local dismiss =
+        button.create_image_onclick(
+        beautiful.delete_grey_icon,
+        beautiful.delete_icon,
+        function()
+            _G.remove_notifbox(box)
+        end
+    )
     dismiss.forced_height = dpi(14)
     dismiss.forced_width = dpi(14)
 
-    local img_icon = wibox.widget {
+    local img_icon =
+        wibox.widget {
         image = icon,
         forced_width = dpi(35),
         forced_height = dpi(35),
@@ -34,7 +38,8 @@ notifbox.create = function(icon, n, width)
         widget = wibox.widget.imagebox
     }
 
-    box = wibox.widget {
+    box =
+        wibox.widget {
         {
             {
                 {
@@ -43,8 +48,7 @@ notifbox.create = function(icon, n, width)
                             {
                                 image = icon,
                                 resize = true,
-                                clip_shape = helpers.rrect(
-                                    beautiful.border_radius - 3),
+                                clip_shape = helpers.rrect(beautiful.border_radius - 3),
                                 widget = wibox.widget.imagebox
                             },
                             -- bg = beautiful.xcolor1,
@@ -67,14 +71,12 @@ notifbox.create = function(icon, n, width)
                         {
                             {
                                 {
-                                    step_function = wibox.container.scroll
-                                        .step_functions
-                                        .waiting_nonlinear_back_and_forth,
+                                    step_function = wibox.container.scroll.step_functions.waiting_nonlinear_back_and_forth,
                                     speed = 50,
                                     {
-                                        markup = "<b>" .. n.title .. "</b>",
+                                        markup = '<b>' .. n.title .. '</b>',
                                         font = beautiful.font,
-                                        align = "left",
+                                        align = 'left',
                                         visible = title_visible,
                                         widget = wibox.widget.textbox
                                     },
@@ -84,7 +86,7 @@ notifbox.create = function(icon, n, width)
                                 {
                                     {
                                         markup = time,
-                                        align = "right",
+                                        align = 'right',
                                         font = beautiful.font,
                                         widget = wibox.widget.textbox
                                     },
@@ -94,7 +96,7 @@ notifbox.create = function(icon, n, width)
                                 {
                                     {
                                         dismiss,
-                                        halign = "right",
+                                        halign = 'right',
                                         widget = wibox.container.place
                                     },
                                     left = dpi(10),
@@ -104,14 +106,14 @@ notifbox.create = function(icon, n, width)
                             },
                             {
                                 markup = n.message,
-                                align = "left",
+                                align = 'left',
                                 font = beautiful.font,
                                 widget = wibox.widget.textbox
                             },
                             layout = wibox.layout.fixed.vertical
                         },
                         nil,
-                        expand = "none",
+                        expand = 'none',
                         layout = wibox.layout.align.vertical
                     },
                     margins = dpi(8),
@@ -123,7 +125,7 @@ notifbox.create = function(icon, n, width)
             bottom = dpi(2),
             widget = wibox.container.margin
         },
-        bg = beautiful.xcolor0 .. "55",
+        bg = beautiful.xcolor0 .. '55',
         shape = helpers.rrect(beautiful.border_radius),
         widget = wibox.container.background
     }

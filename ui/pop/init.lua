@@ -4,7 +4,7 @@ local wibox = require 'wibox'
 local exit_manager = require(... .. '.exitscreen')
 local start = require(... .. '.start')
 local dash_manager = require(... .. '.dash')
--- local notif = require(... .. ".notif")
+local notif = require(... .. '.notif')
 local beautiful = require('beautiful')
 local xresources = require('beautiful.xresources')
 local dpi = xresources.apply_dpi
@@ -16,27 +16,40 @@ awesome.connect_signal(
         dash_manager.dash_show()
     end
 )
-
---[[
-awesome.connect_signal("widgets::notif_panel::show", function(s)
-    notif.screen = s
-    notif.visible = not notif.visible
-    awesome.emit_signal("widgets::notif_panel::status", notif.visible)
-end)
---]]
+-- ########################################################################
+-- ########################################################################
+-- ########################################################################
+awesome.connect_signal(
+    'widgets::notif_panel::show',
+    function(s)
+        notif.screen = s
+        notif.visible = not notif.visible
+        awesome.emit_signal('widgets::notif_panel::status', notif.visible)
+    end
+)
+-- ########################################################################
+-- ########################################################################
+-- ########################################################################
 awesome.connect_signal(
     'widgets::exit_screen::toggle',
     function()
         exit_manager.exit_screen_show()
+        if not start.visible then
+            start:emit_signal('opened')
+        else
+            start:emit_signal('closed')
+        end
     end
 )
-
-start.x = -451
+-- ########################################################################
+-- ########################################################################
+-- ########################################################################
+start.x = -551
 start.y = beautiful.wibar_height - beautiful.widget_border_width
 
 local panel_anim =
     awestore.tweened(
-    -451,
+    -551,
     {
         duration = 650,
         easing = awestore.easing.circ_in_out
@@ -47,16 +60,21 @@ local strut_anim =
     awestore.tweened(
     0,
     {
-        duration = 300,
+        duration = 650,
         easing = awestore.easing.circ_in_out
     }
 )
-
+-- ########################################################################
+-- ########################################################################
+-- ########################################################################
 panel_anim:subscribe(
     function(x)
         start.x = x
     end
 )
+-- ########################################################################
+-- ########################################################################
+-- ########################################################################
 strut_anim:subscribe(
     function(width)
         start:struts {left = width, right = 0, bottom = 0, top = 0}
@@ -68,11 +86,14 @@ awesome.connect_signal(
     function()
         if not start.visible then
             start.visible = true
-            strut_anim:set(451)
-            panel_anim:set(-1 * beautiful.widget_border_width)
+            awesome.emit_signal('opened')
+            strut_anim:set(551)
+            panel_anim:set(0)
         else
             strut_anim:set(0)
-            panel_anim:set(-451)
+            panel_anim:set(-551)
+            awesome.emit_signal('closed')
+
             local unsub_strut
             unsub_strut =
                 strut_anim.ended:subscribe(

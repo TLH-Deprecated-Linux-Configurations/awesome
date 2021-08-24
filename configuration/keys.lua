@@ -32,6 +32,39 @@ local dpi = beautiful.xresources.apply_dpi
 -- ########################################################################
 -- Client and Tabs Bindings
 awful.keyboard.append_global_keybindings {
+    -- from https://www.reddit.com/r/awesomewm/comments/5cd0mi/how_to_get_to_minimized_windows_using_the_keyboard/
+    awful.key(
+        {modkey},
+        'w',
+        function()
+            if cl_menu then
+                cl_menu:hide()
+                cl_menu = nil
+            else
+                client_list = {}
+                local tag = awful.tag.selected()
+                for i = 1, #tag:clients() do
+                    cl = tag:clients()[i]
+                    if tag:clients()[i].minimized then
+                        prefix = '_ '
+                    else
+                        prefix = '* '
+                    end
+                    if not awful.rules.match(cl, {class = 'Conky'}) then
+                        client_list[i] = {
+                            prefix .. cl.name,
+                            function()
+                                tag:clients()[i].minimized = not tag:clients()[i].minimized
+                            end,
+                            cl.icon
+                        }
+                    end
+                end
+                cl_menu = awful.menu({items = client_list, theme = {width = 300}})
+                cl_menu:show()
+            end
+        end
+    ),
     -- ########################################################################
     awful.key(
         {'Mod1'},
@@ -422,7 +455,7 @@ awful.keyboard.append_global_keybindings {
         {modkey},
         'p',
         function()
-            awful.spawn 'farge --notify'
+            awful.spawn ''
         end,
         {description = 'color picker', group = 'Awesome'}
     ),

@@ -38,7 +38,7 @@ client.connect_signal(
         -- ########################################################################
         -- Fade in animation (fade out is in keys)
         if not c.icon then
-            local i = gears.surface(gfs.get_configuration_dir() .. 'icons/ghosts/awesome.png')
+            local i = gears.surface(gfs.get_configuration_dir() .. 'theme/icons/ghosts/awesome.png')
             c.icon = i._native
         end
 
@@ -120,7 +120,7 @@ client.connect_signal(
 -- ########################################################################
 -- ########################################################################
 -- Add in layout configuration
-require('configuration.window.layouts')
+require('configuration.layouts')
 -- ########################################################################
 -- ########################################################################
 -- ########################################################################
@@ -140,3 +140,23 @@ awesome.connect_signal(
         end
     end
 )
+local function backup()
+    local s = awful.screen.focused()
+    local c = awful.client.focus.history.get(s, 0)
+    if c then
+        client.focus = c
+        c:raise()
+    end
+end
+
+-- ########################################################################
+-- ########################################################################
+-- ########################################################################
+
+--+ attach to minimized state
+
+client.connect_signal('property::minimized', backup)
+
+--+ attach to closed state
+
+client.connect_signal('unmanage', backup)

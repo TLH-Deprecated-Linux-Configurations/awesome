@@ -100,12 +100,20 @@ local function grab_password()
         hooks = {
             -- Custom escape behaviour: Do not cancel input with Escape
             -- Instead, this will just clear any input received so far.
-            {{}, 'Escape', function(_)
+            {
+                {},
+                'Escape',
+                function(_)
                     grab_password()
-                end}, -- Fix for Control+Delete crashing the keygrabber
-            {{'Control'}, 'Delete', function()
+                end
+            }, -- Fix for Control+Delete crashing the keygrabber
+            {
+                {'Control'},
+                'Delete',
+                function()
                     grab_password()
-                end}
+                end
+            }
         },
         keypressed_callback = function(mod, key, cmd)
             -- Debug Stuff
@@ -311,7 +319,7 @@ lock_screen_box:setup {
         },
         {
             {
-                require('ui.widgets.playerctl_lock'),
+                require('ui.widgets.playerctl.playerctl_lock'),
                 shape = helpers.rrect(beautiful.widget_border_radius),
                 bg = beautiful.xbackground,
                 widget = wibox.container.background
