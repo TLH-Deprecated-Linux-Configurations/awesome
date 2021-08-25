@@ -94,44 +94,65 @@ local get_titlebar = function(c, height, color)
         end
     end
 
-    --[[
-    local close = create_title_button(c, beautiful.xcolor1, beautiful.xcolor8,
-                                      gears.shape.transform(cross(13, 13)):rotate_at(
-                                          6.5, 6.5, math.pi / 4))
-    close:connect_signal("button::press", function() c:kill() end)
-    local min = create_title_button(c, beautiful.xcolor3, beautiful.xcolor8,
-                                    ci(12, 12))
-    min:connect_signal("button::press", function() c.minimized = true end)
-    local max = create_title_button(c, beautiful.xcolor4, beautiful.xcolor8,
-                                    tri(12, 12))
-    max:connect_signal("button::press",
-                       function() c.maximized = not c.maximized end)
-                       --]]
-    local close = create_title_button(c, beautiful.xcolor1, beautiful.xcolor8 .. 55, gears.shape.squircle)
+    local close =
+        create_title_button(
+        c,
+        beautiful.xcolor1,
+        beautiful.xcolor8,
+        gears.shape.transform(cross(13, 13)):rotate_at(6.5, 6.5, math.pi / 4)
+    )
     close:connect_signal(
         'button::press',
         function()
             c:kill()
         end
     )
-
-    local min = create_title_button(c, beautiful.xcolor3, beautiful.xcolor8 .. 55, gears.shape.squircle)
-
+    local min =
+        create_title_button(
+        c,
+        beautiful.xcolor3,
+        beautiful.xcolor8,
+        gears.shape.transform(po(12, 12)):rotate_at(6, 6, math.pi / 2)
+    )
     min:connect_signal(
         'button::press',
         function()
             c.minimized = true
         end
     )
-
-    local max = create_title_button(c, beautiful.xcolor4, beautiful.xcolor8 .. 55, gears.shape.squircle)
-
+    local max = create_title_button(c, beautiful.xcolor4, beautiful.xcolor8, tri(12, 12))
     max:connect_signal(
         'button::press',
         function()
             c.maximized = not c.maximized
         end
-    ) --
+    )
+
+    -- local close = create_title_button(c, beautiful.xcolor1, beautiful.xcolor8 .. 55, gears.shape.squircle)
+    -- close:connect_signal(
+    --     'button::press',
+    --     function()
+    --         c:kill()
+    --     end
+    -- )
+
+    -- local min = create_title_button(c, beautiful.xcolor3, beautiful.xcolor8 .. 55, gears.shape.squircle)
+
+    -- min:connect_signal(
+    --     'button::press',
+    --     function()
+    --         c.minimized = true
+    --     end
+    -- )
+
+    -- local max = create_title_button(c, beautiful.xcolor4, beautiful.xcolor8 .. 55, gears.shape.squircle)
+
+    -- max:connect_signal(
+    --     'button::press',
+    --     function()
+    --         c.maximized = not c.maximized
+    --     end
+    -- ) --
 
     --[[
     awful.titlebar(c, {
@@ -173,8 +194,8 @@ local get_titlebar = function(c, height, color)
             },
             {
                 {
-                    max,
                     min,
+                    max,
                     close,
                     spacing = dpi(10),
                     layout = wibox.layout.flex.horizontal
