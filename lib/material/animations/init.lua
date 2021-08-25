@@ -9,25 +9,25 @@
 -- Animate any lua object over a period of time
 --    animate(2, example, { width=200, height=200 }, "outCubic")
 
-local gears = require("gears")
-local hardware = require("module.hardware.hardware-check")
-local tween = require("module.interface.animations.tween")
-require("module.interface.animations.awestore")
-require("module.interface.animations.rubato")
+local gears = require('gears')
+local hardware = require('lib.hardware')
+local tween = require('lib.material.animations.tween')
+require('lib.material.animations.awestore')
+require('lib.material.animations.rubato')
 -- we refresh at display frequency or 24 the lowest one frequency (thus the highest delay)
 local freq = math.max(1 / 24, 1 / hardware.getDisplayFrequency())
 -- ########################################################################
 -- ########################################################################
 -- ########################################################################
 local function createAnimObject(duration, subject, target, easing, end_callback, delay, widget, tween_callback)
-    assert(type(duration) == "number", "The duration should be specified in seconds")
+    assert(type(duration) == 'number', 'The duration should be specified in seconds')
     assert(duration >= 0, "your duration can't be lower than 0 seconds")
     -- ########################################################################
     -- ########################################################################
     -- ########################################################################
     -- if the duration is 0 then we should 'teleport' to the end state
     if duration == 0 then
-        print("Animation is zero")
+        print('Animation is zero')
         -- iterate over all key value pairs and assign them to the subject
         for key, value in pairs(target) do
             subject[key] = value
@@ -43,7 +43,7 @@ local function createAnimObject(duration, subject, target, easing, end_callback,
     widget = widget and widget or subject
     -- check if animation is running
     if widget.anim then
-        widget:emit_signal("interrupt", widget)
+        widget:emit_signal('interrupt', widget)
     end
     -- ########################################################################
     -- ########################################################################
@@ -55,7 +55,7 @@ local function createAnimObject(duration, subject, target, easing, end_callback,
         if callback_widget.timer and callback_widget.timer.started then
             callback_widget.timer:stop()
         end
-        callback_widget:disconnect_signal("interrupt", callback_widget.cback)
+        callback_widget:disconnect_signal('interrupt', callback_widget.cback)
     end
     -- ########################################################################
     -- ########################################################################
@@ -67,11 +67,11 @@ local function createAnimObject(duration, subject, target, easing, end_callback,
     -- ########################################################################
     -- create timeout signal
     widget.timer:connect_signal(
-        "timeout",
+        'timeout',
         function()
             local complete = twob:update(freq)
             if tween_callback == nil then
-                widget:emit_signal("widget::redraw_needed")
+                widget:emit_signal('widget::redraw_needed')
             else
                 tween_callback()
             end
@@ -89,7 +89,7 @@ local function createAnimObject(duration, subject, target, easing, end_callback,
     -- ########################################################################
     -- ########################################################################
     -- start animation
-    widget:connect_signal("interrupt", widget.cback)
+    widget:connect_signal('interrupt', widget.cback)
     widget.anim = true
     if delay ~= nil then
         -- ########################################################################

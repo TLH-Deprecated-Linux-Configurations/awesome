@@ -1,8 +1,8 @@
-local wibox = require("wibox")
-local awful = require("awful")
-local gears = require("gears")
-local beautiful = require("beautiful")
-local helpers = require("helpers")
+local wibox = require('wibox')
+
+local gears = require('gears')
+local beautiful = require('beautiful')
+local helpers = require('helpers')
 local dpi = beautiful.xresources.apply_dpi
 
 local width = dpi(200)
@@ -16,7 +16,8 @@ local active_color_1 = {
     stops = {{0, beautiful.xcolor6}, {0.50, beautiful.xcolor4}}
 }
 
-local volume_icon = wibox.widget {
+local volume_icon =
+    wibox.widget {
     markup = "<span foreground='" .. beautiful.xcolor4 .. "'><b></b></span>",
     align = 'center',
     valign = 'center',
@@ -24,19 +25,23 @@ local volume_icon = wibox.widget {
     widget = wibox.widget.textbox
 }
 
-local volume_adjust = wibox({
-    screen = screen.primary,
-    type = "notification",
-    x = screen.geometry.width / 2 - width / 2,
-    y = screen.geometry.height / 2 - height / 2 + 300,
-    width = width,
-    height = height,
-    visible = false,
-    ontop = true,
-    bg = beautiful.xbackground .. "00"
-})
+local volume_adjust =
+    wibox(
+    {
+        screen = screen.primary,
+        type = 'notification',
+        x = screen.geometry.width / 2 - width / 2,
+        y = screen.geometry.height / 2 - height / 2 + 300,
+        width = width,
+        height = height,
+        visible = false,
+        ontop = true,
+        bg = beautiful.xbackground .. '00'
+    }
+)
 
-local volume_bar = wibox.widget {
+local volume_bar =
+    wibox.widget {
     widget = wibox.widget.progressbar,
     shape = gears.shape.rounded_bar,
     bar_shape = gears.shape.rounded_bar,
@@ -46,7 +51,7 @@ local volume_bar = wibox.widget {
     value = 0
 }
 
-volume_adjust:setup{
+volume_adjust:setup {
     {
         layout = wibox.layout.align.vertical,
         {
@@ -64,7 +69,6 @@ volume_adjust:setup{
             bottom = dpi(30),
             widget = wibox.container.margin
         }
-
     },
     shape = helpers.rrect(beautiful.client_radius),
     bg = beautiful.xbackground,
@@ -75,31 +79,33 @@ volume_adjust:setup{
 
 -- create a 3 second timer to hide the volume adjust
 -- component whenever the timer is started
-local hide_volume_adjust = gears.timer {
+local hide_volume_adjust =
+    gears.timer {
     timeout = 3,
     autostart = true,
-    callback = function() volume_adjust.visible = false end
+    callback = function()
+        volume_adjust.visible = false
+    end
 }
 
-awesome.connect_signal("signal::volume", function(vol, muted)
-    volume_bar.value = vol
-    if muted or vol == 0 then
-        volume_icon.markup = "<span foreground='" .. beautiful.xcolor4 ..
-                                 "'><b>ﳌ</b></span>"
-    else
-        volume_icon.markup = "<span foreground='" .. beautiful.xcolor4 ..
-                                 "'><b></b></span>"
+awesome.connect_signal(
+    'signal::volume',
+    function(vol, muted)
+        volume_bar.value = vol
+        if muted or vol == 0 then
+            volume_icon.markup = "<span foreground='" .. beautiful.xcolor4 .. "'><b>ﳌ</b></span>"
+        else
+            volume_icon.markup = "<span foreground='" .. beautiful.xcolor4 .. "'><b></b></span>"
+        end
 
+        if volume_adjust.visible then
+            hide_volume_adjust:again()
+        else
+            volume_adjust.visible = true
+            hide_volume_adjust:start()
+        end
     end
-
-    if volume_adjust.visible then
-        hide_volume_adjust:again()
-    else
-        volume_adjust.visible = true
-        hide_volume_adjust:start()
-    end
-
-end)
+)
 --[[
 -- show volume-adjust when "volume_change" signal is emitted
 awesome.connect_signal("signal::volume", function(volume, muted)
@@ -116,4 +122,4 @@ awesome.connect_signal("signal::volume", function(volume, muted)
         hide_volume_adjust:start()
     end
 end)
-]] -- 
+]] --

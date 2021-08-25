@@ -6,7 +6,7 @@
 -- ########################################################################
 -- ########################################################################
 -- Wibar (top bar)
-local awful = require 'awful'
+
 local gears = require 'gears'
 local gfs = require 'gears.filesystem'
 local wibox = require 'wibox'

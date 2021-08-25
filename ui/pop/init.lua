@@ -1,15 +1,11 @@
-local awful = require('awful')
-local gears = require('gears')
-local wibox = require 'wibox'
 local exit_manager = require(... .. '.exitscreen')
 local start = require(... .. '.start')
 local dash_manager = require(... .. '.dash')
 local notif = require(... .. '.notif')
 local beautiful = require('beautiful')
-local xresources = require('beautiful.xresources')
-local dpi = xresources.apply_dpi
-local awestore = require('awestore')
+local HOME = os.getenv('HOME')
 
+local PATH_TO_ICONS = HOME .. '/.config/awesome/ui/start/icons/'
 awesome.connect_signal(
     'widgets::dashboard::show',
     function()
@@ -34,11 +30,6 @@ awesome.connect_signal(
     'widgets::exit_screen::toggle',
     function()
         exit_manager.exit_screen_show()
-        if not start.visible then
-            start:emit_signal('opened')
-        else
-            start:emit_signal('closed')
-        end
     end
 )
 -- ########################################################################
@@ -89,10 +80,12 @@ awesome.connect_signal(
             awesome.emit_signal('opened')
             strut_anim:set(551)
             panel_anim:set(0)
+            start.icon:set_image(PATH_TO_ICONS .. 'arrow-left-r.svg')
         else
             strut_anim:set(0)
             panel_anim:set(-551)
             awesome.emit_signal('closed')
+            start.icon:set_image(PATH_TO_ICONS .. 'arrow-left-r.svg')
 
             local unsub_strut
             unsub_strut =

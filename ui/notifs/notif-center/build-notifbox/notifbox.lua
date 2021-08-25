@@ -20,7 +20,7 @@ notifbox.create = function(icon, n, width)
         beautiful.delete_grey_icon,
         beautiful.delete_icon,
         function()
-            _G.remove_notifbox(box)
+            remove_notifbox(box)
         end
     )
     dismiss.forced_height = dpi(14)

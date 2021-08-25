@@ -1,51 +1,45 @@
-local awful = require("awful")
-local gears = require("gears")
-local wibox = require("wibox")
-local beautiful = require("beautiful")
-local naughty = require("naughty")
-local xresources = require("beautiful.xresources")
+local gears = require('gears')
+local wibox = require('wibox')
+local beautiful = require('beautiful')
+local naughty = require('naughty')
+local xresources = require('beautiful.xresources')
 local dpi = xresources.apply_dpi
 
-local pixbuf = require("lgi").GdkPixbuf
-local cairo = require("lgi").cairo
+local pixbuf = require('lgi').GdkPixbuf
+local cairo = require('lgi').cairo
 
-local helpers = require("helpers")
+local helpers = require('helpers')
 
-local area = wibox.widget {
+local area =
+    wibox.widget {
     {
         {
             {
-                --[[{
-                    markup = "<span foreground='" .. beautiful.xcolor2 ..
-                        "'></span>",
-                    align = "center",
-                    valign = "center",
-                    font = beautiful.icon_font_name .. "45",
-                    widget = wibox.widget.textbox
-                },]] --
                 {
                     image = beautiful.me,
                     resize = true,
-                    forced_height = dpi(91),
-                    forced_width = dpi(91),
+                    forced_height = dpi(120),
+                    forced_width = dpi(120),
                     widget = wibox.widget.imagebox
                 },
-                left = dpi(25),
-                right = dpi(25),
+                left = dpi(20),
+                right = dpi(20),
                 top = dpi(5),
                 bottom = dpi(5),
                 widget = wibox.container.margin
             },
-            bg = beautiful.xcolor8 .. 55,
+            bg = beautiful.xcolor0 .. 'aa',
+            border_color = beautiful.xcolor7,
+            border_width = dpi(3),
             shape = gears.shape.circle,
             widget = wibox.container.background
         },
-        top = dpi(20),
+        top = dpi(0),
         bottom = dpi(0),
         widget = wibox.container.margin
     },
-    halign = "center",
-    valign = "center",
+    halign = 'center',
+    valign = 'center',
     widget = wibox.container.place
 }
 

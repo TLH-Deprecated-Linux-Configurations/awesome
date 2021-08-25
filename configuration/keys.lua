@@ -9,7 +9,7 @@
 -- Contains Global Keybindings, with client and misc keybindings each in
 -- its own section. By default well documented for the help popup
 local gears = require 'gears'
-local awful = require 'awful'
+
 local hotkeys_popup = require 'awful.hotkeys_popup'
 local helpers = require 'helpers'
 -- Custom modules
@@ -623,25 +623,25 @@ awful.keyboard.append_global_keybindings {
             group = 'Layout'
         }
     ),
-    -- =========================================================================
-    awful.key(
-        {modkey},
-        'space',
-        function()
-            awful.layout.inc(1)
-        end,
-        {description = 'select next', group = 'Layout'}
-    ),
-    -- =========================================================================
+    -- -- =========================================================================
+    -- awful.key(
+    --     {modkey},
+    --     'space',
+    --     function()
+    --         awful.layout.inc(1)
+    --     end,
+    --     {description = 'select next', group = 'Layout'}
+    -- ),
+    -- -- =========================================================================
 
-    awful.key(
-        {modkey, 'Shift'},
-        'space',
-        function()
-            awful.layout.inc(-1)
-        end,
-        {description = 'select previous', group = 'Layout'}
-    ),
+    -- awful.key(
+    --     {modkey, 'Shift'},
+    --     'space',
+    --     function()
+    --         awful.layout.inc(-1)
+    --     end,
+    --     {description = 'select previous', group = 'Layout'}
+    -- ),
     -- =========================================================================
 
     -- Set Layout

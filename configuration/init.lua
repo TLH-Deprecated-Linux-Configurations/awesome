@@ -70,32 +70,22 @@ screen.connect_signal(
     'request::wallpaper',
     function(s)
         gears.wallpaper.maximized(beautiful.wallpaper, s, false, nil)
-        --[[
-    bling.module.tiled_wallpaper("x", s, {
-        -- call the actual function ("x" is the string that will be tiled)
-        fg = beautiful.xcolor0, -- define the foreground color
-        bg = beautiful.xbackground, -- define the background color
-        offset_y = 45, -- set a y offset
-        offset_x = 30, -- set a x offset
-        font = beautiful.icon_font_name, -- set the font (without the size)
-        font_size = 15, -- set the font size
-        padding = 125, -- set padding (default is 100)
-        zickzack = true -- rectangular pattern or criss cross
-    })
-    ]] --
     end
 )
 -- ########################################################################
 -- ########################################################################
 -- ########################################################################
 -- Set Autostart Applications
-require('configuration.autostart')
+require 'configuration.autostart'
+
+-- Garbage Collection
+require 'configuration.garbage_collection'
 
 -- Get Keybinds
-require('configuration.keys')
+require 'configuration.keys'
 
 -- Get Rules
-require('configuration.ruled')
+require 'configuration.ruled'
 
 -- Layouts and Window Stuff
-require('configuration.window')
+require 'configuration.window'

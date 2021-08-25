@@ -6,7 +6,7 @@
 -- ########################################################################
 -- ########################################################################
 -- Libraries and Modules
-local awful = require 'awful'
+
 local wibox = require('wibox')
 local gears = require('gears')
 local HOME = os.getenv('HOME')
@@ -15,6 +15,7 @@ local PATH_TO_ICONS = HOME .. '/.config/awesome/theme/icons/matangi/'
 
 local dpi = require('beautiful').xresources.apply_dpi
 local clickable_container = require('lib.clickable-container')
+local start = require 'ui.pop.start'
 -- ########################################################################
 -- ########################################################################
 -- ########################################################################
@@ -32,9 +33,9 @@ local widget =
 -- ########################################################################
 -- ########################################################################
 -- ########################################################################
-local home_button = clickable_container(wibox.container.margin(widget, dpi(5), dpi(5), dpi(5), dpi(5)))
+local start_button = clickable_container(wibox.container.margin(widget, dpi(5), dpi(5), dpi(5), dpi(5)))
 
-home_button:buttons(
+start_button:buttons(
     gears.table.join(
         awful.button(
             {},
@@ -46,30 +47,10 @@ home_button:buttons(
         )
     )
 )
--- ########################################################################
--- ########################################################################
--- ########################################################################
--- TODO get this to work
--- screen.primary:connect_signal(
---     'opened',
---     function()
---         widget.icon:set_image(PATH_TO_ICONS .. 'arrow-right-r.svg')
---         awesome.emit_signal('widgets::start::toggle', mouse.screen)
---     end
--- )
--- -- ########################################################################
--- -- ########################################################################
--- -- ########################################################################
--- screen.primary:connect_signal(
---     'closed',
---     function()
---         widget.icon:set_image(PATH_TO_ICONS .. 'arrow-left-r.svg')
---         awesome.emit_signal('widgets::start::toggle', mouse.screen)
---     end
--- )
+
 -- ########################################################################
 -- ########################################################################
 -- ########################################################################
 widget.icon:set_image(PATH_TO_ICONS .. 'sidebar.svg')
 
-return home_button
+return start_button

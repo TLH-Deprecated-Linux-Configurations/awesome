@@ -281,7 +281,7 @@ function helpers.add_hover_cursor(w, hover_cursor)
     w:connect_signal(
         'mouse::enter',
         function()
-            local w = _G.mouse.current_wibox
+            local w = mouse.current_wibox
             if w then
                 w.cursor = hover_cursor
             end
@@ -291,7 +291,7 @@ function helpers.add_hover_cursor(w, hover_cursor)
     w:connect_signal(
         'mouse::leave',
         function()
-            local w = _G.mouse.current_wibox
+            local w = mouse.current_wibox
             if w then
                 w.cursor = original_cursor
             end
@@ -357,6 +357,16 @@ function helpers.resize_dwim(c, direction)
             awful.tag.incmwfact(tiling_resize_factor)
         end
     end
+end
+local function bytes_to_grandness(bytes, start)
+    -- sanitize the input
+    local number = bytes
+    if type(bytes) == 'string' then
+        number = tonumber(bytes) or 0
+    elseif not (type(number) == 'number') then
+        return number
+    end
+    return num_to_si_prefix(number, start) .. 'B'
 end
 
 -- Move client to screen edge, respecting the screen workarea

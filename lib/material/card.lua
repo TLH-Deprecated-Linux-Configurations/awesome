@@ -11,14 +11,14 @@
 --    local card = lib.card("title")
 --    card.update_body(lib.textbox("body"))
 
-local wibox = require("wibox")
-local beautiful = require("beautiful")
-local gears = require("gears")
+local wibox = require('wibox')
+local beautiful = require('beautiful')
+local gears = require('gears')
 local dpi = beautiful.xresources.apply_dpi
 -- ########################################################################
 -- ########################################################################
 -- ########################################################################
-local header_font = beautiful.font .. " 14"
+local header_font = beautiful.font .. ' 14'
 local bg = beautiful.bg_modal
 local bg_title = beautiful.bg_modal_title
 -- ########################################################################
@@ -29,11 +29,11 @@ local titled_card = function(title, height)
         wibox.widget {
         text = title,
         font = header_font,
-        align = "center",
-        valign = "center",
+        align = 'center',
+        valign = 'center',
         widget = wibox.widget.textbox,
         border_color = beautiful.xcolor0,
-        bg = beautiful.xbackground .. "99",
+        bg = beautiful.xbackground .. '99',
         border_width = dpi(3),
         border_radius = dpi(12)
     }
@@ -49,7 +49,7 @@ local titled_card = function(title, height)
         end,
         widget = wibox.container.background,
         forced_height = height,
-        bg = beautiful.xbackground .. "99"
+        bg = beautiful.xbackground .. '99'
     }
     -- ########################################################################
     -- ########################################################################
@@ -58,7 +58,7 @@ local titled_card = function(title, height)
         wibox.widget {
         layout = wibox.layout.fixed.vertical,
         {
-            bg = beautiful.xbackground .. "99",
+            bg = beautiful.xbackground .. '99',
             wibox.widget {
                 wibox.container.margin(header, dpi(10), dpi(10), dpi(10), dpi(10)),
                 bg = bg_title,
@@ -71,7 +71,7 @@ local titled_card = function(title, height)
         },
         body_widget,
         nil,
-        bg = beautiful.xbackground .. "99",
+        bg = beautiful.xbackground .. '99',
         border_color = beautiful.xcolor0,
         border_width = dpi(3),
         border_radius = dpi(12)
@@ -120,7 +120,7 @@ local bare_card = function()
     local body_widget =
         wibox.widget {
         wibox.widget.base.empty_widget(),
-        bg = beautiful.xbackground .. "99",
+        bg = beautiful.xbackground .. '99',
         border_color = beautiful.xcolor0,
         border_width = dpi(3),
         border_radius = dpi(12),

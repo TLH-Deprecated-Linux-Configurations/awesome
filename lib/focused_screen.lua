@@ -1,5 +1,3 @@
-local awful = require 'awful'
-
 local function focused_screen()
     if mouse ~= nil and mouse.screen ~= nil then
         return mouse.screen

@@ -1,53 +1,73 @@
-local gears = require("gears")
-local awful = require("awful")
-local wibox = require("wibox")
-local helpers = require("helpers")
-local beautiful = require("beautiful")
-local xresources = require("beautiful.xresources")
+local gears = require('gears')
+
+local wibox = require('wibox')
+local helpers = require('helpers')
+local beautiful = require('beautiful')
+local xresources = require('beautiful.xresources')
 local dpi = xresources.apply_dpi
 
 local create_button = function(symbol, color, command, playpause)
-
-    local icon = wibox.widget {
+    local icon =
+        wibox.widget {
         markup = helpers.colorize_text(symbol, color),
-        font = beautiful.icon_font_name .. "20",
-        align = "center",
-        valigin = "center",
+        font = beautiful.icon_font_name .. '20',
+        align = 'center',
+        valigin = 'center',
         widget = wibox.widget.textbox()
     }
 
-    local button = wibox.widget {
+    local button =
+        wibox.widget {
         icon,
         forced_height = dpi(30),
         forced_width = dpi(30),
         widget = wibox.container.background
     }
 
-    awesome.connect_signal("bling::playerctl::status", function(playing)
-        if playpause then
-            if playing then
-                icon.markup = helpers.colorize_text("", color)
-            else
-                icon.markup = helpers.colorize_text("", color)
+    awesome.connect_signal(
+        'bling::playerctl::status',
+        function(playing)
+            if playpause then
+                if playing then
+                    icon.markup = helpers.colorize_text('', color)
+                else
+                    icon.markup = helpers.colorize_text('', color)
+                end
             end
         end
-    end)
+    )
 
-    button:buttons(gears.table.join(
-                       awful.button({}, 1, function() command() end)))
+    button:buttons(
+        gears.table.join(
+            awful.button(
+                {},
+                1,
+                function()
+                    command()
+                end
+            )
+        )
+    )
 
-    button:connect_signal("mouse::enter", function()
-        icon.markup = helpers.colorize_text(icon.text, beautiful.xforeground)
-    end)
+    button:connect_signal(
+        'mouse::enter',
+        function()
+            icon.markup = helpers.colorize_text(icon.text, beautiful.xforeground)
+        end
+    )
 
-    button:connect_signal("mouse::leave", function()
-        icon.markup = helpers.colorize_text(icon.text, color)
-    end)
+    button:connect_signal(
+        'mouse::leave',
+        function()
+            icon.markup = helpers.colorize_text(icon.text, color)
+        end
+    )
 
     return button
 end
 
-local title_widget = wibox.widget {
+local title_widget =
+    wibox.widget {
     markup = 'No Title',
     align = 'center',
     valign = 'center',
@@ -55,7 +75,8 @@ local title_widget = wibox.widget {
     widget = wibox.widget.textbox
 }
 
-local artist_widget = wibox.widget {
+local artist_widget =
+    wibox.widget {
     markup = 'No Artist',
     align = 'center',
     valign = 'center',
@@ -64,32 +85,36 @@ local artist_widget = wibox.widget {
     widget = wibox.widget.textbox
 }
 
--- Get Song Info 
-awesome.connect_signal("bling::playerctl::title_artist_album",
-                       function(title, artist, _)
+-- Get Song Info
+awesome.connect_signal(
+    'bling::playerctl::title_artist_album',
+    function(title, artist, _)
+        title_widget:set_markup_silently(
+            '<span foreground="' .. beautiful.xforeground .. '"><b>' .. title .. '</b></span>'
+        )
+        artist_widget:set_markup_silently(
+            '<span foreground="' .. beautiful.xforeground .. '"><i>' .. artist .. '</i></span>'
+        )
+    end
+)
 
-    title_widget:set_markup_silently('<span foreground="' ..
-                                         beautiful.xforeground .. '"><b>' ..
-                                         title .. '</b></span>')
-    artist_widget:set_markup_silently('<span foreground="' ..
-                                          beautiful.xforeground .. '"><i>' ..
-                                          artist .. '</i></span>')
-end)
+local play_command = function()
+    awful.spawn.with_shell('playerctl play-pause')
+end
+local prev_command = function()
+    awful.spawn.with_shell('playerctl previous')
+end
+local next_command = function()
+    awful.spawn.with_shell('playerctl next')
+end
 
-local play_command =
-    function() awful.spawn.with_shell("playerctl play-pause") end
-local prev_command = function() awful.spawn.with_shell("playerctl previous") end
-local next_command = function() awful.spawn.with_shell("playerctl next") end
+local playerctl_play_symbol = create_button('', beautiful.xcolor4, play_command, true)
 
-local playerctl_play_symbol = create_button("", beautiful.xcolor4,
-                                            play_command, true)
+local playerctl_prev_symbol = create_button('玲', beautiful.xcolor4, prev_command, false)
+local playerctl_next_symbol = create_button('怜', beautiful.xcolor4, next_command, false)
 
-local playerctl_prev_symbol = create_button("玲", beautiful.xcolor4,
-                                            prev_command, false)
-local playerctl_next_symbol = create_button("怜", beautiful.xcolor4,
-                                            next_command, false)
-
-local playerctl = wibox.widget {
+local playerctl =
+    wibox.widget {
     {
         {
             {title_widget, artist_widget, layout = wibox.layout.fixed.vertical},
@@ -108,7 +133,7 @@ local playerctl = wibox.widget {
                 layout = wibox.layout.fixed.horizontal
             },
             nil,
-            expand = "none",
+            expand = 'none',
             layout = wibox.layout.align.horizontal
         },
         layout = wibox.layout.flex.vertical

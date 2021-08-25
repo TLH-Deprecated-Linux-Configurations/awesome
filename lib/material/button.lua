@@ -4,10 +4,12 @@
 --     |______/|_____||____|____|_____|__|__|
 -- ########################################################################
 -- ########################################################################
+
 -- ########################################################################
-local wibox = require("wibox")
-local beautiful = require("beautiful")
-local gears = require("gears")
+
+local wibox = require('wibox')
+local beautiful = require('beautiful')
+local gears = require('gears')
 local dpi = beautiful.xresources.apply_dpi
 -- ########################################################################
 -- ########################################################################
@@ -16,7 +18,7 @@ local dpi = beautiful.xresources.apply_dpi
 return function(body, callback, bNo_center, leave_callback, no_update)
     local button = wibox.container.background()
     local bIsHovered = false
-    button.bg = beautiful.bg_normal .. "66"
+    button.bg = beautiful.bg_normal .. '66'
     button.border_color = beautiful.xbackground
     button.border_width = dpi(1)
     button.border_radius = dpi(12)
@@ -27,7 +29,7 @@ return function(body, callback, bNo_center, leave_callback, no_update)
     -- ########################################################################
     -- ########################################################################
     -- ########################################################################
-    if type(body) == "string" then
+    if type(body) == 'string' then
         body = wibox.widget.textbox(body)
     end
     -- ########################################################################
@@ -44,13 +46,13 @@ return function(body, callback, bNo_center, leave_callback, no_update)
     --- Emulate a hover unfocus event
     button.emulate_focus_loss = function()
         bIsHovered = false
-        button.bg = beautiful.bg_normal .. "66"
+        button.bg = beautiful.bg_normal .. '66'
     end
     -- ########################################################################
     -- ########################################################################
     -- ########################################################################
     button:connect_signal(
-        "mouse::enter",
+        'mouse::enter',
         function()
             button.emulate_hover()
         end
@@ -59,7 +61,7 @@ return function(body, callback, bNo_center, leave_callback, no_update)
     -- ########################################################################
     -- ########################################################################
     button:connect_signal(
-        "mouse::leave",
+        'mouse::leave',
         function()
             button.emulate_focus_loss()
         end
@@ -75,7 +77,7 @@ return function(body, callback, bNo_center, leave_callback, no_update)
     else
         button:setup {
             layout = wibox.container.place,
-            halign = "center",
+            halign = 'center',
             body
         }
     end

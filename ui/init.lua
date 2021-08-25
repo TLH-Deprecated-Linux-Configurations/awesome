@@ -1,8 +1,8 @@
-local awful = require 'awful'
-require('ui.notifs')
-require('ui.pop')
-require('ui.bar')
-require('ui.decorations')
+require 'ui.notifs'
+require 'ui.pop'
+require 'ui.bar'
+require 'ui.decorations'
+require 'ui.menu'
 -- TODO Add a timer around this to trigger at certain amount of inactivity
 require('ui.lockscreen')
 
@@ -33,7 +33,7 @@ end
 -- ########################################################################
 -- ########################################################################
 -- ########################################################################
-_G.tag.connect_signal(
+tag.connect_signal(
     'property::selected',
     function(_)
         updateBarsVisibility()

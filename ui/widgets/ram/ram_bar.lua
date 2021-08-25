@@ -1,7 +1,6 @@
-local awful = require("awful")
-local gears = require("gears")
-local wibox = require("wibox")
-local beautiful = require("beautiful")
+local gears = require('gears')
+local wibox = require('wibox')
+local beautiful = require('beautiful')
 local dpi = beautiful.xresources.apply_dpi
 
 -- Set colors
@@ -14,7 +13,8 @@ local active_color = {
 
 local background_color = beautiful.xbackground
 
-local ram_bar = wibox.widget {
+local ram_bar =
+    wibox.widget {
     max_value = 100,
     value = 50,
     forced_height = dpi(10),
@@ -48,9 +48,12 @@ local ram_script = [[
 --   ram_bar.value = used_ram_percentage
 -- end)
 
-awesome.connect_signal("signal::ram", function(used, total)
-    local used_ram_percentage = (used / total) * 100
-    ram_bar.value = used_ram_percentage
-end)
+awesome.connect_signal(
+    'signal::ram',
+    function(used, total)
+        local used_ram_percentage = (used / total) * 100
+        ram_bar.value = used_ram_percentage
+    end
+)
 
 return ram_bar

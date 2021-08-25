@@ -14,7 +14,7 @@ local delete_button =
     beautiful.clear_grey_icon,
     beautiful.clear_icon,
     function()
-        _G.reset_notifbox_layout()
+        reset_notifbox_layout()
     end
 )
 

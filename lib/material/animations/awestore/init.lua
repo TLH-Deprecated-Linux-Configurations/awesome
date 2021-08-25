@@ -7,12 +7,12 @@
 -- sudo luarocks install luafilesystem
 -- sudo luarocks install awestore
 -- or follow the documentation about this, which installs hererocks and locally installs the relevant packages
-local package = require("package")
+local package = require('package')
 
 -- ########################################################################
 -- ########################################################################
 -- ########################################################################
-package.preload["awestore.easing"] = function()
+package.preload['awestore.easing'] = function()
     local a
     local b, c, d
     local e, f, g
@@ -201,16 +201,16 @@ end
 -- ########################################################################
 -- ########################################################################
 -- ########################################################################
-package.preload["awestore.core"] = function()
-    local Q = require "awestore.utils"
+package.preload['awestore.core'] = function()
+    local Q = require 'awestore.utils'
     local R, S, T, U, V, W, X
     W =
         setmetatable(
         {},
         {
-            __name = "store",
+            __name = 'store',
             __tostring = function(self)
-                return "store"
+                return 'store'
             end,
             __newindex = function(self, Y, Z)
                 return
@@ -445,10 +445,10 @@ end
 -- ########################################################################
 -- ########################################################################
 -- ########################################################################
-package.preload["awestore.utils"] = function()
+package.preload['awestore.utils'] = function()
     local ac, ad
     ac = function(Z)
-        if type(Z) ~= "table" then
+        if type(Z) ~= 'table' then
             return false
         end
         local a6 = 1
@@ -467,12 +467,12 @@ end
 -- ########################################################################
 -- ########################################################################
 -- ########################################################################
-package.preload["awestore.tweened"] = function()
-    local ae = require("gears")
-    local af = require("posix")
-    local ag = require("awestore.core")
-    local ah = require("awestore.easing")
-    local Q = require("awestore.utils")
+package.preload['awestore.tweened'] = function()
+    local ae = require('gears')
+    local af = require('posix')
+    local ag = require('awestore.core')
+    local ah = require('awestore.easing')
+    local Q = require('awestore.utils')
     local ai, aj, ak
     function ai()
         local al, am = af.clock_gettime(0)
@@ -485,7 +485,7 @@ package.preload["awestore.tweened"] = function()
             end
         end
         if type(H) ~= type(I) or Q.is_sequence(H) ~= Q.is_sequence(I) then
-            error("Cannot interpolate values of different types.")
+            error('Cannot interpolate values of different types.')
         end
         if Q.is_sequence(H) then
             local an = {}
@@ -500,7 +500,7 @@ package.preload["awestore.tweened"] = function()
                 return ao
             end
         end
-        if type(H) == "table" then
+        if type(H) == 'table' then
             local an = {}
             for Y, a3 in pairs(I) do
                 an[Y] = aj(H[Y], I[Y])
@@ -513,13 +513,13 @@ package.preload["awestore.tweened"] = function()
                 return ao
             end
         end
-        if type(H) == "number" then
+        if type(H) == 'number' then
             local aq = I - H
             return function(F)
                 return H + F * aq
             end
         end
-        error("Cannot interpolate values of type " .. type(H) .. ".")
+        error('Cannot interpolate values of type ' .. type(H) .. '.')
     end
     -- ########################################################################
     -- ########################################################################
@@ -616,9 +616,9 @@ end
 -- ########################################################################
 -- ########################################################################
 -- ########################################################################
-local ag = require("awestore.core")
-local ah = require("awestore.easing")
-local ak = require("awestore.tweened")
+local ag = require('awestore.core')
+local ah = require('awestore.easing')
+local ak = require('awestore.tweened')
 return {
     derived = ag.derived,
     easing = ah,

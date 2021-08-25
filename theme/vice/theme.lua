@@ -32,7 +32,7 @@ theme.wallpaper = gfs.get_configuration_dir() .. 'images/bg.png'
 local icon_path = gfs.get_configuration_dir() .. 'theme/icons/'
 
 -- TODO remove avatar, since we all know what we look like and don't need to see it on our desktops
-theme.me = gears.surface.load_uncached(gfs.get_configuration_dir() .. 'images/me.png')
+theme.me = gears.surface.load_uncached(gfs.get_configuration_dir() .. 'images/distro.png')
 
 -- Distro Logo
 --

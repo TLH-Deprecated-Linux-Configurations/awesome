@@ -7,6 +7,7 @@
 -- ########################################################################
 -- ########################################################################
 -- Libraries and Modules
+--
 local awful = require('awful')
 local gears = require('gears')
 local gfs = gears.filesystem
@@ -21,6 +22,7 @@ local bling = require('module.bling')
 -- ########################################################################
 -- ########################################################################
 -- Bling Provided Layouts
+--
 local mstab = bling.layout.mstab
 local centered = bling.layout.centered
 local vertical = bling.layout.vertical
@@ -28,7 +30,7 @@ local horizontal = bling.layout.horizontal
 local equal = bling.layout.equalarea
 
 -- Custom Layouts
--- TODO add icons for these in theme
+--
 local stack = require 'configuration.layouts.stack'
 local empathy = require 'configuration.layouts.empathy'
 local centermaster = require 'configuration.layouts.centermaster'
@@ -36,7 +38,11 @@ local centermaster = require 'configuration.layouts.centermaster'
 -- ########################################################################
 -- ########################################################################
 -- Set the layouts, order is the order they will be in for the tags top being first.
+-- ########################################################################
 
+-- ########################################################################
+-- ########################################################################
+-- ########################################################################
 tag.connect_signal(
     'request::default_layouts',
     function()

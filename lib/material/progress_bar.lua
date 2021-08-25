@@ -7,17 +7,17 @@
 -- ########################################################################
 -- ########################################################################
 -- Default widget requirements
-local base = require("wibox.widget.base")
-local gtable = require("gears.table")
+local base = require('wibox.widget.base')
+local gtable = require('gears.table')
 local setmetatable = setmetatable
-local dpi = require("beautiful").xresources.apply_dpi
+
 -- ########################################################################
 -- ########################################################################
 -- ########################################################################
 -- Commons requirements
-local wibox = require("wibox")
-local gears = require("gears")
-local beautiful = require("beautiful")
+local wibox = require('wibox')
+local gears = require('gears')
+local beautiful = require('beautiful')
 -- Local declarations
 -- ########################################################################
 -- ########################################################################
@@ -28,7 +28,7 @@ function mat_slider:set_value(value)
     if self._private.value ~= value then
         self._private.value = value
         self._private.progress_bar:set_value(self._private.value)
-        self:emit_signal("property::value")
+        self:emit_signal('property::value')
     --self:emit_signal('widget::layout_changed')
     end
 end
@@ -44,8 +44,8 @@ end
 function mat_slider:set_read_only(value)
     if self._private.read_only ~= value then
         self._private.read_only = value
-        self:emit_signal("property::read_only")
-        self:emit_signal("widget::layout_changed")
+        self:emit_signal('property::read_only')
+        self:emit_signal('widget::layout_changed')
     end
 end
 -- ########################################################################
@@ -99,11 +99,11 @@ local function new(args)
         wibox.widget {
         max_value = 100,
         value = 25,
-        forced_height = dpi(6),
+        forced_height = 6,
         paddings = 0,
         shape = gears.shape.rounded_rect,
         background_color = beautiful.bg_modal,
-        color = beautiful.xcolor20.hue_500 or "#fdfdfd",
+        color = beautiful.xcolor20.hue_500 or '#fdfdfd',
         widget = wibox.widget.progressbar
     }
     -- ########################################################################
