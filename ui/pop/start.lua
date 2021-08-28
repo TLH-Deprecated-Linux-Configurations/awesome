@@ -1,5 +1,11 @@
--- panel.lua
--- Panel Widget
+--  _______ __               __        ______                     __
+-- |     __|  |_.---.-.----.|  |_     |   __ \.---.-.-----.-----.|  |
+-- |__     |   _|  _  |   _||   _|    |    __/|  _  |     |  -__||  |
+-- |_______|____|___._|__|  |____|    |___|   |___._|__|__|_____||__|
+
+-- ########################################################################
+-- ########################################################################
+-- ########################################################################
 local awful = require('awful')
 local gears = require('gears')
 local wibox = require('wibox')
@@ -10,13 +16,7 @@ local helpers = require('helpers')
 
 local box_radius = beautiful.client_radius
 local box_gap = dpi(8)
-local function focused_screen()
-    if mouse ~= nil and mouse.screen ~= nil then
-        return mouse.screen
-    end
-    return awful.screen.focused()
-end
-local s = focused_screen()
+local s = awful.screen.focused()
 local width = 551
 local height = s.geometry.height
 -- ########################################################################
@@ -30,7 +30,9 @@ local function create_boxed_widget(widget_to_be_boxed, width, height, bg_color)
     box_container.shape = helpers.rrect(box_radius)
     box_container.border_width = 0 or beautiful.widget_border_width
     box_container.border_color = beautiful.widget_border_color
-
+    -- ########################################################################
+    -- ########################################################################
+    -- ########################################################################
     local boxed_widget =
         wibox.widget {
         {
@@ -47,7 +49,7 @@ local function create_boxed_widget(widget_to_be_boxed, width, height, bg_color)
             widget = box_container
         },
         margins = box_gap,
-        color = '#FF000000',
+        color = beautiful.xbackground .. '00',
         widget = wibox.container.margin
     }
     return boxed_widget
@@ -82,7 +84,7 @@ end
 -- ########################################################################
 -- ########################################################################
 -- ########################################################################
---- {{{ Volume Widget
+---  Volume Widget
 
 local volume_bar = require('ui.widgets.volume.volume_squircle')
 local volume = format_progress_bar(volume_bar, "<span foreground='" .. beautiful.xcolor6 .. "'><b></b></span>")
@@ -107,7 +109,9 @@ awesome.connect_signal(
 apps_volume = function()
     helpers.run_or_raise({class = 'Pavucontrol'}, true, 'pavucontrol')
 end
-
+-- ########################################################################
+-- ########################################################################
+-- ########################################################################
 volume:buttons(
     gears.table.join( -- Left click - Mute / Unmute
         awful.button(
@@ -152,37 +156,39 @@ local brightness =
 -- ########################################################################
 ---  Ram Widget
 ---
-
 -- local ram = require("ui.widgets.ram.ram_arc")
 
 local ram_bar = require('ui.widgets.ram.ram_squircle')
 local ram = format_progress_bar(ram_bar, "<span foreground='" .. beautiful.xcolor15 .. "'><b></b></span>")
-
---- }}}
-
---- {{{ Disk Widget
-
+-- ########################################################################
+-- ########################################################################
+-- ########################################################################
+--- Disk Widget
+--
 local disk_bar = require('ui.widgets.disk.disk_squircle')
 local disk = format_progress_bar(disk_bar, "<span foreground='" .. beautiful.xcolor15 .. "'><b></b></span>")
 
---- }}}
-
---- {{{ Temp Widget
-
+-- ########################################################################
+-- ########################################################################
+-- ########################################################################
+--- Temp Widget
+--
 local temp_bar = require('ui.widgets.temp.temp_squircle')
 local temp = format_progress_bar(temp_bar, "<span foreground='" .. beautiful.xcolor15 .. "'><b></b></span>")
 
---- }}}
-
---- {{{ Cpu Widget
+-- ########################################################################
+-- ########################################################################
+-- ########################################################################
+--- Cpu Widget
 
 local cpu_bar = require('ui.widgets.cpu.cpu_squircle')
 local cpu = format_progress_bar(cpu_bar, "<span foreground='" .. beautiful.xcolor15 .. "'><b></b></span>")
 
---- }}}
-
---- {{{ Clock
-
+-- ########################################################################
+-- ########################################################################
+-- ########################################################################
+--- Clock
+--
 local fancy_time_widget = wibox.widget.textclock('%H%M')
 fancy_time_widget.markup =
     fancy_time_widget.text:sub(1, 2) ..
@@ -231,21 +237,24 @@ fancy_date_widget.font = beautiful.font_name .. '12'
 
 local fancy_date = {fancy_date_widget, layout = wibox.layout.fixed.vertical}
 
----}}}
-
--- {{{ Info Widget
-
+-- ########################################################################
+-- ########################################################################
+-- ########################################################################
+-- Info Widget
+--
 local info = require('ui.widgets.info.info')
 -- local info_box = create_boxed_widget(info, 400, 145, beautiful.xbackground)
 
--- }}}
-
--- {{ Weather
-
+-- ########################################################################
+-- ########################################################################
+-- ########################################################################
+--  Weather
+--
 local weather = require('ui.widgets.weather.weather')
 
--- }}
-
+-- ########################################################################
+-- ########################################################################
+-- ########################################################################
 local sys =
     wibox.widget {
     {
@@ -261,7 +270,9 @@ local sys =
     bottom = dpi(10),
     widget = wibox.container.margin
 }
-
+-- ########################################################################
+-- ########################################################################
+-- ########################################################################
 local sys2 =
     wibox.widget {
     {ram, disk, temp, spacing = dpi(20), layout = wibox.layout.flex.horizontal},
@@ -271,12 +282,15 @@ local sys2 =
     bottom = dpi(20),
     widget = wibox.container.margin
 }
-
--- local sys2 = wibox.widget {ram, disk, temp, layout = wibox.layout.flex.vertical}
+-- ########################################################################
+-- ########################################################################
+-- ########################################################################
 
 local sys_box = create_boxed_widget(sys, 400, 117, beautiful.xcolor0)
 local sys_box2 = create_boxed_widget(sys2, 400, 117, beautiful.xcolor0)
-
+-- ########################################################################
+-- ########################################################################
+-- ########################################################################
 local time =
     wibox.widget {
     {
@@ -291,7 +305,9 @@ local time =
     bottom = dpi(20),
     widget = wibox.container.margin
 }
-
+-- ########################################################################
+-- ########################################################################
+-- ########################################################################
 local notifs =
     wibox.widget {
     require('ui.notifs.notif-center'),
@@ -301,7 +317,9 @@ local notifs =
     right = dpi(8),
     widget = wibox.container.margin
 }
-
+-- ########################################################################
+-- ########################################################################
+-- ########################################################################
 local ll =
     awful.widget.layoutlist {
     source = awful.widget.layoutlist.source.default_layouts, -- DOC_HIDE
@@ -363,14 +381,20 @@ local panelWidget =
     widget = wibox.container.margin
 }
 
+-- ########################################################################
+-- ########################################################################
+-- ########################################################################
 local widgetContainer =
     wibox.widget {
     {panelWidget, widget = wibox.container.margin},
     forced_height = height,
     forced_width = width,
-    layout = wibox.layout.fixed.vertical
+    layout = wibox.layout.fixed.vertical,
+    screen = s
 }
-
+-- ########################################################################
+-- ########################################################################
+-- ########################################################################
 local widgetBG =
     wibox.widget {
     widgetContainer,
@@ -378,9 +402,12 @@ local widgetBG =
     border_color = beautiful.widget_border_color,
     border_width = dpi(beautiful.widget_border_width),
     shape = helpers.prrect(dpi(3), false, true, false, false),
-    widget = wibox.container.background
+    widget = wibox.container.background,
+    screen = s
 }
-
+-- ########################################################################
+-- ########################################################################
+-- ########################################################################
 local popupWidget =
     awful.popup(
     {
@@ -388,8 +415,11 @@ local popupWidget =
         visible = false,
         ontop = false,
         type = 'popup_menu',
-        bg = beautiful.xbackground .. '00'
+        bg = beautiful.xbackground .. '00',
+        screen = s
     }
 )
-
+-- ########################################################################
+-- ########################################################################
+-- ########################################################################
 return popupWidget

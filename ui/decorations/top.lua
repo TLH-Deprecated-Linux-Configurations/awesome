@@ -112,7 +112,7 @@ local get_titlebar = function(c, height, color)
         c,
         beautiful.xcolor3,
         beautiful.xcolor8,
-        gears.shape.transform(po(12, 12)):rotate_at(6, 6, math.pi / 2)
+        gears.shape.transform(tri(12, 12)):rotate_at(6, 6, math.pi / 2)
     )
     min:connect_signal(
         'button::press',

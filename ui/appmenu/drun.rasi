@@ -15,8 +15,8 @@ configuration {
     background-color:               #17191e66;
     background-entry:               #3c3f4c66;
     background-alt:                 #3c3f4c66;
-    foreground:                     #f2f2f2EE;
-    foreground-selected:            #f4f4f7FF;
+    foreground:                     #8b9cbe;
+    foreground-selected:            #f4f4f7;
     urgent:                         #ff3d8166;
     urgent-selected:                #ff3d8166;
 }
@@ -38,7 +38,7 @@ prompt {
 button {
     action:                         "ok";
     str:                            " ";
-    font:                           "FantasqueSansMono Nerd Font 11";
+    font:                           "SFMono Nerd Font Mono 11";
     expand:                         false;
     text-color:                     @foreground;
     background-color:               @background;

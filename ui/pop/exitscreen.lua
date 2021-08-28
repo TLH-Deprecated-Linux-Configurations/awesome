@@ -1,5 +1,10 @@
--- exitscreen.lua
--- Exit Screen Widget
+--  _______         __ __        _______
+-- |    ___|.--.--.|__|  |_     |     __|.----.----.-----.-----.-----.
+-- |    ___||_   _||  |   _|    |__     ||  __|   _|  -__|  -__|     |
+-- |_______||__.__||__|____|    |_______||____|__| |_____|_____|__|__|
+-- ########################################################################
+-- ########################################################################
+-- ########################################################################
 local awful = require('awful')
 local gears = require('gears')
 local wibox = require('wibox')
@@ -8,8 +13,11 @@ local xresources = require('beautiful.xresources')
 local dpi = xresources.apply_dpi
 local helpers = require('helpers')
 local pad = helpers.pad
-
+-- ########################################################################
+-- ########################################################################
+-- ########################################################################
 -- Appearance
+--
 local icon_font = beautiful.icon_font_name .. 120
 local poweroff_text_icon = ''
 local reboot_text_icon = ''
@@ -20,11 +28,16 @@ local bios_text_icon = ''
 
 local button_bg = beautiful.xbackground
 local button_size = dpi(140)
-
+-- ########################################################################
+-- ########################################################################
+-- ########################################################################
 local lock_screen = require('ui.lockscreen')
 lock_screen.init()
-
+-- ########################################################################
+-- ########################################################################
+-- ########################################################################
 -- Commands
+--
 local poweroff_command = function()
     awful.spawn.with_shell('systemctl poweroff')
 end
@@ -45,7 +58,12 @@ local bios_command = function()
     lock_screen_show()
     awful.spawn.with_shell('systemctl reboot --firmware-setup')
 end
+
+-- ########################################################################
+-- ########################################################################
+-- ########################################################################
 -- Helper function that generates the clickable buttons
+--
 local create_button = function(symbol, hover_color, text, command)
     local icon =
         wibox.widget {
@@ -57,7 +75,10 @@ local create_button = function(symbol, hover_color, text, command)
         markup = helpers.colorize_text(symbol, beautiful.xforeground .. 55),
         widget = wibox.widget.textbox()
     }
-
+    -- ########################################################################
+    -- ########################################################################
+    -- ########################################################################
+    --
     local button =
         wibox.widget {
         {nil, icon, expand = 'none', layout = wibox.layout.align.horizontal},
@@ -69,8 +90,11 @@ local create_button = function(symbol, hover_color, text, command)
         border_color = beautiful.xcolor8,
         widget = wibox.container.background
     }
-
+    -- ########################################################################
+    -- ########################################################################
+    -- ########################################################################
     -- Bind left click to run the command
+    --
     button:buttons(
         gears.table.join(
             awful.button(
@@ -82,8 +106,11 @@ local create_button = function(symbol, hover_color, text, command)
             )
         )
     )
-
+    -- ########################################################################
+    -- ########################################################################
+    -- ########################################################################
     -- Change color on hover
+    --
     button:connect_signal(
         'mouse::enter',
         function()
@@ -98,14 +125,20 @@ local create_button = function(symbol, hover_color, text, command)
             button.border_color = beautiful.widget_border_color
         end
     )
-
+    -- ########################################################################
+    -- ########################################################################
+    -- ########################################################################
     -- Use helper function to change the cursor on hover
+    --
     helpers.add_hover_cursor(button, 'hand1')
 
     return button
 end
-
+-- ########################################################################
+-- ########################################################################
+-- ########################################################################
 -- Create the buttons
+--
 local poweroff = create_button(poweroff_text_icon, beautiful.xcolor1, 'Poweroff', poweroff_command)
 local reboot = create_button(reboot_text_icon, beautiful.xcolor2, 'Reboot', reboot_command)
 local suspend = create_button(suspend_text_icon, beautiful.xcolor3, 'Suspend', suspend_command)
@@ -113,7 +146,11 @@ local exit = create_button(exit_text_icon, beautiful.xcolor4, 'Exit', exit_comma
 local lock = create_button(lock_text_icon, beautiful.xcolor5, 'Lock', lock_command)
 local bios = create_button(bios_text_icon, beautiful.xcolor6, 'Boot to BIOS', bios_command)
 local exit_manager = {}
+-- ########################################################################
+-- ########################################################################
+-- ########################################################################
 -- Create the exit screen wibox
+--
 local exit_screen =
     wibox(
     {
@@ -124,27 +161,37 @@ local exit_screen =
     }
 )
 awful.placement.maximize(exit_screen)
-
-exit_screen.bg = beautiful.exit_screen_bg or exitscreen_bg or '#111111'
-exit_screen.fg = beautiful.exit_screen_fg or beautiful.wibar_fg or '#FEFEFE'
-
+-- ########################################################################
+-- ########################################################################
+-- ########################################################################
+--
+exit_screen.bg = beautiful.exit_screen_bg or '#17191e'
+exit_screen.fg = beautiful.exit_screen_fg or '#f4f4f7'
+-- ########################################################################
+-- ########################################################################
+-- ########################################################################
 -- Add exit screen to each screen
+--
 awful.screen.connect_for_each_screen(
     function(s)
-        if s == screen.primary then
+        if s == mouse.screen then
             s.exit = exit_screen
         else
             s.exit = helpers.screen_mask(s, beautiful.exit_screen_bg or beautiful.xbackground .. '80')
         end
     end
 )
-
+-- ########################################################################
+-- ########################################################################
+-- ########################################################################
 local function set_visibility(v)
     for s in screen do
         s.exit.visible = v
     end
 end
-
+-- ########################################################################
+-- ########################################################################
+-- ########################################################################
 local exit_screen_grabber
 
 exit_manager.exit_screen_hide = function()
@@ -152,7 +199,9 @@ exit_manager.exit_screen_hide = function()
     set_visibility(false)
     awesome.emit_signal('widgets::splash::visibility', exit_screen.visible)
 end
-
+-- ########################################################################
+-- ########################################################################
+-- ########################################################################
 exit_manager.exit_screen_show = function()
     exit_screen_grabber =
         awful.keygrabber.run(
@@ -187,7 +236,9 @@ exit_manager.exit_screen_show = function()
     set_visibility(true)
     -- awesome.emit_signal("widgets::splash::visibility", exit_screen.visible)
 end
-
+-- ########################################################################
+-- ########################################################################
+-- ########################################################################
 exit_screen:buttons(
     gears.table.join( -- Left click - Hide exit_screen
         awful.button(
@@ -214,8 +265,11 @@ exit_screen:buttons(
         )
     )
 )
-
+-- ########################################################################
+-- ########################################################################
+-- ########################################################################
 -- Item placement
+--
 exit_screen:setup {
     nil,
     {
@@ -236,5 +290,7 @@ exit_screen:setup {
     expand = 'none',
     layout = wibox.layout.align.vertical
 }
-
+-- ########################################################################
+-- ########################################################################
+-- ########################################################################
 return exit_manager
