@@ -1,15 +1,76 @@
 {
-    "Lua.diagnostics.disable": [
-        "lowercase-global",
-        "W111",
-        "unused-local"
-    ],
-    "Lua.diagnostics.globals": [
-        "cursor",
-        "client",
-        "tag",
-        "awesome",
-        "screen",
-        "mouse"
-    ]
+  "files.associations": {
+    "*.rsh": "javascript"
+  },
+  "Lua.diagnostics.globals": [
+    "awesome",
+    "mouse",
+    "client",
+    "modkey",
+    "s",
+    "root",
+    "center",
+    "screen",
+    "backup",
+    "tag",
+    "double_click_event_handler",
+    "c",
+    "dpi",
+    "wibox",
+    "beautiful",
+    "awful",
+    "general",
+    "filesystem",
+    "xresources",
+    "gfs",
+    "gears",
+    "client_keys",
+    "client_buttons",
+    "icons",
+    "timer",
+    "theme"
+  ],
+  "Lua.diagnostics.disable": [
+    "undefined-field"
+  ],
+  "C_Cpp_Runner.cCompilerPath": "/usr/bin/gcc",
+  "C_Cpp_Runner.cppCompilerPath": "/usr/bin/g++",
+  "C_Cpp_Runner.debuggerPath": "/usr/bin/gdb",
+  "C_Cpp_Runner.makePath": "/usr/bin/make",
+  "C_Cpp_Runner.warnings": [
+    "-Wall",
+    "-Wextra",
+    "-Wpedantic"
+  ],
+  "C_Cpp_Runner.compilerArgs": [],
+  "C_Cpp_Runner.includePaths": [],
+  "C_Cpp_Runner.linkerArgs": [],
+  "C_Cpp_Runner.cStandard": "",
+  "C_Cpp_Runner.cppStandard": "",
+  "C_Cpp_Runner.excludeSearch": [],
+  "C_Cpp_Runner.enableWarnings": true,
+  "C_Cpp_Runner.warningsAsError": false,
+  "DockerRun.DisableDockerrc": true,
+  "DockerRun.DisableAutoGenerateConfig": true,
+  "cSpell.words": [
+    "SFPD's",
+    "awesomewm",
+    "covid",
+    "else's",
+    "hacky",
+    "htop",
+    "mstab",
+    "picom",
+    "rofi",
+    "streetturtle",
+    "submodules",
+    "subwidgets",
+    "tabbar",
+    "unixporn",
+    "wibar",
+    "wibars"
+  ],
+  "[markdown]": {
+    "editor.cursorSurroundingLines": 0
+  }
 }

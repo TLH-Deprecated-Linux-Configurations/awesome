@@ -2,29 +2,45 @@
 -- |   _   |.--.--.--.-----.-----.-----.--------.-----.|  |  |  |   |   |
 -- |       ||  |  |  |  -__|__ --|  _  |        |  -__||  |  |  |       |
 -- |___|___||________|_____|_____|_____|__|__|__|_____||________|__|_|__|
-
+-- ########################################################################
+--  By Thomas Leon Highbaugh
+--  As part of the Electric Tantra Linux
 -- ########################################################################
 -- ########################################################################
 -- ########################################################################
 -- If LuaRocks is installed, make sure that packages installed through it are
 -- found (e.g. lgi). If LuaRocks is not installed, do nothing.
---
-pcall(require, 'luarocks.loader')
+pcall(require, "luarocks.loader")
 -- ########################################################################
-require 'configuration.global_variables'
+
+require("module.functions.luapath")
+require("module.functions.logger")
+print("Booting up...")
+require("configuration.garbage")
 -- ########################################################################
-require 'awful.autofocus'
+require("configuration.global_var")
+require("awful.autofocus")
 -- ########################################################################
-require('awful.hotkeys_popup.keys')
+-- We load in the notifications before loading anything else so we get errors to display appropiately
+require("module.settings.notifications")
 -- ########################################################################
-require('configuration')
+
+require("widget.titlebar")
+require("module.interface.backdrop")
 
 -- ########################################################################
+-- Layout
+require("layout")
 -- ########################################################################
+require("module")
 -- ########################################################################
--- Import Daemons and Widgets
---
-require('signal')
-require('ui')
+-- Setup configurations
+require("configuration.client")
+require("configuration.tags")
+_G.root.keys(require("configuration.keys.global"))
 
-local blacklisted_snid = setmetatable({}, {__mode = 'v'})
+-- ########################################################################
+require("module.settings.bootup_configuration")
+require("module.settings.lazy_load_boot")
+
+-- remove all images from memory (to save memory space at expense of the CPU so don't go hammer time too hard)
