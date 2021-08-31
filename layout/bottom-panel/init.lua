@@ -109,7 +109,6 @@ local bottom_panel = function(s)
     s.battery = build_widget(show_widget_or_default('layout.bottom-panel.widgets.battery', hardware.hasBattery(), true))
     s.mytextclock = build_widget(require('layout.bottom-panel.widgets.clock'))
     s.notification_center = build_widget(require('layout.right-panel'))
-    -- s.screen_record = build_widget(require("widget.screen-record"))
     -- ########################################################################
     -- ### Setup Panel Widgets ################################################
     -- ########################################################################
@@ -137,7 +136,6 @@ local bottom_panel = function(s)
                 --s.screen_record,
                 s.battery,
                 layout_box,
-                --   s.screen_recorder,
                 s.mytextclock,
                 s.notification_center
 

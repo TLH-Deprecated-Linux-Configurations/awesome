@@ -10,6 +10,26 @@ local wibox = require('wibox')
 local beautiful = require('beautiful')
 local xresources = require('beautiful.xresources')
 local dpi = xresources.apply_dpi
+local tag_preview_box = require('layout.bottom-panel.widgets.tag-list.tag-preview')
+tag_preview_box.enable {
+    show_client_content = true, -- Whether or not to show the client content
+    x = 10, -- The x-coord of the popup
+    y = 10, -- The y-coord of the popup
+    scale = 0.25, -- The scale of the previews compared to the screen
+    honor_padding = false, -- Honor padding when creating widget size
+    honor_workarea = false, -- Honor work area when creating widget size
+    placement_fn = function(c) -- Place the widget using awful.placement (this overrides x & y)
+        awful.placement.bottom_left(
+            c,
+            {
+                margins = {
+                    bottom = 40,
+                    left = 30
+                }
+            }
+        )
+    end
+}
 -- ########################################################################
 -- ########################################################################
 -- ########################################################################
@@ -94,8 +114,8 @@ local get_taglist = function(s)
                     'mouse::enter',
                     function()
                         if #c3:clients() > 0 then
-                            awesome.emit_signal('bling::tag_preview::update', c3)
-                            awesome.emit_signal('bling::tag_preview::visibility', s, true)
+                            awesome.emit_signal('tag_preview::update', c3)
+                            awesome.emit_signal('tag_preview::visibility', s, true)
                         end
                         if self.bg ~= beautiful.xcolor0 .. '88' then
                             self.backup = self.bg
@@ -107,7 +127,7 @@ local get_taglist = function(s)
                 self:connect_signal(
                     'mouse::leave',
                     function()
-                        awesome.emit_signal('bling::tag_preview::visibility', s, false)
+                        awesome.emit_signal('tag_preview::visibility', s, false)
                         if self.has_backup then
                             self.bg = beautiful.xcolor0 .. '88'
                         end

@@ -31,6 +31,8 @@ client_buttons = require 'configuration.client.buttons'
 client_keys = require 'configuration.client.keys'
 signals = require('module.settings.signals')
 file = require('module.functions.file')
+spawn = require('awful.spawn')
+slider = require('module.interface.slider')
 
 -- ###############################################
 -- ###############################################

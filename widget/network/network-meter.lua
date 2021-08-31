@@ -6,19 +6,19 @@
 -- ########################################################################
 -- ########################################################################
 -- ########################################################################
-local wibox = require("wibox")
-local mat_list_item = require("module.interface.material.list-item")
-local mat_slider = require("module.interface.progress_bar")
-local mat_icon = require("module.interface.material.icon")
-local icons = require("theme.icons")
-local dpi = require("beautiful").xresources.apply_dpi
-local filehandle = require("module.functions.file")
-local gears = require("gears")
-local common = require("lib.function.common")
-local delayed_timer = require("lib.function.delayed-timer")
-local beautiful = require("beautiful")
+local wibox = require('wibox')
+local mat_list_item = require('module.interface.material.list-item')
+local mat_slider = require('module.interface.progress_bar')
+local mat_icon = require('module.interface.icon')
+local icons = require('theme.icons')
+local dpi = require('beautiful').xresources.apply_dpi
+local filehandle = require('module.functions.file')
+local gears = require('gears')
+local common = require('lib.function.common')
+local delayed_timer = require('lib.function.delayed-timer')
+local beautiful = require('beautiful')
 
-local functions = require("module.functions")
+local functions = require('module.functions')
 -- ########################################################################
 -- ########################################################################
 -- ########################################################################
@@ -37,13 +37,13 @@ local network_meter_down
 -- ########################################################################
 -- ########################################################################
 -- ########################################################################
-if filehandle.exists("/tmp/interface.txt") then
-    interface = filehandle.string("/tmp/interface.txt"):gsub("\n", "")
+if filehandle.exists('/tmp/interface.txt') then
+    interface = filehandle.string('/tmp/interface.txt'):gsub('\n', '')
 end
 local value_up =
     wibox.widget {
-    markup = "...",
-    font = beautiful.font .. " 14",
+    markup = '...',
+    font = beautiful.font .. ' 14',
     widget = wibox.widget.textbox
 }
 -- ########################################################################
@@ -51,8 +51,8 @@ local value_up =
 -- ########################################################################
 local value_down =
     wibox.widget {
-    markup = "...",
-    font = beautiful.font .. " 14",
+    markup = '...',
+    font = beautiful.font .. ' 14',
     widget = wibox.widget.textbox
 }
 -- ########################################################################
@@ -91,8 +91,8 @@ local function _draw_results(download, upload)
     -- ########################################################################
     -- ########################################################################
     -- ########################################################################
-    print("Network download: " .. download_text)
-    print("Network upload: " .. upload_text)
+    print('Network download: ' .. download_text)
+    print('Network upload: ' .. upload_text)
 end
 -- ########################################################################
 -- ########################################################################
@@ -102,7 +102,7 @@ delayed_timer(
     function()
         -- sanitizing the interface
         if interface == nil then
-            interface = filehandle.string("/tmp/interface.txt"):gsub("\n", "")
+            interface = filehandle.string('/tmp/interface.txt'):gsub('\n', '')
             return
         end
         -- ########################################################################
@@ -110,8 +110,8 @@ delayed_timer(
         -- ########################################################################
         counter = counter + 1
 
-        local valueRX = filehandle.string("/sys/class/net/" .. interface .. "/statistics/rx_bytes"):gsub("\n", "")
-        local valueTX = filehandle.string("/sys/class/net/" .. interface .. "/statistics/tx_bytes"):gsub("\n", "")
+        local valueRX = filehandle.string('/sys/class/net/' .. interface .. '/statistics/rx_bytes'):gsub('\n', '')
+        local valueTX = filehandle.string('/sys/class/net/' .. interface .. '/statistics/tx_bytes'):gsub('\n', '')
         -- ########################################################################
         -- ########################################################################
         -- ########################################################################
@@ -138,7 +138,7 @@ delayed_timer(
 -- ########################################################################
 local widget_icon_up =
     wibox.widget {
-    id = "icon",
+    id = 'icon',
     image = icons.upload,
     forced_width = 36,
     forced_height = 36,
@@ -173,7 +173,7 @@ local function up(screen)
             widget = wibox.container.margin
         },
         shape = gears.shape.rounded_rect,
-        bg = beautiful.bg_normal .. "77",
+        bg = beautiful.bg_normal .. '77',
         shape_border_color = beautiful.bg_normal,
         shape_border_width = dpi(3),
         widget = wibox.container.background
@@ -185,7 +185,7 @@ end
 -- ########################################################################
 local widget_icon_down =
     wibox.widget {
-    id = "icon",
+    id = 'icon',
     image = icons.download,
     forced_width = 36,
     forced_height = 36,
@@ -219,7 +219,7 @@ local function down(screen)
             widget = wibox.container.margin
         },
         shape = gears.shape.rounded_rect,
-        bg = beautiful.bg_normal .. "77",
+        bg = beautiful.bg_normal .. '77',
         shape_border_color = beautiful.bg_normal,
         shape_border_width = dpi(3),
         widget = wibox.container.background

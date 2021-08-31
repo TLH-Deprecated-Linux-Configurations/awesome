@@ -17,7 +17,7 @@ fi
 # autolock the system
 if [[ "$(command -v i3lock)" != "" && "$1" -gt "5" ]]; then
     echo "Lock screen time set to: $1 seconds"
-    sh $HOME/.config/awesome/bin/autolock.sh "$1" &>/dev/null &
+    "$HOME"/.config/awesome/bin/autolock.sh &>/dev/null &
 fi
 
 # run clipboard manager
@@ -25,9 +25,7 @@ if [[ "$(command -v greenclip)" ]]; then
     pgrep greenclip || greenclip daemon
 fi
 
-# autostart user scripts if that directory exists
-if [[ -d "$userlocation" ]]; then
-    for script in "$userlocation"/scripts/*.sh; do
-        "$script" & # launch all user scripts in the background
-    done
+# run clipboard manager
+if [[ "$(command -v picom)" ]]; then
+    picom -b --experimental-backends --config ~/.config/awesome/external/picom.conf &>/dev/null &
 fi

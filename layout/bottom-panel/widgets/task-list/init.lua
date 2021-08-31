@@ -12,7 +12,19 @@ local beautiful = require('beautiful')
 local dpi = beautiful.xresources.apply_dpi
 -- Set tasklist items to set width of 200
 local common = require('awful.widget.common')
-
+local task_preview_box = require('layout.bottom-panel.widgets.task-list.task_preview')
+task_preview_box.enable {
+    placement_fn = function(c) -- Place the widget using awful.placement (this overrides x & y)
+        awful.placement.bottom(
+            c,
+            {
+                margins = {
+                    bottom = 40
+                }
+            }
+        )
+    end
+}
 -- ########################################################################
 -- ########################################################################
 -- ########################################################################
@@ -71,6 +83,7 @@ local tasklist = function(s)
                     {
                         {
                             {
+                                id = 'clienticon',
                                 awful.widget.clienticon,
                                 margins = dpi(6),
                                 left = dpi(6),
@@ -104,9 +117,27 @@ local tasklist = function(s)
             right = dpi(6),
             top = dpi(2),
             bottom = dpi(2),
-            widget = wibox.container.margin
+            widget = wibox.container.margin,
+            create_callback = function(self, c, index, objects) --luacheck: no unused args
+                self:get_children_by_id('clienticon')[1].client = c
+
+                -- BLING: Toggle the popup on hover and disable it off hover
+                self:connect_signal(
+                    'mouse::enter',
+                    function()
+                        awesome.emit_signal('task_preview::visibility', s, true, c)
+                    end
+                )
+                self:connect_signal(
+                    'mouse::leave',
+                    function()
+                        awesome.emit_signal('task_preview::visibility', s, false, c)
+                    end
+                )
+            end
         }
     }
+
     -- ########################################################################
     -- ########################################################################
     -- ########################################################################

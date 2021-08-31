@@ -30,7 +30,7 @@ return {
         -- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
         web_browser = 'firefox',
         -- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-        file_manager = 'thunar',
+        file_manager = 'caja',
         -- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
         rofi = 'rofi -dpi ' ..
             screen.primary.dpi ..
@@ -82,7 +82,9 @@ return {
         'xsetroot -cursor_name left_ptr',
         -- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
         --  Set the Super key to all three of the below for menu on single key press
-        'xcape -e "Super_L=Super_L|Control_L|Escape"'
+        'xcape -e "Super_L=Super_L|Control_L|Escape"',
+        -- Locking
+        'sh $HOME/.config/awesome/bin/autolock.sh'
         -- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     },
     -- ########################################################################

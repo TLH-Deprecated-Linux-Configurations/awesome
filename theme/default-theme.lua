@@ -100,7 +100,7 @@ local awesome_overrides = function(theme)
     theme.dir = theme_dir
     theme.titlebar_size = 24
     theme.icons = theme.dir .. '/icons/'
-    theme.wallpaper = theme_dir .. '/wallpapers/wp33.png'
+    theme.wallpaper = theme_dir .. '/wallpapers/wp01.png'
 
     -- ########################################################################
     -- ########################################################################
@@ -140,9 +140,9 @@ local awesome_overrides = function(theme)
     theme.bg_focus = theme.xcolor18
     theme.bg_urgent = theme.xcolor1
     theme.bg_systray = theme.xcolor18
-    theme.bg_modal = theme.xbackground .. '88'
-    theme.bg_modal_title = theme.xbackground .. '88'
-    theme.bg_settings_display_number = theme.xbackground .. '88'
+    theme.bg_modal = theme.xbackground .. '33'
+    theme.bg_modal_title = theme.xbackground .. '33'
+    theme.bg_settings_display_number = theme.xbackground .. '33'
     theme.bg_normal = theme.background
     theme.bg_button = theme.xbackground
     theme.bg_widget = theme.xcolor0
@@ -194,15 +194,15 @@ local awesome_overrides = function(theme)
         from = {0, 0},
         to = {95, 95},
         stops = {
-            {0, theme.xbackground .. '88'},
-            {33, theme.xcolor8 .. '88'},
-            {70, theme.xcolor18 .. '88'},
-            {80, theme.xcolor22 .. '88'},
-            {90, theme.xbackground .. '88'}
+            {0, theme.xbackground .. '33'},
+            {33, theme.xcolor8 .. '33'},
+            {70, theme.xcolor18 .. '33'},
+            {80, theme.xcolor22 .. '33'},
+            {90, theme.xbackground .. '33'}
         }
     }
 
-    theme.tooltip_border_color = theme.xcolor0 .. '88'
+    theme.tooltip_border_color = theme.xcolor0 .. '33'
     theme.tooltip_border_width = 0
     theme.tooltip_shape = function(cr, w, h)
         gears.shape.rounded_rect(cr, w, h, dpi(6))
@@ -243,11 +243,11 @@ local awesome_overrides = function(theme)
         from = {0, 0},
         to = {15, 15},
         stops = {
-            {0, theme.xbackground .. '88'},
-            {3, theme.xcolor18 .. '88'},
-            {7, theme.xcolor8 .. '88'},
-            {12, theme.xbackground .. '88'},
-            {15, theme.xcolor0 .. '88'}
+            {0, theme.xbackground .. '33'},
+            {3, theme.xcolor18 .. '33'},
+            {7, theme.xcolor8 .. '33'},
+            {12, theme.xbackground .. '33'},
+            {15, theme.xcolor0 .. '33'}
         }
     }
 
@@ -256,11 +256,11 @@ local awesome_overrides = function(theme)
         from = {0, 0},
         to = {65, 65},
         stops = {
-            {0, theme.xbackground .. '88'},
-            {15, theme.xcolor0 .. '88'},
-            {30, theme.xcolor8 .. '88'},
-            {45, theme.xcolor17 .. '88'},
-            {60, theme.xcolor19 .. '88'}
+            {0, theme.xbackground .. '33'},
+            {15, theme.xcolor0 .. '33'},
+            {30, theme.xcolor8 .. '33'},
+            {55, theme.xcolor17 .. '33'},
+            {60, theme.xcolor19 .. '33'}
         }
     }
 
@@ -269,10 +269,10 @@ local awesome_overrides = function(theme)
         from = {0, 0},
         to = {65, 65},
         stops = {
-            {0, theme.xbackground .. '88'},
-            {30, theme.xcolor9 .. '88'},
-            {40, theme.xcolor21 .. '88'},
-            {65, theme.xcolor19 .. '88'}
+            {0, theme.xbackground .. '33'},
+            {30, theme.xcolor9 .. '33'},
+            {60, theme.xcolor21 .. '33'},
+            {65, theme.xcolor19 .. '33'}
         }
     }
     -- foreground
@@ -286,61 +286,10 @@ local awesome_overrides = function(theme)
     -- Taglist
     theme.taglist_spacing = 1
     -- colors
-    -- theme.taglist_bg_empty = {
-    --     type = 'linear',
-    --     from = {0, 0},
-    --     to = {-85, -85},
-    --     stops = {
-    --         {0, theme.xbackground .. '88'},
-    --         {0.45, theme.xcolor7 .. '88'},
-    --         {0.85, theme.xcolor21 .. '88'},
-    --         {1, theme.xcolor19 .. '88'}
-    --     }
-    -- }
-    -- theme.taglist_bg_occupied = {
-    --     type = 'linear',
-    --     from = {0, 0},
-    --     to = {-35, -35},
-    --     stops = {
-    --         {0, theme.xcolor0 .. '88'},
-    --         {0.45, theme.xcolor7 .. '88'},
-    --         {0.85, theme.xcolor21 .. '88'},
-    --         {1, theme.xcolor19 .. '88'}
-    --     }
-    -- }
-    -- theme.taglist_bg_urgent = {
-    --     type = 'linear',
-    --     from = {0, 0},
-    --     to = {35, 35},
-    --     stops = {
-    --         {0, theme.xcolor0 .. '88'},
-    --         {0.45, theme.xcolor7 .. '88'},
-    --         {0.85, theme.xcolor16 .. '88'},
-    --         {1, theme.xcolor19 .. '88'}
-    --     }
-    -- }
-    -- theme.taglist_bg_focus = {
-    --     type = 'linear',
-    --     from = {0, 0},
-    --     to = {115, 15},
-    --     stops = {
-    --         {0, theme.xbackground .. '88'},
-    --         {0.45, theme.xcolor7 .. '88'},
-    --         {0.85, theme.xforeground .. '88'},
-    --         {1, theme.xcolor18 .. '88'}
-    --     }
-    -- }
-    -- theme.taglist_bg = {
-    --     type = 'linear',
-    --     from = {0, 0},
-    --     to = {65, 65},
-    --     stops = {
-    --         {0, theme.xbackground .. '88'},
-    --         {0.45, theme.xcolor7 .. '88'},
-    --         {0.85, theme.xcolor18 .. '88'},
-    --         {1, theme.xbackground .. '88'}
-    --    }
-    -- }
+    theme.taglist_bg_empty = theme.xbackground .. '00'
+    theme.taglist_bg_occupied = theme.xbackground .. '00'
+    theme.taglist_bg_urgent = theme.xbackground .. '00'
+    theme.taglist_bg_focus = theme.xbackground .. '00'
     theme.taglist_bg = theme.xbackground .. '00'
     theme.taglist_fg_focus = theme.xforeground
     theme.taglist_fg_urgent = theme.xcolor1
@@ -427,10 +376,10 @@ local awesome_overrides = function(theme)
         from = {0, 0},
         to = {125, 125},
         stops = {
-            {0, theme.xbackground .. '88'},
-            {0.45, theme.xcolor0 .. '88'},
-            {0.85, theme.xbackground .. '88'},
-            {1, theme.xcolor19 .. '88'}
+            {0, theme.xbackground .. '33'},
+            {0.45, theme.xcolor0 .. '33'},
+            {0.85, theme.xbackground .. '33'},
+            {1, theme.xcolor19 .. '33'}
         }
     }
     theme.notification_fg = theme.fg_normal
@@ -453,10 +402,10 @@ local awesome_overrides = function(theme)
         from = {0, 0},
         to = {-55, -55},
         stops = {
-            {0, theme.xbackground .. '88'},
-            {0.45, theme.xcolor0 .. '88'},
-            {0.85, theme.xbackground .. '88'},
-            {1, theme.xcolor19 .. '88'}
+            {0, theme.xbackground .. '33'},
+            {0.45, theme.xcolor0 .. '33'},
+            {0.85, theme.xbackground .. '33'},
+            {1, theme.xcolor19 .. '33'}
         }
     }
 

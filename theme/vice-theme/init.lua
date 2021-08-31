@@ -83,13 +83,13 @@ end
 -- ########################################################################
 
 local icon_path = gears.filesystem.get_configuration_dir() .. 'theme/icons/'
-local titlebar_icon_path = icon_path .. 'titlebar/'
+local titlebar_icon_path = icon_path .. 'titlebar/basic/'
 
-theme.titlebar_close_button_normal = titlebar_icon_path .. 'close_normal.svg'
-theme.titlebar_close_button_focus = titlebar_icon_path .. 'close_focus.svg'
+theme.titlebar_close_button_normal = titlebar_icon_path .. 'window-closed-normal.svg'
+theme.titlebar_close_button_focus = titlebar_icon_path .. 'window-close.svg'
 
-theme.titlebar_minimize_button_normal = titlebar_icon_path .. 'minimize_normal.svg'
-theme.titlebar_minimize_button_focus = titlebar_icon_path .. 'minimize_focus.svg'
+theme.titlebar_minimize_button_normal = titlebar_icon_path .. 'min.svg'
+theme.titlebar_minimize_button_focus = titlebar_icon_path .. 'min.svg'
 
 theme.titlebar_ontop_button_normal_inactive = titlebar_icon_path .. 'ontop_normal_inactive.svg'
 theme.titlebar_ontop_button_focus_inactive = titlebar_icon_path .. 'ontop_focus_inactive.svg'
@@ -101,15 +101,15 @@ theme.titlebar_sticky_button_focus_inactive = titlebar_icon_path .. 'sticky_focu
 theme.titlebar_sticky_button_normal_active = titlebar_icon_path .. 'sticky_normal_active.svg'
 theme.titlebar_sticky_button_focus_active = titlebar_icon_path .. 'sticky_focus_active.svg'
 
-theme.titlebar_floating_button_normal_inactive = titlebar_icon_path .. 'floating_normal_inactive.svg'
-theme.titlebar_floating_button_focus_inactive = titlebar_icon_path .. 'floating_focus_inactive.svg'
-theme.titlebar_floating_button_normal_active = titlebar_icon_path .. 'floating_normal_active.svg'
-theme.titlebar_floating_button_focus_active = titlebar_icon_path .. 'floating_focus_active.svg'
+theme.titlebar_floating_button_normal_inactive = titlebar_icon_path .. 'go-left.svg'
+theme.titlebar_floating_button_focus_inactive = titlebar_icon_path .. 'go-left.svg'
+theme.titlebar_floating_button_normal_active = titlebar_icon_path .. 'go-left.svg'
+theme.titlebar_floating_button_focus_active = titlebar_icon_path .. 'go-left.svg'
 
-theme.titlebar_maximized_button_normal_inactive = titlebar_icon_path .. 'maximized_normal_inactive.svg'
-theme.titlebar_maximized_button_focus_inactive = titlebar_icon_path .. 'maximized_focus_inactive.svg'
-theme.titlebar_maximized_button_normal_active = titlebar_icon_path .. 'maximized_normal_active.svg'
-theme.titlebar_maximized_button_focus_active = titlebar_icon_path .. 'maximized_focus_active.svg'
+theme.titlebar_maximized_button_normal_inactive = titlebar_icon_path .. 'max.svg'
+theme.titlebar_maximized_button_focus_inactive = titlebar_icon_path .. 'max.svg'
+theme.titlebar_maximized_button_normal_active = titlebar_icon_path .. 'max.svg'
+theme.titlebar_maximized_button_focus_active = titlebar_icon_path .. 'max.svg'
 -- ########################################################################
 -- ########################################################################
 -- ########################################################################
@@ -118,10 +118,10 @@ theme.background = {
     from = {0, 0},
     to = {-55, -55},
     stops = {
-        {0, theme.xbackground .. '66'},
-        {0.45, theme.xcolor0 .. '66'},
-        {0.85, theme.xbackground .. '66'},
-        {1, theme.xcolor19 .. '66'}
+        {0, theme.xbackground .. '88'},
+        {-15, theme.xcolor0 .. '88'},
+        {-25, theme.xbackground .. '88'},
+        {-45, theme.xcolor19 .. '88'}
     }
 }
 -- ########################################################################

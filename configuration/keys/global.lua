@@ -128,9 +128,9 @@ local globalKeys =
         {modkey},
         'F3',
         function()
-            print('Spawning Thunar')
+            print('Spawning caja')
 
-            awful.spawn('thunar')
+            awful.spawn('caja')
         end,
         {
             description = 'Launch file Manager',
@@ -143,9 +143,9 @@ local globalKeys =
         {modkey, 'Control'},
         'F3',
         function()
-            print('Spawning Thunar as Root')
+            print('Spawning caja as Root')
 
-            awful.spawn('gksu thunar')
+            awful.spawn('gksu caja')
         end,
         {
             description = 'Launch file Manager as Root',

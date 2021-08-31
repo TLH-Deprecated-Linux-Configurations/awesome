@@ -1,6 +1,6 @@
 local HOME = os.getenv('HOME')
 
-local dir = HOME .. '/.config/awesome/icons/matangi'
+local dir = HOME .. '/.config/awesome/theme/icons/'
 return {
     abstract = dir .. 'abstract.svg',
     academic_cap = dir .. 'academic-cap.svg',

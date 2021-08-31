@@ -3,32 +3,11 @@
     "*.rsh": "javascript"
   },
   "Lua.diagnostics.globals": [
-    "awesome",
-    "mouse",
-    "client",
-    "modkey",
-    "s",
-    "root",
-    "center",
-    "screen",
-    "backup",
-    "tag",
-    "double_click_event_handler",
-    "c",
-    "dpi",
-    "wibox",
-    "beautiful",
     "awful",
-    "general",
-    "filesystem",
-    "xresources",
-    "gfs",
-    "gears",
-    "client_keys",
-    "client_buttons",
-    "icons",
-    "timer",
-    "theme"
+    "client",
+    "awesome",
+    "create_callback",
+    "mouse"
   ],
   "Lua.diagnostics.disable": [
     "undefined-field"

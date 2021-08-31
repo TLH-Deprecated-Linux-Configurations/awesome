@@ -20,7 +20,7 @@ HIST_file="$CONF_DIR/history.rs"
 
 OPENER=open
 TERM_EMU=${TERMINAL:-"st"}
-file_MANAGER=${file_MANAGER:-"thunar"}
+file_MANAGER=${file_MANAGER:-"caja"}
 BLUETOOTH_SEND=blueman-sendto
 
 CUR_DIR=$HOME

@@ -10,15 +10,15 @@
 -- ########################################################################
 -- ########################################################################
 -- External Library Handling
-local awful = require("awful")
-local gears = require("gears")
+local awful = require('awful')
+local gears = require('gears')
 
 -- Widget and layout library
-local wibox = require("wibox")
+local wibox = require('wibox')
 
 -- Theme handling library
-local beautiful = require("beautiful")
-local dpi = require("beautiful.xresources").apply_dpi
+local beautiful = require('beautiful')
+local dpi = require('beautiful.xresources').apply_dpi
 -- ########################################################################
 -- ########################################################################
 -- ########################################################################
@@ -32,7 +32,7 @@ end
 -- ########################################################################
 -- ########################################################################
 client.connect_signal(
-    "manage",
+    'manage',
     function(c)
         awful.titlebar.show(c)
     end
@@ -43,7 +43,7 @@ client.connect_signal(
 -- ########################################################################
 -- Add a titlebar if titlebars_enabled is set to true in the rules.
 client.connect_signal(
-    "request::titlebars",
+    'request::titlebars',
     function(c)
         -- buttons for the titlebar
         -- ########################################################################
@@ -56,8 +56,8 @@ client.connect_signal(
                 1,
                 function()
                     c:emit_signal(
-                        "request::activate",
-                        "titlebar",
+                        'request::activate',
+                        'titlebar',
                         {
                             raise = true
                         }
@@ -73,8 +73,8 @@ client.connect_signal(
                 3,
                 function()
                     c:emit_signal(
-                        "request::activate",
-                        "titlebar",
+                        'request::activate',
+                        'titlebar',
                         {
                             raise = true
                         }
@@ -134,44 +134,48 @@ client.connect_signal(
         local function update()
             if client.focus == c then
                 -- Changed This
-                l_reverse_corner.bg = beautiful.xbackground .. "66"
-                r_reverse_corner.bg = beautiful.xbackground .. "66"
+                l_reverse_corner.bg = beautiful.xbackground .. '66'
+                r_reverse_corner.bg = beautiful.xbackground .. '66'
             else
-                l_reverse_corner.bg = beautiful.xbackground .. "33"
-                r_reverse_corner.bg = beautiful.xbackground .. "33"
+                l_reverse_corner.bg = beautiful.xbackground .. '33'
+                r_reverse_corner.bg = beautiful.xbackground .. '33'
             end
         end
         -- ########################################################################
         -- ########################################################################
         -- ########################################################################
         update()
-        c:connect_signal("focus", update)
-        c:connect_signal("unfocus", update)
+        c:connect_signal('focus', update)
+        c:connect_signal('unfocus', update)
 
         awful.titlebar(
             c,
             {
-                position = "top",
+                position = 'top',
                 size = beautiful.titlebar_size,
-                bg = beautiful.xbackground .. "99"
+                bg = beautiful.xbackground .. '99'
             }
         ):setup {
             {
                 {
-                    awful.titlebar.widget.floatingbutton(c),
+                    awful.titlebar.widget.iconwidget(c),
+                    -- awful.titlebar.widget.floatingbutton(c),
+
                     buttons = buttons,
                     layout = wibox.layout.flex.horizontal
                 },
-                margins = dpi(0),
+                margins = dpi(2),
+                left = dpi(18),
+                right = dpi(12),
                 widget = wibox.container.margin
             },
             {
                 -- Middle
-                -- awful.titlebar.widget.iconwidget(c),
+                --
 
                 {
                     -- Title
-                    align = "center",
+                    align = 'center',
                     widget = awful.titlebar.widget.titlewidget(c)
                 },
                 buttons = buttons,
@@ -186,7 +190,7 @@ client.connect_signal(
                     },
                     width = 0,
                     height = 0,
-                    strategy = "exact",
+                    strategy = 'exact',
                     layout = wibox.layout.constraint
                 },
                 {
@@ -199,14 +203,16 @@ client.connect_signal(
                                 --   awful.titlebar.widget.ontopbutton(c),
                                 awful.titlebar.widget.closebutton(c),
                                 layout = wibox.layout.flex.horizontal,
-                                margins = 0
+                                margins = dpi(12),
+                                spacing = dpi(6)
                             },
                             widget = wibox.container.margin
                         },
                         shape = prrect(beautiful.border_radius, true, true, false, false),
                         widget = wibox.container.background
                     },
-                    top = dpi(0),
+                    top = dpi(2),
+                    bottom = dpi(2),
                     right = dpi(6),
                     spacing = dpi(6),
                     widget = wibox.container.margin
@@ -220,7 +226,7 @@ client.connect_signal(
                     },
                     width = 0,
                     height = 0,
-                    strategy = "exact",
+                    strategy = 'exact',
                     layout = wibox.layout.constraint
                 },
                 top = dpi(2),
@@ -229,7 +235,7 @@ client.connect_signal(
                 layout = wibox.layout.fixed.horizontal
             },
             layout = wibox.layout.align.horizontal,
-            bg = beautiful.xbackground .. "99"
+            bg = beautiful.xbackground .. '99'
         }
     end
 )

@@ -10,9 +10,9 @@ result="$(rofi -dpi "$DPI" -show drun -theme "$theme")"
 
 while [[ ! "$result" == "" ]]; do
     qalculatedResult="$(qalc "$result")"
-    
+
     if ! echo "$qalculatedResult" | grep -q "^error: "; then
-        result="$(qalc "$result" | rofi -dpi "$DPI" -dmenu -theme "$theme")"
+        result="$(qalc "$result" | rofi -no-default-config -dpi "$DPI" -dmenu -theme "$theme")"
     else
         result=""
     fi
