@@ -8,4 +8,4 @@ for i in "${!MONITOR_NAMES[@]}"; do
   fi
 done
 
-#xrandr --output $1 --brightness $2
+xrandr --output $1 --brightness $2

@@ -1,7 +1,5 @@
 #!/usr/bin/env bash
 
-userlocation="$HOME/.config/awesome/"
-
 function run() {
     if ! pgrep -f "$1"; then
         "$@" &
@@ -15,8 +13,8 @@ if [[ "$(command -v udiskie)" ]]; then
 fi
 
 # autolock the system
-if [[ "$(command -v i3lock)" != "" && "$1" -gt "5" ]]; then
-    echo "Lock screen time set to: $1 seconds"
+if [[ "$(command -v i3lock)" ]]; then
+    echo "Lock screen time set to: 90 seconds"
     "$HOME"/.config/awesome/bin/autolock.sh &>/dev/null &
 fi
 

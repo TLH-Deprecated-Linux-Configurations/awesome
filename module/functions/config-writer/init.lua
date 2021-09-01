@@ -6,18 +6,12 @@
 -- ########################################################################
 -- ########################################################################
 -- ########################################################################
-local parser = require("module.functions.parser")
-local file_handle = require("module.functions.file")
+local parser = require('module.functions.parser')
+local file_handle = require('module.functions.file')
 -- ########################################################################
 -- ########################################################################
 -- ########################################################################
---- Update an entry in a configuration file
--- @tparam string file The path to the file, can be both absolute or relative.
--- @tparam string field The specific configuration field to update
--- @tparam string value The value that the configuration field should contain
--- @treturn bool if the write was successful
--- @staticfct update_entry
--- @usage -- This will create the content in hallo.txt to var=value
+
 -- module.functions.file.update_entry("hallo.txt", "var", "value")
 local function update_entry(file, field, value)
     if not file_handle.exists(file) then
@@ -30,8 +24,8 @@ local function update_entry(file, field, value)
     local parsed = parser(file)
     -- our field doesn't exist, let's add it
     if parsed[field] == nil then
-        print("Appending file")
-        file_handle.write(file, "\n" .. field .. '="' .. value .. '"\n')
+        print('Appending file')
+        file_handle.write(file, '\n' .. field .. '="' .. value .. '"\n')
         return true
     end
     -- ########################################################################
@@ -39,12 +33,12 @@ local function update_entry(file, field, value)
     -- ########################################################################
     -- our field already exists, we need to alter them
     local lines = file_handle.lines(file)
-    local result = ""
+    local result = ''
     -- ########################################################################
     -- ########################################################################
     -- ########################################################################
     for i, line in ipairs(lines) do
-        if string.match(line, "^ *" .. field .. ' *= *[\'"].*[\'"]') then
+        if string.match(line, '^ *' .. field .. " *= *['\"].*['\"]") then
             -- ########################################################################
             -- ########################################################################
             -- ########################################################################
@@ -52,7 +46,7 @@ local function update_entry(file, field, value)
         else
             -- otherwise a lot of newlines will appear in the config file
             if not (i == #lines) then
-                result = result .. line .. "\n"
+                result = result .. line .. '\n'
             else
                 result = result .. line
             end
@@ -61,7 +55,7 @@ local function update_entry(file, field, value)
     -- ########################################################################
     -- ########################################################################
     -- ########################################################################
-    print("Overwriting file")
+    print('Writing file')
     return file_handle.overwrite(file, result)
 end
 -- ########################################################################
