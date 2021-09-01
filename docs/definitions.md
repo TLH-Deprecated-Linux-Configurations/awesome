@@ -38,7 +38,3 @@ for purposes of keeping clutter in the `widgets` directory at a minimum.
 **Theme** - files relating to the appearance of the window manager and a general suite of icons (specific icons should be included in the `widget` subdirectory local to the file calling it).
 
 **Widget** - These are files that add functionality that the user interacts with, thus a type of module. Many of these are the applications one interacts with on the bottom bar, or the various components of the two settings applications (also accessed via icons on the bottom bar).
-
-## Making Things Modular
-
-Sometimes it makes more sense to ignore the careful scaffolding above and use a pattern similar to the way React.js development works, where all the related files get packed in the components directory. In this context, it is a pretty solid approach when handling icons and making `widgets` directories for each of the wibars makes the `widget` directory less painful to look at. These sorts of changes help me simplify the code in terms of how it relates to itself and most importantly how it may be useful to others.

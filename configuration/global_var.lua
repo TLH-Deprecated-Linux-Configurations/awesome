@@ -33,7 +33,7 @@ signals = require('module.settings.signals')
 file = require('module.functions.file')
 spawn = require('awful.spawn')
 slider = require('module.interface.slider')
-
+naughty = require 'naughty'
 -- ###############################################
 -- ###############################################
 -- ###############################################
@@ -57,3 +57,13 @@ beautiful.init(require('theme'))
 -- Fixes for Default Modules
 require('lib.fixed-align')
 require('lib.fixed-margin')
+
+--Require theme initialization first before declaration
+hardware = require('module.hardware.hardware-check')
+task_list = require('layout.bottom-panel.widgets.task-list')
+tag_list = require('layout.bottom-panel.widgets.tag-list')
+file = require 'module.functions.file'
+clickable_container = require 'widget.clickable-container'
+delayed_timer = require('lib.function.delayed-timer')
+icons = require('theme.icons')
+rubato = require('module.interface.animations.rubato')

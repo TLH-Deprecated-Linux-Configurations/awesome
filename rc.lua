@@ -10,37 +10,55 @@
 -- ########################################################################
 -- If LuaRocks is installed, make sure that packages installed through it are
 -- found (e.g. lgi). If LuaRocks is not installed, do nothing.
-pcall(require, "luarocks.loader")
+pcall(require, 'luarocks.loader')
 -- ########################################################################
-
-require("module.functions.luapath")
-require("module.functions.logger")
-print("Booting up...")
-require("configuration.garbage")
+-- First get logging ready
+--
+require('module.functions.luapath')
+require('module.functions.logger')
+-- An example of how that works
+--
+print('Booting up...')
 -- ########################################################################
-require("configuration.global_var")
-require("awful.autofocus")
+-- Function for garbage collection to keep memory use stable
+require('configuration.garbage')
 -- ########################################################################
--- We load in the notifications before loading anything else so we get errors to display appropiately
-require("module.settings.notifications")
--- ########################################################################
-
-require("widget.titlebar")
-require("module.interface.backdrop")
+require('configuration.global_var')
 
 -- ########################################################################
--- Layout
-require("layout")
+-- Pull in this for focus following the mouse
+--
+require('awful.autofocus')
 -- ########################################################################
-require("module")
+-- Load the notifications & errors early to get the messages when things go wrong
+--
+require('module.settings.notifications')
 -- ########################################################################
--- Setup configurations
-require("configuration.client")
-require("configuration.tags")
-_G.root.keys(require("configuration.keys.global"))
+-- Titlebar with custom icons
+--
+require('widget.titlebar')
+-- ########################################################################
+-- Backdrop for when left and right bar are displayed
+--
+require('module.interface.backdrop')
 
 -- ########################################################################
-require("module.settings.bootup_configuration")
-require("module.settings.lazy_load_boot")
+-- Layout which features the bars
+--
+require('layout')
+-- ########################################################################
+-- Modules
+--
+require('module')
+-- ########################################################################
+-- Setup configurations of client, keys and tags
+--
+require('configuration.client')
+require('configuration.tags')
+_G.root.keys(require('configuration.keys.global'))
 
--- remove all images from memory (to save memory space at expense of the CPU so don't go hammer time too hard)
+-- ########################################################################
+-- Other bootup functions
+--
+require('module.settings.bootup_configuration')
+require('module.settings.lazy_load_boot')

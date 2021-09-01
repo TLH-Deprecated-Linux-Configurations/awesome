@@ -3,13 +3,8 @@
 -- |   _|  _  |  _  ||  |  ||__ --||   _|
 -- |____|___._|___  ||__|__||_____||____|
 --            |_____|
-local awful = require('awful')
-local gears = require('gears')
+
 local gfs = gears.filesystem
-local wibox = require('wibox')
-local beautiful = require('beautiful')
-local xresources = require('beautiful.xresources')
-local dpi = xresources.apply_dpi
 local tag_preview_box = require('layout.bottom-panel.widgets.tag-list.tag-preview')
 tag_preview_box.enable {
     show_client_content = true, -- Whether or not to show the client content

@@ -11,15 +11,9 @@
 -- ########################################################################
 -- ########################################################################
 -- ########################################################################
-local wibox = require("wibox")
-local awful = require("awful")
-local beautiful = require("beautiful")
-local dpi = beautiful.xresources.apply_dpi
-local clickable_container = require("widget.clickable-container")
-local gears = require("gears")
-local modkey = require("configuration.keys.mod").modKey
-local timer = require("gears.timer")
-local get_screen = require("lib.function.common").focused_screen
+local gears = require('gears')
+local modkey = require('configuration.keys.mod').modKey
+local get_screen = require('lib.function.common').focused_screen
 
 -- ########################################################################
 -- ########################################################################
@@ -35,12 +29,12 @@ local ll =
         spacing = dpi(72),
         forced_num_cols = 3,
         layout = wibox.layout.grid.vertical,
-        bg = beautiful.xbackground .. "33"
+        bg = beautiful.xbackground .. '33'
     },
     widget_template = {
         {
             {
-                id = "icon_role",
+                id = 'icon_role',
                 forced_height = dpi(84),
                 forced_width = dpi(84),
                 widget = wibox.widget.imagebox
@@ -48,7 +42,7 @@ local ll =
             margins = dpi(15),
             widget = wibox.container.margin
         },
-        id = "background_role",
+        id = 'background_role',
         forced_width = dpi(84),
         forced_height = dpi(84),
         shape = gears.shape.rounded_rect,
@@ -70,14 +64,14 @@ local layout_popup =
     ontop = true,
     screen = s,
     visible = false,
-    bg = beautiful.bg_normal .. "00"
+    bg = beautiful.bg_normal .. '00'
 }
 layout_popup.timer =
     gears.timer {
     timeout = 1
 }
 layout_popup.timer:connect_signal(
-    "timeout",
+    'timeout',
     function()
         layout_popup.visible = false
     end
@@ -110,19 +104,19 @@ awful.keygrabber(
             layout_popup.timer:start()
         end,
         export_keybindings = true,
-        stop_event = "release",
-        stop_key = {"Escape", "Super_L", "Super_R", "Mod4"},
+        stop_event = 'release',
+        stop_key = {'Escape', 'Super_L', 'Super_R', 'Mod4'},
         keybindings = {
             {
-                {modkey, "Shift"},
-                " ",
+                {modkey, 'Shift'},
+                ' ',
                 function()
                     awful.layout.set(gears.table.iterate_value(ll.layouts, ll.current_layout, -1), nil)
                 end
             },
             {
                 {modkey},
-                " ",
+                ' ',
                 function()
                     awful.layout.set(gears.table.iterate_value(ll.layouts, ll.current_layout, 1), nil)
                 end

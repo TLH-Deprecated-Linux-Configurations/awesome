@@ -5,16 +5,14 @@
 -- ########################################################################
 -- ########################################################################
 -- ########################################################################
-local wibox = require("wibox")
-local beautiful = require("beautiful")
-require("widget.calendar-widget")
+require('layout.bottom-panel.widgets.clock.calendar')
 -- ########################################################################
 -- ########################################################################
 -- ########################################################################
 local clock = wibox.widget.textclock('<span font="' .. beautiful.font .. '"> %H:%M:%S %m/%d/%y </span>')
 
 clock:connect_signal(
-    "button::press",
+    'button::press',
     function(_, _, _, button)
         if button == 1 then
             cal_toggle()

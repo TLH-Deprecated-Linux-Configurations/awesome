@@ -1,16 +1,10 @@
---
--- Provides:
--- bling::task_preview::visibility
---      s   (screen)
---      v   (boolean)
---      c   (client)
---
-local awful = require('awful')
-local wibox = require('wibox')
-local gears = require('gears')
-local beautiful = require('beautiful')
-local dpi = beautiful.xresources.apply_dpi
-local cairo = require('lgi').cairo
+--  _______               __         ______                    __
+-- |_     _|.---.-.-----.|  |--.    |   __ \.----.-----.--.--.|__|.-----.--.--.--.
+--   |   |  |  _  |__ --||    <     |    __/|   _|  -__|  |  ||  ||  -__|  |  |  |
+--   |___|  |___._|_____||__|__|    |___|   |__| |_____|\___/ |__||_____|________|
+-- ########################################################################
+-- ########################################################################
+-- ########################################################################
 
 local function draw_widget(
     c,
@@ -31,6 +25,9 @@ local function draw_widget(
      then
         return
     end
+    -- ########################################################################
+    -- ########################################################################
+    -- ########################################################################
     local content = gears.surface(c.content)
     local cr = cairo.Context(content)
     local x, y, w, h = cr:clip_extents()
@@ -39,7 +36,9 @@ local function draw_widget(
     cr:set_source_surface(content, 0, 0)
     cr.operator = cairo.Operator.SOURCE
     cr:paint()
-
+    -- ########################################################################
+    -- ########################################################################
+    -- ########################################################################
     local widget =
         wibox.widget(
         {
@@ -79,14 +78,18 @@ local function draw_widget(
             widget = wibox.container.constraint
         }
     )
-
+    -- ########################################################################
+    -- ########################################################################
+    -- ########################################################################
     for _, w in ipairs(widget:get_children_by_id('image_role')) do
         w.image = img
     end
 
     return widget
 end
-
+-- ########################################################################
+-- ########################################################################
+-- ########################################################################
 local enable = function(opts)
     local opts = opts or {}
 
@@ -95,7 +98,9 @@ local enable = function(opts)
     local widget_height = dpi(500)
     local widget_width = dpi(500)
     local placement_fn = opts.placement_fn or nil
-
+    -- ########################################################################
+    -- ########################################################################
+    -- ########################################################################
     local margin = beautiful.task_preview_widget_margin or dpi(0)
     local screen_radius = beautiful.task_preview_widget_border_radius or dpi(0)
     local widget_bg = beautiful.task_preview_widget_bg or '#000000'
@@ -114,7 +119,9 @@ local enable = function(opts)
             bg = '#00000000'
         }
     )
-
+    -- ########################################################################
+    -- ########################################################################
+    -- ########################################################################
     awesome.connect_signal(
         'task_preview::visibility',
         function(s, v, c)
@@ -133,7 +140,9 @@ local enable = function(opts)
                     widget_height
                 )
             end
-
+            -- ########################################################################
+            -- ########################################################################
+            -- ########################################################################
             if not placement_fn then
                 task_preview_box.x = s.geometry.x + widget_x
                 task_preview_box.y = s.geometry.y + widget_y
@@ -143,5 +152,7 @@ local enable = function(opts)
         end
     )
 end
-
+-- ########################################################################
+-- ########################################################################
+-- ########################################################################
 return {enable = enable}
