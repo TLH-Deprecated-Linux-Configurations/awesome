@@ -10,12 +10,14 @@
 -- ########################################################################
 -- If LuaRocks is installed, make sure that packages installed through it are
 -- found (e.g. lgi). If LuaRocks is not installed, do nothing.
+--
 pcall(require, 'luarocks.loader')
 -- ########################################################################
 -- First get logging ready
 --
 require('module.functions.luapath')
 require('module.functions.logger')
+
 -- An example of how that works
 --
 print('Booting up...')

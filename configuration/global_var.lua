@@ -57,6 +57,7 @@ beautiful.init(require('theme'))
 -- Fixes for Default Modules
 require('lib.fixed-align')
 require('lib.fixed-margin')
+require('awful.hotkeys_popup.keys')
 
 --Require theme initialization first before declaration
 hardware = require('module.hardware.hardware-check')
@@ -67,3 +68,7 @@ clickable_container = require 'widget.clickable-container'
 delayed_timer = require('lib.function.delayed-timer')
 icons = require('theme.icons')
 rubato = require('module.interface.animations.rubato')
+hotkeys_popup = require('awful.hotkeys_popup').widget
+volume = require('module.hardware.volume')
+xrandr = require('module.hardware.xrandr')
+apps = require('configuration.apps')

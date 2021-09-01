@@ -3,25 +3,12 @@
 -- |    |  |  ||  _  ||  _  |  _  ||  |    |     < |  -__|  |  |__ --|
 -- |_______|__||_____||_____|___._||__|    |__|\__||_____|___  |_____|
 --                                                       |_____|
--- ########################################################################
--- ########################################################################
--- ########################################################################
-require('awful.autofocus')
-local hotkeys_popup = require('awful.hotkeys_popup').widget
-local has_package_installed = require('module.hardware.hardware-check').has_package_installed
-require('awful.hotkeys_popup.keys')
-
-local config = require('configuration.keys.mod')
-local modkey = config.modKey
-
-local apps = require('configuration.apps')
-local xrandr = require('module.hardware.xrandr')
-local signals = require('module.settings.signals')
-local volume = require('module.hardware.volume')
--- ########################################################################
+local drop = require('lib.attachdrop')
 -- ########################################################################
 -- ########################################################################
 -- returns true if we cannot create a screenshot
+local has_package_installed = require('module.hardware.hardware-check').has_package_installed
+
 local function send_notification_if_maim_missing()
     if not has_package_installed('maim') then
         require('naughty').notification(
@@ -35,6 +22,11 @@ local function send_notification_if_maim_missing()
     end
     return false
 end
+
+-- ########################################################################
+-- ########################################################################
+-- ########################################################################
+
 -- ########################################################################
 -- ########################################################################
 -- ########################################################################
@@ -48,6 +40,22 @@ local globalKeys =
         'Return',
         function()
             print('Spawning terminal')
+            drop.toggle('kitty', 'left', 'top', 0.8, 0.8)
+            --awful.spawn(apps.default.terminal)
+        end,
+        {
+            description = 'Open Terminal',
+            group = 'Launcher'
+        }
+    ),
+    -- #############################################################################
+
+    awful.key(
+        {modkey, 'Shift'},
+        'Return',
+        function()
+            print('Spawning terminal')
+            -- drop.toggle('kitty', 'left', 'top', 0.8, 0.8)
             awful.spawn(apps.default.terminal)
         end,
         {
@@ -215,21 +223,6 @@ local globalKeys =
         end,
         {
             description = 'Open Display Configuration Application',
-            group = 'Launcher'
-        }
-    ),
-    -- ######################################################
-    -- Dropdown application
-    awful.key(
-        {modkey},
-        'F12',
-        function()
-            print('Spawning Terminal In Quake Mode')
-
-            _G.toggle_quake()
-        end,
-        {
-            description = 'Dropdown Terminal',
             group = 'Launcher'
         }
     ),

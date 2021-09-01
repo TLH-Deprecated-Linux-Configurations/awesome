@@ -22,7 +22,7 @@ configuration {
   urgent-selected: #ff3d81ee;
   padding: 0;
   margin: 0;
-  background-color: #000000aa;
+  background-color: #00000044;
 }
 
 window {
