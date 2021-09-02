@@ -38,6 +38,7 @@ widget_button:buttons(
             nil,
             function()
                 _G.screen.primary.right_panel:toggle()
+                collectgarbage('collect')
             end
         )
     )

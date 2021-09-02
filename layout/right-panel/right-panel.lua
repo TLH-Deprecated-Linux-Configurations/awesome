@@ -1,17 +1,16 @@
-local wibox = require('wibox')
-local gears = require('gears')
-local beautiful = require('beautiful')
+--  ______ __         __     __        ______                     __
+-- |   __ \__|.-----.|  |--.|  |_     |   __ \.---.-.-----.-----.|  |
+-- |      <  ||  _  ||     ||   _|    |    __/|  _  |     |  -__||  |
+-- |___|__|__||___  ||__|__||____|    |___|   |___._|__|__|_____||__|
+--            |_____|
+-- ########################################################################
+-- ########################################################################
+-- ########################################################################
 
-local dpi = require('beautiful').xresources.apply_dpi
-local clickable_container = require('widget.clickable-container')
-local signals = require('module.settings.signals')
 local animate = require('module.interface.animations').createAnimObject
-local seperator_widget = require('layout.right-panel.widgets.separator')
 
 local keyconfig = require('configuration.keys.mod')
 local modKey = keyconfig.modKey
-
-local scrollbox = require('module.interface.scrollbox')
 
 local get_screen = require('lib.function.common').focused_screen
 

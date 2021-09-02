@@ -64,3 +64,4 @@ _G.root.keys(require('configuration.keys.global'))
 --
 require('module.settings.bootup_configuration')
 require('module.settings')
+require('widget')

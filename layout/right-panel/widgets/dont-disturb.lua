@@ -1,26 +1,31 @@
-local wibox = require("wibox")
-local dpi = require("beautiful").xresources.apply_dpi
-local mat_list_item = require("module.interface.material.list-item")
-local signals = require("module.settings.signals")
-local card = require("module.interface.card")
-local checkbox = require("module.interface.checkbox")
-local HOME = os.getenv("HOME")
-local beautiful = require("beautiful")
-local PATH_TO_ICONS = HOME .. "/.config/awesome/layout/right-panel/icons/"
+--  _____  _______ _____
+-- |     \|    |  |     \
+-- |  --  |       |  --  |
+-- |_____/|__|____|_____/
+-- ########################################################################
+-- ########################################################################
+-- ########################################################################
+local PATH_TO_ICONS = HOME .. '/.config/awesome/layout/right-panel/icons/'
 
 _G.dont_disturb = false
-
+-- ########################################################################
+-- ########################################################################
+-- ########################################################################
 local disturb_card = card()
 local box
-
+-- ########################################################################
+-- ########################################################################
+-- ########################################################################
 local dont_disturb_text =
     wibox.widget {
-    text = "Do Not Disturb",
-    font = beautiful.font .. " 10",
-    align = "left",
+    text = 'Do Not Disturb',
+    font = beautiful.font .. ' 10',
+    align = 'left',
     widget = wibox.widget.textbox
 }
-
+-- ########################################################################
+-- ########################################################################
+-- ########################################################################
 local function update_disturb(state)
     -- luacheck: ignore dont_disturb
     dont_disturb = state
@@ -29,7 +34,9 @@ local function update_disturb(state)
     end
     signals.emit_do_not_disturb(dont_disturb)
 end
-
+-- ########################################################################
+-- ########################################################################
+-- ########################################################################
 box =
     checkbox(
     false,
@@ -37,17 +44,21 @@ box =
         update_disturb(checked)
     end
 )
-
+-- ########################################################################
+-- ########################################################################
+-- ########################################################################
 local dont_disturb_icon =
     wibox.widget {
     {
-        image = PATH_TO_ICONS .. "dont-disturb.svg",
+        image = PATH_TO_ICONS .. 'dont-disturb.svg',
         widget = wibox.widget.imagebox,
         resize = true
     },
     layout = wibox.layout.align.horizontal
 }
-
+-- ########################################################################
+-- ########################################################################
+-- ########################################################################
 signals.connect_do_not_disturb(
     function(bDoNotDisturb)
         if dont_disturb == bDoNotDisturb then
@@ -57,7 +68,9 @@ signals.connect_do_not_disturb(
         update_disturb(bDoNotDisturb)
     end
 )
-
+-- ########################################################################
+-- ########################################################################
+-- ########################################################################
 local content =
     wibox.widget {
     {
@@ -72,7 +85,9 @@ local content =
     },
     layout = wibox.layout.align.horizontal
 }
-
+-- ########################################################################
+-- ########################################################################
+-- ########################################################################
 local dont_disturb_wrap =
     wibox.widget {
     wibox.widget {
@@ -85,7 +100,11 @@ local dont_disturb_wrap =
     },
     widget = mat_list_item
 }
-
+-- ########################################################################
+-- ########################################################################
+-- ########################################################################
 disturb_card.update_body(dont_disturb_wrap)
-
+-- ########################################################################
+-- ########################################################################
+-- ########################################################################
 return wibox.container.margin(disturb_card, dpi(15), dpi(15))

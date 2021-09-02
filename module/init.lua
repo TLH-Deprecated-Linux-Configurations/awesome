@@ -13,6 +13,5 @@ require('widget.exit-screen')
 require('module.hardware.brightness-slider-osd')
 require('module.hardware.volume-slider-osd')
 require('module.hardware.volume_manager')
-_G.switcher = require('module.interface.application-switch')
 
 require('module.hardware.battery-notifier')

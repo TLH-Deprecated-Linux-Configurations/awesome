@@ -5,21 +5,12 @@
 -- ########################################################################
 -- ########################################################################
 -- ########################################################################
-local wibox = require('wibox')
-local beautiful = require('beautiful')
-local HOME = os.getenv('HOME')
 
 local PATH_TO_ICONS = HOME .. '/.config/awesome/layout/left-panel/icons/'
 
 local apps = require('configuration.apps')
-local dpi = require('beautiful').xresources.apply_dpi
-local mat_list_item = require('module.interface.material.list-item')
-local mat_icon = require('module.interface.material.icon-button')
-local signals = require('module.settings.signals')
+
 local animate = require('module.interface.animations').createAnimObject
-local seperator_widget = require('layout.left-panel.dashboard.separator')
-local card = require('module.interface.card')
-local button = require('module.interface.button')
 
 local get_screen = require('lib.function.common').focused_screen
 
@@ -396,8 +387,8 @@ local left_panel_func = function()
         local table_widget =
             wibox.widget {
             topSeparator,
-            require('layout.left-panel.dashboard.quick-settings'),
-            require('layout.left-panel.dashboard.hardware-monitor')(s),
+            require('layout.left-panel.widgets.quick-settings'),
+            require('layout.left-panel.widgets.hardware-monitor')(s),
             separator,
             wibox.container.margin(network_card, dpi(20), dpi(20), dpi(20), dpi(20)),
             separator,

@@ -3,24 +3,12 @@
 -- |       ||  _  |  _  ||  |  ||  __|  _  ||   _|  ||  _  |     |    |__     ||  |  |  ||  |   _|  __||     |
 -- |___|___||   __|   __||__|__||____|___._||____|__||_____|__|__|    |_______||________||__|____|____||__|__|
 --          |__|  |__|
--- ########################################################################
--- ########################################################################
--- ########################################################################
-local cairo = require('lgi').cairo
-local wibox = require('wibox')
-local math = require('math')
-local awful = require('awful')
-local gears = require('gears')
-local timer = gears.timer
-local beautiful = require('beautiful')
-local icons = require('theme.icons')
-awful.client = require('awful.client')
-local dpi = beautiful.xresources.apply_dpi
+
 -- ########################################################################
 -- ########################################################################
 -- ########################################################################
 -- luacheck: ignore 113
-local unpack = unpack or table.unpack
+local unpack = table.unpack
 
 local surface = cairo.ImageSurface(cairo.Format.RGB24, 20, 20)
 local cr = cairo.Context(surface)
@@ -33,7 +21,7 @@ local _M = {}
 
 _M.settings = {
     preview_box = true,
-    preview_box_bg = beautiful.bg_normal,
+    preview_box_bg = beautiful.xbackground,
     preview_box_border = beautiful.xcolor7,
     preview_box_fps = 0.3,
     preview_box_delay = 100,

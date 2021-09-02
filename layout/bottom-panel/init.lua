@@ -5,10 +5,9 @@
 -- ########################################################################
 -- ########################################################################
 -- ########################################################################
-
--- ########################################################################
--- ########################################################################
--- ########################################################################
+-- The main system bar, which is revealed by hovering your mouse near the
+-- bottom edge of the screen.
+--
 local bottom_panel = function(s)
     local function show_widget_or_default(widget, show, require_is_function)
         if show and require_is_function then
@@ -53,7 +52,9 @@ local bottom_panel = function(s)
         }
     )
     panel:struts {bottom = dpi(42)}
-
+    -- ########################################################################
+    -- ########################################################################
+    -- ########################################################################
     panel:connect_signal(
         'mouse::enter',
         function()
@@ -99,6 +100,8 @@ local bottom_panel = function(s)
     -- ########################################################################
     -- ########################################################################
     -- ########################################################################
+    -- Pull in and build the widgets used on the bar
+    --
     s.control_center_toggle = build_widget(require('layout.left-panel'))
     s.bluetooth = build_widget(show_widget_or_default('layout.bottom-panel.widgets.bluetooth', hardware.hasBluetooth()))
     s.network = build_widget(show_widget_or_default('layout.bottom-panel.widgets.wifi', hardware.hasWifi()))
@@ -107,8 +110,9 @@ local bottom_panel = function(s)
     s.mytextclock = build_widget(require('layout.bottom-panel.widgets.clock'))
     s.notification_center = build_widget(require('layout.right-panel'))
     -- ########################################################################
-    -- ### Setup Panel Widgets ################################################
     -- ########################################################################
+    -- ########################################################################
+    -- Set Up the Panel, add in the widgets
     panel:setup {
         {
             layout = wibox.layout.align.horizontal,

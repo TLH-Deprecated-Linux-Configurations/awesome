@@ -6,12 +6,15 @@
 -- ########################################################################
 -- ########################################################################
 -- ########################################################################
-
+-- Declarations not made global
+--
 local config = require 'module.functions'
 local widget_icon_dir = HOME .. '/.config/awesome/layout/bottom-panel/widgets/battery/icons/'
 -- ########################################################################
 -- ########################################################################
 -- ########################################################################
+-- Return the button itself
+--
 local return_button = function()
     local battery_imagebox =
         wibox.widget {
@@ -29,6 +32,7 @@ local return_button = function()
     -- ########################################################################
     -- ########################################################################
     -- ########################################################################
+    -- Battery Percentage Text
     local battery_percentage_text =
         wibox.widget {
         id = 'percent_text',
@@ -42,6 +46,8 @@ local return_button = function()
     -- ########################################################################
     -- ########################################################################
     -- ########################################################################
+    -- Widget Definition
+    --
     local battery_widget =
         wibox.widget {
         layout = wibox.layout.fixed.horizontal,
@@ -52,6 +58,8 @@ local return_button = function()
     -- ########################################################################
     -- ########################################################################
     -- ########################################################################
+    -- Button Definition and Margins
+    --
     local battery_button = clickable_container(wibox.container.margin(battery_widget, dpi(6), dpi(6), dpi(6), dpi(6)))
     local battery_tooltip =
         awful.tooltip {
@@ -69,6 +77,7 @@ local return_button = function()
     -- ########################################################################
     -- ########################################################################
     -- Get battery info script
+    --
     local get_battery_info = function()
         awful.spawn.easy_async_with_shell(
             'upower -i $(upower -e | grep BAT)',
@@ -86,8 +95,10 @@ local return_button = function()
     -- ########################################################################
     -- ########################################################################
     -- Update tooltip on startup
+    --
     get_battery_info()
     -- Update tooltip on hover
+    --
     battery_widget:connect_signal(
         'mouse::enter',
         function()
@@ -111,6 +122,8 @@ local return_button = function()
     -- ########################################################################
     -- ########################################################################
     -- ########################################################################
+    -- Update Battery (else why even have this widget?)
+    --
     local update_battery = function(status)
         status = status:gsub('%\n', '%\n')
         local percentage = file.string '/sys/class/power_supply/BAT0/capacity'
@@ -122,6 +135,8 @@ local return_button = function()
         -- ########################################################################
         -- ########################################################################
         -- ########################################################################
+        -- Percentage Regularization (the joys of programming)
+        --
         local battery_percentage = tonumber(percentage) or 0
         print('Battery percentage: ' .. percentage)
         battery_widget.spacing = dpi(5)
@@ -131,6 +146,8 @@ local return_button = function()
         -- ########################################################################
         -- ########################################################################
         -- ########################################################################
+        -- If Discharging, sets icons
+        --
         if status:match 'Discharging' then
             if battery_percentage >= 0 and battery_percentage < 10 then
                 icon_name = icon_name .. '-' .. 'alert-red'
@@ -180,13 +197,12 @@ local return_button = function()
     -- ########################################################################
     -- ########################################################################
     -- ########################################################################
+    -- Timer Defintiion
+    --
     gears.timer {
         timeout = config.battery_timeout,
         call_now = true,
         autostart = true,
-        -- ########################################################################
-        -- ########################################################################
-        -- ########################################################################
         callback = function()
             local status = file.string '/sys/class/power_supply/BAT0/status'
             if status == '' then
@@ -197,6 +213,7 @@ local return_button = function()
             -- ########################################################################
             -- ########################################################################
             -- If no output or battery detected
+            --
             if status == '' then
                 battery_widget.spacing = dpi(0)
                 battery_percentage_text.visible = false

@@ -7,3 +7,5 @@ This began as a means of simplifying what was in the widget directory and has ex
 ## The Big Exception
 
 What is not modular about most/all of these files is that the typical import statements of the beginning of most files has been moved primarily into the `configuration/global_var` file as a means of simplifying writing the files. Meaning if you extract pieces of the file, unless you use a similar global variable scheme to me, will require adding these statements back into your files.
+
+If you are doing all of your configuring on a vanilla vim install, this will be a bit more problematic (though less frustrating if you test with AWMTT) but any modern editor or syntax highlighter should be able to point out the undeclared globals in the files you adapt, which you can find references to in the global variables file of course, which if its another file in this configuration, its path will of course be there for your reference.

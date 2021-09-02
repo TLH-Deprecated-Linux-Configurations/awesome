@@ -7,11 +7,6 @@
 -- ########################################################################
 -- This changes between the two panel modes via a click of the mouse
 --
-local wibox = require('wibox')
-local gears = require('gears')
-local beautiful = require('beautiful')
-local dpi = require('beautiful').xresources.apply_dpi
-local clickable_container = require('widget.clickable-container')
 
 local active_button = beautiful.xcolor8 .. '90'
 local inactive_button = beautiful.xcolor8 .. '70'
