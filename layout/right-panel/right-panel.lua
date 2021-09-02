@@ -26,22 +26,22 @@ local function notification_plugin()
         separator,
         layout = wibox.layout.fixed.vertical,
         {
-            require('widget.social-media'),
+            require('layout.right-panel.widgets.social-media'),
             wibox.container.margin(dpi(20), dpi(20), dpi(20), dpi(25)),
             layout = wibox.layout.fixed.vertical
         },
         {
-            require('widget.sars-cov-2'),
+            require('layout.right-panel.widgets.sars-cov-2'),
             wibox.container.margin(dpi(20), dpi(20), dpi(20), dpi(25)),
             layout = wibox.layout.fixed.vertical
         },
         {
-            require('widget.calculator'),
+            require('layout.right-panel.widgets.calculator'),
             wibox.container.margin(dpi(20), dpi(20), dpi(20), dpi(25)),
             layout = wibox.layout.fixed.vertical
         },
         {
-            require('widget.calendar-widget'),
+            require('layout.right-panel.widgets.calendar'),
             wibox.container.margin(dpi(20), dpi(20), dpi(20), dpi(25)),
             layout = wibox.layout.fixed.vertical
         }

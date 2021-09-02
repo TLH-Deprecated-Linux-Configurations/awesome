@@ -164,8 +164,8 @@ client.connect_signal(
                     buttons = buttons,
                     layout = wibox.layout.flex.horizontal
                 },
-                margins = dpi(2),
-                left = dpi(18),
+                margins = dpi(4),
+                left = dpi(20),
                 right = dpi(12),
                 widget = wibox.container.margin
             },
@@ -203,18 +203,18 @@ client.connect_signal(
                                 --   awful.titlebar.widget.ontopbutton(c),
                                 awful.titlebar.widget.closebutton(c),
                                 layout = wibox.layout.flex.horizontal,
-                                margins = dpi(12),
-                                spacing = dpi(6)
+                                margins = dpi(0),
+                                spacing = dpi(0)
                             },
                             widget = wibox.container.margin
                         },
                         shape = prrect(beautiful.border_radius, true, true, false, false),
                         widget = wibox.container.background
                     },
-                    top = dpi(2),
-                    bottom = dpi(2),
-                    right = dpi(6),
-                    spacing = dpi(6),
+                    top = dpi(0),
+                    bottom = dpi(0),
+                    right = dpi(4),
+                    spacing = dpi(0),
                     widget = wibox.container.margin
                 },
                 {

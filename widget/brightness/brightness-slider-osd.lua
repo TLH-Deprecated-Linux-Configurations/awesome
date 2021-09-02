@@ -1,5 +1,5 @@
 local mat_list_item = require('module.interface.material.list-item')
-local mat_icon_button = require('module.interface.icon')
+local mat_icon_button = require('module.interface.material.icon-button')
 
 local slider_osd =
     slider(

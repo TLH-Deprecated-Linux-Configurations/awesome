@@ -83,33 +83,33 @@ end
 -- ########################################################################
 
 local icon_path = gears.filesystem.get_configuration_dir() .. 'theme/icons/'
-local titlebar_icon_path = icon_path .. 'titlebar/basic/'
+local titlebar_icon_path = icon_path .. 'titlebar/arctodon/'
 
-theme.titlebar_close_button_normal = titlebar_icon_path .. 'window-closed-normal.svg'
-theme.titlebar_close_button_focus = titlebar_icon_path .. 'window-close.svg'
+theme.titlebar_close_button_normal = titlebar_icon_path .. 'close-inactive.png'
+theme.titlebar_close_button_focus = titlebar_icon_path .. 'close-active.png'
 
-theme.titlebar_minimize_button_normal = titlebar_icon_path .. 'min.svg'
-theme.titlebar_minimize_button_focus = titlebar_icon_path .. 'min.svg'
+theme.titlebar_minimize_button_normal = titlebar_icon_path .. 'hide-active.png'
+theme.titlebar_minimize_button_focus = titlebar_icon_path .. 'hide-inactive.png'
 
-theme.titlebar_ontop_button_normal_inactive = titlebar_icon_path .. 'ontop_normal_inactive.svg'
-theme.titlebar_ontop_button_focus_inactive = titlebar_icon_path .. 'ontop_focus_inactive.svg'
-theme.titlebar_ontop_button_normal_active = titlebar_icon_path .. 'ontop_normal_active.svg'
-theme.titlebar_ontop_button_focus_active = titlebar_icon_path .. 'ontop_focus_active.svg'
+-- theme.titlebar_ontop_button_normal_inactive = titlebar_icon_path .. 'ontop_normal_inactive.png'
+-- theme.titlebar_ontop_button_focus_inactive = titlebar_icon_path .. 'ontop_focus_inactive.png'
+-- theme.titlebar_ontop_button_normal_active = titlebar_icon_path .. 'ontop_normal_active.png'
+-- theme.titlebar_ontop_button_focus_active = titlebar_icon_path .. 'ontop_focus_active.png'
 
-theme.titlebar_sticky_button_normal_inactive = titlebar_icon_path .. 'sticky_normal_inactive.svg'
-theme.titlebar_sticky_button_focus_inactive = titlebar_icon_path .. 'sticky_focus_inactive.svg'
-theme.titlebar_sticky_button_normal_active = titlebar_icon_path .. 'sticky_normal_active.svg'
-theme.titlebar_sticky_button_focus_active = titlebar_icon_path .. 'sticky_focus_active.svg'
+-- theme.titlebar_sticky_button_normal_inactive = titlebar_icon_path .. 'sticky_normal_inactive.png'
+-- theme.titlebar_sticky_button_focus_inactive = titlebar_icon_path .. 'sticky_focus_inactive.png'
+-- theme.titlebar_sticky_button_normal_active = titlebar_icon_path .. 'sticky_normal_active.png'
+-- theme.titlebar_sticky_button_focus_active = titlebar_icon_path .. 'sticky_focus_active.png'
 
-theme.titlebar_floating_button_normal_inactive = titlebar_icon_path .. 'go-left.svg'
-theme.titlebar_floating_button_focus_inactive = titlebar_icon_path .. 'go-left.svg'
-theme.titlebar_floating_button_normal_active = titlebar_icon_path .. 'go-left.svg'
-theme.titlebar_floating_button_focus_active = titlebar_icon_path .. 'go-left.svg'
+-- theme.titlebar_floating_button_normal_inactive = titlebar_icon_path .. 'go-left.png'
+-- theme.titlebar_floating_button_focus_inactive = titlebar_icon_path .. 'go-left.png'
+-- theme.titlebar_floating_button_normal_active = titlebar_icon_path .. 'go-left.png'
+-- theme.titlebar_floating_button_focus_active = titlebar_icon_path .. 'go-left.png'
 
-theme.titlebar_maximized_button_normal_inactive = titlebar_icon_path .. 'max.svg'
-theme.titlebar_maximized_button_focus_inactive = titlebar_icon_path .. 'max.svg'
-theme.titlebar_maximized_button_normal_active = titlebar_icon_path .. 'max.svg'
-theme.titlebar_maximized_button_focus_active = titlebar_icon_path .. 'max.svg'
+theme.titlebar_maximized_button_normal_inactive = titlebar_icon_path .. 'maximize-active.png'
+theme.titlebar_maximized_button_focus_inactive = titlebar_icon_path .. 'maximize-inactive.png'
+theme.titlebar_maximized_button_normal_active = titlebar_icon_path .. 'maximize-toggled-active.png'
+theme.titlebar_maximized_button_focus_active = titlebar_icon_path .. 'maximize-toggled-inactive.png'
 -- ########################################################################
 -- ########################################################################
 -- ########################################################################

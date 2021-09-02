@@ -7,9 +7,7 @@
 -- ########################################################################
 -- ########################################################################
 local wibox = require('wibox')
-local mat_list_item = require('module.interface.material.list-item')
 local mat_slider = require('module.interface.progress_bar')
-local mat_icon = require('module.interface.icon')
 local icons = require('theme.icons')
 local dpi = require('beautiful').xresources.apply_dpi
 local filehandle = require('module.functions.file')

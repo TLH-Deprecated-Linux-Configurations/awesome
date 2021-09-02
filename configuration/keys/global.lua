@@ -40,7 +40,7 @@ local globalKeys =
         'Return',
         function()
             print('Spawning terminal')
-            drop.toggle('kitty', 'left', 'top', 0.8, 0.8)
+            drop.toggle('kitty', 'left', 'top', 0.9, 0.9)
             --awful.spawn(apps.default.terminal)
         end,
         {
@@ -93,25 +93,11 @@ local globalKeys =
         {modkey},
         'F2',
         function()
-            print('Spawning Firefox')
-
+            print('Spawning Firefox Instance')
             awful.spawn('firefox')
         end,
         {
-            description = 'Launch Firefox',
-            group = 'Launcher'
-        }
-    ),
-    -- #############################################################################
-    awful.key(
-        {modkey, 'Shift'},
-        'F2',
-        function()
-            print('Spawning Buku')
-            awful.spawn('buku_run')
-        end,
-        {
-            description = 'Launch Buku Rofi Menu',
+            description = 'Launch New Firefox Instance',
             group = 'Launcher'
         }
     ),
@@ -126,7 +112,7 @@ local globalKeys =
             awful.spawn('chrome')
         end,
         {
-            description = 'Launch Chrome',
+            description = 'Launch New Chrome Instance',
             group = 'Launcher'
         }
     ),
@@ -136,12 +122,13 @@ local globalKeys =
         {modkey},
         'F3',
         function()
-            print('Spawning caja')
+            print('Spawning Caja in Scratchpad')
+            drop.toggle('caja', 'left', 'top', 0.7, 0.7)
 
-            awful.spawn('caja')
+            -- awful.spawn('caja')
         end,
         {
-            description = 'Launch file Manager',
+            description = 'Launch Caja in Scratchpad',
             group = 'Launcher'
         }
     ),
@@ -151,7 +138,7 @@ local globalKeys =
         {modkey, 'Control'},
         'F3',
         function()
-            print('Spawning caja as Root')
+            print('Spawning Caja as Root')
 
             awful.spawn('gksu caja')
         end,
@@ -166,12 +153,12 @@ local globalKeys =
         {modkey, 'Shift'},
         'F3',
         function()
-            print('Spawning Ranger')
+            print('Spawning New Caja Instance')
 
-            awful.spawn('kitty -e ranger')
+            awful.spawn('caja')
         end,
         {
-            description = 'Launch Terminal file Manager',
+            description = 'Launch New Caja Instance',
             group = 'Launcher'
         }
     ),
@@ -185,7 +172,7 @@ local globalKeys =
             awful.spawn.easy_async_with_shell('~/.config/awesome/external/rofi/fontawesome_menu/fontawesome-menu')
         end,
         {
-            description = 'Copy Font - Awesome Icons to Clipboard',
+            description = 'Copy FontAwesome Icons to Clipboard',
             group = 'Launcher'
         }
     ), -- #############################################################################
