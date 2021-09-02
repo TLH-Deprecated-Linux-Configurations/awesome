@@ -10,7 +10,6 @@
 
 require('module.settings.auto-start')
 require('widget.exit-screen')
-require('module.interface.quake-terminal')
 require('module.hardware.brightness-slider-osd')
 require('module.hardware.volume-slider-osd')
 require('module.hardware.volume_manager')

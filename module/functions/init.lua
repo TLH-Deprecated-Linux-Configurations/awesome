@@ -8,10 +8,10 @@
 -- ########################################################################
 
 -- This file holds general configuration parameters and functions you can use
-local HOME = os.getenv("HOME")
-local gears = require("gears")
-local filesystem = require("gears.filesystem")
-local file_exists = require("module.functions.file").exists
+local HOME = os.getenv('HOME')
+local gears = require('gears')
+local filesystem = require('gears.filesystem')
+local file_exists = require('module.functions.file').exists
 
 -- We add *_startup_delay to most polls
 -- to separate the runtime
@@ -37,42 +37,32 @@ local config_functions = {
     weather_poll = 1200, -- how often we check the weather status
     cpu_poll = 5, -- how often do we check the current cpu status
     cpu_startup_delay = 9,
-    garbage_collection_cycle = 2 * 60, -- collect garbage every x seconds
-    colors_config = HOME .. "/.config/awesome/electric-tantra/colors.conf",
-    logo = HOME .. "/.config/awesome/theme/icons/logo.svg",
-    getbrightness = gears.filesystem.get_configuration_dir() .. "bin/getbrightness.sh",
-    setbrightness = gears.filesystem.get_configuration_dir() .. "bin/setbrightness.sh",
-    ramcmd = gears.filesystem.get_configuration_dir() .. "scripts/ram.sh",
-    cpucmd = gears.filesystem.get_configuration_dir() .. "scripts/cpu.sh",
-    diskcmd = gears.filesystem.get_configuration_dir() .. "scripts/disk.sh",
+    colors_config = HOME .. '/.config/awesome/electric-tantra/colors.conf',
+    logo = HOME .. '/.config/awesome/theme/icons/logo.svg',
+    getbrightness = gears.filesystem.get_configuration_dir() .. 'bin/getbrightness.sh',
+    setbrightness = gears.filesystem.get_configuration_dir() .. 'bin/setbrightness.sh',
+    ramcmd = gears.filesystem.get_configuration_dir() .. 'scripts/ram.sh',
+    cpucmd = gears.filesystem.get_configuration_dir() .. 'scripts/cpu.sh',
+    diskcmd = gears.filesystem.get_configuration_dir() .. 'scripts/disk.sh',
     proccmd = 'bash -c "ps -eo comm:45,%mem,%cpu --sort=-%cpu,-%mem | head -n 6"',
-    batcmd = 'bash -c "acpi -V | grep -m 1 \'Battery 1\' | awk -F, \'{print $2}\' | sed \'s/%//\'"',
-    updatescmd = 'bash -c "yay -Sup | wc -l"',
-    setvol = "pamixer --set-volume ",
-    play = "spotifycli --playpause",
-    next = "spotifycli --next",
-    prev = "spotifycli --prev",
-    artist = "spotifycli --artist",
-    song = "spotifycli --song",
-    isplaying = 'bash -c "spotifycli --playbackstatus | diff <(echo "▶") -"',
-    audiosrc = 'pamixer --list-sinks | awk -F\\" \'{print $4}\'',
-    micsrc = 'pamixer --list-sources | grep $(pacmd list-sources | grep \'*\' | awk \'{print $3}\' ) | awk -F\\" \'{print $4}\'',
-    software = "pamac-manager",
+    batcmd = "bash -c \"acpi -V | grep -m 1 'Battery 1' | awk -F, '{print $2}' | sed 's/%//'\"",
+    micsrc = "pamixer --list-sources | grep $(pacmd list-sources | grep '*' | awk '{print $3}' ) | awk -F\\\" '{print $4}'",
+    software = 'pamac-manager',
     -- ########################################################################
     -- ########################################################################
     -- ########################################################################
     getComptonfile = function()
-        local userfile = HOME .. "/.config/picom.conf"
+        local userfile = HOME .. '/.config/picom.conf'
         if (file_exists(userfile)) then
             return userfile
         end
-        return filesystem.get_configuration_dir() .. "/external/picom.conf "
+        return filesystem.get_configuration_dir() .. '/external/picom.conf '
     end,
     -- ########################################################################
     -- ########################################################################
     -- ########################################################################
-    aboutText = "the Electric Tantra Linux " ..
-        os.date("%Y") .. "\n\n" .. "The Linux Environment of Thomas Leon Highbaugh" .. " "
+    aboutText = 'the Electric Tantra Linux ' ..
+        os.date('%Y') .. '\n\n' .. 'The Linux Environment of Thomas Leon Highbaugh' .. ' '
 }
 
 return config_functions

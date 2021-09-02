@@ -13,7 +13,7 @@ This configuration is the showcase and center that the Electric Tantra Linux sys
 
 <details style="width: 45%; float:left;"><summary> About the Author </summary>
 <p>
-My name is Thomas Leon Highbaugh, the author of the Electric Tantra Linux and a Linux nerd of the worst sort who enjoys nothing more than making the sorts of attractive desktop layouts that I always wished were available on paid OSes I used before only to have found them here, in the Linux scrap heap. I also work in web development, employing the same questionable taste in making websites, which I make entirely on Linux in an environment configured to my precise taste and using the tools with configurations available to you on GitHub because its not like hiding those configurations would do anything but make it easier to loose them (and cause open source is good mmmkay?). 
+My name is Thomas Leon Highbaugh, the author of the Electric Tantra Linux and a Linux nerd of the worst sort who enjoys nothing more than making the sorts of attractive desktop layouts that I always wished were available on paid OSes I used before only to have found them here, in the Linux scrap heap. I also work in web development, employing the same questionable taste in making websites, which I make entirely on Linux in an environment configured to my precise taste and using the tools with configurations available to you on GitHub because its not like hiding those configurations would do anything but make it easier to loose them (and cause open source is good mmmkay?).
  </p>
 
 </details>
@@ -48,5 +48,6 @@ Anyone embarking on the journey up Mordor that is AwesomeWM configurations shoul
 <li><a href="./definitions.md">Important Terminology</a></li>
 <li><a href="./interface.md">Interface</a></li>
 <li><a href="./luarocks.md">LuaRocks</a></li>
+<li><a href="./reuse.md">Reusing Components Elsewhere</a></li>
 </ul>
 </div>

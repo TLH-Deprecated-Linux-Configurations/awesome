@@ -33,7 +33,7 @@ local widget =
 -- ########################################################################
 -- ########################################################################
 -- ########################################################################
-local home_button = clickable_container(wibox.container.margin(widget, dpi(5), dpi(5), dpi(5), dpi(5)))
+local home_button = clickable_container(wibox.container.margin(widget, dpi(7), dpi(7), dpi(7), dpi(7)))
 
 home_button:buttons(
     gears.table.join(

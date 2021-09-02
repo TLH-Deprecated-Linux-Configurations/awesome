@@ -8,7 +8,7 @@
 -- ########################################################################
 
 local config = require 'module.functions'
-local widget_icon_dir = HOME .. '/.config/awesome/widget/battery/icons/'
+local widget_icon_dir = HOME .. '/.config/awesome/layout/bottom-panel/widgets/battery/icons/'
 -- ########################################################################
 -- ########################################################################
 -- ########################################################################
@@ -33,7 +33,7 @@ local return_button = function()
         wibox.widget {
         id = 'percent_text',
         text = '100%',
-        font = beautiful.font .. ' 12',
+        font = beautiful.font .. ' 16',
         align = 'center',
         valign = 'center',
         visible = false,

@@ -63,4 +63,4 @@ _G.root.keys(require('configuration.keys.global'))
 -- Other bootup functions
 --
 require('module.settings.bootup_configuration')
-require('module.settings.lazy_load_boot')
+require('module.settings')
