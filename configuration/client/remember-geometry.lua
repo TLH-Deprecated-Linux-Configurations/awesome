@@ -1,13 +1,16 @@
---  _______                         _______ __               __
--- |     __|.---.-.--.--.-----.    |    ___|  |.-----.---.-.|  |_.-----.
--- |__     ||  _  |  |  |  -__|    |    ___|  ||  _  |  _  ||   _|__ --|
--- |_______||___._|\___/|_____|    |___|   |__||_____|___._||____|_____|
+--  ______                                 __                    _______                              __
+-- |   __ \.-----.--------.-----.--------.|  |--.-----.----.    |     __|.-----.-----.--------.-----.|  |_.----.--.--.
+-- |      <|  -__|        |  -__|        ||  _  |  -__|   _|    |    |  ||  -__|  _  |        |  -__||   _|   _|  |  |
+-- |___|__||_____|__|__|__|_____|__|__|__||_____|_____|__|      |_______||_____|_____|__|__|__|_____||____|__| |___  |
+--                                                                                                             |_____|
 -- ########################################################################
 -- ########################################################################
 -- ########################################################################
+-- Remembers geometry when switching between floating and tiled, in case that
+-- matters to anyone, I am not sure I care much but its is somewhat useful
 -- from https://github.com/basaran/awesome-remember-geometry
 
-local awful = require("awful")
+local awful = require('awful')
 local client = client
 local tag = tag
 local ipairs = ipairs
@@ -16,7 +19,7 @@ local ipairs = ipairs
 -- ########################################################################
 --  Remember client size when switching between floating and tiling.
 client.connect_signal(
-    "maximize",
+    'maximize',
     function(c)
         -- max if
         --- both are false
@@ -34,7 +37,7 @@ client.connect_signal(
 -- ########################################################################
 -- ########################################################################
 client.connect_signal(
-    "manage",
+    'manage',
     function(c)
         c.remember_geometry = {
             floating_geometry = c:geometry(),
@@ -48,7 +51,7 @@ client.connect_signal(
 -- ########################################################################
 -- ########################################################################
 client.connect_signal(
-    "unmanage",
+    'unmanage',
     function(c)
         c.remember_geometry = nil
     end
@@ -57,7 +60,7 @@ client.connect_signal(
 -- ########################################################################
 -- ########################################################################
 client.connect_signal(
-    "property::floating",
+    'property::floating',
     function(c)
         if c.floating and c.remember_geometry then
             c:geometry(c.remember_geometry.floating_geometry)
@@ -68,7 +71,7 @@ client.connect_signal(
 -- ########################################################################
 -- ########################################################################
 tag.connect_signal(
-    "property::layout",
+    'property::layout',
     function(t)
         if t.layout == awful.layout.suit.floating then
             for k, c in ipairs(t:clients()) do
@@ -81,9 +84,9 @@ tag.connect_signal(
 -- ########################################################################
 -- ########################################################################
 client.connect_signal(
-    "request::geometry",
+    'request::geometry',
     function(c, context)
-        if context == "mouse.resize" and not c.fullscreen then
+        if context == 'mouse.resize' and not c.fullscreen then
             c.maximized_horizontal = false
             c.maximized_vertical = false
         end
@@ -93,7 +96,7 @@ client.connect_signal(
 -- ########################################################################
 -- ########################################################################
 client.connect_signal(
-    "property::geometry",
+    'property::geometry',
     function(c)
         local is_floating = c.floating or (c.first_tag and c.first_tag.layout == awful.layout.suit.floating)
         if c.remember_geometry and is_floating and not c.fullscreen and not c.minimized then
@@ -129,7 +132,7 @@ client.connect_signal(
 -- ########################################################################
 -- ########################################################################
 client.connect_signal(
-    "property::fullscreen",
+    'property::fullscreen',
     function(c)
         if c.floating and not c.fullscreen then
             c:geometry(c.remember_geometry.floating_geometry)

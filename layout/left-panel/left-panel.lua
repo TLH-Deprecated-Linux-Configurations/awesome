@@ -239,32 +239,14 @@ local left_panel_func = function()
     -- ########################################################################
     function left_panel:run_rofi()
         action_grabber:stop()
-        _G.awesome.spawn(
-            apps.default.web,
-            false,
-            false,
-            false,
-            false,
-            function()
-                left_panel:toggle()
-            end
-        )
+        _G.awesome.spawn(apps.default.web, false, false, false, false, left_panel:toggle())
     end
     -- ########################################################################
     -- ########################################################################
     -- ########################################################################
     function left_panel:run_wifi()
         action_grabber:stop()
-        _G.awesome.spawn(
-            apps.default.rofiwifimenu,
-            false,
-            false,
-            false,
-            false,
-            function()
-                left_panel:toggle()
-            end
-        )
+        _G.awesome.spawn(apps.default.rofiwifimenu, false, false, false, false, left_panel:toggle())
     end
     -- ########################################################################
     -- ########################################################################
@@ -283,7 +265,7 @@ local left_panel_func = function()
     -- ########################################################################
     -- ########################################################################
     -- ########################################################################
-    local dpi_button =
+    local systray =
         wibox.widget {
         wibox.widget {
             icon = PATH_TO_ICONS .. 'screen.svg',
@@ -291,7 +273,7 @@ local left_panel_func = function()
             widget = mat_icon
         },
         wibox.widget {
-            text = 'Change Application Scaling',
+            text = 'System Tray Icons',
             font = beautiful.font .. ' 12',
             widget = wibox.widget.textbox,
             align = center
@@ -300,20 +282,6 @@ local left_panel_func = function()
         clickable = true,
         widget = mat_list_item
     }
-    -- ########################################################################
-    -- ########################################################################
-    -- ########################################################################
-    dpi_button:buttons(
-        awful.util.table.join(
-            awful.button(
-                {},
-                1,
-                function()
-                    left_panel:run_dpi()
-                end
-            )
-        )
-    )
 
     -- ########################################################################
     -- ########################################################################
@@ -380,7 +348,6 @@ local left_panel_func = function()
         -- ########################################################################
         -- ########################################################################
         network_card.update_body(wifi_button)
-        screen_card.update_body(dpi_button)
         -- ########################################################################
         -- ########################################################################
         -- ########################################################################
@@ -392,7 +359,7 @@ local left_panel_func = function()
             separator,
             wibox.container.margin(network_card, dpi(20), dpi(20), dpi(20), dpi(20)),
             separator,
-            wibox.container.margin(screen_card, dpi(20), dpi(20), dpi(20), dpi(20)),
+            require('layout.left-panel.widgets.systray'),
             separator,
             layout = wibox.layout.fixed.vertical
         }
@@ -421,7 +388,7 @@ local left_panel_func = function()
                 bottomSeparator
             },
             0,
-            0,
+            dpi(15),
             dpi(15),
             dpi(15)
         )

@@ -38,6 +38,7 @@ return function(min, max, increment, default_value, callback, tooltip_callback)
     -- ########################################################################
     -- ########################################################################
     -- set the initial value
+    --
     widget:set_value(default_value * step_size)
 
     widget:connect_signal(
@@ -52,6 +53,7 @@ return function(min, max, increment, default_value, callback, tooltip_callback)
     -- ########################################################################
     --- Update the value of the slider
     -- slider.update(8.5)
+    --
     widget.update = function(value)
         widget:set_value(value * step_size)
     end

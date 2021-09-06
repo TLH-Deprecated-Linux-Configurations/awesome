@@ -74,16 +74,16 @@ awful.screen.connect_for_each_screen(
 -- ########################################################################
 -- ########################################################################
 -- Put its items in a shaped container
+--
 brightnessOverlay:setup {
     -- Container
     {
         -- Items go here
-        --wibox.widget.textbox("Hello!"),
+        --
         wibox.container.rotate(vol_osd, "east"),
         -- ...
         layout = wibox.layout.fixed.vertical
     },
-    -- The real background color
     bg = "#000000" .. "66",
     -- The real, anti-aliased shape
     shape = gears.shape.rounded_rect,
@@ -114,6 +114,7 @@ local function toggleBriOSD(bool)
     -- ########################################################################
     -- ########################################################################
     -- don't perform the toggle off if it is already off
+    --
     if ((not bool) and (not brightnessOverlay.visible)) then
         return
     end

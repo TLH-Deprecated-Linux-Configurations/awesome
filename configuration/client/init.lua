@@ -6,4 +6,4 @@
 -- ########################################################################
 -- ########################################################################
 require('configuration.client.rules')
-require('configuration.client.save-floats')
+require('configuration.client.remember-geometry')

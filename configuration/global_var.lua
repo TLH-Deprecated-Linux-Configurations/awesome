@@ -18,7 +18,6 @@ timer = gears.timer
 math = require('math')
 cairo = require('lgi').cairo
 awful.client = require('awful.client')
-
 wibox = require('wibox')
 dpi = beautiful.xresources.apply_dpi
 xresources = require('beautiful.xresources')

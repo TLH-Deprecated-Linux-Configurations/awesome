@@ -7,6 +7,9 @@
 -- ########################################################################
 -- Buttons for client windows, enabling grabbing the titlebar to move the
 -- window without additional key presses and other goodies
+-- Scrollwheel swithching tags is definitely set to off, because it makes
+-- things go wrong more than right.
+
 local function getButtons()
     return awful.util.table.join(
         awful.button(

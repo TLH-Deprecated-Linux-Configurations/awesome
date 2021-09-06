@@ -122,13 +122,13 @@ local globalKeys =
         {modkey},
         'F3',
         function()
-            print('Spawning Caja in Scratchpad')
-            drop.toggle('caja', 'left', 'top', 0.7, 0.7)
+            print('Spawning thunar in Scratchpad')
+            drop.toggle('thunar', 'left', 'top', 0.7, 0.7)
 
-            -- awful.spawn('caja')
+            -- awful.spawn('thunar')
         end,
         {
-            description = 'Launch Caja in Scratchpad',
+            description = 'Launch thunar in Scratchpad',
             group = 'Launcher'
         }
     ),
@@ -138,9 +138,9 @@ local globalKeys =
         {modkey, 'Control'},
         'F3',
         function()
-            print('Spawning Caja as Root')
+            print('Spawning thunar as Root')
 
-            awful.spawn('gksu caja')
+            awful.spawn('gksu thunar')
         end,
         {
             description = 'Launch file Manager as Root',
@@ -153,12 +153,12 @@ local globalKeys =
         {modkey, 'Shift'},
         'F3',
         function()
-            print('Spawning New Caja Instance')
+            print('Spawning New thunar Instance')
 
-            awful.spawn('caja')
+            awful.spawn('thunar')
         end,
         {
-            description = 'Launch New Caja Instance',
+            description = 'Launch New thunar Instance',
             group = 'Launcher'
         }
     ),

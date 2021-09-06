@@ -34,7 +34,7 @@ require('awful.autofocus')
 -- ########################################################################
 -- Load the notifications & errors early to get the messages when things go wrong
 --
-require('module.settings.notifications')
+require('module.settings')
 -- ########################################################################
 -- Titlebar with custom icons
 --

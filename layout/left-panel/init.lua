@@ -11,6 +11,7 @@ local PATH_TO_ICONS = HOME .. '/.config/awesome/layout/left-panel/icons/'
 
 -- Load panel rules, it will create panel for each screen
 require('layout.left-panel.panel-rules')
+local left_panel = require("layout.left-panel.left-panel")
 -- ########################################################################
 -- ########################################################################
 -- ########################################################################

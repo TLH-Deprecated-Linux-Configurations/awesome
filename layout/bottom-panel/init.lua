@@ -85,23 +85,14 @@ local bottom_panel = function(s)
     -- ########################################################################
     -- ########################################################################
     -- ########################################################################
-    s.systray =
-        wibox.widget {
-        {
-            base_size = dpi(20),
-            horizontal = true,
-            screen = s,
-            widget = wibox.widget.systray
-        },
-        visible = true,
-        bottom = dpi(0),
-        widget = wibox.container.margin
-    }
+
+    --s.systray:set_screen(s)
     -- ########################################################################
     -- ########################################################################
     -- ########################################################################
     -- Pull in and build the widgets used on the bar
     --
+
     s.control_center_toggle = build_widget(require('layout.left-panel'))
     s.bluetooth = build_widget(show_widget_or_default('layout.bottom-panel.widgets.bluetooth', hardware.hasBluetooth()))
     s.network = build_widget(show_widget_or_default('layout.bottom-panel.widgets.wifi', hardware.hasWifi()))
@@ -131,7 +122,6 @@ local bottom_panel = function(s)
             {
                 layout = wibox.layout.fixed.horizontal,
                 spacing = dpi(2),
-                s.systray,
                 s.network,
                 s.bluetooth,
                 --s.screen_record,
