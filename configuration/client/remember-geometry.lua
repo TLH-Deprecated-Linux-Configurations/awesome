@@ -18,6 +18,7 @@ local ipairs = ipairs
 -- ########################################################################
 -- ########################################################################
 --  Remember client size when switching between floating and tiling.
+--
 client.connect_signal(
     'maximize',
     function(c)

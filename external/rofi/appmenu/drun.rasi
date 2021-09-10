@@ -15,7 +15,7 @@ configuration {
 
 * {
   background: #17191e00;
-  background-selected: #17191e44;
+  background-selected: #b2bfd944;
   foreground: #b2bfd9ff;
   foreground-selected: #f4f4f7ff;
   urgent: #ff3d81ee;
