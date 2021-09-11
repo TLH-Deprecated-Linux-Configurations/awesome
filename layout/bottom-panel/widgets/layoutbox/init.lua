@@ -140,6 +140,8 @@ local layout_box = function(s)
                 1,
                 function()
                     awful.layout.set(gears.table.iterate_value(ll.layouts, ll.current_layout, 1), nil)
+                end,
+                function()
                     layout_popup.visible = true
                 end,
                 function()
@@ -149,10 +151,11 @@ local layout_box = function(s)
             -- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
             awful.button(
                 {},
-                3,
-                function()
+                3,g
                     awful.layout.set(gears.table.iterate_value(ll.layouts, ll.current_layout, -1), nil)
-                    layoutpopup.visible = true
+                end,
+                function()
+                    layout_popup.visible = true
                 end,
                 function()
                     layout_popup.timer:start()
