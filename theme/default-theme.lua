@@ -100,7 +100,7 @@ local awesome_overrides = function(theme)
     theme.dir = theme_dir
     theme.titlebar_size = 24
     theme.icons = theme.dir .. '/icons/'
-    theme.wallpaper = theme_dir .. '/wallpapers/wp01.png'
+    theme.wallpaper = theme_dir .. '/wallpapers/wp03.png'
 
     -- ########################################################################
     -- ########################################################################

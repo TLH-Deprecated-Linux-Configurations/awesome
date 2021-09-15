@@ -68,8 +68,8 @@ local function draw_widget(
                         widget = wibox.container.margin
                     },
                     bg = widget_bg,
-                    shape_border_width = dpi(0),
-                    shape_border_color = beautiful.xcolor0 .. '33',
+                    shape_border_width = dpi(3),
+                    shape_border_color = beautiful.xcolor15,
                     shape = beautiful.window_shape,
                     widget = wibox.container.background
                 }),

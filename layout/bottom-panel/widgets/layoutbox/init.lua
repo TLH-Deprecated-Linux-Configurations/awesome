@@ -151,7 +151,8 @@ local layout_box = function(s)
             -- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
             awful.button(
                 {},
-                3,g
+                3,
+                function()
                     awful.layout.set(gears.table.iterate_value(ll.layouts, ll.current_layout, -1), nil)
                 end,
                 function()

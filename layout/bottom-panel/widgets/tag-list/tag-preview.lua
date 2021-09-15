@@ -141,25 +141,25 @@ local enable = function(opts)
     local widget_x = dpi(200)
     local widget_y = dpi(200)
     local scale = 0.25
-    local work_area = false
-    local padding = false
+    local work_area = true
+    local padding = true
     local placement_fn = opts.placement_fn or nil
 
-    local margin = beautiful.tag_preview_widget_margin or dpi(0)
-    local screen_radius = beautiful.tag_preview_widget_border_radius or dpi(0)
-    local client_radius = beautiful.tag_preview_client_border_radius or dpi(0)
-    local client_opacity = 0.5
-    local client_bg = beautiful.tag_preview_client_bg or '#000000'
-    local client_border_color = beautiful.xcolor0 .. '33'
-    local client_border_width = dpi(0)
+    local margin = dpi(3)
+    local screen_radius = dpi(3)
+    local client_radius = dpi(3)
+    local client_opacity = 0.75
+    local client_bg = beautiful.tag_preview_client_bg or '#00000000'
+    local client_border_color = beautiful.xcolor7 .. '99'
+    local client_border_width = dpi(1)
     local widget_bg = {
         type = 'linear',
         from = {0, 0},
         to = {15, 12},
         stops = {{0, beautiful.xcolor19 .. '88'}, {6, beautiful.xcolor0 .. '88'}, {12, beautiful.xcolor16 .. '88'}}
     }
-    local widget_border_color = beautiful.tag_preview_widget_border_color or '#ffffff'
-    local widget_border_width = beautiful.tag_preview_widget_border_width or dpi(3)
+    local widget_border_color = beautiful.xcolor15 .. '99'
+    local widget_border_width = dpi(3)
 
     local tag_preview_box =
         awful.popup(
@@ -200,7 +200,7 @@ local enable = function(opts)
             -- ########################################################################
             -- ########################################################################
             -- ########################################################################
-            tag_preview_box.maximum_width = dpi(500)
+            tag_preview_box.maximum_width = dpi(480)
             tag_preview_box.maximum_height = dpi(250)
             tag_preview_box:setup(
                 draw_widget(
@@ -234,6 +234,7 @@ local enable = function(opts)
             end
 
             tag_preview_box.visible = v
+            collectgarbage()
         end
     )
 end

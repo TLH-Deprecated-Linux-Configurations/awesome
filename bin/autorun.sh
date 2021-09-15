@@ -5,11 +5,9 @@
 # |       ||  |  ||   _|  _  |   _|  |  |     |
 # |___|___||_____||____|_____|__| |_____|__|__|
 ###################################################
-
-###########################################################################
-###########################################################################
-###########################################################################
-
+# Like ~/.xprofile, but within the configuratiom amdm
+# runs everytime awesome starts instead of once per
+# logins which has pros and cons
 function run() {
     if ! pgrep -f "$1"; then
         "$@" &
@@ -23,7 +21,7 @@ if [[ "$(command -v udiskie)" ]]; then
 fi
 
 # autolock the system
-if [[ "$(command -v i3lock)" ]]; then
+if [[ "$(command -v i3lock-color)" ]]; then
     echo "Lock screen time set to: 90 seconds"
     "$HOME"/.config/awesome/bin/autolock.sh &>/dev/null &
 fi
