@@ -134,11 +134,11 @@ client.connect_signal(
         local function update()
             if client.focus == c then
                 -- Changed This
-                l_reverse_corner.bg = beautiful.xbackground .. '66'
-                r_reverse_corner.bg = beautiful.xbackground .. '66'
+                l_reverse_corner.bg = beautiful.xbackground .. 'cc'
+                r_reverse_corner.bg = beautiful.xbackground .. 'cc'
             else
-                l_reverse_corner.bg = beautiful.xbackground .. '33'
-                r_reverse_corner.bg = beautiful.xbackground .. '33'
+                l_reverse_corner.bg = beautiful.xbackground .. 'aa'
+                r_reverse_corner.bg = beautiful.xbackground .. 'aa'
             end
         end
         -- ########################################################################
@@ -235,7 +235,7 @@ client.connect_signal(
                 layout = wibox.layout.fixed.horizontal
             },
             layout = wibox.layout.align.horizontal,
-            bg = beautiful.xbackground .. '99'
+            bg = beautiful.xbackground .. 'cc'
         }
     end
 )

@@ -1,8 +1,8 @@
---  __           __   __                                   __     __               __
--- |  |--.---.-.|  |_|  |_.-----.----.--.--.    .--.--.--.|__|.--|  |.-----.-----.|  |_
--- |  _  |  _  ||   _|   _|  -__|   _|  |  |    |  |  |  ||  ||  _  ||  _  |  -__||   _|
--- |_____|___._||____|____|_____|__| |___  |    |________||__||_____||___  |_____||____|
---                                   |_____|                         |_____|
+--  ______         __   __
+-- |   __ \.---.-.|  |_|  |_.-----.----.--.--.
+-- |   __ <|  _  ||   _|   _|  -__|   _|  |  |
+-- |______/|___._||____|____|_____|__| |___  |
+--                                     |_____|
 -- ########################################################################
 -- ########################################################################
 -- ########################################################################
@@ -21,7 +21,7 @@ local return_button = function()
         nil,
         {
             id = 'icon',
-            image = widget_icon_dir .. 'battery-standard' .. '.svg',
+            image = widget_icon_dir .. 'battery-standard' .. '.png',
             widget = wibox.widget.imagebox,
             resize = true
         },
@@ -37,7 +37,7 @@ local return_button = function()
         wibox.widget {
         id = 'percent_text',
         text = '100%',
-        font = beautiful.font .. ' 16',
+        font = beautiful.font .. ' 14',
         align = 'center',
         valign = 'center',
         visible = false,
@@ -53,14 +53,15 @@ local return_button = function()
         layout = wibox.layout.fixed.horizontal,
         spacing = dpi(0),
         battery_imagebox,
-        battery_percentage_text
-    }
+        battery_percentage_text,
+        bg=beautiful.xcolor8
+        }
     -- ########################################################################
     -- ########################################################################
     -- ########################################################################
     -- Button Definition and Margins
     --
-    local battery_button = clickable_container(wibox.container.margin(battery_widget, dpi(6), dpi(6), dpi(6), dpi(6)))
+    local battery_button = clickable_container(wibox.container.margin(battery_widget, dpi(10), dpi(10), dpi(10), dpi(10)))
     local battery_tooltip =
         awful.tooltip {
         objects = {battery_button},
@@ -112,10 +113,10 @@ local return_button = function()
     -- ########################################################################
     local function show_battery_warning()
         naughty.notification {
-            icon = widget_icon_dir .. 'battery-alert.svg',
+            icon = widget_icon_dir .. 'battery-alert.png',
             app_name = 'System notification',
             title = 'System notification',
-            message = 'Hey, your laptop is about to die! Better save your work while you still can.',
+            message = 'I pity the fool who does not plugin in their laptop because it is about to die sucka.',
             urgency = 'critical'
         }
     end
@@ -192,7 +193,7 @@ local return_button = function()
                 icon_name = icon_name .. '-fully-charged'
             end
         end
-        battery_imagebox.icon:set_image(gears.surface.load(widget_icon_dir .. icon_name .. '.svg'))
+        battery_imagebox.icon:set_image(gears.surface.load(widget_icon_dir .. icon_name .. '.png'))
     end
     -- ########################################################################
     -- ########################################################################
@@ -218,7 +219,7 @@ local return_button = function()
                 battery_widget.spacing = dpi(0)
                 battery_percentage_text.visible = false
                 battery_tooltip:set_text('No battery detected!')
-                battery_imagebox.icon:set_image(gears.surface.load(widget_icon_dir .. 'battery-unknown' .. '.svg'))
+                battery_imagebox.icon:set_image(gears.surface.load(widget_icon_dir .. 'battery-unknown' .. '.png'))
                 return
             end
             update_battery(status)
