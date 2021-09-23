@@ -32,7 +32,7 @@ local bottom_panel = function(s)
 		stretch = false,
 		bg = beautiful.xcolor45 .. "dd",
 		fg = beautiful.fg_normal,
-		struts = { bottom = dpi(48) },
+		
 	})
 	panel:struts({ bottom = dpi(48) })
 	-- ########################################################################
