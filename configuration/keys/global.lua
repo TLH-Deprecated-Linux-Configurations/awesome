@@ -7,7 +7,7 @@ local drop = require('lib.attachdrop')
 -- ########################################################################
 -- ########################################################################
 -- returns true if we cannot create a screenshot
-local has_package_installed = require('module.hardware.hardware-check').has_package_installed
+local has_package_installed = require('widget.hardware.hardware-check').has_package_installed
 
 local function send_notification_if_maim_missing()
     if not has_package_installed('maim') then
@@ -33,8 +33,17 @@ end
 -- Key bindings
 local globalKeys =
     awful.util.table.join( -- Hotkeys
-    -- #############################################################################
-
+    --#####################################################################
+    awful.key(
+        {'Mod1'},
+        'Escape',
+        function()
+            -- If you want to always position the menu on the same place set coordinates
+            awful.menu.menu_keys.down = {'Down', 'Alt_L'}
+            awful.menu.clients({theme = {width = 450}}, {keygrabber = true, coords = {x = 525, y = 330}})
+        end
+    ),
+    --#####################################################################
     awful.key(
         {modkey},
         'Return',
@@ -182,7 +191,7 @@ local globalKeys =
         function()
             print('Spawning Emoji Pick')
 
-            awful.spawn.easy_async_with_shell('bin/emojipick')
+            awful.spawn.easy_async_with_shell('bin/emoji')
         end,
         {description = 'Copy bin/emojis to Clipboard', group = 'Launcher'}
     ),

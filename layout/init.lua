@@ -6,7 +6,8 @@
 -- ########################################################################
 -- ########################################################################
 -- ########################################################################
-local bottom_panel = require "layout.bottom-panel"
+local bottom_panel = require 'layout.bottom-panel'
+
 -- Create a wibox for each screen and add it
 awful.screen.connect_for_each_screen(
     function(s)
@@ -18,7 +19,7 @@ awful.screen.connect_for_each_screen(
 -- ########################################################################
 -- Hide the wibox by default
 local function updateBarsVisibility()
-    collectgarbage("collect")
+    collectgarbage('collect')
 
     for s in screen do
         if s.selected_tag then
@@ -33,7 +34,7 @@ end
 -- ########################################################################
 -- ########################################################################
 _G.tag.connect_signal(
-    "property::selected",
+    'property::selected',
     function(_)
         updateBarsVisibility()
     end

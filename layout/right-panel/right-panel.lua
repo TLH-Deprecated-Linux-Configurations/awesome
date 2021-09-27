@@ -7,7 +7,7 @@
 -- ########################################################################
 -- ########################################################################
 
-local animate = require('module.interface.animations').createAnimObject
+local animate = require('widget.interface.animations').createAnimObject
 
 local keyconfig = require('configuration.keys.mod')
 local modKey = keyconfig.modKey
@@ -56,7 +56,7 @@ local function notification_plugin()
 end
 
 local right_panel = function()
-    local panel_width = dpi(375)
+    local panel_width = dpi(450)
 
     local s = get_screen()
 

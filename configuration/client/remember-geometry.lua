@@ -10,7 +10,6 @@
 -- matters to anyone, I am not sure I care much but its is somewhat useful
 -- from https://github.com/basaran/awesome-remember-geometry
 
-local awful = require('awful')
 local client = client
 local tag = tag
 local ipairs = ipairs

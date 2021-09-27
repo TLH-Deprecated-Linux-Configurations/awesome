@@ -11,14 +11,18 @@
 -- least annoying feature of Lua, a garbage collector that runs to save
 -- memory (at the expense of compute power).Which is run on a timer here
 --
+
 local gears = require('gears')
 -- Run garbage collector regularly to prevent memory leaks
-gears.timer {
-    timeout = 30,
-    autostart = true,
-    callback = function()
-        collectgarbage()
-        collectgarbage('setpause', 110)
-        collectgarbage('setstepmul', 1000)
-    end
-}
+local _M = function()
+    gears.timer {
+        timeout = 30,
+        autostart = true,
+        callback = function()
+            collectgarbage()
+            collectgarbage('setpause', 110)
+            collectgarbage('setstepmul', 1000)
+        end
+    }
+end
+return _M

@@ -1,11 +1,11 @@
 local wibox = require('wibox')
-local clickable_container = require('widget.clickable-container')
+local clickable_container = require('widget.interface.clickable-container')
 local gears = require('gears')
 local dpi = require('beautiful').xresources.apply_dpi
-local config = require('module.functions')
+local config = require('widget.functions')
 local theme = require('theme.icons')
-local filehandle = require('module.functions.file')
-local signals = require('module.settings.signals')
+local filehandle = require('widget.functions.file')
+local signals = require('widget.settings.signals')
 
 local PATH_TO_ICONS = HOME .. '/.config/awesome/layout/bottom-panel/widgets/wifi/icons/'
 local interface = 'wlan0'

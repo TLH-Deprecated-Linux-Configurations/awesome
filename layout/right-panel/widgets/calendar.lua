@@ -11,7 +11,7 @@ local awful = require("awful")
 local gears = require("gears")
 local wibox = require("wibox")
 local beautiful = require("beautiful")
--- local clickable_container = require('module.interface.material.clickable-container')
+-- local clickable_container = require('widget.interface.clickable-container')
 local dpi = require("beautiful").xresources.apply_dpi
 
 awesome.register_xproperty("WM_CLASS", "string")

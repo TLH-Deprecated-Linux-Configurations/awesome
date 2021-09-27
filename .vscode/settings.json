@@ -44,10 +44,14 @@
     "card",
     "mat_list_item",
     "scrollbox",
-    "checkbox"
+    "checkbox",
+    "reverse",
+    "center"
   ],
   "Lua.diagnostics.disable": [
-    "undefined-field"
+    "undefined-field",
+    "redefined-local",
+    "unused-local"
   ],
   "C_Cpp_Runner.cCompilerPath": "/usr/bin/gcc",
   "C_Cpp_Runner.cppCompilerPath": "/usr/bin/g++",

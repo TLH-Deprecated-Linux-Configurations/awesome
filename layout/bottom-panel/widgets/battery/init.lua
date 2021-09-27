@@ -8,7 +8,7 @@
 -- ########################################################################
 -- Declarations not made global
 --
-local config = require 'module.functions'
+local config = require 'widget.functions'
 local widget_icon_dir = HOME .. '/.config/awesome/layout/bottom-panel/widgets/battery/icons/'
 -- ########################################################################
 -- ########################################################################

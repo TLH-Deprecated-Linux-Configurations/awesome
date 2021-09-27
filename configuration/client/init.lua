@@ -5,5 +5,9 @@
 -- ########################################################################
 -- ########################################################################
 -- ########################################################################
-require('configuration.client.rules')
-require('configuration.client.remember-geometry')
+return {
+    require('configuration.client.rules'),
+    require('configuration.client.remember-geometry'),
+    require(... .. '.screenposition'),
+    
+}

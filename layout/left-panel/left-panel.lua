@@ -1,25 +1,22 @@
---  _____          ___ __        ______                     __
--- |     |_.-----.'  _|  |_     |   __ \.---.-.-----.-----.|  |
--- |       |  -__|   _|   _|    |    __/|  _  |     |  -__||  |
--- |_______|_____|__| |____|    |___|   |___._|__|__|_____||__|
+-- _____          ___ __
+-- |     |_.-----.'  _|  |_
+-- |       |  -__|   _|   _|
+-- |_______|_____|__| |____|
+-- ______                     __
+-- |   __ \.---.-.-----.-----.|  |
+-- |    __/|  _  |     |  -__||  |
+-- |___|   |___._|__|__|_____||__|
 -- ########################################################################
 -- ########################################################################
 -- ########################################################################
-
 local PATH_TO_ICONS = HOME .. '/.config/awesome/layout/left-panel/icons/'
-
-local apps = require('configuration.apps')
-
-local animate = require('module.interface.animations').createAnimObject
-
-local get_screen = require('lib.function.common').focused_screen
-
-local keyconfig = require('configuration.keys.mod')
+local apps = require 'configuration.apps'
+local animate = require 'widget.interface.animations'.createAnimObject
+local get_screen = require 'lib.function.common'.focused_screen
+local keyconfig = require 'configuration.keys.mod'
 local modKey = keyconfig.modKey
-
 -- body gets populated with a scrollbox widget once generated
 local body = {}
-
 -- ########################################################################
 -- ########################################################################
 -- ########################################################################
@@ -28,9 +25,7 @@ local left_panel_func = function()
     -- the rofi width is defined in configuration/rofi/sidebar/rofi.rasi
     -- under the section window-> width
     local left_panel_width = dpi(450)
-
     local s = get_screen()
-
     local backdrop =
         wibox {
         ontop = true,
@@ -42,6 +37,7 @@ local left_panel_func = function()
         width = s.geometry.width,
         height = s.geometry.height
     }
+
     -- ########################################################################
     -- ########################################################################
     -- ########################################################################
@@ -51,6 +47,7 @@ local left_panel_func = function()
         backdrop.width = s.geometry.width
         backdrop.height = s.geometry.height
     end
+
     -- ########################################################################
     -- ########################################################################
     -- ########################################################################
@@ -58,14 +55,13 @@ local left_panel_func = function()
         wibox {
         ontop = true,
         screen = s,
-        bg = beautiful.xcolor0 .. '66',
+        bg = beautiful.xcolor0 .. 'aa',
         width = left_panel_width,
         height = s.geometry.height,
         x = s.geometry.x,
         y = s.geometry.y,
         fg = beautiful.fg_normal
     }
-
     -- ########################################################################
     -- ########################################################################
     -- ########################################################################
@@ -83,20 +79,16 @@ local left_panel_func = function()
     -- this is called when we need to update the screen
     signals.connect_refresh_screen(
         function()
-            print('Refreshing action center')
-
+            print 'Refreshing action center'
             if left_panel == nil then
                 return
             end
-
             s = get_screen()
-
             -- the action center itself
             left_panel.x = s.geometry.x
             left_panel.y = s.geometry.y
             left_panel.width = left_panel_width
             left_panel.height = s.geometry.height
-
             -- the backdrop
             update_backdrop_location()
         end
@@ -115,15 +107,14 @@ local left_panel_func = function()
         if grabber then
             grabber:start()
         end
-        left_panel:emit_signal('opened')
-
+        left_panel:emit_signal 'opened'
         s = get_screen()
         -- ########################################################################
         -- ########################################################################
         -- ########################################################################
         -- start the animations
         left_panel.x = s.geometry.x - left_panel_width
-        left_panel.bg = beautiful.xbackground .. '66'
+        left_panel.bg = beautiful.xcolor21 .. 'cc'
         left_panel.y = s.geometry.y
         left_panel.height = s.geometry.height
         left_panel.opacity = 0
@@ -146,8 +137,11 @@ local left_panel_func = function()
         left_panel.x = s.geometry.x
         left_panel.y = s.geometry.y
         left_panel.height = s.geometry.height
-        left_panel.bg = beautiful.xbackground .. '66'
-        left_panel.opacity = 0.88
+        left_panel.bg = beautiful.xbackground .. 'dd'
+        left_panel.border_width = dpi(3)
+        left_panel.border_color = beautiful.xcolor8 .. '66'
+        left_panel.border_radius = dpi(12)
+        left_panel.opacity = 0.98
         backdrop.visible = false
         animate(
             _G.anim_speed,
@@ -160,7 +154,7 @@ local left_panel_func = function()
                 if grabber then
                     grabber:stop()
                 end
-                left_panel:emit_signal('closed')
+                left_panel:emit_signal 'closed'
                 update_backdrop_location()
             end
         )
@@ -195,11 +189,7 @@ local left_panel_func = function()
     -- ########################################################################
     -- ########################################################################
     -- ########################################################################
-    left_panel:struts(
-        {
-            left = 0
-        }
-    )
+    left_panel:struts {left = 0}
     -- ########################################################################
     -- ########################################################################
     -- ########################################################################
@@ -218,6 +208,7 @@ local left_panel_func = function()
         stop_key = 'Escape',
         stop_event = 'release'
     }
+
     -- ########################################################################
     -- ########################################################################
     -- ########################################################################
@@ -234,6 +225,7 @@ local left_panel_func = function()
             closeleft_panel()
         end
     end
+
     -- ########################################################################
     -- ########################################################################
     -- ########################################################################
@@ -241,6 +233,7 @@ local left_panel_func = function()
         action_grabber:stop()
         _G.awesome.spawn(apps.default.web, false, false, false, false, left_panel:toggle())
     end
+
     -- ########################################################################
     -- ########################################################################
     -- ########################################################################
@@ -248,6 +241,7 @@ local left_panel_func = function()
         action_grabber:stop()
         _G.awesome.spawn(apps.default.rofiwifimenu, false, false, false, false, left_panel:toggle())
     end
+
     -- ########################################################################
     -- ########################################################################
     -- ########################################################################
@@ -258,61 +252,6 @@ local left_panel_func = function()
                 1,
                 function()
                     left_panel:toggle()
-                end
-            )
-        )
-    )
-    -- ########################################################################
-    -- ########################################################################
-    -- ########################################################################
-    local systray =
-        wibox.widget {
-        wibox.widget {
-            icon = PATH_TO_ICONS .. 'screen.svg',
-            size = dpi(24),
-            widget = mat_icon
-        },
-        wibox.widget {
-            text = 'System Tray Icons',
-            font = beautiful.font .. ' 12',
-            widget = wibox.widget.textbox,
-            align = center
-        },
-        forced_height = dpi(60),
-        clickable = true,
-        widget = mat_list_item
-    }
-
-    -- ########################################################################
-    -- ########################################################################
-    -- ########################################################################
-    local wifi_button =
-        wibox.widget {
-        wibox.widget {
-            icon = PATH_TO_ICONS .. 'wifi.svg',
-            size = dpi(24),
-            widget = mat_icon
-        },
-        wibox.widget {
-            text = 'Connect to a wireless network',
-            font = beautiful.font .. ' 12',
-            widget = wibox.widget.textbox,
-            align = center
-        },
-        forced_height = dpi(60),
-        clickable = true,
-        widget = mat_list_item
-    }
-    -- ########################################################################
-    -- ########################################################################
-    -- ########################################################################
-    wifi_button:buttons(
-        awful.util.table.join(
-            awful.button(
-                {},
-                1,
-                function()
-                    left_panel:run_wifi()
                 end
             )
         )
@@ -334,38 +273,34 @@ local left_panel_func = function()
     -- ########################################################################
     -- ########################################################################
     local separator = seperator_widget(20, 'vertical', 0)
-
     local topSeparator = seperator_widget(20, 'horizontal', 0)
-
     local bottomSeparator = seperator_widget(5, 'horizontal', 0)
+
     -- ########################################################################
     -- ########################################################################
     -- ########################################################################
     local function settings_plugin()
-        local network_card = card('Network Settings')
-        local screen_card = card('Screen Settings')
+        local screen_card = card 'System Tray'
         -- ########################################################################
         -- ########################################################################
         -- ########################################################################
-        network_card.update_body(wifi_button)
+        screen_card.update_body(require 'layout.left-panel.widgets.systray')
         -- ########################################################################
         -- ########################################################################
         -- ########################################################################
         local table_widget =
             wibox.widget {
             topSeparator,
-            require('layout.left-panel.widgets.quick-settings'),
-            require('layout.left-panel.widgets.hardware-monitor')(s),
+            require 'layout.left-panel.widgets.quick-settings',
+            require 'layout.left-panel.widgets.hardware-monitor'(s),
             separator,
-            wibox.container.margin(network_card, dpi(20), dpi(20), dpi(20), dpi(20)),
-            separator,
-            require('layout.left-panel.widgets.systray'),
+            wibox.container.margin(screen_card, dpi(20), dpi(20), dpi(20), dpi(20)),
             separator,
             layout = wibox.layout.fixed.vertical
         }
-
         return table_widget
     end
+
     -- ########################################################################
     -- ########################################################################
     -- ########################################################################
@@ -387,13 +322,12 @@ local left_panel_func = function()
                 },
                 bottomSeparator
             },
-            0,
+            dpi(15),
             dpi(15),
             dpi(15),
             dpi(15)
         )
     }
-
     -- ########################################################################
     -- ########################################################################
     -- ########################################################################
@@ -402,8 +336,6 @@ local left_panel_func = function()
         layout = wibox.layout.fixed.vertical,
         body
     }
-
     return left_panel
 end
-
 return left_panel_func

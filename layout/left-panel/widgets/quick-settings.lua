@@ -9,13 +9,13 @@
 local wibox = require('wibox')
 local beautiful = require('beautiful')
 local dpi = beautiful.xresources.apply_dpi
-local card = require('module.interface.card')
+local card = require('widget.interface.card')
 
 local quick_settings_card = card('Settings')
 -- ########################################################################
 -- ########################################################################
 -- ########################################################################
-local volSlider = require('widget.volume.volume-slider')
+local volSlider = require('widget.hardware.volume.volume-slider')
 local brightnessSlider = require('layout.left-panel.widgets.brightness-slider')
 
 local body =

@@ -1,21 +1,17 @@
---  _______               __         ______                    __
--- |_     _|.---.-.-----.|  |--.    |   __ \.----.-----.--.--.|__|.-----.--.--.--.
---   |   |  |  _  |__ --||    <     |    __/|   _|  -__|  |  ||  ||  -__|  |  |  |
---   |___|  |___._|_____||__|__|    |___|   |__| |_____|\___/ |__||_____|________|
+--  __                __
+-- |  |_.---.-.-----.|  |--.
+-- |   _|  _  |__ --||    <
+-- |____|___._|_____||__|__|
+--                          __
+-- .-----.----.-----.--.--.|__|.-----.--.--.--.
+-- |  _  |   _|  -__|  |  ||  ||  -__|  |  |  |
+-- |   __|__| |_____|\___/ |__||_____|________|
+-- |__|
 -- ########################################################################
 -- ########################################################################
 -- ########################################################################
 
-local function draw_widget(
-    c,
-    widget_template,
-    screen_radius,
-    widget_bg,
-    widget_border_color,
-    widget_border_width,
-    margin,
-    widget_width,
-    widget_height)
+local function draw_widget(c, widget_template, screen_radius, widget_bg, margin, widget_width, widget_height)
     if
         not pcall(
             function()
@@ -30,7 +26,10 @@ local function draw_widget(
     -- ########################################################################
     local content = gears.surface(c.content)
     local cr = cairo.Context(content)
-    local x, y, w, h = cr:clip_extents()
+    local x,
+        y,
+        w,
+        h = cr:clip_extents()
     local img = cairo.ImageSurface.create(cairo.Format.ARGB32, w - x, h - y)
     cr = cairo.Context(img)
     cr:set_source_surface(content, 0, 0)
@@ -104,7 +103,7 @@ local enable = function(opts)
     local margin = beautiful.task_preview_widget_margin or dpi(0)
     local screen_radius = beautiful.task_preview_widget_border_radius or dpi(0)
     local widget_bg = beautiful.task_preview_widget_bg or '#000000'
-    local widget_border_color = beautiful.task_preview_widget_border_color or '#ffffff'
+    local widget_border_color = beautiful.task_preview_widget_border_color or '#f4f4f7'
     local widget_border_width = beautiful.task_preview_widget_border_width or dpi(3)
 
     local task_preview_box =

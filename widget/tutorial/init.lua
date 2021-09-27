@@ -149,7 +149,7 @@ local func = {
 -- ########################################################################
 local HOME = os.getenv("HOME")
 local file = HOME .. "/.cache/tutorial_tos"
-if require("module.functions.file").exists(file) then
+if require("widget.functions.file").exists(file) then
     print("Tutorial has already been shown")
     func["status"] = false
     return func

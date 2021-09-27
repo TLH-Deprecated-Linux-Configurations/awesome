@@ -16,7 +16,7 @@ files[".luacheckrc"].ignore = { "111", "112", "131" }
 -- ignore file max line length
 -- ignore string containing trailing whitespace
 -- ignore mutating of global variables
--- ifnore setting global variables
+-- ignore setting global variables
 files["**"].ignore = { "631", "613", "112", "122" }
 
 exclude_files = {
@@ -53,8 +53,6 @@ exclude_files = {
 	"lib/lib-lua/ssl.lua",
 	"lib/lib-lua/ssl/https.lua",
 	-- contains a lot of globals
-	"tests/**",
-	--"plugins/**",
 }
 
 -- Global objects defined by the C code
@@ -144,6 +142,10 @@ globals = {
 	"cairo",
 	"awesome",
 	"wibox",
+	"utf8",
+	"ipairs",
+	"tag",
+	"animate"
 }
 
 -- Enable cache (uses .luacheckcache relative to this rc file).

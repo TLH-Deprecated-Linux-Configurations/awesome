@@ -7,7 +7,7 @@
 -- ########################################################################
 -- ########################################################################
 local dpi = require('beautiful').xresources.apply_dpi
-local clickable_container = require('widget.clickable-container')
+local clickable_container = require('widget.interface.clickable-container')
 local PATH_TO_ICONS = HOME .. '/.config/awesome/layout/right-panel/icons/'
 
 -- Load panel rules, it will create panel for each screen

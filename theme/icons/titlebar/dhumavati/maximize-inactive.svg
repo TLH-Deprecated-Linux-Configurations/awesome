@@ -3,9 +3,10 @@
    version="1.1"
    viewBox="0 0 20 20.000015"
    id="svg213"
-   sodipodi:docname="__Assets-Dark-Black.svg"
+   sodipodi:docname="maximize-inactive.svg"
    width="20"
    height="20.000015"
+   inkscape:version="1.2-dev (1fb2a9dbb0, 2021-09-23, custom)"
    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
    xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
    xmlns:xlink="http://www.w3.org/1999/xlink"
@@ -18,9 +19,32 @@
      borderopacity="1.0"
      inkscape:pageshadow="2"
      inkscape:pageopacity="0.0"
-     inkscape:pagecheckerboard="0" />
+     inkscape:pagecheckerboard="0"
+     inkscape:blackoutopacity="0.0"
+     showgrid="false"
+     inkscape:zoom="34.899973"
+     inkscape:cx="4.7277973"
+     inkscape:cy="10.000008"
+     inkscape:window-width="942"
+     inkscape:window-height="1031"
+     inkscape:window-x="966"
+     inkscape:window-y="12"
+     inkscape:window-maximized="0"
+     inkscape:current-layer="svg213" />
   <defs
      id="defs27">
+    <linearGradient
+       inkscape:collect="always"
+       id="linearGradient8369">
+      <stop
+         style="stop-color:#22262d;stop-opacity:1;"
+         offset="0"
+         id="stop8365" />
+      <stop
+         style="stop-color:#3c3f4c;stop-opacity:1;"
+         offset="1"
+         id="stop8367" />
+    </linearGradient>
     <linearGradient
        id="linearGradient1078">
       <stop
@@ -126,6 +150,15 @@
        gradientTransform="translate(-2e-7,66)"
        gradientUnits="userSpaceOnUse"
        xlink:href="#linearGradient1078" />
+    <linearGradient
+       inkscape:collect="always"
+       xlink:href="#linearGradient8369"
+       id="linearGradient8371"
+       x1="42"
+       y1="604.36"
+       x2="62"
+       y2="604.36"
+       gradientUnits="userSpaceOnUse" />
   </defs>
   <g
      id="maximize-prelight"
@@ -148,7 +181,7 @@
        shape-rendering="auto"
        solid-color="#000000"
        stop-color="#000000"
-       style="stroke:#0d0e11"
+       style="stroke:#0d0e11;fill-opacity:1;fill:url(#linearGradient8371)"
        id="path120" />
     <path
        d="m 48,600.36 v 8 h 8 v -8 z m 1.9942,2 h 4.0117 v 4 h -4.0117 z"

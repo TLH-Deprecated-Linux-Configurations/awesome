@@ -7,16 +7,16 @@
 -- ########################################################################
 -- ########################################################################
 local wibox = require('wibox')
-local mat_slider = require('module.interface.progress_bar')
+local mat_slider = require('widget.interface.progress_bar')
 local icons = require('theme.icons')
 local dpi = require('beautiful').xresources.apply_dpi
-local filehandle = require('module.functions.file')
+local filehandle = require('widget.functions.file')
 local gears = require('gears')
 local common = require('lib.function.common')
 local delayed_timer = require('lib.function.delayed-timer')
 local beautiful = require('beautiful')
 
-local functions = require('module.functions')
+local functions = require('widget.functions')
 -- ########################################################################
 -- ########################################################################
 -- ########################################################################

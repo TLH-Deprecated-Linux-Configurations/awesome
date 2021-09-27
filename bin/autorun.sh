@@ -21,9 +21,9 @@ if [[ "$(command -v udiskie)" ]]; then
 fi
 
 # autolock the system
-if [[ "$(command -v i3lock-color)" ]]; then
+if [[ "$(command -v gautolock)" ]]; then
     echo "Lock screen time set to: 90 seconds"
-    "$HOME"/.config/awesome/bin/autolock.sh &>/dev/null &
+    goautolock --locker "$HOME"/.config/awesome/external/i3lock/blur.sh --time 360 --notify 30  >/dev/null &
 fi
 
 # run clipboard manager

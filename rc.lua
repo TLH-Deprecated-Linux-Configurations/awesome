@@ -15,8 +15,8 @@ pcall(require, 'luarocks.loader')
 -- ########################################################################
 -- First get logging ready
 --
-require('module.functions.luapath')
-require('module.functions.logger')
+require('widget.functions.luapath')
+require('widget.functions.logger')
 
 -- An example of how that works
 --
@@ -34,15 +34,15 @@ require('awful.autofocus')
 -- ########################################################################
 -- Load the notifications & errors early to get the messages when things go wrong
 --
-require('module.settings')
+require('widget.settings')
 -- ########################################################################
 -- Titlebar with custom icons
 --
-require('widget.titlebar')
+require('widget.interface.titlebar')
 -- ########################################################################
 -- Backdrop for when left and right bar are displayed
 --
-require('module.interface.backdrop')
+require('widget.interface.backdrop')
 
 -- ########################################################################
 -- Layout which features the bars
@@ -59,9 +59,10 @@ require('configuration.client')
 require('configuration.tags')
 _G.root.keys(require('configuration.keys.global'))
 
+require('sound')
 -- ########################################################################
 -- Other bootup functions
 --
-require('module.settings.bootup_configuration')
-require('module.settings')
+require('widget.settings.bootup_configuration')
+require('widget.settings')
 require('widget')

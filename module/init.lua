@@ -6,8 +6,8 @@
 -- ########################################################################
 -- ########################################################################
 -- Init all modules
-require('module.settings')
-require('widget.exit-screen')
-require('module.hardware')
+require('widget.settings')
+require('widget.interface.exit-screen')
+require('widget.hardware')
 
-require('module.hardware.battery-notifier')
+require('widget.hardware.battery.battery-notifier')
