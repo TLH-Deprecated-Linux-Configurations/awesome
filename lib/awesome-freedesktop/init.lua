@@ -10,6 +10,6 @@
 --]]
 
 return {
-    desktop  = require("freedesktop.desktop"),
-    menu     = require("freedesktop.menu")
+    desktop  = require("lib.awesome-freedesktop.desktop"),
+    menu     = require("lib.awesome-freedesktop.menu")
 }

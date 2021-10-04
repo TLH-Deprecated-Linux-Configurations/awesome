@@ -19,7 +19,7 @@
 
 -- {{{ Grab environment
 local io = { open = io.open }
-local helpers = require"vicious.helpers"
+local helpers = require"lib.vicious.helpers"
 -- }}}
 
 -- {{{ Mbox count widget type

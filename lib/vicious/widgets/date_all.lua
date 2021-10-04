@@ -21,7 +21,7 @@
 
 -- {{{ Grab environment
 local os = { date = os.date, time = os.time }
-local helpers = require"vicious.helpers"
+local helpers = require"lib.vicious.helpers"
 -- }}}
 
 return helpers.setcall(function (format, warg)

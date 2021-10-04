@@ -25,8 +25,8 @@ local string = {
     format = string.format
 }
 
-local helpers = require("vicious.helpers")
-local spawn = require("vicious.spawn")
+local helpers = require("lib.vicious.helpers")
+local spawn = require("lib.vicious.spawn")
 -- }}}
 
 -- Battery: provides battery level of requested battery

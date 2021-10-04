@@ -23,8 +23,8 @@ local type = type
 local tonumber = tonumber
 local math = { floor = math.floor }
 
-local helpers = require"vicious.helpers"
-local spawn = require"vicious.spawn"
+local helpers = require"lib.vicious.helpers"
+local spawn = require"lib.vicious.spawn"
 -- }}}
 
 -- Wifi: provides wireless information for a requested interface using iwconfig

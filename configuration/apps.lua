@@ -6,16 +6,16 @@
 -- ########################################################################
 -- ########################################################################
 -- ########################################################################
-local filesystem = require 'gears.filesystem'
+local filesystem = require "gears.filesystem"
 -- ########################################################################
 -- ########################################################################
 -- ########################################################################
 -- lib to retrieve current theme
-local beautiful = require 'beautiful'
+local beautiful = require "beautiful"
 local color = beautiful.xforeground
-local HOME = os.getenv 'HOME'
+local HOME = os.getenv "HOME"
 
-package.loaded['awful.hotkeys_popup.keys.tmux'] = {}
+package.loaded["awful.hotkeys_popup.keys.tmux"] = {}
 
 -- ########################################################################
 -- ########################################################################
@@ -23,84 +23,86 @@ package.loaded['awful.hotkeys_popup.keys.tmux'] = {}
 return {
     -- List of apps to start by default on some actions
     default = {
-        terminal = 'kitty',
+        terminal = "kitty",
         -- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-        editor = 'nvim',
+        editor = "nvim",
         -- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-        web_browser = 'firefox',
+        web_browser = "firefox",
         -- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-        file_manager = 'caja',
+        file_manager = "caja",
         -- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-        rofi = 'rofi -dpi ' ..
+        rofi = "rofi -dpi " ..
             screen.primary.dpi ..
                 ' -show "Global Search" -modi "Global Search":' ..
                     HOME ..
-                        '/.config/awesome/external/rofi/sidebar/rofi-spotlight.sh -theme ' ..
-                            HOME .. '/.config/awesome/external/rofi/sidebar/rofi.rasi',
+                        "/.config/awesome/external/rofi/sidebar/rofi-spotlight.sh -theme " ..
+                            HOME .. "/.config/awesome/external/rofi/sidebar/rofi.rasi",
         -- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-        web = 'rofi -dpi ' ..
+        web = "rofi -dpi " ..
             screen.primary.dpi ..
-                ' -show Search -modi Search:' ..
+                " -show Search -modi Search:" ..
                     HOME ..
-                        '/external/rofi/search.py' ..
-                            ' -theme ' .. HOME .. '/.config/awesome/external/rofi/sidebar/rofi.rasi',
+                        "/external/rofi/search.py" ..
+                            " -theme " .. HOME .. "/.config/awesome/external/rofi/sidebar/rofi.rasi",
         -- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-        rofiappmenu = 'bash ' ..
+        rofiappmenu = "bash " ..
             HOME ..
-                '/.config/awesome/bin/applauncher.sh ' ..
-                    screen.primary.dpi .. ' ' .. filesystem.get_configuration_dir(),
+                "/.config/awesome/bin/applauncher.sh " ..
+                    screen.primary.dpi .. " " .. filesystem.get_configuration_dir(),
         -- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-        roficlipboard = 'rofi -dpi ' ..
+        roficlipboard = "rofi -dpi " ..
             screen.primary.dpi ..
                 ' -modi "clipboard:greenclip print" -show clipboard -theme ' ..
-                    HOME .. '/.config/awesome/external/rofi/appmenu/drun.rasi',
+                    HOME .. "/.config/awesome/external/rofi/appmenu/drun.rasi",
         -- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-        rofiwifimenu = 'sh ' .. HOME .. '/.config/awesome/bin/wifi.sh',
+        rofiwifimenu = "sh " .. HOME .. "/.config/awesome/bin/wifi.sh",
         -- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-        lock = 'bash ' .. HOME .. '/.config/awesome/external/i3lock/blur.sh',
+        lock = "bash " .. HOME .. "/.config/awesome/external/i3lock/blur.sh",
         -- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-        quake = (os.getenv 'TERMINAL' or 'kitty') .. ' -T QuakeTerminal',
+        quake = (os.getenv "TERMINAL" or "kitty") .. " -T QuakeTerminal",
         -- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-        duplicate_screens = 'bash ' .. HOME .. 'xrandr-duplicate.sh'
+        duplicate_screens = "bash " .. HOME .. "xrandr-duplicate.sh"
     },
     -- ########################################################################
     -- List of apps to start once on start-up
     run_on_start_up = {
-        'picom -b --experimental-backends --config ~/.config/awesome/external/picom.conf',
+        "picom -b --experimental-backends --config ~/.config/awesome/external/picom.conf",
         -- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-        'xfce4-power-manager', -- Power manager
+        "xfce4-power-manager", -- Power manager
         -- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-        'xfsettingsd',
+        "xfsettingsd",
         -- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-        'xrdb $HOME/.Xresources',
+        "greenclip daemon",
+        -- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+        "xrdb $HOME/.Xresources",
         '"$HOME"/.config/awesome/bin/autolock.sh &>/dev/null &',
         -- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
         -- Make the cursor the normal pointer
-        'xsetroot -cursor_name left_ptr',
+        "xsetroot -cursor_name left_ptr",
         -- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
         --  Set the Super key to all three of the below for menu on single key press
         'xcape -e "Super_L=Super_L|Control_L|Escape"',
         -- Locking
-        'sh $HOME/.config/awesome/bin/autolock.sh'
+        "sh $HOME/.config/awesome/bin/autolock.sh"
         -- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     },
     -- ########################################################################
     bins = {
         -- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-        full_screenshot = 'sh /.config/awesome/bin/snapshot.sh full "' .. color .. '"',
+        full_screenshot = "sh" .. HOME .. '/.config/awesome/bin/snapshot.sh full "' .. color .. '"',
         -- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-        full_blank_screenshot = 'sh ' .. HOME .. ' /.config/awesome/bin/snapshot.sh full_blank',
+        full_blank_screenshot = "sh " .. HOME .. " /.config/awesome/bin/snapshot.sh full_blank",
         -- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-        area_screenshot = 'sh ' .. HOME .. '/.config/awesome/bin/snapshot.sh area ' .. color .. '"',
+        area_screenshot = "sh " .. HOME .. "/.config/awesome/bin/snapshot.sh area " .. color .. '"',
         -- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-        area_blank_screenshot = 'sh ' .. HOME .. '/.config/awesome/bin/snapshot.sh area_blank',
+        area_blank_screenshot = "sh " .. HOME .. "/.config/awesome/bin/snapshot.sh area_blank",
         -- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-        window_screenshot = 'sh ' .. HOME .. '/.config/awesome/bin/snapshot.sh" window ' .. color .. '"',
+        window_screenshot = "sh " .. HOME .. '/.config/awesome/bin/snapshot.sh" window ' .. color .. '"',
         -- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-        window_blank_screenshot = 'sh ' .. HOME .. '/.config/awesome/bin/snapshot.sh window_blank'
+        window_blank_screenshot = "sh " .. HOME .. "/.config/awesome/bin/snapshot.sh window_blank"
         -- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     }
 }

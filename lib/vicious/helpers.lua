@@ -50,7 +50,7 @@ local string = {
 local table = { concat = table.concat }
 local pcall = pcall
 local assert = assert
-local spawn = require("vicious.spawn")
+local spawn = require("lib.vicious.spawn")
 -- }}}
 
 
@@ -59,7 +59,7 @@ local spawn = require("vicious.spawn")
 local helpers = {}
 
 -- {{{ Constants definitions
-local OS_UNSUPPORTED_ERR = "Vicious: platform not supported: %s"
+local OS_UNSUPPORTED_ERR = "lib.vicious: platform not supported: %s"
 local NOT_FOUND_MSG = "module '%s' not found"
 local NOT_FOUND_ERR = [[
 Vicious: %s is not available for the current platform or does not exist]]

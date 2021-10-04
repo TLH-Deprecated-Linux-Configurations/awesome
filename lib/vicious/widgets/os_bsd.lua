@@ -19,8 +19,8 @@
 -- {{{ Grab environment
 local los = { getenv = os.getenv }
 local string = { match = string.match }
-local helpers = require("vicious.helpers")
-local spawn = require("vicious.spawn")
+local helpers = require("lib.vicious.helpers")
+local spawn = require("lib.vicious.spawn")
 -- }}}
 
 -- OS: provides operating system information

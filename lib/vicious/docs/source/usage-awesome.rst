@@ -16,7 +16,7 @@ Then add the following to the top of your ``rc.lua``:
 
 .. code-block:: lua
 
-   local vicious = require("vicious")
+   local vicious = require("lib.vicious")
 
 vicious.register
 ----------------

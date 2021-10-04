@@ -26,8 +26,8 @@ local tonumber = tonumber
 local math = { floor = math.floor }
 local type = type
 
-local helpers = require"vicious.helpers"
-local spawn = require"vicious.spawn"
+local helpers = require"lib.vicious.helpers"
+local spawn = require"lib.vicious.spawn"
 -- }}}
 
 -- Mpd: provides Music Player Daemon information

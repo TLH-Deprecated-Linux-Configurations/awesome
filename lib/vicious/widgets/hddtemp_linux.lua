@@ -21,8 +21,8 @@
 -- {{{ Grab environment
 local tonumber = tonumber
 
-local helpers = require"vicious.helpers"
-local spawn = require"vicious.spawn"
+local helpers = require"lib.vicious.helpers"
+local spawn = require"lib.vicious.spawn"
 -- }}}
 
 -- Hddtemp: provides hard drive temperatures using the hddtemp daemon

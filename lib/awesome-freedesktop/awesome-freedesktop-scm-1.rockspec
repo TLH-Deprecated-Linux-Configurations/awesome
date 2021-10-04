@@ -5,7 +5,7 @@ source = {
    tag = "master",
 }
 description = {
-   summary = "Freedesktop.org menu and desktop icons support for Awesome WM",
+   summary = "lib.awesome-freedesktop.org menu and desktop icons support for Awesome WM",
    homepage = "https://github.com/lcpz/awesome-freedesktop",
    license = "GPL v2"
 }

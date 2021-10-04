@@ -22,8 +22,8 @@
 -- along with Vicious.  If not, see <https://www.gnu.org/licenses/>.
 
 -- {{{ Grab environment
-local spawn = require("vicious.spawn")
-local helpers = require("vicious.helpers")
+local spawn = require("lib.vicious.spawn")
+local helpers = require("lib.vicious.helpers")
 -- }}}
 
 -- Pkg: provides number of pending updates on UNIX systems

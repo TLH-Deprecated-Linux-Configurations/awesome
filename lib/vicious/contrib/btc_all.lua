@@ -20,8 +20,8 @@
 
 -- {{{ Grab environment
 local pcall = pcall
-local helpers = require("vicious.helpers")
-local spawn = require("vicious.spawn")
+local helpers = require("lib.vicious.helpers")
+local spawn = require("lib.vicious.spawn")
 
 local success, json = pcall(require, "cjson")
 if not success then

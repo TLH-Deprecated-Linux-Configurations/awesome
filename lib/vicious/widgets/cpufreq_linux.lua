@@ -19,7 +19,7 @@
 
 -- {{{ Grab environment
 local tonumber = tonumber
-local helpers = require("vicious.helpers")
+local helpers = require("lib.vicious.helpers")
 -- }}}
 
 local GOVERNOR_STATE = {

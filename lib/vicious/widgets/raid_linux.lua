@@ -26,7 +26,7 @@ local string = {
     gmatch = string.gmatch
 }
 
-local helpers = require"vicious.helpers"
+local helpers = require"lib.vicious.helpers"
 -- }}}
 
 -- Initialize function tables

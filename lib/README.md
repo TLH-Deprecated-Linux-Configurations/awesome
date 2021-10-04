@@ -1,0 +1,4 @@
+# Lib
+The library directory are files other people have wrote that are generally just as I found them. If I have nedd to do something more substantial than just use them as modules, I will dice them up and use my comment bars and obnoxious ASCII art method of making them readable, but these files I have not needed to or not wanted to and left as they were found deeply grateful to their authors for putting them out there for me to use. 
+
+This directory includes files used by other configurations I am adapting to my purposes, as well as the more standard awesome libraries I make use of and are typically seen around configurations like this one. The long term goal of the majority of these is to phase them out, either eliminating them entirely or adapting the useful bits into my own configuration as the carrying capacity of the configuration reaches a level where such an infusions can again be tolerated. 

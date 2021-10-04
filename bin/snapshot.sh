@@ -46,7 +46,7 @@ window() {
     # shellcheck disable=SC2012
     xclip -selection clipboard -t image/png -i "${screenshot_dir}"/"$(ls -1 -t "${screenshot_dir}" | head -1)" &
 
-    notify-send 'Snap!' "${notif_message}" -a 'Screenshot tool' -i "${file_loc}"
+    notify-send 'Screen Capture Successful' "${notif_message}" -a 'Screenshot tool' -i "${file_loc}"
 }
 
 # Main function
@@ -81,7 +81,7 @@ shot() {
     # shellcheck disable=SC2012
     xclip -selection clipboard -t image/png -i "${screenshot_dir}"/"$(ls -1 -t "${screenshot_dir}" | head -1)" &
 
-    notify-send 'Snap!' "${notif_message}" -a 'Screenshot tool' -i "${file_loc}"
+    notify-send 'Screenshot Captured!' "${notif_message}" -a 'Screenshot tool' -i "${file_loc}"
 }
 
 # Check the args passed

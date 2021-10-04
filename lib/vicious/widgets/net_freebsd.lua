@@ -25,8 +25,8 @@ local string = {
     gmatch = string.gmatch
 }
 
-local helpers = require("vicious.helpers")
-local spawn = require("vicious.spawn")
+local helpers = require("lib.vicious.helpers")
+local spawn = require("lib.vicious.spawn")
 -- }}}
 
 
