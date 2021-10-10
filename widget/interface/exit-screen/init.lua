@@ -11,9 +11,9 @@ local beautiful = require("beautiful")
 
 local dpi = require("beautiful").xresources.apply_dpi
 
-local apps = require("configuration.apps")
+local apps = require("configuration.settings.apps")
 local clickable_container = require("widget.interface.clickable-container")
-local signals = require("widget.settings.signals")
+local signals = require("configuration.settings.signals")
 local HOME = os.getenv "HOME"
 
 local widget_icon_dir = HOME .. "/.config/awesome/widget/interface/exit-screen/icons/"

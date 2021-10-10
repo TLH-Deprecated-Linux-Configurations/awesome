@@ -1,10 +1,10 @@
-local wibox = require('wibox')
-local mat_list_item = require('widget.interface.list-item')
-local slider = require('widget.interface.slider')
-local mat_icon_button = require('widget.interface.icon-button')
-local icons = require('theme.icons')
-local signals = require('widget.settings.signals')
-local volume = require('widget.hardware.volume')
+local wibox = require("wibox")
+local mat_list_item = require("widget.interface.list-item")
+local slider = require("widget.interface.slider")
+local mat_icon_button = require("widget.interface.icon-button")
+local icons = require("theme.icons")
+local signals = require("configuration.settings.signals")
+local volume = require("widget.hardware.volume")
 
 local vol_slider =
     slider(
@@ -49,7 +49,7 @@ signals.connect_volume_is_muted(
     end
 )
 
-button:connect_signal('button::press', toggleIcon)
+button:connect_signal("button::press", toggleIcon)
 
 local volume_setting =
     wibox.widget {

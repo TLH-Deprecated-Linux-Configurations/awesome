@@ -6,7 +6,7 @@
 -- ########################################################################
 -- ########################################################################
 -- ########################################################################
-local signals = require("widget.settings.signals")
+local signals = require("configuration.settings.signals")
 local gettime = require("socket").gettime
 
 local screen_geometry = {}

@@ -6,7 +6,7 @@
 -- ########################################################################
 -- ########################################################################
 -- ########################################################################
-local tag_preview_box = require 'layout.bottom-panel.widgets.tag-list.tag-preview'
+local tag_preview_box = require "layout.bottom-panel.widgets.tag-list.tag-preview"
 tag_preview_box.enable {
     show_client_content = true,
     -- Whether or not to show the client content
@@ -63,11 +63,6 @@ local get_taglist = function(s)
     -- ########################################################################
     -- ########################################################################
     -- ########################################################################
-    -- The actual png icons
-
-    -- ########################################################################
-    -- ########################################################################
-    -- ########################################################################
     -- Function to update the tags
 
     local taglist =
@@ -78,50 +73,48 @@ local get_taglist = function(s)
         widget_template = {
             {
                 {
-                    id = 'text_role',
-                    widget = wibox.widget.textbox,
-                    align = 'center',
-                    valign = 'center'
+                    {
+                        id = "text_role",
+                        widget = wibox.widget.textbox,
+                        border_width = dpi(6),
+                        border_color = beautiful.xcolor7 .. "cc"
+                    },
+                    margins = 4,
+                    widget = clickable_container,
+                    layout = wibox.layout.fixed.horizontal,
+                    shape = beautiful.btn_xs_shape
                 },
-                id = 'margin_role',
-                shape = beautiful.btn_sm_shape,
-                right = dpi(16),
-                left = dpi(16),
-                bottom = dpi(4),
-                top = dpi(4),
-                border_color = beautiful.xcolor7 .. '88',
-                border_width = dpi(2),
-                widget = clickable_container
+                left = 4,
+                right = 4,
+                widget = wibox.container.margin,
+                shape = beautiful.btn_xs_shape,
+                border_width = dpi(6),
+                border_color = beautiful.xcolor7 .. "cc"
             },
-            valign = 'center',
-            halign = 'center',
-            id = 'background_role',
-            right = dpi(16),
-            left = dpi(16),
-            bottom = dpi(4),
-            top = dpi(4),
+            id = "background_role",
+            shape = beautiful.btn_xs_shape,
             widget = wibox.container.background,
             create_callback = function(self, c3, index, objects)
                 self:connect_signal(
-                    'mouse::enter',
+                    "mouse::enter",
                     function()
                         if #c3:clients() > 0 then
-                            awesome.emit_signal('tag_preview::update', c3)
-                            awesome.emit_signal('tag_preview::visibility', s, true)
+                            awesome.emit_signal("tag_preview::update", c3)
+                            awesome.emit_signal("tag_preview::visibility", s, true)
                         end
-                        if self.bg ~= beautiful.xcolor7 .. 'cc' then
+                        if self.bg ~= beautiful.xcolor7 .. "cc" then
                             self.backup = self.bg
                             self.has_backup = true
                         end
-                        self.bg = beautiful.xcolor7 .. 'cc'
+                        self.bg = beautiful.xcolor7 .. "cc"
                     end
                 )
                 self:connect_signal(
-                    'mouse::leave',
+                    "mouse::leave",
                     function()
-                        awesome.emit_signal('tag_preview::visibility', s, false)
+                        awesome.emit_signal("tag_preview::visibility", s, false)
                         if self.has_backup then
-                            self.bg = beautiful.xcolor0 .. 'cc'
+                            self.bg = beautiful.xcolor0 .. "cc"
                         end
                     end
                 )

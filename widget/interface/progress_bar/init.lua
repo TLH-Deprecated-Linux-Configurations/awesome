@@ -12,7 +12,7 @@ local gtable = require("gears.table")
 local setmetatable = setmetatable
 local beautiful = require("beautiful")
 local dpi = beautiful.xresources.apply_dpi
-local signals = require("widget.settings.signals")
+local signals = require("configuration.settings.signals")
 
 -- Commons requirements
 local wibox = require("wibox")
@@ -30,7 +30,7 @@ function mat_slider:set_value(value)
         self._private.value = value
         self._private.progress_bar:set_value(self._private.value)
         self:emit_signal("property::value")
-        -- self:emit_signal('widget::layout_changed')
+    -- self:emit_signal('widget::layout_changed')
     end
 end
 -- ########################################################################
@@ -38,7 +38,9 @@ end
 -- ########################################################################
 --- get the current value of the progress_bar
 
-function mat_slider:get_value() return self._private.value end
+function mat_slider:get_value()
+    return self._private.value
+end
 
 function mat_slider:set_read_only(value)
     collectgarbage("collect")
@@ -52,7 +54,9 @@ end
 -- ########################################################################
 -- ########################################################################
 -- ########################################################################
-function mat_slider:get_read_only() return self._private.read_only end
+function mat_slider:get_read_only()
+    return self._private.read_only
+end
 -- ########################################################################
 -- ########################################################################
 -- ########################################################################
@@ -60,18 +64,22 @@ function mat_slider:layout(_, width, height)
     local layout = {}
     local size_field = 32
     local calc_height = height - dpi(size_field)
-    if calc_height < 0 then calc_height = 0 end
-    table.insert(layout,
-                 base.place_widget_at(self._private.progress_bar, 0,
-                                      dpi(size_field / 2), width, calc_height))
+    if calc_height < 0 then
+        calc_height = 0
+    end
+    table.insert(layout, base.place_widget_at(self._private.progress_bar, 0, dpi(size_field / 2), width, calc_height))
     return layout
 end
 -- ########################################################################
 -- ########################################################################
 -- ########################################################################
 function mat_slider:fit(_, width, height)
-    if height < 0 then height = 1 end
-    if width < 0 then width = 1 end
+    if height < 0 then
+        height = 1
+    end
+    if width < 0 then
+        width = 1
+    end
     return width, height
 end
 
@@ -86,7 +94,8 @@ local function new(args)
     -- ########################################################################
     -- ########################################################################
     -- ########################################################################
-    ret._private.progress_bar = wibox.widget {
+    ret._private.progress_bar =
+        wibox.widget {
         max_value = 100,
         value = 25,
         forced_height = dpi(6),
@@ -107,7 +116,9 @@ end
 -- ########################################################################
 -- ########################################################################
 -- ########################################################################
-function mat_slider.mt:__call(...) return new(...) end
+function mat_slider.mt:__call(...)
+    return new(...)
+end
 -- ########################################################################
 -- ########################################################################
 -- ########################################################################

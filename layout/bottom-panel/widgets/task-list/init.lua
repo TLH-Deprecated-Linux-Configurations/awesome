@@ -1,8 +1,8 @@
-local awful = require('awful')
-local wibox = require('wibox')
-local dpi = require('beautiful').xresources.apply_dpi
-local gears = require('gears')
-local icons = require('theme.icons')
+local awful = require("awful")
+local wibox = require("wibox")
+local dpi = require("beautiful").xresources.apply_dpi
+local gears = require("gears")
+local icons = require("theme.icons")
 
 --- Common method to create buttons.
 -- @tab buttons
@@ -10,8 +10,8 @@ local icons = require('theme.icons')
 -- @return table
 
 -- Set tasklist items to set width of 200
-local common = require('awful.widget.common')
-local task_preview_box = require('layout.bottom-panel.widgets.task-list.task_preview')
+local common = require("awful.widget.common")
+local task_preview_box = require("layout.bottom-panel.widgets.task-list.task_preview")
 task_preview_box.enable {
     placement_fn = function(c) -- Place the widget using awful.placement (this overrides x & y)
         awful.placement.bottom(c, {bottom = 40})
@@ -31,10 +31,10 @@ local function create_buttons(buttons, object)
                 modifiers = b.modifiers,
                 button = b.button,
                 on_press = function()
-                    b:emit_signal('press', object)
+                    b:emit_signal("press", object)
                 end,
                 on_release = function()
-                    b:emit_signal('release', object)
+                    b:emit_signal("release", object)
                 end
             }
             btns[#btns + 1] = btn
@@ -48,17 +48,7 @@ local function list_update(w, buttons, label, data, objects)
     w:reset()
     for i, o in ipairs(objects) do
         local cache = data[o]
-        local ib,
-            cb,
-            tb,
-            cbm,
-            bgb,
-            tbm,
-            ibm,
-            tt,
-            l,
-            ll,
-            bg_clickable
+        local ib, cb, tb, cbm, bgb, tbm, ibm, tt, l, ll, bg_clickable
         if cache then
             ib = cache.ib
             tb = cache.tb
@@ -82,12 +72,12 @@ local function list_update(w, buttons, label, data, objects)
                 },
                 widget = clickable_container
             }
-            cb.shape = beautiful.btn_lg_shape
+            cb.shape = beautiful.btn_sm_shape
             cbm =
                 wibox.widget {
                 -- 4, 8 ,12 ,12 -- close button
                 cb,
-                border_color = beautiful.xcolor7 .. 'dd',
+                border_color = beautiful.xcolor7 .. "dd",
                 border_width = dpi(2),
                 left = dpi(8),
                 right = dpi(8),
@@ -147,8 +137,8 @@ local function list_update(w, buttons, label, data, objects)
                 awful.tooltip(
                 {
                     objects = {tb},
-                    mode = 'outside',
-                    align = 'bottom',
+                    mode = "outside",
+                    align = "bottom",
                     delay_show = 1
                 }
             )
@@ -163,32 +153,28 @@ local function list_update(w, buttons, label, data, objects)
             }
         end
 
-        local text,
-            bg,
-            bg_image,
-            icon,
-            args = label(o, tb)
+        local text, bg, bg_image, icon, args = label(o, tb)
         args = args or {}
 
         -- The text might be invalid, so use pcall.
-        if text == nil or text == '' then
+        if text == nil or text == "" then
             tbm:set_margins(0)
         else
             -- Truncate when title is too long
-            local text_only = text:match('>(.-)<')
+            local text_only = text:match(">(.-)<")
             if (utf8.len(text_only) > 24) then
-                text = text:gsub('>(.-)<', '>' .. string.sub(text_only, 1, utf8.offset(text_only, 22) - 1) .. '...<')
+                text = text:gsub(">(.-)<", ">" .. string.sub(text_only, 1, utf8.offset(text_only, 22) - 1) .. "...<")
                 tt:set_text(text_only)
                 tt:add_to_object(tb)
             else
                 tt:remove_from_object(tb)
             end
             if not tb:set_markup_silently(text) then
-                tb:set_markup('<i>&lt;Invalid text&gt;</i>')
+                tb:set_markup("<i>&lt;Invalid text&gt;</i>")
             end
         end
         bgb:set_bg(bg)
-        if type(bg_image) == 'function' then
+        if type(bg_image) == "function" then
             bg_image = bg_image(tb, o, nil, objects, i)
         end
         bgb:set_bgimage(bg_image)
@@ -200,7 +186,7 @@ local function list_update(w, buttons, label, data, objects)
 
         bgb.shape = beautiful.btn_sm_shape
         bgb.shape_border_width = dpi(2)
-        bgb.shape_border_color = beautiful.xcolor7 .. '88'
+        bgb.shape_border_color = beautiful.xcolor7 .. "88"
 
         w:add(bgb)
     end
@@ -223,7 +209,7 @@ local tasklist_buttons =
                 end
                 -- This will also un-minimize
                 -- the client, if needed
-                c:emit_signal('request::activate')
+                c:emit_signal("request::activate")
                 c:raise()
             end
         end

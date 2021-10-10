@@ -7,10 +7,9 @@
 -- ########################################################################
 -- ########################################################################
 -- Declare widgets not called elsewhere
-_G.switcher = require('widget.interface.application-switch')
-require('widget.functions')
-require('widget.settings')
-require('widget.interface')
-require('widget.hardware')
+_G.switcher = require("widget.interface.application-switch")
+require("widget.functions")
+require("widget.interface")
+require("widget.hardware")
 
-require('widget.hardware.battery.battery-notifier')
+require("widget.hardware.battery.battery-notifier")

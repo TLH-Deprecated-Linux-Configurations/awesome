@@ -11,8 +11,9 @@
 -- ########################################################################
 -- ########################################################################
 return {
-    keys = require('configuration.keys'),
-    apps = require('configuration.apps'),
-    functions = require('configurations.functions'),
-    global_var = require('configuration.global_var')
+    keys = require(... .. ".keys"),
+    apps = require(... .. ".settings.apps"),
+    global_var = require(... .. ".settings.global_var"),
+    settings = require(... .. ".settings"),
+    tags = require(... .. ".tags")
 }

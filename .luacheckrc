@@ -8,16 +8,16 @@ self = false
 files["spec"].std = "+busted"
 
 -- The default config may set global variables
-files["configuration.global_var"].allow_defined_top = true
+files["configuration.settings.global_var"].allow_defined_top = true
 
 -- This file itself
-files[".luacheckrc"].ignore = { "111", "112", "131" }
+files[".luacheckrc"].ignore = {"111", "112", "131"}
 
 -- ignore file max line length
 -- ignore string containing trailing whitespace
 -- ignore mutating of global variables
 -- ignore setting global variables
-files["**"].ignore = { "631", "613", "112", "122" }
+files["**"].ignore = {"631", "613", "112", "122"}
 
 exclude_files = {
 	".luacheckrc",
@@ -51,7 +51,7 @@ exclude_files = {
 	"lib/lib-lua/socket/tp.lua",
 	"lib/lib-lua/socket/url.lua",
 	"lib/lib-lua/ssl.lua",
-	"lib/lib-lua/ssl/https.lua",
+	"lib/lib-lua/ssl/https.lua"
 	-- contains a lot of globals
 }
 
@@ -63,7 +63,6 @@ read_globals = {
 	"dbus",
 	"drawable",
 	"drawin",
-
 	"key",
 	"keygrabber",
 	"mousegrabber",
@@ -79,7 +78,7 @@ read_globals = {
 	"dont_disturb",
 	"clear_desktop_selection",
 	"wibox",
-	"rawlen",
+	"rawlen"
 }
 
 globals = {

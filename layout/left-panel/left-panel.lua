@@ -9,11 +9,11 @@
 -- ########################################################################
 -- ########################################################################
 -- ########################################################################
-local PATH_TO_ICONS = HOME .. '/.config/awesome/layout/left-panel/icons/'
-local apps = require 'configuration.apps'
-local animate = require 'widget.interface.animations'.createAnimObject
-local get_screen = require 'lib.function.common'.focused_screen
-local keyconfig = require 'configuration.keys.mod'
+local PATH_TO_ICONS = HOME .. "/.config/awesome/layout/left-panel/icons/"
+local apps = require "configuration.settings.apps"
+local animate = require "widget.interface.animations".createAnimObject
+local get_screen = require "lib.function.common".focused_screen
+local keyconfig = require "configuration.keys.mod"
 local modKey = keyconfig.modKey
 -- body gets populated with a scrollbox widget once generated
 local body = {}
@@ -30,8 +30,8 @@ local left_panel_func = function()
         wibox {
         ontop = true,
         screen = s,
-        bg = '#00000000',
-        type = 'dock',
+        bg = "#00000000",
+        type = "dock",
         x = s.geometry.x,
         y = s.geometry.y,
         width = s.geometry.width,
@@ -55,7 +55,7 @@ local left_panel_func = function()
         wibox {
         ontop = true,
         screen = s,
-        bg = beautiful.xcolor0 .. 'aa',
+        bg = "radial:960,540,10:0,0,10:0,#2f303d:0.34,#17191e:0.65,#22262d:1,#17191e",
         width = left_panel_width,
         height = s.geometry.height,
         x = s.geometry.x,
@@ -66,7 +66,7 @@ local left_panel_func = function()
     -- ########################################################################
     -- ########################################################################
     screen.connect_signal(
-        'removed',
+        "removed",
         function(removed)
             if s == removed then
                 s = get_screen()
@@ -79,7 +79,7 @@ local left_panel_func = function()
     -- this is called when we need to update the screen
     signals.connect_refresh_screen(
         function()
-            print 'Refreshing action center'
+            print "Refreshing action center"
             if left_panel == nil then
                 return
             end
@@ -107,14 +107,14 @@ local left_panel_func = function()
         if grabber then
             grabber:start()
         end
-        left_panel:emit_signal 'opened'
+        left_panel:emit_signal "opened"
         s = get_screen()
         -- ########################################################################
         -- ########################################################################
         -- ########################################################################
         -- start the animations
         left_panel.x = s.geometry.x - left_panel_width
-        left_panel.bg = beautiful.xcolor21 .. 'cc'
+        left_panel.bg = "radial:960,540,1000:0,0,1000:0,#2f303d:0.34,#17191e:0.65,#22262d:1,#17191e"
         left_panel.y = s.geometry.y
         left_panel.height = s.geometry.height
         left_panel.opacity = 0
@@ -122,7 +122,7 @@ local left_panel_func = function()
             _G.anim_speed,
             left_panel,
             {opacity = 1, x = s.geometry.x},
-            'outCubic',
+            "outCubic",
             function()
                 update_backdrop_location()
             end
@@ -137,24 +137,21 @@ local left_panel_func = function()
         left_panel.x = s.geometry.x
         left_panel.y = s.geometry.y
         left_panel.height = s.geometry.height
-        left_panel.bg = beautiful.xbackground .. 'dd'
-        left_panel.border_width = dpi(3)
-        left_panel.border_color = beautiful.xcolor8 .. '66'
-        left_panel.border_radius = dpi(12)
-        left_panel.opacity = 0.98
+        left_panel.border_radius = dpi(4)
+        left_panel.opacity = 1
         backdrop.visible = false
         animate(
             _G.anim_speed,
             left_panel,
             {opacity = 0, x = s.geometry.x - left_panel_width},
-            'outCubic',
+            "outCubic",
             function()
                 left_panel.visible = false
                 -- Change to notify mode on close
                 if grabber then
                     grabber:stop()
                 end
-                left_panel:emit_signal 'closed'
+                left_panel:emit_signal "closed"
                 update_backdrop_location()
             end
         )
@@ -167,7 +164,7 @@ local left_panel_func = function()
         keybindings = {
             awful.key {
                 modifiers = {},
-                key = 'Escape',
+                key = "Escape",
                 on_press = function()
                     left_panel.opened = false
                     closeleft_panel()
@@ -183,8 +180,8 @@ local left_panel_func = function()
             }
         },
         -- Note that it is using the key name and not the modifier name.
-        stop_key = 'Escape',
-        stop_event = 'release'
+        stop_key = "Escape",
+        stop_event = "release"
     }
     -- ########################################################################
     -- ########################################################################
@@ -198,15 +195,15 @@ local left_panel_func = function()
         keybindings = {
             awful.key {
                 modifiers = {},
-                key = 'Escape',
+                key = "Escape",
                 on_press = function()
                     left_panel:close()
                 end
             }
         },
         -- Note that it is using the key name and not the modifier name.
-        stop_key = 'Escape',
-        stop_event = 'release'
+        stop_key = "Escape",
+        stop_event = "release"
     }
 
     -- ########################################################################
@@ -259,7 +256,7 @@ local left_panel_func = function()
     -- ########################################################################
     -- ########################################################################
     -- ########################################################################
-    local exit_button_widget = wibox.widget.imagebox(PATH_TO_ICONS .. 'power.svg')
+    local exit_button_widget = wibox.widget.imagebox(PATH_TO_ICONS .. "power.svg")
     local exit_button =
         button(
         exit_button_widget,
@@ -269,30 +266,31 @@ local left_panel_func = function()
             _G.exit_screen_show()
         end
     )
+    exit_button.bg = beautiful.xcolor8 .. "ff"
     -- ########################################################################
     -- ########################################################################
     -- ########################################################################
-    local separator = seperator_widget(20, 'vertical', 0)
-    local topSeparator = seperator_widget(20, 'horizontal', 0)
-    local bottomSeparator = seperator_widget(5, 'horizontal', 0)
+    local separator = seperator_widget(20, "vertical", 0)
+    local topSeparator = seperator_widget(20, "horizontal", 0)
+    local bottomSeparator = seperator_widget(5, "horizontal", 0)
 
     -- ########################################################################
     -- ########################################################################
     -- ########################################################################
     local function settings_plugin()
-        local screen_card = card 'System Tray'
+        local screen_card = card "System Tray"
         -- ########################################################################
         -- ########################################################################
         -- ########################################################################
-        screen_card.update_body(require 'layout.left-panel.widgets.systray')
+        screen_card.update_body(require "layout.left-panel.widgets.systray")
         -- ########################################################################
         -- ########################################################################
         -- ########################################################################
         local table_widget =
             wibox.widget {
             topSeparator,
-            require 'layout.left-panel.widgets.quick-settings',
-            require 'layout.left-panel.widgets.hardware-monitor'(s),
+            require "layout.left-panel.widgets.quick-settings",
+            require "layout.left-panel.widgets.hardware-monitor"(s),
             separator,
             wibox.container.margin(screen_card, dpi(20), dpi(20), dpi(20), dpi(20)),
             separator,
@@ -316,7 +314,10 @@ local left_panel_func = function()
                     wibox.widget {
                         exit_button,
                         widget = wibox.container.background,
-                        shape = beautiful.window_shape
+                        bg = beautiful.xcolor8,
+                        border_width = dpi(3),
+                        border_color = beautiful.xcolor7 .. "33",
+                        shape = beautiful.btn_lg_shape
                     },
                     widget = mat_list_item
                 },
@@ -332,7 +333,7 @@ local left_panel_func = function()
     -- ########################################################################
     -- ########################################################################
     left_panel:setup {
-        expand = 'none',
+        expand = "none",
         layout = wibox.layout.fixed.vertical,
         body
     }

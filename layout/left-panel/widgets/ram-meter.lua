@@ -6,7 +6,7 @@ local wibox = require("wibox")
 local vicious = require("lib.vicious")
 local dpi = beautiful.xresources.apply_dpi
 local icons = require("theme.icons")
-local signals = require("widget.settings.signals")
+local signals = require("configuration.settings.signals")
 local ramgraph_widget = {}
 
 collectgarbage("collect")

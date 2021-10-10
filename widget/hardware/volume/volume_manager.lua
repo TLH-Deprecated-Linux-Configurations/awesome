@@ -5,10 +5,10 @@
 -- ########################################################################
 -- ########################################################################
 -- ########################################################################
-local signals = require('widget.settings.signals')
-local sound = require('sound')
-local time = require('socket').gettime
-local volume = require('widget.hardware.volume')
+local signals = require("configuration.settings.signals")
+local sound = require("sound")
+local time = require("socket").gettime
+local volume = require("widget.hardware.volume")
 
 local startup = true
 local prev_time = 0

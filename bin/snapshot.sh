@@ -109,7 +109,7 @@ elif [ "$1" = 'full_blank' ]; then
     shot 'maim -u -m 1' "${msg}"
 elif [ "$1" = 'area' ]; then
     msg='Area screenshot saved and copied to clipboard!'
-    window 'maim -u -s -n -m 1' "${msg}" "convert - ( +clone -background black -shadow 80x3+8+8 ) +swap -background $COLOR -layers merge +repage"
+    window 'maim -u -s -n -m 1' "${msg}" "convert - ( +clone -background black -shadow 80x3+8+8 ) +swap -layers merge +repage"
 elif [ "$1" = 'area_blank' ]; then
     msg='Area screenshot saved and copied to clipboard!'
     shot 'maim -u -s -n -m 1' "${msg}"

@@ -21,9 +21,9 @@ if [[ "$(command -v udiskie)" ]]; then
 fi
 
 # autolock the system
-if [[ "$(command -v gautolock)" ]]; then
+if [[ "$(command -v goautolock)" ]]; then
     echo "Lock screen time set to: 90 seconds"
-    goautolock --locker "$HOME"/.config/awesome/external/i3lock/blur.sh --time 360 --notify 30  >/dev/null &
+    goautolock --locker i3lockr --time 360 --notify 30 >/dev/null &
 fi
 
 # run clipboard manager
@@ -33,5 +33,25 @@ fi
 
 # run clipboard manager
 if [[ "$(command -v picom)" ]]; then
-    picom -b --experimental-backends --config ~/.config/awesome/external/picom.conf &>/dev/null &
+    picom -b --experimental-backends &>/dev/null &
+fi
+
+# run clipboard manager
+if [[ "$(command -v xsettingsd)" ]]; then
+    xsettingsd &
+fi
+
+# run xsetroot
+if [[ "$(command -v xsetroot)" ]]; then
+    xsetroot -cursor_name left_ptr &
+fi
+
+# run power manager
+if [[ "$(command -v xfce4-power-manager)" ]]; then
+    xfce4-power-manager &
+fi
+
+#  Make sure the colors are as they are supposed to be
+if [[ "$(command -v xrdb)" ]]; then
+    xrdb "$HOME"/.Xresources &
 fi

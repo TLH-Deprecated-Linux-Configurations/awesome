@@ -7,27 +7,27 @@
 -- ########################################################################
 -- ########################################################################
 -- Separating Multiple Monitor functions as a separated module (taken from awesome wiki)
-local gtable = require('gears.table')
+local gtable = require("gears.table")
 
-local naughty = require('naughty')
-local apps = require('configuration.apps')
-local home = os.getenv('HOME')
+local naughty = require("naughty")
+local apps = require("configuration.settings.apps")
+local home = os.getenv("HOME")
 -- ########################################################################
 -- ########################################################################
 -- ########################################################################
 -- A path to a fancy icon
-local icon_path = home .. '.config/awesome/theme/icons/laptop.svg'
+local icon_path = home .. ".config/awesome/theme/icons/laptop.svg"
 -- ########################################################################
 -- ########################################################################
 -- ########################################################################
 -- Get active outputs
 local function outputs()
     local output_tbl = {}
-    local xrandr = io.popen('xrandr -q --current')
+    local xrandr = io.popen("xrandr -q --current")
 
     if xrandr then
         for line in xrandr:lines() do
-            local output = line:match('^([%w-]+) connected ')
+            local output = line:match("^([%w-]+) connected ")
             if output then
                 output_tbl[#output_tbl + 1] = output
             end
@@ -85,16 +85,16 @@ local function menu()
     -- ########################################################################
     -- ########################################################################
     for _, choice in pairs(choices) do
-        local cmd = 'xrandr'
+        local cmd = "xrandr"
         -- ########################################################################
         -- ########################################################################
         -- ########################################################################
         -- Enabled outputs
         for i, o in pairs(choice) do
             -- set default resolution and disable panning (in case it is on)
-            cmd = cmd .. ' --output ' .. o .. ' --panning 0x0 --auto'
+            cmd = cmd .. " --output " .. o .. " --panning 0x0 --auto"
             if i > 1 then
-                cmd = cmd .. ' --right-of ' .. choice[i - 1]
+                cmd = cmd .. " --right-of " .. choice[i - 1]
             end
             -- duplicate command due to xrandr bug?
             --cmd = cmd .. "; sleep 1; " .. cmd
@@ -105,21 +105,21 @@ local function menu()
         -- Disabled outputs
         for _, o in pairs(out) do
             if not gtable.hasitem(choice, o) then
-                cmd = cmd .. ' --output ' .. o .. ' --off'
+                cmd = cmd .. " --output " .. o .. " --off"
             end
         end
         -- ########################################################################
         -- ########################################################################
         -- ########################################################################
-        local label = ''
+        local label = ""
         if #choice == 1 then
-            label = 'Only <span weight="bold">' .. choice[1] .. '</span>'
+            label = 'Only <span weight="bold">' .. choice[1] .. "</span>"
         else
             for i, o in pairs(choice) do
                 if i > 1 then
-                    label = label .. ' + '
+                    label = label .. " + "
                 end
-                label = label .. '<span weight="bold">' .. o .. '</span>'
+                label = label .. '<span weight="bold">' .. o .. "</span>"
             end
         end
         -- ########################################################################
@@ -128,8 +128,8 @@ local function menu()
         menu_tbl[#menu_tbl + 1] = {label, cmd, choice}
         if #choice == 1 then
             menu_tbl[#menu_tbl + 1] = {
-                'Duplicate <span weight="bold">' .. choice[1] .. '</span>',
-                apps.default.duplicate_screens .. ' ' .. choice[1],
+                'Duplicate <span weight="bold">' .. choice[1] .. "</span>",
+                apps.default.duplicate_screens .. " " .. choice[1],
                 choice
             }
         end
@@ -178,7 +178,7 @@ local function xrandr()
     state.index = state.index + 1
 
     if not next then
-        label = 'Keep the current configuration'
+        label = "Keep the current configuration"
         state.index = nil
     else
         label = next[1]
@@ -186,11 +186,11 @@ local function xrandr()
     -- ########################################################################
     -- ########################################################################
     -- ########################################################################
-    print('Display mode: ' .. label)
+    print("Display mode: " .. label)
     local noti =
         naughty.notify(
         {
-            title = 'Screen System',
+            title = "Screen System",
             text = label,
             icon = icon_path,
             timeout = 4,
@@ -201,7 +201,7 @@ local function xrandr()
     -- ########################################################################
     -- ########################################################################
     -- ########################################################################
-    noti:connect_signal('destroyed', naughty_destroy_callback)
+    noti:connect_signal("destroyed", naughty_destroy_callback)
     state.cid = noti.id
 end
 -- ########################################################################

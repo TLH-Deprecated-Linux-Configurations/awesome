@@ -16,7 +16,7 @@ local battery_function = require("widget.hardware.battery")
 local gears = require("gears")
 
 -- Subscribe to power supply status changes with acpi_listen
-local signals = require("widget.settings.signals")
+local signals = require("configuration.settings.signals")
 -- ########################################################################
 -- ########################################################################
 -- ########################################################################

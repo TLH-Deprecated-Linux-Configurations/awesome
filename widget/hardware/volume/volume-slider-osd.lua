@@ -3,13 +3,13 @@
 -- the slider in the dashboard.
 -- Excuse my messy code.
 
-local wibox = require('wibox')
-local mat_list_item = require('widget.interface.list-item')
-local slider = require('widget.interface.slider')
-local mat_icon_button = require('widget.interface.icon-button')
-local icons = require('theme.icons')
-local signal = require('widget.settings.signals')
-local volume = require('widget.hardware.volume')
+local wibox = require("wibox")
+local mat_list_item = require("widget.interface.list-item")
+local slider = require("widget.interface.slider")
+local mat_icon_button = require("widget.interface.icon-button")
+local icons = require("theme.icons")
+local signal = require("configuration.settings.signals")
+local volume = require("widget.hardware.volume")
 
 local slider_osd =
     slider(
@@ -40,7 +40,7 @@ local icon =
 local button = mat_icon_button(icon)
 
 button:connect_signal(
-    'button::press',
+    "button::press",
     function()
         volume.toggle_master()
         signal.emit_volume_update()

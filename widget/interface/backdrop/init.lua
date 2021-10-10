@@ -50,7 +50,7 @@ local function backdrop(c)
         update_backdrop(c.backdrop, c)
     end
     if not c.backdrop then
-        c.backdrop = wibox {ontop = true, bg = "#17191eaa", type = "splash"}
+        c.backdrop = wibox {ontop = false, bg = "#17191dd", type = "splash"}
         c.backdrop:buttons(
             awful.util.table.join(
                 awful.button(

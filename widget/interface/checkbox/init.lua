@@ -9,7 +9,7 @@
 local wibox = require("wibox")
 local beautiful = require("beautiful")
 local gears = require("gears")
-local signals = require("widget.settings.signals")
+local signals = require("configuration.settings.signals")
 local dpi = beautiful.xresources.apply_dpi
 -- ########################################################################
 -- ########################################################################
