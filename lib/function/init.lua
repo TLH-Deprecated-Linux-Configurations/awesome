@@ -1,7 +1,6 @@
----------------------------------------------------------------------------
---- A set of functions designed as a general helper
---
--- @author Tom Meyers &lt;tom@odex.be&gt;
--- @copyright 2020 Tom Meyers
--- @module lib.function
----------------------------------------------------------------------------
+return {
+    require(... .. ".application_runner"),
+    require(... .. ".common"),
+    require(... .. ".datetime"),
+    require(... .. ".delayed_timer"),
+}

@@ -91,6 +91,8 @@ mat_list_item = require("widget.interface.list-item")
 scrollbox = require("widget.interface.scrollbox")
 checkbox = require("widget.interface.checkbox")
 button = require("widget.interface.button")
+config = require("widget.functions")
+
 -- #######################################################################
 -- ########################################################################
 -- ########################################################################

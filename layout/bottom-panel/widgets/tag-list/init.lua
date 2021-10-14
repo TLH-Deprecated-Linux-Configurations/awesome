@@ -72,26 +72,28 @@ local get_taglist = function(s)
         layout = wibox.layout.fixed.horizontal,
         widget_template = {
             {
-                {
+                
                     {
                         id = "text_role",
                         widget = wibox.widget.textbox,
-                        border_width = dpi(6),
-                        border_color = beautiful.xcolor7 .. "cc"
-                    },
-                    margins = 4,
-                    widget = clickable_container,
-                    layout = wibox.layout.fixed.horizontal,
-                    shape = beautiful.btn_xs_shape
+
+       
+                        placement = awful.placement.centered(c),
                 },
-                left = 4,
-                right = 4,
-                widget = wibox.container.margin,
+
+                forced_height = 36,
+                forced_width = 36,
+                widget = clickable_container,
                 shape = beautiful.btn_xs_shape,
-                border_width = dpi(6),
-                border_color = beautiful.xcolor7 .. "cc"
+                placement = awful.placement.centered(c),
+                border_width = dpi(1),
+                border_color = beautiful.xcolor19 .. "ee"
             },
             id = "background_role",
+            forced_height = 36,
+            forced_width = 36,
+            border_width = dpi(2),
+            border_color = beautiful.xcolor7 .. "cc",
             shape = beautiful.btn_xs_shape,
             widget = wibox.container.background,
             create_callback = function(self, c3, index, objects)
@@ -105,8 +107,9 @@ local get_taglist = function(s)
                         if self.bg ~= beautiful.xcolor7 .. "cc" then
                             self.backup = self.bg
                             self.has_backup = true
+
                         end
-                        self.bg = beautiful.xcolor7 .. "cc"
+                     
                     end
                 )
                 self:connect_signal(

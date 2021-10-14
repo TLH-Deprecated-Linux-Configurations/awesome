@@ -58,7 +58,19 @@ local globalKeys =
     ),
     -- #############################################################################
 
-    -- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    awful.key(
+        {modkey, "Mod1"},
+        "Return",
+        function()
+            print("Showing all scratch windows")
+            require('attachdrop').showall()
+        end,
+        {
+            description = "Show all scratchpad windows on screen",
+            group = "Launcher"
+        }
+    ),
+   -- #############################################################################
     awful.key(
         {modkey, "Control"},
         "Escape",
@@ -115,13 +127,13 @@ local globalKeys =
         {modkey},
         "F3",
         function()
-            print("Spawning thunar in Scratchpad")
-            drop.toggle("thunar", "left", "top", 0.7, 0.7)
+            print("Spawning caja in Scratchpad")
+            drop.toggle("caja", "left", "top", 0.7, 0.7)
 
-            -- awful.spawn('thunar')
+            -- awful.spawn('caja')
         end,
         {
-            description = "Launch thunar in Scratchpad",
+            description = "Launch caja in Scratchpad",
             group = "Launcher"
         }
     ),
@@ -131,9 +143,9 @@ local globalKeys =
         {modkey, "Control"},
         "F3",
         function()
-            print("Spawning thunar as Root")
+            print("Spawning caja as Root")
 
-            awful.spawn("gksu thunar")
+            awful.spawn("gksu caja")
         end,
         {
             description = "Launch file Manager as Root",
@@ -146,15 +158,30 @@ local globalKeys =
         {modkey, "Shift"},
         "F3",
         function()
-            print("Spawning New thunar Instance")
+            print("Spawning New caja Instance")
 
-            awful.spawn("thunar")
+            awful.spawn("caja")
         end,
         {
-            description = "Launch New thunar Instance",
+            description = "Launch New caja Instance",
             group = "Launcher"
         }
     ),
+        -- #############################################################################
+
+        awful.key(
+            {modkey, "Mod1"},
+            "F3",
+            function()
+                print("Spawning New Ranger Instance")
+    
+                awful.spawn("ranger")
+            end,
+            {
+                description = "Launch New Ranger Instance",
+                group = "Launcher"
+            }
+        ),
     -- #############################################################################
     awful.key(
         {modkey},
@@ -284,7 +311,7 @@ local globalKeys =
         {modkey},
         "Up",
         function()
-            print("Decreasing Number of Master Clients")
+            print("Increasing Number of Master Clients")
 
             awful.tag.incnmaster(1, nil, true)
         end,
@@ -307,35 +334,7 @@ local globalKeys =
             group = "Layout"
         }
     ),
-    -- #############################################################################
 
-    -- Toggle System Tray
-    awful.key(
-        {modkey},
-        "=",
-        function()
-            print("Toggeling Systray Visibility")
-            awful.screen.focused().systray.visible = not awful.screen.focused().systray.visible
-        end,
-        {
-            description = "Toggle Systray Visibility",
-            group = "custom"
-        }
-    ),
-    -- #############################################################################
-
-    awful.key(
-        {modkey},
-        "b",
-        function()
-            print("Spawning rofi window switcher")
-            awful.spawn(apps.default.rofiwindowswitch)
-        end,
-        {
-            description = "Open a Window Switcher",
-            group = "Launcher"
-        }
-    ),
     -- #############################################################################
 
     -- Tag browsing
