@@ -5,15 +5,15 @@
 -- ########################################################################
 -- ########################################################################
 -- ########################################################################
-local wibox = require('wibox')
-local gears = require('gears')
-local dpi = require('beautiful').xresources.apply_dpi
-local card = require('widget.interface.card')
+local wibox = require("wibox")
+local gears = require("gears")
+local dpi = require("beautiful").xresources.apply_dpi
+local card = require("widget.interface.card")
 
-local beautiful = require('beautiful')
+local beautiful = require("beautiful")
 
-local HOME = os.getenv('HOME')
-local PATH_TO_ICONS = HOME .. '/.config/awesome/layout/right-panel/widgets/social-media/icons/'
+local HOME = os.getenv("HOME")
+local PATH_TO_ICONS = HOME .. "/.config/awesome/layout/right-panel/widgets/social-media/icons/"
 -- ########################################################################
 -- ########################################################################
 -- ########################################################################
@@ -35,13 +35,13 @@ end
 -- ########################################################################
 -- ########################################################################
 -- ########################################################################
-local social_card = card('Social Media', dpi(60))
+local social_card = card("Social Media", dpi(60))
 
 local reddit_widget =
     wibox.widget {
     {
-        id = 'icon',
-        image = PATH_TO_ICONS .. 'reddit.svg',
+        id = "icon",
+        image = PATH_TO_ICONS .. "reddit.svg",
         widget = wibox.widget.imagebox,
         resize = true
     },
@@ -50,6 +50,19 @@ local reddit_widget =
 -- ########################################################################
 -- ########################################################################
 -- ########################################################################
+local search_button = clickable_container(wibox.container.margin(reddit_widget, dpi(3), dpi(3), dpi(3), dpi(3)))
+search_button:buttons(
+    gears.table.join(
+        awful.button(
+            {},
+            1,
+            nil,
+            function()
+                awful.spawn(apps.web)
+            end
+        )
+    )
+)
 local reddit_button = clickable_container(wibox.container.margin(reddit_widget, dpi(3), dpi(3), dpi(3), dpi(3)))
 reddit_button:buttons(
     gears.table.join(
@@ -59,7 +72,7 @@ reddit_button:buttons(
             nil,
             function()
                 awful.spawn.easy_async_with_shell(
-                    'xdg-open https://reddit.com',
+                    "xdg-open https://reddit.com",
                     function(_)
                     end,
                     1
@@ -74,8 +87,8 @@ reddit_button:buttons(
 local facebook_widget =
     wibox.widget {
     {
-        id = 'icon',
-        image = PATH_TO_ICONS .. 'facebook.svg',
+        id = "icon",
+        image = PATH_TO_ICONS .. "facebook.svg",
         widget = wibox.widget.imagebox,
         resize = true
     },
@@ -93,7 +106,7 @@ facebook_button:buttons(
             nil,
             function()
                 awful.spawn.easy_async_with_shell(
-                    'xdg-open https://facebook.com',
+                    "xdg-open https://facebook.com",
                     function(_)
                     end,
                     1
@@ -108,8 +121,8 @@ facebook_button:buttons(
 local twitter_widget =
     wibox.widget {
     {
-        id = 'icon',
-        image = PATH_TO_ICONS .. 'twitter' .. '.svg',
+        id = "icon",
+        image = PATH_TO_ICONS .. "twitter" .. ".svg",
         widget = wibox.widget.imagebox,
         resize = true
     },
@@ -127,7 +140,7 @@ twitter_button:buttons(
             nil,
             function()
                 awful.spawn.easy_async_with_shell(
-                    'xdg-open https://twitter.com',
+                    "xdg-open https://twitter.com",
                     function(_)
                     end,
                     1
@@ -142,8 +155,8 @@ twitter_button:buttons(
 local instagram_widget =
     wibox.widget {
     {
-        id = 'icon',
-        image = PATH_TO_ICONS .. 'instagram.svg',
+        id = "icon",
+        image = PATH_TO_ICONS .. "instagram.svg",
         widget = wibox.widget.imagebox,
         resize = true
     },
@@ -161,7 +174,7 @@ instagram_button:buttons(
             nil,
             function()
                 awful.spawn.easy_async_with_shell(
-                    'xdg-open https://instagram.com',
+                    "xdg-open https://instagram.com",
                     function(_)
                     end,
                     1
@@ -188,7 +201,7 @@ local social_layout =
 local body =
     wibox.widget {
     {
-        expand = 'none',
+        expand = "none",
         layout = wibox.layout.align.horizontal,
         {
             layout = wibox.layout.fixed.horizontal,

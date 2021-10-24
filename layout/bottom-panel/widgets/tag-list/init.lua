@@ -72,29 +72,34 @@ local get_taglist = function(s)
         layout = wibox.layout.fixed.horizontal,
         widget_template = {
             {
-                
+                {
                     {
-                        id = "text_role",
-                        widget = wibox.widget.textbox,
-
-       
-                        placement = awful.placement.centered(c),
+                        -- NOTE: because this uses wibox.layout.align, the
+                        -- two nil represent the right and left sections
+                        -- of the layout, providing them on either side
+                        -- of the text role means the text is centered
+                        nil,
+                        {
+                            id = "text_role",
+                            widget = wibox.widget.textbox
+                        },
+                        nil,
+                        layout = wibox.layout.align.horizontal,
+                        expand = "outside"
+                    },
+                    widget = clickable_container
                 },
-
-                forced_height = 36,
-                forced_width = 36,
-                widget = clickable_container,
-                shape = beautiful.btn_xs_shape,
-                placement = awful.placement.centered(c),
-                border_width = dpi(1),
-                border_color = beautiful.xcolor19 .. "ee"
+                widget = wibox.container.background,
+                shape = beautiful.btn_md_shape,
+                forced_width = dpi(36),
+                border_width = dpi(2),
+                border_color = beautiful.xcolor7 .. "66"
             },
             id = "background_role",
-            forced_height = 36,
-            forced_width = 36,
-            border_width = dpi(2),
-            border_color = beautiful.xcolor7 .. "cc",
-            shape = beautiful.btn_xs_shape,
+            top = dpi(2),
+            bottom = dpi(2),
+            border_width = dpi(4),
+            border_color = beautiful.xcolor7 .. "66",
             widget = wibox.container.background,
             create_callback = function(self, c3, index, objects)
                 self:connect_signal(
@@ -107,9 +112,7 @@ local get_taglist = function(s)
                         if self.bg ~= beautiful.xcolor7 .. "cc" then
                             self.backup = self.bg
                             self.has_backup = true
-
                         end
-                     
                     end
                 )
                 self:connect_signal(

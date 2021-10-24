@@ -16,6 +16,7 @@ local _M = function(c)
             c,
             {
                 honor_workarea = true,
+                honor_padding = true,
                 margins = beautiful.useless_gap
             }
         )

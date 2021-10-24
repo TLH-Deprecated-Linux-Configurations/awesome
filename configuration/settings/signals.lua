@@ -314,8 +314,9 @@ end
 -- ########################################################################
 
 --- Trigger a callback function when we are about to shut down
-connections.connect_exit =
-    function(func) awesome.connect_signal("exit", func) end
+connections.connect_exit = function(func)
+    awesome.connect_signal("exit", func)
+end
 -- ########################################################################
 -- ########################################################################
 -- ########################################################################
@@ -331,22 +332,6 @@ end
 --- Trigger a callback function when a wibox should update their position on the screen
 connections.connect_refresh_screen = function(func)
     awesome.connect_signal("awesome::screen:refresh", func)
-end
--- ########################################################################
--- ########################################################################
--- ########################################################################
-
---- Notify when the user profile picture changed
-connections.emit_profile_picture_changed = function(picture)
-    awesome.emit_signal("awesome::profile:picture::changed", picture)
-end
--- ########################################################################
--- ########################################################################
--- ########################################################################
-
---- Trigger a callback function when the user profile picture changed
-connections.connect_profile_picture_changed = function(func)
-    awesome.connect_signal("awesome::profile:picture::changed", func)
 end
 -- ########################################################################
 -- ########################################################################
@@ -386,23 +371,26 @@ end
 
 -- Restore geometry for floating clients
 -- (for example after swapping from tiling mode to floating mode)
-tag.connect_signal("property::layout", function(t)
-    for k, c in ipairs(t:clients()) do
-        if awful.layout.get(mouse.screen) == awful.layout.suit.floating then
-            -- Geometry x = 0 and y = 0 most probably means that the
-            -- clients have been spawned in a non floating layout, and thus
-            -- they don't have their floating_geometry set properly.
-            -- If that is the case, don't change their geometry
-            local cgeo = awful.client.property.get(c, "floating_geometry")
-            if cgeo ~= nil then
-                if not (cgeo.x == 0 and cgeo.y == 0) then
-                    c:geometry(awful.client.property.get(c, "floating_geometry"))
+tag.connect_signal(
+    "property::layout",
+    function(t)
+        for k, c in ipairs(t:clients()) do
+            if awful.layout.get(mouse.screen) == awful.layout.suit.floating then
+                -- Geometry x = 0 and y = 0 most probably means that the
+                -- clients have been spawned in a non floating layout, and thus
+                -- they don't have their floating_geometry set properly.
+                -- If that is the case, don't change their geometry
+                local cgeo = awful.client.property.get(c, "floating_geometry")
+                if cgeo ~= nil then
+                    if not (cgeo.x == 0 and cgeo.y == 0) then
+                        c:geometry(awful.client.property.get(c, "floating_geometry"))
+                    end
                 end
-            end
             -- c:geometry(awful.client.property.get(c, 'floating_geometry'))
+            end
         end
     end
-end)
+)
 
 --------------------------------------------------------------------> signal ;
 

@@ -6,8 +6,9 @@
 -- ########################################################################
 -- ########################################################################
 return {
-    require('configuration.client.rules'),
-    require('configuration.client.remember-geometry'),
-    require(... .. '.screenposition'),
-    
+    require(... .. ".screenposition"),
+    require(... .. ".rules"),
+    require(... .. ".remember-geometry"),
+    require(... .. ".keys"),
+    require(... .. ".buttons")
 }

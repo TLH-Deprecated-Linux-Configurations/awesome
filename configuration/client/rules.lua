@@ -40,6 +40,7 @@ awful.rules.rules = {
             sticky = false,
             maximized_horizontal = false,
             maximized_vertical = false,
+            drawBackdrop = false,
             titlebars_enabled = true,
             skip_decoration = false,
             raise = false
@@ -69,7 +70,8 @@ awful.rules.rules = {
             titlebars_enabled = false,
             floating = true,
             placement = awful.placement.centered,
-            ontop = true
+            ontop = true,
+            drawBackdrop = false
         }
     },
     -- ########################################################################
@@ -119,7 +121,8 @@ awful.rules.rules = {
             floating = true,
             ontop = true,
             raise = true,
-            visible = true
+            visible = true,
+            drawBackdrop = false
         }
     },
     -- ########################################################################
@@ -209,6 +212,7 @@ awful.rules.rules = {
             skip_decoration = true,
             floating = true,
             hide_titlebars = true,
+            drawBackdrop = false,
             ontop = true,
             placement = awful.placement.centered
         }
@@ -225,7 +229,8 @@ awful.rules.rules = {
             floating = true,
             placement = awful.placement.centered,
             ontop = true,
-            sticky = true
+            sticky = true,
+            drawBackdrop = false
         }
     },
     -- ########################################################################
@@ -240,7 +245,8 @@ awful.rules.rules = {
                 focus = awful.client.focus.filter,
                 ontop = true,
                 above = true,
-                sticky = true
+                sticky = true,
+                drawBackdrop = false
             }
         }
     },
@@ -256,7 +262,7 @@ awful.rules.rules = {
             ontop = true,
             raise = true,
             focus = awful.client.focus.filter,
-            drawBackdrop = true
+            drawBackdrop = false
         }
     },
     -- ########################################################################
@@ -276,7 +282,7 @@ awful.rules.rules = {
             floating = true,
             placement = awful.placement.centered,
             ontop = true,
-            drawBackdrop = true
+            drawBackdrop = false
         }
     }
     -- -- ########################################################################

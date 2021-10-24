@@ -30,7 +30,7 @@ local left_panel_func = function()
         wibox {
         ontop = true,
         screen = s,
-        bg = "#00000000",
+        bg = "#00000033",
         type = "dock",
         x = s.geometry.x,
         y = s.geometry.y,

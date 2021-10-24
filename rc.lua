@@ -39,19 +39,19 @@ require("configuration.settings")
 -- Titlebar with custom icons
 --
 require("widget.interface.titlebar")
--- ########################################################################
--- Backdrop for when left and right bar are displayed
---
-require("widget.interface.backdrop")
 
 -- ########################################################################
 -- Layout which features the bars
 --
 require("layout")
 -- ########################################################################
--- Modules
 --
-require("module")
+require("configuration.settings")
+require("widget.interface.exit-screen")
+require("widget.hardware")
+
+require("widget.hardware.battery.battery-notifier")
+
 -- ########################################################################
 -- Setup configurations of client, keys and tags
 --

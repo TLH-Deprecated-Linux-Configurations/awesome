@@ -63,14 +63,14 @@ local globalKeys =
         "Return",
         function()
             print("Showing all scratch windows")
-            require('attachdrop').showall()
+            require("attachdrop").showall()
         end,
         {
             description = "Show all scratchpad windows on screen",
             group = "Launcher"
         }
     ),
-   -- #############################################################################
+    -- #############################################################################
     awful.key(
         {modkey, "Control"},
         "Escape",
@@ -167,21 +167,21 @@ local globalKeys =
             group = "Launcher"
         }
     ),
-        -- #############################################################################
+    -- #############################################################################
 
-        awful.key(
-            {modkey, "Mod1"},
-            "F3",
-            function()
-                print("Spawning New Ranger Instance")
-    
-                awful.spawn("ranger")
-            end,
-            {
-                description = "Launch New Ranger Instance",
-                group = "Launcher"
-            }
-        ),
+    awful.key(
+        {modkey, "Mod1"},
+        "F3",
+        function()
+            print("Spawning New Ranger Instance")
+
+            awful.spawn("ranger")
+        end,
+        {
+            description = "Launch New Ranger Instance",
+            group = "Launcher"
+        }
+    ),
     -- #############################################################################
     awful.key(
         {modkey},
@@ -334,7 +334,6 @@ local globalKeys =
             group = "Layout"
         }
     ),
-
     -- #############################################################################
 
     -- Tag browsing
@@ -588,9 +587,7 @@ local globalKeys =
         function()
             print("Opening rofi clipboard")
 
-
-    naughty.notify({ title = "System", text = "The rofi clipboard is now opening on your screen", timeout = 10 })
-
+            naughty.notify({title = "System", text = "The rofi clipboard is now opening on your screen", timeout = 10})
 
             awful.spawn(apps.default.roficlipboard)
         end,
@@ -813,7 +810,7 @@ local globalKeys =
         function()
             print("Taking A Full Screenshot")
 
-            awful.spawn(apps.bins.full_screenshot)
+            awful.spawn("bash " .. HOME .. "/.config/awesome/bin/snapshot.sh full")
         end,
         {
             description = "Fullscreen Screenshot",
@@ -827,7 +824,8 @@ local globalKeys =
         "Print",
         function()
             print("Taking An Area Screenshot")
-                awful.spawn(apps.bins.area_screenshot)
+            awful.spawn("bash " .. HOME .. "/.config/awesome/bin/snapshot.sh area ")
+            client.drawBackdrop = false
         end,
         {
             description = "Area/selected Screenshot",
@@ -841,7 +839,7 @@ local globalKeys =
         "Print",
         function()
             print("Taking A Screenshot Of A Window")
-                awful.spawn(apps.bins.window_blank_screenshot)
+            awful.spawn(apps.bins.window_blank_screenshot)
         end,
         {
             description = "Window Screenshot",

@@ -36,6 +36,7 @@ spawn = require("awful.spawn")
 slider = require("widget.interface.slider")
 naughty = require("naughty")
 math = require("math")
+common = require("awful.widget.common")
 ipairs = ipairs
 client = client
 tag = tag

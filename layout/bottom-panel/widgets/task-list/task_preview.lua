@@ -1,17 +1,21 @@
---  __                __
--- |  |_.---.-.-----.|  |--.
--- |   _|  _  |__ --||    <
--- |____|___._|_____||__|__|
---                          __
--- .-----.----.-----.--.--.|__|.-----.--.--.--.
--- |  _  |   _|  -__|  |  ||  ||  -__|  |  |  |
--- |   __|__| |_____|\___/ |__||_____|________|
--- |__|
+--  _______               __         ______                    __
+-- |_     _|.---.-.-----.|  |--.    |   __ \.----.-----.--.--.|__|.-----.--.--.--.
+--   |   |  |  _  |__ --||    <     |    __/|   _|  -__|  |  ||  ||  -__|  |  |  |
+--   |___|  |___._|_____||__|__|    |___|   |__| |_____|\___/ |__||_____|________|
 -- ########################################################################
 -- ########################################################################
 -- ########################################################################
 
-local function draw_widget(c, widget_template, screen_radius, widget_bg, margin, widget_width, widget_height)
+local function draw_widget(
+    c,
+    widget_template,
+    screen_radius,
+    widget_bg,
+    widget_border_color,
+    widget_border_width,
+    margin,
+    widget_width,
+    widget_height)
     if
         not pcall(
             function()
@@ -26,10 +30,7 @@ local function draw_widget(c, widget_template, screen_radius, widget_bg, margin,
     -- ########################################################################
     local content = gears.surface(c.content)
     local cr = cairo.Context(content)
-    local x,
-        y,
-        w,
-        h = cr:clip_extents()
+    local x, y, w, h = cr:clip_extents()
     local img = cairo.ImageSurface.create(cairo.Format.ARGB32, w - x, h - y)
     cr = cairo.Context(img)
     cr:set_source_surface(content, 0, 0)
@@ -48,16 +49,16 @@ local function draw_widget(c, widget_template, screen_radius, widget_bg, margin,
                             {
                                 {
                                     {
-                                        id = 'image_role',
+                                        id = "image_role",
                                         resize = true,
                                         clip_shape = beautiful.window_shape,
                                         widget = wibox.widget.imagebox
                                     },
-                                    valign = 'center',
-                                    halign = 'center',
+                                    valign = "center",
+                                    halign = "center",
                                     widget = wibox.container.place
                                 },
-                                top = margin * 0.25,
+                                top = dpi(2),
                                 widget = wibox.container.margin
                             },
                             fill_space = true,
@@ -66,9 +67,9 @@ local function draw_widget(c, widget_template, screen_radius, widget_bg, margin,
                         margins = margin,
                         widget = wibox.container.margin
                     },
-                    bg = widget_bg,
-                    shape_border_width = dpi(3),
-                    shape_border_color = beautiful.xcolor15,
+                    bg = beautiful.xcolor0 .. "99",
+                    shape_border_width = dpi(2),
+                    shape_border_color = beautiful.xcolor15 .. "99",
                     shape = beautiful.window_shape,
                     widget = wibox.container.background
                 }),
@@ -80,7 +81,7 @@ local function draw_widget(c, widget_template, screen_radius, widget_bg, margin,
     -- ########################################################################
     -- ########################################################################
     -- ########################################################################
-    for _, w in ipairs(widget:get_children_by_id('image_role')) do
+    for _, w in ipairs(widget:get_children_by_id("image_role")) do
         w.image = img
     end
 
@@ -100,29 +101,29 @@ local enable = function(opts)
     -- ########################################################################
     -- ########################################################################
     -- ########################################################################
-    local margin = beautiful.task_preview_widget_margin or dpi(0)
-    local screen_radius = beautiful.task_preview_widget_border_radius or dpi(0)
-    local widget_bg = beautiful.task_preview_widget_bg or '#000000'
-    local widget_border_color = beautiful.task_preview_widget_border_color or '#f4f4f7'
-    local widget_border_width = beautiful.task_preview_widget_border_width or dpi(3)
+    local margin = dpi(2)
+    local screen_radius = dpi(0)
+    local widget_bg = beautiful.xcolor0 .. "99"
+    local widget_border_color = "#ffffff"
+    local widget_border_width = dpi(1)
 
     local task_preview_box =
         awful.popup(
         {
-            type = 'dropdown_menu',
+            type = "dropdown_menu",
             visible = false,
             ontop = true,
             placement = placement_fn,
             widget = wibox.container.background, -- A dummy widget to make awful.popup not scream
             input_passthrough = true,
-            bg = '#00000000'
+            bg = beautiful.xcolor0 .. "99"
         }
     )
     -- ########################################################################
     -- ########################################################################
     -- ########################################################################
     awesome.connect_signal(
-        'task_preview::visibility',
+        "task_preview::visibility",
         function(s, v, c)
             if v then
                 -- Update task preview contents

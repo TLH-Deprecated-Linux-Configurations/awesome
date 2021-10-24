@@ -67,30 +67,14 @@ return {
     -- ########################################################################
     -- List of apps to start once on start-up
     run_on_start_up = {
-        -- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-        -- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
+        -- Note: if this is set in a script it errors the system into non-functioning, so we are
+        -- still using this structure. You could add additional functions here or you could add
+        -- them to bin/autorun.sh
         --  Set the Super key to all three of the below for menu on single key press
+        --
         'xcape -e "Super_L=Super_L|Control_L|Escape"'
 
         -- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-    },
-    -- ########################################################################
-    bins = {
-        -- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-        full_screenshot = "sh" .. HOME .. '/.config/awesome/bin/snapshot.sh full "' .. color .. '"',
-        -- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-        full_blank_screenshot = "sh " .. HOME .. " /.config/awesome/bin/snapshot.sh full_blank",
-        -- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-        area_screenshot = "sh " .. HOME .. "/.config/awesome/bin/snapshot.sh area ",
-        -- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-        area_blank_screenshot = "sh " .. HOME .. "/.config/awesome/bin/snapshot.sh area_blank",
-        -- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-        window_screenshot = "sh " .. HOME .. '/.config/awesome/bin/snapshot.sh" window ' .. color .. '"',
-        -- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-        window_blank_screenshot = "sh " .. HOME .. "/.config/awesome/bin/snapshot.sh window_blank"
-        -- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     }
+    -- ########################################################################
 }

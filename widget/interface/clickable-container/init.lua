@@ -16,45 +16,60 @@ local beautiful = require("beautiful")
 -- ########################################################################
 -- ########################################################################
 local function build(widget)
-	local container = wibox.widget({
-		widget,
-		widget = wibox.container.background,
-		bg = beautiful.bg_normal .. "88",
-	})
+	local container =
+		wibox.widget(
+		{
+			widget,
+			widget = wibox.container.background,
+			bg = beautiful.xbackground .. "dd"
+		}
+	)
 	local old_cursor, old_wibox
 	-- ########################################################################
 	-- ########################################################################
 	-- ########################################################################
-	container:connect_signal("mouse::enter", function()
-		container.bg = beautiful.xcolor7 .. "88"
-		local w = mouse.current_wibox
-		if w then
-			old_cursor, old_wibox = w.cursor, w
-			w.cursor = "hand1"
+	container:connect_signal(
+		"mouse::enter",
+		function()
+			container.bg = beautiful.xcolor7 .. "bb"
+			local w = mouse.current_wibox
+			if w then
+				old_cursor, old_wibox = w.cursor, w
+				w.cursor = "hand1"
+			end
 		end
-	end)
+	)
 	-- ########################################################################
 	-- ########################################################################
 	-- ########################################################################
-	container:connect_signal("mouse::leave", function()
-		container.bg = beautiful.bg_normal .. "88"
-		if old_wibox then
-			old_wibox.cursor = old_cursor
-			old_wibox = nil
+	container:connect_signal(
+		"mouse::leave",
+		function()
+			container.bg = beautiful.bg_normal .. "88"
+			if old_wibox then
+				old_wibox.cursor = old_cursor
+				old_wibox = nil
+			end
 		end
-	end)
+	)
 	-- ########################################################################
 	-- ########################################################################
 	-- ########################################################################
-	container:connect_signal("button::press", function()
-		container.bg = beautiful.groups_title_bg
-	end)
+	container:connect_signal(
+		"button::press",
+		function()
+			container.bg = beautiful.groups_title_bg
+		end
+	)
 	-- ########################################################################
 	-- ########################################################################
 	-- ########################################################################
-	container:connect_signal("button::release", function()
-		container.bg = beautiful.groups_bg
-	end)
+	container:connect_signal(
+		"button::release",
+		function()
+			container.bg = beautiful.groups_bg
+		end
+	)
 	-- ########################################################################
 	-- ########################################################################
 	-- ########################################################################

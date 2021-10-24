@@ -1,124 +1,108 @@
-#!/bin/bash
+#!/usr/bin/bash
 
-screenshot_dir="$HOME/Pictures/Screenshots/"
-COLOR="${2:-none}"
-PADDING="3%"
-
-echo "Selected color: $COLOR"
+screenshot_dir=$HOME/Pictures/Screenshots/
 
 # Check save directory
-# Creates it if it doesn't exist
-check_dir() {
-    if [ ! -d "$screenshot_dir" ]; then
+# Create it if it doesn't exist
+function check_dir() {
+    if [ ! -d "$screenshot_dir" ];
+    then
         mkdir -p "$screenshot_dir"
     fi
 }
 
-window() {
-    check_dir
-
-    file_loc="${screenshot_dir}$(date +%Y%m%d_%H%M%S).png"
-    file_loc_tmp="${screenshot_dir}$(date +%Y%m%d_%H%M%S)tmp.png"
-
-    maim_command="$1"
-    notif_message="$2"
-
-    # Execute maim command if a third option is provided maim will be piped into it
-    ${maim_command} | $3 "${file_loc}"
-    cp "${file_loc}" "${file_loc_tmp}"
-    convert "${file_loc_tmp}" -gravity west -background "$COLOR" -splice "$PADDING"x0 "${file_loc_tmp}"
-    convert "${file_loc_tmp}" -gravity east -background "$COLOR" -splice "$PADDING"x0 "${file_loc_tmp}"
-    convert "${file_loc_tmp}" -gravity north -background "$COLOR" -splice 0x"$PADDING" "${file_loc_tmp}"
-    convert "${file_loc_tmp}" -gravity south -background "$COLOR" -splice 0x"$PADDING" "${file_loc_tmp}"
-
-    mv "$file_loc_tmp" "$file_loc"
-
-    # compress the image
-    mogrify -quality 20 "${file_loc}"
-
-    # Exit if the user cancels the screenshot
-    # So it means there's no new screenshot image file
-    if [ ! -f "${file_loc}" ]; then
-        exit
-    fi
-
-    # Copy to clipboard
-    # shellcheck disable=SC2012
-    xclip -selection clipboard -t image/png -i "${screenshot_dir}"/"$(ls -1 -t "${screenshot_dir}" | head -1)" &
-
-    notify-send 'Screen Capture Successful' "${notif_message}" -a 'Screenshot tool' -i "${file_loc}"
-}
-
 # Main function
-shot() {
-
+function shot() {
+    
     check_dir
-
-    file_loc_tmp="${screenshot_dir}$(date +%Y%m%d_%H%M%S)tmp.png"
+    
     file_loc="${screenshot_dir}$(date +%Y%m%d_%H%M%S).png"
-
+    
     maim_command="$1"
     notif_message="$2"
-
-    # Execute maim command if a third option is provided maim will be piped into it
-    if [[ -n "$3" ]]; then
-        ${maim_command} | $3 "${file_loc}"
-    else
-        ${maim_command} "${file_loc_tmp}"
-        convert "${file_loc_tmp}" "${file_loc}"
-        # compress the image
-        mogrify -quality 20 "${file_loc}"
-        rm "${file_loc_tmp}"
-    fi
-
+    
+    # Execute maim command
+    ${maim_command} "${file_loc}"
+    
     # Exit if the user cancels the screenshot
     # So it means there's no new screenshot image file
-    if [ ! -f "${file_loc}" ]; then
-        exit
+    if [ ! -f "${file_loc}" ];
+    then
+        exit;
     fi
-
+    
     # Copy to clipboard
-    # shellcheck disable=SC2012
-    xclip -selection clipboard -t image/png -i "${screenshot_dir}"/"$(ls -1 -t "${screenshot_dir}" | head -1)" &
+    xclip -selection clipboard -t image/png -i "${screenshot_dir}"/`ls -1 -t "${screenshot_dir}" | head -1` &
+    
+    awesome-client "
 
-    notify-send 'Screenshot Captured!' "${notif_message}" -a 'Screenshot tool' -i "${file_loc}"
+	-- IMPORTANT NOTE: THIS PART OF THE SCRIPT IS LUA!
+	naughty = require('naughty')
+	awful = require('awful')
+	beautiful = require('beautiful')
+	dpi = beautiful.xresources.apply_dpi
+
+	local open_image = naughty.action {
+		name = 'Open',
+	   	icon_only = false,
+	}
+
+	local open_folder = naughty.action {
+		name = 'Open Folder',
+	   	icon_only = false,
+	}
+
+	local delete_image = naughty.action {
+		name = 'Delete',
+	   	icon_only = false,
+	}
+
+	-- Execute the callback when 'Open' is pressed
+	open_image:connect_signal('invoked', function()
+		awful.spawn('xdg-open ' .. '${file_loc}', false)
+	end)
+
+	open_folder:connect_signal('invoked', function()
+		awful.spawn('xdg-open ' .. '${screenshot_dir}', false)
+	end)
+
+	-- Execute the callback when 'Delete' is pressed
+	delete_image:connect_signal('invoked', function()
+		awful.spawn('gio trash ' .. '${file_loc}', false)
+	end)
+
+	-- Show notification
+	naughty.notification ({
+		app_name = 'Screenshot Tool',
+		icon = '${file_loc}',
+		timeout = 10,
+		title = '<b>Snap!</b>',
+		message = '${notif_message}',
+		actions = { open_image, open_folder, delete_image }
+	})
+    "
+    
 }
 
 # Check the args passed
-if [ -z "$1" ] || { [ "$1" != 'full' ] && [ "$1" != 'full_blank' ] && [ "$1" != 'area' ] && [ "$1" != 'area_blank' ] && [ "$1" != 'window' ] && [ "$1" != 'window_blank' ]; }; then
+if [ -z "$1" ] || ([ "$1" != 'full' ] && [ "$1" != 'area' ]);
+then
     echo "
 	Requires an argument:
 	area 	- Area screenshot
 	full 	- Fullscreen screenshot
-	window  - Take a screenshot of a window (optionaly provide a color for the background)
-	window_blank - Don't add any fancy shadow and background to the window screenshot
 
 	Example:
-	./snapshot area
-	./snapshot full
-	./snapshot window
-	./snapshot window #f4f4f7
-	./snapshot window_blank
-
+	./screenshots area
+	./screenshots full
     "
-elif [ "$1" = 'full' ]; then
-    msg="Full screenshot saved and copied to clipboard!"
-    window 'maim -u -m 1' "${msg}" "convert - ( +clone -background black -shadow 80x3+8+8 ) +swap -background $COLOR -layers merge +repage"
-elif [ "$1" = 'full_blank' ]; then
+elif [ "$1" = 'full' ];
+then
     msg="Full screenshot saved and copied to clipboard!"
     shot 'maim -u -m 1' "${msg}"
-elif [ "$1" = 'area' ]; then
-    msg='Area screenshot saved and copied to clipboard!'
-    window 'maim -u -s -n -m 1' "${msg}" "convert - ( +clone -background black -shadow 80x3+8+8 ) +swap -layers merge +repage"
-elif [ "$1" = 'area_blank' ]; then
+elif [ "$1" = 'area' ];
+then
     msg='Area screenshot saved and copied to clipboard!'
     shot 'maim -u -s -n -m 1' "${msg}"
-
-elif [ "$1" = 'window' ]; then
-    msg='Window screenshot saved and copied to clipboard!'
-
-    window 'maim -st 9999999 -B -m 1 -u' "${msg}" "convert - ( +clone -background black -shadow 80x3+8+8 ) +swap -background $COLOR -layers merge +repage"
-elif [ "$1" = "window_blank" ]; then
-    msg='Window screenshot saved and copied to clipboard!'
-    shot 'maim -st 9999999 -B -m 1 -u' "${msg}"
 fi
+

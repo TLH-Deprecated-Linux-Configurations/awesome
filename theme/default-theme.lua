@@ -32,7 +32,7 @@ local awesome_overrides = function(theme)
     theme.xcolor5 = "#8265ff"
     theme.xcolor6 = "#00eaff"
     theme.xcolor7 = "#8b9cbe"
-    theme.xcolor8 = "#22262d"
+    theme.xcolor8 = "#555e70"
     theme.xcolor9 = "#ff3d81"
     theme.xcolor10 = "#00ffcc"
     theme.xcolor11 = "#f9f871"
@@ -40,43 +40,15 @@ local awesome_overrides = function(theme)
     theme.xcolor13 = "#6c71c4"
     theme.xcolor14 = "#00fae9"
     theme.xcolor15 = "#f4f4f7"
-    theme.xcolor16 = "#252830"
-    theme.xcolor17 = "#22262d"
-    theme.xcolor18 = "#23262e"
-    theme.xcolor19 = "#292c36"
-    theme.xcolor20 = "#2d303b"
-    theme.xcolor21 = "#23212A"
-    theme.xcolor22 = "#343845"
-    theme.xcolor23 = "#404554"
-    theme.xcolor24 = "#444959"
-    theme.xcolor25 = "#484d5e"
-    theme.xcolor26 = "#4c5163"
-    theme.xcolor27 = "#4f5569"
-    theme.xcolor28 = "#53596e"
-    theme.xcolor29 = "#575d73"
-    theme.xcolor30 = "#5b6278"
-    theme.xcolor31 = "#5f667d"
-    theme.xcolor32 = "#636a82"
-    theme.xcolor33 = "#676e87"
-    theme.xcolor34 = "#6a728c"
-    theme.xcolor35 = "#6e7691"
-    theme.xcolor36 = "#727b96"
-    theme.xcolor37 = "#767f9c"
-    theme.xcolor38 = "#7a83a1"
-    theme.xcolor39 = "#7e87a6"
-    theme.xcolor40 = "#828bab"
-    theme.xcolor41 = "#868fb0"
-    theme.xcolor42 = "#8994b5"
-    theme.xcolor43 = "#8d98ba"
-    theme.xcolor44 = "#919cbf"
-    theme.xcolor45 = "#919cbf"
-    theme.xcolor46 = "#121418"
-    theme.xcolor47 = "#0e0f12"
-    theme.xcolor48 = "#090a0c"
-    theme.xcolor49 = "#050506"
-    theme.xcolor50 = "#1B1D24"
+    theme.xcolor16 = "#0e0f12"
     theme.xcolor51 = "#1C1E24"
-    theme.xcolor52 = "#23252E"
+    theme.xcolor17 = "#121418"
+    theme.xcolor18 = "#22262d"
+    theme.xcolor19 = "#23262e"
+    theme.xcolor20 = "#484d5e"
+    theme.xcolor21 = "#636a82"
+    theme.xcolor22 = "#767f9c"
+    theme.xcolor23 = "#919cbf"
 
     theme.background_transparency = "cc"
     -- Custom
@@ -98,12 +70,12 @@ local awesome_overrides = function(theme)
     theme.dir = theme_dir
     theme.titlebar_size = 24
     theme.icons = theme.dir .. "/icons/"
-    theme.wallpaper = theme_dir .. "/wallpapers/wp04.png"
+    theme.wallpaper = theme_dir .. "/wallpapers/3.png"
     -- ########################################################################
     -- ########################################################################
     -- ########################################################################
     -- Fonts
-    theme.taglist_font = "awesomewm-font 18"
+    theme.taglist_font = "awesomewm-font 16"
     theme.font = "Commodore 64 Rounded Regular "
     theme.monitor_font = "Commodore 64 Rounded Regular 50"
     theme.title_font = "Commodore 64 Rounded Regular 18"
@@ -173,18 +145,7 @@ local awesome_overrides = function(theme)
     -- ########################################################################
     -- ########################################################################
     -- Tooltips
-    theme.tooltip_bg = {
-        type = "linear",
-        from = {0, 0},
-        to = {95, 95},
-        stops = {
-            {0, theme.xbackground .. "cc"},
-            {40, theme.xcolor8 .. "cc"},
-            {70, theme.xcolor18 .. "cc"},
-            {80, theme.xcolor22 .. "cc"},
-            {90, theme.xbackground .. "cc"}
-        }
-    }
+    theme.tooltip_bg = "radial:960,540,20:960,540,500:0,#22262daa:0.2,#3c3f4c88:0.65,#17191e88:1,#272a3488"
     theme.tooltip_border_color = theme.xcolor0 .. "cc"
     theme.tooltip_border_width = 0
     theme.tooltip_shape = function(cr, w, h)
@@ -207,7 +168,7 @@ local awesome_overrides = function(theme)
     -- ########################################################################
 
     -- Buttons
-    theme.border_button = theme.xcolor7 .. "cc"
+    theme.border_button = theme.xcolor7 .. "66"
     theme.button_active = theme.xcolor7 .. "dd"
     theme.button_active_alt = theme.xcolor4
     -- ########################################################################
@@ -217,8 +178,8 @@ local awesome_overrides = function(theme)
     -- Background
     theme.tasklist_font = theme.font
     theme.tasklist_bg_normal = "radial:960,540,20:960,540,500:0,#22262daa:0.2,#3c3f4c88:0.65,#17191e88:1,#272a3488"
-    theme.tasklist_bg_focus = "radial:960,540,10:0,0,10:0,#2f303dcc:0.34,#3c3f4caa:0.65,#22262d88:1,#22262d88"
-    theme.tasklist_bg_urgent = "radial:960,540,10:0,0,10:0,#2f303dcc:0.34,#3c3f4caa:0.65,#22262d88:1,#22262d88"
+    theme.tasklist_bg_focus = "radial:960,540,10:0,0,10:0,##17191ecc:0.34,#3c3f4caa:0.65,#22262d88:1,#22262d88"
+    theme.tasklist_bg_urgent = "radial:960,540,10:0,0,10:0,##17191ecc:0.34,#3c3f4caa:0.65,#22262d88:1,#22262d88"
     -- foreground
     theme.tasklist_fg_focus = theme.xcolor15
     theme.tasklist_fg_urgent = theme.xcolor1
@@ -229,18 +190,21 @@ local awesome_overrides = function(theme)
     -- Taglist
     theme.taglist_spacing = 8
     -- colors
-    -- theme.taglist_bg_empty = "radial:960,540,10:0,0,10:0,#2f303dcc:0.34,#3c3f4caa:0.65,#22262d88:1,#22262d88"
-    -- theme.taglist_bg_occupied = "radial:960,540,10:0,0,10:0,#2f303dcc:0.34,#3c3f4caa:0.65,#22262d88:1,#22262d88"
-    -- theme.taglist_bg_urgent = "radial:960,540,10:0,0,10:0,#2f303dcc:0.34,#3c3f4caa:0.65,#22262d88:1,#22262d88"
-    -- theme.taglist_bg = "radial:960,540,10:0,0,10:0,#343a50cc:0.34,#3c3f4caa:0.65,#22262d88:1,#22262d88"
-    -- theme.taglist_fg_focus = theme.xcolor15
-    -- theme.taglist_border_color = theme.xcolor7
+    -- theme.taglist_bg_empty = "radial:960,540,10:0,0,10:0,##17191ecc:0.34,#3c3f4caa:0.65,#12141888:1,#12141888"
+    -- theme.taglist_bg_occupied = "radial:960,540,10:0,0,10:0,##17191ecc:0.34,#3c3f4caa:0.65,#12141888:1,#12141888"
+    -- theme.taglist_bg_urgent = "radial:960,540,10:0,0,10:0,##17191ecc:0.34,#3c3f4caa:0.65,#12141888:1,#12141888"
+    -- theme.taglist_bg = "radial:960,540,10:0,0,10:0,#343a50cc:0.34,#3c3f4caa:0.65,#12141888:1,#12141888"
+    theme.taglist_fg_empty = theme.xcolor8 .. "aa"
+    theme.taglist_fg_focus = theme.xcolor15
+    theme.taglist_fg_occupied = theme.xcolor7
+    theme.taglist_border_color = theme.xcolor7 .. "66"
+
     -- theme.taglist_border_width = dpi(2)
     -- theme.taglist_fg_urgent = theme.xcolor1
     -- theme.taglist_fg_occupied = theme.xcolor7
     -- theme.taglist_fg_empty = theme.xcolor7
     -- theme.taglist_fg_volatile = theme.xcolor9
-    -- theme.taglist_shape = theme.btn_lg_shape
+    theme.taglist_shape = theme.btn_lg_shape
 
     local taglist_square_size = dpi(0)
     theme.taglist_squares_sel = theme_assets.taglist_squares_sel(taglist_square_size, theme.xforeground)
@@ -280,6 +244,9 @@ local awesome_overrides = function(theme)
     end
     theme.btn_sm_shape = function(cr, height, width)
         gears.shape.rounded_rect(cr, height, width, 4)
+    end
+    theme.btn_md_shape = function(cr, height, width)
+        gears.shape.rounded_rect(cr, height, width, 8)
     end
     theme.btn_lg_shape = function(cr, height, width)
         gears.shape.rounded_rect(cr, height, width, 12)

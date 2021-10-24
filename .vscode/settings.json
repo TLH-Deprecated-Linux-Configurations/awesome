@@ -46,7 +46,8 @@
     "scrollbox",
     "checkbox",
     "reverse",
-    "center"
+    "center",
+    "common"
   ],
   "Lua.diagnostics.disable": [
     "undefined-field",

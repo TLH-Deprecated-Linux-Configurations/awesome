@@ -21,12 +21,12 @@ if [[ "$(command -v udiskie)" ]]; then
     pgrep udiskie &>/dev/null || udiskie &>/dev/null &
 fi
 
-# Set the Super key to all three of the below for menu on single key press, 
-# better as a configuration specific setting as on xfce4 or whatever, this 
+# Set the Super key to all three of the below for menu on single key press,
+# better as a configuration specific setting as on xfce4 or whatever, this
 # would not be helpful but the opposite really
-if [[ "$(command -v xcape)" ]]; then
-    xcape -e "Super_L=Super_L|Control_L|Escape" &
-fi
+#if [[ "$(command -v xcape)" ]]; then
+#   xcape -e "Super_L=Super_L|Control_L|Escape" &
+#fi
 
 # run clipboard manager
 if [[ "$(command -v greenclip)" ]]; then
@@ -60,4 +60,8 @@ fi
 #  Make sure the colors are as they are supposed to be
 if [[ "$(command -v xrdb)" ]]; then
     xrdb "$HOME"/.Xresources &
+fi
+
+if [[ "$(command -v goautolock)" ]]; then
+    goautolock --locker slock  &
 fi
