@@ -63,5 +63,5 @@ if [[ "$(command -v xrdb)" ]]; then
 fi
 
 if [[ "$(command -v goautolock)" ]]; then
-    goautolock --locker slock  &
+    goautolock --locker multilockscreen -l &
 fi
