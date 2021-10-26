@@ -1,48 +1,4 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<!-- Created with Inkscape (http://www.inkscape.org/) -->
-
-<svg
-   version="1.1"
-   id="svg2"
-   width="980"
-   height="568"
-   viewBox="0 0 980 568"
-   sodipodi:docname="desktop.svg"
-   inkscape:version="1.1 (c4e8f9ed74, 2021-05-24)"
-   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
-   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
-   xmlns:xlink="http://www.w3.org/1999/xlink"
-   xmlns="http://www.w3.org/2000/svg"
-   xmlns:svg="http://www.w3.org/2000/svg">
-  <defs
-     id="defs6" />
-  <sodipodi:namedview
-     id="namedview4"
-     pagecolor="#ffffff"
-     bordercolor="#666666"
-     borderopacity="1.0"
-     inkscape:pageshadow="2"
-     inkscape:pageopacity="0.0"
-     inkscape:pagecheckerboard="0"
-     showgrid="false"
-     inkscape:zoom="1.5246479"
-     inkscape:cx="289.57506"
-     inkscape:cy="277.11316"
-     inkscape:window-width="1908"
-     inkscape:window-height="995"
-     inkscape:window-x="0"
-     inkscape:window-y="0"
-     inkscape:window-maximized="1"
-     inkscape:current-layer="g8" />
-  <g
-     inkscape:groupmode="layer"
-     inkscape:label="Image"
-     id="g8">
-    <image
-       width="980"
-       height="568"
-       preserveAspectRatio="none"
-       xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAA9QAAAI4CAQAAAAhLGlCAAAABGdBTUEAALGPC/xhBQAAACBjSFJN
+<svg height="568" viewBox="0 0 980 568" width="980" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"><image height="568" preserveAspectRatio="none" width="980" xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAA9QAAAI4CAQAAAAhLGlCAAAABGdBTUEAALGPC/xhBQAAACBjSFJN
 AAB6JgAAgIQAAPoAAACA6AAAdTAAAOpgAAA6mAAAF3CculE8AAAAAmJLR0QA/4ePzL8AAAAJcEhZ
 cwAAAGAAAABgAPBrQs8AAAAHdElNRQflAxoGOTY36okrAAAkqUlEQVR42u3dZ6BlVWE24HdfZmCG
 AWdoiiCiFIlRVFBBVIwFRSwYRQmaxCQWLElQE75g/EzRxIAxRkWNij0maiTEKAaIInZBFEVFuoCA
@@ -211,8 +167,4 @@ ckV739IRYIS2y8/U9OBd0J6U/8p3SscgyeI8JYflkGw5wt87Rb2WK9tdS0eAEdov31DUE+K69vSc
 kW/mAjduKmCbPCyPykHZP/NG/hunqNfyk/aRpSPACD0lb1fUE2Zp+4NcnItzda7P9bkpq0oHGqjF
 2Tr3yD2yW/bKXtm9w9+z/wcOfK2KQVU1RwAAACV0RVh0ZGF0ZTpjcmVhdGUAMjAyMS0wMy0yNVQy
 MDowNzo0NyswMDowMFTYJuoAAAAldEVYdGRhdGU6bW9kaWZ5ADIwMTYtMDQtMTZUMDc6MzM6NTAr
-MDA6MDADzMeIAAAAAElFTkSuQmCC
-"
-       id="image10" />
-  </g>
-</svg>
+MDA6MDADzMeIAAAAAElFTkSuQmCC"/></svg>
