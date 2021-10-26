@@ -21,7 +21,11 @@ local function build(widget)
 		{
 			widget,
 			widget = wibox.container.background,
-			bg = beautiful.xbackground .. "dd"
+			bg = "radial:960,540,10:0,0,10:0,##17191e99:0.34,#3c3f4c88:0.65,#22262d88:1,#22262d88",
+			border_color = beautiful.xcolor7 .. "66",
+			border_width = dpi(3),
+			margins = dpi(3),
+			shape = beautiful.btn_sm_shape
 		}
 	)
 	local old_cursor, old_wibox
@@ -31,7 +35,9 @@ local function build(widget)
 	container:connect_signal(
 		"mouse::enter",
 		function()
-			container.bg = beautiful.xcolor7 .. "bb"
+			container.border_color = beautiful.xcolor7
+
+			container.bg = "radial:1024,960,20:960,540,500:0,#22262d88:0.2,#3c3f4c88:0.65,#17191e88:1,#3c3f4c88"
 			local w = mouse.current_wibox
 			if w then
 				old_cursor, old_wibox = w.cursor, w
@@ -45,7 +51,8 @@ local function build(widget)
 	container:connect_signal(
 		"mouse::leave",
 		function()
-			container.bg = beautiful.bg_normal .. "88"
+			container.border_color = beautiful.xcolor7 .. "66"
+			container.bg = "radial:960,540,10:0,0,10:0,##17191e99:0.34,#3c3f4c88:0.65,#22262d88:1,#22262d88"
 			if old_wibox then
 				old_wibox.cursor = old_cursor
 				old_wibox = nil
@@ -58,7 +65,9 @@ local function build(widget)
 	container:connect_signal(
 		"button::press",
 		function()
-			container.bg = beautiful.groups_title_bg
+			container.border_width = dpi(4)
+			container.border_color = beautiful.xcolor7
+			container.bg = "radial:1024,960,20:960,540,500:0,#3c3f4c88:0.2,#3c3f4c88:0.65,#17191e88:1,#22262d88"
 		end
 	)
 	-- ########################################################################
@@ -67,7 +76,9 @@ local function build(widget)
 	container:connect_signal(
 		"button::release",
 		function()
-			container.bg = beautiful.groups_bg
+			container.border_width = dpi(3)
+			container.border_color = beautiful.xcolor7 .. "66"
+			container.bg = "radial:960,540,10:0,0,10:0,##17191e99:0.34,#3c3f4c88:0.65,#22262d88:1,#22262d88"
 		end
 	)
 	-- ########################################################################

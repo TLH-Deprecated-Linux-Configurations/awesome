@@ -8,11 +8,6 @@
 -- This changes between the two panel modes via a click of the mouse
 --
 
-local active_button = beautiful.xcolor7 .. "dd"
-local inactive_button = beautiful.xcolor8 .. "dd"
--- ########################################################################
--- ########################################################################
--- ########################################################################
 local notif_text =
     wibox.widget {
     text = "Notifications",
@@ -32,9 +27,8 @@ local wrap_notif =
     wibox.widget {
     notif_button,
     forced_width = dpi(180),
-    bg = active_button,
     shape = beautiful.widget_shape,
-    widget = wibox.container.background
+    widget = clickable_container
 }
 -- ########################################################################
 -- ########################################################################
@@ -56,9 +50,8 @@ local wrap_widget =
     wibox.widget {
     widgets_button,
     forced_width = dpi(180),
-    bg = inactive_button,
     shape = beautiful.widget_shape,
-    widget = wibox.container.background
+    widget = clickable_container
 }
 -- ########################################################################
 -- ########################################################################

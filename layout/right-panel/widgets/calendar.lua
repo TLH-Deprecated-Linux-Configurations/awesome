@@ -11,7 +11,7 @@ local awful = require("awful")
 local gears = require("gears")
 local wibox = require("wibox")
 local beautiful = require("beautiful")
--- local clickable_container = require('widget.interface.clickable-container')
+local clickable_container = require("widget.interface.clickable-container")
 local dpi = require("beautiful").xresources.apply_dpi
 
 awesome.register_xproperty("WM_CLASS", "string")
@@ -93,13 +93,13 @@ local calWidget =
     wibox.widget {
     {
         nil,
-        {cal, margins = dpi(16), widget = wibox.container.margin},
+        {cal, border_color = beautiful.xcolor7 .. "66", widget = wibox.container.margin},
         nil,
         layout = wibox.layout.flex.horizontal
     },
     resize = true,
-    bg = beautiful.xcolor0 .. "46",
-    widget = wibox.container.background
+    bg = "radial:960,540,20:960,540,500:0,#22262daa:0.2,#3c3f4c88:0.65,#17191e88:1,#272a3488",
+    widget = card
 }
 
 local popup =

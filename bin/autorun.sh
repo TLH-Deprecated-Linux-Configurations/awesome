@@ -63,5 +63,5 @@ if [[ "$(command -v xrdb)" ]]; then
 fi
 
 if [[ "$(command -v goautolock)" ]]; then
-    goautolock --locker multilockscreen -l &
+    goautolock --time 360 --notify 30 --locker 'multilockscreen' --args -l &
 fi
