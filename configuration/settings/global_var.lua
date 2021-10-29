@@ -37,6 +37,7 @@ slider = require("widget.interface.slider")
 naughty = require("naughty")
 math = require("math")
 common = require("awful.widget.common")
+sound= require("sound")
 ipairs = ipairs
 client = client
 tag = tag

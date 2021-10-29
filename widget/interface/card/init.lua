@@ -2,8 +2,8 @@ local wibox = require("wibox")
 local beautiful = require("beautiful")
 local gears = require("gears")
 local dpi = beautiful.xresources.apply_dpi
-local header_font = beautiful.font .. " 14"
-local bg_title = beautiful.bg_modal_title
+local header_font = beautiful.font .. " 16"
+
 local titled_card = function(title, height)
     local header =
         wibox.widget(
@@ -13,8 +13,8 @@ local titled_card = function(title, height)
             align = "center",
             valign = "center",
             widget = wibox.widget.textbox,
-            border_color = beautiful.xcolor7 .. "ff",
-            bg = beautiful.xcolor8 .. "ff",
+            border_color = beautiful.xcolor19 .. "ff",
+            bg = beautiful.xcolor20 .. "ff",
             border_width = dpi(3),
             border_radius = dpi(12)
         }
@@ -28,7 +28,10 @@ local titled_card = function(title, height)
             end,
             widget = wibox.container.background,
             forced_height = height,
-            bg = beautiful.xcolor8 .. "ff"
+            bg = beautiful.xcolor20 .. "ff",
+            border_color = beautiful.xcolor19 .. "dd",
+            border_width = dpi(3),
+            border_radius = dpi(12)
         }
     )
     local widget =
@@ -36,23 +39,30 @@ local titled_card = function(title, height)
         {
             layout = wibox.layout.fixed.vertical,
             {
-                bg = beautiful.xcolor8 .. "ff",
+                bg = beautiful.xcolor20 .. "ff",
+                border_color = beautiful.xcolor19 .. "dd",
+            border_width = dpi(6),
+            border_radius = dpi(12),
                 wibox.widget(
                     {
                         wibox.container.margin(header, dpi(10), dpi(10), dpi(10), dpi(10)),
-                        bg = bg_title,
                         shape = function(cr, rect_width, rect_height)
                             gears.shape.partially_rounded_rect(cr, rect_width, rect_height, true, true, false, false, 6)
                         end,
-                        widget = wibox.container.background
+                        widget = wibox.container.background,
+
+            border_color = beautiful.xcolor19 .. "dd",
+            border_width = dpi(3),
+            border_radius = dpi(12)
                     }
                 ),
                 layout = wibox.layout.fixed.vertical
             },
-            body_widget,
-            nil,
-            bg = beautiful.xcolor8 .. "ff",
-            border_color = beautiful.xcolor7 .. "aa",
+            body_widget, 
+        
+            bg = beautiful.xcolor20 .. "ff",
+
+            border_color = beautiful.xcolor19 .. "dd",
             border_width = dpi(3),
             border_radius = dpi(12)
         }
@@ -74,8 +84,8 @@ local bare_card = function()
         wibox.widget(
         {
             wibox.widget.base.empty_widget(),
-            bg = beautiful.xcolor8 .. "ff",
-            border_color = beautiful.xcolor7 .. "aa",
+            bg = beautiful.xcolor20 .. "ff",
+            border_color = beautiful.xcolor19 .. "dd",
             border_width = dpi(3),
             border_radius = dpi(12),
             shape = beautiful.btn_sm_shape,

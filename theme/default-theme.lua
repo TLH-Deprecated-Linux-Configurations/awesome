@@ -70,7 +70,7 @@ local awesome_overrides = function(theme)
     theme.dir = theme_dir
     theme.titlebar_size = 24
     theme.icons = theme.dir .. "/icons/"
-    theme.wallpaper = theme_dir .. "/wallpapers/3.png"
+    theme.wallpaper = theme_dir .. "/wallpapers/10.png"
     -- ########################################################################
     -- ########################################################################
     -- ########################################################################
@@ -275,17 +275,7 @@ local awesome_overrides = function(theme)
     -- ########################################################################
     -- Notification
     theme.notification_font = theme.font
-    theme.notification_bg = {
-        type = "linear",
-        from = {0, 0},
-        to = {125, 125},
-        stops = {
-            {0, theme.xbackground .. "cc"},
-            {0.45, theme.xcolor0 .. "cc"},
-            {0.85, theme.xbackground .. "cc"},
-            {1, theme.xcolor19 .. "cc"}
-        }
-    }
+    theme.notification_bg =  "radial:960,540,20:960,540,500:0,#22262daa:0.2,#3c3f4c88:0.65,#17191e88:1,#272a3488"
     theme.notification_fg = theme.fg_normal
     theme.notification_shape = function(cr, width, height)
         gears.shape.rounded_rect(cr, width, height, 8)
@@ -313,7 +303,7 @@ local awesome_overrides = function(theme)
     -- Generate Awesome icon:
     theme.awesome_icon = theme_assets.awesome_icon(theme.menu_height, theme.bg_focus, theme.fg_focus)
     -- Titlebar
-    theme.titlebar_size = dpi(24)
+    theme.titlebar_size = dpi(28)
     -- UI Groups
     theme.layout_stackLeft = theme_dir .. "/icons/layouts/stack_left.png"
     theme.layout_stack = theme_dir .. "/icons/layouts/stack.png"

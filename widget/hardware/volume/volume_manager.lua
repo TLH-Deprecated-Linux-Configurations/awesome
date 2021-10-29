@@ -6,7 +6,6 @@
 -- ########################################################################
 -- ########################################################################
 local signals = require("configuration.settings.signals")
-local sound = require("sound")
 local time = require("socket").gettime
 local volume = require("widget.hardware.volume")
 
@@ -14,6 +13,11 @@ local startup = true
 local prev_time = 0
 local boot_time = time()
 local deltaTime = 0.1
+
+local function play_sound()
+    print('Playing audio-pop sound')
+    spawn.with_shell('paplay ~/.config/awesome/sound/audio-pop.wav')
+end
 -- ########################################################################
 -- ########################################################################
 -- ########################################################################
@@ -24,8 +28,8 @@ signals.connect_volume(
             prev_time = time() + 1
         end
         if prev_time < (time() - deltaTime) then
-            sound()
             volume.set_volume(value)
+            play_sound()
             prev_time = time()
         end
     end

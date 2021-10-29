@@ -114,7 +114,7 @@ local left_panel_func = function()
         -- ########################################################################
         -- start the animations
         left_panel.x = s.geometry.x - left_panel_width
-        left_panel.bg = "radial:960,540,1000:0,0,1000:0,#2f303d:0.34,#17191e:0.65,#22262d:1,#17191e"
+        left_panel.bg = "radial:960,540,1000:0,0,1000:0,#17191e:0.34,#22262d:0.65,#17191e:1,#2f303d"
         left_panel.y = s.geometry.y
         left_panel.height = s.geometry.height
         left_panel.opacity = 0

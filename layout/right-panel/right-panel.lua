@@ -86,7 +86,7 @@ local right_panel = function()
         width = panel_width,
         height = s.geometry.height,
         x = s.geometry.x + (s.geometry.width - panel_width),
-        bg = "radial:960,540,1000:0,0,1000:0,#2f303d:0.34,#17191e:0.65,#22262d:1,#17191e",
+        bg = beautiful.xcolor0,
         fg = beautiful.fg_normal
     }
 
@@ -203,6 +203,7 @@ local right_panel = function()
         -- start the animations
         panel.x = s.geometry.x + s.geometry.width
         panel.height = s.geometry.height
+        panel.bg = "radial:960,540,1000:0,0,1000:0,#17191e:0.34,#22262d:0.65,#17191e:1,#2f303d"
         panel.opacity = 0
         animate(
             _G.anim_speed,

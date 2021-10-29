@@ -28,14 +28,14 @@ local function rounded_shape(size, partial)
         end
     end
 end
-styles.month = {padding = 5, bg_color = beautiful.xbackground .. "33", shape = rounded_shape(6)}
-styles.normal = {shape = rounded_shape(5), padding = 5}
+styles.month = {padding = dpi(5), bg_color = "radial:960,540,20:960,540,500:0,#22262daa:0.2,#3c3f4c88:0.65,#17191e88:1,#272a3488", shape = beautiful.btn_lg_shape}
+styles.normal = {shape = beautiful.btn_lg_shape, padding = dpi(5)}
 styles.focus = {
     fg_color = beautiful.xcolor15, -- Current day Color
     markup = function(t)
         return "<b>" .. t .. "</b>"
     end,
-    shape = rounded_shape(5, true)
+    shape = beautiful.btn_lg_shape
 }
 styles.header = {
     fg_color = beautiful.xcolor7, -- Month Name Color
@@ -82,24 +82,28 @@ end
 local cal =
     wibox.widget {
     date = os.date("*t"),
-    font = beautiful.font .. " 14",
+    font = beautiful.font .. " 20",
     fn_embed = decorate_cell,
     -- start_sunday = true,
+    align = "center",
+    valign="center",
     widget = wibox.widget.calendar.month,
-    bg_color = beautiful.bg_normal .. "66"
+    bg_color = "radial:960,540,10:0,0,10:0,##17191ecc:0.34,#2f303d88:0.65,#17191e88:1,#22262d88"
 }
 
 local calWidget =
     wibox.widget {
-    {
-        nil,
-        {cal, border_color = beautiful.xcolor7 .. "66", widget = wibox.container.margin},
-        nil,
-        layout = wibox.layout.flex.horizontal
+    {cal, 
+    border_color = beautiful.xcolor7 .. "66", 
+    widget = wibox.container.margin,
+        margins= dpi(6),
+        layout = wibox.layout.align.horizontal,
     },
-    resize = true,
+    expand = "none",
     bg = "radial:960,540,20:960,540,500:0,#22262daa:0.2,#3c3f4c88:0.65,#17191e88:1,#272a3488",
-    widget = card
+    widget = card,
+    border_color = beautiful.xcolor7 .. '66',
+    border_width = dpi(3)
 }
 
 local popup =
@@ -158,4 +162,4 @@ function cal_toggle()
     end
 end
 
-return cal
+return calWidget

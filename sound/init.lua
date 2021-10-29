@@ -3,7 +3,7 @@ local soundPath = '/usr/share/sounds/Pop/stereo/notification/'
 
 local function play_sound()
     print('Playing audio-pop sound')
-    spawn('paplay ~/.config/awesome/sound/audio-pop.wav')
+    spawn.with_shell('paplay ~/.config/awesome/sound/audio-pop.wav')
 end
 return {
     play_sound,
