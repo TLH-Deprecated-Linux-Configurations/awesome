@@ -27,13 +27,13 @@ local bottom_panel = function(s)
         ontop = true,
         screen = s,
         position = "bottom",
-        height = dpi(38),
+        height = dpi(48),
         -- 48
         width = s.geometry.width - offsetx,
         x = s.geometry.x + offsetx,
         y = s.geometry.y,
         stretch = false,
-        bg = beautiful.xcolor0 .. "dd",
+        bg = "linear:0,0:0,21:0,#3c3f4ccc:1,#17191ecc",
         fg = beautiful.fg_normal
     }
     panel:struts {bottom = dpi(38)}
@@ -60,7 +60,7 @@ local bottom_panel = function(s)
                 widget,
                 border_width = dpi(2),
                 border_color = beautiful.xcolor7 .. "88",
-                bg = beautiful.bg_normal,
+                bg = "linear:0,0:0,21:0,#3c3f4ccc:1,#17191ecc",
                 shape = beautiful.panel_button_shape,
                 widget = wibox.container.background,
                 resize = true

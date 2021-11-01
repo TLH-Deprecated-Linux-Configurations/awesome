@@ -4,6 +4,5 @@ return {
     require(... .. ".linkedList"),
     require(... .. ".queue"),
     require(... .. ".set"),
-    require(... .. ".stack"),
-
+    require(... .. ".stack")
 }

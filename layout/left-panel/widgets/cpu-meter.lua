@@ -6,17 +6,9 @@
 -- Inspired by:
 -- https://github.com/streetturtle/awesome-wm-widgets/tree/master/cpu-widget
 -- @author Pavel Makhov
--- -----------------------------------------------
-local awful = require "awful"
-local watch = require "awful.widget.watch"
-local wibox = require "wibox"
-local beautiful = require "beautiful"
-local gears = require "gears"
-local vicious = require "lib.vicious"
-local dpi = beautiful.xresources.apply_dpi
-local icons = require "theme.icons"
-local signals = require "configuration.settings.signals"
--- ###########################################################
+-- ########################################################################
+-- ########################################################################
+-- ########################################################################
 -- cpu widget with resource monitor from vicious
 local cpu = wibox.widget.textbox()
 vicious.cache(vicious.widgets.cpu)
@@ -162,8 +154,8 @@ local function worker(user_args)
             right = dpi(1),
             widget = wibox.container.margin
         },
-        shape = gears.shape.rounded_rect,
-        bg = beautiful.bg_normal,
+        shape = beautiful.btn_md_shape,
+        bg = "linear:0,0:0,21:0,#8b9cbe:1,#3c3f4c",
         shape_border_color = beautiful.bg_normal,
         shape_border_width = dpi(3),
         widget = wibox.container.background

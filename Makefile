@@ -8,11 +8,10 @@ help:
 
 all: allinstall 
 
-multilockscreen:
-	cd .. && cd .. && git clone https://github.com/jeffmhubbard/multilockscreen
-	cd multilockscreen
-	sudo install -Dm 755 multilockscreen /usr/bin/multilockscreen
-	multilockscreen -u ~/.config/awesome/themes/wallpapers 
+goautolock:
+	cd .. && cd .. && git clone https://gitlab.com/mrvik/goautolock
+	cd goautolock
+	sudo make && sudo make install
 
 awesomefont:
 	curl https://awesomewm.org/recipes/awesomewm-font.ttf
@@ -30,7 +29,7 @@ hererocks:
 	sudo luarocks install luafilesystem 
 	sudo luarocks install luasocket 
 
-allinstall: multilockscreen awesomefont hererocks 
+allinstall: goautolock awesomefont hererocks 
 
 
 

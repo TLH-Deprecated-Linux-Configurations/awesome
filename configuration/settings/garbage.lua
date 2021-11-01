@@ -12,7 +12,7 @@
 -- memory (at the expense of compute power).Which is run on a timer here
 --
 
-local gears = require('gears')
+local gears = require("gears")
 -- Run garbage collector regularly to prevent memory leaks
 local _M = function()
     gears.timer {
@@ -20,8 +20,8 @@ local _M = function()
         autostart = true,
         callback = function()
             collectgarbage()
-            collectgarbage('setpause', 110)
-            collectgarbage('setstepmul', 1000)
+            collectgarbage("setpause", 110)
+            collectgarbage("setstepmul", 1000)
         end
     }
 end

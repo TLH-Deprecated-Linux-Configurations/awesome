@@ -63,5 +63,5 @@ if [[ "$(command -v xrdb)" ]]; then
 fi
 
 if [[ "$(command -v goautolock)" ]]; then
-    goautolock --time 360 --notify 30 --locker 'multilockscreen' --args -l &
+    goautolock --time 360 --notify 30 --locker "$HOME/.config/awesome/external/i3lock/blur.sh" &
 fi

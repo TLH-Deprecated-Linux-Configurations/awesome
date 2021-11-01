@@ -62,7 +62,7 @@ end
 -- ########################################################################
 function mat_slider:layout(_, width, height)
     local layout = {}
-    local size_field = 32
+    local size_field = 2
     local calc_height = height - dpi(size_field)
     if calc_height < 0 then
         calc_height = 0
@@ -98,7 +98,7 @@ local function new(args)
         wibox.widget {
         max_value = 100,
         value = 25,
-        forced_height = dpi(6),
+        forced_height = dpi(1),
         paddings = 0,
         shape = gears.shape.rounded_rect,
         background_color = beautiful.bg_modal,

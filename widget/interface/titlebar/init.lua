@@ -10,15 +10,15 @@
 -- ########################################################################
 -- ########################################################################
 -- External Library Handling
-local awful = require('awful')
-local gears = require('gears')
+local awful = require("awful")
+local gears = require("gears")
 
 -- Widget and layout library
-local wibox = require('wibox')
+local wibox = require("wibox")
 
 -- Theme handling library
-local beautiful = require('beautiful')
-local dpi = require('beautiful.xresources').apply_dpi
+local beautiful = require("beautiful")
+local dpi = require("beautiful.xresources").apply_dpi
 -- ########################################################################
 -- ########################################################################
 -- ########################################################################
@@ -32,7 +32,7 @@ end
 -- ########################################################################
 -- ########################################################################
 client.connect_signal(
-    'manage',
+    "manage",
     function(c)
         awful.titlebar.show(c)
     end
@@ -43,7 +43,7 @@ client.connect_signal(
 -- ########################################################################
 -- Add a titlebar if titlebars_enabled is set to true in the rules.
 client.connect_signal(
-    'request::titlebars',
+    "request::titlebars",
     function(c)
         -- buttons for the titlebar
         -- ########################################################################
@@ -56,8 +56,8 @@ client.connect_signal(
                 1,
                 function()
                     c:emit_signal(
-                        'request::activate',
-                        'titlebar',
+                        "request::activate",
+                        "titlebar",
                         {
                             raise = true
                         }
@@ -73,8 +73,8 @@ client.connect_signal(
                 3,
                 function()
                     c:emit_signal(
-                        'request::activate',
-                        'titlebar',
+                        "request::activate",
+                        "titlebar",
                         {
                             raise = true
                         }
@@ -115,7 +115,7 @@ client.connect_signal(
         -- ########################################################################
         local l_reverse_corner =
             wibox.widget {
-            bg = beautiful.xcolor0,
+            bg = "linear:0,0:0,21:0,#3c3f4ccc:1,#17191ecc",
             shape = prrect(6, false, false, true, false),
             widget = wibox.container.background
         }
@@ -124,7 +124,7 @@ client.connect_signal(
         -- ########################################################################
         local r_reverse_corner =
             wibox.widget {
-            bg = beautiful.xcolor0,
+            bg = "linear:0,0:0,21:0,#3c3f4ccc:1,#17191ecc",
             shape = prrect(6, false, false, false, true),
             widget = wibox.container.background
         }
@@ -134,26 +134,26 @@ client.connect_signal(
         local function update()
             if client.focus == c then
                 -- Changed This
-                l_reverse_corner.bg = beautiful.xbackground .. 'cc'
-                r_reverse_corner.bg = beautiful.xbackground .. 'cc'
+                l_reverse_corner.bg = "linear:0,0:0,21:0,#3c3f4ccc:1,#17191ecc"
+                r_reverse_corner.bg = "linear:0,0:0,21:0,#3c3f4ccc:1,#17191ecc"
             else
-                l_reverse_corner.bg = beautiful.xbackground .. 'aa'
-                r_reverse_corner.bg = beautiful.xbackground .. 'aa'
+                l_reverse_corner.bg = "linear:0,0:0,21:0,#22262d:1,#17191ecc"
+                r_reverse_corner.bg = "linear:0,0:0,21:0,#22262d:1,#17191ecc"
             end
         end
         -- ########################################################################
         -- ########################################################################
         -- ########################################################################
         update()
-        c:connect_signal('focus', update)
-        c:connect_signal('unfocus', update)
+        c:connect_signal("focus", update)
+        c:connect_signal("unfocus", update)
 
         awful.titlebar(
             c,
             {
-                position = 'top',
+                position = "top",
                 size = beautiful.titlebar_size,
-                bg = beautiful.xbackground .. '99'
+                bg = "linear:0,0:0,21:0,#3c3f4ccc:1,#17191ecc"
             }
         ):setup {
             {
@@ -175,7 +175,7 @@ client.connect_signal(
 
                 {
                     -- Title
-                    align = 'center',
+                    align = "center",
                     widget = awful.titlebar.widget.titlewidget(c)
                 },
                 buttons = buttons,
@@ -190,7 +190,7 @@ client.connect_signal(
                     },
                     width = 0,
                     height = 0,
-                    strategy = 'exact',
+                    strategy = "exact",
                     layout = wibox.layout.constraint
                 },
                 {
@@ -220,13 +220,13 @@ client.connect_signal(
                 {
                     {
                         r_reverse_corner,
-                        bg = beautiful.xbackground,
+                        bg = "linear:0,0:0,21:0,#3c3f4ccc:1,#17191ecc",
                         shape = gears.rectangle,
                         widget = wibox.container.background
                     },
                     width = 0,
                     height = 0,
-                    strategy = 'exact',
+                    strategy = "exact",
                     layout = wibox.layout.constraint
                 },
                 top = dpi(2),
@@ -235,7 +235,7 @@ client.connect_signal(
                 layout = wibox.layout.fixed.horizontal
             },
             layout = wibox.layout.align.horizontal,
-            bg = beautiful.xbackground .. 'cc'
+            bg = "linear:0,0:0,21:0,#3c3f4ccc:1,#17191ecc"
         }
     end
 )

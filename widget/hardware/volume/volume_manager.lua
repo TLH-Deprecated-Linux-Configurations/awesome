@@ -15,8 +15,8 @@ local boot_time = time()
 local deltaTime = 0.1
 
 local function play_sound()
-    print('Playing audio-pop sound')
-    spawn.with_shell('paplay ~/.config/awesome/sound/audio-pop.wav')
+    print("Playing audio-pop sound")
+    spawn.with_shell("paplay ~/.config/awesome/sound/audio-pop.wav")
 end
 -- ########################################################################
 -- ########################################################################

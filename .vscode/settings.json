@@ -47,7 +47,12 @@
     "checkbox",
     "reverse",
     "center",
-    "common"
+    "common",
+    "watch",
+    "config",
+    "tag",
+    "sound",
+    "vicious"
   ],
   "Lua.diagnostics.disable": [
     "undefined-field",

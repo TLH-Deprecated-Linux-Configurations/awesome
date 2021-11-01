@@ -5,7 +5,7 @@
 -- ########################################################################
 -- ########################################################################
 -- ########################################################################
-local PATH_TO_ICONS = HOME .. '/.config/awesome/layout/right-panel/icons/'
+local PATH_TO_ICONS = HOME .. "/.config/awesome/layout/right-panel/icons/"
 
 _G.dont_disturb = false
 -- ########################################################################
@@ -18,9 +18,9 @@ local box
 -- ########################################################################
 local dont_disturb_text =
     wibox.widget {
-    text = 'Do Not Disturb',
-    font = beautiful.font .. ' 10',
-    align = 'left',
+    text = "Do Not Disturb",
+    font = beautiful.font .. " 10",
+    align = "left",
     widget = wibox.widget.textbox
 }
 -- ########################################################################
@@ -50,7 +50,7 @@ box =
 local dont_disturb_icon =
     wibox.widget {
     {
-        image = PATH_TO_ICONS .. 'dont-disturb.svg',
+        image = PATH_TO_ICONS .. "dont-disturb.svg",
         widget = wibox.widget.imagebox,
         resize = true
     },

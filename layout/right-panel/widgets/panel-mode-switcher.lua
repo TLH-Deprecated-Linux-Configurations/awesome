@@ -11,7 +11,7 @@
 local notif_text =
     wibox.widget {
     text = "Notifications",
-    font = beautiful.font .. " 12",
+    font = beautiful.font .. " 14",
     align = "center",
     valign = "center",
     widget = wibox.widget.textbox
@@ -62,11 +62,13 @@ local switcher =
     layout = wibox.layout.fixed.horizontal,
     {
         wrap_notif,
-        layout = wibox.layout.fixed.horizontal
+        layout = wibox.layout.fixed.horizontal,
+        bg = "linear:0,0:0,21:0,#3c3f4c:1,#17191e"
     },
     {
         wrap_widget,
-        layout = wibox.layout.fixed.horizontal
+        layout = wibox.layout.fixed.horizontal,
+        bg = "linear:0,0:0,21:0,#3c3f4c:1,#17191e"
     }
 }
 -- ########################################################################
@@ -75,14 +77,14 @@ local switcher =
 local function switch_mode(right_panel_mode)
     if right_panel_mode == "notif_mode" then
         -- Update button color
-        wrap_notif.bg = active_button
-        wrap_widget.bg = inactive_button
+        wrap_notif.bg = "linear:0,0:0,21:0,#3c3f4c:1,#17191e"
+        wrap_widget.bg = "linear:0,0:0,21:0,#636a82:1,#3c3f4c"
         -- Change panel content of right-panel.lua
         _G.screen.primary.right_panel:switch_mode(right_panel_mode)
     elseif right_panel_mode == "widgets_mode" then
         -- Update button color
-        wrap_notif.bg = inactive_button
-        wrap_widget.bg = active_button
+        wrap_notif.bg = "linear:0,0:0,21:0,#636a82:1,#3c3f4c"
+        wrap_widget.bg = "linear:0,0:0,21:0,#3c3f4c:1,#17191e"
         -- Change panel content of right-panel.lua
         _G.screen.primary.right_panel:switch_mode(right_panel_mode)
     end

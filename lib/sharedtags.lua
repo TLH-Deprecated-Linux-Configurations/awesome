@@ -41,32 +41,37 @@ local sharedtags = {
 
 -- Add a signal for each new screen, which just listens for the remove
 -- event, and moves over all tags when it happens.
-awful.screen.connect_for_each_screen(function(s)
-    -- When the screen is removed, all tags need to be moved over to an existing
-    -- screen. If they are not, accessing the tags will result in an error. It
-    -- doesn't make sense to fix the error, since clients on the now-hidden tags
-    -- will automatically be moved to a tag on a visible screen.
-    s:connect_signal("removed",function()
-        -- The screen to move the orphaned tags to.
-        local newscreen = capi.screen.primary
-        -- The currently selected tags on that screen.
-        local seltags = newscreen.selected_tags
+awful.screen.connect_for_each_screen(
+    function(s)
+        -- When the screen is removed, all tags need to be moved over to an existing
+        -- screen. If they are not, accessing the tags will result in an error. It
+        -- doesn't make sense to fix the error, since clients on the now-hidden tags
+        -- will automatically be moved to a tag on a visible screen.
+        s:connect_signal(
+            "removed",
+            function()
+                -- The screen to move the orphaned tags to.
+                local newscreen = capi.screen.primary
+                -- The currently selected tags on that screen.
+                local seltags = newscreen.selected_tags
 
-        -- Move over all tags to an existing screen.
-        for _,tag in ipairs(s.tags) do
-            sharedtags.movetag(tag, newscreen)
-        end
+                -- Move over all tags to an existing screen.
+                for _, tag in ipairs(s.tags) do
+                    sharedtags.movetag(tag, newscreen)
+                end
 
-        -- Restore the viewed tags on the new screen.
-        for i,tag in ipairs(seltags) do
-            if i == 1 then
-                tag:view_only()
-            else
-                awful.tag.viewtoggle(tag)
+                -- Restore the viewed tags on the new screen.
+                for i, tag in ipairs(seltags) do
+                    if i == 1 then
+                        tag:view_only()
+                    else
+                        awful.tag.viewtoggle(tag)
+                    end
+                end
             end
-        end
-    end)
-end)
+        )
+    end
+)
 
 --- Create new tag objects.
 -- The first tag defined for each screen will be automatically selected.
@@ -90,12 +95,16 @@ end)
 function sharedtags.new(def)
     local tags = {}
 
-    for i,t in ipairs(def) do
-        tags[i] = awful.tag.add(t.name or i, {
-            screen = (t.screen and t.screen <= capi.screen.count()) and t.screen or capi.screen.primary,
-            layout = t.layout,
-            sharedtagindex = i
-        })
+    for i, t in ipairs(def) do
+        tags[i] =
+            awful.tag.add(
+            t.name or i,
+            {
+                screen = (t.screen and t.screen <= capi.screen.count()) and t.screen or capi.screen.primary,
+                layout = t.layout,
+                sharedtagindex = i
+            }
+        )
 
         -- Create an alias between the index and the name.
         if t.name and type(t.name) ~= "number" then
@@ -135,17 +144,22 @@ function sharedtags.movetag(tag, screen)
                 end
             end
         --else
-            -- NOTE: A bug in awesome 4.0 is causing all tags to be deselected
-            -- here. A shame, but I haven't found a nice way to work around it
-            -- except by fixing the bug (history seems to be in a weird state).
+        -- NOTE: A bug in awesome 4.0 is causing all tags to be deselected
+        -- here. A shame, but I haven't found a nice way to work around it
+        -- except by fixing the bug (history seems to be in a weird state).
         end
 
         -- Also sort the tag in the taglist, by reapplying the index. This is just a nicety.
         local unpack = unpack or table.unpack
-        for _,s in ipairs({ screen, oldscreen }) do
-            local tags = { unpack(s.tags) } -- Copy
-            table.sort(tags, function(a, b) return a.sharedtagindex < b.sharedtagindex end)
-            for i,t in ipairs(tags) do
+        for _, s in ipairs({screen, oldscreen}) do
+            local tags = {unpack(s.tags)} -- Copy
+            table.sort(
+                tags,
+                function(a, b)
+                    return a.sharedtagindex < b.sharedtagindex
+                end
+            )
+            for i, t in ipairs(tags) do
                 t.index = i
             end
         end
@@ -185,6 +199,11 @@ function sharedtags.viewtoggle(tag, screen)
     end
 end
 
-return setmetatable(sharedtags, { __call = function(...) return sharedtags.new(select(2, ...)) end })
+return setmetatable(
+    sharedtags,
+    {__call = function(...)
+            return sharedtags.new(select(2, ...))
+        end}
+)
 
 -- vim: filetype=lua:expandtab:shiftwidth=4:tabstop=8:softtabstop=4:textwidth=80

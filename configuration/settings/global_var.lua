@@ -34,10 +34,11 @@ signals = require("configuration.settings.signals")
 file = require("widget.functions.file")
 spawn = require("awful.spawn")
 slider = require("widget.interface.slider")
+progressbar = require("widget.interface.progress_bar")
 naughty = require("naughty")
 math = require("math")
 common = require("awful.widget.common")
-sound= require("sound")
+sound = require("sound")
 ipairs = ipairs
 client = client
 tag = tag
@@ -94,6 +95,8 @@ scrollbox = require("widget.interface.scrollbox")
 checkbox = require("widget.interface.checkbox")
 button = require("widget.interface.button")
 config = require("widget.functions")
+watch = require "awful.widget.watch"
+vicious = require "lib.vicious"
 
 -- #######################################################################
 -- ########################################################################

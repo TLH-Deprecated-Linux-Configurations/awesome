@@ -49,6 +49,7 @@ local awesome_overrides = function(theme)
     theme.xcolor21 = "#636a82"
     theme.xcolor22 = "#767f9c"
     theme.xcolor23 = "#919cbf"
+    theme.xcolor24 = "#C1C1E0"
 
     theme.background_transparency = "cc"
     -- Custom
@@ -75,7 +76,7 @@ local awesome_overrides = function(theme)
     -- ########################################################################
     -- ########################################################################
     -- Fonts
-    theme.taglist_font = "awesomewm-font 16"
+    theme.taglist_font = "awesomewm-font 18"
     theme.font = "Commodore 64 Rounded Regular "
     theme.monitor_font = "Commodore 64 Rounded Regular 50"
     theme.title_font = "Commodore 64 Rounded Regular 18"
@@ -101,21 +102,21 @@ local awesome_overrides = function(theme)
     -- ########################################################################
     -- ########################################################################
     -- Background colors (cannot be linear gradients for whatever reason)
-    theme.bg_focus = theme.xcolor18
+    theme.bg_focus = "linear:0,0:0,21:0,#555e70:1,#3c3f4c"
     theme.bg_urgent = theme.xcolor1
-    theme.bg_systray = theme.xcolor18
-    theme.bg_modal = theme.xbackground .. "cc"
-    theme.bg_modal_title = theme.xcolor8 .. "cc"
+    theme.bg_systray = "linear:0,0:0,21:0,#3c3f4c:1,#17191e"
+    theme.bg_modal = "linear:0,0:0,21:0,#636a82:1,#3c3f4c"
+    theme.bg_modal_title = "linear:0,0:0,21:0,#636a82:1,#3c3f4c"
     theme.bg_settings_display_number = theme.xbackground .. "cc"
-    theme.bg_normal = theme.background
-    theme.bg_button = theme.xbackground
-    theme.bg_widget = theme.xcolor0
+    theme.bg_normal = "linear:0,0:0,21:0,#3c3f4c:1,#17191e"
+    theme.bg_button = "linear:0,0:0,21:0,#3c3f4c:1,#17191e"
+    theme.bg_widget = "linear:0,0:0,21:0,#3c3f4c:1,#17191e"
     -- ########################################################################
     -- ########################################################################
     -- ########################################################################
     -- Notification
     theme.notification_position = "top_right"
-    theme.notification_bg = theme.transparent
+    theme.notification_bg = "linear:0,0:0,21:0,#3c3f4c:1,#17191e"
     theme.notification_margin = dpi(5)
     theme.notification_border_width = dpi(0)
     theme.notification_border_color = theme.xcolor7 .. "aa"
@@ -132,7 +133,7 @@ local awesome_overrides = function(theme)
     -- ########################################################################
     -- ########################################################################
     -- UI Groups
-    theme.groups_title_bg = theme.bg_modal_title
+    theme.groups_title_bg = "linear:0,0:0,21:0,#3c3f4c:1,#17191e"
     theme.groups_bg = theme.bg_modal
     theme.groups_radius = dpi(9)
     -- ########################################################################
@@ -194,9 +195,9 @@ local awesome_overrides = function(theme)
     -- theme.taglist_bg_occupied = "radial:960,540,10:0,0,10:0,##17191ecc:0.34,#3c3f4caa:0.65,#12141888:1,#12141888"
     -- theme.taglist_bg_urgent = "radial:960,540,10:0,0,10:0,##17191ecc:0.34,#3c3f4caa:0.65,#12141888:1,#12141888"
     -- theme.taglist_bg = "radial:960,540,10:0,0,10:0,#343a50cc:0.34,#3c3f4caa:0.65,#12141888:1,#12141888"
-    theme.taglist_fg_empty = theme.xcolor8 .. "aa"
+    theme.taglist_fg_empty = theme.xcolor7
     theme.taglist_fg_focus = theme.xcolor15
-    theme.taglist_fg_occupied = theme.xcolor7
+    theme.taglist_fg_occupied = theme.xcolor24
     theme.taglist_border_color = theme.xcolor7 .. "66"
 
     -- theme.taglist_border_width = dpi(2)
@@ -275,7 +276,7 @@ local awesome_overrides = function(theme)
     -- ########################################################################
     -- Notification
     theme.notification_font = theme.font
-    theme.notification_bg =  "radial:960,540,20:960,540,500:0,#22262daa:0.2,#3c3f4c88:0.65,#17191e88:1,#272a3488"
+    theme.notification_bg = "radial:960,540,20:960,540,500:0,#22262daa:0.2,#3c3f4c88:0.65,#17191e88:1,#272a3488"
     theme.notification_fg = theme.fg_normal
     theme.notification_shape = function(cr, width, height)
         gears.shape.rounded_rect(cr, width, height, 8)

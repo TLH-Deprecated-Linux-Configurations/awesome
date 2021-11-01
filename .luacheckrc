@@ -60,6 +60,7 @@ read_globals = {
 	"awesome",
 	"button",
 	"client",
+	"config",
 	"dbus",
 	"drawable",
 	"drawin",

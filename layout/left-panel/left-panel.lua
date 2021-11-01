@@ -55,7 +55,7 @@ local left_panel_func = function()
         wibox {
         ontop = true,
         screen = s,
-        bg = "radial:960,540,10:0,0,10:0,#2f303d:0.34,#17191e:0.65,#22262d:1,#17191e",
+        bg = "linear:0,0:0,21:0,#636a82:1,#3c3f4c",
         width = left_panel_width,
         height = s.geometry.height,
         x = s.geometry.x,
@@ -114,7 +114,7 @@ local left_panel_func = function()
         -- ########################################################################
         -- start the animations
         left_panel.x = s.geometry.x - left_panel_width
-        left_panel.bg = "radial:960,540,1000:0,0,1000:0,#17191e:0.34,#22262d:0.65,#17191e:1,#2f303d"
+        left_panel.bg = "linear:0,0:0,21:0,#636a82:1,#3c3f4c"
         left_panel.y = s.geometry.y
         left_panel.height = s.geometry.height
         left_panel.opacity = 0
@@ -266,7 +266,7 @@ local left_panel_func = function()
             _G.exit_screen_show()
         end
     )
-    exit_button.bg = beautiful.xcolor8 .. "ff"
+
     -- ########################################################################
     -- ########################################################################
     -- ########################################################################
@@ -313,8 +313,8 @@ local left_panel_func = function()
                 wibox.widget {
                     wibox.widget {
                         exit_button,
-                        widget = wibox.container.background,
-                        bg = beautiful.xcolor8,
+                        widget = clickable_container,
+                        bg = "linear:0,0:0,21:0,#636a82:1,#3c3f4c",
                         border_width = dpi(3),
                         border_color = beautiful.xcolor7 .. "33",
                         shape = beautiful.btn_lg_shape

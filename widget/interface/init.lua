@@ -5,16 +5,11 @@ return {
     require(... .. ".card"),
     require(... .. ".checkbox"),
     require(... .. ".clickable-container"),
-    require(... .. ".helper"),
     require(... .. ".icon-button"),
-    require(... .. ".inputfield"),
     require(... .. ".list-item"),
     require(... .. ".menu"),
-    require(... .. ".modal"),
-    require(... .. ".profilebox"),
     require(... .. ".progress_bar"),
     require(... .. ".scrollbox"),
     require(... .. ".slider"),
-    require(... .. ".text"),
     require(... .. ".titlebar")
 }

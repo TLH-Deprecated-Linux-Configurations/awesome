@@ -1,14 +1,14 @@
---  ________ _______ _______ _______     
--- |  |  |  |_     _|    ___|_     _|    
--- |  |  |  |_|   |_|    ___|_|   |_     
--- |________|_______|___|   |_______|    
+--  ________ _______ _______ _______
+-- |  |  |  |_     _|    ___|_     _|
+-- |  |  |  |_|   |_|    ___|_|   |_
+-- |________|_______|___|   |_______|
 -- ########################################################################
 -- ########################################################################
--- ########################################################################                                      
+-- ########################################################################
 -- simple widget that displays only if there is a wifi card (hopefully) and
--- then shows a pictoral representation of the status of the connection if 
--- there is that clicking on brings up nmtui 
--- 
+-- then shows a pictoral representation of the status of the connection if
+-- there is that clicking on brings up nmtui
+--
 
 local PATH_TO_ICONS = HOME .. "/.config/awesome/layout/bottom-panel/widgets/wifi/icons/"
 local interface = "wlan0"

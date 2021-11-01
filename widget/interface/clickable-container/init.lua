@@ -21,7 +21,7 @@ local function build(widget)
 		{
 			widget,
 			widget = wibox.container.background,
-			bg = "radial:960,540,10:0,0,10:0,##17191e99:0.34,#3c3f4c88:0.65,#22262d88:1,#22262d88",
+			bg = "linear:0,0:0,21:0,#3c3f4c:1,#17191e",
 			border_color = beautiful.xcolor7 .. "66",
 			border_width = dpi(3),
 			margins = dpi(3),
@@ -37,7 +37,8 @@ local function build(widget)
 		function()
 			container.border_color = beautiful.xcolor7
 
-			container.bg = "radial:1024,960,20:960,540,500:0,#22262d88:0.2,#3c3f4c88:0.65,#17191e88:1,#3c3f4c88"
+			container.bg = "linear:0,0:0,21:0,#8b9cbe:1,#555e70"
+			container.color = "#17191e"
 			local w = mouse.current_wibox
 			if w then
 				old_cursor, old_wibox = w.cursor, w
@@ -52,7 +53,7 @@ local function build(widget)
 		"mouse::leave",
 		function()
 			container.border_color = beautiful.xcolor7 .. "66"
-			container.bg = "radial:960,540,10:0,0,10:0,##17191e99:0.34,#3c3f4c88:0.65,#22262d88:1,#22262d88"
+			container.bg = "linear:0,0:0,21:0,#3c3f4c:1,#17191e"
 			if old_wibox then
 				old_wibox.cursor = old_cursor
 				old_wibox = nil
@@ -67,7 +68,7 @@ local function build(widget)
 		function()
 			container.border_width = dpi(4)
 			container.border_color = beautiful.xcolor7
-			container.bg = "radial:1024,960,20:960,540,500:0,#3c3f4c88:0.2,#3c3f4c88:0.65,#17191e88:1,#22262d88"
+			container.bg = "linear:0,0:0,21:0,#8b9cbe:1,#3c3f4c"
 		end
 	)
 	-- ########################################################################
@@ -78,7 +79,7 @@ local function build(widget)
 		function()
 			container.border_width = dpi(3)
 			container.border_color = beautiful.xcolor7 .. "66"
-			container.bg = "radial:960,540,10:0,0,10:0,##17191e99:0.34,#3c3f4c88:0.65,#22262d88:1,#22262d88"
+			container.bg = "linear:0,0:0,21:0,#3c3f4c:1,#17191e"
 		end
 	)
 	-- ########################################################################

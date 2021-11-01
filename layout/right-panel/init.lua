@@ -6,12 +6,12 @@
 -- ########################################################################
 -- ########################################################################
 -- ########################################################################
-local dpi = require('beautiful').xresources.apply_dpi
-local clickable_container = require('widget.interface.clickable-container')
-local PATH_TO_ICONS = HOME .. '/.config/awesome/layout/right-panel/icons/'
+local dpi = require("beautiful").xresources.apply_dpi
+local clickable_container = require("widget.interface.clickable-container")
+local PATH_TO_ICONS = HOME .. "/.config/awesome/layout/right-panel/icons/"
 
 -- Load panel rules, it will create panel for each screen
-require('layout.right-panel.panel-rules')
+require("layout.right-panel.panel-rules")
 
 -- ########################################################################
 -- ########################################################################
@@ -19,8 +19,8 @@ require('layout.right-panel.panel-rules')
 local widget =
     wibox.widget {
     {
-        id = 'icon',
-        image = PATH_TO_ICONS .. 'sidebar-right.svg',
+        id = "icon",
+        image = PATH_TO_ICONS .. "sidebar-right.svg",
         widget = wibox.widget.imagebox,
         resize = true
     },
@@ -38,7 +38,7 @@ widget_button:buttons(
             nil,
             function()
                 _G.screen.primary.right_panel:toggle()
-                collectgarbage('collect')
+                collectgarbage("collect")
             end
         )
     )
