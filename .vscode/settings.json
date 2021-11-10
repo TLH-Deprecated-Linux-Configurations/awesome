@@ -52,7 +52,9 @@
     "config",
     "tag",
     "sound",
-    "vicious"
+    "vicious",
+    "socket",
+    "time"
   ],
   "Lua.diagnostics.disable": [
     "undefined-field",

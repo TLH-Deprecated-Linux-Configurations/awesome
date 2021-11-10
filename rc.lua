@@ -12,6 +12,7 @@
 -- found (e.g. lgi). If LuaRocks is not installed, do nothing.
 --
 pcall(require, "luarocks.loader")
+pcall(require, "lua53.luarocks.loader")
 -- ########################################################################
 -- First get logging ready
 --

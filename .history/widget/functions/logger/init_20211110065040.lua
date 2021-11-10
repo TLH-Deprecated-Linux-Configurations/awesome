@@ -7,7 +7,7 @@
 -- ########################################################################
 -- ########################################################################
 local filehandle = require("widget.functions.file")
-local time = require("lib.lib-lua.socket").gettime
+local time = require("lua53.lib.lua.5.3.socket.core.so").gettime
 -- store the old print variable into echo
 echo = print
 -- ########################################################################

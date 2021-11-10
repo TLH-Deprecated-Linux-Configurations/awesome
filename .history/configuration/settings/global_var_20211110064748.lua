@@ -21,7 +21,7 @@ timer = gears.timer
 math = require("math")
 cairo = require("lgi").cairo
 awful.client = require("awful.client")
-
+time = require("lua53.lib.lua.5.3.socket.core.so").gettime
 wibox = require("wibox")
 dpi = beautiful.xresources.apply_dpi
 xresources = require("beautiful.xresources")

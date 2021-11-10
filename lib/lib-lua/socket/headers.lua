@@ -56,7 +56,6 @@ _M.canonic = {
     ["last-attempt-date"] = "Last-Attempt-Date",
     ["last-modified"] = "Last-Modified",
     ["location"] = "Location",
-    ["luaL_openlib"] = "LUA_COMPAT_MODULE",
     ["max-forwards"] = "Max-Forwards",
     ["message-id"] = "Message-ID",
     ["mime-version"] = "MIME-Version",

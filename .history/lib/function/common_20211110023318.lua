@@ -20,6 +20,7 @@
 -- @tdemod lib.function.common
 ---------------------------------------------------------------------------
 
+local socket = require("lib.lib-lua.socket")
 
 --- split the input to a table based on the separator
 -- @tparam string inputstr The string to split.
