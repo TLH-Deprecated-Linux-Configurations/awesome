@@ -41,6 +41,9 @@ math = require("math")
 common = require("awful.widget.common")
 sound = require("sound")
 ipairs = ipairs
+ruled = require("ruled")
+queue = require("lib.datastructure.queue")()
+menubar = require("menubar")
 client = client
 tag = tag
 

@@ -1,3 +1,4 @@
+-- ########################################################################
 -- ______ __ __               __
 -- |      |  |__|.-----.-----.|  |_
 -- |   ---|  |  ||  -__|     ||   _|
@@ -9,17 +10,22 @@
 -- ########################################################################
 -- ########################################################################
 -- ########################################################################
+-- Provides the client rules, which apply properties to clients in general or
+-- specific ones because of some quirk of said client requiring modification.
+-- This is a highly powerful aspect of awesome that makes it so much more than
+-- i3, or its wayland fork (the fork really sucks, no nvidia support? Lame).
+-- `
+-- This can be used for things like feh, where titlebars and window decorations
+-- just mess up its functionality and it needs to be floating if used properly
+-- ########################################################################
+-- ########################################################################
+-- ########################################################################
 local client_keys = require("configuration.client.keys")
 local client_buttons = require("configuration.client.buttons")
--- Rules
+-- All clients will match this rule.
 --
 
 awful.rules.rules = {
-    -- ########################################################################
-    -- ########################################################################
-    -- ########################################################################
-    -- All clients will match this rule.
-    --
     {
         rule = {},
         except_any = {
@@ -43,7 +49,9 @@ awful.rules.rules = {
             drawBackdrop = false,
             titlebars_enabled = true,
             skip_decoration = false,
-            raise = false
+            raise = false,
+            honor_padding = true,
+            honor_workarea = true
         }
     },
     {
@@ -51,20 +59,17 @@ awful.rules.rules = {
         properties = {
             skip_decoration = false,
             titlebars_enabled = true,
-            shape = function()
-                return function(cr, w, h)
-                    gears.shape.rounded_rect(cr, w, h, 12)
-                end
-            end
+            shape = beautiful.btn_lg_shape
         }
     },
     -- ########################################################################
     -- ########################################################################
     -- ########################################################################
-    -- Custom
+    -- feh & polkit
     --
+
     {
-        rule_any = {class = {"feh", "Lxpolkit"}},
+        rule_any = {class = {"feh", "Lxpolkit", "xfce-polkit"}},
         properties = {
             skip_decoration = true,
             titlebars_enabled = false,
@@ -77,6 +82,8 @@ awful.rules.rules = {
     -- ########################################################################
     -- ########################################################################
     -- ########################################################################
+    --
+    --
     {
         rule_any = {
             instance = {
@@ -128,6 +135,7 @@ awful.rules.rules = {
     -- ########################################################################
     -- ########################################################################
     -- ########################################################################
+    -- xlunch fullscreen mode
     {
         rule_any = {class = {"xlunch-fullscreen"}},
         properties = {fullscreen = true, ontop = true}
@@ -152,7 +160,7 @@ awful.rules.rules = {
     -- ########################################################################
     -- ########################################################################
     -- ########################################################################
-    -- For nemo progress bar when copying or moving
+    -- For progress bar when copying or moving
     --
     {
         rule = {instance = "file_progress"},
@@ -169,6 +177,7 @@ awful.rules.rules = {
     -- ########################################################################
     -- ########################################################################
     -- ########################################################################
+    -- awmtt windows
     {
         rule_any = {class = {"Xephyr"}},
         properties = {
@@ -227,7 +236,7 @@ awful.rules.rules = {
         },
         properties = {
             floating = true,
-            placement = awful.placement.centered,
+            placement = awful.placement.centered + awful.placement.no_offscreen,
             ontop = true,
             sticky = true,
             drawBackdrop = false
@@ -254,8 +263,7 @@ awful.rules.rules = {
     -- ########################################################################
     -- ########################################################################
     {
-        rule_any = {class = {"lxpolkit", "Lxpolkit"}},
-        except_any = {type = {"dialog"}},
+        rule_any = {class = {"lxpolkit", "Lxpolkit", "xfce-polkit"}},
         properties = {
             floating = true,
             placement = awful.placement.centered + awful.placement.no_offscreen,
@@ -278,9 +286,14 @@ awful.rules.rules = {
                 "pinentry-gtk"
             }
         },
+        except_any = {
+            class = {
+                "maim"
+            }
+        },
         properties = {
             floating = true,
-            placement = awful.placement.centered,
+            placement = awful.placement.centered + awful.placement.no_offscreen,
             ontop = true,
             drawBackdrop = false
         }

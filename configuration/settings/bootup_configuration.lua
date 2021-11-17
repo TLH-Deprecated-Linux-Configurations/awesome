@@ -6,11 +6,11 @@
 -- ########################################################################
 -- ########################################################################
 -- ########################################################################
-local gears = require("gears")
-local beautiful = require("beautiful")
+
 local naughty = require("naughty")
 
--- Create a wibox for each screen and add it
+-- Load the wallpaper if set it on each screen
+--
 awful.screen.connect_for_each_screen(
     function(s)
         -- If wallpaper is a function, call it with the screen
@@ -32,10 +32,11 @@ awful.screen.connect_for_each_screen(
 -- ########################################################################
 -- ########################################################################
 -- Signal function to execute when a new client appears.
+--
 _G.client.connect_signal(
     "manage",
     function(c)
-        -- Set the windows at the slave,
+        -- Set the windows as the "slave", their word and I agree it is a little tasteless
         --
         if not _G.awesome.startup then
             awful.client.setslave(c)
@@ -54,7 +55,10 @@ _G.client.connect_signal(
 -- ########################################################################
 -- Enable sloppy focus, so that focus follows mouse.
 -- Raise causes issues when a normal client is over a maximized client,
--- so it was commented out
+-- so it was commented out.
+-- Without raise, this is actually a desirable setting even if the
+-- configuration is complex, not sure what the dev's were thinking when
+-- they included a setting rendering sloppy focus useless...
 --
 _G.client.connect_signal(
     "mouse::enter",
@@ -68,6 +72,8 @@ _G.client.connect_signal(
 -- ########################################################################
 -- ########################################################################
 -- ########################################################################
+-- set the client border for focused client
+--
 _G.client.connect_signal(
     "focus",
     function(c)
@@ -77,6 +83,8 @@ _G.client.connect_signal(
 -- ########################################################################
 -- ########################################################################
 -- ########################################################################
+-- set the client border color
+--
 _G.client.connect_signal(
     "unfocus",
     function(c)
@@ -87,7 +95,10 @@ _G.client.connect_signal(
 -- ########################################################################
 -- ########################################################################
 -- ########################################################################
-
+-- startup errors, which there is not way to make the logging information
+-- something easily comprehended at a glance due to the underlying program
+-- as far as I know, so same goobldygook as always.
+--
 if awesome.startup_errors then
     naughty.notify(
         {
@@ -107,7 +118,8 @@ do
     awesome.connect_signal(
         "debug::error",
         function(err)
-            -- Make sure we don't go into an endless error loop
+            -- Make sure we don't go into an endless error loop, they suck
+            --
             if in_error then
                 return
             end

@@ -32,11 +32,12 @@ function shot() {
     fi
     
     # Copy to clipboard
-    xclip -selection clipboard -t image/png -i "${screenshot_dir}"/`ls -1 -t "${screenshot_dir}" | head -1` &
+    xclip -selection clipboard -t image/png -i "${screenshot_dir}"/"$(ls -1 -t "${screenshot_dir}" | head -1)" &
     
     awesome-client "
 
 	-- IMPORTANT NOTE: THIS PART OF THE SCRIPT IS LUA!
+	-- MORE IMPORTANT NOTE: This CANNOT be ruin outside of AwesomeWM. It requires various libraries and functions from it to work.
 	naughty = require('naughty')
 	awful = require('awful')
 	beautiful = require('beautiful')
@@ -75,8 +76,8 @@ function shot() {
 	naughty.notification ({
 		app_name = 'Screenshot Tool',
 		icon = '${file_loc}',
-		timeout = 10,
-		title = '<b>Snap!</b>',
+		timeout = 0,
+		title = '<b>Screenshot Taken</b>',
 		message = '${notif_message}',
 		actions = { open_image, open_folder, delete_image }
 	})

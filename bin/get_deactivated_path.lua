@@ -1,3 +1,25 @@
+-- ########################################################################
+--  _______         __
+-- |     __|.-----.|  |_
+-- |    |  ||  -__||   _|
+-- |_______||_____||____|
+--  _____                    __   __               __            __
+-- |     \.-----.---.-.----.|  |_|__|.--.--.---.-.|  |_.-----.--|  |
+-- |  --  |  -__|  _  |  __||   _|  ||  |  |  _  ||   _|  -__|  _  |
+-- |_____/|_____|___._|____||____|__| \___/|___._||____|_____|_____|
+--  ______         __   __
+-- |   __ \.---.-.|  |_|  |--.
+-- |    __/|  _  ||   _|     |
+-- |___|   |___._||____|__|__|
+-- ########################################################################
+-- ########################################################################
+-- ########################################################################
+-- I didn't have anything to do with this file, just the header above. This
+-- was put here by hererocks which is lua's awesome way around pip virtualenv
+-- hell or global, yarn path variable hells. Its like node_modules, but also
+-- rolls in nvm functionality that stays in the repo no need for virtual nothing
+-- just source the file and run luarocks in the directory and it will actually work
+--
 local path = os.getenv("PATH")
 local dir_sep = package.config:sub(1, 1)
 local path_sep = dir_sep == "\\" and ";" or ":"

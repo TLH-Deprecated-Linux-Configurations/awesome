@@ -2,22 +2,27 @@
 -- |_     _|.--.--.|  |_.-----.----.|__|.---.-.|  |
 --   |   |  |  |  ||   _|  _  |   _||  ||  _  ||  |
 --   |___|  |_____||____|_____|__|  |__||___._||__|
-
 -- ########################################################################
 -- ########################################################################
 -- ########################################################################
-local naughty = require("naughty")
+-- This is for the popup windows intended to help new users get started.
+-- something most tiling window managers probably should inlcude, especially
+-- this archiac nightmare but do not. So this file addresses that need and informs
+-- users how to find the keybindings help.
 -- ########################################################################
--- ## Libraries and Dependencies ##########################################
 -- ########################################################################
+-- ########################################################################
+-- Final Dialogue Window
+--
 local function finish()
     local HOME = os.getenv("HOME")
-    local file = HOME .. "/.cache/tutorial_tos"
+    local file = HOME .. "/.cache/tutorial"
     io.open(file, "w"):write("tutorial is complete"):close()
 end
 -- ########################################################################
--- ## Ninth Tip ###########################################################
 -- ########################################################################
+-- ########################################################################
+-- tip 9
 local function ninthTip()
     naughty.notify(
         {
@@ -30,7 +35,7 @@ local function ninthTip()
     ):connect_signal("destroyed", finish)
 end
 -- ########################################################################
--- ## Eighth Tip ##########################################################
+-- ########################################################################
 -- ########################################################################
 local function eightTip()
     naughty.notify(
@@ -44,8 +49,10 @@ local function eightTip()
     ):connect_signal("destroyed", ninthTip)
 end
 -- ########################################################################
--- ## Seventh Tip #########################################################
 -- ########################################################################
+-- ########################################################################
+-- tip 7
+--
 local function seventhTip()
     naughty.notify(
         {
@@ -59,8 +66,10 @@ local function seventhTip()
     ):connect_signal("destroyed", eightTip)
 end
 -- ########################################################################
--- ## Sixth Tip ###########################################################
 -- ########################################################################
+-- ########################################################################
+-- tip 6
+--
 local function sixthTip()
     naughty.notify(
         {
@@ -73,8 +82,10 @@ local function sixthTip()
     ):connect_signal("destroyed", seventhTip)
 end
 -- ########################################################################
--- ## Fifth Tip ###########################################################
 -- ########################################################################
+-- ########################################################################
+-- tip 5
+--
 local function fifthTip()
     naughty.notify(
         {
@@ -102,8 +113,9 @@ local function fourthTip()
     ):connect_signal("destroyed", fifthTip)
 end
 -- ########################################################################
--- ## Third Tip ##########################################################
 -- ########################################################################
+-- ########################################################################
+-- tip 3
 local function thirdTip()
     naughty.notify(
         {
@@ -117,8 +129,9 @@ local function thirdTip()
     ):connect_signal("destroyed", fourthTip)
 end
 -- ########################################################################
--- ## Second Tip ##########################################################
 -- ########################################################################
+-- ########################################################################
+-- tip 2
 local function secondTip()
     naughty.notify(
         {
@@ -133,6 +146,8 @@ end
 -- ########################################################################
 -- ########################################################################
 -- ########################################################################
+-- assign tips (providing order, calls above functions)
+--
 local func = {
     secondTip = secondTip,
     thirdTip = thirdTip,
@@ -148,7 +163,7 @@ local func = {
 -- ## Check to see if tutorial already ran or not #########################
 -- ########################################################################
 local HOME = os.getenv("HOME")
-local file = HOME .. "/.cache/tutorial_tos"
+local file = HOME .. "/.cache/tutorial"
 if require("widget.functions.file").exists(file) then
     print("Tutorial has already been shown")
     func["status"] = false
@@ -165,7 +180,7 @@ require("gears").timer.start_new(
             {
                 app_name = "User Tutorial",
                 title = "User Tutorial",
-                message = " Click this box to proceed to the next starter tip! ",
+                message = " These tips are intended to help you get started using this configuration either on the LiveISO of the Electric Tantra Linux or in case you are evaluating the configuration on your own installation. \n \n \n Click this box to proceed to the first starter tip! \n ",
                 timeout = 0,
                 position = "top_left"
             }
