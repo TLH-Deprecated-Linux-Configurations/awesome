@@ -127,16 +127,17 @@ local awesome_overrides = function(theme)
     -- ########################################################################
     -- ########################################################################
     -- ########################################################################
-    -- Background colors (cannot be linear gradients for whatever reason)
+    -- Background colors (where the magic happens for the skeuomorphic thing)
     --
-    theme.bg_focus = "linear:0,0:0,21:0,#555e70:1,#3c3f4c"
+    theme.bg_focus = "linear:0,0:0,21:0,#484d5e:1,#22262d"
     theme.bg_urgent = theme.xcolor1
     theme.bg_systray = "linear:0,0:0,32:0,#3c3f4c:1,#17191e"
-    theme.bg_modal = "linear:0,0:0,28:0,#636a82:1,#3c3f4c"
-    theme.bg_modal_title = "linear:0,0:0,52:0,#636a82:1,#3c3f4c"
+    theme.bg_modal = "linear:0,0:0,21:0,#8b9cbe:1,#555e70"
+    theme.bg_modal_title = "linear:0,0:0,21:0,#8b9cbe:1,#555e70"
     theme.bg_settings_display_number = theme.xbackground .. "cc"
     theme.bg_normal = "linear:0,0:0,12:0,#3c3f4c:1,#17191e"
     theme.bg_button = "linear:0,0:0,21:0,#3c3f4c:1,#17191e"
+    theme.bg_button_press = "linear:0,0:0,21:0,#8b9cbe:1,#3c3f4c"
     theme.bg_widget = "linear:0,0:0,11:0,#3c3f4c:1,#17191e"
 
     -- ########################################################################

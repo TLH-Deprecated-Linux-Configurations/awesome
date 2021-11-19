@@ -6,22 +6,28 @@
 -- ########################################################################
 -- ########################################################################
 -- ########################################################################
--- menu takes a bit of time to load in.
--- because of this we put it in the back so the rest of the system can already behave
--- Look into awesome-freedesktop for more information
-
+-- more like consistent loader, this really just loads certain aspects of
+-- the configuration in the background so that there is not multiple
+-- autorun scripts running and to keep certain things loaded in the bg
+-- ########################################################################
+-- ########################################################################
+-- ########################################################################
+-- load the menu in the background so it doesn't have an awful delay
+--
 require("widget.interface.menu")
 
 -- ########################################################################
 -- ########################################################################
 -- ########################################################################
 -- restore the last state
+--
 require("configuration.settings.state")
 require("widget.tutorial")
 
 -- ########################################################################
 -- ########################################################################
 -- ########################################################################
+--  runs when the window manager is exiting
 require("configuration.settings.signals").connect_exit(
     function()
         -- stop current autorun.sh
@@ -32,8 +38,8 @@ require("configuration.settings.signals").connect_exit(
 -- ########################################################################
 -- ########################################################################
 -- ########################################################################
-local lockscreentime = "5"
-awful.spawn(HOME .. "/.config/awesome/autorun.sh " .. lockscreentime)
+-- spawn the autorun script (again)
+awful.spawn(HOME .. "/.config/awesome/autorun.sh ")
 -- ########################################################################
 -- ########################################################################
 -- ########################################################################

@@ -25,7 +25,7 @@ theme.icons = theme_dir .. "/icons/"
 -- ########################################################################
 -- Colors Pallets
 -- Load ~/.Xresources colors and set fallback colors
-theme.xbackground = "#17191e" .. "66"
+theme.xbackground = "#17191e"
 theme.background = "#17191e" .. "66"
 theme.xforeground = "#b2bfd9"
 theme.foreground = "#b2bfd9"
@@ -68,9 +68,9 @@ end
 -- ########################################################################
 local icon_path = gears.filesystem.get_configuration_dir() .. "theme/icons/"
 local titlebar_icon_path = icon_path .. "titlebar/dhumavati/"
-theme.titlebar_close_button_normal = titlebar_icon_path .. "close-inactive.png"
+theme.titlebar_close_button_normal = titlebar_icon_path .. "close-preseed.png"
 theme.titlebar_close_button_focus = titlebar_icon_path .. "close-active.png"
-theme.titlebar_minimize_button_normal = titlebar_icon_path .. "hide-inactive.png"
+theme.titlebar_minimize_button_normal = titlebar_icon_path .. "hide-preseed.png"
 theme.titlebar_minimize_button_focus = titlebar_icon_path .. "hide-active.png"
 -- theme.titlebar_ontop_button_normal_inactive = titlebar_icon_path .. 'ontop_normal_inactive.png'
 -- theme.titlebar_ontop_button_focus_inactive = titlebar_icon_path .. 'ontop_focus_inactive.png'
@@ -84,12 +84,12 @@ theme.titlebar_minimize_button_focus = titlebar_icon_path .. "hide-active.png"
 -- theme.titlebar_floating_button_focus_inactive = titlebar_icon_path .. 'go-left.png'
 -- theme.titlebar_floating_button_normal_active = titlebar_icon_path .. 'go-left.png'
 -- theme.titlebar_floating_button_focus_active = titlebar_icon_path .. 'go-left.png'
-theme.titlebar_maximized_button_normal_inactive = titlebar_icon_path .. "maximize-inactive.png"
+theme.titlebar_maximized_button_normal_inactive = titlebar_icon_path .. "maximize-preseed.png"
 theme.titlebar_maximized_button_focus_inactive = titlebar_icon_path .. "maximize-active.png"
 -- ########################################################################
 -- ########################################################################
 -- ########################################################################
-theme.background = "radial:960,540,20:960,540,500:0,#22262daa:0.2,#3c3f4c88:0.65,#17191e88:1,#272a3488"
+theme.background = "linear:0,0:0,21:0,#484d5e:1,#23262e"
 -- ########################################################################
 -- ########################################################################
 -- ########################################################################

@@ -6,16 +6,12 @@
 -- ########################################################################
 -- ########################################################################
 -- ########################################################################
--- Run all the apps listed in configuration/apps.lua as run_on_start_up only once when awesome start
-
-local apps = require("configuration.settings.apps")
-local run_once = require("lib.function.application_runner")
-local delayed_timer = require("lib.function.delayed-timer")
-local HOME = os.getenv "HOME"
-
+-- Run all the apps listed in configuration/apps.lua as run_on_start_up
+-- only once when awesome start
 -- ########################################################################
 -- ########################################################################
 -- ########################################################################
+-- do not run the app if its already running
 for _, app in ipairs(apps.run_on_start_up) do
     run_once(app)
 end

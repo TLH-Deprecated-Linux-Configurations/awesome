@@ -47,6 +47,15 @@ menubar = require("menubar")
 client = client
 tag = tag
 
+run_once = require("lib.function.application_runner")
+
+serialize = require("widget.functions.serialize")
+filehandle = require("widget.functions.file")
+
+volume = require("widget.hardware.volume")
+gtable = require("gears.table")
+home = os.getenv("HOME")
+
 -- ########################################################################
 -- ########################################################################
 -- ########################################################################

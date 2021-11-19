@@ -8,12 +8,12 @@
 -- Defaults
 --
 naughty.config.defaults.ontop = true
-naughty.config.defaults.icon_size = dpi(32)
-naughty.config.defaults.timeout = 5
+
+naughty.config.defaults.timeout = 0
 naughty.config.defaults.title = "Notification"
 naughty.config.defaults.margin = dpi(16)
 naughty.config.defaults.border_width = 0
-naughty.config.defaults.position = "bottom_right"
+naughty.config.defaults.position = "top_right"
 naughty.config.defaults.shape = function(cr, w, h)
     gears.shape.rounded_rect(cr, w, h, dpi(12))
 end
@@ -54,7 +54,7 @@ ruled.notification.connect_signal(
                 bg = "#ff3d81",
                 fg = "#17191e",
                 margin = dpi(16),
-                position = "bottom_right",
+                position = "top_right",
                 implicit_timeout = 10
             }
         }
@@ -67,10 +67,10 @@ ruled.notification.connect_signal(
                 urgency = "normal"
             },
             properties = {
-                bg = beautiful.transparent,
+                bg = beautiful.bg_normal,
                 fg = beautiful.fg_normal,
                 margin = dpi(16),
-                position = "bottom_right",
+                position = "top_right",
                 implicit_timeout = 5
             }
         }
@@ -83,10 +83,10 @@ ruled.notification.connect_signal(
                 urgency = "low"
             },
             properties = {
-                bg = beautiful.transparent,
+                bg = beautiful.bg_normal,
                 fg = beautiful.fg_normal,
                 margin = dpi(16),
-                position = "bottom_right",
+                position = "top_right",
                 implicit_timeout = 5
             }
         }
@@ -197,8 +197,6 @@ naughty.connect_signal(
                     },
                     bg = beautiful.groups_bg,
                     shape = gears.shape.rounded_rect,
-                    forced_height = dpi(640),
-                    forced_width = dpi(800),
                     widget = wibox.container.background
                 },
                 margins = dpi(4),
@@ -254,7 +252,7 @@ naughty.connect_signal(
                                                 {
                                                     {
                                                         layout = wibox.layout.align.vertical,
-                                                        expand = "inside",
+                                                        expand = "outside",
                                                         nil,
                                                         {
                                                             align = "left",
@@ -276,7 +274,7 @@ naughty.connect_signal(
                                         margins = dpi(0),
                                         widget = wibox.container.margin
                                     },
-                                    bg = beautiful.transparent,
+                                    bg = beautiful.bg_normal,
                                     widget = wibox.container.background
                                 },
                                 -- Actions
@@ -284,12 +282,13 @@ naughty.connect_signal(
                                 spacing = dpi(4),
                                 layout = wibox.layout.fixed.vertical
                             },
-                            bg = beautiful.transparent,
+                            bg = beautiful.bg_normal,
                             id = "background_role",
                             widget = naughty.container.background
                         },
-                        strategy = "min",
-                        width = dpi(250),
+                        strategy = "max",
+                        height = dpi(640),
+                        width = dpi(800),
                         widget = wibox.container.constraint
                     },
                     strategy = "max",

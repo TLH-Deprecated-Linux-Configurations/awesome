@@ -17,17 +17,17 @@ local thrizen = require("configuration.tags.layouts.thrizen")
 -- ########################################################################
 _G.tag.connect_signal(
     "request::default_layouts",
-    function()
+    function(s)
         awful.layout.append_default_layouts(
             {
-                stack.right,
+                stack,
                 empathy,
                 centermaster,
                 thrizen,
-                --awful.layout.suit.max,
+                awful.layout.suit.max,
                 --       awful.layout.suit.tile,
-                awful.layout.suit.spiral.dwindle,
-                awful.layout.suit.floating
+                awful.layout.suit.spiral.dwindle
+                --awful.layout.suit.floating
                 --awful.layout.suit.fair,
                 --           awful.layout.suit.magnifier,
                 --       awful.layout.suit.fair.horizontal

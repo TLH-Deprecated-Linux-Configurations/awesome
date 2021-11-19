@@ -21,10 +21,10 @@ local function build(widget)
 		{
 			widget,
 			widget = wibox.container.background,
-			bg = "linear:0,0:0,21:0,#3c3f4c:1,#17191e",
+			bg = beautiful.bg_button,
 			border_color = beautiful.xcolor7 .. "66",
-			border_width = dpi(3),
-			margins = dpi(3),
+			border_width = dpi(2),
+			margins = dpi(0),
 			shape = beautiful.btn_sm_shape
 		}
 	)
@@ -35,10 +35,8 @@ local function build(widget)
 	container:connect_signal(
 		"mouse::enter",
 		function()
-			container.border_color = beautiful.xcolor7
-
-			container.bg = "linear:0,0:0,21:0,#8b9cbe:1,#555e70"
-			container.color = "#17191e"
+			container.border_color = beautiful.xcolor7 .. "66"
+			container.bg = beautiful.bg_button_press
 			local w = mouse.current_wibox
 			if w then
 				old_cursor, old_wibox = w.cursor, w
@@ -53,7 +51,7 @@ local function build(widget)
 		"mouse::leave",
 		function()
 			container.border_color = beautiful.xcolor7 .. "66"
-			container.bg = "linear:0,0:0,21:0,#3c3f4c:1,#17191e"
+			container.bg = beautiful.bg_button
 			if old_wibox then
 				old_wibox.cursor = old_cursor
 				old_wibox = nil
@@ -66,9 +64,8 @@ local function build(widget)
 	container:connect_signal(
 		"button::press",
 		function()
-			container.border_width = dpi(4)
-			container.border_color = beautiful.xcolor7
-			container.bg = "linear:0,0:0,21:0,#8b9cbe:1,#3c3f4c"
+			container.border_color = beautiful.xcolor7 .. "66"
+			container.bg = beautiful.bg_button_press
 		end
 	)
 	-- ########################################################################
@@ -77,9 +74,8 @@ local function build(widget)
 	container:connect_signal(
 		"button::release",
 		function()
-			container.border_width = dpi(3)
 			container.border_color = beautiful.xcolor7 .. "66"
-			container.bg = "linear:0,0:0,21:0,#3c3f4c:1,#17191e"
+			container.bg = beautiful.bg_button
 		end
 	)
 	-- ########################################################################

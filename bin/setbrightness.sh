@@ -1,2 +1,2 @@
-#! /usr/bin/env bash
-xrandr --output $1 --brightness $2
+#! /usr/bin/bash
+xrandr --output "$1" --brightness "$2"

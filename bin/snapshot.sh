@@ -69,7 +69,7 @@ function shot() {
 
 	-- Execute the callback when 'Delete' is pressed
 	delete_image:connect_signal('invoked', function()
-		awful.spawn('gio trash ' .. '${file_loc}', false)
+		awful.spawn('rm ' .. '${file_loc}', false)
 	end)
 
 	-- Show notification

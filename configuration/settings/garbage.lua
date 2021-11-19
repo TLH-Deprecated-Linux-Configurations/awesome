@@ -14,6 +14,7 @@
 
 local gears = require("gears")
 -- Run garbage collector regularly to prevent memory leaks
+--
 local _M = function()
     gears.timer {
         timeout = 30,

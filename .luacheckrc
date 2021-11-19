@@ -82,10 +82,20 @@ read_globals = {
 	"wibox",
 	"rawlen",
 	"queue",
-	"menubar"
+	"menubar",
+	"progressbar",
+	"wibox",
+	"sound",
+	"common",
+	"gtable"
 }
 
 globals = {
+	"gtable",
+	"common",
+	"sound",
+	"wibox",
+	"progressbar",
 	"menubar",
 	"ruled",
 	"queue",

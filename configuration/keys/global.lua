@@ -25,19 +25,23 @@ local globalKeys =
             -- If you want to always position the menu on the same place set coordinates
             awful.menu.menu_keys.down = {"Down", "Alt_L"}
             awful.menu.clients({theme = {width = 450}}, {keygrabber = true, coords = {x = 525, y = 330}})
-        end
+        end,
+        {
+            description = "Open Window Menu",
+            group = "Launcher"
+        }
     ),
     --#####################################################################
     awful.key(
         {modkey},
         "Return",
         function()
-            print("Spawning terminal")
+            print("Spawning Scratch Terminal")
             drop.toggle("kitty", "left", "top", 0.9, 0.9)
             --awful.spawn(apps.default.terminal)
         end,
         {
-            description = "Open Terminal",
+            description = "Open Scratch Terminal",
             group = "Launcher"
         }
     ),
@@ -63,7 +67,7 @@ local globalKeys =
         "Return",
         function()
             print("Showing all scratch windows")
-            require("attachdrop").showall()
+            drop.showall()
         end,
         {
             description = "Show all scratchpad windows on screen",

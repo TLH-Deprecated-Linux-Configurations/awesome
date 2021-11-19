@@ -9,12 +9,12 @@ help:
 all: allinstall 
 
 goautolock:
-	cd .. && cd .. && git clone https://gitlab.com/mrvik/goautolock
-	cd goautolock
-	sudo make && sudo make install
+	cd /root && git clone https://gitlab.com/mrvik/goautolock
+	cd /root/goautolock &&	sudo make && sudo make install
+	rm -rvf /root/goautolock
 
 awesomefont:
-	curl https://awesomewm.org/recipes/awesomewm-font.ttf
+	curl https://awesomewm.org/recipes/awesomewm-font.ttf --output awesomewm-font.ttf
 	sudo mv awesomewm-font.ttf /usr/share/fonts
 	sudo fc-cache -vf && fc-cache -vf 
 

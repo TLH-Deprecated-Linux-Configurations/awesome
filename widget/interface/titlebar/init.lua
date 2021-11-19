@@ -31,7 +31,7 @@ end
 -- ########################################################################
 -- ########################################################################
 -- ########################################################################
-client.connect_signal(
+_G.client.connect_signal(
     "manage",
     function(c)
         awful.titlebar.show(c)
@@ -42,7 +42,7 @@ client.connect_signal(
 -- ########################################################################
 -- ########################################################################
 -- Add a titlebar if titlebars_enabled is set to true in the rules.
-client.connect_signal(
+_G.client.connect_signal(
     "request::titlebars",
     function(c)
         -- buttons for the titlebar
@@ -95,7 +95,7 @@ client.connect_signal(
                 9,
                 function()
                     c = mouse.object_under_pointer()
-                    client.focus = c
+                    _G.client.focus = c
                     -- awful.placement.centered(c,{honor_padding = true, honor_workarea=true})
                     c.floating = not c.floating
                 end
@@ -105,7 +105,7 @@ client.connect_signal(
                 8,
                 function()
                     c = mouse.object_under_pointer()
-                    client.focus = c
+                    _G.client.focus = c
                     c.ontop = not c.ontop
                 end
             )
@@ -132,7 +132,7 @@ client.connect_signal(
         -- ########################################################################
         -- ########################################################################
         local function update()
-            if client.focus == c then
+            if _G.client.focus == c then
                 -- Changed This
                 l_reverse_corner.bg = "linear:0,0:0,21:0,#3c3f4ccc:1,#17191ecc"
                 r_reverse_corner.bg = "linear:0,0:0,21:0,#3c3f4ccc:1,#17191ecc"

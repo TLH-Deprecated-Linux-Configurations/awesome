@@ -11,10 +11,11 @@
 -- ########################################################################
 -- ########################################################################
 -- ########################################################################
+
 return {
-    keys = require(... .. ".keys"),
-    apps = require(... .. ".settings.apps"),
-    global_var = require(... .. ".settings.global_var"),
-    settings = require(... .. ".settings"),
-    tags = require(... .. ".tags")
+    require(... .. ".keys"),
+    require(... .. ".settings.apps"),
+    require(... .. ".settings.global_var"),
+    require(... .. ".settings"),
+    require(... .. ".tags")
 }

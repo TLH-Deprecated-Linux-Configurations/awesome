@@ -2,26 +2,19 @@
 -- |     __|  |_.---.-.|  |_.-----.
 -- |__     |   _|  _  ||   _|  -__|
 -- |_______|____|___._||____|_____|
-
 -- ########################################################################
 -- ########################################################################
 -- ########################################################################
 -- This module listens for events and stores then
--- This makes certain data persistent
-
-local signals = require("configuration.settings.signals")
-local serialize = require("widget.functions.serialize")
-local filehandle = require("widget.functions.file")
-
-local volume = require("widget.hardware.volume")
-
+-- This makes certain data is persistent
+--
 local file = os.getenv("HOME") .. "/.cache/awesome/settings_state.json"
 -- ########################################################################
 -- ########################################################################
 -- ########################################################################
 local function load()
     local table = {
-        volume = 50,
+        volume = 100,
         volume_muted = false,
         brightness = 100,
         mouse = {}
@@ -36,7 +29,7 @@ local function load()
     result.brightness = result.brightness or table.brightness
     result.mouse = result.mouse or table.mouse
     result.do_not_disturb = result.do_not_disturb or table.do_not_disturb
-    result.oled_mode = result.oled_mode or table.oled_mode
+
     return result
 end
 -- ########################################################################
@@ -63,18 +56,15 @@ local function setup_state(state)
     -- ########################################################################
     -- ########################################################################
     -- set the brightness
-    if (_G.oled) then
-        awful.spawn("brightness -s " .. math.max(state.brightness, 5) .. " -F") -- toggle pixel values
-    else
-        awful.spawn("brightness -s 100 -F") -- reset pixel values
-        awful.spawn("brightness -s " .. math.max(state.brightness, 5))
-    end
+    print("Setting Brightness")
+    awful.spawn("brightnessctl set 100 ") -- reset pixel values
+    awful.spawn("brightnessctl set " .. math.max(state.brightness, 5))
+
     -- ########################################################################
     -- ########################################################################
     -- ########################################################################
     signals.emit_brightness(math.max(state.brightness, 5))
     signals.emit_do_not_disturb(state.do_not_disturb or false)
-    signals.emit_oled_mode(state.oled_mode or false)
 end
 -- ########################################################################
 -- ########################################################################
