@@ -91,15 +91,15 @@ local mymainmenu =
         -- Not actually the size, but the quality of the icon
         icon_size = 64,
         before = {
-            {"Terminal", terminal, menubar.utils.lookup_icon("utilities-terminal")},
+            {"Terminal", terminal, menubar.utils.lookup_icon("terminal")},
             {"Web browser", web_browser, menubar.utils.lookup_icon("webbrowser-app")},
             {"file Manager", file_manager, menubar.utils.lookup_icon("system-file-manager")},
             {"Text Editor", text_editor, menubar.utils.lookup_icon("accessories-text-editor")}
             -- other triads can be put here
         },
         after = {
-            {"Awesome", myawesomemenu},
-            {"Screenshot", screenshot},
+            {"Awesome", myawesomemenu, icons.awesome},
+            {"Screenshot", screenshot, icons.camera},
             {
                 "End Session",
                 function()
@@ -126,6 +126,8 @@ root.buttons(
                 mymainmenu:toggle()
             end
         ),
+        -- Clicking outside the menu closes it, quality of life thing trust me
+        --
         awful.button(
             {},
             1,

@@ -79,6 +79,7 @@ local bottom_panel = function(s)
     s.bluetooth = build_widget(show_widget_or_default("layout.bottom-panel.widgets.bluetooth", hardware.hasBluetooth()))
     s.network = build_widget(show_widget_or_default("layout.bottom-panel.widgets.wifi", hardware.hasWifi()))
     local layout_box = build_widget(require "layout.bottom-panel.widgets.layoutbox"(s))
+    local dropbox = build_widget(require "layout.bottom-panel.widgets.dropbox.dropbox")
     s.battery = build_widget(show_widget_or_default("layout.bottom-panel.widgets.battery", hardware.hasBattery(), true))
     s.mytextclock = build_widget(require "layout.bottom-panel.widgets.clock")
     local notification_center = build_widget(require "layout.right-panel")
@@ -107,9 +108,10 @@ local bottom_panel = function(s)
                 spacing = dpi(2),
                 s.network,
                 s.bluetooth,
+                dropbox,
+                layout_box,
                 -- s.screen_record,
                 s.battery,
-                layout_box,
                 s.mytextclock,
                 notification_center
                 -- clock,
