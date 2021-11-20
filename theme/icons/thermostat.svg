@@ -1,1 +1,6 @@
-<svg fill="none" height="24" width="24" xmlns="http://www.w3.org/2000/svg"><g fill="#f4f4f7"><path d="m12 19a1 1 0 1 0 0-2 1 1 0 0 0 0 2z"/><path clip-rule="evenodd" d="m15 14a5 5 0 1 1 -6 0v-10a3 3 0 1 1 6 0zm-2-10v11.17a3.001 3.001 0 0 1 -1 5.83 3 3 0 0 1 -1-5.83v-11.17a1 1 0 1 1 2 0z" fill-rule="evenodd"/></g></svg>
+<svg fill="none" height="24" width="24" xmlns="http://www.w3.org/2000/svg">
+    <g fill="#f4f4f7">
+        <path d="M12 19a1 1 0 1 0 0-2 1 1 0 0 0 0 2z"/>
+        <path clip-rule="evenodd" d="M15 14a5 5 0 1 1-6 0V4a3 3 0 1 1 6 0zM13 4v11.17A3.001 3.001 0 0 1 12 21a3 3 0 0 1-1-5.83V4a1 1 0 1 1 2 0z" fill-rule="evenodd"/>
+    </g>
+</svg>
