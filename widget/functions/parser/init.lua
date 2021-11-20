@@ -6,7 +6,7 @@
 -- ########################################################################
 -- ########################################################################
 local file_exists = require("widget.functions.file").exists
-local split = require("lib.function.common").split
+local split = require("widget.functions.common").split
 
 local function extract(line)
     local splitted = split(line, "=")

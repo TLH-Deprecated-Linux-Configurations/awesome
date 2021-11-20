@@ -12,7 +12,7 @@ local animate = require("widget.interface.animations").createAnimObject
 local keyconfig = require("configuration.keys.mod")
 local modKey = keyconfig.modKey
 
-local get_screen = require("lib.function.common").focused_screen
+local get_screen = require("widget.functions.common").focused_screen
 
 -- body gets populated with a scrollbox widget once generated
 local body = {}

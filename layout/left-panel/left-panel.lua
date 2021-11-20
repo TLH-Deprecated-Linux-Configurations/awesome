@@ -12,7 +12,7 @@
 local PATH_TO_ICONS = HOME .. "/.config/awesome/layout/left-panel/icons/"
 local apps = require "configuration.settings.apps"
 local animate = require "widget.interface.animations".createAnimObject
-local get_screen = require "lib.function.common".focused_screen
+local get_screen = require "widget.functions.common".focused_screen
 local keyconfig = require "configuration.keys.mod"
 local modKey = keyconfig.modKey
 -- body gets populated with a scrollbox widget once generated

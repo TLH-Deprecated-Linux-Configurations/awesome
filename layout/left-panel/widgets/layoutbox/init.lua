@@ -11,14 +11,15 @@
 -- ########################################################################
 -- ########################################################################
 local gears = require "gears"
-local modkey = require"configuration.keys.mod".modKey
-local get_screen = require"lib.function.common".focused_screen
+local modkey = require "configuration.keys.mod".modKey
+local get_screen = require "widget.functions.common".focused_screen
 -- ########################################################################
 -- ########################################################################
 -- ########################################################################
 local s = get_screen()
 local layoutpopup = {}
-local ll = awful.widget.layoutlist {
+local ll =
+    awful.widget.layoutlist {
     spacing = dpi(84),
     screen = s,
     base_layout = wibox.widget {
@@ -45,7 +46,8 @@ local ll = awful.widget.layoutlist {
         widget = wibox.container.background
     }
 }
-local layout_popup = awful.popup {
+local layout_popup =
+    awful.popup {
     widget = wibox.widget {
         ll,
         screen = s,
@@ -61,18 +63,26 @@ local layout_popup = awful.popup {
     bg = beautiful.bg_normal .. "00"
 }
 layout_popup.timer = gears.timer {timeout = 2}
-layout_popup.timer:connect_signal("timeout",
-                                  function() layout_popup.visible = false end)
+layout_popup.timer:connect_signal(
+    "timeout",
+    function()
+        layout_popup.visible = false
+    end
+)
 
 function gears.table.iterate_value(t, value, step_size, filter, start_at)
     local k = gears.table.hasitem(t, value, true, start_at)
-    if not k then return end
+    if not k then
+        return
+    end
     step_size = step_size or 1
     local new_key = gears.math.cycle(#t, k + step_size)
     if filter and not filter(t[new_key]) then
         for i = 1, #t do
             local k2 = gears.math.cycle(#t, new_key + i)
-            if filter(t[k2]) then return t[k2], k2 end
+            if filter(t[k2]) then
+                return t[k2], k2
+            end
         end
         return
     end
@@ -80,29 +90,35 @@ function gears.table.iterate_value(t, value, step_size, filter, start_at)
 end
 
 awful.keygrabber {
-    start_callback = function() layout_popup.visible = true end,
-    stop_callback = function() layout_popup.timer:start() end,
+    start_callback = function()
+        layout_popup.visible = true
+    end,
+    stop_callback = function()
+        layout_popup.timer:start()
+    end,
     export_keybindings = true,
     stop_event = "release",
     stop_key = {"Escape", "Super_L", "Super_R", "Mod4"},
     keybindings = {
         {
-            {modkey, "Shift"}, " ", function()
-                awful.layout.set(gears.table.iterate_value(ll.layouts,
-                                                           ll.current_layout, -1),
-                                 nil)
+            {modkey, "Shift"},
+            " ",
+            function()
+                awful.layout.set(gears.table.iterate_value(ll.layouts, ll.current_layout, -1), nil)
             end
-        }, {
-            {modkey}, " ", function()
-                awful.layout.set(gears.table.iterate_value(ll.layouts,
-                                                           ll.current_layout, 1),
-                                 nil)
+        },
+        {
+            {modkey},
+            " ",
+            function()
+                awful.layout.set(gears.table.iterate_value(ll.layouts, ll.current_layout, 1), nil)
             end
         }
     }
 }
 local layout_box = function(s)
-    local layoutbox = wibox.widget {
+    local layoutbox =
+        wibox.widget {
         {
             awful.widget.layoutbox(s),
             margins = dpi(8),
@@ -110,18 +126,34 @@ local layout_box = function(s)
         },
         widget = clickable_container,
         -- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~---------------------
-        buttons = gears.table.join(awful.button({}, 1, function()
-            awful.layout.set(gears.table.iterate_value(ll.layouts,
-                                                       ll.current_layout, 1),
-                             nil)
-        end, function() layout_popup.visible = true end, function()
-            layout_popup.timer:start()
-        end), awful.button({}, 3, function()
-            awful.layout.set(gears.table.iterate_value(ll.layouts,
-                                                       ll.current_layout, -1),
-                             nil)
-        end, function() layout_popup.visible = true end,
-                           function() layout_popup.timer:start() end))
+        buttons = gears.table.join(
+            awful.button(
+                {},
+                1,
+                function()
+                    awful.layout.set(gears.table.iterate_value(ll.layouts, ll.current_layout, 1), nil)
+                end,
+                function()
+                    layout_popup.visible = true
+                end,
+                function()
+                    layout_popup.timer:start()
+                end
+            ),
+            awful.button(
+                {},
+                3,
+                function()
+                    awful.layout.set(gears.table.iterate_value(ll.layouts, ll.current_layout, -1), nil)
+                end,
+                function()
+                    layout_popup.visible = true
+                end,
+                function()
+                    layout_popup.timer:start()
+                end
+            )
+        )
     }
     return layoutbox
 end

@@ -74,7 +74,10 @@
     "tasklist_update",
     "dont_disturb",
     "cal_toggle",
-    "root"
+    "root",
+    "run_once",
+    "filehandle",
+    "serialize"
   ],
   "Lua.diagnostics.disable": [
     "undefined-field",
@@ -120,5 +123,6 @@
   ],
   "[markdown]": {
     "editor.cursorSurroundingLines": 0
-  }
+  },
+  "lua.targetVersion": "5.3"
 }

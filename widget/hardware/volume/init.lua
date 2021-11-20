@@ -7,7 +7,7 @@
 -- ########################################################################
 local hardware = require("widget.hardware.hardware-check")
 local execute = hardware.execute
-local split = require("lib.function.common").split
+local split = require("widget.functions.common").split
 -- ########################################################################
 -- ########################################################################
 -- ########################################################################

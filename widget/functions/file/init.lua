@@ -116,7 +116,7 @@ end
 -- widget.functions.file.dir_create(os.getenv("HOME") .. "/.cache/tde/some_dir")
 local function dir_create(path)
     local stat = require("posix.sys.stat")
-    local split = require("lib.function.common").split
+    local split = require("widget.functions.common").split
     local dir = dirname(path)
     if dir_exists(dir) then
         return

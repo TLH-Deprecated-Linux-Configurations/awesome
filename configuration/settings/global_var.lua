@@ -47,7 +47,7 @@ menubar = require("menubar")
 client = client
 tag = tag
 
-run_once = require("lib.function.application_runner")
+run_once = require("configuration.settings.application_runner")
 
 serialize = require("widget.functions.serialize")
 filehandle = require("widget.functions.file")
@@ -78,10 +78,8 @@ beautiful.init(require("theme"))
 -- ########################################################################
 -- ########################################################################
 -- ########################################################################
--- Fixes for Default Modules
+-- Helper to display keybindings
 --
-require("lib.fixed-align")
-require("lib.fixed-margin")
 require("awful.hotkeys_popup.keys")
 -- ########################################################################
 -- ########################################################################
@@ -93,7 +91,7 @@ task_list = require("layout.bottom-panel.widgets.task-list")
 tag_list = require("layout.bottom-panel.widgets.tag-list")
 file = require("widget.functions.file")
 clickable_container = require("widget.interface.clickable-container")
-delayed_timer = require("lib.function.delayed-timer")
+delayed_timer = require("widget.functions.delayed-timer")
 icons = require("theme.icons")
 rubato = require("widget.interface.animations.rubato")
 hotkeys_popup = require("awful.hotkeys_popup").widget
