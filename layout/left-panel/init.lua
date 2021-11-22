@@ -49,7 +49,7 @@ home_button:buttons(
 _G.screen.primary.left_panel:connect_signal(
 	"opened",
 	function()
-		widget.icon:set_image(PATH_TO_ICONS .. "sidebar-open.svg")
+		widget.icon:set_image(icons.sidebar_open)
 		_G.menuopened = true
 	end
 )
@@ -59,13 +59,13 @@ _G.screen.primary.left_panel:connect_signal(
 _G.screen.primary.left_panel:connect_signal(
 	"closed",
 	function()
-		widget.icon:set_image(PATH_TO_ICONS .. "sidebar.svg")
+		widget.icon:set_image(icons.sidebar)
 		_G.menuopened = false
 	end
 )
 -- ########################################################################
 -- ########################################################################
 -- ########################################################################
-widget.icon:set_image(PATH_TO_ICONS .. "sidebar.svg")
+widget.icon:set_image(icons.sidebar)
 
 return home_button

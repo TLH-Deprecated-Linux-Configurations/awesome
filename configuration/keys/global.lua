@@ -118,10 +118,10 @@ local globalKeys =
         function()
             print("Spawning Chrome")
 
-            awful.spawn("chrome")
+            awful.spawn("chromium")
         end,
         {
-            description = "Launch New Chrome Instance",
+            description = "Launch New Chromium Instance",
             group = "Launcher"
         }
     ),

@@ -24,11 +24,11 @@ local genWidget = function(widgets)
             widgets,
             bg = beautiful.bg_modal,
             shape = function(cr, width, height)
-                gears.shape.rounded_rect(cr, width, height, 12)
+                gears.shape.rounded_rect(cr, width, height, 6)
             end,
             widget = wibox.container.background
         },
-        margins = dpi(10),
+        margins = dpi(3),
         widget = wibox.container.margin
     }
 end

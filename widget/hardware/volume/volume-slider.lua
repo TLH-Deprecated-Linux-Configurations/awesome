@@ -1,7 +1,7 @@
 local wibox = require("wibox")
 local mat_list_item = require("widget.interface.list-item")
 local slider = require("widget.interface.slider")
-local mat_icon_button = require("widget.interface.icon-button")
+local icon_button_button = require("widget.interface.icon-button")
 local icons = require("theme.icons")
 local signals = require("configuration.settings.signals")
 local volume = require("widget.hardware.volume")
@@ -32,7 +32,7 @@ signals.connect_volume(
     end
 )
 
-local button = mat_icon_button(icon)
+local button = icon_button_button(icon)
 
 local function toggleIcon()
     volume.toggle_master()

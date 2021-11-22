@@ -9,7 +9,13 @@
 -- then shows a pictoral representation of the status of the connection if
 -- there is that clicking on brings up nmtui
 --
-
+-- Icons are not being moved to the general icon dump because moving them
+-- would make the widget more painful to adapt, making copying this function
+-- probably as easy as it can be in terms of knowing which parts to take.
+-- You are welcome
+-- ########################################################################
+-- ########################################################################
+-- ########################################################################
 local PATH_TO_ICONS = HOME .. "/.config/awesome/layout/bottom-panel/widgets/wifi/icons/"
 local interface = "wlan0"
 
@@ -54,7 +60,7 @@ awful.tooltip(
             if connected then
                 return ("Connected to ") .. essid
             else
-                return ("Wireless network is disconnected")
+                return ("Disconnected")
             end
         end,
         preferred_positions = {"right", "left", "top", "bottom"},

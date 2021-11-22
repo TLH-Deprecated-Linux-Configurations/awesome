@@ -29,7 +29,10 @@ hererocks:
 	sudo luarocks install luafilesystem 
 	sudo luarocks install luasocket 
 
-allinstall: goautolock awesomefont hererocks 
+void-dependencies: 
+	sudo xbps-install -S brightnessctl iwd iw kitty firefox caja ranger rofi rofi-devel 
+	sudo xbps-install -S  caja-dropbox  caja-extensions  caja-image-converter  caja-open-terminal  caja-xattr-tags
+allinstall: goautolock awesomefont hererocks void-dependencies
 
 
 

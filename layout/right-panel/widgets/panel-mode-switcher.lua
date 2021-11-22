@@ -11,7 +11,7 @@
 local notif_text =
     wibox.widget {
     text = "Notifications",
-    font = beautiful.font .. " 14",
+    font = beautiful.font .. " 11",
     align = "center",
     valign = "center",
     widget = wibox.widget.textbox

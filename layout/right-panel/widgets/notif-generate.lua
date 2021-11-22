@@ -8,7 +8,7 @@
 local naughty = require "naughty"
 local wibox = require "wibox"
 local gears = require "gears"
-local dpi = require"beautiful".xresources.apply_dpi
+local dpi = require "beautiful".xresources.apply_dpi
 local HOME = os.getenv "HOME"
 local lgi = require "lgi"
 local Pango = lgi.Pango
@@ -23,7 +23,8 @@ notif_layout.spacing = dpi(5)
 --
 _G.notification_firstime = true
 local notif_icon = function(ico_image)
-    local noti_icon = wibox.widget {
+    local noti_icon =
+        wibox.widget {
         {
             id = "icon",
             resize = true,
@@ -66,8 +67,7 @@ end
 -- Empty content
 --
 local empty_title = "All Clear"
-local empty_message =
-    "There's nothing requiring your attention... Come check back later."
+local empty_message = "There's nothing requiring your attention... Come check back later."
 
 -- ########################################################################
 -- ########################################################################
@@ -77,13 +77,16 @@ local empty_message =
 local function notif_generate(title, message, icon, noti)
     -- make sure the message is valid, otherwise we escape it
     local attr, _ = Pango.parse_markup(message, -1, 0)
-    if not attr then message = gears.string.xml_escape(message) end
+    if not attr then
+        message = gears.string.xml_escape(message)
+    end
     -- ########################################################################
     -- ########################################################################
     -- ########################################################################
     -- naughty.list.actions
     --
-    local notif_actions = wibox.widget {
+    local notif_actions =
+        wibox.widget {
         notification = noti,
         base_layout = wibox.widget {
             spacing = dpi(5),
@@ -114,7 +117,8 @@ local function notif_generate(title, message, icon, noti)
     -- ########################################################################
     -- The layout of notification to be generated
     --
-    local notif_template = wibox.widget {
+    local notif_template =
+        wibox.widget {
         id = "notif_template",
         expand = "none",
         layout = wibox.layout.fixed.vertical,
@@ -124,8 +128,7 @@ local function notif_generate(title, message, icon, noti)
                 layout = wibox.layout.align.horizontal,
                 {nil, layout = wibox.layout.fixed.horizontal},
                 {
-                    wibox.container.margin(notif_title(title), dpi(0), dpi(0),
-                                           dpi(4), dpi(4)),
+                    wibox.container.margin(notif_title(title), dpi(0), dpi(0), dpi(4), dpi(4)),
                     layout = wibox.layout.fixed.horizontal
                 }
             },
@@ -162,55 +165,60 @@ local function notif_generate(title, message, icon, noti)
             wibox.widget {
                 {
                     notif_actions,
-                    margins = dpi(4),
+                    margins = dpi(8),
                     widget = wibox.container.margin
                 },
-                bg = beautiful.bg_modal,
                 shape = beautiful.widget_shape,
                 widget = wibox.container.background
             },
             layout = wibox.layout.flex.horizontal
-        }
+        },
+        bg = beautiful.bg_modal,
+        border_color = beautiful.xcolor7 .. "66",
+        border_width = dpi(3),
+        shape = beautiful.widget_shape
     }
     -- ########################################################################
     -- ########################################################################
     -- ########################################################################
     -- Delete notification if naughty.list.actions was pressed
     --
-    notif_actions:connect_signal("button::press", function(_, _, _, _)
-        -- ########################################################################
-        -- ########################################################################
-        -- ########################################################################
-        -- Don't let the user make the notification center null
-        --
-        if #notif_layout.children == 1 then
-            notif_layout:reset(notif_layout)
-            _G.notification_firstime = true
-            notif_layout:insert(1, notif_generate(empty_title, empty_message,
-                                                  PATH_TO_ICONS ..
-                                                      "dont-disturb.svg"))
-        else
-            notif_layout:remove_widgets(notif_template, true)
+    notif_actions:connect_signal(
+        "button::press",
+        function(_, _, _, _)
+            -- ########################################################################
+            -- ########################################################################
+            -- ########################################################################
+            -- Don't let the user make the notification center null
+            --
+            if #notif_layout.children == 1 then
+                notif_layout:reset(notif_layout)
+                _G.notification_firstime = true
+                notif_layout:insert(1, notif_generate(empty_title, empty_message, PATH_TO_ICONS .. "dont-disturb.svg"))
+            else
+                notif_layout:remove_widgets(notif_template, true)
+            end
         end
-    end)
+    )
     -- ########################################################################
     -- ########################################################################
     -- ########################################################################
     -- Delete notification if the generated notification was pressed
     --
-    notif_template:connect_signal("button::press", function(_, _, _, _)
-        -- Don't let the user make the notification center null
-        --
-        if #notif_layout.children == 1 then
-            notif_layout:reset(notif_layout)
-            _G.notification_firstime = true
-            notif_layout:insert(1, notif_generate(empty_title, empty_message,
-                                                  PATH_TO_ICONS ..
-                                                      "dont-disturb.svg"))
-        else
-            notif_layout:remove_widgets(notif_template, true)
+    notif_template:connect_signal(
+        "button::press",
+        function(_, _, _, _)
+            -- Don't let the user make the notification center null
+            --
+            if #notif_layout.children == 1 then
+                notif_layout:reset(notif_layout)
+                _G.notification_firstime = true
+                notif_layout:insert(1, notif_generate(empty_title, empty_message, PATH_TO_ICONS .. "dont-disturb.svg"))
+            else
+                notif_layout:remove_widgets(notif_template, true)
+            end
         end
-    end)
+    )
     -- return template to generate
     --
     return notif_template
@@ -222,8 +230,7 @@ end
 -- add a message to an empty notification center
 --
 local function add_empty()
-    notif_layout:insert(1, notif_generate(empty_title, empty_message,
-                                          PATH_TO_ICONS .. "dont-disturb.svg"))
+    notif_layout:insert(1, notif_generate(empty_title, empty_message, PATH_TO_ICONS .. "dont-disturb.svg"))
 end
 
 -- ########################################################################
@@ -248,27 +255,29 @@ end
 _G.notification_clear_all = clear_all
 -- Check signal
 --
-naughty.connect_signal("request::display", function(n)
-    if _G.notification_firstime then
-        -- Delete empty message if the 1st notification is generated
+naughty.connect_signal(
+    "request::display",
+    function(n)
+        if _G.notification_firstime then
+            -- Delete empty message if the 1st notification is generated
+            --
+            notif_layout:remove(1)
+            _G.notification_firstime = false
+        end
+
+        -- Check and set icon to the notification message in panel
+        -- Then generate a widget based on naughty.notify data
         --
-        notif_layout:remove(1)
-        _G.notification_firstime = false
+        if n.icon == nil then
+            -- if naughty sends a signal without an icon then use this instead
+            notif_layout:insert(1, notif_generate(n.title, n.message, PATH_TO_ICONS .. "new-notif.svg", n))
+        else
+            -- Use the notification's icon
+            --
+            notif_layout:insert(1, notif_generate(n.title, n.message, n.icon, n))
+        end
     end
-    -- Check and set icon to the notification message in panel
-    -- Then generate a widget based on naughty.notify data
-    --
-    if n.icon == nil then
-        -- if naughty sends a signal without an icon then use this instead
-        notif_layout:insert(1, notif_generate(n.title, n.message,
-                                              PATH_TO_ICONS .. "new-notif.svg",
-                                              n))
-    else
-        -- Use the notification's icon
-        --
-        notif_layout:insert(1, notif_generate(n.title, n.message, n.icon, n))
-    end
-end)
+)
 -- Return notif_layout to right-panel.lua to display it
 --
 return notif_layout

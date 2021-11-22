@@ -113,7 +113,7 @@ globals = {
 	"mat_list_item",
 	"button",
 	"seperator_widget",
-	"mat_icon",
+	"icon_button",
 	"xrandr",
 	"volume",
 	"clickable_container",

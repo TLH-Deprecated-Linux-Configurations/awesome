@@ -55,7 +55,7 @@ local left_panel_func = function()
         wibox {
         ontop = true,
         screen = s,
-        bg = "linear:0,0:0,21:0,#636a82:1,#3c3f4c",
+        bg = beautiful.bg_normal,
         width = left_panel_width,
         height = s.geometry.height,
         x = s.geometry.x,
@@ -114,7 +114,7 @@ local left_panel_func = function()
         -- ########################################################################
         -- start the animations
         left_panel.x = s.geometry.x - left_panel_width
-        left_panel.bg = "linear:0,0:0,21:0,#636a82:1,#3c3f4c"
+        left_panel.bg = beautiful.bg_normal
         left_panel.y = s.geometry.y
         left_panel.height = s.geometry.height
         left_panel.opacity = 0
@@ -314,9 +314,9 @@ local left_panel_func = function()
                     wibox.widget {
                         exit_button,
                         widget = clickable_container,
-                        bg = "linear:0,0:0,21:0,#636a82:1,#3c3f4c",
+                        bg = beautiful.bg_normal,
                         border_width = dpi(3),
-                        border_color = beautiful.xcolor7 .. "33",
+                        border_color = beautiful.xcolor7 .. "66",
                         shape = beautiful.btn_lg_shape
                     },
                     widget = mat_list_item

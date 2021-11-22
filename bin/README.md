@@ -11,8 +11,12 @@ Below is a description of the scripts, mostly wrappers around single commands, w
 | cpu | provides the cpu command called cpucmd for hardware monitoring |
 | disk | Disk monitoring|
 | emoji |provides the emojis for the emoji selection menu |
-|getbrightness | Gets the brightness, one of the slicker features I have gotten to work mostly |
 |ram | Hardware monitoring |
-|setbrightness |sets the brightness (descriptive naming is key) |
 | snapshot | screenshot script |
 | wifi | provide wifi functionality via rofi |
+
+
+## What Are the Other Scripts?!
+Generated and used by hererocks for the local luarocks that is run to fully install the lua dependencies (since they are sort of necessary as well). 
+
+That is explained elsewhere (hopefully) but if you are having trouble finding where, make an issue on the repo and I will assist you with that part. 

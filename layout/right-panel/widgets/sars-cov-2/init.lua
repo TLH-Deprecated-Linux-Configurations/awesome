@@ -5,6 +5,11 @@
 -- ########################################################################
 -- ########################################################################
 -- ########################################################################
+-- just a simple parsing of API data in a little informational widget about
+-- the virus which need not be named, out of morbid curiousity
+-- ########################################################################
+-- ########################################################################
+-- ########################################################################
 local watch = require("awful.widget.watch")
 local wibox = require("wibox")
 local dpi = require("beautiful").xresources.apply_dpi
@@ -13,14 +18,14 @@ local card = require("widget.interface.card")
 local HOME = os.getenv("HOME")
 local PATH_TO_ICONS = HOME .. "/.config/awesome/layout/right-panel/widgets/sars-cov-2/icons/"
 local beautiful = require("beautiful")
-local covid_card = card("Covid-19 cases in your country")
+local covid_card = card("Domestic Covid-19 Cases")
 -- ########################################################################
 -- ########################################################################
 -- ########################################################################
 local covid_deceases =
     wibox.widget {
     text = ("No internet connection..."),
-    font = beautiful.font .. " 16",
+    font = beautiful.font .. " 10",
     align = "left",
     valign = "center",
     widget = wibox.widget.textbox
@@ -53,16 +58,6 @@ watch(
 -- ########################################################################
 -- ########################################################################
 -- ########################################################################
-watch(
-    [[curl -s https://ipapi.co/country_name]],
-    3600,
-    function(_, stdout)
-        covid_card.update_title(("Covid-19 cases in ") .. stdout)
-    end
-)
--- ########################################################################
--- ########################################################################
--- ########################################################################
 local covid_icon_widget =
     wibox.widget {
     {
@@ -86,24 +81,31 @@ local body =
         wibox.widget {
             covid_icon_widget,
             margins = dpi(4),
+            haligh = "center",
+            valign = "center",
             widget = wibox.container.margin
         },
-        margins = dpi(5),
+        margins = dpi(2),
+        top = dpi(8),
         widget = wibox.container.margin
     },
     {
         {
-            layout = wibox.layout.fixed.vertical,
+            layout = wibox.layout.align.vertical,
             covid_deceases,
-            covid_deaths
+            covid_deaths,
+            haligh = "center",
+            valign = "center"
         },
-        margins = dpi(4),
+        margins = dpi(2),
+        top = dpi(12),
         widget = wibox.container.margin
     }
 }
 -- ########################################################################
 -- ########################################################################
 -- ########################################################################
+covid_card.update_title(("Domestic Covid-19 Cases"))
 covid_card.update_body(body)
 
 return covid_card
