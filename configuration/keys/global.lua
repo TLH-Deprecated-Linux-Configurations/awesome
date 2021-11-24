@@ -204,9 +204,9 @@ local globalKeys =
         {modkey, "Control"},
         "F4",
         function()
-            print("Spawning Emoji Pick")
+            print("Spawning Emoji Picker")
 
-            awful.spawn.easy_async_with_shell("bin/emoji")
+            awful.spawn.easy_async_with_shell("rofimoji -a copy ")
         end,
         {description = "Copy bin/emojis to Clipboard", group = "Launcher"}
     ),

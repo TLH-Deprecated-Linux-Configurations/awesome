@@ -2,7 +2,7 @@ configuration {
     show-icons:                     true;
     icon-theme:                     "chhinamasta";
     display-drun:                   "";
-            font:                           "agave Nerd Font Mono Bold 24";
+    font:                           "Commodore64 Rounded Bold 12";
 
     drun-display-format:            "{name}";
     threads:                        0;
@@ -14,13 +14,13 @@ configuration {
 }
 
 * {
-    background:                     #0e121aff;
-    background-alt:                 #0e121aff;
-    background-ib:                  #0e121aff;
+    background:                     #17191e99;
+    background-alt:                 #22262d99;
+    background-ib:                  #0e121a99;
     foreground:                     #e9e9ffff;
-    border:                         #555566ff;
-    border-sel:                     #1A73E9FF;
-    selected:                       #14182299;
+    border:                         #555e7099;
+    border-sel:                     #8b9cbe99;
+    selected:                       #3c3f4c99;
     urgent:                         #DA4453FF;
 }
 
@@ -33,7 +33,7 @@ window {
     border:                         0px;
     border-radius:                  8px 8px 0px 0px;
     border-color:                   @foreground;
-    height:                         57%;
+    height:                         43%;
     width:                          100%;
     location:                       south;
     anchor:                         south;
@@ -46,7 +46,7 @@ prompt {
     padding:                        8px 8px 8px 8px;
     background-color:               @background-ib;
     text-color:                     @foreground;
-    font:                           "agave Nerd Font Bold 14";
+    font:                           "Commodore64 Rounded Bold 14";
 }
 
 
@@ -60,7 +60,7 @@ inputbar {
     margin:                         10px 35% 0% 35%;
     padding:                        6px 6px 6px 6px;
     position:                       center;
-            font:                           "agave Nerd Font Mono Bold 12";
+            font:                           "Commodore64 Rounded Bold 12";
 
 }
 
@@ -69,7 +69,7 @@ entry {
     text-color:                     @foreground;
     placeholder-color:              @foreground;
     expand:                         true;
-        font:                           "agave Nerd Font Mono Bold 9";
+    font:                           "Commodore64 Rounded Bold 9";
     horizontal-align:               0.5;
     vertical-align:                 0.5;
     padding:                        3px 3px 3px 3px;
@@ -86,7 +86,7 @@ case-indicator {
 
 listview {
     background-color:               @background;
-    columns:                        5;
+    columns:                        4;
     spacing:                        5px;
     cycle:                          true;
     dynamic:                        true;
@@ -103,13 +103,14 @@ element {
     background-color:               @background;
     text-color:                     @foreground;
     orientation:                    vertical;
-    font:                           "agave Nerd Font Mono Bold 18";
+    font:                           "Commodore64 Rounded Bold 18";
     border:                         0px 0px 1px 0px;
-    border-radius:                  22px;
+    border-radius:                  12px;
     border-color:                   @border;
-    padding: 10px 10px 10px 10px;
-    margin: 0px 0px 0px 0px;
-    vertical-align: 0.5;
+    padding:                        10px 10px 10px 10px;
+    margin:                         0px 0px 0px 0px;
+    vertical-align:                 0.5;
+    horizontal-align:               0.5;
 }
 
 
@@ -140,7 +141,7 @@ element alternate.active {
 element selected {
     background-color:               @selected;
     text-color:                     @foreground;
-    border:                         0px 0px 5px 0px;
+    border:                         1px 1px 1px 1px;
     border-radius:                  22px;
     border-color:                   @border-sel;
 }

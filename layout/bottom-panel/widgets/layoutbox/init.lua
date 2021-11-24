@@ -105,6 +105,7 @@ awful.keygrabber {
             " ",
             function()
                 awful.layout.set(gears.table.iterate_value(ll.layouts, ll.current_layout, -1), nil)
+                layout_popup.timer:start()
             end
         },
         {
@@ -112,6 +113,7 @@ awful.keygrabber {
             " ",
             function()
                 awful.layout.set(gears.table.iterate_value(ll.layouts, ll.current_layout, 1), nil)
+                layout_popup.timer:start()
             end
         }
     }
@@ -121,7 +123,7 @@ local layout_box = function(s)
         wibox.widget {
         {
             awful.widget.layoutbox(s),
-            margins = dpi(8),
+            margins = dpi(9),
             widget = wibox.container.margin
         },
         widget = clickable_container,
@@ -132,26 +134,31 @@ local layout_box = function(s)
                 1,
                 function()
                     awful.layout.set(gears.table.iterate_value(ll.layouts, ll.current_layout, 1), nil)
-                end,
-                function()
-                    layout_popup.visible = true
-                end,
-                function()
                     layout_popup.timer:start()
+                    layout_popup.visible = true
+
                 end
+                -- function()
+                --     layout_popup.visible = true
+                -- end,
+                -- function()
+                --     layout_popup.timer:start()
+                -- end
             ),
             awful.button(
                 {},
                 3,
                 function()
                     awful.layout.set(gears.table.iterate_value(ll.layouts, ll.current_layout, -1), nil)
-                end,
-                function()
-                    layout_popup.visible = true
-                end,
-                function()
                     layout_popup.timer:start()
+                    layout_popup.visible = true
                 end
+                -- function()
+                --     layout_popup.visible = true
+                -- end,
+                -- function()
+                --     layout_popup.timer:start()
+                -- end
             )
         )
     }

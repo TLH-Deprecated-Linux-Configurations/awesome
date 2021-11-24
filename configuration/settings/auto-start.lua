@@ -20,7 +20,7 @@ end
 -- ########################################################################
 -- ########################################################################
 delayed_timer(
-    5,
+    15,
     function()
         -- picom crashed, we have to restart it again
         if not awesome.composite_manager_running then

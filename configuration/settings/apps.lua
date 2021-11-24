@@ -60,9 +60,8 @@ return {
         -- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
         lock = "bash " .. HOME .. "/.config/awesome/external/i3lock/blur.sh",
         -- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-        quake = (os.getenv "TERMINAL" or "kitty") .. " -T QuakeTerminal",
+        quake = (os.getenv "TERMINAL" or "kitty") .. " -T QuakeTerminal"
         -- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-        duplicate_screens = "bash " .. HOME .. "xrandr-duplicate.sh"
     },
     -- ########################################################################
     -- List of apps to start once on start-up

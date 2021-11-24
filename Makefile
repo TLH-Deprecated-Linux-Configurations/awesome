@@ -32,6 +32,9 @@ hererocks:
 void-dependencies: 
 	sudo xbps-install -S brightnessctl iwd iw kitty firefox caja ranger rofi rofi-devel 
 	sudo xbps-install -S  caja-dropbox  caja-extensions  caja-image-converter  caja-open-terminal  caja-xattr-tags
+	sudo xbps-install -S  xdotool xsel 
+	sudo pip install rofimoji
+
 allinstall: goautolock awesomefont hererocks void-dependencies
 
 

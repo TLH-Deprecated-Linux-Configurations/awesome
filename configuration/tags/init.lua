@@ -7,6 +7,7 @@
 -- ########################################################################
 -- ########################################################################
 local awful = require("awful")
+
 local empathy = require("configuration.tags.layouts.empathy")
 local stack = require("configuration.tags.layouts.stack")
 local centermaster = require("configuration.tags.layouts.centermaster")

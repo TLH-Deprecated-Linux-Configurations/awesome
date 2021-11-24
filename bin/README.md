@@ -10,7 +10,6 @@ Below is a description of the scripts, mostly wrappers around single commands, w
 | autorun | Similar to an ~/.xinitrc file, runs commands at startup |
 | cpu | provides the cpu command called cpucmd for hardware monitoring |
 | disk | Disk monitoring|
-| emoji |provides the emojis for the emoji selection menu |
 |ram | Hardware monitoring |
 | snapshot | screenshot script |
 | wifi | provide wifi functionality via rofi |
