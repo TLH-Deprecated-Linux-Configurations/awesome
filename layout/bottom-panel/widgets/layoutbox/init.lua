@@ -60,7 +60,7 @@ local layout_popup =
     ontop = true,
     screen = s,
     visible = false,
-    bg = beautiful.bg_normal .. "00"
+    bg = beautiful.bg_modal
 }
 layout_popup.timer = gears.timer {timeout = 2}
 layout_popup.timer:connect_signal(
@@ -106,6 +106,8 @@ awful.keygrabber {
             function()
                 awful.layout.set(gears.table.iterate_value(ll.layouts, ll.current_layout, -1), nil)
                 layout_popup.timer:start()
+                layout_popup.visible = true
+
             end
         },
         {
@@ -114,6 +116,8 @@ awful.keygrabber {
             function()
                 awful.layout.set(gears.table.iterate_value(ll.layouts, ll.current_layout, 1), nil)
                 layout_popup.timer:start()
+                layout_popup.visible = true
+
             end
         }
     }
@@ -138,12 +142,7 @@ local layout_box = function(s)
                     layout_popup.visible = true
 
                 end
-                -- function()
-                --     layout_popup.visible = true
-                -- end,
-                -- function()
-                --     layout_popup.timer:start()
-                -- end
+
             ),
             awful.button(
                 {},
@@ -153,12 +152,7 @@ local layout_box = function(s)
                     layout_popup.timer:start()
                     layout_popup.visible = true
                 end
-                -- function()
-                --     layout_popup.visible = true
-                -- end,
-                -- function()
-                --     layout_popup.timer:start()
-                -- end
+
             )
         )
     }
