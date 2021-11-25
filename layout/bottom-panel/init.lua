@@ -59,7 +59,7 @@ local bottom_panel = function(s)
             {
                 widget,
                 border_width = dpi(2),
-                border_color = beautiful.xcolor7 .. "88",
+                border_color = beautiful.border_color,
                 bg = beautiful.bg_normal,
                 shape = beautiful.panel_button_shape,
                 widget = wibox.container.background,
@@ -75,14 +75,14 @@ local bottom_panel = function(s)
     -- ########################################################################
     -- Pull in and build the widgets used on the bar
     --
-    s.control_center_toggle = build_widget(require "layout.left-panel")
-    s.bluetooth = build_widget(show_widget_or_default("layout.bottom-panel.widgets.bluetooth", hardware.hasBluetooth()))
-    s.network = build_widget(show_widget_or_default("layout.bottom-panel.widgets.wifi", hardware.hasWifi()))
-    local layout_box = build_widget(require "layout.bottom-panel.widgets.layoutbox"(s))
-    local dropbox = build_widget(require "layout.bottom-panel.widgets.dropbox.dropbox")
-    s.battery = build_widget(show_widget_or_default("layout.bottom-panel.widgets.battery", hardware.hasBattery(), true))
-    s.mytextclock = build_widget(require "layout.bottom-panel.widgets.clock")
-    local notification_center = build_widget(require "layout.right-panel")
+    s.control_center_toggle = require "layout.left-panel"
+    local bluetooth = show_widget_or_default("layout.bottom-panel.widgets.bluetooth", hardware.hasBluetooth())
+    s.network = show_widget_or_default("layout.bottom-panel.widgets.wifi", hardware.hasWifi())
+    local layout_box = require "layout.bottom-panel.widgets.layoutbox"(s)
+    local dropbox = require "layout.bottom-panel.widgets.dropbox.dropbox"
+    s.battery = show_widget_or_default("layout.bottom-panel.widgets.battery", hardware.hasBattery(), true)
+    s.clock = require "layout.bottom-panel.widgets.clock"
+    local notification_center = require "layout.right-panel"
     -- ########################################################################
     -- ########################################################################
     -- ########################################################################
@@ -107,14 +107,12 @@ local bottom_panel = function(s)
                 layout = wibox.layout.fixed.horizontal,
                 spacing = dpi(2),
                 s.network,
-                s.bluetooth,
+                bluetooth,
                 dropbox,
                 layout_box,
-                -- s.screen_record,
                 s.battery,
-                s.mytextclock,
+                s.clock,
                 notification_center
-                -- clock,
             }
         },
         left = dpi(10),
@@ -129,13 +127,17 @@ local bottom_panel = function(s)
         awful.wibar {
         screen = s,
         position = "bottom",
-        height = 1,
+        height = dpi(1),
         ontop = true,
         width = s.geometry.width,
         bg = "#00000000",
         visible = true
     }
-    panel_trigger.timer = gears.timer {timeout = 3}
+    -- ########################################################################
+    -- ########################################################################
+    -- ########################################################################
+
+    panel_trigger.timer = gears.timer {timeout = 2}
     panel_trigger.timer:connect_signal(
         "timeout",
         function()
@@ -143,7 +145,11 @@ local bottom_panel = function(s)
             panel_trigger.visible = true
         end
     )
+    -- ########################################################################
+    -- ########################################################################
+    -- ########################################################################
     -- Show panel and hide trigger
+    --
     panel_trigger:connect_signal(
         "mouse::enter",
         function()
@@ -151,6 +157,9 @@ local bottom_panel = function(s)
             panel_trigger.visible = false
         end
     )
+    -- ########################################################################
+    -- ########################################################################
+    -- ########################################################################
     -- Hide panel and show trigger
     panel:connect_signal(
         "mouse::leave",
@@ -158,15 +167,21 @@ local bottom_panel = function(s)
             panel_trigger.timer:start()
         end
     )
-
+    -- ########################################################################
+    -- ########################################################################
+    -- ########################################################################
     -- hide panel when client is fullscreen
+    --
     local function change_panel_visibility(client)
         if client.screen == s then
             panel.ontop = not client.fullscreen
         end
     end
-
+    -- ########################################################################
+    -- ########################################################################
+    -- ########################################################################
     -- connect panel visibility function to relevant signals
+    --
     _G.client.connect_signal("property::fullscreen", change_panel_visibility)
     _G.client.connect_signal("focus", change_panel_visibility)
     return panel

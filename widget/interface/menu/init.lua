@@ -1,14 +1,6 @@
 -- .--------.-----.-----.--.--.
 -- |        |  -__|     |  |  |
 -- |__|__|__|_____|__|__|_____|
-
--- ########################################################################
--- ########################################################################
--- ########################################################################
-local gears = require("gears")
-local beautiful = require("beautiful")
-local apps = require("configuration.settings.apps")
-local hotkeys_popup = require("awful.hotkeys_popup").widget
 -- ########################################################################
 -- ########################################################################
 -- ########################################################################
@@ -37,15 +29,17 @@ local myawesomemenu = {
         "Hotkeys",
         function()
             hotkeys_popup.show_help(nil, awful.screen.focused())
-        end
+        end,
+        menubar.utils.lookup_icon("input-keyboard")
     },
-    {"Edit config", editor_cmd .. " " .. awesome.conffile},
-    {"Restart", awesome.restart},
+    {"Edit config", editor_cmd .. " " .. awesome.conffile, menubar.utils.lookup_icon("accessories-text-editor")},
+    {"Restart", awesome.restart, menubar.utils.lookup_icon("system-reboot")},
     {
         "Quit",
         function()
             awesome.quit()
-        end
+        end,
+        menubar.utils.lookup_icon("system-log-out")
     }
 }
 -- ########################################################################

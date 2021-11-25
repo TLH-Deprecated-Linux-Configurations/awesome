@@ -20,6 +20,7 @@ local theme_dir = filesystem.get_configuration_dir() .. "/theme"
 local dpi = require "beautiful".xresources.apply_dpi
 local gtk = require "beautiful.gtk"
 local theme_assets = require "beautiful.theme_assets"
+require("awful.hotkeys_popup.keys")
 -- ########################################################################
 -- ########################################################################
 -- ########################################################################
@@ -30,13 +31,19 @@ local awesome_overrides = function(theme)
     -- ########################################################################
     -- ########################################################################
     -- ########################################################################
+    -- GTK Theme
+    --
+    theme.gtk = gtk.get_theme_variables()
+    -- ########################################################################
+    -- ########################################################################
+    -- ########################################################################
     -- Colors Pallets
     -- Load ~/.Xresources colors and set fallback colors
     --
-    theme.xbackground = "#17191e"
-    theme.background = "#17191e"
-    theme.xforeground = "#b2bfd9"
-    theme.foreground = "#b2bfd9"
+    theme.xbackground = theme.gtk.bg_color
+    theme.background = theme.gtk.bg_color
+    theme.xforeground = theme.gtk.fg_color
+    theme.foreground = theme.gtk.fg_color
     theme.xcolor0 = "#17191e"
     theme.xcolor1 = "#ff28a9"
     theme.xcolor2 = "#44ffdd"
@@ -70,30 +77,16 @@ local awesome_overrides = function(theme)
     --
     theme.custom = theme.xcolor15
     theme.transparent = "#00000000"
-    -- ########################################################################
-    -- ########################################################################
-    -- ########################################################################
-    -- GTK Theme
-    --
-    theme.gtk = gtk.get_theme_variables()
 
-    -- ########################################################################
-    -- ########################################################################
-    -- ########################################################################
-    -- system stat charts in settings app
-    --
-    theme.cpu_bar = theme.xcolor1
-    theme.ram_bar = theme.xcolor2
-    theme.disk_bar = theme.xcolor3
     -- ########################################################################
     -- ########################################################################
     -- ########################################################################
     -- Basic Theme Set Up
     --
     theme.dir = theme_dir
-    theme.titlebar_size = dpi(24)
+
     theme.icons = theme.dir .. "/icons/"
-    theme.wallpaper = theme_dir .. "/wallpapers/10.png"
+    theme.wallpaper = theme_dir .. "/wallpapers/13.png"
     -- ########################################################################
     -- ########################################################################
     -- ########################################################################
@@ -118,7 +111,6 @@ local awesome_overrides = function(theme)
     --
     theme.text = theme.foreground
     theme.fg_white = theme.xcolo15
-    theme.fg_black = theme.xcolor17
     theme.fg_normal = theme.xcolor15
     theme.fg_focus = theme.xcolor15
     theme.fg_urgent = theme.xcolor9
@@ -131,13 +123,13 @@ local awesome_overrides = function(theme)
     --
     theme.bg_focus = "linear:0,0:0,21:0,#484d5e:1,#22262d"
     theme.bg_urgent = theme.xcolor1
-    theme.bg_systray = "linear:0,0:0,32:0,#3c3f4c:1,#17191e"
+    theme.bg_systray = "linear:0,0:0,32:0,#484d5e:1,#22262d"
     theme.bg_modal = "linear:0,0:0,21:0,#484d5ecc:1,#22262dcc"
     theme.bg_modal_title = "linear:0,0:0,21:0,#484d5e:1,#22262d"
     theme.bg_settings_display_number = theme.xbackground .. "cc"
     theme.bg_normal = "linear:0,0:0,21:0,#484d5e:1,#22262d"
-    theme.bg_button = "linear:0,0:0,21:0,#484d5e:1,#2f303d"
-    theme.bg_button_press = "linear:0,0:0,21:0,#8b9cbe:1,#3c3f4c"
+    theme.bg_button = "linear:0,0:0,21:0,#7786A3:1,#22262d"
+    theme.bg_button_press = "linear:0,0:0,21:0,#7786A3:1,#484d5e"
     theme.bg_widget = "linear:0,0:0,11:0,#484d5ecc:1,#22262dcc"
 
     -- ########################################################################
@@ -146,10 +138,10 @@ local awesome_overrides = function(theme)
     -- Notification
     --
     theme.notification_position = "top_right"
-    theme.notification_bg = "linear:0,0:0,21:0,#3c3f4c:1,#17191e"
+    theme.notification_bg = "linear:0,0:0,21:0,#484d5e:1,#22262d"
     theme.notification_margin = dpi(5)
     theme.notification_border_width = dpi(0)
-    theme.notification_border_color = theme.xcolor7 .. "aa"
+    theme.notification_border_color = theme.xcolor21 .. "aa"
     theme.notification_spacing = dpi(0)
     theme.notification_icon_resize_strategy = "center"
     theme.notification_icon_size = dpi(32)
@@ -167,7 +159,7 @@ local awesome_overrides = function(theme)
     -- ########################################################################
     -- UI Groups
     --
-    theme.groups_title_bg = "linear:0,0:0,21:0,#3c3f4c:1,#17191e"
+    theme.groups_title_bg = "linear:0,0:0,21:0,#484d5e:1,#22262d"
     theme.groups_bg = theme.bg_modal
     theme.groups_radius = dpi(9)
 
@@ -183,8 +175,8 @@ local awesome_overrides = function(theme)
     -- ########################################################################
     -- Tooltips
     --
-    theme.tooltip_bg = "linear:0,0:0,21:0,#3c3f4c:1,#17191e"
-    theme.tooltip_border_color = theme.xcolor0 .. "cc"
+    theme.tooltip_bg = "linear:0,0:0,21:0,#484d5e:1,#22262d"
+    theme.tooltip_border_color = theme.border_focus
     theme.tooltip_border_width = 0
     theme.tooltip_shape = function(cr, w, h)
         gears.shape.rounded_rect(cr, w, h, dpi(6))
@@ -209,9 +201,10 @@ local awesome_overrides = function(theme)
     -- ########################################################################
     -- Buttons
     --
-    theme.border_button = theme.xcolor7 .. "66"
-    theme.button_active = theme.xcolor7 .. "dd"
-    theme.button_active_alt = theme.xcolor4
+    theme.border_button = theme.xcolor21 .. "bb"
+    theme.button_active = theme.xcolor21 .. "dd"
+
+    theme.button_active_alt = theme.xcolor7 .. "cc"
 
     -- ########################################################################
     -- ########################################################################
@@ -220,9 +213,9 @@ local awesome_overrides = function(theme)
     -- Background
     --
     theme.tasklist_font = theme.font
-    theme.tasklist_bg_normal = "linear:0,0:0,21:0,#2f303d:1,#17191e"
+    theme.tasklist_bg_normal = "linear:0,0:0,21:0,#2f303d:1,#1C1E24"
     theme.tasklist_bg_focus = "linear:0,0:0,21:0,#484d5e:1,#23262e"
-    theme.tasklist_bg_urgent = "linear:0,0:0,21:0,#2f303d:1,#17191e"
+    theme.tasklist_bg_urgent = "linear:0,0:0,21:0,#2f303d:1,#1C1E24"
     -- ########################################################################
     -- Foreground
     --
@@ -235,7 +228,7 @@ local awesome_overrides = function(theme)
     theme.tasklist_shape = function(cr, height, width)
         gears.shape.rounded_rect(cr, height, width, 8)
     end
-    theme.tasklist_shape_border_color = theme.xcolor7 .. "66"
+    theme.tasklist_shape_border_color = theme.xcolor21 .. "66"
     theme.tasklist_shape_border_width = dpi(2)
     -- ########################################################################
     -- ########################################################################
@@ -246,28 +239,24 @@ local awesome_overrides = function(theme)
     -- ########################################################################
     -- Background
     --
-    theme.taglist_bg_empty = "linear:0,0:0,21:0,#3c3f4c:1,#17191e"
-    theme.taglist_bg_occupied = "linear:0,0:0,21:0,#3c3f4c:1,#17191e"
-    theme.taglist_bg_urgent = "linear:0,0:0,21:0,#3c3f4c:1,#17191e"
-    theme.taglist_bg = "linear:0,0:0,21:0,#3c3f4c:1,#17191e"
-    theme.taglist_fg_empty = theme.xcolor7
-    theme.taglist_fg_focus = theme.xcolor15
-    theme.taglist_fg_occupied = theme.xcolor24
-    theme.taglist_border_color = theme.xcolor7 .. "66"
+    theme.taglist_bg_empty = "linear:0,0:0,21:0,#484d5e:1,#22262d"
+    theme.taglist_bg_occupied = "linear:0,0:0,21:0,#484d5e:1,#22262d"
+    theme.taglist_bg_urgent = "linear:0,0:0,21:0,#484d5e:1,#22262d"
+    theme.taglist_bg = "linear:0,0:0,21:0,#484d5e:1,#22262d"
+
+    theme.taglist_border_color = theme.xcolor21 .. "66"
 
     -- ########################################################################
     -- Foreground
     --
-    -- theme.taglist_border_width = dpi(2)
-    -- theme.taglist_fg_urgent = theme.xcolor1
-    -- theme.taglist_fg_occupied = theme.xcolor7
-    -- theme.taglist_fg_empty = theme.xcolor7
-    -- theme.taglist_fg_volatile = theme.xcolor9
+    theme.taglist_fg_empty = theme.xcolor22
+    theme.taglist_fg_focus = theme.xcolor15
+    theme.taglist_fg_occupied = theme.xforeground
 
     -- ########################################################################
     -- Shape
     --
-    theme.taglist_shape = theme.btn_lg_shape
+    theme.taglist_shape = theme.btn_md_shape
 
     -- ########################################################################
     -- ########################################################################
@@ -293,12 +282,12 @@ local awesome_overrides = function(theme)
     theme.border_radius = dpi(12)
     theme.maximized_hide_border = true
     theme.border_width = dpi(0)
-    theme.border_normal = theme.xcolor7 .. "88"
-    theme.border_focus = theme.xcolor7 .. "aa"
-    theme.border_marked = theme.xcolor7 .. "cc"
+    theme.border_normal = theme.xcolor21 .. "55"
+    theme.border_focus = theme.xcolor7 .. "55"
+    theme.border_marked = theme.xcolor21 .. "55"
     theme.btn_border_width = dpi(4)
     theme.widget_border_width = dpi(1)
-    theme.border_color = theme.xcolor7 .. "cc"
+    theme.border_color = theme.xcolor21 .. "55"
 
     -- ########################################################################
     -- ########################################################################
@@ -310,7 +299,6 @@ local awesome_overrides = function(theme)
     theme.btn_xs_margin = dpi(2)
     theme.btn_md_margin = dpi(4)
     theme.widget_margin = dpi(6)
-    theme.is_enable_titlebar = true
 
     -- ####################################################################
     -- ####################################################################
@@ -357,7 +345,7 @@ local awesome_overrides = function(theme)
     -- Notification
     --
     theme.notification_font = theme.font
-    theme.notification_bg = "linear:0,0:0,21:0,#3c3f4c:1,#17191e"
+    theme.notification_bg = "linear:0,0:0,21:0,#484d5e:1,#22262d"
     theme.notification_fg = theme.fg_normal
     theme.notification_shape = theme.btn_md_shape
     theme.notification_width = dpi(165)
@@ -372,7 +360,7 @@ local awesome_overrides = function(theme)
     -- #########################################################################
     -- systray
     --
-    theme.bg_systray = "linear:0,0:0,21:0,#2f303d:1,#17191e"
+    theme.bg_systray = "linear:0,0:0,21:0,#2f303d:1,#22262d"
 
     -- ########################################################################
     -- ########################################################################
@@ -380,13 +368,6 @@ local awesome_overrides = function(theme)
     -- Generate Awesome icon:
     --
     theme.awesome_icon = theme_assets.awesome_icon(theme.menu_height, theme.bg_focus, theme.fg_focus)
-
-    -- ########################################################################
-    -- ########################################################################
-    -- ########################################################################
-    -- Titlebar
-    --
-    theme.titlebar_size = dpi(28)
 
     -- ########################################################################
     -- ########################################################################
@@ -420,6 +401,36 @@ local awesome_overrides = function(theme)
     -- ########################################################################
     -- ########################################################################
     -- ########################################################################
+    -- Titlebar
+    --
+    theme.is_enable_titlebar = true
+    theme.titlebar_size = dpi(21)
+    local icon_path = gears.filesystem.get_configuration_dir() .. "theme/icons/"
+    local titlebar_icon_path = icon_path .. "titlebar/dhumavati/"
+    theme.titlebar_close_button_normal = titlebar_icon_path .. "close-preseed.png"
+    theme.titlebar_close_button_focus = titlebar_icon_path .. "close-active.png"
+    theme.titlebar_minimize_button_normal = titlebar_icon_path .. "hide-preseed.png"
+    theme.titlebar_minimize_button_focus = titlebar_icon_path .. "hide-active.png"
+    -- theme.titlebar_ontop_button_normal_inactive = titlebar_icon_path .. 'ontop_normal_inactive.png'
+    -- theme.titlebar_ontop_button_focus_inactive = titlebar_icon_path .. 'ontop_focus_inactive.png'
+    -- theme.titlebar_ontop_button_normal_active = titlebar_icon_path .. 'ontop_normal_active.png'
+    -- theme.titlebar_ontop_button_focus_active = titlebar_icon_path .. 'ontop_focus_active.png'
+    -- theme.titlebar_sticky_button_normal_inactive = titlebar_icon_path .. 'sticky_normal_inactive.png'
+    -- theme.titlebar_sticky_button_focus_inactive = titlebar_icon_path .. 'sticky_focus_inactive.png'
+    -- theme.titlebar_sticky_button_normal_active = titlebar_icon_path .. 'sticky_normal_active.png'
+    -- theme.titlebar_sticky_button_focus_active = titlebar_icon_path .. 'sticky_focus_active.png'
+    -- theme.titlebar_floating_button_normal_inactive = titlebar_icon_path .. 'go-left.png'
+    -- theme.titlebar_floating_button_focus_inactive = titlebar_icon_path .. 'go-left.png'
+    -- theme.titlebar_floating_button_normal_active = titlebar_icon_path .. 'go-left.png'
+    -- theme.titlebar_floating_button_focus_active = titlebar_icon_path .. 'go-left.png'
+    theme.titlebar_maximized_button_normal_inactive = titlebar_icon_path .. "maximize-preseed.png"
+    theme.titlebar_maximized_button_focus_inactive = titlebar_icon_path .. "maximize-active.png"
 end
+-- ########################################################################
+-- ########################################################################
+-- ########################################################################
+-- Hot Keys Popup
+theme.hotkeys_modifiers_fg = theme.xcolor7
+
 -- ########################################################################
 return {theme = theme, awesome_overrides = awesome_overrides}

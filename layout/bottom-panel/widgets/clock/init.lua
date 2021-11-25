@@ -6,6 +6,6 @@
 -- ########################################################################
 -- ########################################################################
 
-local clock = wibox.widget.textclock('<span font="' .. beautiful.font .. ' 16"> %H:%M:%S </span>')
+local clock = clickable_container(wibox.widget.textclock('<span font="' .. beautiful.font .. ' 16"> %H:%M:%S </span>'))
 
 return clock

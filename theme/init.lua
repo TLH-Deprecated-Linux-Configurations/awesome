@@ -10,13 +10,18 @@ local default_theme = require("theme.default-theme")
 -- ########################################################################
 -- ########################################################################
 -- ########################################################################
-local theme = require("theme.vice-theme")
+local theme = default_theme
+local gtk = require("theme.gtk")
+
 -- ########################################################################
 -- ########################################################################
 -- ########################################################################
+
 local final_theme = {}
+--gtable.crush(final_theme, xresources.theme)
+gtable.crush(final_theme, gtk)
 gtable.crush(final_theme, default_theme.theme)
-gtable.crush(final_theme, theme.theme)
+--gtable.crush(final_theme, theme.theme)
 default_theme.awesome_overrides(final_theme)
 theme.awesome_overrides(final_theme)
 -- ########################################################################

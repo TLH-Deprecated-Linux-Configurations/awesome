@@ -136,9 +136,11 @@ _G.client.connect_signal(
                 -- Changed This
                 l_reverse_corner.bg = "linear:0,0:0,21:0,#3c3f4ccc:1,#17191ecc"
                 r_reverse_corner.bg = "linear:0,0:0,21:0,#3c3f4ccc:1,#17191ecc"
+                c.fg = beautiful.xcolor15
             else
                 l_reverse_corner.bg = "linear:0,0:0,21:0,#22262d:1,#17191ecc"
                 r_reverse_corner.bg = "linear:0,0:0,21:0,#22262d:1,#17191ecc"
+                c.fg = beautiful.xcolor7
             end
         end
         -- ########################################################################
@@ -176,7 +178,8 @@ _G.client.connect_signal(
                 {
                     -- Title
                     align = "center",
-                    widget = awful.titlebar.widget.titlewidget(c)
+                    widget = awful.titlebar.widget.titlewidget(c),
+                    fg = beautiful.xcolor15
                 },
                 buttons = buttons,
                 layout = wibox.layout.flex.horizontal
