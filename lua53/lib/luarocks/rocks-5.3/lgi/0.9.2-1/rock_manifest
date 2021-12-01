@@ -11,7 +11,7 @@ rock_manifest = {
    ["lgi-0.9.2-1.rockspec"] = "9d1e4e20feefc78bdd3744c13da3a68b",
    lib = {
       lgi = {
-         ["corelgilua51.so"] = "f519395d810396b56dfe37dcc929fcf8"
+         ["corelgilua51.so"] = "fe851e88210fdd43860a61cb94e59b33"
       }
    },
    lua = {

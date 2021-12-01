@@ -1,4 +1,10 @@
 commands = {
+   json2lua = {
+      "lua-cjson/2.1.0.6-1"
+   },
+   lua2json = {
+      "lua-cjson/2.1.0.6-1"
+   },
    luacheck = {
       "luacheck/0.25.0-1"
    }
@@ -27,6 +33,36 @@ dependencies = {
    },
    lgi = {
       ["0.9.2-1"] = {
+         {
+            constraints = {
+               {
+                  op = ">=",
+                  version = {
+                     5, 1, string = "5.1"
+                  }
+               }
+            },
+            name = "lua"
+         }
+      }
+   },
+   ["lua-cjson"] = {
+      ["2.1.0.6-1"] = {
+         {
+            constraints = {
+               {
+                  op = ">=",
+                  version = {
+                     5, 1, string = "5.1"
+                  }
+               }
+            },
+            name = "lua"
+         }
+      }
+   },
+   ["lua-json"] = {
+      ["1.0.0-1"] = {
          {
             constraints = {
                {
@@ -131,26 +167,23 @@ dependencies = {
             name = "luasocket"
          }
       }
-   },
-   luasocket = {
-      ["3.0rc1-2"] = {
-         {
-            constraints = {
-               {
-                  op = ">=",
-                  version = {
-                     5, 1, string = "5.1"
-                  }
-               }
-            },
-            name = "lua"
-         }
-      }
    }
 }
 modules = {
    argparse = {
       "argparse/0.7.1-1"
+   },
+   cjson = {
+      "lua-cjson/2.1.0.6-1"
+   },
+   ["cjson.util"] = {
+      "lua-cjson/2.1.0.6-1"
+   },
+   json = {
+      "lua-json/1.0.0-1"
+   },
+   json2lua = {
+      "lua-cjson/2.1.0.6-1"
    },
    lfs = {
       "luafilesystem/1.8.0-1"
@@ -257,8 +290,8 @@ modules = {
    ["lgi.version"] = {
       "lgi/0.9.2-1"
    },
-   ltn12 = {
-      "luasocket/3.0rc1-2"
+   lua2json = {
+      "lua-cjson/2.1.0.6-1"
    },
    ["luacheck.builtin_standards.init"] = {
       "luacheck/0.25.0-1"
@@ -416,12 +449,6 @@ modules = {
    ["luacheck.version"] = {
       "luacheck/0.25.0-1"
    },
-   mime = {
-      "luasocket/3.0rc1-2"
-   },
-   ["mime.core"] = {
-      "luasocket/3.0rc1-2"
-   },
    ["posix._base"] = {
       "luaposix/35.1-1"
    },
@@ -533,36 +560,6 @@ modules = {
    ["posix.version"] = {
       "luaposix/35.1-1"
    },
-   socket = {
-      "luasocket/3.0rc1-2"
-   },
-   ["socket.core"] = {
-      "luasocket/3.0rc1-2"
-   },
-   ["socket.ftp"] = {
-      "luasocket/3.0rc1-2"
-   },
-   ["socket.headers"] = {
-      "luasocket/3.0rc1-2"
-   },
-   ["socket.http"] = {
-      "luasocket/3.0rc1-2"
-   },
-   ["socket.serial"] = {
-      "luasocket/3.0rc1-2"
-   },
-   ["socket.smtp"] = {
-      "luasocket/3.0rc1-2"
-   },
-   ["socket.tp"] = {
-      "luasocket/3.0rc1-2"
-   },
-   ["socket.unix"] = {
-      "luasocket/3.0rc1-2"
-   },
-   ["socket.url"] = {
-      "luasocket/3.0rc1-2"
-   },
    ssl = {
       "luasec/1.0.2-1"
    },
@@ -624,6 +621,36 @@ repository = {
                ["lgi.package"] = "lgi/package.lua",
                ["lgi.record"] = "lgi/record.lua",
                ["lgi.version"] = "lgi/version.lua"
+            }
+         }
+      }
+   },
+   ["lua-cjson"] = {
+      ["2.1.0.6-1"] = {
+         {
+            arch = "installed",
+            commands = {
+               json2lua = "json2lua",
+               lua2json = "lua2json"
+            },
+            dependencies = {},
+            modules = {
+               cjson = "cjson.so",
+               ["cjson.util"] = "cjson/util.lua",
+               json2lua = "json2lua.lua",
+               lua2json = "lua2json.lua"
+            }
+         }
+      }
+   },
+   ["lua-json"] = {
+      ["1.0.0-1"] = {
+         {
+            arch = "installed",
+            commands = {},
+            dependencies = {},
+            modules = {
+               json = "json.so"
             }
          }
       }
@@ -761,36 +788,10 @@ repository = {
          {
             arch = "installed",
             commands = {},
-            dependencies = {
-               luasocket = "3.0rc1-2"
-            },
+            dependencies = {},
             modules = {
                ssl = "ssl.lua",
                ["ssl.https"] = "ssl/https.lua"
-            }
-         }
-      }
-   },
-   luasocket = {
-      ["3.0rc1-2"] = {
-         {
-            arch = "installed",
-            commands = {},
-            dependencies = {},
-            modules = {
-               ltn12 = "ltn12.lua",
-               mime = "mime.lua",
-               ["mime.core"] = "mime/core.so",
-               socket = "socket.lua",
-               ["socket.core"] = "socket/core.so",
-               ["socket.ftp"] = "socket/ftp.lua",
-               ["socket.headers"] = "socket/headers.lua",
-               ["socket.http"] = "socket/http.lua",
-               ["socket.serial"] = "socket/serial.so",
-               ["socket.smtp"] = "socket/smtp.lua",
-               ["socket.tp"] = "socket/tp.lua",
-               ["socket.unix"] = "socket/unix.so",
-               ["socket.url"] = "socket/url.lua"
             }
          }
       }

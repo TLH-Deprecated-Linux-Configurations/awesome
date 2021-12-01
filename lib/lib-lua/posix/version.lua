@@ -1,1 +1,1 @@
-return 'posix for ' .. _VERSION .. ' / luaposix 35.0'
+return 'posix for ' .. _VERSION .. ' / luaposix 35.1'

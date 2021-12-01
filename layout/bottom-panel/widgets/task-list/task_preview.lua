@@ -58,7 +58,7 @@ local function draw_widget(
                                     halign = "center",
                                     widget = wibox.container.place
                                 },
-                                top = dpi(2),
+                                top = dpi(1),
                                 widget = wibox.container.margin
                             },
                             fill_space = true,
@@ -67,9 +67,9 @@ local function draw_widget(
                         margins = margin,
                         widget = wibox.container.margin
                     },
-                    bg = beautiful.xcolor0 .. "99",
-                    shape_border_width = dpi(2),
-                    shape_border_color = beautiful.xcolor15 .. "99",
+                    bg = beautiful.bg_normal,
+                    shape_border_width = dpi(1),
+                    shape_border_color = beautiful.border_color,
                     shape = beautiful.window_shape,
                     widget = wibox.container.background
                 }),
@@ -102,21 +102,20 @@ local enable = function(opts)
     -- ########################################################################
     -- ########################################################################
     local margin = dpi(2)
-    local screen_radius = dpi(0)
-    local widget_bg = beautiful.xcolor0 .. "99"
-    local widget_border_color = "#ffffff"
+    local screen_radius = dpi(12)
+    local widget_bg = beautiful.bg_normal
+    local widget_border_color = beautiful.menu_border_color
     local widget_border_width = dpi(1)
 
     local task_preview_box =
         awful.popup(
         {
-            type = "dropdown_menu",
             visible = false,
             ontop = true,
             placement = placement_fn,
             widget = wibox.container.background, -- A dummy widget to make awful.popup not scream
             input_passthrough = true,
-            bg = beautiful.xcolor0 .. "99"
+            bg = beautiful.xcolor0 .. "00"
         }
     )
     -- ########################################################################
@@ -125,29 +124,39 @@ local enable = function(opts)
     awesome.connect_signal(
         "task_preview::visibility",
         function(s, v, c)
-            if v then
-                -- Update task preview contents
-                task_preview_box.widget =
-                    draw_widget(
-                    c,
-                    opts.structure,
-                    screen_radius,
-                    widget_bg,
-                    widget_border_color,
-                    widget_border_width,
-                    margin,
-                    widget_width,
-                    widget_height
+            if not c.minimized then
+                local geo =
+                    c.screen:get_bounding_geometry(
+                    {
+                        honor_padding = true,
+                        honor_workarea = true
+                    }
                 )
+                if v then
+                    -- Update task preview contents
+                    task_preview_box.widget =
+                        draw_widget(
+                        c,
+                        opts.structure,
+                        screen_radius,
+                        widget_bg,
+                        widget_border_color,
+                        widget_border_width,
+                        margin,
+                        widget_width,
+                        widget_height
+                    )
+                end
+                -- ########################################################################
+                -- ########################################################################
+                -- ########################################################################
+                if not placement_fn then
+                    task_preview_box.x = s.geometry.x + widget_x
+                    task_preview_box.y = s.geometry.y + widget_y
+                end
+            else
+                v = false
             end
-            -- ########################################################################
-            -- ########################################################################
-            -- ########################################################################
-            if not placement_fn then
-                task_preview_box.x = s.geometry.x + widget_x
-                task_preview_box.y = s.geometry.y + widget_y
-            end
-
             task_preview_box.visible = v
         end
     )

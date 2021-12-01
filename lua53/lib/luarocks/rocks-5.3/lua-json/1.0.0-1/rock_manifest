@@ -1,0 +1,10 @@
+rock_manifest = {
+   doc = {
+      LICENSE = "febe0c0d105a6e85382fb80b14afb549",
+      ["README.md"] = "dbf70eb8649af9b48644fe4e29cd11c9"
+   },
+   lib = {
+      ["json.so"] = "faf0ad91bcfe134546b6ed7245ac20c5"
+   },
+   ["lua-json-1.0.0-1.rockspec"] = "08f7bdf45871ec95cfef10726334e4e5"
+}

@@ -15,7 +15,3 @@ Below is a description of the scripts, mostly wrappers around single commands, w
 | wifi | provide wifi functionality via rofi |
 
 
-## What Are the Other Scripts?!
-Generated and used by hererocks for the local luarocks that is run to fully install the lua dependencies (since they are sort of necessary as well). 
-
-That is explained elsewhere (hopefully) but if you are having trouble finding where, make an issue on the repo and I will assist you with that part. 
