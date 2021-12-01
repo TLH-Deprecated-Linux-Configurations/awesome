@@ -7,7 +7,6 @@
 -- ########################################################################
 -- ########################################################################
 local signals = require("configuration.settings.signals")
-local gettime = require("socket").gettime
 
 local screen_geometry = {}
 local bIsInRemoveState = false
@@ -63,7 +62,7 @@ screen.connect_signal(
 -- ########################################################################
 -- ########################################################################
 -- ########################################################################
-local prev_time = gettime()
+
 -- specify how often to poll
 local refresh_timeout_in_seconds = 0.5
 
@@ -92,10 +91,12 @@ end
 awesome.connect_signal(
     "refresh",
     function()
-        local time = gettime()
-        if prev_time < (time - refresh_timeout_in_seconds) then
-            prev_time = time
+gears.timer{
+ timeout= 30,
+ autostart = true,
+collectgarbage(),
             perform_refresh()
-        end
+
+}
     end
 )

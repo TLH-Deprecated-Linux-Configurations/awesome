@@ -1,0 +1,167 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Luacheck documentation &#8212; luacheck 0.25.0 documentation</title>
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="_static/alabaster.css" />
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="List of warnings" href="warnings.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <div class="section" id="luacheck-documentation">
+<h1>Luacheck documentation<a class="headerlink" href="#luacheck-documentation" title="Permalink to this headline">¶</a></h1>
+<p>Contents:</p>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="warnings.html">List of warnings</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="warnings.html#global-variables-1xx">Global variables (1xx)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="warnings.html#read-only-globals">Read-only globals</a></li>
+<li class="toctree-l3"><a class="reference internal" href="warnings.html#implicitly-defined-globals">Implicitly defined globals</a></li>
+<li class="toctree-l3"><a class="reference internal" href="warnings.html#modules">Modules</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="warnings.html#unused-variables-2xx-and-values-3xx">Unused variables (2xx) and values (3xx)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="warnings.html#unused-values-and-uninitialized-variables">Unused values and uninitialized variables</a></li>
+<li class="toctree-l3"><a class="reference internal" href="warnings.html#secondary-values-and-variables">Secondary values and variables</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="warnings.html#shadowing-declarations-4xx">Shadowing declarations (4xx)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="warnings.html#control-flow-and-data-flow-issues-5xx">Control flow and data flow issues (5xx)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="warnings.html#unreachable-code">Unreachable code</a></li>
+<li class="toctree-l3"><a class="reference internal" href="warnings.html#unused-labels">Unused labels</a></li>
+<li class="toctree-l3"><a class="reference internal" href="warnings.html#unbalanced-assignments">Unbalanced assignments</a></li>
+<li class="toctree-l3"><a class="reference internal" href="warnings.html#empty-blocks">Empty blocks</a></li>
+<li class="toctree-l3"><a class="reference internal" href="warnings.html#empty-statements">Empty statements</a></li>
+<li class="toctree-l3"><a class="reference internal" href="warnings.html#cyclomatic-complexity">Cyclomatic complexity</a></li>
+<li class="toctree-l3"><a class="reference internal" href="warnings.html#reversed-numeric-for-loops">Reversed numeric for loops</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="warnings.html#formatting-issues-6xx">Formatting issues (6xx)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="warnings.html#whitespace-issues">Whitespace issues</a></li>
+<li class="toctree-l3"><a class="reference internal" href="warnings.html#line-length-limits">Line length limits</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="cli.html">Command line interface</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="cli.html#command-line-options">Command line options</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cli.html#patterns">Patterns</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cli.html#defining-extra-globals-and-fields">Defining extra globals and fields</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cli.html#sets-of-standard-globals">Sets of standard globals</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cli.html#formatters">Formatters</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cli.html#caching">Caching</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cli.html#stable-interface-for-editor-plugins-and-tools">Stable interface for editor plugins and tools</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="config.html">Configuration file</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="config.html#config-options">Config options</a></li>
+<li class="toctree-l2"><a class="reference internal" href="config.html#custom-sets-of-globals">Custom sets of globals</a></li>
+<li class="toctree-l2"><a class="reference internal" href="config.html#per-file-and-per-path-overrides">Per-file and per-path overrides</a></li>
+<li class="toctree-l2"><a class="reference internal" href="config.html#default-per-path-std-overrides">Default per-path std overrides</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="inline.html">Inline options</a></li>
+<li class="toctree-l1"><a class="reference internal" href="module.html">Luacheck module</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="module.html#report-format">Report format</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<p>This is documentation for 0.25.0 version of <a class="reference external" href="https://github.com/luarocks/luacheck/">Luacheck</a>, a linter for <a class="reference external" href="https://www.lua.org/">Lua</a>.</p>
+</div>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="#">luacheck</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="warnings.html">List of warnings</a></li>
+<li class="toctree-l1"><a class="reference internal" href="cli.html">Command line interface</a></li>
+<li class="toctree-l1"><a class="reference internal" href="config.html">Configuration file</a></li>
+<li class="toctree-l1"><a class="reference internal" href="inline.html">Inline options</a></li>
+<li class="toctree-l1"><a class="reference internal" href="module.html">Luacheck module</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="#">Documentation overview</a><ul>
+      <li>Next: <a href="warnings.html" title="next chapter">List of warnings</a></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2014 - 2018, Peter Melnichenko.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 4.1.2</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      
+      |
+      <a href="_sources/index.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

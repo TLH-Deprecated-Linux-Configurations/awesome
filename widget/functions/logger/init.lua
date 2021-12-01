@@ -6,8 +6,10 @@
 -- ########################################################################
 -- ########################################################################
 -- ########################################################################
+pcall(require, "lua53.luarocks.loader")
+
 local filehandle = require("widget.functions.file")
-local time = require("lib.lib-lua.socket").gettime
+
 -- store the old print variable into echo
 echo = print
 -- ########################################################################
@@ -125,7 +127,7 @@ print = function(arg, log_type, depth)
     -- ########################################################################
     -- ########################################################################
     -- ########################################################################
-    local out = os.date("%H:%M:%S") .. "." .. math.floor(time() * 10000) % 10000
+    local out = os.date("%H:%M:%S")
     local statement = log .. out:gsub("\n", "") .. " ]\27[0m "
     for line in arg:gmatch("[^\r\n]+") do
         -- print it to stdout

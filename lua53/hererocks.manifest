@@ -1,0 +1,1 @@
+{"lua": {"name": "Lua", "source": "release", "version": "5.3.6", "target": "linux", "compat": "default", "c flags": "", "location": "/home/tlh/.config/awesome/lua53", "major version": "5.3", "readline": "true", "patched": "false"}, "version": 3, "luarocks": {"name": "LuaRocks", "source": "release", "version": "3.5.0"}}

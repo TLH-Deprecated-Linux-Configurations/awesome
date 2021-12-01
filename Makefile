@@ -23,11 +23,11 @@ hererocks:
 	hererocks lua53 -l5.3 -rlatest
 	source lua53/bin/activate
 	lua -v 
-	sudo luarocks install luacheck 
-	sudo luarocks install lgi 
-	sudo luarocks install luasec 
-	sudo luarocks install luafilesystem 
-	sudo luarocks install luasocket 
+	 luarocks install luacheck 
+	 luarocks install lgi 
+	 luarocks install luasec 
+	 luarocks install luafilesystem 
+	 luarocks install luasocket 
 
 void-dependencies: 
 	sudo xbps-install -S brightnessctl iwd iw kitty firefox caja ranger rofi rofi-devel 
