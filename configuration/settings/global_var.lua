@@ -55,6 +55,12 @@ filehandle = require("widget.functions.file")
 volume = require("widget.hardware.volume")
 gtable = require("gears.table")
 home = os.getenv("HOME")
+base = require("wibox.widget.base")
+fixed = require("wibox.layout.fixed")
+separator = require("wibox.widget.separator")
+
+gshape = require("gears.shape")
+gobject = require("gears.object")
 
 -- ########################################################################
 -- ########################################################################
@@ -89,7 +95,7 @@ clickable_container = require("widget.interface.clickable-container")
 delayed_timer = require("widget.functions.delayed-timer")
 icons = require("theme.icons")
 rubato = require("widget.interface.animations.rubato")
-hotkeys_popup = require("awful.hotkeys_popup").widget
+hotkeys_popup = require("widget.interface.hotkeys_popup")
 volume = require("widget.hardware.volume")
 xrandr = require("widget.hardware.xrandr")
 apps = require("configuration.settings.apps")
@@ -103,6 +109,7 @@ button = require("widget.interface.button")
 config = require("widget.functions")
 watch = require "awful.widget.watch"
 vicious = require "lib.vicious"
+animate = require("widget.interface.animations").createAnimObject
 
 -- #######################################################################
 -- ########################################################################

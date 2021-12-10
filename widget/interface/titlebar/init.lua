@@ -42,13 +42,12 @@ _G.client.connect_signal(
 -- ########################################################################
 -- ########################################################################
 -- Add a titlebar if titlebars_enabled is set to true in the rules.
+--
 _G.client.connect_signal(
     "request::titlebars",
     function(c)
-        -- buttons for the titlebar
-        -- ########################################################################
-        -- ########################################################################
-        -- ########################################################################
+        -- mouse button handling for the titlebar
+        --
         local buttons =
             gears.table.join(
             awful.button(
@@ -62,9 +61,7 @@ _G.client.connect_signal(
                             raise = true
                         }
                     )
-                    if c.maximized == true then
-                        c.maximized = false
-                    end
+
                     awful.mouse.client.move(c)
                 end
             ),
@@ -115,7 +112,6 @@ _G.client.connect_signal(
         -- ########################################################################
         local l_reverse_corner =
             wibox.widget {
-            bg = "linear:0,0:0,21:0,#3c3f4ccc:1,#17191ecc",
             shape = prrect(6, false, false, true, false),
             widget = wibox.container.background
         }
@@ -124,45 +120,27 @@ _G.client.connect_signal(
         -- ########################################################################
         local r_reverse_corner =
             wibox.widget {
-            bg = "linear:0,0:0,21:0,#3c3f4ccc:1,#17191ecc",
             shape = prrect(6, false, false, false, true),
             widget = wibox.container.background
         }
+
         -- ########################################################################
         -- ########################################################################
         -- ########################################################################
-        local function update()
-            if _G.client.focus == c then
-                -- Changed This
-                l_reverse_corner.bg = "linear:0,0:0,21:0,#3c3f4ccc:1,#17191ecc"
-                r_reverse_corner.bg = "linear:0,0:0,21:0,#3c3f4ccc:1,#17191ecc"
-                c.fg = beautiful.xcolor15
-            else
-                l_reverse_corner.bg = "linear:0,0:0,21:0,#22262d:1,#17191ecc"
-                r_reverse_corner.bg = "linear:0,0:0,21:0,#22262d:1,#17191ecc"
-                c.fg = beautiful.xcolor7
-            end
-        end
-        -- ########################################################################
-        -- ########################################################################
-        -- ########################################################################
-        update()
-        c:connect_signal("focus", update)
-        c:connect_signal("unfocus", update)
 
         awful.titlebar(
             c,
             {
                 position = "top",
-                size = beautiful.titlebar_size,
-                bg = "linear:0,0:0,21:0,#3c3f4ccc:1,#17191ecc"
+                size = beautiful.titlebar_size
             }
         ):setup {
             {
                 {
                     awful.titlebar.widget.iconwidget(c),
                     -- awful.titlebar.widget.floatingbutton(c),
-
+                    --  awful.titlebar.widget.stickybutton(c),
+                    --   awful.titlebar.widget.ontopbutton(c),
                     buttons = buttons,
                     layout = wibox.layout.flex.horizontal
                 },
@@ -202,8 +180,6 @@ _G.client.connect_signal(
                             {
                                 awful.titlebar.widget.minimizebutton(c),
                                 awful.titlebar.widget.maximizedbutton(c),
-                                --  awful.titlebar.widget.stickybutton(c),
-                                --   awful.titlebar.widget.ontopbutton(c),
                                 awful.titlebar.widget.closebutton(c),
                                 layout = wibox.layout.flex.horizontal,
                                 margins = dpi(0),
@@ -223,7 +199,6 @@ _G.client.connect_signal(
                 {
                     {
                         r_reverse_corner,
-                        bg = "linear:0,0:0,21:0,#3c3f4ccc:1,#17191ecc",
                         shape = gears.rectangle,
                         widget = wibox.container.background
                     },
@@ -237,8 +212,7 @@ _G.client.connect_signal(
                 -- widget = wibox.container.margin
                 layout = wibox.layout.fixed.horizontal
             },
-            layout = wibox.layout.align.horizontal,
-            bg = "linear:0,0:0,21:0,#3c3f4ccc:1,#17191ecc"
+            layout = wibox.layout.align.horizontal
         }
     end
 )

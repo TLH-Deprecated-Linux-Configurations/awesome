@@ -77,7 +77,8 @@
     "root",
     "run_once",
     "filehandle",
-    "serialize"
+    "serialize",
+    "mousegrabber"
   ],
   "Lua.diagnostics.disable": [
     "undefined-field",

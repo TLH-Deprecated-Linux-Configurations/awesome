@@ -5,20 +5,7 @@
 -- ########################################################################
 -- ########################################################################
 -- ########################################################################
-local gears = require("gears")
-local wibox = require("wibox")
-local beautiful = require("beautiful")
 
-local dpi = require("beautiful").xresources.apply_dpi
-
-local apps = require("configuration.settings.apps")
-local clickable_container = require("widget.interface.clickable-container")
-local signals = require("configuration.settings.signals")
-local HOME = os.getenv "HOME"
-
-local widget_icon_dir = HOME .. "/.config/awesome/widget/interface/exit-screen/icons/"
-
-local animate = require("widget.interface.animations").createAnimObject
 -- ########################################################################
 -- ########################################################################
 -- ########################################################################
@@ -155,7 +142,7 @@ end
 -- ########################################################################
 -- ########################################################################
 -- ########################################################################
-local ignore = buildButton(widget_icon_dir .. "close.svg", "Return")
+local ignore = buildButton(icons.close, "Return")
 ignore:connect_signal(
     "button::release",
     function()
@@ -165,7 +152,7 @@ ignore:connect_signal(
 -- ########################################################################
 -- ########################################################################
 -- ########################################################################
-local poweroff = buildButton(widget_icon_dir .. "power.svg", "Shutdown")
+local poweroff = buildButton(icons.power, "Shutdown")
 poweroff:connect_signal(
     "button::release",
     function()
@@ -175,7 +162,7 @@ poweroff:connect_signal(
 -- ########################################################################
 -- ########################################################################
 -- ########################################################################
-local reboot = buildButton(widget_icon_dir .. "restart.svg", "Restart")
+local reboot = buildButton(icons.refresh, "Restart")
 reboot:connect_signal(
     "button::release",
     function()
@@ -185,7 +172,7 @@ reboot:connect_signal(
 -- ########################################################################
 -- ########################################################################
 -- ########################################################################
-local suspend = buildButton(widget_icon_dir .. "sleep.svg", "Sleep")
+local suspend = buildButton(icons.sleep, "Sleep")
 suspend:connect_signal(
     "button::release",
     function()
@@ -195,7 +182,7 @@ suspend:connect_signal(
 -- ########################################################################
 -- ########################################################################
 -- ########################################################################
-local exit = buildButton(widget_icon_dir .. "logout.svg", "Logout")
+local exit = buildButton(icons.logout, "Logout")
 exit:connect_signal(
     "button::release",
     function()
@@ -205,7 +192,7 @@ exit:connect_signal(
 -- ########################################################################
 -- ########################################################################
 -- ########################################################################
-local lock = buildButton(widget_icon_dir .. "lock.svg", "Lock")
+local lock = buildButton(icons.lock, "Lock")
 lock:connect_signal(
     "button::release",
     function()
@@ -215,7 +202,7 @@ lock:connect_signal(
 -- ########################################################################
 -- ########################################################################
 -- ########################################################################
-local bios = buildButton(widget_icon_dir .. "bios.svg", "BIOS")
+local bios = buildButton(icons.bios, "BIOS")
 bios:connect_signal(
     "button::release",
     function()

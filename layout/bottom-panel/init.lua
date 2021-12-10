@@ -83,6 +83,7 @@ local bottom_panel = function(s)
     s.battery = show_widget_or_default("layout.bottom-panel.widgets.battery", hardware.hasBattery(), true)
     s.clock = require "layout.bottom-panel.widgets.clock"
     local notification_center = require "layout.right-panel"
+
     -- ########################################################################
     -- ########################################################################
     -- ########################################################################
@@ -109,6 +110,7 @@ local bottom_panel = function(s)
                 s.network,
                 bluetooth,
                 dropbox,
+                s.screenshoter,
                 layout_box,
                 s.battery,
                 s.clock,

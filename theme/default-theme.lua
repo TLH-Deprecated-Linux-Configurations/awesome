@@ -17,10 +17,9 @@
 --
 local filesystem = require "gears.filesystem"
 local theme_dir = filesystem.get_configuration_dir() .. "/theme"
-local dpi = require "beautiful".xresources.apply_dpi
+local dpi = require"beautiful".xresources.apply_dpi
 local gtk = require "beautiful.gtk"
 local theme_assets = require "beautiful.theme_assets"
-require("awful.hotkeys_popup.keys")
 -- ########################################################################
 -- ########################################################################
 -- ########################################################################
@@ -121,7 +120,7 @@ local awesome_overrides = function(theme)
     -- ########################################################################
     -- Background colors (where the magic happens for the skeuomorphic thing)
     --
-    theme.bg_focus = "linear:0,0:0,21:0,#484d5e:1,#22262d"
+    theme.bg_focus = "linear:0,0:0,21:0,#555e70:1,#22262d"
     theme.bg_urgent = theme.xcolor1
     theme.bg_systray = "linear:0,0:0,32:0,#484d5e:1,#22262d"
     theme.bg_modal = "linear:0,0:0,21:0,#484d5ecc:1,#22262dcc"
@@ -394,7 +393,6 @@ local awesome_overrides = function(theme)
     theme.layout_magnifier = theme_dir .. "/icons/layouts/magnifier.png"
     theme.layout_fairv = theme_dir .. "/icons/layouts/fairv.png"
     theme.layout_fairh = theme_dir .. "/icons/layouts/fairh.png"
-
     theme.layout_thrizen = theme_dir .. "/icons/layouts/thrizen.png"
     theme.layout_fullscreen = theme_dir .. "/icons/layouts/fullscreen.png"
     theme.layout_spiral = theme_dir .. "/icons/layouts/spiral.png"
@@ -403,8 +401,16 @@ local awesome_overrides = function(theme)
     -- ########################################################################
     -- Titlebar
     --
-    theme.is_enable_titlebar = true
+
+    awful.titlebar.enable_tooltip = true
     theme.titlebar_size = dpi(21)
+    theme.titlebar_fg_normal = theme.xcolor15
+    theme.titlebar_bg_normal = theme.bg_normal
+    theme.titlebar_fg_focus = theme.xcolor15
+    theme.titlebar_bg_focus = theme.bg_focus
+
+    -- Titlebar Icons
+    --
     local icon_path = gears.filesystem.get_configuration_dir() .. "theme/icons/"
     local titlebar_icon_path = icon_path .. "titlebar/dhumavati/"
     theme.titlebar_close_button_normal = titlebar_icon_path .. "close-preseed.png"
@@ -425,12 +431,26 @@ local awesome_overrides = function(theme)
     -- theme.titlebar_floating_button_focus_active = titlebar_icon_path .. 'go-left.png'
     theme.titlebar_maximized_button_normal_inactive = titlebar_icon_path .. "maximize-preseed.png"
     theme.titlebar_maximized_button_focus_inactive = titlebar_icon_path .. "maximize-active.png"
+    -- ########################################################################
+    -- ########################################################################
+    -- ########################################################################
+    -- Hot Keys Popup
+    theme.hotkeys_modifiers_fg = theme.xcolor15
+    theme.hotkeys_bg = theme.bg_normal
+    theme.hotkeys_border_width = dpi(1)
+    theme.hotkeys_border_color = theme.xcolor8
+    theme.hotkeys_shape = theme.widget_shape
+    theme.hotkeys_fg = theme.xcolor7
+    theme.hotkeys_label_bg = theme.xolor2
+    theme.hotkeys_group_margin = dpi(4)
+    theme.hotkeys_font = theme.font .. '11'
+    theme.hotkeys_description_font = theme.font .. ' 9'
+    theme.hotkeys_label_fg = theme.xcolor0
+
 end
--- ########################################################################
--- ########################################################################
--- ########################################################################
--- Hot Keys Popup
-theme.hotkeys_modifiers_fg = theme.xcolor7
 
 -- ########################################################################
-return {theme = theme, awesome_overrides = awesome_overrides}
+return {
+    theme = theme,
+    awesome_overrides = awesome_overrides
+}

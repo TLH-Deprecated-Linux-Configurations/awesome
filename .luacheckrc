@@ -57,6 +57,11 @@ exclude_files = {
 
 -- Global objects defined by the C code
 read_globals = {
+	"base",
+	"fixed",
+	"separator",
+	"gshape",
+	"gobject",
 	"ruled",
 	"awesome",
 	"button",
@@ -91,6 +96,11 @@ read_globals = {
 }
 
 globals = {
+	"base",
+	"fixed",
+	"separator",
+	"gshape",
+	"gobject",
 	"gtable",
 	"common",
 	"sound",

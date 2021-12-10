@@ -10,10 +10,7 @@ local volume = require("widget.hardware.volume")
 
 local startup = true
 
-local function play_sound()
-    print("Playing audio-pop sound")
-    spawn.with_shell("paplay ~/.config/awesome/sound/audio-pop.wav")
-end
+local play_sound = require("sound")
 -- ########################################################################
 -- ########################################################################
 -- ########################################################################

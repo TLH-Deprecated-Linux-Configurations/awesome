@@ -95,7 +95,7 @@ local enable = function(opts)
 
     local widget_x = dpi(40)
     local widget_y = dpi(40)
-    local widget_height = dpi(500)
+    local widget_height = dpi(300)
     local widget_width = dpi(500)
     local placement_fn = opts.placement_fn or nil
     -- ########################################################################
