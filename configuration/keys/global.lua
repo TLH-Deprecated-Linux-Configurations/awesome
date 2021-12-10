@@ -28,7 +28,7 @@ local globalKeys =
             awful.menu.menu_keys.up = {'Up', 'Alt_R'}
             awful.menu.clients({theme = {width = 450}}, {keygrabber = true})
         end,
-        {description = 'Open Window Menu', group = 'Launcher'}
+        {description = 'Open Window Menu', group = 'Utility'}
     ),
     -- ########################################################################
     -- ########################################################################
@@ -81,7 +81,7 @@ local globalKeys =
             print('Spawning Applications Menu')
             awful.spawn(apps.default.rofiappmenu)
         end,
-        {description = 'Open Applications Menu', group = 'Launcher'}
+        {description = 'Open Applications Menu', group = 'Utility'}
     ),
     -- ########################################################################
     -- ########################################################################
@@ -403,9 +403,9 @@ local globalKeys =
         'w',
         function()
             print('Focusing Next By Index')
-            awful.client.focus.byidx(1)
+            awful.client.focus.global_bydirection('left')
         end,
-        {description = 'Focus Next by Index', group = 'Client'}
+        {description = 'Focus Client to the Left', group = 'Client'}
     ),
     -- #############################################################################
     awful.key(
@@ -413,9 +413,9 @@ local globalKeys =
         'a',
         function()
             print('Focusing Prior By Index')
-            awful.client.focus.byidx(-1)
+            awful.client.focus.global_bydirection('right')
         end,
-        {description = 'Focus Previous by Index', group = 'Client'}
+        {description = 'Focus Client to the Right', group = 'Client'}
     ),
     -- ########################################################################
     -- ########################################################################
@@ -429,7 +429,7 @@ local globalKeys =
             print('Showing action center')
             _G.screen.primary.left_panel:toggle(true)
         end,
-        {description = 'Open Control panel', group = 'Launcher'}
+        {description = 'Open Control panel', group = 'Utility'}
     ),
     -- #############################################################################
     awful.key(
@@ -441,7 +441,7 @@ local globalKeys =
                 _G.screen.primary.right_panel:toggle()
             end
         end,
-        {description = 'Open Notification Center', group = 'Launcher'}
+        {description = 'Open Notification Center', group = 'Utility'}
     ),
     -- ########################################################################
     -- ########################################################################
@@ -766,7 +766,7 @@ for i = 1, 9 do
             function()
                 local screen = awful.screen.focused()
                 local tag = screen.tags[i]
-                print('Toggeling Tag: ' .. i)
+                print('Toggling Tag: ' .. i)
                 if _G.clear_desktop_selection then
                     _G.clear_desktop_selection()
                 end
@@ -800,7 +800,7 @@ for i = 1, 9 do
             {modkey, 'Control', 'Shift'},
             '#' .. i + 9,
             function()
-                print('Toggeling Tag ' .. i .. ' Focused Client')
+                print('Toggling Tag ' .. i .. ' Focused Client')
                 if _G.clear_desktop_selection then
                     _G.clear_desktop_selection()
                 end

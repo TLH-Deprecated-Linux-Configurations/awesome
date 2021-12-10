@@ -11,8 +11,7 @@ local filesystem = require 'gears.filesystem'
 -- ########################################################################
 -- ########################################################################
 -- lib to retrieve current theme
-local beautiful = require 'beautiful'
-local color = beautiful.xforeground
+
 local HOME = os.getenv 'HOME'
 
 package.loaded['awful.hotkeys_popup.keys.tmux'] = {}
