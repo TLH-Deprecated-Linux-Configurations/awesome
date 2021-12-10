@@ -34,10 +34,12 @@ hererocks:
 
 
 void-dependencies: 
-	sudo xbps-install -S brightnessctl iwd iw kitty firefox caja ranger rofi rofi-devel 
-	sudo xbps-install -S  caja-dropbox  caja-extensions  caja-image-converter  caja-open-terminal  caja-xattr-tags
-	sudo xbps-install -S  xdotool xsel 
-	sudo pip install rofimoji
+	sudo xbps-install -S --noconfirm brightnessctl iwd iw kitty firefox caja ranger rofi rofi-devel 
+	sudo xbps-install -S --noconfirm caja-dropbox  caja-extensions  caja-image-converter  caja-open-terminal  caja-xattr-tags
+	sudo xbps-install -S --noconfirm xdotool xsel libluv libluv-devel  lua lua-devel lua-cjson lua-lpeg lua-luadbi lua-lualdap lua-stdlib-debug lua-stdlib-normalize lia-zlib
+	sudo xbps-install -S --noconfirm lua53 lua53-MessagePack lua53-cjson lua53-devel lua53-lgi lua53-lpeg lua53-luadbi lua53-luaexpat lua53-luafilesystem lua53-lualdap lua53-luaposix 
+	sudo xbps-install -S --noconfirm lua53-luasec lua53-stdlib-debug lua53-stdlib-normalize lua53-vicious lua53-zlib luaposix luasec luasocket 	
+	sudo pip install rofimoji 
 
 allinstall: goautolock awesomefont hererocks void-dependencies
 

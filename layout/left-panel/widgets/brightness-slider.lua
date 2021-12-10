@@ -10,88 +10,61 @@
 -- ########################################################################
 -- ########################################################################
 -- ########################################################################
-local mat_list_item = require("widget.interface.list-item")
-local slider = require("widget.interface.slider")
-local icon_button_button = require("widget.interface.icon-button")
-local icons = require("theme.icons")
-local signals = require("configuration.settings.signals")
-local functions = require("widget.functions")
+-- sets the slider's range and defines its function
+--
+local brightness_slider = slider(5, 255, 1, 5, function(value)
+	if _G.menuopened then
+		_G.brightness.update(value)
+	end
 
-local spawn = require("awful.spawn")
+	spawn("brightnessctl set 255") -- reset pixel values
+	spawn("brightnessctl set " .. value .. " --save")
+end)
 -- ########################################################################
 -- ########################################################################
 -- ########################################################################
---sets the slider's range and defines its function
-local brightness_slider =
-    slider(
-    5,
-    255,
-    1,
-    5,
-    function(value)
-        if (_G.menuopened) then
-            _G.brightness2.update(value)
-        end
-
-        spawn("brightnessctl set 100%") -- reset pixel values
-        spawn("brightnessctl set " .. value .. " --save")
-    end
-)
--- ########################################################################
--- ########################################################################
--- ########################################################################
-_G.brightness1 = brightness_slider
+_G.brightness = brightness_slider
 -- ########################################################################
 -- ########################################################################
 -- ########################################################################
 local update = function()
-    awful.spawn.easy_async_with_shell(
-        [[brightness get]],
-        function(stdout)
-            local brightness = string.match(stdout, "(%d+)")
-            signals.emit_brightness(tonumber(brightness))
-        end
-    )
+	awful.spawn.easy_async_with_shell([[brightness get]], function(stdout)
+		local brightness = string.match(stdout, "(%d+)")
+		signals.emit_brightness(tonumber(brightness))
+	end)
 end
 -- ########################################################################
 -- ########################################################################
 -- ########################################################################
-awesome.connect_signal(
-    "widget::brightness",
-    function(_)
-        update()
-    end
-)
+awesome.connect_signal("widget::brightness", function(_)
+	update()
+end)
 -- ########################################################################
 -- ########################################################################
 -- ########################################################################
 -- The emit will come from the OSD
-signals.connect_brightness(
-    function(value)
-        brightness_slider.update(value)
-    end
-)
+signals.connect_brightness(function(value)
+	brightness_slider.update(value)
+end)
 -- ########################################################################
 -- ########################################################################
 -- ########################################################################
-local icon =
-    wibox.widget {
-    image = icons.light_bulb,
-    widget = wibox.widget.imagebox
-}
+local icon = wibox.widget({
+	image = icons.light_bulb,
+	widget = wibox.widget.imagebox,
+})
 -- ########################################################################
 -- ########################################################################
 -- ########################################################################
-local button = icon_button_button(icon)
+local button = icon_button(icon)
 -- ########################################################################
 -- ########################################################################
 -- ########################################################################
-local brightness_setting =
-    wibox.widget {
-    button,
-    brightness_slider,
-    widget = mat_list_item
-}
+local brightness_setting = wibox.widget({
+	button,
+	brightness_slider,
+	widget = mat_list_item,
+})
 -- ########################################################################
 -- ########################################################################
 -- ########################################################################

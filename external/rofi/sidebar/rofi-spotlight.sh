@@ -1,4 +1,5 @@
-----------------------------------------------------------------------------
+#!/bin/bash
+#----------------------------------------------------------------------------
 # --- Rofi file Browser
 # --
 # --
@@ -16,7 +17,7 @@ MY_PATH="$(dirname "${0}")"
 CONF_DIR="$HOME/.local/share/rofi"
 HIST_file="$CONF_DIR/history.rs"
 
-[[ ! -d "$CONF_DIR" ]] && mkdir -p "$CONF_DIR"
+mkdir -p "$CONF_DIR"
 
 OPENER=open
 TERM_EMU=${TERMINAL:-"st"}
@@ -79,24 +80,21 @@ COMBINED_OPTIONS=(
 
 # Remove duplicates
 while IFS= read -r -d '' x; do
-    ALL_OPTIONS+=("$x")
+	ALL_OPTIONS+=("$x")
 done < <(printf "%s\0" "${COMBINED_OPTIONS[@]}" | sort -uz)
 
 # Create tmp dir for rofi
-if [ ! -d "${TMP_DIR}" ]
-then
-	mkdir -p "${TMP_DIR}";
+if [ ! -d "${TMP_DIR}" ]; then
+	mkdir -p "${TMP_DIR}"
 fi
 
 # Create hist file if it doesn't exist
-if [ ! -f "${HIST_file}" ]
-then
+if [ ! -f "${HIST_file}" ]; then
 	touch "${HIST_file}"
 fi
 
 # Help message
-if [[ ! -z "$@" ]] && [[ "$@" == ":help" ]]
-then
+if [[ ! -z "$@" ]] && [[ "$@" == ":help" ]]; then
 
 	echo "Rofi Spotlight"
 	echo "A Rofi with file and web searching functionality"
@@ -132,283 +130,260 @@ then
 	echo "	:web how to install bedrock linux"
 	echo "	:webbro how to install wine in windowsxp"
 
-	exit;
+	exit
 fi
 
 # Return the icon string
-function icon_file_type(){
+function icon_file_type() {
 
 	icon_name=""
 	mime_type=$(file --mime-type -b "${1}")
 
 	case "${mime_type}" in
-		"inode/directory")
-			case "${1}" in
-				"Desktop/" )
-					icon_name='folder-blue-desktop'
-					;;
-				"Documents/" )
-					icon_name='folder-blue-documents'
-					;;
-				"Downloads/" )
-					icon_name='folder-blue-downloads'
-					;;
-				"Music/" )
-					icon_name='folder-blue-music'
-					;;
-				"Pictures/" )
-					icon_name='folder-blue-pictures'
-					;;
-				"Public/" )
-					icon_name='folder-blue-public'
-					;;
-				"Templates/" )
-					icon_name='folder-blue-templates'
-					;;
-				"Videos/" )
-					icon_name='folder-blue-videos'
-					;;
-				"root/" )
-					icon_name='folder-root'
-					;;
-				"home/" | "${USER}/")
-					icon_name='folder-home'
-					;;
-				*"$" )
-					icon_name='folder-blue'
-					;;
-				*)
-					icon_name='folder-blue'
-					;;
-			esac
+	"inode/directory")
+		case "${1}" in
+		"Desktop/")
+			icon_name='folder-blue-desktop'
+			;;
+		"Documents/")
+			icon_name='folder-blue-documents'
+			;;
+		"Downloads/")
+			icon_name='folder-blue-downloads'
+			;;
+		"Music/")
+			icon_name='folder-blue-music'
+			;;
+		"Pictures/")
+			icon_name='folder-blue-pictures'
+			;;
+		"Public/")
+			icon_name='folder-blue-public'
+			;;
+		"Templates/")
+			icon_name='folder-blue-templates'
+			;;
+		"Videos/")
+			icon_name='folder-blue-videos'
+			;;
+		"root/")
+			icon_name='folder-root'
+			;;
+		"home/" | "${USER}/")
+			icon_name='folder-home'
+			;;
+		*"$")
+			icon_name='folder-blue'
+			;;
+		*)
+			icon_name='folder-blue'
+			;;
+		esac
 		;;
-		"inode/symlink" )
-			icon_name='inode-symlink'
+	"inode/symlink")
+		icon_name='inode-symlink'
+		;;
+	"audio/flac" | "audio/mpeg")
+		icon_name='music'
+		;;
+	"video/mp4")
+		icon_name='video-mp4'
+		;;
+	"video/x-matroska")
+		icon_name=video-x-matroska
+		;;
+	"image/x-xcf")
+		# notify-send '123'
+		icon_name='image-x-xcf'
+		;;
+	"image/jpeg" | "image/png" | "image/svg+xml")
+		icon_name="${CUR_DIR}/${1}"
+		;;
+	"image/gif")
+		icon_name='gif'
+		;;
+	"image/vnd.adobe.photoshop")
+		icon_name='image-vnd.adobe.photoshop'
+		;;
+	"image/webp")
+		icon_name='gif'
+		;;
+	"application/x-pie-executable")
+		icon_name='binary'
+		;;
+	"application/pdf")
+		icon_name='pdf'
+		;;
+	"application/zip")
+		icon_name='application-zip'
+		;;
+	"application/x-xz")
+		icon_name='application-x-xz-compressed-tar'
+		;;
+	"application/x-7z-compressed")
+		icon_name='application-x-7zip'
+		;;
+	"application/x-rar")
+		icon_name='application-x-rar'
+		;;
+	"application/octet-stream" | "application/x-iso9660-image")
+		icon_name='application-x-iso'
+		;;
+	"application/x-dosexec")
+		icon_name='application-x-ms-dos-executable'
+		;;
+	"text/plain")
+		icon_name='application-text'
+		;;
+	"text/x-shellscript")
+		icon_name='application-x-shellscript'
+		;;
+	"font/sfnt" | "application/vnd.ms-opentype")
+		icon_name='application-x-font-ttf'
+		;;
+	*)
+		case "${1}" in
+		*."docx" | *".doc")
+			icon_name='application-msword'
 			;;
-		"audio/flac" | "audio/mpeg" )
-			icon_name='music'
+		*."apk")
+			icon_name='android-package-archive'
 			;;
-		"video/mp4" )
-			icon_name='video-mp4'
+		*)
+			icon_name='unknown'
 			;;
-		"video/x-matroska" )
-			icon_name=video-x-matroska
-			;;
-		"image/x-xcf" )
-			# notify-send '123'
-			icon_name='image-x-xcf'
-			;;
-		"image/jpeg" | "image/png" | "image/svg+xml")
-			icon_name="${CUR_DIR}/${1}"
-			;;
-		"image/gif" )
-			icon_name='gif'
-			;;
-		"image/vnd.adobe.photoshop" )
-			icon_name='image-vnd.adobe.photoshop'
-			;;
-		"image/webp" )
-			icon_name='gif'
-			;;
-		"application/x-pie-executable" )
-			icon_name='binary'
-			;;
-		"application/pdf" )
-			icon_name='pdf'
-			;;
-		"application/zip" )
-			icon_name='application-zip'
-			;;
-		"application/x-xz" ) 
-			icon_name='application-x-xz-compressed-tar'
-			;;
-		"application/x-7z-compressed" )
-			icon_name='application-x-7zip'
-			;;
-		"application/x-rar" )
-			icon_name='application-x-rar'
-			;;
-		"application/octet-stream" | "application/x-iso9660-image" )
-			icon_name='application-x-iso'
-			;;
-		"application/x-dosexec" )
-			icon_name='application-x-ms-dos-executable'
-			;;
-		"text/plain" )
-			icon_name='application-text'
-			;;
-		"text/x-shellscript" )
-			icon_name='application-x-shellscript'
-			;;
-		"font/sfnt" | "application/vnd.ms-opentype" )
-			icon_name='application-x-font-ttf'
-			;;
-		* )
-			case "${1}" in
-				*."docx" | *".doc" )
-					icon_name='application-msword'
-					;;
-				*."apk" )
-					icon_name='android-package-archive'
-					;;
-				* )
-					icon_name='unknown'
-					;;
-			esac
-			;;
+		esac
+		;;
 	esac
 
 	echo "${1}""\0icon\x1f""${icon_name}""\n"
 }
 
-
 # Pass the argument to python script
 function web_search() {
 	# Pass the search query to web-search script
 	python "${MY_PATH}/web-search.py" "${1}"
-	exit;
+	exit
 }
 
 # Handles the web search method
-if [ ! -z "$@" ] && [[ "$@" == ":webbro"* ]]
-then
+if [ ! -z "$@" ] && [[ "$@" == ":webbro"* ]]; then
 	remove=":webbro "
 
 	# Search directly from your web browser
 	web_search "$(printf '%s\n' "${1//$remove/}")"
-	exit;
+	exit
 
-elif [ ! -z "$@" ] && [[ "$@" == ":web"* ]]
-then
+elif [ ! -z "$@" ] && [[ "$@" == ":web"* ]]; then
 	remove=":web "
 
 	# Get search suggestions
 	web_search "!$(printf '%s\n' "${1//$remove/}")"
-	exit;
+	exit
 fi
 
 # file and calls to the web search
-if [ ! -z "$@" ] && ([[ "$@" == /* ]] || [[ "$@" == \?* ]] || [[ "$@" == \!* ]])
-then
+if [ ! -z "$@" ] && ([[ "$@" == /* ]] || [[ "$@" == \?* ]] || [[ "$@" == \!* ]]); then
 	QUERY=$@
 
-	echo "${QUERY}" >> "${HIST_file}"
+	echo "${QUERY}" >>"${HIST_file}"
 
-	if [[ "$@" == /* ]]
-	then
-	
-		if [[ "$@" == *\?\? ]]
-		then
+	if [[ "$@" == /* ]]; then
+
+		if [[ "$@" == *\?\? ]]; then
 			# shellcheck disable=SC1065,SC1073
-			coproc ( "$OPENER" "${QUERY%\/* \?\?}"  > /dev/null 2>&1 )
+			coproc ("$OPENER" "${QUERY%\/* \?\?}" >/dev/null 2>&1)
 			# shellcheck disable=SC1064
 			exec 1>&-
-			exit;
+			exit
 		else
 			# shellcheck disable=SC1065,SC1073
-			coproc ( "$OPENER" "$@"  > /dev/null 2>&1 )
+			coproc ("$OPENER" "$@" >/dev/null 2>&1)
 			# shellcheck disable=SC1064
 			exec 1>&-
-			exit;
+			exit
 		fi
 
-	elif [[ "$@" == \?* ]]
-	then
-		while read -r line
-		do
+	elif [[ "$@" == \?* ]]; then
+		while read -r line; do
 			echo "$line" \?\?
-		done <<< $(find "${HOME}" -iname *"${QUERY#\?}"* 2>&1 | grep -v 'Permission denied\|Input/output error')
+		done <<<$(find "${HOME}" -iname *"${QUERY#\?}"* 2>&1 | grep -v 'Permission denied\|Input/output error')
 
 	else
 		# Find the file
 		find "${HOME}" -iname *"${QUERY#!}"* -exec echo -ne \
-		"{}\0icon\x1f${MY_PATH}/icons/result.svg\n" \; 2>&1 | 
-		grep -av 'Permission denied\|Input/output error'
+			"{}\0icon\x1f${MY_PATH}/icons/result.svg\n" \; 2>&1 |
+			grep -av 'Permission denied\|Input/output error'
 
 		# Web search
 		web_search "${QUERY}"
 	fi
-	exit;
+	exit
 fi
 
 # Create notification if there's an error
 function create_notification() {
-	if [[ "${1}" == "denied" ]]
-	then
+	if [[ "${1}" == "denied" ]]; then
 		notify-send -a "Global Search" "<b>Permission denied!</b>" \
-		'You have no permission to access '"<b>${CUR_DIR}</b>!"
-	elif [[ "${1}" == "deleted" ]]
-	then
+			'You have no permission to access '"<b>${CUR_DIR}</b>!"
+	elif [[ "${1}" == "deleted" ]]; then
 		notify-send -a "Global Search" "<b>Success!</b>" \
-		'file deleted!'
-	elif [[ "${1}" == "trashed" ]]
-	then
+			'file deleted!'
+	elif [[ "${1}" == "trashed" ]]; then
 		notify-send -a "Global Search" "<b>Success!</b>" \
-		'The file has been moved to trash!'	
-	elif [[ "${1}" == "cleared" ]]
-	then
+			'The file has been moved to trash!'
+	elif [[ "${1}" == "cleared" ]]; then
 		notify-send -a "Global Search" "<b>Success!</b>" \
-		'Search history has been successfully cleared!'
+			'Search history has been successfully cleared!'
 
 	else
 		notify-send -a "Global Search" "<b>Somethings wrong I can feel it!</b>" \
-		'This incident will be reported!'
+			'This incident will be reported!'
 	fi
 }
 
 # Show the files in the current directory
 function navigate_to() {
 	# process current dir.
-	if [ -n "${CUR_DIR}" ]
-	then
+	if [ -n "${CUR_DIR}" ]; then
 		CUR_DIR=$(readlink -e "${CUR_DIR}")
-		if [ ! -d "${CUR_DIR}" ] || [ ! -r "${CUR_DIR}" ]
-		then
-			echo "${HOME}" > "${PREV_LOC_file}"
+		if [ ! -d "${CUR_DIR}" ] || [ ! -r "${CUR_DIR}" ]; then
+			echo "${HOME}" >"${PREV_LOC_file}"
 			create_notification "denied"
-	
+
 		else
-			echo "${CUR_DIR}/" > "${PREV_LOC_file}"
+			echo "${CUR_DIR}/" >"${PREV_LOC_file}"
 		fi
 		pushd "${CUR_DIR}" >/dev/null
 	fi
 
 	printf "..\0icon\x1fup\n"
-	
-	if [[ ${SHOW_HIDDEN} == true ]]
-	then
 
-		for i in .*/
-		do
-			if [[ -d "${i}" ]] && ([[ "${i}" != "./" ]] && [[ "${i}" != "../"* ]])
-			then
-				printf "$(icon_file_type "${i}")";
+	if [[ ${SHOW_HIDDEN} == true ]]; then
+
+		for i in .*/; do
+			if [[ -d "${i}" ]] && ([[ "${i}" != "./" ]] && [[ "${i}" != "../"* ]]); then
+				printf "$(icon_file_type "${i}")"
 			fi
 		done
 
-		for i in .*
-		do 
-			if [[ -f "${i}" ]]
-			then
-				printf "$(icon_file_type "${i}")";
+		for i in .*; do
+			if [[ -f "${i}" ]]; then
+				printf "$(icon_file_type "${i}")"
 			fi
 		done
 
 	fi
 
-	for i in */
-	do 
-		if [[ -d "${i}" ]]
-		then
-			printf "$(icon_file_type "${i}")";
+	for i in */; do
+		if [[ -d "${i}" ]]; then
+			printf "$(icon_file_type "${i}")"
 		fi
 	done
 
-	for i in *
-	do 
-		if [[ -f "${i}" ]]
-		then
-			printf "$(icon_file_type "${i}")";
+	for i in *; do
+		if [[ -f "${i}" ]]; then
+			printf "$(icon_file_type "${i}")"
 		fi
 	done
 }
@@ -417,89 +392,73 @@ function navigate_to() {
 function return_xdg_dir() {
 	target_dir=$(echo "$1" | tr "[:lower:]" "[:upper:]")
 
-	if [[ "HOME" == *"${target_dir}"* ]]
-	then
+	if [[ "HOME" == *"${target_dir}"* ]]; then
 		CUR_DIR=$(xdg-user-dir)
-	
-	elif [[ "DESKTOP" == *"${target_dir}"* ]]
-		then
+
+	elif [[ "DESKTOP" == *"${target_dir}"* ]]; then
 		CUR_DIR=$(xdg-user-dir DESKTOP)
-	
-	elif [[ "DOCUMENTS" == *"${target_dir}"* ]]
-		then
+
+	elif [[ "DOCUMENTS" == *"${target_dir}"* ]]; then
 		CUR_DIR=$(xdg-user-dir DOCUMENTS)
-	
-	elif [[ "DOWNLOADS" == *"${target_dir}"* ]]
-		then
+
+	elif [[ "DOWNLOADS" == *"${target_dir}"* ]]; then
 		CUR_DIR=$(xdg-user-dir DOWNLOAD)
-	
-	elif [[ "MUSIC" == *"${target_dir}"* ]]
-		then
+
+	elif [[ "MUSIC" == *"${target_dir}"* ]]; then
 		CUR_DIR=$(xdg-user-dir MUSIC)
-	
-	elif [[ "PICTURES" == *"${target_dir}"* ]]
-		then
+
+	elif [[ "PICTURES" == *"${target_dir}"* ]]; then
 		CUR_DIR=$(xdg-user-dir PICTURES)
-	
-	elif [[ "PUBLICSHARE" == *"${target_dir}"* ]]
-		then
+
+	elif [[ "PUBLICSHARE" == *"${target_dir}"* ]]; then
 		CUR_DIR=$(xdg-user-dir PUBLICSHARE)
-	
-	elif [[ "TEMPLATES" == *"${target_dir}"* ]]
-		then
+
+	elif [[ "TEMPLATES" == *"${target_dir}"* ]]; then
 		CUR_DIR=$(xdg-user-dir TEMPLATES)
-	
-	elif [[ "VIDEOS" == *"${target_dir}"* ]]
-		then
+
+	elif [[ "VIDEOS" == *"${target_dir}"* ]]; then
 		CUR_DIR=$(xdg-user-dir VIDEOS)
-	
-	elif [[ "ROOT" == *"${target_dir}"* ]]
-		then
+
+	elif [[ "ROOT" == *"${target_dir}"* ]]; then
 		CUR_DIR="/"
-	
+
 	else
 		CUR_DIR="${HOME}"
 	fi
 	navigate_to
-	exit;
+	exit
 }
 
 # Show and Clear History
-if [ ! -z "$@" ] && ([[ "$@" == ":sh" ]] || [[ "$@" == ":show_hist" ]])
-then
+if [ ! -z "$@" ] && ([[ "$@" == ":sh" ]] || [[ "$@" == ":show_hist" ]]); then
 	hist=$(tac "${HIST_file}")
 
-	if [ ! -n "${hist}" ]
-	then
+	if [ ! -n "${hist}" ]; then
 		printf ".\0icon\x1fback\n"
 		printf "No history, yet.\0icon\x1ftext-plain\n"
 	fi
 
-	while IFS= read -r line; 
-	do 
-		printf "${line}\0icon\x1f${MY_PATH}/icons/history.svg\n"; 
-	done <<< "${hist}"
-	
-	exit;
+	while IFS= read -r line; do
+		printf "${line}\0icon\x1f${MY_PATH}/icons/history.svg\n"
+	done <<<"${hist}"
 
-elif [ ! -z "$@" ] && ([[ "$@" == ":ch" ]] || [[ "$@" == ":clear_hist" ]])
-then
-	:> "${HIST_file}"
+	exit
+
+elif [ ! -z "$@" ] && ([[ "$@" == ":ch" ]] || [[ "$@" == ":clear_hist" ]]); then
+	: >"${HIST_file}"
 	create_notification "cleared"
 
 	CUR_DIR="${HOME}"
 	navigate_to
-	exit;
+	exit
 fi
 
 # Accepts XDG command
-if [[ ! -z "$@" ]] && [[ "$@" == ":xdg"* ]]
-then
+if [[ ! -z "$@" ]] && [[ "$@" == ":xdg"* ]]; then
 
 	NEXT_DIR=$(echo "$@" | awk '{print $2}')
 
-	if [[ ! -z "$NEXT_DIR" ]]
-	then
+	if [[ ! -z "$NEXT_DIR" ]]; then
 		return_xdg_dir "${NEXT_DIR}"
 	else
 		return_xdg_dir "${HOME}"
@@ -508,131 +467,137 @@ then
 fi
 
 # Read last location, otherwise we default to PWD.
-if [ -f "${PREV_LOC_file}" ]
-then
+if [ -f "${PREV_LOC_file}" ]; then
 	CUR_DIR=$(cat "${PREV_LOC_file}")
 fi
 
-if [[ ! -z "$@" ]] && ([[ "$@" == ":h" ]] || [[ "$@" == ":hidden" ]])
-then
+if [[ ! -z "$@" ]] && ([[ "$@" == ":h" ]] || [[ "$@" == ":hidden" ]]); then
 	SHOW_HIDDEN=true
 	navigate_to
-	exit;
+	exit
 fi
 
 # Handle argument.
-if [ -n "$@" ]
-then
+if [ -n "$@" ]; then
 	CUR_DIR="${CUR_DIR}/$@"
 fi
 
-
 # Context Menu
-if [[ ! -z "$@" ]] && [[ "${ALL_OPTIONS[*]} " == *"${1}"* ]]
-then
+if [[ ! -z "$@" ]] && [[ "${ALL_OPTIONS[*]} " == *"${1}"* ]]; then
 	case "${1}" in
-		"Run" )
-			coproc ( eval "$(cat "${CURRENT_file}")" & > /dev/null 2>&1 )
-			kill -9 $(pgrep rofi)
-			;;
-		"Execute in ${TERM_EMU}" )
-			coproc ( eval "${TERM_EMU} "$(cat "${CURRENT_file}")"" & > /dev/null 2>&1 )
-			kill -9 $(pgrep rofi)
-			;;
-		"Open" )
-			coproc ( eval "${OPENER} "$(cat "${CURRENT_file}")"" & > /dev/null 2>&1 )
-			kill -9 $(pgrep rofi)
-			;;
-		"Open file location in ${TERM_EMU}" )
-			file_path="$(cat "${CURRENT_file}")"
-			coproc ( ${TERM_EMU} bash -c "cd "${file_path%/*}" ; ${SHELL}" & > /dev/null 2>&1 )
-			kill -9 $(pgrep rofi)
-			;;
-		"Open file location in ${file_MANAGER}" )
-			file_path="$(cat "${CURRENT_file}")"
-			coproc ( eval "${file_MANAGER} "${file_path%/*}"" & > /dev/null 2>&1 )
-			kill -9 $(pgrep rofi)
-			;;
-		"Edit" )
-			coproc ( eval "${TERM_EMU} ${EDITOR} $(cat "${CURRENT_file}")" & > /dev/null 2>&1 )
-			kill -9 $(pgrep rofi)
-			;;
-		"Move to trash" )
-			coproc( gio trash "$(cat "${CURRENT_file}")" & > /dev/null 2>&1 )
-			create_notification "trashed"
-			CUR_DIR="$(dirname $(cat "${CURRENT_file}"))"
-			navigate_to
-			;;
-		"Delete" )
-			shred "$(cat "${CURRENT_file}")"
-			rm "$(cat "${CURRENT_file}")"
-			create_notification "deleted"
-			CUR_DIR="$(dirname $(cat "${CURRENT_file}"))"
-			navigate_to
-			;;
-		"Send via Bluetooth" )
-			rfkill unblock bluetooth &&	bluetoothctl power on 
-			sleep 1
-			blueman-sendto "$(cat "${CURRENT_file}")" & > /dev/null 2>&1
-			kill -9 $(pgrep rofi)
-			;;
-		"Back" )
-			CUR_DIR=$(cat "${PREV_LOC_file}")
-			navigate_to
-			;;
+	"Run")
+		coproc (
+			eval "$(cat "${CURRENT_file}")" &
+			>/dev/null 2>&1
+		)
+		kill -9 $(pgrep rofi)
+		;;
+	"Execute in ${TERM_EMU}")
+		coproc (
+			eval "${TERM_EMU} "$(cat "${CURRENT_file}")"" &
+			>/dev/null 2>&1
+		)
+		kill -9 $(pgrep rofi)
+		;;
+	"Open")
+		coproc (
+			eval "${OPENER} "$(cat "${CURRENT_file}")"" &
+			>/dev/null 2>&1
+		)
+		kill -9 $(pgrep rofi)
+		;;
+	"Open file location in ${TERM_EMU}")
+		file_path="$(cat "${CURRENT_file}")"
+		coproc (
+			${TERM_EMU} bash -c "cd "${file_path%/*}" ; ${SHELL}" &
+			>/dev/null 2>&1
+		)
+		kill -9 $(pgrep rofi)
+		;;
+	"Open file location in ${file_MANAGER}")
+		file_path="$(cat "${CURRENT_file}")"
+		coproc (
+			eval "${file_MANAGER} "${file_path%/*}"" &
+			>/dev/null 2>&1
+		)
+		kill -9 $(pgrep rofi)
+		;;
+	"Edit")
+		coproc (
+			eval "${TERM_EMU} ${EDITOR} $(cat "${CURRENT_file}")" &
+			>/dev/null 2>&1
+		)
+		kill -9 $(pgrep rofi)
+		;;
+	"Move to trash")
+		coproc (
+			gio trash "$(cat "${CURRENT_file}")" &
+			>/dev/null 2>&1
+		)
+		create_notification "trashed"
+		CUR_DIR="$(dirname $(cat "${CURRENT_file}"))"
+		navigate_to
+		;;
+	"Delete")
+		shred "$(cat "${CURRENT_file}")"
+		rm "$(cat "${CURRENT_file}")"
+		create_notification "deleted"
+		CUR_DIR="$(dirname $(cat "${CURRENT_file}"))"
+		navigate_to
+		;;
+	"Send via Bluetooth")
+		rfkill unblock bluetooth && bluetoothctl power on
+		sleep 1
+		blueman-sendto "$(cat "${CURRENT_file}")" &
+		>/dev/null 2>&1
+		kill -9 $(pgrep rofi)
+		;;
+	"Back")
+		CUR_DIR=$(cat "${PREV_LOC_file}")
+		navigate_to
+		;;
 	esac
-	exit;
+	exit
 fi
 
 function context_menu_icons() {
 
-	if [[ "${1}" == "Run" ]]
-	then
+	if [[ "${1}" == "Run" ]]; then
 		echo '\0icon\x1fsystem-run\n'
 
-	elif [[ "${1}" == "Execute in ${TERM_EMU}" ]]
-	then
+	elif [[ "${1}" == "Execute in ${TERM_EMU}" ]]; then
 		echo "\0icon\x1f${TERM_EMU}\n"
 
-	elif [[ "${1}" == "Open" ]]
-	then
+	elif [[ "${1}" == "Open" ]]; then
 		echo "\0icon\x1futilities-x-terminal\n"
 
-	elif [[ "${1}" == "Open file location in ${TERM_EMU}" ]]
-	then
+	elif [[ "${1}" == "Open file location in ${TERM_EMU}" ]]; then
 		echo "\0icon\x1f${TERM_EMU}\n"
 
-	elif [[ "${1}" == "Open file location in ${file_MANAGER}" ]]
-	then
+	elif [[ "${1}" == "Open file location in ${file_MANAGER}" ]]; then
 		echo "\0icon\x1fblue-folder-open\n"
 
-	elif [[ "${1}" == "Edit" ]]
-	then
+	elif [[ "${1}" == "Edit" ]]; then
 		echo "\0icon\x1faccessories-text-editor\n"
 
-	elif [[ "${1}" == "Move to trash" ]]
-	then
+	elif [[ "${1}" == "Move to trash" ]]; then
 		echo "\0icon\x1fapplication-x-trash\n"
 
-	elif [[ "${1}" == "Delete" ]]
-	then
+	elif [[ "${1}" == "Delete" ]]; then
 		echo "\0icon\x1findicator-trashindicator\n"
 
-	elif [[ "${1}" == "Send via Bluetooth" ]]
-	then
+	elif [[ "${1}" == "Send via Bluetooth" ]]; then
 		echo "\0icon\x1fbluetooth\n"
 
-	elif [[ "${1}" == "Back" ]]
-	then
+	elif [[ "${1}" == "Back" ]]; then
 		echo "\0icon\x1fback\n"
 	fi
 }
 
 function print_context_menu() {
 	declare -a arg_arr=("${!1}")
-	
-	for menu in "${arg_arr[@]}"
-	do
+
+	for menu in "${arg_arr[@]}"; do
 		printf "$menu$(context_menu_icons "${menu}")\n"
 	done
 }
@@ -640,53 +605,52 @@ function print_context_menu() {
 function context_menu() {
 
 	type=$(file --mime-type -b "${CUR_DIR}")
-	
-	if [ -w "${CUR_DIR}" ] && [[ "${type}" == "text/x-shellscript" ]]
-	then
+
+	if [ -w "${CUR_DIR}" ] && [[ "${type}" == "text/x-shellscript" ]]; then
 		print_context_menu SHELL_OPTIONS[@]
 
-	elif [[ "${type}" == "text/plain" ]]
-	then
+	elif [[ "${type}" == "text/plain" ]]; then
 		print_context_menu TEXT_OPTIONS[@]
-	
-	elif [[ "${type}" == "image/jpeg" ]] || [[ "${type}" == "image/png" ]]
-	then
+
+	elif [[ "${type}" == "image/jpeg" ]] || [[ "${type}" == "image/png" ]]; then
 		print_context_menu IMAGE_OPTIONS[@]
-	
-	elif [[ "${type}" == "image/x-xcf" ]] || [[ "${type}" == "image/svg+xml" ]]
-	then
+
+	elif [[ "${type}" == "image/x-xcf" ]] || [[ "${type}" == "image/svg+xml" ]]; then
 		print_context_menu XCF_SVG_OPTIONS[@]
-	
-	elif [ ! -w "${CUR_DIR}" ] && [[ "${type}" == "text/x-shellscript" ]]
-	then
-		coproc ( exec "${CUR_DIR}" & > /dev/null  2>&1 )
-	
+
+	elif [ ! -w "${CUR_DIR}" ] && [[ "${type}" == "text/x-shellscript" ]]; then
+		coproc (
+			exec "${CUR_DIR}" &
+			>/dev/null 2>&1
+		)
+
 	else
-		if [ ! -d "${CUR_DIR}" ] && [ ! -f "${CUR_DIR}" ]
-		then
+		if [ ! -d "${CUR_DIR}" ] && [ ! -f "${CUR_DIR}" ]; then
 			QUERY="${CUR_DIR//*\/\//}"
 
-			echo "${QUERY}" >> "${HIST_file}"
+			echo "${QUERY}" >>"${HIST_file}"
 
 			find "${HOME}" -iname *"${QUERY#!}"* -exec echo -ne \
-			"{}\0icon\x1f${MY_PATH}/icons/result.svg\n" \; 2>&1 | 
-			grep -av 'Permission denied\|Input/output error'
+				"{}\0icon\x1f${MY_PATH}/icons/result.svg\n" \; 2>&1 |
+				grep -av 'Permission denied\|Input/output error'
 
 			web_search "!${QUERY}"
 		else
-			coproc ( ${OPENER} "${CUR_DIR}" & > /dev/null  2>&1 )
+			coproc (
+				${OPENER} "${CUR_DIR}" &
+				>/dev/null 2>&1
+			)
 		fi
 	fi
-	exit;
+	exit
 
 }
 
 # If argument is not a directory/folder
-if [ ! -d "${CUR_DIR}" ]
-then
-	echo "${CUR_DIR}" > "${CURRENT_file}"
+if [ ! -d "${CUR_DIR}" ]; then
+	echo "${CUR_DIR}" >"${CURRENT_file}"
 	context_menu
-	exit;
+	exit
 fi
 
 navigate_to

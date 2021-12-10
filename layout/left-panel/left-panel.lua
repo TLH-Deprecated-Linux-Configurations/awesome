@@ -9,11 +9,11 @@
 -- ########################################################################
 -- ########################################################################
 -- ########################################################################
-local PATH_TO_ICONS = HOME .. "/.config/awesome/layout/left-panel/icons/"
-local apps = require "configuration.settings.apps"
-local animate = require "widget.interface.animations".createAnimObject
-local get_screen = require "widget.functions.common".focused_screen
-local keyconfig = require "configuration.keys.mod"
+local PATH_TO_ICONS = HOME .. '/.config/awesome/layout/left-panel/icons/'
+local apps = require 'configuration.settings.apps'
+local animate = require 'widget.interface.animations'.createAnimObject
+local get_screen = require 'widget.functions.common'.focused_screen
+local keyconfig = require 'configuration.keys.mod'
 local modKey = keyconfig.modKey
 -- body gets populated with a scrollbox widget once generated
 local body = {}
@@ -30,8 +30,8 @@ local left_panel_func = function()
         wibox {
         ontop = true,
         screen = s,
-        bg = "#00000033",
-        type = "dock",
+        bg = '#00000033',
+        type = 'dock',
         x = s.geometry.x,
         y = s.geometry.y,
         width = s.geometry.width,
@@ -66,7 +66,7 @@ local left_panel_func = function()
     -- ########################################################################
     -- ########################################################################
     screen.connect_signal(
-        "removed",
+        'removed',
         function(removed)
             if s == removed then
                 s = get_screen()
@@ -79,7 +79,7 @@ local left_panel_func = function()
     -- this is called when we need to update the screen
     signals.connect_refresh_screen(
         function()
-            print "Refreshing action center"
+            print 'Refreshing action center'
             if left_panel == nil then
                 return
             end
@@ -107,7 +107,7 @@ local left_panel_func = function()
         if grabber then
             grabber:start()
         end
-        left_panel:emit_signal "opened"
+        left_panel:emit_signal 'opened'
         s = get_screen()
         -- ########################################################################
         -- ########################################################################
@@ -122,7 +122,7 @@ local left_panel_func = function()
             _G.anim_speed,
             left_panel,
             {opacity = 1, x = s.geometry.x},
-            "outCubic",
+            'outCubic',
             function()
                 update_backdrop_location()
             end
@@ -144,14 +144,14 @@ local left_panel_func = function()
             _G.anim_speed,
             left_panel,
             {opacity = 0, x = s.geometry.x - left_panel_width},
-            "outCubic",
+            'outCubic',
             function()
                 left_panel.visible = false
                 -- Change to notify mode on close
                 if grabber then
                     grabber:stop()
                 end
-                left_panel:emit_signal "closed"
+                left_panel:emit_signal 'closed'
                 update_backdrop_location()
             end
         )
@@ -164,7 +164,7 @@ local left_panel_func = function()
         keybindings = {
             awful.key {
                 modifiers = {},
-                key = "Escape",
+                key = 'Escape',
                 on_press = function()
                     left_panel.opened = false
                     closeleft_panel()
@@ -180,8 +180,8 @@ local left_panel_func = function()
             }
         },
         -- Note that it is using the key name and not the modifier name.
-        stop_key = "Escape",
-        stop_event = "release"
+        stop_key = 'Escape',
+        stop_event = 'release'
     }
     -- ########################################################################
     -- ########################################################################
@@ -195,15 +195,15 @@ local left_panel_func = function()
         keybindings = {
             awful.key {
                 modifiers = {},
-                key = "Escape",
+                key = 'Escape',
                 on_press = function()
                     left_panel:close()
                 end
             }
         },
         -- Note that it is using the key name and not the modifier name.
-        stop_key = "Escape",
-        stop_event = "release"
+        stop_key = 'Escape',
+        stop_event = 'release'
     }
 
     -- ########################################################################
@@ -234,14 +234,6 @@ local left_panel_func = function()
     -- ########################################################################
     -- ########################################################################
     -- ########################################################################
-    function left_panel:run_wifi()
-        action_grabber:stop()
-        _G.awesome.spawn(apps.default.rofiwifimenu, false, false, false, false, left_panel:toggle())
-    end
-
-    -- ########################################################################
-    -- ########################################################################
-    -- ########################################################################
     backdrop:buttons(
         awful.util.table.join(
             awful.button(
@@ -253,10 +245,11 @@ local left_panel_func = function()
             )
         )
     )
+
     -- ########################################################################
     -- ########################################################################
     -- ########################################################################
-    local exit_button_widget = wibox.widget.imagebox(PATH_TO_ICONS .. "power.svg")
+    local exit_button_widget = wibox.widget.imagebox(PATH_TO_ICONS .. 'power.svg')
     local exit_button =
         button(
         exit_button_widget,
@@ -266,31 +259,43 @@ local left_panel_func = function()
             _G.exit_screen_show()
         end
     )
-
     -- ########################################################################
     -- ########################################################################
     -- ########################################################################
-    local separator = seperator_widget(20, "vertical", 0)
-    local topSeparator = seperator_widget(20, "horizontal", 0)
-    local bottomSeparator = seperator_widget(5, "horizontal", 0)
+    local search_button_widget = wibox.widget.imagebox(icons.search_circle)
+    local search_button =
+        button(
+        search_button_widget,
+        function()
+            left_panel:toggle()
+            action_grabber:stop()
+            awful.spawn(apps.default.web)
+        end
+    )
+    -- ########################################################################
+    -- ########################################################################
+    -- ########################################################################
+    local separator = seperator_widget(20, 'vertical', 0)
+    local topSeparator = seperator_widget(20, 'horizontal', 0)
+    local bottomSeparator = seperator_widget(5, 'horizontal', 0)
 
     -- ########################################################################
     -- ########################################################################
     -- ########################################################################
     local function settings_plugin()
-        local screen_card = card "System Tray"
+        local screen_card = card 'System Tray'
         -- ########################################################################
         -- ########################################################################
         -- ########################################################################
-        screen_card.update_body(require "layout.left-panel.widgets.systray")
+        screen_card.update_body(require 'layout.left-panel.widgets.systray')
         -- ########################################################################
         -- ########################################################################
         -- ########################################################################
         local table_widget =
             wibox.widget {
             topSeparator,
-            require "layout.left-panel.widgets.quick-settings",
-            require "layout.left-panel.widgets.hardware-monitor"(s),
+            require 'layout.left-panel.widgets.quick-settings',
+            require 'layout.left-panel.widgets.hardware-monitor'(s),
             separator,
             wibox.container.margin(screen_card, dpi(20), dpi(20), dpi(20), dpi(20)),
             separator,
@@ -312,11 +317,22 @@ local left_panel_func = function()
                 layout = wibox.layout.fixed.vertical,
                 wibox.widget {
                     wibox.widget {
+                        search_button,
+                        widget = clickable_container,
+                        bg = beautiful.bg_normal,
+                        border_width = dpi(3),
+                        border_color = beautiful.xcolor7 .. '66',
+                        shape = beautiful.btn_lg_shape
+                    },
+                    widget = mat_list_item
+                },
+                wibox.widget {
+                    wibox.widget {
                         exit_button,
                         widget = clickable_container,
                         bg = beautiful.bg_normal,
                         border_width = dpi(3),
-                        border_color = beautiful.xcolor7 .. "66",
+                        border_color = beautiful.xcolor7 .. '66',
                         shape = beautiful.btn_lg_shape
                     },
                     widget = mat_list_item
@@ -333,7 +349,7 @@ local left_panel_func = function()
     -- ########################################################################
     -- ########################################################################
     left_panel:setup {
-        expand = "none",
+        expand = 'none',
         layout = wibox.layout.fixed.vertical,
         body
     }

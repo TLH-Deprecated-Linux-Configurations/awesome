@@ -7,7 +7,7 @@
 -- ########################################################################
 -- ########################################################################
 
-local naughty = require("naughty")
+local naughty = require('naughty')
 
 -- Load the wallpaper if set it on each screen
 --
@@ -15,12 +15,12 @@ awful.screen.connect_for_each_screen(
     function(s)
         -- If wallpaper is a function, call it with the screen
         if beautiful.wallpaper then
-            if type(beautiful.wallpaper) == "string" then
-                if beautiful.wallpaper:sub(1, #"#") == "#" then
+            if type(beautiful.wallpaper) == 'string' then
+                if beautiful.wallpaper:sub(1, #'#') == '#' then
                     gears.wallpaper.set(beautiful.wallpaper)
-                elseif beautiful.wallpaper:sub(1, #"/") == "/" then
+                elseif beautiful.wallpaper:sub(1, #'/') == '/' then
                     gears.wallpaper.maximized(beautiful.wallpaper, s)
-                    print("Setting wallpaper: " .. beautiful.wallpaper)
+                    print('Setting wallpaper: ' .. beautiful.wallpaper)
                 end
             else
                 beautiful.wallpaper(s)
@@ -34,12 +34,14 @@ awful.screen.connect_for_each_screen(
 -- Signal function to execute when a new client appears.
 --
 _G.client.connect_signal(
-    "manage",
+    'manage',
     function(c)
         -- Set the windows as the "slave", their word and I agree it is a little tasteless
         --
         if not _G.awesome.startup then
             awful.client.setslave(c)
+            awful.placement.no_offscreen(c)
+            awful.placement.no_overlap(c)
         end
 
         if _G.awesome.startup and not c.size_hints.user_position and not c.size_hints.program_position then
@@ -61,11 +63,11 @@ _G.client.connect_signal(
 -- they included a setting rendering sloppy focus useless...
 --
 _G.client.connect_signal(
-    "mouse::enter",
+    'mouse::enter',
     function(c)
         c:emit_signal(
-            "request::activate",
-            "mouse_enter" -- , {raise = true}
+            'request::activate',
+            'mouse_enter' -- , {raise = true}
         )
     end
 )
@@ -75,7 +77,7 @@ _G.client.connect_signal(
 -- set the client border for focused client
 --
 _G.client.connect_signal(
-    "focus",
+    'focus',
     function(c)
         c.border_color = beautiful.border_focus
     end
@@ -86,7 +88,7 @@ _G.client.connect_signal(
 -- set the client border color
 --
 _G.client.connect_signal(
-    "unfocus",
+    'unfocus',
     function(c)
         c.border_color = beautiful.border_normal
     end
@@ -103,7 +105,7 @@ if awesome.startup_errors then
     naughty.notify(
         {
             preset = naughty.config.presets.critical,
-            title = "Oops, there were errors during startup!",
+            title = 'Oops, there were errors during startup!',
             text = awesome.startup_errors
         }
     )
@@ -116,7 +118,7 @@ end
 do
     local in_error = false
     awesome.connect_signal(
-        "debug::error",
+        'debug::error',
         function(err)
             -- Make sure we don't go into an endless error loop, they suck
             --
@@ -128,7 +130,7 @@ do
             naughty.notify(
                 {
                     preset = naughty.config.presets.critical,
-                    title = "Well Shucks, I am Broken Again!",
+                    title = 'Well Shucks, I am Broken Again!',
                     text = tostring(err)
                 }
             )
