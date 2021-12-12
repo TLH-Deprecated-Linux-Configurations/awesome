@@ -4,6 +4,9 @@
         "root",
         "screen",
         "mouse",
-        "client"
+        "client",
+        "beautiful",
+        "awful",
+        "gears"
     ]
 }
