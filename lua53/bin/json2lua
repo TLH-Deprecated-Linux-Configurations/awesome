@@ -1,3 +1,0 @@
-#!/bin/sh
-
-LUAROCKS_SYSCONFDIR='/home/tlh/.config/awesome/lua53/etc/luarocks' exec '/home/tlh/.config/awesome/lua53/bin/lua' -e 'package.path="/home/tlh/.config/awesome/lua53/share/lua/5.3/?.lua;/home/tlh/.config/awesome/lua53/share/lua/5.3/?/init.lua;"..package.path;package.cpath="/home/tlh/.config/awesome/lua53/lib/lua/5.3/?.so;"..package.cpath;local k,l,_=pcall(require,"luarocks.loader") _=k and l.add_context("lua-cjson","2.1.0.6-1")' '/home/tlh/.config/awesome/lua53/lib/luarocks/rocks-5.3/lua-cjson/2.1.0.6-1/bin/json2lua' "$@"

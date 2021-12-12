@@ -1,69 +1,87 @@
---  _______                                             ________ _______
--- |   _   |.--.--.--.-----.-----.-----.--------.-----.|  |  |  |   |   |
--- |       ||  |  |  |  -__|__ --|  _  |        |  -__||  |  |  |       |
--- |___|___||________|_____|_____|_____|__|__|__|_____||________|__|_|__|
--- ########################################################################
---  By Thomas Leon Highbaugh
---  As part of the Electric Tantra Linux
--- ########################################################################
--- ########################################################################
--- ########################################################################
--- If LuaRocks is installed, make sure that packages installed through it are
--- found (e.g. lgi). If LuaRocks is not installed, do nothing.
---
-pcall(require, "luarocks.loader")
-pcall(require, "lua53.luarocks.loader")
--- ########################################################################
--- First get logging ready
---
-require("widget.functions.luapath")
-require("widget.functions.logger")
+-- ░█▀▀░█░█░█▀▄░█▀▄░█▀▀░█▀█░█░░
+-- ░▀▀█░█░█░█▀▄░█▀▄░█▀▀░█▀█░█░░
+-- ░▀▀▀░▀▀▀░▀░▀░▀░▀░▀▀▀░▀░▀░▀▀▀
+-- Banner generated using `toilet -f pagga AwesomeWM"
 
--- An example of how that works
---
-print("Booting up...")
--- ########################################################################
--- Function for garbage collection to keep memory use stable
-require("configuration.settings.garbage")
--- ########################################################################
-require("configuration.settings.global_var")
+local gears = require('gears')
+local beautiful = require('beautiful')
+local awful = require('awful')
+require('awful.autofocus')
 
--- ########################################################################
--- Pull in this for focus following the mouse
---
-require("awful.autofocus")
--- ########################################################################
--- Load the notifications & errors early to get the messages when things go wrong
---
-require("configuration.settings")
--- ########################################################################
--- Titlebar with custom icons
---
-require("widget.interface.titlebar")
+-- ░█▀▀░█░█░█▀▀░█░░░█░░
+-- ░▀▀█░█▀█░█▀▀░█░░░█░░
+-- ░▀▀▀░▀░▀░▀▀▀░▀▀▀░▀▀▀
 
--- ########################################################################
--- Layout which features the bars
---
-require("layout")
--- ########################################################################
---
-require("configuration.settings")
-require("widget.interface.exit-screen")
-require("widget.hardware")
+awful.util.shell = 'zsh'
 
-require("widget.hardware.battery.battery-notifier")
+-- ░▀█▀░█░█░█▀▀░█▄█░█▀▀
+-- ░░█░░█▀█░█▀▀░█░█░█▀▀
+-- ░░▀░░▀░▀░▀▀▀░▀░▀░▀▀▀
 
--- ########################################################################
--- Setup configurations of client, keys and tags
---
-require("configuration.client")
-require("configuration.tags")
-_G.root.keys(require("configuration.keys.global"))
+beautiful.init(require('theme'))
 
-require("sound")
--- ########################################################################
--- Other bootup functions
---
-require("configuration.settings.bootup_configuration")
-require("configuration.settings")
-require("widget")
+-- ░█░░░█▀█░█░█░█▀█░█░█░▀█▀
+-- ░█░░░█▀█░░█░░█░█░█░█░░█░
+-- ░▀▀▀░▀░▀░░▀░░▀▀▀░▀▀▀░░▀░
+
+require('layout')
+
+-- ░█▀▀░█▀█░█▀█░█▀▀░▀█▀░█▀▀░█░█░█▀▄░█▀█░▀█▀░▀█▀░█▀█░█▀█░█▀▀
+-- ░█░░░█░█░█░█░█▀▀░░█░░█░█░█░█░█▀▄░█▀█░░█░░░█░░█░█░█░█░▀▀█
+-- ░▀▀▀░▀▀▀░▀░▀░▀░░░▀▀▀░▀▀▀░▀▀▀░▀░▀░▀░▀░░▀░░▀▀▀░▀▀▀░▀░▀░▀▀▀
+
+require('configuration.client')
+require('configuration.root')
+require('configuration.tags')
+root.keys(require('configuration.keys.global'))
+
+-- ░█▄█░█▀█░█▀▄░█░█░█░░░█▀▀░█▀▀
+-- ░█░█░█░█░█░█░█░█░█░░░█▀▀░▀▀█
+-- ░▀░▀░▀▀▀░▀▀░░▀▀▀░▀▀▀░▀▀▀░▀▀▀
+
+require('module.notifications')
+require('module.auto-start')
+require('module.exit-screen')
+require('module.quake-terminal')
+require('module.menu')
+require('module.titlebar')
+require('module.brightness-osd')
+require('module.volume-osd')
+require('module.lockscreen')
+require('module.application-switcher')
+
+-- ░█░█░█▀█░█░░░█░░░█▀█░█▀█░█▀█░█▀▀░█▀▄
+-- ░█▄█░█▀█░█░░░█░░░█▀▀░█▀█░█▀▀░█▀▀░█▀▄
+-- ░▀░▀░▀░▀░▀▀▀░▀▀▀░▀░░░▀░▀░▀░░░▀▀▀░▀░▀
+
+screen.connect_signal(
+    'request::wallpaper',
+    function(s)
+        -- If wallpaper is a function, call it with the screen
+        if beautiful.wallpaper then
+            if type(beautiful.wallpaper) == 'string' then
+                -- Check if beautiful.wallpaper is color/image
+                if beautiful.wallpaper:sub(1, #'#') == '#' then
+                    -- If beautiful.wallpaper is color
+                    gears.wallpaper.set(beautiful.wallpaper)
+                elseif beautiful.wallpaper:sub(1, #'/') == '/' then
+                    -- If beautiful.wallpaper is path/image
+                    gears.wallpaper.maximized(beautiful.wallpaper, s)
+                end
+            else
+                beautiful.wallpaper(s)
+            end
+        end
+    end
+)
+
+awful.util.spawn_with_shell('nm-applet --indicator &')
+awful.util.spawn_with_shell('xfce4-power-manager &')
+awful.util.spawn_with_shell('picom &')
+awful.util.spawn_with_shell('xfce4-clipman &')
+awful.util.spawn_with_shell('numlockx on &')
+awful.util.spawn_with_shell(
+    '/usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1 & eval $(gnome-keyring-daemon -s --components=pkcs11,secrets,ssh,gpg) &'
+)
+awful.util.spawn_with_shell('iris &')
+awful.util.spawn_with_shell('virtdown &')

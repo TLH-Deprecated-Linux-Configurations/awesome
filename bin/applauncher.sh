@@ -2,9 +2,8 @@
 set -o noglob
 
 DPI="$1"
-CONFIG="$2"
 
-theme="$CONFIG/external/rofi/appmenu/drun.rasi"
+theme="$HOME/.config/awesome/configuration/rofi/appmenu/rofi.rasi"
 
 result="$(rofi -dpi "$DPI" -show drun -theme "$theme")"
 

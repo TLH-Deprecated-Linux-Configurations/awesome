@@ -6,22 +6,24 @@
 -- ########################################################################
 -- ########################################################################
 -- ########################################################################
-local awful = require("awful") -- necessary here for reasons of ordering
-
+local awful = require('awful') -- necessary here for reasons of ordering
+local beautiful = require('beautiful')
+local gears = require('gears')
+local tag = tag
+local dpi = beautiful.xresources.apply_dpi
 -- These are only called here, so they are retained in this file
 -- instead of configuration.settings.global_var
 --
-local empathy = require("configuration.tags.layouts.empathy")
-local stack = require("configuration.tags.layouts.stack")
-local centermaster = require("configuration.tags.layouts.centermaster")
-local thrizen = require("configuration.tags.layouts.thrizen")
+local empathy = require('configuration.tags.layouts.empathy')
+local stack = require('configuration.tags.layouts.stack')
+local centermaster = require('configuration.tags.layouts.centermaster')
+local thrizen = require('configuration.tags.layouts.thrizen')
 
-
 -- ########################################################################
 -- ########################################################################
 -- ########################################################################
-_G.tag.connect_signal(
-    "request::default_layouts",
+tag.connect_signal(
+    'request::default_layouts',
     function(s)
         awful.layout.append_default_layouts(
             {
@@ -58,7 +60,7 @@ awful.screen.connect_for_each_screen(
     function(s)
         -- Each screen has its own tag table.
 
-        local tag_names = {"A", "W", "E", "S", "O", "M", "E"}
+        local tag_names = {'A', 'W', 'E', 'S', 'O', 'M', 'E'}
         for idx, name in ipairs(tag_names) do
             local selected = false
             if idx == 1 then
@@ -88,10 +90,10 @@ awful.screen.connect_for_each_screen(
 -- ########################################################################
 -- ########################################################################
 -- ########################################################################
-_G.tag.connect_signal(
-    "property::layout",
+tag.connect_signal(
+    'property::layout',
     function(t)
-        local currentLayout = awful.tag.getproperty(t, "layout")
+        local currentLayout = awful.tag.getproperty(t, 'layout')
         if (currentLayout == awful.layout.suit.max) then
             t.gap = dpi(4)
         else
