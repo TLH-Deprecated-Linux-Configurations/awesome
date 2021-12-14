@@ -115,8 +115,8 @@ local awesome_overrides = function(theme)
     -- theme.titlebar_maximized_button_focus_active_hover = tip .. 'maximized_focus_active_hover.svg'
 
     -- UI Groups
-    theme.groups_title_bg = '#ffffff' .. '15'
-    theme.groups_bg = '#ffffff' .. '10'
+    theme.groups_title_bg = 'linear:0,0:0,21:0,#484d5e:1,#23262e'
+    theme.groups_bg = 'linear:0,0:0,21:0,#484d5e:1,#23262e'
     theme.groups_radius = dpi(16)
 
     -- UI events
@@ -130,12 +130,12 @@ local awesome_overrides = function(theme)
     -- Borders
     theme.border_focus = gtk_variable().bg_color
     theme.border_normal = gtk_variable().base_color
-    theme.border_marked = '#CC9393'
+    theme.border_marked = '#f4f4f7'
     theme.border_width = dpi(0)
     theme.border_radius = dpi(12)
 
     -- Decorations
-    theme.useless_gap = dpi(4)
+    theme.useless_gap = dpi(8)
     theme.client_shape_rounded = function(cr, width, height)
         gears.shape.rounded_rect(cr, width, height, dpi(12))
     end
@@ -215,9 +215,9 @@ local awesome_overrides = function(theme)
     theme.tasklist_bg_normal = 'linear:0,0:0,21:0,#2f303d:1,#1C1E24'
     theme.tasklist_bg_focus = 'linear:0,0:0,21:0,#484d5e:1,#23262e'
     theme.tasklist_bg_urgent = '#E91E63' .. '99'
-    theme.tasklist_fg_focus = '#DDDDDD'
+    theme.tasklist_fg_focus = '#f4f4f7'
     theme.tasklist_fg_urgent = '#ffffff'
-    theme.tasklist_fg_normal = '#AAAAAA'
+    theme.tasklist_fg_normal = '#b2bfd9'
 
     -- Notification
     theme.notification_position = 'top_left'

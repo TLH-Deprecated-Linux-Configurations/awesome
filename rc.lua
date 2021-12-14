@@ -10,38 +10,27 @@
 -- ########################################################################
 -- ########################################################################
 -- ########################################################################
-local gears = require('gears')
-local beautiful = require('beautiful')
-local awful = require('awful')
+
+require('configuration.global_variables')
+require('configuration.garbage_collection')
 require('awful.autofocus')
-dofile('configuration.global_variables')
 -- ########################################################################
 -- ########################################################################
 -- ########################################################################
--- shell
+-- Theme
 --
-awful.util.shell = 'zsh'
-
--- ########################################################################
--- ########################################################################
--- ########################################################################
--- theme
 beautiful.init(require('theme'))
-
--- ░█░░░█▀█░█░█░█▀█░█░█░▀█▀
--- ░█░░░█▀█░░█░░█░█░█░█░░█░
--- ░▀▀▀░▀░▀░░▀░░▀▀▀░▀▀▀░░▀░
-
+-- ########################################################################
+-- ########################################################################
+-- ########################################################################
+-- Layout
 require('layout')
+-- ########################################################################
+-- ########################################################################
+-- ########################################################################
+-- Configuration
 
--- ░█▀▀░█▀█░█▀█░█▀▀░▀█▀░█▀▀░█░█░█▀▄░█▀█░▀█▀░▀█▀░█▀█░█▀█░█▀▀
--- ░█░░░█░█░█░█░█▀▀░░█░░█░█░█░█░█▀▄░█▀█░░█░░░█░░█░█░█░█░▀▀█
--- ░▀▀▀░▀▀▀░▀░▀░▀░░░▀▀▀░▀▀▀░▀▀▀░▀░▀░▀░▀░░▀░░▀▀▀░▀▀▀░▀░▀░▀▀▀
-
-require('configuration.client')
-require('configuration.root')
-require('configuration.tags')
-root.keys(require('configuration.keys.global'))
+require('configuration')
 
 -- ░█▄█░█▀█░█▀▄░█░█░█░░░█▀▀░█▀▀
 -- ░█░█░█░█░█░█░█░█░█░░░█▀▀░▀▀█
@@ -82,14 +71,3 @@ screen.connect_signal(
         end
     end
 )
-
-awful.util.spawn_with_shell('nm-applet --indicator &')
-awful.util.spawn_with_shell('xfce4-power-manager &')
-awful.util.spawn_with_shell('picom &')
-awful.util.spawn_with_shell('xfce4-clipman &')
-awful.util.spawn_with_shell('numlockx on &')
-awful.util.spawn_with_shell(
-    '/usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1 & eval $(gnome-keyring-daemon -s --components=pkcs11,secrets,ssh,gpg) &'
-)
-awful.util.spawn_with_shell('iris &')
-awful.util.spawn_with_shell('virtdown &')

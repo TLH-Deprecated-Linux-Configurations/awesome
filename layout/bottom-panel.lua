@@ -53,7 +53,7 @@ local bottom_panel = function(s)
     local layout_box = require('widget.layoutbox')(s)
 
     s.tray_toggler = require('widget.tray-toggle')
-    s.updater = require('widget.package-updater')()
+
     s.screen_rec = require('widget.screen-recorder')()
     s.bluetooth = require('widget.bluetooth')()
     s.battery = require('widget.battery')()
@@ -81,7 +81,6 @@ local bottom_panel = function(s)
                 widget = wibox.container.margin
             },
             s.tray_toggler,
-            s.updater,
             s.screen_rec,
             s.network,
             s.bluetooth,

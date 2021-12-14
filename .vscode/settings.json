@@ -7,6 +7,15 @@
         "client",
         "beautiful",
         "awful",
-        "gears"
+        "gears",
+        "filesystem",
+        "config_dir",
+        "utils_dir",
+        "clickable_container",
+        "wibox",
+        "dpi",
+        "naughty",
+        "watch",
+        "spawn"
     ]
 }

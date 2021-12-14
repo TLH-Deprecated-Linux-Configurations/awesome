@@ -10,20 +10,30 @@
 -- ########################################################################
 -- ########################################################################
 -- This makes for neater files without boilerplate and improves the
--- developer experience considerably compared to the standard use of local
+-- developer experience considerably compared to the standard use of
 -- require statements to call libraries in per file
 -- ########################################################################
 -- ########################################################################
 -- ########################################################################
-local gears = require('gears')
-local beautiful = require('beautiful')
-local awful = require('awful')
 
-local filesystem = require('gears.filesystem')
-local config_dir = filesystem.get_configuration_dir()
-local utils_dir = config_dir .. 'utilities/'
-local HOME = os.getenv 'HOME'
+gears = require('gears')
+beautiful = require('beautiful')
+awful = require('awful')
+wibox = require('wibox')
 
-local beautiful = require('beautiful')
-
+filesystem = require('gears.filesystem')
+config_dir = filesystem.get_configuration_dir()
+utils_dir = config_dir .. 'utilities/'
+HOME = os.getenv 'HOME'
+clickable_container = require('widget.clickable-container')
+beautiful = require('beautiful')
+dpi = beautiful.xresources.apply_dpi
+--assignments
 awful.util.shell = 'zsh'
+awful = require('awful')
+wibox = require('wibox')
+gears = require('gears')
+naughty = require('naughty')
+string = require('string')
+watch = require('awful.widget.watch')
+spawn = require('awful.spawn')
