@@ -9,13 +9,25 @@ local client_keys =
     awful.util.table.join(
     awful.key(
         {modkey},
-        'f',
+        'm',
+        function(c)
+            c.maximized = not c.maximized
+            c:raise()
+        end,
+        {description = 'Toggle Maximized', group = 'Client'}
+    ),
+    -- ########################################################################
+
+    awful.key(
+        {modkey, 'Shift'},
+        'm',
         function(c)
             c.fullscreen = not c.fullscreen
             c:raise()
         end,
         {description = 'toggle fullscreen', group = 'client'}
     ),
+    -- ########################################################################
     awful.key(
         {modkey},
         'x',
@@ -24,6 +36,7 @@ local client_keys =
         end,
         {description = 'close', group = 'client'}
     ),
+    -- ########################################################################
     awful.key(
         {modkey},
         'd',

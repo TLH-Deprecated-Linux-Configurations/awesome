@@ -1,7 +1,16 @@
-local awful = require('awful')
+--  _____                            __
+-- |     |_.---.-.--.--.-----.--.--.|  |_
+-- |       |  _  |  |  |  _  |  |  ||   _|
+-- |_______|___._|___  |_____|_____||____|
+--               |_____|
+-- ########################################################################
+-- ########################################################################
+-- ########################################################################
+-- Don't move these to global, it breaks everything lol
+--
 local bottom_panel = require('layout.bottom-panel')
-local control_center = require('layout.control-center')
-local info_center = require('layout.info-center')
+local control_center = require('layout.widget.control-center')
+local info_center = require('layout.widget.info-center')
 
 -- Create a wibox panel for each screen and add it
 screen.connect_signal(

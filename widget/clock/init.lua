@@ -1,18 +1,12 @@
-local wibox = require('wibox')
-local awful = require('awful')
-local gears = require('gears')
-local beautiful = require('beautiful')
-local dpi = beautiful.xresources.apply_dpi
-local clickable_container = require('widget.clickable-container')
 local config = require('configuration.config')
 local military_mode = config.widget.clock.military_mode or false
 
 local create_clock = function(s)
     local clock_format = nil
     if not military_mode then
-        clock_format = '<span font="SF Intermosaic B  11">%I:%M %p</span>'
+        clock_format = '<span font="SFMono Nerd Font Mono Heavy  13">%I:%M %p</span>'
     else
-        clock_format = '<span font="SF Intermosaic B  11">%H:%M</span>'
+        clock_format = '<span font="SFMono Nerd Font Mono Heavy  13">%H:%M</span>'
     end
 
     s.clock_widget = wibox.widget.textclock(clock_format, 1)
@@ -33,7 +27,7 @@ local create_clock = function(s)
             local w = mouse.current_wibox
             if w then
                 old_cursor, old_wibox = w.cursor, w
-                w.cursor = 'hand1'
+                w.cursor = 'hand3'
             end
         end
     )
@@ -53,7 +47,7 @@ local create_clock = function(s)
         objects = {s.clock_widget},
         mode = 'outside',
         delay_show = 1,
-        preferred_positions = {'right', 'left', 'top', 'bottom'},
+        preferred_positions = {'right', 'bottom', 'left', 'top'},
         preferred_alignments = {'middle', 'front', 'back'},
         margin_leftright = dpi(8),
         margin_topbottom = dpi(8),
@@ -81,8 +75,8 @@ local create_clock = function(s)
             end
 
             local date_str =
-                'Today is the ' ..
-                '<b>' .. day .. ordinal .. ' of ' .. month .. '</b>.\n' .. "And it's a boombastic " .. os.date('%A')
+                'Today is <b>' ..
+                os.date('%A') .. '</b> the ' .. '<b>' .. day .. ordinal .. '</b> of <b>' .. month .. '</b>.\n' .. ' '
 
             return date_str
         end
@@ -103,7 +97,7 @@ local create_clock = function(s)
         {
             start_sunday = true,
             spacing = dpi(5),
-            font = 'SF Intermosaic B  10',
+            font = 'SFMono Nerd Font Mono Heavy  14',
             long_weekdays = true,
             margin = dpi(5),
             screen = s,
@@ -141,7 +135,7 @@ local create_clock = function(s)
                 border_color = beautiful.fg_normal,
                 bg_color = beautiful.accent,
                 shape = function(cr, width, height)
-                    gears.shape.partially_rounded_rect(cr, width, height, true, true, true, true, dpi(4))
+                    gears.shape.partially_rounded_rect(cr, width, height, true, true, true, true, dpi(12))
                 end
             }
         }

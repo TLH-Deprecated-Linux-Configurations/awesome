@@ -6,13 +6,8 @@
 -- ########################################################################
 -- ########################################################################
 -- ########################################################################
--- Systray sucks, the styling is a little wonk-a-donk on the left panel
--- and I want to see things are working when i look at the bottom bar to make
--- sure its working (its my second degree of backup after git so its important)
--- ########################################################################
--- ########################################################################
--- ########################################################################
-
+-- An issue with the systray & qt makes the typical dropbox icon suck, so
+-- this helps provide some of its functionality locally within awesome
 -- ########################################################################
 -- ########################################################################
 -- ########################################################################
@@ -45,7 +40,10 @@ local dropbox_widget =
     {
         id = 'icon',
         image = dropbox_status_logo,
-        --resize = false,
+        resize = true,
+        margins = dpi(15),
+        forced_height = dpi(48),
+        forced_width = dpi(48),
         widget = wibox.widget.imagebox
     },
     layout = wibox.container.margin(dpi(3)),
@@ -106,6 +104,7 @@ dropbox_widget:connect_signal(
     function(_, _, _, button)
         if (button == 1) then
             spawn('xdg-open https://dropbox.com', false)
+            spawn.with_shell('dropbox start &')
         --  elseif  (button == 3) then naughty.notify { text = script_path(), timeout = 5, hover_timeout = 0.5 }
         end
         spawn.easy_async(

@@ -6,14 +6,21 @@ local watch = awful.widget.watch
 local dpi = beautiful.xresources.apply_dpi
 local clickable_container = require('widget.clickable-container')
 local config_dir = gears.filesystem.get_configuration_dir()
-local widget_dir = config_dir .. 'widget/bluetooth-toggle/'
+local widget_dir = config_dir .. 'widget/dropbox/'
 local widget_icon_dir = widget_dir .. 'icons/'
 local icons = require('theme.icons')
 local device_state = false
 
+local dropbox_status_blank = widget_icon_dir .. 'dropboxstatus-blank.png'
+local dropbox_status_busy2 = widget_icon_dir .. 'dropboxstatus-busy2.png'
+local dropbox_status_busy1 = widget_icon_dir .. 'dropboxstatus-busy1.png'
+local dropbox_status_idle = widget_icon_dir .. 'dropboxstatus-idle.png'
+local dropbox_status_logo = widget_icon_dir .. 'dropboxstatus-logo.png'
+local dropbox_status_x = widget_icon_dir .. 'dropboxstatus-x.png'
+
 local action_name =
     wibox.widget {
-    text = 'Bluetooth',
+    text = 'Dropbox',
     font = 'SFMono Nerd Font Mono Heavy  10',
     align = 'left',
     widget = wibox.widget.textbox
@@ -38,7 +45,7 @@ local button_widget =
     wibox.widget {
     {
         id = 'icon',
-        image = widget_icon_dir .. 'bluetooth-off.svg',
+        image = widget_icon_dir .. 'dropboxstatus-logo.png',
         widget = wibox.widget.imagebox,
         resize = true
     },
@@ -66,19 +73,19 @@ local update_widget = function()
     if device_state then
         action_status:set_text('On')
         widget_button.bg = beautiful.accent
-        button_widget.icon:set_image(widget_icon_dir .. 'bluetooth.svg')
+        button_widget.icon:set_image(widget_icon_dir .. 'dropboxstatus-logo.png')
     else
         action_status:set_text('Off')
         widget_button.bg = beautiful.groups_bg
-        button_widget.icon:set_image(widget_icon_dir .. 'bluetooth-off.svg')
+        button_widget.icon:set_image(widget_icon_dir .. 'dropboxstatus-x.svg')
     end
 end
 
 local check_device_state = function()
     awful.spawn.easy_async_with_shell(
-        'rfkill list bluetooth',
+        'dropbox running',
         function(stdout)
-            if stdout:match('Soft blocked: yes') then
+            if stdout:match('*') then
                 device_state = false
             else
                 device_state = true
@@ -92,43 +99,39 @@ end
 check_device_state()
 local power_on_cmd =
     [[
-	rfkill unblock bluetooth
-
+dropbox start &
+	sleep 1
 	# Create an AwesomeWM Notification
 	awesome-client "
 	naughty = require('naughty')
 	naughty.notification({
-		app_name = 'Bluetooth Manager',
+		app_name = 'Dropbox - Powering On',
 		title = 'System Notification',
-		message = 'Initializing bluetooth device...',
+		message = 'Initializing Dropbox...',
 		icon = ']] ..
-    widget_icon_dir ..
-        'loading' ..
-            '.svg' ..
-                [['
+    widget_icon_dir .. 'dropboxstatus-logo' .. '.png' .. [['
 	})
 	"
 
-	# Add a delay here so we can enable the bluetooth
-	sleep 1
+
+
 	
-	bluetoothctl power on
+
 ]]
 
 local power_off_cmd =
     [[
-	bluetoothctl power off
-	rfkill block bluetooth
-
+dropbox stop
+sleep 1
 	# Create an AwesomeWM Notification
 	awesome-client "
 	naughty = require('naughty')
 	naughty.notification({
-		app_name = 'Bluetooth Manager',
+		app_name = 'Dropbox - Powering Off',
 		title = 'System Notification',
-		message = 'The bluetooth device has been disabled.',
+		message = 'The dropbox daemon has been disabled.',
 		icon = ']] ..
-    widget_icon_dir .. 'bluetooth-off' .. '.svg' .. [['
+    widget_icon_dir .. 'dropboxstatus-x' .. '.png' .. [['
 	})
 	"
 ]]
@@ -180,7 +183,7 @@ action_info:buttons(
 )
 
 watch(
-    'rfkill list bluetooth',
+    'dropbox status &',
     5,
     function(_, stdout)
         check_device_state()

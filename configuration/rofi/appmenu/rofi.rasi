@@ -1,5 +1,5 @@
 configuration {
-  font: "SF Intermosaic B 14";
+  font: "SFMono Nerd Font Mono Heavy 14";
   show-icons: true;
   drun-display-format: "{name}";
   threads: 0;

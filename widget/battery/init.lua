@@ -1,13 +1,3 @@
-local awful = require('awful')
-local wibox = require('wibox')
-local awful = require('awful')
-local gears = require('gears')
-local naughty = require('naughty')
-local watch = awful.widget.watch
-local apps = require('configuration.apps')
-local clickable_container = require('widget.clickable-container')
-local dpi = require('beautiful').xresources.apply_dpi
-local config_dir = gears.filesystem.get_configuration_dir()
 local widget_icon_dir = config_dir .. 'widget/battery/icons/'
 
 local return_button = function()
@@ -29,7 +19,7 @@ local return_button = function()
         wibox.widget {
         id = 'percent_text',
         text = '100%',
-        font = 'SF Intermosaic B  11',
+        font = 'SFMono Nerd Font Mono Heavy  13',
         align = 'center',
         valign = 'center',
         visible = false,

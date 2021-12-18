@@ -19,7 +19,20 @@ local apps = require('configuration.apps')
 -- Key bindings
 local global_keys =
     awful.util.table.join(
-    -- Hotkeys 
+    -- #####################################################################
+
+    awful.key(
+        {'Mod1'},
+        'Escape',
+        function()
+            print('Spawning Window Menu')
+            awful.menu.menu_keys.down = {'Down', 'Alt_L'}
+            awful.menu.menu_keys.up = {'Up', 'Alt_R'}
+            awful.menu.clients({theme = {width = 450}}, {keygrabber = true})
+        end,
+        {description = 'Open Window Menu', group = 'Utility'}
+    ),
+    -- Hotkeys
     -- ########################################################################
     -- ########################################################################
     -- ########################################################################
@@ -476,7 +489,7 @@ local global_keys =
         {},
         'XF86AudioRaiseVolume',
         function()
-            awful.spawn('amixer -D pulse sset Master 5%+', false)
+            awful.spawn('amixer sset Master 5%+')
             awesome.emit_signal('widget::volume')
             awesome.emit_signal('module::volume_osd:show', true)
         end,
@@ -488,7 +501,7 @@ local global_keys =
         {},
         'XF86AudioLowerVolume',
         function()
-            awful.spawn('amixer -D pulse sset Master 5%-', false)
+            awful.spawn('amixer sset Master 5%-', false)
             awesome.emit_signal('widget::volume')
             awesome.emit_signal('module::volume_osd:show', true)
         end,
@@ -500,7 +513,7 @@ local global_keys =
         {},
         'XF86AudioMute',
         function()
-            awful.spawn('amixer -D pulse set Master 1+ toggle', false)
+            awful.spawn('amixer  set Master 1+ toggle', false)
         end,
         {description = 'toggle mute', group = 'hotkeys'}
     ),
@@ -540,7 +553,7 @@ local global_keys =
         {},
         'XF86AudioMicMute',
         function()
-            awful.spawn('amixer set Capture toggle', false)
+            awful.spawn('amixer sset Capture toggle', false)
         end,
         {description = 'mute microphone', group = 'hotkeys'}
     ),
@@ -582,7 +595,7 @@ local global_keys =
         function()
             awesome.emit_signal('module::quake_terminal:toggle')
         end,
-        {description = 'dropdown application', group = 'launcher'}
+        {description = 'dropdown application', group = 'Launcher'}
     ),
     -- ########################################################################
     -- ########################################################################
@@ -604,8 +617,19 @@ local global_keys =
         {},
         'Print',
         function()
-            -- awful.spawn.easy_async_with_shell(apps.utils.full_screenshot,function() end)
-            awful.spawn('xfce4-screenshooter')
+            awful.spawn(apps.utils.full_screenshot)
+        end,
+        {description = 'screenshot tool', group = 'Launcher'}
+    ),
+    -- ########################################################################
+    -- ########################################################################
+    -- ########################################################################
+    --Screenshot
+    awful.key(
+        {modkey},
+        'Print',
+        function()
+            awful.spawn(apps.utils.area_screenshot)
         end,
         {description = 'screenshot tool', group = 'launcher'}
     ),
@@ -769,7 +793,7 @@ local global_keys =
         function()
             awful.spawn(apps.default.rofi_global, false)
         end,
-        {description = 'open global search', group = 'launcher'}
+        {description = 'open global search', group = 'Launcher'}
     ),
     -- ########################################################################
     -- ########################################################################
@@ -785,7 +809,7 @@ local global_keys =
             end
             focused.control_center:toggle()
         end,
-        {description = 'open control center', group = 'launcher'}
+        {description = 'open control center', group = 'Launcher'}
     ),
     -- ########################################################################
     -- ########################################################################
@@ -801,7 +825,7 @@ local global_keys =
             end
             focused.info_center:toggle()
         end,
-        {description = 'open info center', group = 'launcher'}
+        {description = 'open info center', group = 'Launcher'}
     )
 )
 

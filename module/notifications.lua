@@ -15,7 +15,7 @@ naughty.config.defaults.timeout = 5
 naughty.config.defaults.title = 'System Notification'
 naughty.config.defaults.margin = dpi(16)
 naughty.config.defaults.border_width = 0
-naughty.config.defaults.position = 'top_left'
+naughty.config.defaults.position = 'top_right'
 naughty.config.defaults.shape = function(cr, w, h)
     gears.shape.rounded_rect(cr, w, h, dpi(6))
 end
@@ -24,6 +24,7 @@ end
 naughty.config.padding = dpi(8)
 naughty.config.spacing = dpi(8)
 naughty.config.icon_dirs = {
+    '/usr/share/icons/chhinamasta',
     '/usr/share/icons/Tela',
     '/usr/share/icons/Tela-blue-dark',
     '/usr/share/icons/Papirus/',
@@ -43,11 +44,11 @@ ruled.notification.connect_signal(
         ruled.notification.append_rule {
             rule = {urgency = 'critical'},
             properties = {
-                font = 'SF Intermosaic B  10',
+                font = 'SFMono Nerd Font Mono Heavy  10',
                 bg = '#ff0000',
                 fg = '#ffffff',
                 margin = dpi(16),
-                position = 'top_left',
+                position = 'top_right',
                 implicit_timeout = 0
             }
         }
@@ -56,11 +57,11 @@ ruled.notification.connect_signal(
         ruled.notification.append_rule {
             rule = {urgency = 'normal'},
             properties = {
-                font = 'SF Intermosaic B  10',
+                font = 'SFMono Nerd Font Mono Heavy  10',
                 bg = beautiful.transparent,
                 fg = beautiful.fg_normal,
                 margin = dpi(16),
-                position = 'top_left',
+                position = 'top_right',
                 implicit_timeout = 5
             }
         }
@@ -69,11 +70,11 @@ ruled.notification.connect_signal(
         ruled.notification.append_rule {
             rule = {urgency = 'low'},
             properties = {
-                font = 'SF Intermosaic B  10',
+                font = 'SFMono Nerd Font Mono Heavy  10',
                 bg = beautiful.transparent,
                 fg = beautiful.fg_normal,
                 margin = dpi(16),
-                position = 'top_left',
+                position = 'top_right',
                 implicit_timeout = 5
             }
         }
@@ -128,7 +129,7 @@ naughty.connect_signal(
                         {
                             {
                                 id = 'text_role',
-                                font = 'SF Intermosaic B  10',
+                                font = 'SFMono Nerd Font Mono Heavy  10',
                                 widget = wibox.widget.textbox
                             },
                             widget = wibox.container.place
@@ -165,7 +166,7 @@ naughty.connect_signal(
                                                 {
                                                     {
                                                         markup = n.app_name or 'System Notification',
-                                                        font = 'SF Intermosaic B  10',
+                                                        font = 'SFMono Nerd Font Mono Heavy  10',
                                                         align = 'center',
                                                         valign = 'center',
                                                         widget = wibox.widget.textbox
@@ -173,7 +174,7 @@ naughty.connect_signal(
                                                     margins = beautiful.notification_margin,
                                                     widget = wibox.container.margin
                                                 },
-                                                bg = beautiful.background,
+                                                bg = beautiful.bg_normal,
                                                 widget = wibox.container.background
                                             },
                                             {
@@ -234,11 +235,11 @@ naughty.connect_signal(
                         widget = wibox.container.constraint
                     },
                     strategy = 'max',
-                    height = dpi(250),
-                    width = dpi(250),
+                    height = dpi(350),
+                    width = dpi(450),
                     widget = wibox.container.constraint
                 },
-                bg = beautiful.background,
+                bg = beautiful.bg_normal,
                 shape = gears.shape.rounded_rect,
                 widget = wibox.container.background
             }

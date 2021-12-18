@@ -4,8 +4,8 @@ local theme_dir = filesystem.get_configuration_dir() .. '/theme'
 local theme = {}
 
 theme.icons = theme_dir .. '/icons/'
-theme.font = 'SF Intermosaic B  10'
-theme.font_bold = 'SF Intermosaic B  10'
+theme.font = 'SFMono Nerd Font Mono Heavy  10'
+theme.font_bold = 'SFMono Nerd Font Mono Heavy  10'
 
 -- Colorscheme
 theme.system_black_dark = '#17191e'
@@ -33,7 +33,7 @@ theme.system_white_dark = '#b2bfd9'
 theme.system_white_light = '#F4f4f7'
 
 -- Accent color
-theme.accent = theme.system_blue_dark
+theme.accent = 'linear:0,0:0,51:0,#8b9cbe:1,#5A647A'
 
 -- Background color
 theme.background = '#00000066'

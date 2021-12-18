@@ -1,5 +1,5 @@
 configuration {
-	font: "SF Intermosaic B  10";
+	font: "SFMono Nerd Font Mono Heavy  10";
 	show-icons: true;
 	drun-display-format: "{name}";
 	fullscreen: false;
@@ -50,7 +50,7 @@ button {
 }
 
 entry {
-	font: "SF Intermosaic B  11";
+	font: "SFMono Nerd Font Mono Heavy  11";
 	background-color: @transparent;
 	text-color: @foreground;
 	expand: true;

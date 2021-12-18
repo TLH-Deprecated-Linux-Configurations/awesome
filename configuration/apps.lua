@@ -1,14 +1,24 @@
-local filesystem = require('gears.filesystem')
-local config_dir = filesystem.get_configuration_dir()
-local utils_dir = config_dir .. 'utilities/'
-local HOME = os.getenv 'HOME'
-
+--  _____         ___               __ __
+-- |     \.-----.'  _|.---.-.--.--.|  |  |_
+-- |  --  |  -__|   _||  _  |  |  ||  |   _|
+-- |_____/|_____|__|  |___._|_____||__|____|
+--  _______               __ __              __   __
+-- |   _   |.-----.-----.|  |__|.----.---.-.|  |_|__|.-----.-----.-----.
+-- |       ||  _  |  _  ||  |  ||  __|  _  ||   _|  ||  _  |     |__ --|
+-- |___|___||   __|   __||__|__||____|___._||____|__||_____|__|__|_____|
+--          |__|  |__|
+-- ########################################################################
+-- ########################################################################
+-- ########################################################################
 return {
     -- The default applications that we will use in keybindings and widgets
+    --
     default = {
         -- Default terminal emulator
+        --
         terminal = 'kitty',
         -- Default web browser
+        --
         browser = 'firefox-nightly',
         -- Default text editor
         text_editor = 'nvim',
@@ -46,31 +56,33 @@ return {
     },
     -- List of apps to start once on start-up
     run_on_start_up = {
-        -- Compositor
-        'picom -b --experimental-backends --dbus --config ' .. config_dir .. '/configuration/picom.conf',
-        -- Blueman applet
-        'blueberry-tray',
-        'pnmixer',
-        -- Polkit and keyring
-        '/usr/bin/lxqt-policykit-agent &' .. ' eval $(gnome-keyring-daemon -s --components=pkcs11,secrets,ssh,gpg)',
-        -- Load X colors
-        'xrdb $HOME/.Xresources',
-        'xinput set-prop "ELAN1301:00 04F3:30C6 Touchpad" "libinput Tapping Enabled" 1 &',
-        -- Audio equalizer
-        'pulseeffects --gapplication-service',
-        -- Make App Drawe Spawn with Single Key Press
-        'xcape -e "Super_L=Super_L|Control_L|Escape"',
-        -- Lockscreen timer
-        'goautolock -l ~/.config/awesome/bin/blur.sh'
-        -- You can add more start-up applications here
+        -- AutoRun Script
+       'sh ' .. config_dir .. '/bin/autorun.sh',
+       'xsettingsd',
+       'xrdb "$HOME"/.Xresources',
+       'pnmixer',
+       'xinpt set-prop "ELAN1301:00 04F3:30C6 Touchpad" "libinput Tapping Enabled" 1',
+       'goautolock --time 360 --notify 30 --locker "$HOME/.config/awesome/bin/blur.sh"',
+       'dropbox start',
+       'pulseeffects --gapplication-service',
+       '/usr/bin/lxqt-policykit-agent',
+       ' eval "$(gnome-keyring-daemon -s --components=pkcs11,secrets,ssh,gpg)"',
+       'xcape -e "Super_L=Super_L|Control_L|Escape" ',
+       'greenclip daemon',
+       'udiskie',
+       'picom -b --experimental-backends',
     },
     -- List of binaries/shell scripts that will execute for a certain task
+    --
     utils = {
         -- Fullscreen screenshot
-        full_screenshot = utils_dir .. 'xfce4-screenshooter',
+        --
+        full_screenshot = config_dir .. '/bin/snapshot.sh full',
         -- Area screenshot
-        area_screenshot = utils_dir .. 'xfce4-screenshooter',
+        --
+        area_screenshot = config_dir .. '/bin/snapshot.sh area',
         -- Update profile picture
-        update_profile = utils_dir .. 'profile-image'
+        --
+        update_profile = utils_dir .. '/profile-image'
     }
 }

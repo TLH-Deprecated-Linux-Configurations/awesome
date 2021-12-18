@@ -11,34 +11,18 @@ local widget_icon_dir = config_dir .. 'configuration/user-profile/'
 local user_icon_dir = '/var/lib/AccountsService/icons/'
 
 title_table = {
-    'Hey, I have a message for you',
-    'Listen here you little noob!',
-    "Le' me tell you a secret",
-    'I never lie',
-    'Message received from your boss'
+    'Heads Up!',
+    'Listen Here!',
+    'Take Heed!'
 }
 
 message_table = {
-    "Let me rate your face! Oops... It looks like I can't compute negative numbers. You're ugly af, sorry",
-    "Lookin' good today, now get off!",
-    'The last thing I want to do is hurt you. But it’s still on the list.',
-    'If I agreed with you we’d both be wrong.',
-    'I intend to live forever. So far, so good.',
-    'Jesus loves you, but everyone else thinks you’re an asshole.',
-    'Your baby is so ugly, you should have thrown it away and kept the stork.',
-    'If your brain was dynamite, there wouldn’t be enough to blow your hat off.',
-    'You are more disappointing than an unsalted pretzel.',
-    'Your kid is so ugly, he makes his Happy Meal cry.',
-    'Your secrets are always safe with me. I never even listen when you tell me them.',
-    'I only take you everywhere I go just so I don’t have to kiss you goodbye.',
-    'You look so pretty. Not at all gross, today.',
-    'It’s impossible to underestimate you.',
-    'I’m not insulting you, I’m describing you.',
-    'Keep rolling your eyes, you might eventually find a brain.',
-    'You bring everyone so much joy, when you leave the room.',
-    'I thought of you today. It reminded me to take out the trash.',
-    'You are the human version of period cramps.',
-    'You’re the reason God created the middle finger.'
+    'Stop screwing things up, go walk the dog or something!',
+    'There can only be one cow level',
+    'Remember the words of the propher Richard Stallman: Free as in freedom, not free as in beer.',
+    'At least you are not as ugly as Bill Gates.',
+    'When it rains, it pours.',
+    'The dead know only one thing, its better to be alive'
 }
 
 local create_profile = function()
@@ -46,7 +30,7 @@ local create_profile = function()
         wibox.widget {
         {
             id = 'icon',
-            image = widget_icon_dir .. 'user.jpeg',
+            image = widget_icon_dir .. 'user.png',
             widget = wibox.widget.imagebox,
             resize = true,
             forced_height = dpi(28),
@@ -87,7 +71,7 @@ local create_profile = function()
 
     local profile_name =
         wibox.widget {
-        font = 'SF Intermosaic B  10',
+        font = 'SFMono Nerd Font Mono Heavy  10',
         markup = 'User',
         align = 'left',
         valign = 'center',

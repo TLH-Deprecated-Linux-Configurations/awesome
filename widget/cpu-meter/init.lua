@@ -10,7 +10,7 @@ local icons = require('theme.icons')
 local meter_name =
     wibox.widget {
     text = 'CPU',
-    font = 'SF Intermosaic B  10',
+    font = 'SFMono Nerd Font Mono Heavy  10',
     align = 'left',
     widget = wibox.widget.textbox
 }

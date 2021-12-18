@@ -38,13 +38,6 @@ root.buttons(
             end
         ),
         awful.button(
-            {'Shift'},
-            2,
-            function()
-                awesome.emit_signal('widget::blue_light:toggle')
-            end
-        ),
-        awful.button(
             {},
             8,
             function()
@@ -66,7 +59,7 @@ root.buttons(
             {'Control'},
             8,
             function()
-                awful.spawn('amixer -D pulse sset Master 5%+', false)
+                awful.spawn('amixer sset Master 5%+', true)
                 awesome.emit_signal('widget::volume')
                 awesome.emit_signal('module::volume_osd:show', true)
             end
@@ -75,7 +68,7 @@ root.buttons(
             {'Control'},
             9,
             function()
-                awful.spawn('amixer -D pulse sset Master 5%-', false)
+                awful.spawn('amixer sset Master 5%-', true)
                 awesome.emit_signal('widget::volume')
                 awesome.emit_signal('module::volume_osd:show', true)
             end

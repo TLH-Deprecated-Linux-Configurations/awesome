@@ -46,7 +46,7 @@ local uname_text =
     wibox.widget {
     id = 'uname_text',
     markup = '$USER',
-    font = 'SF Intermosaic B  12',
+    font = 'SFMono Nerd Font Mono Heavy  12',
     align = 'center',
     valign = 'center',
     widget = wibox.widget.textbox
@@ -74,9 +74,9 @@ local profile_imagebox =
     widget = wibox.widget.imagebox
 }
 
-local clock_format = '<span font="SF Intermosaic B  52">%H:%M</span>'
+local clock_format = '<span font="SFMono Nerd Font Mono Heavy  52">%H:%M</span>'
 if not locker_config.military_clock then
-    clock_format = '<span font="SF Intermosaic B  52">%I:%M %p</span>'
+    clock_format = '<span font="SFMono Nerd Font Mono Heavy  52">%I:%M %p</span>'
 end
 
 -- Create clock widget
@@ -85,7 +85,7 @@ local time = wibox.widget.textclock(clock_format, 1)
 local wanted_text =
     wibox.widget {
     markup = 'INTRUDER ALERT!',
-    font = 'SF Intermosaic B  12',
+    font = 'SFMono Nerd Font Mono Heavy  12',
     align = 'center',
     valign = 'center',
     widget = wibox.widget.textbox
@@ -110,7 +110,7 @@ local msg_table = {
 local wanted_msg =
     wibox.widget {
     markup = 'This incident will be reported!',
-    font = 'SF Intermosaic B  10',
+    font = 'SFMono Nerd Font Mono Heavy  10',
     align = 'center',
     valign = 'center',
     widget = wibox.widget.textbox
@@ -153,7 +153,7 @@ end
 local date =
     wibox.widget {
     markup = date_value(),
-    font = 'SF Intermosaic B  20',
+    font = 'SFMono Nerd Font Mono Heavy  20',
     align = 'center',
     valign = 'center',
     widget = wibox.widget.textbox

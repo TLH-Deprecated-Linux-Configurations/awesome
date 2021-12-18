@@ -1,170 +1,126 @@
-local awful = require('awful')
-local wibox = require('wibox')
-local dpi = require('beautiful').xresources.apply_dpi
-local clickable_container = require('widget.clickable-container')
-local icons = require('theme.icons')
-
---- Common method to create buttons.
--- @tab buttons
--- @param object
--- @return table
-local function create_buttons(buttons, object)
-    if buttons then
-        local btns = {}
-        for _, b in ipairs(buttons) do
-            -- Create a proxy button object: it will receive the real
-            -- press and release events, and will propagate them to the
-            -- button object the user provided, but with the object as
-            -- argument.
-            local btn =
-                awful.button {
-                modifiers = b.modifiers,
-                button = b.button,
-                on_press = function()
-                    b:emit_signal('press', object)
-                end,
-                on_release = function()
-                    b:emit_signal('release', object)
-                end
-            }
-            btns[#btns + 1] = btn
-        end
-        return btns
+local tag_preview_box = require('widget.tag-list.tag-preview')
+tag_preview_box.enable {
+    show_client_content = true,
+    -- Whether or not to show the client content
+    x = 10,
+    -- The x-coord of the popup
+    y = 10,
+    -- The y-coord of the popup
+    scale = 0.25,
+    -- The scale of the previews compared to the screen
+    honor_padding = false,
+    -- Honor padding when creating widget size
+    honor_workarea = false,
+    -- Honor work area when creating widget size
+    placement_fn = function(c)
+        -- Place the widget using awful.placement (this overrides x & y)
+        awful.placement.bottom_left(c, {margins = {bottom = 40, left = 30}})
     end
-end
+}
 
-local function list_update(w, buttons, label, data, objects)
-    -- update the widgets, creating them if needed
-    w:reset()
-    for i, o in ipairs(objects) do
-        local cache = data[o]
-        local ib, tb, bgb, tbm, ibm, l, bg_clickable
-        if cache then
-            ib = cache.ib
-            tb = cache.tb
-            bgb = cache.bgb
-            tbm = cache.tbm
-            ibm = cache.ibm
-        else
-            ib = wibox.widget.imagebox()
-            tb = wibox.widget.textbox()
-            bgb = wibox.container.background()
-            tbm =
-                wibox.widget {
-                tb,
-                left = dpi(4),
-                right = dpi(16),
-                widget = wibox.container.margin
-            }
-            ibm =
-                wibox.widget {
-                ib,
-                margins = dpi(10),
-                widget = wibox.container.margin
-            }
-            l = wibox.layout.fixed.horizontal()
-            bg_clickable = clickable_container()
-
-            -- All of this is added in a fixed widget
-            l:fill_space(true)
-            l:add(tbm)
-            -- l:add(tbm)
-            bg_clickable:set_widget(l)
-
-            -- And all of this gets a background
-            bgb:set_widget(bg_clickable)
-
-            bgb:buttons(create_buttons(buttons, o))
-
-            data[o] = {
-                ib = ib,
-                tb = tb,
-                bgb = bgb,
-                tbm = tbm,
-                ibm = ibm
-            }
-        end
-
-        local text, bg, bg_image, icon, args = label(o, tb)
-        args = args or {}
-
-        -- The text might be invalid, so use pcall.
-        if text == nil or text == '' then
-            tbm:set_margins(0)
-        else
-            if not tb:set_markup_silently(text) then
-                tb:set_markup('<i>&lt;Invalid text&gt;</i>')
+-- ########################################################################
+-- ########################################################################
+-- ########################################################################
+local get_taglist = function(s)
+    -- Taglist buttons
+    local taglist_buttons =
+        gears.table.join(
+        awful.button(
+            {},
+            1,
+            function(t)
+                t:view_only()
             end
-        end
-        bgb:set_bg(bg)
-        if type(bg_image) == 'function' then
-            bg_image = bg_image(tb, o, nil, objects, i)
-        end
-        bgb:set_bgimage(bg_image)
-        if icon then
-            ib.image = icon
-        else
-            ibm:set_margins(0)
-        end
-
-        bgb.shape = args.shape
-        bgb.shape_border_width = args.shape_border_width
-        bgb.shape_border_color = args.shape_border_color
-
-        w:add(bgb)
-    end
-end
-
-local tag_list = function(s)
-    return awful.widget.taglist(
-        s,
-        awful.widget.taglist.filter.all,
-        awful.util.table.join(
-            awful.button(
-                {},
-                1,
-                function(t)
-                    t:view_only()
-                end
-            ),
-            awful.button(
-                {modkey},
-                1,
-                function(t)
-                    if _G.client.focus then
-                        _G.client.focus:move_to_tag(t)
-                        t:view_only()
-                    end
-                end
-            ),
-            awful.button({}, 3, awful.tag.viewtoggle),
-            awful.button(
-                {modkey},
-                3,
-                function(t)
-                    if _G.client.focus then
-                        _G.client.focus:toggle_tag(t)
-                    end
-                end
-            ),
-            awful.button(
-                {},
-                8,
-                function(t)
-                    awful.tag.viewprev(t.screen)
-                end
-            ),
-            awful.button(
-                {},
-                9,
-                function(t)
-                    awful.tag.viewnext(t.screen)
-                end
-            )
         ),
-        {},
-        list_update,
-        wibox.layout.fixed.horizontal()
+        awful.button(
+            {modkey},
+            1,
+            function(t)
+                if client.focus then
+                    client.focus:move_to_tag(t)
+                end
+            end
+        ),
+        awful.button({}, 3, awful.tag.viewtoggle),
+        awful.button(
+            {modkey},
+            3,
+            function(t)
+                if client.focus then
+                    client.focus:toggle_tag(t)
+                end
+            end
+        )
     )
+    -- ########################################################################
+    -- ########################################################################
+    -- ########################################################################
+    -- Function to update the tags
+
+    local taglist =
+        awful.widget.taglist {
+        screen = s,
+        spacing = dpi(12),
+        filter = awful.widget.taglist.filter.all,
+        layout = wibox.layout.fixed.horizontal,
+        widget_template = {
+            {
+                {
+                    {
+                        -- NOTE: because this uses wibox.layout.align, the
+                        -- two nil represent the right and left sections
+                        -- of the layout, providing them on either side
+                        -- of the text role means the text is centered
+                        nil,
+                        {
+                            id = 'text_role',
+                            widget = wibox.widget.textbox
+                        },
+                        nil,
+                        layout = wibox.layout.align.horizontal,
+                        expand = 'outside'
+                    },
+                    widget = clickable_container
+                },
+                widget = wibox.container.background,
+                shape = function(cr, width, height)
+                    gears.shape.rounded_rect(cr, width, height, 12)
+                end,
+                forced_width = dpi(36),
+                border_width = dpi(0)
+            },
+            id = 'background_role',
+            top = dpi(2),
+            bottom = dpi(2),
+            border_width = dpi(0),
+            widget = wibox.container.background,
+            create_callback = function(self, c3, index, objects)
+                self:connect_signal(
+                    'mouse::enter',
+                    function()
+                        if #c3:clients() > 0 then
+                            awesome.emit_signal('tag_preview::update', c3)
+                            awesome.emit_signal('tag_preview::visibility', s, true)
+                        end
+                        if self.bg ~= '#f4f4f7cc' then
+                            self.backup = self.bg
+                            self.has_backup = true
+                        end
+                    end
+                )
+                self:connect_signal(
+                    'mouse::leave',
+                    function()
+                        awesome.emit_signal('tag_preview::visibility', s, false)
+                        if self.has_backup then
+                            self.bg = beautiful.bg_focus
+                        end
+                    end
+                )
+            end
+        },
+        buttons = taglist_buttons
+    }
+    return taglist
 end
-return tag_list
+return get_taglist

@@ -16,6 +16,15 @@
         "dpi",
         "naughty",
         "watch",
-        "spawn"
+        "spawn",
+        "icons",
+        "task_list",
+        "apps",
+        "bottom_panel",
+        "control_center",
+        "info_center",
+        "tag",
+        "modkey",
+        "cairo"
     ]
 }

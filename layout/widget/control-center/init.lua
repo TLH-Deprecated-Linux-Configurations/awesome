@@ -88,7 +88,7 @@ local main_control_row_two =
             spacing = dpi(5),
             require('widget.airplane-mode'),
             require('widget.bluetooth-toggle'),
-            require('widget.dropbox.dropbox')
+            require('widget.dropbox')
         }
     ),
     {
@@ -154,7 +154,7 @@ local monitor_control_row_progressbars =
 
 local control_center = function(s)
     -- Set the control center geometry
-    local panel_width = dpi(400)
+    local panel_width = dpi(600)
     local panel_margins = dpi(5)
 
     local panel =

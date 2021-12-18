@@ -1,71 +1,71 @@
-#!/usr/bin/env bash
+#!/bin/sh
 ###################################################
 #  _______         __
 # |   _   |.--.--.|  |_.-----.----.--.--.-----.
 # |       ||  |  ||   _|  _  |   _|  |  |     |
 # |___|___||_____||____|_____|__| |_____|__|__|
 ###################################################
-# Like ~/.xprofile, but within the configuratiom amdm
-# runs everytime awesome starts instead of once per
-# logins which has pros and cons
-function run() {
-    if ! pgrep -f "$1"; then
-        "$@" &
-    fi
-}
-
-setxkbmap "$(cut -d= -f2 /etc/vconsole.conf | cut -d- -f1)"
 
 #  Disk Automounting & User Controls
-if [[ "$(command -v udiskie)" ]]; then
-    pgrep udiskie &>/dev/null || udiskie &>/dev/null &
+if "$(command -v udiskie)"; then
+    udiskie &
 fi
 
-# Set the Super key to all three of the below for menu on single key press,
-# better as a configuration specific setting as on xfce4 or whatever, this
-# would not be helpful but the opposite really
-#if [[ "$(command -v xcape)" ]]; then
-#   xcape -e "Super_L=Super_L|Control_L|Escape" &
-#fi
 
-# run clipboard manager
-if [[ "$(command -v greenclip)" ]]; then
-    pgrep greenclip || greenclip daemon
+#  clipboard manager
+if "$(command -v greenclip)"; then
+    greenclip daemon &
 fi
 
-# run clipboard manager
-if [[ "$(command -v picom)" ]]; then
-    picom -b --experimental-backends &>/dev/null &
+#  clipboard manager
+if "$(command -v picom)"; then
+    pkill picom && picom -b --experimental-backends &
 fi
+
+if "$(command -v xcape)"; then
+    xcape -e "Super_L=Super_L|Control_L|Escape" &
+fi
+
+# clipboard manager
+if "$(command -v pnmixer)"; then
+    pnmixer &
+fi
+
 #  Make sure the colors are as they are supposed to be
-if [[ "$(command -v xrdb)" ]]; then
+if "$(command -v xrdb)"; then
     xrdb "$HOME"/.Xresources &
 fi
 
-# run clipboard manager
-if [[ "$(command -v xsettingsd)" ]]; then
+# clipboard manager
+if "$(command -v xsettingsd)"; then
     xsettingsd &
 fi
 
-# run xsetroot
-if [[ "$(command -v xsetroot)" ]]; then
-    xsetroot -cursor_name left_ptr &
-fi
-
-# run power manager
-if [[ "$(command -v xfce4-power-manager)" ]]; then
-    xfce4-power-manager &
-fi
-
 #  Make sure the colors are as they are supposed to be
-if [[ "$(command -v xrdb)" ]]; then
-    xrdb "$HOME"/.Xresources &
+if "$(command -v xinput)"; then
+    xinput set-prop "ELAN1301:00 04F3:30C6 Touchpad" "libinput Tapping Enabled" 1 &
 fi
 
-if [[ "$(command -v goautolock)" ]]; then
-    goautolock --time 360 --notify 30 --locker "$HOME/.config/awesome/external/i3lock/blur.sh" &
+if "$(command -v goautolock)"; then
+    goautolock --time 360 --notify 30 --locker "$HOME/.config/awesome/bin/blur.sh" &
 fi
-
-if [[ "$(command -v dropbox)" ]]; then
+# Dropbox
+if "$(command -v dropbox)"; then
     dropbox start &
+fi
+# Pulse Effects Equalizer
+if "$(command -v pulseeffects)"; then
+    pulseeffects --gapplication-service &
+fi
+# Pulse Effects Equalizer
+if "$(command -v lxqt-policykit-agent)"; then
+    /usr/bin/lxqt-policykit-agent &
+fi
+
+# Pulse Effects Equalizer
+if "$(command -v lxqt-policykit-agent)"; then
+    /usr/bin/lxqt-policykit-agent &
+fi
+if "$(command -v gnome-keyring-daemon)"; then
+    eval "$(gnome-keyring-daemon -s --components=pkcs11,secrets,ssh,gpg)"
 fi

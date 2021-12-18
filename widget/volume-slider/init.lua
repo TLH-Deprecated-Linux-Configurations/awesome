@@ -1,16 +1,8 @@
-local wibox = require('wibox')
-local gears = require('gears')
-local awful = require('awful')
-local beautiful = require('beautiful')
-local spawn = awful.spawn
-local dpi = beautiful.xresources.apply_dpi
-local icons = require('theme.icons')
-local clickable_container = require('widget.clickable-container')
-
+require('configuration.global_variables')
 local action_name =
     wibox.widget {
     text = 'Volume',
-    font = 'SF Intermosaic B  10',
+    font = 'SFMono Nerd Font Mono Heavy  10',
     align = 'left',
     widget = wibox.widget.textbox
 }
@@ -75,7 +67,7 @@ volume_slider:connect_signal(
     function()
         local volume_level = volume_slider:get_value()
 
-        spawn('amixer -D pulse sset Master ' .. volume_level .. '%', false)
+        spawn('amixer sset Master ' .. volume_level .. '%', false)
 
         -- Update volume osd
         awesome.emit_signal('module::volume_osd', volume_level)

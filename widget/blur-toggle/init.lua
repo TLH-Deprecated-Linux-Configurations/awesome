@@ -14,7 +14,7 @@ local blur_status = true
 local action_name =
     wibox.widget {
     text = 'Blur Effects',
-    font = 'SF Intermosaic B  10',
+    font = 'SFMono Nerd Font Mono Heavy  10',
     align = 'left',
     widget = wibox.widget.textbox
 }
@@ -22,7 +22,7 @@ local action_name =
 local action_status =
     wibox.widget {
     text = 'Off',
-    font = 'SF Intermosaic B  10',
+    font = 'SFMono Nerd Font Mono Heavy  10',
     align = 'left',
     widget = wibox.widget.textbox
 }
@@ -51,8 +51,8 @@ local widget_button =
         {
             button_widget,
             margins = dpi(15),
-            forced_height = dpi(48),
-            forced_width = dpi(48),
+            forced_height = dpi(64),
+            forced_width = dpi(64),
             widget = wibox.container.margin
         },
         widget = clickable_container
@@ -65,7 +65,7 @@ local widget_button =
 local update_widget = function()
     if blur_status then
         action_status:set_text('On')
-        widget_button.bg = beautiful.system_magenta_dark
+        widget_button.bg = beautiful.accent
         button_widget.icon:set_image(icons.effects)
     else
         action_status:set_text('Off')

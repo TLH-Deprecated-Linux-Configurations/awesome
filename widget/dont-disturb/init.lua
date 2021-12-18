@@ -15,7 +15,7 @@ _G.dont_disturb_state = false
 local action_name =
     wibox.widget {
     text = "Don't Disturb",
-    font = 'SF Intermosaic B  10',
+    font = 'SFMono Nerd Font Mono Heavy  10',
     align = 'left',
     widget = wibox.widget.textbox
 }
@@ -23,7 +23,7 @@ local action_name =
 local action_status =
     wibox.widget {
     text = 'Off',
-    font = 'SF Intermosaic B  10',
+    font = 'SFMono Nerd Font Mono Heavy  10',
     align = 'left',
     widget = wibox.widget.textbox
 }
@@ -52,8 +52,8 @@ local widget_button =
         {
             button_widget,
             margins = dpi(15),
-            forced_height = dpi(48),
-            forced_width = dpi(48),
+            forced_height = dpi(64),
+            forced_width = dpi(64),
             widget = wibox.container.margin
         },
         widget = clickable_container

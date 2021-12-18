@@ -32,7 +32,7 @@ notifbox_box = function(notif, icon, title, message, app, bgcolor)
         wibox.widget {
         id = 'time_pop',
         markup = nil,
-        font = 'SF Intermosaic B  10',
+        font = 'SFMono Nerd Font Mono Heavy  10',
         align = 'left',
         valign = 'center',
         visible = true,

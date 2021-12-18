@@ -10,7 +10,7 @@ local clickable_container = require('widget.clickable-container')
 local action_name =
     wibox.widget {
     text = 'Blur Strength',
-    font = 'SF Intermosaic B  10',
+    font = 'SFMono Nerd Font Mono Heavy  10',
     align = 'left',
     widget = wibox.widget.textbox
 }
@@ -51,7 +51,7 @@ local slider =
         id = 'blur_strength_slider',
         bar_shape = gears.shape.rounded_rect,
         bar_height = dpi(24),
-        bar_color = '#ffffff20',
+        bar_color = '#8b9cbe',
         bar_active_color = '#f2f2f2EE',
         handle_color = '#ffffff',
         handle_shape = gears.shape.circle,

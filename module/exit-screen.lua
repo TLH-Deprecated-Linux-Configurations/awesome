@@ -57,7 +57,7 @@ local greeter_message =
 local profile_name =
     wibox.widget {
     markup = 'user@hostname',
-    font = 'SF Intermosaic B  12',
+    font = 'SFMono Nerd Font Mono Heavy  12',
     align = 'center',
     valign = 'center',
     widget = wibox.widget.textbox
@@ -123,7 +123,7 @@ local build_power_button = function(name, icon, callback)
     local power_button_label =
         wibox.widget {
         text = name,
-        font = 'SF Intermosaic B  10',
+        font = 'SFMono Nerd Font Mono Heavy  10',
         align = 'center',
         valign = 'center',
         widget = wibox.widget.textbox

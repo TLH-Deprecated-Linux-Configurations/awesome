@@ -1,11 +1,16 @@
-local wibox = require('wibox')
-local awful = require('awful')
-local gears = require('gears')
-local beautiful = require('beautiful')
-local icons = require('theme.icons')
-local dpi = beautiful.xresources.apply_dpi
-local clickable_container = require('widget.clickable-container')
-local task_list = require('widget.task-list')
+--  __           __   __
+-- |  |--.-----.|  |_|  |_.-----.--------.
+-- |  _  |  _  ||   _|   _|  _  |        |
+-- |_____|_____||____|____|_____|__|__|__|
+
+--                           __
+-- .-----.---.-.-----.-----.|  |
+-- |  _  |  _  |     |  -__||  |
+-- |   __|___._|__|__|_____||__|
+-- |__|
+-- ########################################################################
+-- ########################################################################
+-- ########################################################################
 
 local bottom_panel = function(s)
     local panel =
@@ -23,11 +28,15 @@ local bottom_panel = function(s)
         bg = beautiful.bg_normal,
         fg = beautiful.fg_normal
     }
-
+    -- ########################################################################
+    -- ########################################################################
+    -- ########################################################################
     panel:struts {
         bottom = dpi(36)
     }
-
+    -- ########################################################################
+    -- ########################################################################
+    -- ########################################################################
     panel:connect_signal(
         'mouse::enter',
         function()
@@ -37,7 +46,9 @@ local bottom_panel = function(s)
             end
         end
     )
-
+    -- ########################################################################
+    -- ########################################################################
+    -- ########################################################################
     s.systray =
         wibox.widget {
         visible = false,
@@ -46,7 +57,9 @@ local bottom_panel = function(s)
         screen = 'primary',
         widget = wibox.widget.systray
     }
-
+    -- ########################################################################
+    -- ########################################################################
+    -- ########################################################################
     local tag_list = require('widget.tag-list')
     s.search = require('widget.search-apps')()
     local clock = require('widget.clock')(s)
@@ -55,17 +68,21 @@ local bottom_panel = function(s)
     s.tray_toggler = require('widget.tray-toggle')
 
     s.screen_rec = require('widget.screen-recorder')()
-    s.bluetooth = require('widget.bluetooth')()
     s.battery = require('widget.battery')()
     s.network = require('widget.network')()
     s.control_center_toggle = require('widget.control-center-toggle')()
     s.global_search = require('widget.global-search')()
     s.info_center_toggle = require('widget.info-center-toggle')()
-
+    -- ########################################################################
+    -- ########################################################################
+    -- ########################################################################
     panel:setup {
         layout = wibox.layout.align.horizontal,
         position = 'bottom',
         {
+            left = dpi(5),
+            spacing = dpi(12),
+            s.search,
             tag_list(s),
             layout = wibox.layout.fixed.horizontal
         },
@@ -81,18 +98,19 @@ local bottom_panel = function(s)
                 widget = wibox.container.margin
             },
             s.tray_toggler,
-            s.screen_rec,
             s.network,
-            s.bluetooth,
-            s.battery,
-            s.control_center_toggle,
             layout_box,
+            s.control_center_toggle,
             s.info_center_toggle,
+            s.screen_rec,
+            s.battery,
             clock
         }
     }
 
     return panel
 end
-
+-- ########################################################################
+-- ########################################################################
+-- ########################################################################
 return bottom_panel

@@ -15,7 +15,8 @@ local return_button = function()
             id = 'icon',
             image = icons.menu,
             widget = wibox.widget.imagebox,
-            resize = true
+            resize = true,
+            bg = beautiful.groups_bg
         },
         layout = wibox.layout.align.horizontal
     }
@@ -24,7 +25,7 @@ local return_button = function()
         wibox.widget {
         {
             widget,
-            margins = dpi(10),
+            margins = dpi(8),
             widget = wibox.container.margin
         },
         widget = clickable_container
@@ -34,10 +35,19 @@ local return_button = function()
         gears.table.join(
             awful.button(
                 {},
-                1,
+                3,
                 nil,
                 function()
                     awful.spawn(apps.default.rofi_appmenu)
+                end
+            ),
+            awful.button(
+                {},
+                1,
+                function()
+                    if mymainmenu then
+                        mymainmenu:toggle()
+                    end
                 end
             )
         )

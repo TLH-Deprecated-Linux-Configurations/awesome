@@ -14,8 +14,8 @@ local tip = titlebar_icon_path
 local theme = {}
 
 -- Font
-theme.font = 'SF Intermosaic   10'
-theme.font_bold = 'SF Intermosaic B 10'
+theme.font = 'SFMono Nerd Font Mono Bold   10'
+theme.font_bold = 'SFMono Nerd Font Mono Heavy 10'
 
 -- Menu icon theme
 theme.icon_theme = 'chhinamasta'
@@ -28,12 +28,15 @@ local awesome_overrides = function(theme)
     theme.wallpaper = theme.dir .. '/wallpapers/10.png'
 
     -- Default font
-    theme.font = 'SF Intermosaic B 10'
+    theme.font = 'SFMono Nerd Font Mono Heavy 10'
 
     -- Foreground
     theme.fg_normal = '#ffffffde'
     theme.fg_focus = '#e4e4e4'
     theme.fg_urgent = '#CC9393'
+
+    -- Accent color
+    theme.accent = 'linear:0,0:0,51:0,#8b9cbe:1,#5A647A'
 
     theme.bg_normal = 'linear:0,0:0,21:0,#2f303d:1,#1C1E24'
     theme.bg_focus = 'linear:0,0:0,21:0,#484d5e:1,#23262e'
@@ -120,7 +123,7 @@ local awesome_overrides = function(theme)
     theme.groups_radius = dpi(16)
 
     -- UI events
-    theme.leave_event = transparent
+    theme.leave_event = 'linear:0,0:0,21:0,#484d5e:1,#23262e'
     theme.enter_event = '#ffffff' .. '10'
     theme.press_event = '#ffffff' .. '15'
     theme.release_event = '#ffffff' .. '10'
@@ -141,7 +144,7 @@ local awesome_overrides = function(theme)
     end
 
     -- Menu
-    theme.menu_font = 'SF Intermosaic B  11'
+    theme.menu_font = 'SFMono Nerd Font Mono Heavy  11'
     theme.menu_submenu = '' -- ➤
 
     theme.menu_height = dpi(34)
@@ -157,7 +160,7 @@ local awesome_overrides = function(theme)
     -- Tooltips
 
     theme.tooltip_bg = theme.background
-    theme.tooltip_border_color = theme.transparent
+    theme.tooltip_border_color = 'linear:0,0:0,21:0,#484d5e:1,#23262e'
     theme.tooltip_border_width = 0
     theme.tooltip_gaps = dpi(5)
     theme.tooltip_shape = function(cr, w, h)
@@ -204,14 +207,18 @@ local awesome_overrides = function(theme)
     -- Taglist
     --
     theme.taglist_font = 'awesomewm-font 16'
-    theme.taglist_bg_empty = 'linear:0,0:0,21:0,#2f303d:1,#1C1E24'
-    theme.taglist_bg_occupied = '#ffffff' .. '1A'
-    theme.taglist_bg_urgent = '#E91E63' .. '99'
-    theme.taglist_bg_focus = 'linear:0,0:0,21:0,#484d5e:1,#23262e'
+    theme.taglist_bg = 'linear:0,0:0,21:0,#2f303d:1,#1C1E24'
+    theme.taglist_fg_focus = '#ffffff'
+    theme.taglist_fg = '#e9efff'
+    --  theme.taglist_bg_occupied = '#ffffff' .. '1A'
+    theme.taglist_fg_occupied = '#b2bfd9'
+
+    theme.taglist_bg_urgent = '#E91E63' .. 'cc'
+    -- theme.taglist_bg_focus = 'linear:0,0:0,21:0,#484d5e:1,#23262e'
     theme.taglist_spacing = dpi(0)
 
     -- Tasklist
-    theme.tasklist_font = 'SF Intermosaic B  10'
+    theme.tasklist_font = 'SFMono Nerd Font Mono Heavy  10'
     theme.tasklist_bg_normal = 'linear:0,0:0,21:0,#2f303d:1,#1C1E24'
     theme.tasklist_bg_focus = 'linear:0,0:0,21:0,#484d5e:1,#23262e'
     theme.tasklist_bg_urgent = '#E91E63' .. '99'
@@ -221,10 +228,10 @@ local awesome_overrides = function(theme)
 
     -- Notification
     theme.notification_position = 'top_left'
-    theme.notification_bg = theme.transparent
+    theme.notification_bg = 'linear:0,0:0,21:0,#484d5e:1,#23262e'
     theme.notification_margin = dpi(5)
     theme.notification_border_width = dpi(0)
-    theme.notification_border_color = theme.transparent
+    theme.notification_border_color = 'linear:0,0:0,21:0,#484d5e:1,#23262e'
     theme.notification_spacing = dpi(5)
     theme.notification_icon_resize_strategy = 'center'
     theme.notification_icon_size = dpi(32)
@@ -235,8 +242,8 @@ local awesome_overrides = function(theme)
     theme.snap_border_width = dpi(15)
 
     -- Hotkey popup
-    theme.hotkeys_font = 'SF Intermosaic B'
-    theme.hotkeys_description_font = 'SF Intermosaic B'
+    theme.hotkeys_font = 'SFMono Nerd Font Mono Heavy'
+    theme.hotkeys_description_font = 'SFMono Nerd Font Mono Heavy'
     theme.hotkeys_bg = theme.background
     theme.hotkeys_group_margin = dpi(20)
 end

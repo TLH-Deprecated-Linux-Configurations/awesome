@@ -27,14 +27,14 @@ local empty_notifbox =
         },
         {
             text = 'Wow, such empty.',
-            font = 'SF Intermosaic B  14',
+            font = 'SFMono Nerd Font Mono Heavy  14',
             align = 'center',
             valign = 'center',
             widget = wibox.widget.textbox
         },
         {
             text = 'Come back later.',
-            font = 'SF Intermosaic B  10',
+            font = 'SFMono Nerd Font Mono Heavy  10',
             align = 'center',
             valign = 'center',
             widget = wibox.widget.textbox

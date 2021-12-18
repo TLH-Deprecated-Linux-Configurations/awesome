@@ -33,7 +33,7 @@ end
 ui_noti_builder.notifbox_title = function(title)
     return wibox.widget {
         markup = title,
-        font = 'SF Intermosaic B  12',
+        font = 'SFMono Nerd Font Mono Heavy  12',
         align = 'left',
         valign = 'center',
         widget = wibox.widget.textbox
@@ -44,7 +44,7 @@ end
 ui_noti_builder.notifbox_message = function(msg)
     return wibox.widget {
         markup = msg,
-        font = 'SF Intermosaic B  11',
+        font = 'SFMono Nerd Font Mono Heavy  11',
         align = 'left',
         valign = 'center',
         widget = wibox.widget.textbox
@@ -55,7 +55,7 @@ end
 ui_noti_builder.notifbox_appname = function(app)
     return wibox.widget {
         markup = app,
-        font = 'SF Intermosaic B  12',
+        font = 'SFMono Nerd Font Mono Heavy  12',
         align = 'left',
         valign = 'center',
         widget = wibox.widget.textbox
@@ -77,7 +77,7 @@ ui_noti_builder.notifbox_actions = function(n)
                     {
                         {
                             id = 'text_role',
-                            font = 'SF Intermosaic B  10',
+                            font = 'SFMono Nerd Font Mono Heavy  10',
                             widget = wibox.widget.textbox
                         },
                         widget = wibox.container.place

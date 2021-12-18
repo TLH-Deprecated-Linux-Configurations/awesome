@@ -29,7 +29,7 @@ record_tbl.screen_rec_toggle_button =
 record_tbl.screen_rec_countdown_txt =
     wibox.widget {
     id = 'countdown_text',
-    font = 'SF Intermosaic B  64',
+    font = 'SFMono Nerd Font Mono Heavy  64',
     text = '4',
     align = 'center',
     valign = 'bottom',
@@ -191,7 +191,7 @@ record_tbl.screen_rec_back_txt =
     wibox.widget {
     {
         text = 'Back',
-        font = 'SF Intermosaic B  16',
+        font = 'SFMono Nerd Font Mono Heavy  16',
         align = 'left',
         valign = 'center',
         widget = wibox.widget.textbox
@@ -204,7 +204,7 @@ record_tbl.screen_rec_res_txt =
     wibox.widget {
     {
         text = 'Resolution',
-        font = 'SF Intermosaic B  16',
+        font = 'SFMono Nerd Font Mono Heavy  16',
         align = 'left',
         valign = 'center',
         widget = wibox.widget.textbox
@@ -220,7 +220,7 @@ record_tbl.screen_rec_res_txtbox =
             {
                 id = 'res_tbox',
                 markup = '<span foreground="#FFFFFF66">' .. '1366x768' .. '</span>',
-                font = 'SF Intermosaic B  16',
+                font = 'SFMono Nerd Font Mono Heavy  16',
                 align = 'left',
                 valign = 'center',
                 widget = wibox.widget.textbox
@@ -243,7 +243,7 @@ record_tbl.screen_rec_offset_txt =
     wibox.widget {
     {
         text = 'Offset',
-        font = 'SF Intermosaic B  16',
+        font = 'SFMono Nerd Font Mono Heavy  16',
         align = 'left',
         valign = 'center',
         widget = wibox.widget.textbox
@@ -259,7 +259,7 @@ record_tbl.screen_rec_offset_txtbox =
             {
                 id = 'offset_tbox',
                 markup = '<span foreground="#FFFFFF66">' .. '0,0' .. '</span>',
-                font = 'SF Intermosaic B  16',
+                font = 'SFMono Nerd Font Mono Heavy  16',
                 ellipsize = 'start',
                 align = 'left',
                 valign = 'center',
