@@ -19,10 +19,6 @@ local format_item = function(widget)
             widget = wibox.container.margin
         },
         forced_height = dpi(88),
-        bg = beautiful.groups_bg,
-        shape = function(cr, width, height)
-            gears.shape.rounded_rect(cr, width, height, beautiful.groups_radius)
-        end,
         widget = wibox.container.background
     }
 end
@@ -40,10 +36,6 @@ local format_item_no_fix_height = function(widget)
             margins = dpi(10),
             widget = wibox.container.margin
         },
-        bg = beautiful.groups_bg,
-        shape = function(cr, width, height)
-            gears.shape.rounded_rect(cr, width, height, beautiful.groups_radius)
-        end,
         widget = wibox.container.background
     }
 end

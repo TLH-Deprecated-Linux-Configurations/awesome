@@ -1,14 +1,17 @@
-local awful = require('awful')
-local wibox = require('wibox')
-local dpi = require('beautiful').xresources.apply_dpi
-local gears = require('gears')
-local clickable_container = require('widget.clickable-container')
-local icons = require('theme.icons')
+--  _______               __
+-- |_     _|.---.-.-----.|  |--.
+--   |   |  |  _  |__ --||    <
+--   |___|  |___._|_____||__|__|
 
+--  _____   __         __
+-- |     |_|__|.-----.|  |_
+-- |       |  ||__ --||   _|
+-- |_______|__||_____||____|
+-- ########################################################################
+-- ########################################################################
+-- ########################################################################
 --- Common method to create buttons.
--- @tab buttons
--- @param object
--- @return table
+--
 local function create_buttons(buttons, object)
     if buttons then
         local btns = {}
@@ -17,6 +20,7 @@ local function create_buttons(buttons, object)
             -- press and release events, and will propagate them to the
             -- button object the user provided, but with the object as
             -- argument.
+            --
             local btn =
                 awful.button {
                 modifiers = b.modifiers,
@@ -33,9 +37,11 @@ local function create_buttons(buttons, object)
         return btns
     end
 end
-
+-- ########################################################################
+-- ########################################################################
+-- ########################################################################
+-- Update the widgets, creating them if needed
 local function list_update(w, buttons, label, data, objects)
-    -- Update the widgets, creating them if needed
     w:reset()
     for i, o in ipairs(objects) do
         local cache = data[o]
@@ -63,6 +69,9 @@ local function list_update(w, buttons, label, data, objects)
                 },
                 widget = clickable_container
             }
+
+            -- Close Button
+            --
             cb.shape = function(cr, width, height)
                 gears.shape.rounded_rect(cr, width, height, 3)
             end
@@ -89,6 +98,8 @@ local function list_update(w, buttons, label, data, objects)
                     )
                 )
             )
+            -- Tying it all togehter
+            --
             bg_clickable = clickable_container()
             bgb = wibox.container.background()
             tbm =
@@ -98,9 +109,10 @@ local function list_update(w, buttons, label, data, objects)
                 right = dpi(4),
                 widget = wibox.container.margin
             }
+            -- Size the application's icon
+            --
             ibm =
                 wibox.widget {
-                -- 12 top bottom
                 ib,
                 left = dpi(6),
                 right = dpi(6),
@@ -112,6 +124,7 @@ local function list_update(w, buttons, label, data, objects)
             ll = wibox.layout.fixed.horizontal()
 
             -- All of this is added in a fixed widget
+            --
             l:fill_space(true)
             l:add(ibm)
             l:add(tbm)
@@ -120,11 +133,13 @@ local function list_update(w, buttons, label, data, objects)
 
             bg_clickable:set_widget(ll)
             -- And all of this gets a background
+            --
             bgb:set_widget(bg_clickable)
 
             l:buttons(create_buttons(buttons, o))
 
             -- Tooltip to display whole title, if it was truncated
+            --
             tt =
                 awful.tooltip(
                 {
@@ -149,6 +164,7 @@ local function list_update(w, buttons, label, data, objects)
         args = args or {}
 
         -- The text might be invalid, so use pcall.
+        --
         if text == nil or text == '' then
             tbm:set_margins(0)
         else
@@ -183,7 +199,9 @@ local function list_update(w, buttons, label, data, objects)
         w:add(bgb)
     end
 end
-
+-- ########################################################################
+-- ########################################################################
+-- ########################################################################
 local tasklist_buttons =
     awful.util.table.join(
     awful.button(
@@ -216,6 +234,7 @@ local tasklist_buttons =
     -- Using the mouse wheel for this is
     -- insanely frustrating, so the scroll
     -- buttons are used instead
+    --
     awful.button(
         {},
         8,
@@ -231,7 +250,9 @@ local tasklist_buttons =
         end
     )
 )
-
+-- ########################################################################
+-- ########################################################################
+-- ########################################################################
 local task_list = function(s)
     return awful.widget.tasklist(
         s,

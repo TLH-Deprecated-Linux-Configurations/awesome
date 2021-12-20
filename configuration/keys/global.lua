@@ -2,6 +2,11 @@
 -- |     __|  |.-----.|  |--.---.-.|  |
 -- |    |  |  ||  _  ||  _  |  _  ||  |
 -- |_______|__||_____||_____|___._||__|
+--  __  __
+-- |  |/  |.-----.--.--.-----.
+-- |     < |  -__|  |  |__ --|
+-- |__|\__||_____|___  |_____|
+--               |_____|
 -- ########################################################################
 -- ########################################################################
 -- ########################################################################
@@ -25,7 +30,6 @@ local global_keys =
         {'Mod1'},
         'Escape',
         function()
-            print('Spawning Window Menu')
             awful.menu.menu_keys.down = {'Down', 'Alt_L'}
             awful.menu.menu_keys.up = {'Up', 'Alt_R'}
             awful.menu.clients({theme = {width = 450}}, {keygrabber = true})
@@ -56,19 +60,16 @@ local global_keys =
         {modkey},
         'F2',
         function()
-            print('Spawning Firefox Instance')
-            awful.spawn('firefox-nightly')
+            awful.spawn('luakit')
         end,
-        {description = 'Launch New Firefox Instance', group = 'Launcher'}
+        {description = 'Launch Luakit Browser', group = 'Launcher'}
     ),
     -- #############################################################################
     awful.key(
         {modkey, 'Control'},
         'F2',
         function()
-            print('Spawning Epiphany')
-
-            awful.spawn('epiphany')
+            awful.spawn('firefox-nightly')
         end,
         {description = 'Launch New Epiphany Instance', group = 'Launcher'}
     ),
@@ -80,7 +81,6 @@ local global_keys =
         {modkey},
         'F3',
         function()
-            print('Spawning caja in Scratchpad')
             drop.toggle('caja', 'left', 'top', 0.7, 0.7)
 
             -- awful.spawn('caja')
@@ -92,8 +92,6 @@ local global_keys =
         {modkey, 'Control'},
         'F3',
         function()
-            print('Spawning caja as Root')
-
             awful.spawn('gksu caja')
         end,
         {description = 'Launch file Manager as Root', group = 'Launcher'}
@@ -103,8 +101,6 @@ local global_keys =
         {modkey, 'Shift'},
         'F3',
         function()
-            print('Spawning New caja Instance')
-
             awful.spawn('caja')
         end,
         {description = 'Launch New caja Instance', group = 'Launcher'}
@@ -114,8 +110,6 @@ local global_keys =
         {modkey, 'Mod1'},
         'F3',
         function()
-            print('Spawning New Ranger Instance')
-
             awful.spawn('ranger')
         end,
         {description = 'Launch New Ranger Instance', group = 'Launcher'}
@@ -128,8 +122,6 @@ local global_keys =
         {modkey},
         'F4',
         function()
-            print('Spawning Font Awesome Menu')
-
             awful.spawn.easy_async_with_shell('~/.config/awesome/external/rofi/fontawesome_menu/fontawesome-menu')
         end,
         {
@@ -142,8 +134,6 @@ local global_keys =
         {modkey, 'Control'},
         'F4',
         function()
-            print('Spawning Emoji Picker')
-
             awful.spawn.easy_async_with_shell('rofimoji -a copy ')
         end,
         {description = 'Copy bin/emojis to Clipboard', group = 'Launcher'}
@@ -157,7 +147,6 @@ local global_keys =
         {'Control', 'Mod1'},
         'Delete',
         function()
-            print('Opening System Monitor')
             awful.spawn.easy_async_with_shell("sudo kitty -e '/usr/bin/htop'")
         end,
         {description = 'Open System Monitor', group = 'Launcher'}
@@ -170,7 +159,6 @@ local global_keys =
         {'Mod1'},
         'Tab',
         function()
-            print('Tabbing between applications')
             _G.switcher.switch(1, 'Mod1', 'Alt_L', 'Shift', 'Tab')
         end,
         {description = 'Tab Forward Between Applications', group = 'Launcher'}
@@ -180,7 +168,6 @@ local global_keys =
         {'Mod1', 'Shift'},
         'Tab',
         function()
-            print('Reverse tabbing between applications')
             _G.switcher.switch(-1, 'Mod1', 'Alt_L', 'Shift', 'Tab')
         end,
         {
@@ -196,7 +183,6 @@ local global_keys =
         {modkey, 'Mod1'},
         'Return',
         function()
-            print('Showing all scratch windows')
             drop.showall()
         end,
         {
@@ -213,7 +199,6 @@ local global_keys =
         {},
         'XF86Display',
         function()
-            print('Spawning Arandr')
             awful.spawn('Arandr')
         end,
         {description = 'Spawn Arandr', group = 'Awesome'}
@@ -223,8 +208,6 @@ local global_keys =
         {modkey},
         'F5',
         function()
-            print('Spawning Arandr')
-
             awful.spawn('arandr')
         end,
         {
@@ -241,7 +224,6 @@ local global_keys =
         {'Control', 'Mod1'},
         'Delete',
         function()
-            print('Opening System Monitor')
             awful.spawn.easy_async_with_shell("sudo kitty -e '/usr/bin/htop'")
         end,
         {description = 'Open System Monitor', group = 'Launcher'}
