@@ -1,14 +1,12 @@
-local gears = require('gears')
-local wibox = require('wibox')
-local awful = require('awful')
-local ruled = require('ruled')
-local naughty = require('naughty')
-local menubar = require('menubar')
-local beautiful = require('beautiful')
-local dpi = beautiful.xresources.apply_dpi
-local clickable_container = require('widget.clickable-container')
-
+--  _______         __   __   ___ __              __   __
+-- |    |  |.-----.|  |_|__|.'  _|__|.----.---.-.|  |_|__|.-----.-----.-----.
+-- |       ||  _  ||   _|  ||   _|  ||  __|  _  ||   _|  ||  _  |     |__ --|
+-- |__|____||_____||____|__||__| |__||____|___._||____|__||_____|__|__|_____|
+-- ########################################################################
+-- ########################################################################
+-- ########################################################################
 -- Defaults
+--
 naughty.config.defaults.ontop = true
 naughty.config.defaults.icon_size = dpi(32)
 naughty.config.defaults.timeout = 5
@@ -19,8 +17,11 @@ naughty.config.defaults.position = 'top_right'
 naughty.config.defaults.shape = function(cr, w, h)
     gears.shape.rounded_rect(cr, w, h, dpi(6))
 end
-
+-- ########################################################################
+-- ########################################################################
+-- ########################################################################
 -- Apply theme variables
+--
 naughty.config.padding = dpi(8)
 naughty.config.spacing = dpi(8)
 naughty.config.icon_dirs = {
@@ -34,26 +35,31 @@ naughty.config.icon_dirs = {
     '/usr/share/pixmaps/'
 }
 naughty.config.icon_formats = {'svg', 'png', 'jpg', 'gif'}
-
+-- ########################################################################
+-- ########################################################################
+-- ########################################################################
 -- Presets / rules
-
+--
 ruled.notification.connect_signal(
     'request::rules',
     function()
+        -- ########################################################################
         -- Critical notifs
+        --
         ruled.notification.append_rule {
             rule = {urgency = 'critical'},
             properties = {
                 font = 'SFMono Nerd Font Mono Heavy  10',
-                bg = '#ff0000',
-                fg = '#ffffff',
+                bg = '#ff00b9',
+                fg = '#1c1e24',
                 margin = dpi(16),
                 position = 'top_right',
                 implicit_timeout = 0
             }
         }
-
+        -- ########################################################################
         -- Normal notifs
+        --
         ruled.notification.append_rule {
             rule = {urgency = 'normal'},
             properties = {
@@ -65,8 +71,9 @@ ruled.notification.connect_signal(
                 implicit_timeout = 5
             }
         }
-
+        -- ########################################################################
         -- Low notifs
+        --
         ruled.notification.append_rule {
             rule = {urgency = 'low'},
             properties = {
@@ -80,8 +87,11 @@ ruled.notification.connect_signal(
         }
     end
 )
-
+-- ########################################################################
+-- ########################################################################
+-- ########################################################################
 -- Error handling
+--
 naughty.connect_signal(
     'request::display_error',
     function(message, startup)
@@ -94,8 +104,11 @@ naughty.connect_signal(
         }
     end
 )
-
+-- ########################################################################
+-- ########################################################################
+-- ########################################################################
 -- XDG icon lookup
+--
 naughty.connect_signal(
     'request::icon',
     function(n, context, hints)
@@ -110,8 +123,11 @@ naughty.connect_signal(
         end
     end
 )
-
+-- ########################################################################
+-- ########################################################################
+-- ########################################################################
 -- Connect to naughty on display signal
+--
 naughty.connect_signal(
     'request::display',
     function(n)
@@ -147,8 +163,11 @@ naughty.connect_signal(
             style = {underline_normal = false, underline_selected = true},
             widget = naughty.list.actions
         }
-
+        -- ########################################################################
+        -- ########################################################################
+        -- ########################################################################
         -- Notifbox Blueprint
+        --
         naughty.layout.box {
             notification = n,
             type = 'notification',
@@ -244,9 +263,12 @@ naughty.connect_signal(
                 widget = wibox.container.background
             }
         }
-
+        -- ########################################################################
+        -- ########################################################################
+        -- ########################################################################
         -- Destroy popups if dont_disturb_state mode is on
         -- Or if the info_center is visible
+        --
         local focused = awful.screen.focused()
         if _G.dont_disturb_state or (focused.info_center and focused.info_center.visible) then
             naughty.destroy_all_notifications(nil, 1)

@@ -103,7 +103,7 @@ local create_profile = function()
                 if not stdout:match('default') then
                     profile_imagebox.icon:set_image(stdout)
                 else
-                    profile_imagebox.icon:set_image(widget_icon_dir .. 'user.jpeg')
+                    profile_imagebox.icon:set_image(widget_icon_dir .. 'user.png')
                 end
             end
         )

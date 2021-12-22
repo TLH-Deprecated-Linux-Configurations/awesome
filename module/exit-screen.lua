@@ -1,77 +1,50 @@
-local awful = require('awful')
-local gears = require('gears')
-local wibox = require('wibox')
-local beautiful = require('beautiful')
-local filesystem = gears.filesystem
-local dpi = beautiful.xresources.apply_dpi
-local icons = require('theme.icons')
-local apps = require('configuration.apps')
-local clickable_container = require('widget.clickable-container')
+--  _______         __ __
+-- |    ___|.--.--.|__|  |_
+-- |    ___||_   _||  |   _|
+-- |_______||__.__||__|____|
+
+--  _______
+-- |     __|.----.----.-----.-----.-----.
+-- |__     ||  __|   _|  -__|  -__|     |
+-- |_______||____|__| |_____|_____|__|__|
+-- ########################################################################
+-- ########################################################################
+-- ########################################################################
+-- Assign the directory to pull images for icons from
+--
 local config_dir = filesystem.get_configuration_dir()
 local widget_icon_dir = config_dir .. 'configuration/user-profile/'
-
-local msg_table = {
-    'See you later, astronaut!',
-    'After a while, crocodile.',
-    'Stay out of trouble.',
-    'I’m out of here.',
-    'Okay...bye, fry guy!',
-    'Peace out!',
-    'Peace out, rock ahead!',
-    'Gotta get going.',
-    'Out to the door, dinosaur.',
-    "Don't forget to come back!",
-    'See ya later!',
-    'In a while, crocodile.',
-    'Adios, amigo.',
-    'Begone!',
-    'Arrivederci.',
-    'Never look back!',
-    'So long, man!',
-    'Au revoir!',
-    'Later, skater!',
-    "That'll do my friend. That'll do.",
-    'Happy trails!',
-    'Smell ya later!',
-    'See you soon, coccoon!',
-    'Bye Felicia!',
-    'Sayonara!',
-    'Ciao!',
-    'Well.... bye.',
-    'Delete your browser history!',
-    'See you, Space Cowboy!',
-    'Change da world. My final message. Goodbye.',
-    'Find out on the next episode of Dragonball Z...',
-    'Choose wisely!'
-}
-
-local greeter_message =
-    wibox.widget {
-    markup = 'Choose wisely!',
-    font = 'Inter UltraLight 48',
-    align = 'center',
-    valign = 'center',
-    widget = wibox.widget.textbox
-}
-
+-- ########################################################################
+-- ########################################################################
+-- ########################################################################
+-- Create User Name Display Headline
+--
 local profile_name =
     wibox.widget {
     markup = 'user@hostname',
-    font = 'SFMono Nerd Font Mono Heavy  12',
+    font = beautiful.exit_screen_font,
     align = 'center',
     valign = 'center',
     widget = wibox.widget.textbox
 }
-
+-- ########################################################################
+-- ########################################################################
+-- ########################################################################
+-- Assign the User Image
+--
 local profile_imagebox =
     wibox.widget {
-    image = widget_icon_dir .. 'user.jpeg',
+    image = widget_icon_dir .. 'user.png',
     resize = true,
     forced_height = dpi(140),
-    clip_shape = gears.shape.circle,
+    clip_shape = gears.shape.square,
     widget = wibox.widget.imagebox
 }
-
+-- ########################################################################
+-- ########################################################################
+-- ########################################################################
+-- Update the picture in the unlikely event its changed
+--
 local update_profile_pic = function()
     awful.spawn.easy_async_with_shell(
         apps.utils.update_profile,
@@ -80,15 +53,23 @@ local update_profile_pic = function()
             if not stdout:match('default') then
                 profile_imagebox:set_image(stdout)
             else
-                profile_imagebox:set_image(widget_icon_dir .. 'user.jpeg')
+                profile_imagebox:set_image(widget_icon_dir .. 'user.png')
             end
             profile_imagebox:emit_signal('widget::redraw_needed')
         end
     )
 end
-
+-- ########################################################################
+-- ########################################################################
+-- ########################################################################
+-- Run update picture for good measure
+--
 update_profile_pic()
-
+-- ########################################################################
+-- ########################################################################
+-- ########################################################################
+-- Update user name in the even more unlikely even tit changed
+--
 local update_user_name = function()
     awful.spawn.easy_async_with_shell(
         [[
@@ -109,26 +90,31 @@ local update_user_name = function()
         end
     )
 end
-
+-- ########################################################################
+-- ########################################################################
+-- ########################################################################
+-- Run the user name function for good measure
+--
 update_user_name()
-
-local update_greeter_msg = function()
-    greeter_message:set_markup(msg_table[math.random(#msg_table)])
-    greeter_message:emit_signal('widget::redraw_needed')
-end
-
-update_greeter_msg()
-
+-- ########################################################################
+-- ########################################################################
+-- ########################################################################
+-- Create button widget text box template
+--
 local build_power_button = function(name, icon, callback)
     local power_button_label =
         wibox.widget {
         text = name,
-        font = 'SFMono Nerd Font Mono Heavy  10',
+        font = beautiful.exit_screen_font,
         align = 'center',
         valign = 'center',
         widget = wibox.widget.textbox
     }
-
+    -- ########################################################################
+    -- ########################################################################
+    -- ########################################################################
+    -- General templating for the buttons
+    --
     local power_button =
         wibox.widget {
         {
@@ -138,30 +124,36 @@ local build_power_button = function(name, icon, callback)
                         image = icon,
                         widget = wibox.widget.imagebox
                     },
-                    margins = dpi(16),
+                    margins = dpi(2),
                     widget = wibox.container.margin
                 },
                 bg = beautiful.groups_bg,
                 widget = wibox.container.background
             },
             shape = gears.shape.rounded_rect,
-            forced_width = dpi(90),
-            forced_height = dpi(90),
+            forced_width = dpi(216),
+            forced_height = dpi(216),
             widget = clickable_container
         },
         left = dpi(24),
         right = dpi(24),
         widget = wibox.container.margin
     }
-
+    -- ########################################################################
+    -- ########################################################################
+    -- ########################################################################
+    -- Templating for the buttons as members of a group
     local exit_screen_item =
         wibox.widget {
         layout = wibox.layout.fixed.vertical,
-        spacing = dpi(5),
+        spacing = dpi(15),
         power_button,
         power_button_label
     }
-
+    -- ########################################################################
+    -- ########################################################################
+    -- ########################################################################
+    -- signal indicating button press is released
     exit_screen_item:connect_signal(
         'button::release',
         function()
@@ -170,37 +162,52 @@ local build_power_button = function(name, icon, callback)
     )
     return exit_screen_item
 end
-
+-- ########################################################################
+-- ########################################################################
+-- ########################################################################
+-- Suspend Command
 local suspend_command = function()
     awesome.emit_signal('module::exit_screen:hide')
-    awful.spawn.with_shell(apps.default.lock .. ' & systemctl suspend')
+    awful.spawn.with_shell(apps.default.lock .. ' & loginctl suspend')
 end
-
+-- ########################################################################
+-- ########################################################################
+-- ########################################################################
 local logout_command = function()
     awesome.quit()
 end
-
+-- ########################################################################
+-- ########################################################################
+-- ########################################################################
 local lock_command = function()
     awesome.emit_signal('module::exit_screen:hide')
     awful.spawn.with_shell(apps.default.lock)
 end
-
+-- ########################################################################
+-- ########################################################################
+-- ########################################################################
 local poweroff_command = function()
     awful.spawn.with_shell('poweroff')
     awesome.emit_signal('module::exit_screen:hide')
 end
-
+-- ########################################################################
+-- ########################################################################
+-- ########################################################################
 local reboot_command = function()
     awful.spawn.with_shell('reboot')
     awesome.emit_signal('module::exit_screen:hide')
 end
-
+-- ########################################################################
+-- ########################################################################
+-- ########################################################################
 local poweroff = build_power_button('Shutdown', icons.power, poweroff_command)
 local reboot = build_power_button('Restart', icons.restart, reboot_command)
 local suspend = build_power_button('Sleep', icons.sleep, suspend_command)
 local logout = build_power_button('Logout', icons.logout, logout_command)
 local lock = build_power_button('Lock', icons.lock, lock_command)
-
+-- ########################################################################
+-- ########################################################################
+-- ########################################################################
 local create_exit_screen = function(s)
     s.exit_screen =
         wibox {
@@ -208,14 +215,16 @@ local create_exit_screen = function(s)
         type = 'splash',
         visible = false,
         ontop = true,
-        bg = beautiful.background,
+        bg = beautiful.exit_screen_bg,
         fg = beautiful.fg_normal,
         height = s.geometry.height,
         width = s.geometry.width,
         x = s.geometry.x,
         y = s.geometry.y
     }
-
+    -- ########################################################################
+    -- ########################################################################
+    -- ########################################################################
     s.exit_screen:buttons(
         gears.table.join(
             awful.button(
@@ -234,7 +243,9 @@ local create_exit_screen = function(s)
             )
         )
     )
-
+    -- ########################################################################
+    -- ########################################################################
+    -- ########################################################################
     s.exit_screen:setup {
         layout = wibox.layout.align.vertical,
         expand = 'none',
@@ -271,8 +282,7 @@ local create_exit_screen = function(s)
                 nil,
                 {
                     widget = wibox.container.margin,
-                    margins = dpi(15),
-                    greeter_message
+                    margins = dpi(5)
                 },
                 nil
             },
@@ -294,7 +304,7 @@ local create_exit_screen = function(s)
                         layout = wibox.layout.fixed.vertical
                     },
                     widget = wibox.container.margin,
-                    margins = dpi(15)
+                    margins = dpi(5)
                 },
                 nil
             }
@@ -302,21 +312,27 @@ local create_exit_screen = function(s)
         nil
     }
 end
-
+-- ########################################################################
+-- ########################################################################
+-- ########################################################################
 screen.connect_signal(
     'request::desktop_decoration',
     function(s)
         create_exit_screen(s)
     end
 )
-
+-- ########################################################################
+-- ########################################################################
+-- ########################################################################
 screen.connect_signal(
     'removed',
     function(s)
         create_exit_screen(s)
     end
 )
-
+-- ########################################################################
+-- ########################################################################
+-- ########################################################################
 local exit_screen_grabber =
     awful.keygrabber {
     auto_start = true,
@@ -337,7 +353,9 @@ local exit_screen_grabber =
         end
     end
 }
-
+-- ########################################################################
+-- ########################################################################
+-- ########################################################################
 awesome.connect_signal(
     'module::exit_screen:show',
     function()
@@ -348,11 +366,12 @@ awesome.connect_signal(
         exit_screen_grabber:start()
     end
 )
-
+-- ########################################################################
+-- ########################################################################
+-- ########################################################################
 awesome.connect_signal(
     'module::exit_screen:hide',
     function()
-        update_greeter_msg()
         exit_screen_grabber:stop()
         for s in screen do
             s.exit_screen.visible = false

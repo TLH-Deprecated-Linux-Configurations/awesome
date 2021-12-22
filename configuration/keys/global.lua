@@ -677,7 +677,7 @@ local global_keys =
         {modkey},
         'l',
         function()
-            awful.spawn(apps.default.lock, false)
+            awful.spawn(apps.default.lock)
         end,
         {description = 'lock the screen', group = 'Utility'}
     ),
@@ -689,7 +689,7 @@ local global_keys =
         {modkey},
         'Return',
         function()
-            drop.toggle(apps.default.terminal, 'left', 'top', 0.8, 0.8)
+            drop.toggle(apps.default.terminal, 'left', 'top', 0.9, 0.9)
         end,
         {description = 'open terminal', group = 'launcher'}
     ),

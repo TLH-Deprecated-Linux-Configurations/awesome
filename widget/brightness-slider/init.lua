@@ -7,35 +7,24 @@ local dpi = beautiful.xresources.apply_dpi
 local icons = require('theme.icons')
 local clickable_container = require('widget.clickable-container')
 
-local action_name =
-    wibox.widget {
+local action_name = wibox.widget {
     text = 'Brightness',
     font = 'SFMono Nerd Font Mono Heavy  10',
     align = 'left',
     widget = wibox.widget.textbox
 }
 
-local icon =
-    wibox.widget {
+local icon = wibox.widget {
     layout = wibox.layout.align.vertical,
     expand = 'none',
     nil,
-    {
-        image = icons.brightness,
-        resize = true,
-        widget = wibox.widget.imagebox
-    },
+    {image = icons.brightness, resize = true, widget = wibox.widget.imagebox},
     nil
 }
 
-local action_level =
-    wibox.widget {
+local action_level = wibox.widget {
     {
-        {
-            icon,
-            margins = dpi(5),
-            widget = wibox.container.margin
-        },
+        {icon, margins = dpi(5), widget = wibox.container.margin},
         widget = clickable_container
     },
     bg = beautiful.groups_bg,
@@ -45,20 +34,19 @@ local action_level =
     widget = wibox.container.background
 }
 
-local slider =
-    wibox.widget {
+local slider = wibox.widget {
     nil,
     {
         id = 'brightness_slider',
         bar_shape = gears.shape.rounded_rect,
         bar_height = dpi(24),
-        bar_color = '#ffffff20',
-        bar_active_color = '#f2f2f2EE',
-        handle_color = '#ffffff',
+        bar_color = '#22262d',
+        bar_active_color = '#b2bfd9cc',
+        handle_color = '#e9efff',
         handle_shape = gears.shape.circle,
         handle_width = dpi(24),
-        handle_border_color = '#00000012',
-        handle_border_width = dpi(1),
+        handle_border_color = '#000000aa',
+        handle_border_width = dpi(2),
         maximum = 100,
         widget = wibox.widget.slider
     },
@@ -70,55 +58,35 @@ local slider =
 
 local brightness_slider = slider.brightness_slider
 
-brightness_slider:connect_signal(
-    'property::value',
-    function()
-        local brightness_level = brightness_slider:get_value()
+brightness_slider:connect_signal('property::value', function()
+    local brightness_level = brightness_slider:get_value()
 
-        spawn('light -S ' .. math.max(brightness_level, 5), false)
+    spawn('light -S ' .. math.max(brightness_level, 5), false)
 
-        -- Update brightness osd
-        awesome.emit_signal('module::brightness_osd', brightness_level)
-    end
-)
+    -- Update brightness osd
+    awesome.emit_signal('module::brightness_osd', brightness_level)
+end)
 
-brightness_slider:buttons(
-    gears.table.join(
-        awful.button(
-            {},
-            4,
-            nil,
-            function()
-                if brightness_slider:get_value() > 100 then
-                    brightness_slider:set_value(100)
-                    return
-                end
-                brightness_slider:set_value(brightness_slider:get_value() + 5)
-            end
-        ),
-        awful.button(
-            {},
-            5,
-            nil,
-            function()
-                if brightness_slider:get_value() < 0 then
-                    brightness_slider:set_value(0)
-                    return
-                end
-                brightness_slider:set_value(brightness_slider:get_value() - 5)
-            end
-        )
-    )
-)
+brightness_slider:buttons(gears.table.join(
+                              awful.button({}, 4, nil, function()
+        if brightness_slider:get_value() > 100 then
+            brightness_slider:set_value(100)
+            return
+        end
+        brightness_slider:set_value(brightness_slider:get_value() + 5)
+    end), awful.button({}, 5, nil, function()
+        if brightness_slider:get_value() < 0 then
+            brightness_slider:set_value(0)
+            return
+        end
+        brightness_slider:set_value(brightness_slider:get_value() - 5)
+    end)))
 
 local update_slider = function()
-    awful.spawn.easy_async_with_shell(
-        'light -G',
-        function(stdout)
-            local brightness = string.match(stdout, '(%d+)')
-            brightness_slider:set_value(tonumber(brightness))
-        end
-    )
+    awful.spawn.easy_async_with_shell('light -G', function(stdout)
+        local brightness = string.match(stdout, '(%d+)')
+        brightness_slider:set_value(tonumber(brightness))
+    end)
 end
 
 -- Update on startup
@@ -138,37 +106,18 @@ local action_jump = function()
     brightness_slider:set_value(new_value)
 end
 
-action_level:buttons(
-    awful.util.table.join(
-        awful.button(
-            {},
-            1,
-            nil,
-            function()
-                action_jump()
-            end
-        )
-    )
-)
+action_level:buttons(awful.util.table.join(
+                         awful.button({}, 1, nil, function() action_jump() end)))
 
 -- The emit will come from the global keybind
-awesome.connect_signal(
-    'widget::brightness',
-    function()
-        update_slider()
-    end
-)
+awesome.connect_signal('widget::brightness', function() update_slider() end)
 
 -- The emit will come from the OSD
-awesome.connect_signal(
-    'widget::brightness:update',
-    function(value)
-        brightness_slider:set_value(tonumber(value))
-    end
-)
+awesome.connect_signal('widget::brightness:update', function(value)
+    brightness_slider:set_value(tonumber(value))
+end)
 
-local brightness_setting =
-    wibox.widget {
+local brightness_setting = wibox.widget {
     layout = wibox.layout.fixed.vertical,
     spacing = dpi(5),
     action_name,

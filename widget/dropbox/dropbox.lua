@@ -118,7 +118,7 @@ dropbox_widget:connect_signal(
 -- ########################################################################
 -- ########################################################################
 -- ########################################################################
-watch(status_bin_cmd, 2, update, dropbox_widget)
+watch(status_bin_cmd, 6, update, dropbox_widget)
 
 -- Version with Timer and Updater
 --update(dropbox_widget)

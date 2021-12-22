@@ -1,30 +1,30 @@
-local awful = require('awful')
-local wibox = require('wibox')
-local gears = require('gears')
-local naughty = require('naughty')
-local beautiful = require('beautiful')
+local awful = require("awful")
+local wibox = require("wibox")
+local gears = require("gears")
+local naughty = require("naughty")
+local beautiful = require("beautiful")
 local dpi = beautiful.xresources.apply_dpi
-local clickable_container = require('widget.clickable-container')
+local clickable_container = require("widget.clickable-container")
 local config_dir = gears.filesystem.get_configuration_dir()
-local widget_dir = config_dir .. 'widget/dont-disturb/'
-local widget_icon_dir = widget_dir .. 'icons/'
-local icons = require('theme.icons')
+local widget_dir = config_dir .. "widget/dont-disturb/"
+local widget_icon_dir = widget_dir .. "icons/"
+local icons = require("theme.icons")
 
 _G.dont_disturb_state = false
 
 local action_name =
     wibox.widget {
     text = "Don't Disturb",
-    font = 'SFMono Nerd Font Mono Heavy  10',
-    align = 'left',
+    font = "SFMono Nerd Font Mono Heavy  10",
+    align = "left",
     widget = wibox.widget.textbox
 }
 
 local action_status =
     wibox.widget {
-    text = 'Off',
-    font = 'SFMono Nerd Font Mono Heavy  10',
-    align = 'left',
+    text = "Off",
+    font = "SFMono Nerd Font Mono Heavy  10",
+    align = "left",
     widget = wibox.widget.textbox
 }
 
@@ -38,8 +38,8 @@ local action_info =
 local button_widget =
     wibox.widget {
     {
-        id = 'icon',
-        image = widget_icon_dir .. 'notify.svg',
+        id = "icon",
+        image = widget_icon_dir .. "notify.svg",
         widget = wibox.widget.imagebox,
         resize = true
     },
@@ -59,35 +59,37 @@ local widget_button =
         widget = clickable_container
     },
     bg = beautiful.groups_bg,
-    shape = gears.shape.circle,
+    shape = function(cr, w, h)
+        gears.shape.rounded_rect(cr, w, h, 4)
+    end,
     widget = wibox.container.background
 }
 
 local update_widget = function()
     if dont_disturb_state then
-        action_status:set_text('On')
+        action_status:set_text("On")
         widget_button.bg = beautiful.system_cyan_dark
-        button_widget.icon:set_image(widget_icon_dir .. 'dont-disturb.svg')
+        button_widget.icon:set_image(widget_icon_dir .. "dont-disturb.svg")
     else
-        action_status:set_text('Off')
+        action_status:set_text("Off")
         widget_button.bg = beautiful.groups_bg
-        button_widget.icon:set_image(widget_icon_dir .. 'notify.svg')
+        button_widget.icon:set_image(widget_icon_dir .. "notify.svg")
     end
 end
 
 local check_disturb_status = function()
     awful.spawn.easy_async_with_shell(
-        'cat ' .. widget_dir .. 'disturb_status',
+        "cat " .. widget_dir .. "disturb_status",
         function(stdout)
             local status = stdout
 
-            if status:match('true') then
+            if status:match("true") then
                 dont_disturb_state = true
-            elseif status:match('false') then
+            elseif status:match("false") then
                 dont_disturb_state = false
             else
                 dont_disturb_state = false
-                awful.spawn.with_shell("echo 'false' > " .. widget_dir .. 'disturb_status')
+                awful.spawn.with_shell("echo 'false' > " .. widget_dir .. "disturb_status")
             end
 
             update_widget()
@@ -104,7 +106,7 @@ local toggle_action = function()
         dont_disturb_state = true
     end
     awful.spawn.easy_async_with_shell(
-        'echo ' .. tostring(dont_disturb_state) .. ' > ' .. widget_dir .. 'disturb_status',
+        "echo " .. tostring(dont_disturb_state) .. " > " .. widget_dir .. "disturb_status",
         function()
             update_widget()
         end
@@ -144,7 +146,7 @@ local action_widget =
     widget_button,
     {
         layout = wibox.layout.align.vertical,
-        expand = 'none',
+        expand = "none",
         nil,
         action_info,
         nil
@@ -153,10 +155,10 @@ local action_widget =
 
 -- Create a notification sound
 naughty.connect_signal(
-    'request::display',
+    "request::display",
     function(n)
         if not dont_disturb_state then
-            awful.spawn.with_shell('canberra-gtk-play -i message')
+            awful.spawn.with_shell("canberra-gtk-play -i message")
         end
     end
 )

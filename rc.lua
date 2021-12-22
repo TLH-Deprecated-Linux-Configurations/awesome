@@ -32,10 +32,9 @@ require('layout')
 
 require('configuration')
 
--- ░█▄█░█▀█░█▀▄░█░█░█░░░█▀▀░█▀▀
--- ░█░█░█░█░█░█░█░█░█░░░█▀▀░▀▀█
--- ░▀░▀░▀▀▀░▀▀░░▀▀▀░▀▀▀░▀▀▀░▀▀▀
-
+-- ########################################################################
+-- ########################################################################
+-- ########################################################################
 require('module.notifications')
 require('module.auto-start')
 require('module.exit-screen')
@@ -44,7 +43,7 @@ require('module.menu')
 require('module.titlebar')
 require('module.brightness-osd')
 require('module.volume-osd')
-require('module.lockscreen')
+
 require('module.application-switcher')
 
 -- ░█░█░█▀█░█░░░█░░░█▀█░█▀█░█▀█░█▀▀░█▀▄

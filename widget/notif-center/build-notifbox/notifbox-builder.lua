@@ -63,8 +63,7 @@ notifbox_box = function(notif, icon, title, message, app, bgcolor)
                 notifbox_timepop:set_markup(exact_date_time)
                 return false
             end
-
-            end
+        end
     }
 
     local notifbox_template =
@@ -139,7 +138,7 @@ notifbox_box = function(notif, icon, title, message, app, bgcolor)
                     else
                         notifbox_delete()
                     end
-                            end
+                end
             )
         )
     )
@@ -162,8 +161,6 @@ notifbox_box = function(notif, icon, title, message, app, bgcolor)
             notifbox_dismiss.visible = false
         end
     )
-
-    collectgarbage('collect')
 
     return notifbox
 end

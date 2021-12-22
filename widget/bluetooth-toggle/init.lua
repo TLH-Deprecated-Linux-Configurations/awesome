@@ -1,29 +1,29 @@
-local awful = require('awful')
-local wibox = require('wibox')
-local gears = require('gears')
-local beautiful = require('beautiful')
+local awful = require("awful")
+local wibox = require("wibox")
+local gears = require("gears")
+local beautiful = require("beautiful")
 local watch = awful.widget.watch
 local dpi = beautiful.xresources.apply_dpi
-local clickable_container = require('widget.clickable-container')
+local clickable_container = require("widget.clickable-container")
 local config_dir = gears.filesystem.get_configuration_dir()
-local widget_dir = config_dir .. 'widget/bluetooth-toggle/'
-local widget_icon_dir = widget_dir .. 'icons/'
-local icons = require('theme.icons')
+local widget_dir = config_dir .. "widget/bluetooth-toggle/"
+local widget_icon_dir = widget_dir .. "icons/"
+local icons = require("theme.icons")
 local device_state = false
 
 local action_name =
     wibox.widget {
-    text = 'Bluetooth',
-    font = 'SFMono Nerd Font Mono Heavy  10',
-    align = 'left',
+    text = "Bluetooth",
+    font = "SFMono Nerd Font Mono Heavy  10",
+    align = "left",
     widget = wibox.widget.textbox
 }
 
 local action_status =
     wibox.widget {
-    text = 'Off',
-    font = 'SFMono Nerd Font Mono Heavy  10',
-    align = 'left',
+    text = "Off",
+    font = "SFMono Nerd Font Mono Heavy  10",
+    align = "left",
     widget = wibox.widget.textbox
 }
 
@@ -37,8 +37,8 @@ local action_info =
 local button_widget =
     wibox.widget {
     {
-        id = 'icon',
-        image = widget_icon_dir .. 'bluetooth-off.svg',
+        id = "icon",
+        image = widget_icon_dir .. "bluetooth-off.svg",
         widget = wibox.widget.imagebox,
         resize = true
     },
@@ -58,27 +58,29 @@ local widget_button =
         widget = clickable_container
     },
     bg = beautiful.groups_bg,
-    shape = gears.shape.circle,
+    shape = function(cr, w, h)
+        gears.shape.rounded_rect(cr, w, h, 4)
+    end,
     widget = wibox.container.background
 }
 
 local update_widget = function()
     if device_state then
-        action_status:set_text('On')
+        action_status:set_text("On")
         widget_button.bg = beautiful.accent
-        button_widget.icon:set_image(widget_icon_dir .. 'bluetooth.svg')
+        button_widget.icon:set_image(widget_icon_dir .. "bluetooth.svg")
     else
-        action_status:set_text('Off')
+        action_status:set_text("Off")
         widget_button.bg = beautiful.groups_bg
-        button_widget.icon:set_image(widget_icon_dir .. 'bluetooth-off.svg')
+        button_widget.icon:set_image(widget_icon_dir .. "bluetooth-off.svg")
     end
 end
 
 local check_device_state = function()
     awful.spawn.easy_async_with_shell(
-        'rfkill list bluetooth',
+        "rfkill list bluetooth",
         function(stdout)
-            if stdout:match('Soft blocked: yes') then
+            if stdout:match("Soft blocked: yes") then
                 device_state = false
             else
                 device_state = true
@@ -103,8 +105,8 @@ local power_on_cmd =
 		message = 'Initializing bluetooth device...',
 		icon = ']] ..
     widget_icon_dir ..
-        'loading' ..
-            '.svg' ..
+        "loading" ..
+            ".svg" ..
                 [['
 	})
 	"
@@ -128,7 +130,7 @@ local power_off_cmd =
 		title = 'System Notification',
 		message = 'The bluetooth device has been disabled.',
 		icon = ']] ..
-    widget_icon_dir .. 'bluetooth-off' .. '.svg' .. [['
+    widget_icon_dir .. "bluetooth-off" .. ".svg" .. [['
 	})
 	"
 ]]
@@ -180,7 +182,7 @@ action_info:buttons(
 )
 
 watch(
-    'rfkill list bluetooth',
+    "rfkill list bluetooth",
     5,
     function(_, stdout)
         check_device_state()
@@ -194,7 +196,7 @@ local action_widget =
     widget_button,
     {
         layout = wibox.layout.align.vertical,
-        expand = 'none',
+        expand = "none",
         nil,
         action_info,
         nil

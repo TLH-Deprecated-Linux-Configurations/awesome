@@ -1,3 +1,11 @@
+--  ______               ___ __
+-- |      |.-----.-----.'  _|__|.-----.
+-- |   ---||  _  |     |   _|  ||  _  |
+-- |______||_____|__|__|__| |__||___  |
+--                              |_____|
+-- ########################################################################
+-- ########################################################################
+-- ########################################################################
 return {
     widget = {
         email = {
@@ -49,48 +57,6 @@ return {
         auto_start = {
             -- Will create notification if true
             debug_mode = false
-        },
-        dynamic_wallpaper = {
-            -- Will look for wallpapers here
-            wall_dir = 'theme/wallpapers/',
-            -- Image formats
-            valid_picture_formats = {'jpg', 'png', 'jpeg'},
-            -- Leave this table empty for full auto scheduling
-            wallpaper_schedule = {
-                ['00:00:00'] = 'midnight.jpg',
-                ['06:22:00'] = 'morn.jpg',
-                ['12:00:00'] = 'noon.jpg',
-                ['17:58:00'] = 'night.jpg'
-                -- Example of just using auto-scheduling with keywords
-                --[[
-					'midnight',
-					'morning',
-					'noon',
-					'afternoon',
-					'evening',
-					'night'
-				--]]
-            },
-            -- Stretch background image across all screens(monitor)
-            stretch = false
-        },
-        lockscreen = {
-            -- Clock format
-            military_clock = true,
-            -- Default password if there's no PAM integration
-            fallback_password = 'electrictantra',
-            -- Capture intruder using webcam
-            capture_intruder = true,
-            -- Intruder image save location (Will create directory if it doesn't exist)
-            face_capture_dir = '$(xdg-user-dir PICTURES)/Intruders/',
-            -- Background directory - Defaults to 'awesome/config/theme/wallpapers/' if null
-            bg_dir = nil,
-            -- Will look for this image file under 'bg_dir'
-            bg_image = 'morn.jpg',
-            -- Blur lockscreen background
-            blur_background = true,
-            -- Blurred/filtered background image path (No reason to change this)
-            tmp_wall_dir = '/tmp/awesomewm/' .. os.getenv('USER') .. '/'
         }
     }
 }

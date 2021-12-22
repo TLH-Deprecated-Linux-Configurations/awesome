@@ -1,24 +1,24 @@
-local wibox = require('wibox')
-local gears = require('gears')
-local awful = require('awful')
-local beautiful = require('beautiful')
+local wibox = require("wibox")
+local gears = require("gears")
+local awful = require("awful")
+local beautiful = require("beautiful")
 local watch = awful.widget.watch
 local spawn = awful.spawn
 local dpi = beautiful.xresources.apply_dpi
-local icons = require('theme.icons')
+local icons = require("theme.icons")
 
 local meter_name =
     wibox.widget {
-    text = 'CPU',
-    font = 'SFMono Nerd Font Mono Heavy  10',
-    align = 'left',
+    text = "CPU",
+    font = "SFMono Nerd Font Mono Heavy  10",
+    align = "left",
     widget = wibox.widget.textbox
 }
 
 local icon =
     wibox.widget {
     layout = wibox.layout.align.vertical,
-    expand = 'none',
+    expand = "none",
     nil,
     {
         image = icons.chart,
@@ -46,17 +46,17 @@ local slider =
     wibox.widget {
     nil,
     {
-        id = 'cpu_usage',
+        id = "cpu_usage",
         max_value = 100,
         value = 29,
         forced_height = dpi(24),
-        color = '#f2f2f2EE',
-        background_color = '#ffffff20',
+        color = "#f2f2f2EE",
+        background_color = "#22262d",
         shape = gears.shape.rounded_rect,
         widget = wibox.widget.progressbar
     },
     nil,
-    expand = 'none',
+    expand = "none",
     forced_height = dpi(24),
     layout = wibox.layout.align.vertical
 }
@@ -71,7 +71,7 @@ watch(
     20,
     function(_, stdout)
         local user, nice, system, idle, iowait, irq, softirq, steal, guest, guest_nice =
-            stdout:match('(%d+)%s(%d+)%s(%d+)%s(%d+)%s(%d+)%s(%d+)%s(%d+)%s(%d+)%s(%d+)%s(%d+)%s')
+            stdout:match("(%d+)%s(%d+)%s(%d+)%s(%d+)%s(%d+)%s(%d+)%s(%d+)%s(%d+)%s(%d+)%s(%d+)%s")
 
         local total = user + nice + system + idle + iowait + irq + softirq + steal
 
@@ -96,7 +96,7 @@ local cpu_meter =
         spacing = dpi(5),
         {
             layout = wibox.layout.align.vertical,
-            expand = 'none',
+            expand = "none",
             nil,
             {
                 layout = wibox.layout.fixed.horizontal,

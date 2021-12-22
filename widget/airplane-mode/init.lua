@@ -1,50 +1,70 @@
-local awful = require('awful')
-local wibox = require('wibox')
-local gears = require('gears')
-local beautiful = require('beautiful')
-local watch = awful.widget.watch
-local dpi = beautiful.xresources.apply_dpi
-local clickable_container = require('widget.clickable-container')
+--  _______ __              __
+-- |   _   |__|.----.-----.|  |.---.-.-----.-----.
+-- |       |  ||   _|  _  ||  ||  _  |     |  -__|
+-- |___|___|__||__| |   __||__||___._|__|__|_____|
+--                  |__|
+--  _______           __
+-- |   |   |.-----.--|  |.-----.
+-- |       ||  _  |  _  ||  -__|
+-- |__|_|__||_____|_____||_____|
+-- ########################################################################
+-- ########################################################################
+-- ########################################################################
 local config_dir = gears.filesystem.get_configuration_dir()
-local widget_dir = config_dir .. 'widget/airplane-mode/'
-local widget_icon_dir = widget_dir .. 'icons/'
-local icons = require('theme.icons')
+local widget_dir = config_dir .. "widget/airplane-mode/"
+local widget_icon_dir = widget_dir .. "icons/"
+local icons = require("theme.icons")
 local ap_state = false
-
+-- ########################################################################
+-- ########################################################################
+-- ########################################################################
+-- Provide text to the widget
+--
 local action_name =
     wibox.widget {
-    text = 'Airplane Mode',
-    font = 'SFMono Nerd Font Mono Heavy  10',
-    align = 'left',
+    text = "Airplane Mode",
+    font = "SFMono Nerd Font Mono Heavy  10",
+    align = "left",
     widget = wibox.widget.textbox
 }
-
+-- ########################################################################
+-- ########################################################################
+-- ########################################################################
+-- Provide the widget state with text
 local action_status =
     wibox.widget {
-    text = 'Off',
-    font = 'SFMono Nerd Font Mono Heavy  10',
-    align = 'left',
+    text = "Off",
+    font = "SFMono Nerd Font Mono Heavy  10",
+    align = "left",
     widget = wibox.widget.textbox
 }
-
+-- ########################################################################
+-- ########################################################################
+-- ########################################################################
 local action_info =
     wibox.widget {
     layout = wibox.layout.fixed.vertical,
     action_name,
     action_status
 }
-
+-- ########################################################################
+-- ########################################################################
+-- ########################################################################
 local button_widget =
     wibox.widget {
     {
-        id = 'icon',
-        image = widget_icon_dir .. 'airplane-mode-off.svg',
+        id = "icon",
+        image = widget_icon_dir .. "airplane-mode-off.svg",
         widget = wibox.widget.imagebox,
         resize = true
     },
     layout = wibox.layout.align.horizontal
 }
-
+-- ########################################################################
+-- ########################################################################
+-- ########################################################################
+-- provide the template for the button
+--
 local widget_button =
     wibox.widget {
     {
@@ -58,42 +78,47 @@ local widget_button =
         widget = clickable_container
     },
     bg = beautiful.groups_bg,
-    shape = gears.shape.circle,
+    shape = function(cr, w, h)
+        gears.shape.rounded_rect(cr, w, h, 4)
+    end,
     widget = wibox.container.background
 }
-
+-- ########################################################################
+-- ########################################################################
+-- ########################################################################
+-- update the state of the widget, its icon and system
 local update_widget = function()
     if ap_state then
-        action_status:set_text('On')
-        signals.emit_module_airplane_mode_on(true)
-        signals.emit_module_airplane_mode_off(false)
+        action_status:set_text("On")
         widget_button.bg = beautiful.accent
-        button_widget.icon:set_image(widget_icon_dir .. 'airplane-mode.svg')
+        button_widget.icon:set_image(widget_icon_dir .. "airplane-mode.svg")
     else
-        action_status:set_text('Off')
+        action_status:set_text("Off")
         widget_button.bg = beautiful.groups_bg
-        signals.emit_module_airplane_mode_on(false)
-        signals.emit_module_airplane_mode_off(true)
-        button_widget.icon:set_image(widget_icon_dir .. 'airplane-mode-off.svg')
+        button_widget.icon:set_image(widget_icon_dir .. "airplane-mode-off.svg")
     end
 end
+-- ########################################################################
+-- ########################################################################
+-- ########################################################################
+-- Detemine the current state of the mode
+--
 
 local check_airplane_mode_state = function()
-    local cmd = 'cat ' .. widget_dir .. 'airplane_mode'
-
+    local cmd = "cat " .. widget_dir .. "airplane_mode"
     awful.spawn.easy_async_with_shell(
         cmd,
         function(stdout)
             local status = stdout
 
-            if status:match('true') then
+            if status:match("true") then
                 ap_state = true
-            elseif status:match('false') then
+            elseif status:match("false") then
                 ap_state = false
             else
                 ap_state = false
                 awful.spawn.easy_async_with_shell(
-                    'echo "false" > ' .. widget_dir .. 'airplane_mode',
+                    'echo "false" > ' .. widget_dir .. "airplane_mode",
                     function(stdout)
                     end
                 )
@@ -102,9 +127,16 @@ local check_airplane_mode_state = function()
         end
     )
 end
-
+-- ########################################################################
+-- ########################################################################
+-- ########################################################################
+-- check the state at the onset
+--
 check_airplane_mode_state()
-
+-- ########################################################################
+-- ########################################################################
+-- ########################################################################
+-- BASH for when the mode is turned back off
 local ap_off_cmd =
     [[
 	
@@ -119,12 +151,16 @@ local ap_off_cmd =
 		message = 'Initializing network devices',
 		icon = ']] ..
     widget_icon_dir ..
-        'airplane-mode-off' .. '.svg' .. [['
+        "airplane-mode-off" .. ".svg" .. [['
 	})
 	"
-	]] .. 'echo false > ' .. widget_dir .. 'airplane_mode' .. [[
+	]] .. "echo false > " .. widget_dir .. "airplane_mode" .. [[
 ]]
-
+-- ########################################################################
+-- ########################################################################
+-- ########################################################################
+-- BASH for when the mode is turned on
+--
 local ap_on_cmd =
     [[
 
@@ -139,20 +175,22 @@ local ap_on_cmd =
 		message = 'Disabling radio devices',
 		icon = ']] ..
     widget_icon_dir ..
-        'airplane-mode' .. '.svg' .. [['
+        "airplane-mode" .. ".svg" .. [['
 	})
 	"
-	]] .. 'echo true > ' .. widget_dir .. 'airplane_mode' .. [[
+	]] .. "echo true > " .. widget_dir .. "airplane_mode" .. [[
 ]]
-
+-- ########################################################################
+-- ########################################################################
+-- ########################################################################
+-- Create functionality for button\
+--
 local toggle_action = function()
     if ap_state then
         awful.spawn.easy_async_with_shell(
             ap_off_cmd,
             function(stdout)
                 ap_state = false
-                signals.emit_module_airplane_mode_on(false)
-                signals.emit_module_airplane_mode_off(true)
                 update_widget()
             end
         )
@@ -161,13 +199,16 @@ local toggle_action = function()
             ap_on_cmd,
             function(stdout)
                 ap_state = true
-                signals.emit_module_airplane_mode_on(true)
-                signals.emit_module_airplane_mode_off(false)
                 update_widget()
             end
         )
     end
 end
+-- ########################################################################
+-- ########################################################################
+-- ########################################################################
+-- Assign the button its functionality
+--
 
 widget_button:buttons(
     gears.table.join(
@@ -181,7 +222,6 @@ widget_button:buttons(
         )
     )
 )
-
 action_info:buttons(
     gears.table.join(
         awful.button(
@@ -194,16 +234,9 @@ action_info:buttons(
         )
     )
 )
-
-gears.timer {
-    timeout = 5,
-    call_now = true,
-    autostart = true,
-    callback = function()
-        check_airplane_mode_state()
-    end
-}
-
+-- ########################################################################
+-- ########################################################################
+-- ########################################################################
 local action_widget =
     wibox.widget {
     layout = wibox.layout.fixed.horizontal,
@@ -211,7 +244,7 @@ local action_widget =
     widget_button,
     {
         layout = wibox.layout.align.vertical,
-        expand = 'none',
+        expand = "none",
         nil,
         action_info,
         nil

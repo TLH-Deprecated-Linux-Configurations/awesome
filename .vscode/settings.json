@@ -30,7 +30,20 @@
         "title_table",
         "ruled",
         "client_keys",
-        "client_buttons"
+        "client_buttons",
+        "signals",
+        "file",
+        "menubar",
+        "awful_menu",
+        "menu_gen",
+        "menu_utils",
+        "icon_theme",
+        "hotkeys_popup",
+        "terminal",
+        "web_browser",
+        "file_manager",
+        "text_editor",
+        "editor_cmd"
     ],
     "cSpell.words": [
         "Skeudomorphic"

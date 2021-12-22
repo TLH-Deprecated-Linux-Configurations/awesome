@@ -33,11 +33,18 @@ wibox = require('wibox')
 cairo = require('lgi').cairo
 modkey = require('configuration.keys.mod').mod_key
 altkey = require('configuration.keys.mod').alt_key
-signals = require('configuration.client.signals')
+
 ruled = require('ruled')
 
 client_keys = require('configuration.client.keys')
 client_buttons = require('configuration.client.buttons')
+
+menubar = require('menubar')
+awful_menu = awful.menu
+menu_gen = menubar.menu_gen
+menu_utils = menubar.utils
+icon_theme = require('menubar.icon_theme')
+hotkeys_popup = require('awful.hotkeys_popup').widget
 
 -- ########################################################################
 -- ########################################################################
@@ -48,5 +55,11 @@ client_buttons = require('configuration.client.buttons')
 awful.util.shell = 'zsh'
 dpi = beautiful.xresources.apply_dpi
 config_dir = filesystem.get_configuration_dir()
-utils_dir = config_dir .. 'utilities/'
+utils_dir = config_dir .. 'bin/'
 apps = require('configuration.apps')
+
+terminal = apps.default.terminal
+web_browser = apps.default.web_browser
+file_manager = apps.default.file_manager
+text_editor = apps.default.text_editor
+editor_cmd = terminal .. ' -e ' .. (os.getenv('EDITOR') or 'nano')

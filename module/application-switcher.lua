@@ -11,17 +11,9 @@
 -- ########################################################################
 -- ########################################################################
 -- ########################################################################
-local cairo = require('lgi').cairo
-local awful = require('awful')
-local gears = require('gears')
-local beautiful = require('beautiful')
-local icons = require('theme.icons')
-local wibox = require('wibox')
-local mouse = mouse
-local client = client
-local timer = require('gears.timer')
+-- luacheck: ignore 113
 local unpack = table.unpack
-local dpi = require('beautiful.xresources').apply_dpi
+
 local surface = cairo.ImageSurface(cairo.Format.RGB24, 20, 20)
 local cr = cairo.Context(surface)
 -- ########################################################################
@@ -534,9 +526,9 @@ function _M.switch(dir, mod_key1, release_key, mod_key2, key_switch)
     -- ########################################################################
     -- ########################################################################
     -- ########################################################################
-    -- Now that we have collected all windows, we should run a awful.keygrabber
+    -- Now that we have collected all windows, we should run a keygrabber
     -- as long as the user is alt-tabbing:
-    awful.keygrabber.run(
+    keygrabber.run(
         function(mod, key, event)
             -- Stop alt-tabbing when the alt-key is released
             if gears.table.hasitem(mod, mod_key1) then
@@ -581,7 +573,7 @@ function _M.switch(dir, mod_key1, release_key, mod_key2, key_switch)
                     -- ########################################################################
                     -- ########################################################################
                     -- ########################################################################
-                    awful.keygrabber.stop()
+                    keygrabber.stop()
                 elseif key == key_switch and event == 'press' then
                     if gears.table.hasitem(mod, mod_key2) then
                         -- Move to previous client on Shift-Tab

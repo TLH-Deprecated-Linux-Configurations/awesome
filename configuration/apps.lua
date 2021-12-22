@@ -28,10 +28,6 @@ return {
         multimedia = 'vlc',
         -- Default graphics editor
         graphics = 'gimp',
-        -- Default sandbox
-        sandbox = 'virtualbox',
-        -- Default IDE
-        development = 'code-oss',
         -- Default network manager
         network_manager = 'sh ' .. HOME .. '/.config/awesome/bin/wifi.sh',
         -- Default bluetooth manager
@@ -41,11 +37,9 @@ return {
         -- Default GUI package manager
         package_manager = 'pamac-manager',
         -- Default locker
-        lock = 'bash ~/.config/awesome/blur.sh',
+        lock = 'bash ' .. HOME .. '/.config/awesome/blur.sh',
         -- Default quake terminal
-        quake = 'itty --name QuakeTerminal',
-        -- Default rofi global menu
-        rofi_global = 'cmenu',
+        quake = 'kitty --name QuakeTerminal',
         -- Default app menu
         rofi_appmenu = ' bash ' ..
             HOME ..

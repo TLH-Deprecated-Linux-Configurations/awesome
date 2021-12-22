@@ -1,29 +1,29 @@
-local awful = require('awful')
-local wibox = require('wibox')
-local gears = require('gears')
-local naughty = require('naughty')
-local beautiful = require('beautiful')
+local awful = require("awful")
+local wibox = require("wibox")
+local gears = require("gears")
+local naughty = require("naughty")
+local beautiful = require("beautiful")
 local dpi = beautiful.xresources.apply_dpi
-local clickable_container = require('widget.clickable-container')
+local clickable_container = require("widget.clickable-container")
 local config_dir = gears.filesystem.get_configuration_dir()
-local widget_dir = config_dir .. 'widget/blur-toggle/'
-local widget_icon_dir = widget_dir .. 'icons/'
-local icons = require('theme.icons')
+local widget_dir = config_dir .. "widget/blur-toggle/"
+local widget_icon_dir = widget_dir .. "icons/"
+local icons = require("theme.icons")
 local blur_status = true
 
 local action_name =
     wibox.widget {
-    text = 'Blur Effects',
-    font = 'SFMono Nerd Font Mono Heavy  10',
-    align = 'left',
+    text = "Blur Effects",
+    font = "SFMono Nerd Font Mono Heavy  10",
+    align = "left",
     widget = wibox.widget.textbox
 }
 
 local action_status =
     wibox.widget {
-    text = 'Off',
-    font = 'SFMono Nerd Font Mono Heavy  10',
-    align = 'left',
+    text = "Off",
+    font = "SFMono Nerd Font Mono Heavy  10",
+    align = "left",
     widget = wibox.widget.textbox
 }
 
@@ -37,7 +37,7 @@ local action_info =
 local button_widget =
     wibox.widget {
     {
-        id = 'icon',
+        id = "icon",
         image = icons.effects,
         widget = wibox.widget.imagebox,
         resize = true
@@ -58,19 +58,21 @@ local widget_button =
         widget = clickable_container
     },
     bg = beautiful.groups_bg,
-    shape = gears.shape.circle,
+    shape = function(cr, w, h)
+        gears.shape.rounded_rect(cr, w, h, 4)
+    end,
     widget = wibox.container.background
 }
 
 local update_widget = function()
     if blur_status then
-        action_status:set_text('On')
+        action_status:set_text("On")
         widget_button.bg = beautiful.accent
         button_widget.icon:set_image(icons.effects)
     else
-        action_status:set_text('Off')
+        action_status:set_text("Off")
         widget_button.bg = beautiful.groups_bg
-        button_widget.icon:set_image(widget_icon_dir .. 'effects-off.svg')
+        button_widget.icon:set_image(widget_icon_dir .. "effects-off.svg")
     end
 end
 
@@ -81,7 +83,7 @@ local check_blur_status = function()
             config_dir .. [[/configuration/picom.conf | tr -d '[\"\;\=\ ]'
 		"]],
         function(stdout, stderr)
-            if stdout:match('methodnone') then
+            if stdout:match("methodnone") then
                 blur_status = false
             else
                 blur_status = true
@@ -125,10 +127,10 @@ local toggle_blur_fx = function()
     local state = nil
     if blur_status then
         blur_status = false
-        state = 'disable'
+        state = "disable"
     else
         blur_status = true
-        state = 'enable'
+        state = "enable"
     end
     toggle_blur(state)
     update_widget()
@@ -167,7 +169,7 @@ local action_widget =
     widget_button,
     {
         layout = wibox.layout.align.vertical,
-        expand = 'none',
+        expand = "none",
         nil,
         action_info,
         nil
@@ -175,7 +177,7 @@ local action_widget =
 }
 
 awesome.connect_signal(
-    'widget::blur:toggle',
+    "widget::blur:toggle",
     function()
         toggle_blur_fx()
     end

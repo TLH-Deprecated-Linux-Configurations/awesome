@@ -29,7 +29,9 @@ client.connect_signal(
     function(c)
         -- Focus, raise and activate
         c:emit_signal('request::activate', 'mouse_enter')
-
+        -- ########################################################################
+        -- ########################################################################
+        -- ########################################################################
         -- Set the windows at the slave,
         -- i.e. put it at the end of others instead of setting it master.
         if not awesome.startup then
@@ -47,7 +49,9 @@ client.connect_signal(
         update_client(c)
     end
 )
-
+-- ########################################################################
+-- ########################################################################
+-- ########################################################################
 -- Enable sloppy focus, so that focus follows mouse then raises it.
 client.connect_signal(
     'mouse::enter',
@@ -55,21 +59,27 @@ client.connect_signal(
         c:emit_signal('request::activate', 'mouse_enter')
     end
 )
-
+-- ########################################################################
+-- ########################################################################
+-- ########################################################################
 client.connect_signal(
     'focus',
     function(c)
         c.border_color = beautiful.border_focus
     end
 )
-
+-- ########################################################################
+-- ########################################################################
+-- ########################################################################
 client.connect_signal(
     'unfocus',
     function(c)
         c.border_color = beautiful.border_normal
     end
 )
-
+-- ########################################################################
+-- ########################################################################
+-- ########################################################################
 -- Manipulate client shape on fullscreen/non-fullscreen
 client.connect_signal(
     'property::fullscreen',
@@ -109,20 +119,3 @@ client.connect_signal(
         end
     end
 )
-local signals = {}
-signals.connect_module_airplane_mode_on = function(func)
-    awesome.connect_signal("module::airplane_mode_on", func)
-end
-signals.emit_module_airplane_mode_on = function(func)
-    awesome.emit_signal("module::airplane_mode_on", func)
-end
-
-signals.connect_module_airplane_mode_off = function(func)
-    awesome.connect_signal("module::airplane_mode_off", func)
-end
-
-signals.emit_module_airplane_mode_off = function(func)
-    awesome.emit_signal("module::airplane_mode_off", func)
-end
-
-return signals 

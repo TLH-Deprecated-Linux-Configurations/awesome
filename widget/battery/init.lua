@@ -172,7 +172,7 @@ local return_button = function()
         [[sh -c "
 		upower -i $(upower -e | grep BAT) | grep state | awk '{print \$2}' | tr -d '\n'
 		"]],
-        5,
+        15,
         function(widget, stdout)
             local status = stdout:gsub('%\n', '')
 

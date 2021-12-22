@@ -244,7 +244,6 @@ local enable = function(opts)
             end
 
             tag_preview_box.visible = v
-            collectgarbage()
         end
     )
 end
