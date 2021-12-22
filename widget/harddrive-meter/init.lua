@@ -67,7 +67,6 @@ watch(
     function(_, stdout)
         local space_consumed = stdout:match('(%d+)')
         slider.hdd_usage:set_value(tonumber(space_consumed))
-        collectgarbage('collect')
     end
 )
 

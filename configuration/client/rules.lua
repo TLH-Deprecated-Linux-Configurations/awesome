@@ -1,14 +1,20 @@
-local awful = require('awful')
-local gears = require('gears')
-local ruled = require('ruled')
-local beautiful = require('beautiful')
-local client_keys = require('configuration.client.keys')
-local client_buttons = require('configuration.client.buttons')
-
+--  ______         __
+-- |   __ \.--.--.|  |.-----.-----.
+-- |      <|  |  ||  ||  -__|__ --|
+-- |___|__||_____||__||_____|_____|
+-- ########################################################################
+-- ########################################################################
+-- ########################################################################
+-- This requires the development branch of Awesome or it will throw an
+-- error as `ruled` was included after the release of Awesome 4.3
+-- ########################################################################
+-- ########################################################################
+-- ########################################################################
 ruled.client.connect_signal(
     'request::rules',
     function()
         -- All clients will match this rule.
+        --
         ruled.client.append_rule {
             id = 'global',
             rule = {},
@@ -29,7 +35,9 @@ ruled.client.connect_signal(
                 placement = awful.placement.no_overlap + awful.placement.no_offscreen
             }
         }
-
+        -- ########################################################################
+        -- ########################################################################
+        -- ########################################################################
         ruled.client.append_rule {
             id = 'round_clients',
             rule_any = {
@@ -46,8 +54,11 @@ ruled.client.connect_signal(
                 shape = beautiful.client_shape_rounded
             }
         }
-
+        -- ########################################################################
+        -- ########################################################################
+        -- ########################################################################
         -- Titlebar rules
+        --
         ruled.client.append_rule {
             id = 'titlebars',
             rule_any = {
@@ -62,8 +73,11 @@ ruled.client.connect_signal(
                 titlebars_enabled = true
             }
         }
-
+        -- ########################################################################
+        -- ########################################################################
+        -- ########################################################################
         -- Dialogs
+        --
         ruled.client.append_rule {
             id = 'dialog',
             rule_any = {
@@ -75,11 +89,14 @@ ruled.client.connect_signal(
                 floating = true,
                 above = true,
                 skip_decoration = true,
-                placement = awful.placement.centered
+                placement = awful.placement.centered + awful.placement.no_offscreen
             }
         }
-
+        -- ########################################################################
+        -- ########################################################################
+        -- ########################################################################
         -- Modals
+        --
         ruled.client.append_rule {
             id = 'modal',
             rule_any = {
@@ -90,11 +107,14 @@ ruled.client.connect_signal(
                 floating = true,
                 above = true,
                 skip_decoration = true,
-                placement = awful.placement.centered
+                placement = awful.placement + awful.placement.no_offscreen
             }
         }
-
+        -- ########################################################################
+        -- ########################################################################
+        -- ########################################################################
         -- Utilities
+        --
         ruled.client.append_rule {
             id = 'utility',
             rule_any = {
@@ -104,11 +124,14 @@ ruled.client.connect_signal(
                 titlebars_enabled = false,
                 floating = true,
                 skip_decoration = true,
-                placement = awful.placement.centered
+                placement = awful.placement.centered + awful.placement.no_offscreen
             }
         }
-
+        -- ########################################################################
+        -- ########################################################################
+        -- ########################################################################
         -- Splash
+        --
         ruled.client.append_rule {
             id = 'splash',
             rule_any = {
@@ -121,11 +144,14 @@ ruled.client.connect_signal(
                 floating = true,
                 above = true,
                 skip_decoration = true,
-                placement = awful.placement.centered
+                placement = awful.placement.centered + awful.placement.no_offscreen
             }
         }
-
+        -- ########################################################################
+        -- ########################################################################
+        -- ########################################################################
         -- Terminal emulators
+        --
         ruled.client.append_rule {
             id = 'terminals',
             rule_any = {
@@ -144,8 +170,11 @@ ruled.client.connect_signal(
                 titlebars_enabled = true
             }
         }
-
+        -- ########################################################################
+        -- ########################################################################
+        -- ########################################################################
         -- Multimedia
+        --
         ruled.client.append_rule {
             id = 'multimedia',
             rule_any = {
@@ -155,11 +184,14 @@ ruled.client.connect_signal(
                 }
             },
             properties = {
-                placement = awful.placement.centered
+                placement = awful.placement.centered + awful.placement.no_offscreen
             }
         }
-
+        -- ########################################################################
+        -- ########################################################################
+        -- ########################################################################
         -- Image viewers
+        --
         ruled.client.append_rule {
             id = 'image_viewers',
             rule_any = {
@@ -174,11 +206,14 @@ ruled.client.connect_signal(
                 skip_decoration = true,
                 floating = true,
                 ontop = true,
-                placement = awful.placement.centered
+                placement = awful.placement.centered + awful.placement.no_offscreen
             }
         }
-
+        -- ########################################################################
+        -- ########################################################################
+        -- ########################################################################
         -- Floating
+        --
         ruled.client.append_rule {
             id = 'floating',
             rule_any = {
@@ -207,19 +242,21 @@ ruled.client.connect_signal(
                 raise = true,
                 keys = client_keys,
                 buttons = client_buttons,
-                placement = awful.placement.centered
+                placement = awful.placement.centered + awful.placement.no_offscreen
             }
         }
     end
 )
-
+-- ########################################################################
+-- ########################################################################
+-- ########################################################################
 -- Normally we'd do this with a rule, but some program like spotify doesn't set its class or name
 -- until after it starts up, so we need to catch that signal.
 client.connect_signal(
     'property::class',
     function(c)
         if c.class == 'Spotify' then
-            local window_mode = false
+            local window_mode = true
 
             -- Check if fullscreen or window mode
             if c.fullscreen then
@@ -245,14 +282,6 @@ client.connect_signal(
                 -- Switch to previous instance
                 for c in awful.client.iterate(app) do
                     c:jump_to(false)
-                end
-            else
-                -- Fullscreen mode if not window mode
-                if not window_mode then
-                    c.fullscreen = true
-                else
-                    c.floating = true
-                    awful.placement.centered(c, {honor_workarea = true})
                 end
             end
         end

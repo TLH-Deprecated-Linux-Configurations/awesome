@@ -1,10 +1,21 @@
-local awful = require('awful')
-local gears = require('gears')
-local dpi = require('beautiful').xresources.apply_dpi
-require('awful.autofocus')
-local modkey = require('configuration.keys.mod').mod_key
-local altkey = require('configuration.keys.mod').alt_key
+--  ______ __ __               __
+-- |      |  |__|.-----.-----.|  |_
+-- |   ---|  |  ||  -__|     ||   _|
+-- |______|__|__||_____|__|__||____|
 
+--  __  __
+-- |  |/  |.-----.--.--.-----.
+-- |     < |  -__|  |  |__ --|
+-- |__|\__||_____|___  |_____|
+--               |_____|
+-- ########################################################################
+-- ########################################################################
+-- ########################################################################
+require('awful.autofocus')
+
+-- ########################################################################
+-- ########################################################################
+-- ########################################################################
 local client_keys =
     awful.util.table.join(
     awful.key(
@@ -45,6 +56,7 @@ local client_keys =
         end,
         {description = 'focus next by index', group = 'client'}
     ),
+    -- ########################################################################
     awful.key(
         {modkey},
         'a',
@@ -53,6 +65,7 @@ local client_keys =
         end,
         {description = 'focus previous by index', group = 'client'}
     ),
+    -- ########################################################################
     awful.key(
         {modkey, 'Shift'},
         'd',
@@ -61,6 +74,7 @@ local client_keys =
         end,
         {description = 'swap with next client by index', group = 'client'}
     ),
+    -- ########################################################################
     awful.key(
         {modkey, 'Shift'},
         'a',
@@ -69,7 +83,9 @@ local client_keys =
         end,
         {description = 'swap with next client by index', group = 'client'}
     ),
+    -- ########################################################################
     awful.key({modkey}, 'u', awful.client.urgent.jumpto, {description = 'jump to urgent client', group = 'client'}),
+    -- ########################################################################
     awful.key(
         {modkey},
         'Tab',
@@ -81,6 +97,7 @@ local client_keys =
         end,
         {description = 'go back', group = 'client'}
     ),
+    -- ########################################################################
     awful.key(
         {modkey},
         'n',
@@ -89,6 +106,7 @@ local client_keys =
         end,
         {description = 'minimize client', group = 'client'}
     ),
+    -- ########################################################################
     awful.key(
         {modkey, 'Shift'},
         'c',
@@ -104,6 +122,7 @@ local client_keys =
         end,
         {description = 'align a client to the center of the focused screen', group = 'client'}
     ),
+    -- ########################################################################
     awful.key(
         {modkey},
         'c',
@@ -115,6 +134,7 @@ local client_keys =
         end,
         {description = 'toggle floating', group = 'client'}
     ),
+    -- ########################################################################
     awful.key(
         {modkey},
         'Up',
@@ -123,6 +143,7 @@ local client_keys =
         end,
         {description = 'move floating client up by 10 px', group = 'client'}
     ),
+    -- ########################################################################
     awful.key(
         {modkey},
         'Down',
@@ -131,6 +152,7 @@ local client_keys =
         end,
         {description = 'move floating client down by 10 px', group = 'client'}
     ),
+    -- ########################################################################
     awful.key(
         {modkey},
         'Left',
@@ -139,6 +161,7 @@ local client_keys =
         end,
         {description = 'move floating client to the left by 10 px', group = 'client'}
     ),
+    -- ########################################################################
     awful.key(
         {modkey},
         'Right',
@@ -147,6 +170,7 @@ local client_keys =
         end,
         {description = 'move floating client to the right by 10 px', group = 'client'}
     ),
+    -- ########################################################################
     awful.key(
         {modkey, 'Shift'},
         'Up',
@@ -155,6 +179,7 @@ local client_keys =
         end,
         {description = 'increase floating client size vertically by 10 px up', group = 'client'}
     ),
+    -- ########################################################################
     awful.key(
         {modkey, 'Shift'},
         'Down',
@@ -163,6 +188,7 @@ local client_keys =
         end,
         {description = 'increase floating client size vertically by 10 px down', group = 'client'}
     ),
+    -- ########################################################################
     awful.key(
         {modkey, 'Shift'},
         'Left',
@@ -171,6 +197,7 @@ local client_keys =
         end,
         {description = 'increase floating client size horizontally by 10 px left', group = 'client'}
     ),
+    -- ########################################################################
     awful.key(
         {modkey, 'Shift'},
         'Right',
@@ -179,6 +206,7 @@ local client_keys =
         end,
         {description = 'increase floating client size horizontally by 10 px right', group = 'client'}
     ),
+    -- ########################################################################
     awful.key(
         {modkey, 'Control'},
         'Up',
@@ -189,6 +217,7 @@ local client_keys =
         end,
         {description = 'decrease floating client size vertically by 10 px up', group = 'client'}
     ),
+    -- ########################################################################
     awful.key(
         {modkey, 'Control'},
         'Down',
@@ -201,6 +230,7 @@ local client_keys =
         end,
         {description = 'decrease floating client size vertically by 10 px down', group = 'client'}
     ),
+    -- ########################################################################
     awful.key(
         {modkey, 'Control'},
         'Left',
@@ -211,6 +241,7 @@ local client_keys =
         end,
         {description = 'decrease floating client size horizontally by 10 px left', group = 'client'}
     ),
+    -- ########################################################################
     awful.key(
         {modkey, 'Control'},
         'Right',

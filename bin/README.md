@@ -1,16 +1,14 @@
 # Bin
 
-These are the shell scripts useful to the configuration. Yes almost all of this could be written in lua but for one reason or another I have found increased functionality or ease of maintenance by writhing them in bash. DOn't worry, I will spare you from a laborious explanation of why they are better in BASH.
+These are the shell scripts useful to the configuration. While limited in number, and probably only due to my lack of knowledge as to how to implement their functionality in lua, these were written in BASH instead of Lua. Being that shell scripts can be run from within the configuration relatively easily, most if not all of the functionality you are looking to add into awesome could come from shell scripts but that would be relatively buggy and come with performance impacts I would assume. 
 
-Below is a description of the scripts, mostly wrappers around single commands, with some notes explaining their functionality.
+Below is a description of the scripts.
 
 | Script | Notes |
 |--------x-------|
 | applauncher | the menu that comes up at pressing just mod4 |
-| autorun | Similar to an ~/.xinitrc file, runs commands at startup |
-| cpu | provides the cpu command called cpucmd for hardware monitoring |
-| disk | Disk monitoring|
-|ram | Hardware monitoring |
+| autorun | Similar to  `~/.xinitrc` or  `~/.xprofile` runs commands at startup |
+| blur | makes screensaver out of a distorted desktp background |
 | snapshot | screenshot script |
 | wifi | provide wifi functionality via rofi |
 

@@ -1,21 +1,30 @@
-local awful = require('awful')
-local wibox = require('wibox')
-local gears = require('gears')
-local naughty = require('naughty')
-local beautiful = require('beautiful')
-local dpi = beautiful.xresources.apply_dpi
-local apps = require('configuration.apps')
+--  _______
+-- |   |   |.-----.-----.----.
+-- |   |   ||__ --|  -__|   _|
+-- |_______||_____|_____|__|
+
+--  ______              ___ __ __
+-- |   __ \.----.-----.'  _|__|  |.-----.
+-- |    __/|   _|  _  |   _|  |  ||  -__|
+-- |___|   |__| |_____|__| |__|__||_____|
+-- ########################################################################
+-- ########################################################################
+-- ########################################################################
 local clickable_container = require('widget.clickable-container')
 local config_dir = gears.filesystem.get_configuration_dir()
 local widget_icon_dir = config_dir .. 'configuration/user-profile/'
 local user_icon_dir = '/var/lib/AccountsService/icons/'
-
+-- ########################################################################
+-- ########################################################################
+-- ########################################################################
 title_table = {
     'Heads Up!',
     'Listen Here!',
     'Take Heed!'
 }
-
+-- ########################################################################
+-- ########################################################################
+-- ########################################################################
 message_table = {
     'Stop screwing things up, go walk the dog or something!',
     'There can only be one cow level',
@@ -24,7 +33,9 @@ message_table = {
     'When it rains, it pours.',
     'The dead know only one thing, its better to be alive'
 }
-
+-- ########################################################################
+-- ########################################################################
+-- ########################################################################
 local create_profile = function()
     local profile_imagebox =
         wibox.widget {
@@ -40,7 +51,9 @@ local create_profile = function()
         },
         layout = wibox.layout.align.horizontal
     }
-
+    -- ########################################################################
+    -- ########################################################################
+    -- ########################################################################
     profile_imagebox:buttons(
         gears.table.join(
             awful.button(
@@ -68,7 +81,9 @@ local create_profile = function()
             )
         )
     )
-
+    -- ########################################################################
+    -- ########################################################################
+    -- ########################################################################
     local profile_name =
         wibox.widget {
         font = 'SFMono Nerd Font Mono Heavy  10',
@@ -77,7 +92,9 @@ local create_profile = function()
         valign = 'center',
         widget = wibox.widget.textbox
     }
-
+    -- ########################################################################
+    -- ########################################################################
+    -- ########################################################################
     local update_profile_image = function()
         awful.spawn.easy_async_with_shell(
             apps.utils.update_profile,
@@ -91,7 +108,9 @@ local create_profile = function()
             end
         )
     end
-
+    -- ########################################################################
+    -- ########################################################################
+    -- ########################################################################
     update_profile_image()
 
     awful.spawn.easy_async_with_shell(
@@ -111,7 +130,9 @@ local create_profile = function()
             profile_name:set_markup(stdout)
         end
     )
-
+    -- ########################################################################
+    -- ########################################################################
+    -- ########################################################################
     local user_profile =
         wibox.widget {
         layout = wibox.layout.fixed.horizontal,
@@ -125,7 +146,9 @@ local create_profile = function()
         },
         profile_name
     }
-
+    -- ########################################################################
+    -- ########################################################################
+    -- ########################################################################
     return user_profile
 end
 

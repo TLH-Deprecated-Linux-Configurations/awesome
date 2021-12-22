@@ -64,8 +64,7 @@ notifbox_box = function(notif, icon, title, message, app, bgcolor)
                 return false
             end
 
-            collectgarbage('collect')
-        end
+            end
     }
 
     local notifbox_template =
@@ -140,8 +139,7 @@ notifbox_box = function(notif, icon, title, message, app, bgcolor)
                     else
                         notifbox_delete()
                     end
-                    collectgarbage('collect')
-                end
+                            end
             )
         )
     )

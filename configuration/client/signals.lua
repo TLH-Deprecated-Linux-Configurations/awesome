@@ -10,7 +10,7 @@
 local update_client = function(c)
     -- Set client's shape based on its tag's layout and status (floating, maximized, etc.)
     local current_layout = awful.tag.getproperty(c.first_tag, 'layout')
-    if current_layout == awful.layout.suit.max and (not c.floating) then
+    if current_layout == awful.layout.suit.max and not c.floating then
         c.shape = beautiful.client_shape_rectangle
     elseif c.maximized or c.fullscreen then
         c.shape = beautiful.client_shape_rectangle
@@ -20,7 +20,9 @@ local update_client = function(c)
         c.shape = beautiful.client_shape_rounded
     end
 end
-
+-- ########################################################################
+-- ########################################################################
+-- ########################################################################
 -- Signal function to execute when a new client appears.
 client.connect_signal(
     'manage',
@@ -34,9 +36,11 @@ client.connect_signal(
             awful.client.setslave(c)
         end
 
-        if awesome.startup and not c.size_hints.user_position and not c.size_hints.program_position then
-            -- Prevent clients from being unreachable after screen count changes.
-            awful.placement.no_offscreen(c)
+        if awesome.startup then
+            if not c.size_hints.user_position and not c.size_hints.program_position then
+                -- Prevent clients from being unreachable after screen count changes.
+                awful.placement.no_offscreen(c)
+            end
         end
 
         -- Update client shape
@@ -105,3 +109,20 @@ client.connect_signal(
         end
     end
 )
+local signals = {}
+signals.connect_module_airplane_mode_on = function(func)
+    awesome.connect_signal("module::airplane_mode_on", func)
+end
+signals.emit_module_airplane_mode_on = function(func)
+    awesome.emit_signal("module::airplane_mode_on", func)
+end
+
+signals.connect_module_airplane_mode_off = function(func)
+    awesome.connect_signal("module::airplane_mode_off", func)
+end
+
+signals.emit_module_airplane_mode_off = function(func)
+    awesome.emit_signal("module::airplane_mode_off", func)
+end
+
+return signals 

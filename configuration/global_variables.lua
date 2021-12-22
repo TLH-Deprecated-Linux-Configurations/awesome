@@ -31,12 +31,22 @@ task_list = require('widget.task-list')
 watch = require('awful.widget.watch')
 wibox = require('wibox')
 cairo = require('lgi').cairo
+modkey = require('configuration.keys.mod').mod_key
+altkey = require('configuration.keys.mod').alt_key
+signals = require('configuration.client.signals')
+ruled = require('ruled')
+
+client_keys = require('configuration.client.keys')
+client_buttons = require('configuration.client.buttons')
 
 -- ########################################################################
 -- ########################################################################
 -- ########################################################################
--- Assignments dependent on above list
+-- Assignments dependent on above list otherwise it will throw errrors,
+-- this results from trial and error (and lots of blood)
+--
 awful.util.shell = 'zsh'
 dpi = beautiful.xresources.apply_dpi
 config_dir = filesystem.get_configuration_dir()
 utils_dir = config_dir .. 'utilities/'
+apps = require('configuration.apps')

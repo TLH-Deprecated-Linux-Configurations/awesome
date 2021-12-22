@@ -2,7 +2,7 @@ configuration {
     show-icons:                     true;
     icon-theme:                     "chhinamasta";
     display-drun:                   "";
-    font:                           "Commodore64 Rounded Bold 12";
+    font:                           "SFMono Nerd Font Mono Heavy 10";
 
     drun-display-format:            "{name}";
     threads:                        0;
@@ -14,14 +14,14 @@ configuration {
 }
 
 * {
-    background:                     #17191e99;
-    background-alt:                 #22262d99;
-    background-ib:                  #0e121a99;
+    background:                     #17191ecc;
+    background-alt:                 #22262dcc;
+    background-ib:                  #0e121acc;
     foreground:                     #e9e9ffff;
-    border:                         #555e7099;
+    border:                         #0e121acc;
     border-sel:                     #8b9cbe99;
     selected:                       #3c3f4c99;
-    urgent:                         #DA4453FF;
+    urgent:                         #FF00AA;
 }
 
 
@@ -46,7 +46,7 @@ prompt {
     padding:                        8px 8px 8px 8px;
     background-color:               @background-ib;
     text-color:                     @foreground;
-    font:                           "Commodore64 Rounded Bold 14";
+    font:                           "SFMono Nerd Font Mono Heavy 14";
 }
 
 
@@ -60,7 +60,7 @@ inputbar {
     margin:                         10px 35% 0% 35%;
     padding:                        6px 6px 6px 6px;
     position:                       center;
-            font:                           "Commodore64 Rounded Bold 12";
+            font:                           "SFMono Nerd Font Mono Heavy 12";
 
 }
 
@@ -69,7 +69,7 @@ entry {
     text-color:                     @foreground;
     placeholder-color:              @foreground;
     expand:                         true;
-    font:                           "Commodore64 Rounded Bold 9";
+    font:                           "SFMono Nerd Font Mono Heavy 9";
     horizontal-align:               0.5;
     vertical-align:                 0.5;
     padding:                        3px 3px 3px 3px;
@@ -103,7 +103,7 @@ element {
     background-color:               @background;
     text-color:                     @foreground;
     orientation:                    vertical;
-    font:                           "Commodore64 Rounded Bold 18";
+    font:                           "SFMono Nerd Font Mono Heavy 12";
     border:                         0px 0px 1px 0px;
     border-radius:                  12px;
     border-color:                   @border;
@@ -131,14 +131,22 @@ element alternate.urgent {
 
 element normal.active,
 element alternate.active {
-    background-color:               @background-alt;
     text-color:                     @foreground;
 
 
 
 }
+element normal,
+element normal.active{
+    background: @background;
+}
+element alternative,
+element alternative.active{
+    background: @background-alt;
+}
 
-element selected {
+element selected
+ {
     background-color:               @selected;
     text-color:                     @foreground;
     border:                         1px 1px 1px 1px;

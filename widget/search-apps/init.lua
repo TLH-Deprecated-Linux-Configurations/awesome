@@ -1,13 +1,3 @@
-local awful = require('awful')
-local wibox = require('wibox')
-local gears = require('gears')
-
-local dpi = require('beautiful').xresources.apply_dpi
-local clickable_container = require('widget.clickable-container')
-
-local apps = require('configuration.apps')
-local icons = require('theme.icons')
-
 local return_button = function()
     local widget =
         wibox.widget {

@@ -187,7 +187,6 @@ watch(
     5,
     function(_, stdout)
         check_device_state()
-        collectgarbage('collect')
     end
 )
 

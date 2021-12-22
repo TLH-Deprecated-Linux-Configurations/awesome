@@ -65,11 +65,15 @@ local widget_button =
 local update_widget = function()
     if ap_state then
         action_status:set_text('On')
+        signals.emit_module_airplane_mode_on(true)
+        signals.emit_module_airplane_mode_off(false)
         widget_button.bg = beautiful.accent
         button_widget.icon:set_image(widget_icon_dir .. 'airplane-mode.svg')
     else
         action_status:set_text('Off')
         widget_button.bg = beautiful.groups_bg
+        signals.emit_module_airplane_mode_on(false)
+        signals.emit_module_airplane_mode_off(true)
         button_widget.icon:set_image(widget_icon_dir .. 'airplane-mode-off.svg')
     end
 end
@@ -147,6 +151,8 @@ local toggle_action = function()
             ap_off_cmd,
             function(stdout)
                 ap_state = false
+                signals.emit_module_airplane_mode_on(false)
+                signals.emit_module_airplane_mode_off(true)
                 update_widget()
             end
         )
@@ -155,6 +161,8 @@ local toggle_action = function()
             ap_on_cmd,
             function(stdout)
                 ap_state = true
+                signals.emit_module_airplane_mode_on(true)
+                signals.emit_module_airplane_mode_off(false)
                 update_widget()
             end
         )
@@ -189,6 +197,7 @@ action_info:buttons(
 
 gears.timer {
     timeout = 5,
+    call_now = true,
     autostart = true,
     callback = function()
         check_airplane_mode_state()

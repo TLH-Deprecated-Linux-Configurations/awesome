@@ -7,65 +7,68 @@ CONTACT='thighbaugh@zoho.com'
 CREATED="2020-09-21"
 UPDATED="2020-09-21"
 
-main(){
+main() {
   while getopts :vhf:o:p: option; do
     case "${option}" in
-      f) LISTfile="${OPTARG}" ;;
-      o) ROFI_OPTIONS="${OPTARG}" ;;
-      p) ROFI_PROMPT="${OPTARG}" ;;
-      v) printf '%s\n' \
-           "$NAME - version: $VERSION" \
-           "updated: $UPDATED by $AUTHOR"
-         exit ;;
-      h|*) printinfo && exit ;;
+    f) LISTfile="${OPTARG}" ;;
+    o) ROFI_OPTIONS="${OPTARG}" ;;
+    p) ROFI_PROMPT="${OPTARG}" ;;
+    v)
+      printf '%s\n' \
+        "$NAME - version: $VERSION" \
+        "updated: $UPDATED by $AUTHOR"
+      exit
+      ;;
+    h | *) printinfo && exit ;;
     esac
   done
 
   echo "$LISTfile"
 
-  LISTfile="${LISTfile:-$HOME/.config/awesome/external/rofi/fontawesome_menu/unicode-list.txt}"
+  LISTfile="${LISTfile:-$HOME/.config/awesome/configuration/rofi/fontawesome_menu/unicode-list.txt}"
   ROFI_PROMPT="${ROFI_PROMPT:-""}"
 
-  [[ ! -f "$LISTfile" ]] \
-    && echo "$LISTfile not found" \
-    && exit 1
+  [[ ! -f "$LISTfile" ]] &&
+    echo "$LISTfile not found" &&
+    exit 1
 
-  (($#>1)) && shift $((--OPTIND))
+  (($# > 1)) && shift $((--OPTIND))
 
-  ROFI_MAGIC='-dmenu -config /home/tlh/.config/awesome/external/rofi/fontawesome_menu/icon-browser.rasi -markup-rows'
+  ROFI_MAGIC='-dmenu -config /home/tlh/.config/awesome/configuration/rofi/fontawesome_menu/icon-browser.rasi -markup-rows'
 
   output=${1:-icon}
 
-  selected="$(cat "$LISTfile" \
-    | rofi ${ROFI_MAGIC} ${ROFI_OPTIONS} -p "${ROFI_PROMPT}")"
+  selected="$(cat "$LISTfile" |
+    rofi ${ROFI_MAGIC} ${ROFI_OPTIONS} -p "${ROFI_PROMPT}")"
 
   # Exit if nothing is selected
   [[ -z $selected ]] && exit 1
 
   case "$output" in
-    icon )
-    
-      echo -ne "$(echo "$selected" \
-        | awk -F';' -v RS='>' '
+  icon)
+
+    echo -ne "$(
+      echo "$selected" |
+        awk -F';' -v RS='>' '
             NR==2{sub("&#x","",$1);print "\\u" $1;exit}'
-      )" |  xclip -selection clipboard
-    
-    ;;
-
-    unicode )
-    
-      echo -n "$(echo "$selected" \
-        | awk -F';' -v RS='>' '
-            NR==2{sub("&#x","",$1);print $1;exit}')" \
-        |  xclip -selection clipboard
+    )" | xclip -selection clipboard
 
     ;;
 
-    name )
+  unicode)
 
-      echo -n "$(echo "$selected" \
-        | cut -d\' -f2)" \
-        | xclip -selection clipboard
+    echo -n "$(echo "$selected" |
+      awk -F';' -v RS='>' '
+            NR==2{sub("&#x","",$1);print $1;exit}')" |
+      xclip -selection clipboard
+
+    ;;
+
+  name)
+
+    echo -n "$(echo "$selected" |
+      cut -d\' -f2)" |
+      xclip -selection clipboard
 
     ;;
 
@@ -73,18 +76,18 @@ main(){
 
 }
 
-printinfo(){
+printinfo() {
   case "$1" in
-    m ) printf '%s' "${about}" ;;
-    
-    f ) 
-      printf '%s' "${bouthead}"
-      printf '%s' "${about}"
-      printf '%s' "${boutfoot}"
+  m) printf '%s' "${about}" ;;
+
+  f)
+    printf '%s' "${bouthead}"
+    printf '%s' "${about}"
+    printf '%s' "${boutfoot}"
     ;;
 
-    ''|* ) 
-      printf '%s' "${about}" | awk '
+  '' | *)
+    printf '%s' "${about}" | awk '
          BEGIN{ind=0}
          $0~/^```/{
            if(ind!="1"){ind="1"}

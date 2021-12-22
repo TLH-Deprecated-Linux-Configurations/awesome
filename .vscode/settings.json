@@ -25,6 +25,14 @@
         "info_center",
         "tag",
         "modkey",
-        "cairo"
+        "cairo",
+        "altkey",
+        "title_table",
+        "ruled",
+        "client_keys",
+        "client_buttons"
+    ],
+    "cSpell.words": [
+        "Skeudomorphic"
     ]
 }

@@ -11,24 +11,13 @@ if "$(command -v udiskie)"; then
     udiskie &
 fi
 
-
-#  clipboard manager
-if "$(command -v greenclip)"; then
-    greenclip daemon &
-fi
-
 #  clipboard manager
 if "$(command -v picom)"; then
-    pkill picom && picom -b --experimental-backends &
+    picom -b --experimental-backends &
 fi
 
 if "$(command -v xcape)"; then
     xcape -e "Super_L=Super_L|Control_L|Escape" &
-fi
-
-# clipboard manager
-if "$(command -v pnmixer)"; then
-    pnmixer &
 fi
 
 #  Make sure the colors are as they are supposed to be
@@ -52,10 +41,6 @@ fi
 # Dropbox
 if "$(command -v dropbox)"; then
     dropbox start &
-fi
-# Pulse Effects Equalizer
-if "$(command -v pulseeffects)"; then
-    pulseeffects --gapplication-service &
 fi
 # Pulse Effects Equalizer
 if "$(command -v lxqt-policykit-agent)"; then
