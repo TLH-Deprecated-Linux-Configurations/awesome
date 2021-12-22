@@ -60,7 +60,7 @@ local slider =
         id = "temp_status",
         max_value = 100,
         value = 29,
-        forced_height = dpi(24),
+        forced_height = dpi(48),
         color = "#f2f2f2EE",
         background_color = "#22262d",
         shape = gears.shape.rounded_rect,
@@ -108,7 +108,7 @@ awful.spawn.easy_async_with_shell(
             [[
 			sh -c "cat ]] .. temp_path .. [["
 			]],
-            10,
+            15,
             function(_, stdout)
                 local temp = stdout:match("(%d+)")
                 slider.temp_status:set_value((temp / 1000) / max_temp * 100)
@@ -134,8 +134,8 @@ local temp_meter =
             nil,
             {
                 layout = wibox.layout.fixed.horizontal,
-                forced_height = dpi(24),
-                forced_width = dpi(24),
+                forced_height = dpi(48),
+                forced_width = dpi(48),
                 meter_icon
             },
             nil

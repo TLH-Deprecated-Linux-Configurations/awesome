@@ -19,11 +19,13 @@
   - then oxipng
   - and svgo for the icons
     - should save the three run together in the working directory as a bin script (done)
-- 
+- adjusted timing on the hardware monitor bars, changed their sizes to be larger
 
 ### Fixed 
 - shape of toggles on the control panel
 - control panel slider colors, added contrast and border to the handles
+- fixed bars on control panel to be within the color scheme 
+- 
 
 ### Removed 
 - library directory

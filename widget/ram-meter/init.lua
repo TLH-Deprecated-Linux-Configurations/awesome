@@ -49,7 +49,7 @@ local slider =
         id = "ram_usage",
         max_value = 100,
         value = 29,
-        forced_height = dpi(24),
+        forced_height = dpi(48),
         color = "#f2f2f2EE",
         background_color = "#22262d",
         shape = gears.shape.rounded_rect,
@@ -63,7 +63,7 @@ local slider =
 
 watch(
     'bash -c "free | grep -z Mem.*Swap.*"',
-    25,
+    30,
     function(_, stdout)
         local total, used, free, shared, buff_cache, available, total_swap, used_swap, free_swap =
             stdout:match("(%d+)%s*(%d+)%s*(%d+)%s*(%d+)%s*(%d+)%s*(%d+)%s*Swap:%s*(%d+)%s*(%d+)%s*(%d+)")
@@ -85,8 +85,8 @@ local ram_meter =
             nil,
             {
                 layout = wibox.layout.fixed.horizontal,
-                forced_height = dpi(24),
-                forced_width = dpi(24),
+                forced_height = dpi(48),
+                forced_width = dpi(48),
                 meter_icon
             },
             nil

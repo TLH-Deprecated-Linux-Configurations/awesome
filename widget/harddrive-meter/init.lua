@@ -49,7 +49,7 @@ local slider =
         id = "hdd_usage",
         max_value = 100,
         value = 29,
-        forced_height = dpi(24),
+        forced_height = dpi(48),
         color = "#f2f2f2EE",
         background_color = "#22262d",
         shape = gears.shape.rounded_rect,
@@ -63,7 +63,7 @@ local slider =
 
 watch(
     [[bash -c "df -h /home|grep '^/' | awk '{print $5}'"]],
-    30,
+    90,
     function(_, stdout)
         local space_consumed = stdout:match("(%d+)")
         slider.hdd_usage:set_value(tonumber(space_consumed))
@@ -84,8 +84,8 @@ local harddrive_meter =
             nil,
             {
                 layout = wibox.layout.fixed.horizontal,
-                forced_height = dpi(24),
-                forced_width = dpi(24),
+                forced_height = dpi(48),
+                forced_width = dpi(48),
                 meter_icon
             },
             nil
