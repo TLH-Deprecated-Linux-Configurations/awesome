@@ -1,28 +1,31 @@
-local wibox = require('wibox')
-local gears = require('gears')
-local awful = require('awful')
-local beautiful = require('beautiful')
+local wibox = require("wibox")
+local gears = require("gears")
+local awful = require("awful")
+local beautiful = require("beautiful")
 local spawn = awful.spawn
 local dpi = beautiful.xresources.apply_dpi
-local icons = require('theme.icons')
-local clickable_container = require('widget.clickable-container')
+local icons = require("theme.icons")
+local clickable_container = require("widget.clickable-container")
 
-local action_name = wibox.widget {
-    text = 'Blur Strength',
-    font = 'SFMono Nerd Font Mono Heavy  10',
-    align = 'left',
+local action_name =
+    wibox.widget {
+    text = "Blur Strength",
+    font = "SFMono Nerd Font Mono Heavy  10",
+    align = "left",
     widget = wibox.widget.textbox
 }
 
-local icon = wibox.widget {
+local icon =
+    wibox.widget {
     layout = wibox.layout.align.vertical,
-    expand = 'none',
+    expand = "none",
     nil,
     {image = icons.effects, resize = true, widget = wibox.widget.imagebox},
     nil
 }
 
-local action_level = wibox.widget {
+local action_level =
+    wibox.widget {
     {
         {icon, margins = dpi(5), widget = wibox.container.margin},
         widget = clickable_container
@@ -33,24 +36,25 @@ local action_level = wibox.widget {
     end,
     widget = wibox.container.background
 }
-local slider = wibox.widget {
+local slider =
+    wibox.widget {
     nil,
     {
-        id = 'blur_strength_slider',
+        id = "blur_strength_slider",
         bar_shape = gears.shape.rounded_rect,
         bar_height = dpi(24),
-        bar_color = '#22262d',
-        bar_active_color = '#b2bfd9cc',
-        handle_color = '#e9efff',
+        bar_color = "#22262d",
+        bar_active_color = "#b2bfd9cc",
+        handle_color = "#e9efff",
         handle_shape = gears.shape.circle,
         handle_width = dpi(24),
-        handle_border_color = '#000000aa',
+        handle_border_color = "#000000aa",
         handle_border_width = dpi(2),
         maximum = 100,
         widget = wibox.widget.slider
     },
     nil,
-    expand = 'none',
+    expand = "none",
     forced_height = dpi(24),
     layout = wibox.layout.align.vertical
 }
@@ -58,15 +62,18 @@ local slider = wibox.widget {
 local blur_slider = slider.blur_strength_slider
 
 local update_slider_value = function()
-    awful.spawn.easy_async_with_shell([[bash -c "
-		grep -F 'strength =' $HOME/.config/awesome/configuration/picom.conf | 
-		awk 'NR==1 {print $3}' | tr -d ';'
-		"]], function(stdout, stderr)
-        local strength = stdout:match('%d+')
-        blur_strength = tonumber(strength) / 20 * 100
-        blur_slider:set_value(tonumber(blur_strength))
-        start_up = false
-    end)
+    awful.spawn.easy_async_with_shell(
+        [[bash -c "
+		grep -F 'strength =' $HOME/.config/picom.conf | 
+		awk 'NR==1 {print $3}' | tr -d ';' 
+		"]],
+        function(stdout, stderr)
+            local strength = stdout:match("%d+")
+            blur_strength = tonumber(strength) / 20 * 100
+            blur_slider:set_value(tonumber(blur_strength))
+            start_up = false
+        end
+    )
 end
 
 -- Update on startup
@@ -88,56 +95,83 @@ local action_jump = function()
     blur_slider:set_value(new_value)
 end
 
-action_level:buttons(awful.util.table.join(
-                         awful.button({}, 1, nil, function() action_jump() end)))
+action_level:buttons(
+    awful.util.table.join(
+        awful.button(
+            {},
+            1,
+            nil,
+            function()
+                action_jump()
+            end
+        )
+    )
+)
 
 local adjust_blur = function(power)
-    awful.spawn.with_shell([[bash -c "
-		sed -i 's/.*strength = .*/    strength = ]] .. power .. [[;/g' \
+    awful.spawn.with_shell(
+        [[bash -c "
+		sed -i 's/.*strength = .*/    strength = ]] ..
+            power .. [[;/g' \
 		$HOME/.config/awesome/configuration/picom.conf
-		"]])
+		"]]
+    )
 end
 
-blur_slider:connect_signal('property::value', function()
-    if not start_up then
-        strength = blur_slider:get_value() / 50 * 10
-        adjust_blur(strength)
+blur_slider:connect_signal(
+    "property::value",
+    function()
+        if not start_up then
+            strength = blur_slider:get_value() / 50 * 10
+            adjust_blur(strength)
+        end
     end
-end)
+)
 
 -- Adjust slider value to change blur strength
-awesome.connect_signal('widget::blur:increase', function()
-    -- On startup, the slider.value returns nil so...
-    if blur_slider:get_value() == nil then return end
+awesome.connect_signal(
+    "widget::blur:increase",
+    function()
+        -- On startup, the slider.value returns nil so...
+        if blur_slider:get_value() == nil then
+            return
+        end
 
-    local blur_value = blur_slider:get_value() + 10
+        local blur_value = blur_slider:get_value() + 10
 
-    -- No more than 100!
-    if blur_value > 100 then
-        blur_slider:set_value(100)
-        return
+        -- No more than 100!
+        if blur_value > 100 then
+            blur_slider:set_value(100)
+            return
+        end
+
+        blur_slider:set_value(blur_value)
     end
-
-    blur_slider:set_value(blur_value)
-end)
+)
 
 -- Decrease blur
-awesome.connect_signal('widget::blur:decrease', function()
-    -- On startup, the slider.value returns nil so...
-    if blur_slider:get_value() == nil then return end
+awesome.connect_signal(
+    "widget::blur:decrease",
+    function()
+        -- On startup, the slider.value returns nil so...
+        if blur_slider:get_value() == nil then
+            return
+        end
 
-    local blur_value = blur_slider:get_value() - 10
+        local blur_value = blur_slider:get_value() - 10
 
-    -- No negatives!
-    if blur_value < 0 then
-        blur_slider:set_value(0)
-        return
+        -- No negatives!
+        if blur_value < 0 then
+            blur_slider:set_value(0)
+            return
+        end
+
+        blur_slider:set_value(blur_value)
     end
+)
 
-    blur_slider:set_value(blur_value)
-end)
-
-local volume_setting = wibox.widget {
+local volume_setting =
+    wibox.widget {
     layout = wibox.layout.fixed.vertical,
     forced_height = dpi(48),
     spacing = dpi(5),
@@ -147,7 +181,7 @@ local volume_setting = wibox.widget {
         spacing = dpi(5),
         {
             layout = wibox.layout.align.vertical,
-            expand = 'none',
+            expand = "none",
             nil,
             {
                 layout = wibox.layout.fixed.horizontal,

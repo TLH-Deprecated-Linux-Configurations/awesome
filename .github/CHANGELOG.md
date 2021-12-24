@@ -1,12 +1,28 @@
 # Changelog
 
-## 2021-12-22
-
+## 2021-12-24
 ### To Do Items 
 - make tooltip for resource monitors on control panel that displays the text that the bar is drawn with 
 - blur 100% at startup
 - why application switcher is not displaying 
 - move widgets to directories nested in layout according to where they are utilized for purposes of keeping good order in the configuration
+### Added 
+
+### Changed 
+
+### Fixed
+
+### Removed 
+- library directory, again. 
+
+
+## 2021-12-23
+
+### Added 
+- Worked on documentation, contained in this folder, which will be used later to populate the Github wiki for the configuration. 
+
+## 2021-12-22
+
 
 ### Added 
 - Font and BG color for exit screen in default theme, adjusted exit screen accordingly
