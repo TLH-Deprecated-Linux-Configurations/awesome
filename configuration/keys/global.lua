@@ -60,9 +60,9 @@ local global_keys =
         {modkey},
         'F2',
         function()
-            awful.spawn('luakit')
+            awful.spawn('firefox-nightly')
         end,
-        {description = 'Launch Luakit Browser', group = 'Launcher'}
+        {description = 'Launch firefox-nightly Browser', group = 'Launcher'}
     ),
     -- #############################################################################
     awful.key(

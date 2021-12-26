@@ -3,24 +3,32 @@
 ## 2021-12-24
 ### To Do Items 
 - make tooltip for resource monitors on control panel that displays the text that the bar is drawn with 
-- blur 100% at startup
 - why application switcher is not displaying 
 - move widgets to directories nested in layout according to where they are utilized for purposes of keeping good order in the configuration
+- set volume to 100% at startup instead of 0
+- more expansive annotation commentary
+
 ### Added 
 
 ### Changed 
+- Commented and Titled everything in `layout` 
+- created bottom-panel subdirectory and changed `bottom-panel.lua` to `layout/bottom-panel/init.lua` 
+- Moved control panel widgets to `layout/bottom-panel/widget/control-panel/widget`
 
 ### Fixed
+- blur 100% at startup
+- 
 
 ### Removed 
 - library directory, again. 
 
-
+----
 ## 2021-12-23
 
 ### Added 
 - Worked on documentation, contained in this folder, which will be used later to populate the Github wiki for the configuration. 
 
+----
 ## 2021-12-22
 
 
@@ -46,6 +54,7 @@
 ### Removed 
 - library directory
 
+----
 ## 2021-12-21
 
 ### Added 
@@ -71,7 +80,7 @@
 - timer form brightness osd, changing the timer into a function without removing functionality of the widget to change the backlight
 - Annoying exit screen messages (they really weren't funny at all, just annoying)
 
-
+----
 ##  2021-12-20
 
 ### Added

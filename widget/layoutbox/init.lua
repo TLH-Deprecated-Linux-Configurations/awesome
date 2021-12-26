@@ -1,9 +1,9 @@
-local wibox = require('wibox')
-local awful = require('awful')
-local beautiful = require('beautiful')
+local wibox = require("wibox")
+local awful = require("awful")
+local beautiful = require("beautiful")
 local dpi = beautiful.xresources.apply_dpi
-local clickable_container = require('widget.clickable-container')
-local mod_key = require('configuration.keys.mod')
+local clickable_container = require("widget.clickable-container")
+local mod_key = require("configuration.keys.mod")
 local ll =
     awful.widget.layoutlist {
     spacing = dpi(84),
@@ -15,7 +15,7 @@ local ll =
     widget_template = {
         {
             {
-                id = 'icon_role',
+                id = "icon_role",
                 forced_height = dpi(84),
                 forced_width = dpi(84),
                 widget = wibox.widget.imagebox
@@ -23,7 +23,7 @@ local ll =
             margins = dpi(15),
             widget = wibox.container.margin
         },
-        id = 'background_role',
+        id = "background_role",
         forced_width = dpi(84),
         forced_height = dpi(84),
         shape = gears.shape.rounded_rect,
@@ -34,7 +34,7 @@ local layout_popup =
     awful.popup {
     widget = wibox.widget {
         ll,
-        margins = dpi(48),
+        margins = dpi(36),
         widget = wibox.container.margin
     },
     border_width = dpi(3),
@@ -44,7 +44,7 @@ local layout_popup =
 }
 layout_popup.timer = gears.timer {timeout = 2}
 layout_popup.timer:connect_signal(
-    'timeout',
+    "timeout",
     function()
         layout_popup.visible = false
     end
