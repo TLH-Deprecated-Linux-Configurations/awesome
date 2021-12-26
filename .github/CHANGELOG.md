@@ -1,14 +1,37 @@
 # Changelog
 
-## 2021-12-24
+## 2021-12-26
+
 ### To Do Items 
 - make tooltip for resource monitors on control panel that displays the text that the bar is drawn with 
 - why application switcher is not displaying 
-- move widgets to directories nested in layout according to where they are utilized for purposes of keeping good order in the configuration
 - set volume to 100% at startup instead of 0
 - more expansive annotation commentary
 
-### Added 
+### Added
+- Assets folder for screenshots in `.github`
+  - screenshot of the control center  
+
+
+### Changed
+- color of the bottom panel, made it `bg_focus` to match the GTK theme
+
+### Fixed
+- The issue where popups cause the other windows to be hidden re-emerged, picom based, needed to roll back that config
+  - next time I feel the impulse to change that config, don't  
+  - if picom is started with any options through Awesome, it causes problems, so it is run as `picom &` and works 
+  
+
+
+### Removed
+- utilities directory, eliminated
+- widget directory, all widgets now nested and the template files (clickable container) are in modules
+
+### Notes
+- The bars of the slider cannot be styled with a linear gradient, so no skeudomorphism there. 
+ 
+
+## 2021-12-24
 
 ### Changed 
 - Commented and Titled everything in `layout` 
@@ -17,7 +40,7 @@
 
 ### Fixed
 - blur 100% at startup
-- 
+
 
 ### Removed 
 - library directory, again. 

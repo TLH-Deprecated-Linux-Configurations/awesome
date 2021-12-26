@@ -10,7 +10,7 @@
 -- ########################################################################
 -- ########################################################################
 -- ########################################################################
-local clickable_container = require('widget.clickable-container')
+local clickable_container = require('module.clickable-container')
 local config_dir = gears.filesystem.get_configuration_dir()
 local widget_icon_dir = config_dir .. 'configuration/user-profile/'
 local user_icon_dir = '/var/lib/AccountsService/icons/'

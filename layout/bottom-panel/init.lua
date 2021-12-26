@@ -24,7 +24,7 @@ local bottom_panel = function(s)
         x = s.geometry.x,
         y = s.geometry.y,
         --stretch = true,
-        bg = beautiful.bg_normal,
+        bg = beautiful.bg_focus,
         fg = beautiful.fg_normal
     }
     -- ########################################################################
@@ -64,7 +64,7 @@ local bottom_panel = function(s)
     local tag_list = require("layout.bottom-panel.widget.tag-list")
     s.search = require("layout.bottom-panel.widget.search-apps")()
     local clock = require("layout.bottom-panel.widget.clock")(s)
-    local layout_box = require("widget.layoutbox")(s)
+    local layout_box = require("layout.bottom-panel.widget.layoutbox")(s)
 
     s.tray_toggler = require("layout.bottom-panel.widget.tray-toggle")
 

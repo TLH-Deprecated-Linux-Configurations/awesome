@@ -202,7 +202,7 @@ screen.connect_signal(
 -- ########################################################################
 -- ########################################################################
 -- ########################################################################
-local hide_osd = function()
+hide_osd = function()
     local focused = awful.screen.focused()
     focused.brightness_osd_overlay.visible = false
     focused.show_bri_osd = false

@@ -19,7 +19,7 @@
 awful = require('awful')
 beautiful = require('beautiful')
 gears = require('gears')
-clickable_container = require('widget.clickable-container')
+clickable_container = require('module.clickable-container')
 filesystem = require('gears.filesystem')
 gears = require('gears')
 HOME = os.getenv 'HOME'
@@ -27,13 +27,13 @@ icons = require('theme.icons')
 naughty = require('naughty')
 spawn = require('awful.spawn')
 string = require('string')
-task_list = require('widget.task-list')
+task_list = require('layout.bottom-panel.widget.task-list')
 watch = require('awful.widget.watch')
 wibox = require('wibox')
 cairo = require('lgi').cairo
 modkey = require('configuration.keys.mod').mod_key
 altkey = require('configuration.keys.mod').alt_key
-
+math = require('math')
 ruled = require('ruled')
 
 client_keys = require('configuration.client.keys')

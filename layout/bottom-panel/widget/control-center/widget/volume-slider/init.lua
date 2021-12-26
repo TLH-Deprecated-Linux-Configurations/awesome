@@ -39,7 +39,7 @@ local action_level =
     },
     bg = beautiful.groups_bg,
     shape = function(cr, width, height)
-        gears.shape.rounded_rect(cr, width, height, beautiful.groups_radius)
+        gears.shape.rounded_rect(cr, width, height,2)
     end,
     widget = wibox.container.background
 }

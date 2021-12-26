@@ -11,7 +11,7 @@
 -- ########################################################################
 -- ########################################################################
 -- ########################################################################
-local clickable_container = require("widget.clickable-container")
+local clickable_container = require("module.clickable-container")
 local config_dir = gears.filesystem.get_configuration_dir()
 local widget_dir = config_dir .. "layout/bottom-panel/widget/control-center/widget/dropbox-toggle/"
 local widget_icon_dir = widget_dir .. "icons/"

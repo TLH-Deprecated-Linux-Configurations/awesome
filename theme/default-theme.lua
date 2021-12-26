@@ -76,9 +76,9 @@ local awesome_overrides = function(theme)
     -- ########################################################################
     -- ########################################################################
     -- Background
-    theme.bg_normal = "linear:0,0:0,21:0,#2f303d:1,#1C1E24"
+    theme.bg_normal = "linear:0,0:0,21:0,#2B2E38:1,#1B1D24"
     theme.bg_focus = "linear:0,0:0,21:0,#484d5e:1,#23262e"
-    theme.bg_urgent = "linear:0,0:0,21:0,#2f303d:1,#1C1E24"
+    theme.bg_urgent = "linear:0,0:0,21:0,#2B2E38:1,#1B1D24"
     -- ########################################################################
     -- ########################################################################
     -- ########################################################################
@@ -275,11 +275,12 @@ local awesome_overrides = function(theme)
     theme.menu_width = dpi(200)
     theme.menu_border_width = dpi(20)
     theme.menu_bg_focus = theme.accent .. "CC"
-    theme.menu_accent = "#2f303d"
-    theme.menu_bg_normal = "linear:0,0:0,21:0,#2f303d:1,#1C1E24"
+    theme.menu_accent = "#2B2E38"
+    theme.menu_bg_normal = "linear:0,0:0,21:0,#2B2E38:1,#1B1D24"
+
     theme.menu_fg_normal = "#b2bfd9"
     theme.menu_fg_focus = "#f4f4f7"
-    theme.menu_border_color = "linear:0,0:0,21:0,#2f303d:1,#1C1E24"
+    theme.menu_border_color = "linear:0,0:0,21:0,#2B2E38:1,#1B1D24"
     -- ########################################################################
     -- ########################################################################
     -- ########################################################################
@@ -305,7 +306,7 @@ local awesome_overrides = function(theme)
     --
     theme.titlebar_size = dpi(24)
     theme.titlebar_bg_focus = "linear:0,0:0,21:0,#484d5e:1,#23262e"
-    theme.titlebar_bg_normal = "linear:0,0:0,21:0,#2f303d:1,#1C1E24"
+    theme.titlebar_bg_normal = "linear:0,0:0,21:0,#2B2E38:1,#1B1D24"
     theme.titlebar_fg_focus = gtk_variable().fg_color
     theme.titlebar_fg_normal = gtk_variable().fg_color
 
@@ -315,7 +316,7 @@ local awesome_overrides = function(theme)
     -- Taglist
     --
     theme.taglist_font = "awesomewm-font 16"
-    theme.taglist_bg = "linear:0,0:0,21:0,#2f303d:1,#1C1E24"
+    theme.taglist_bg = "linear:0,0:0,21:0,#2B2E38:1,#1B1D24"
     theme.taglist_fg_focus = "#ffffff"
     theme.taglist_fg = "#e9efff"
     theme.taglist_fg_occupied = "#b2bfd9"
@@ -327,7 +328,7 @@ local awesome_overrides = function(theme)
     -- Tasklist
     --
     theme.tasklist_font = "SFMono Nerd Font Mono Heavy  10"
-    theme.tasklist_bg_normal = "linear:0,0:0,21:0,#2f303d:1,#1C1E24"
+    theme.tasklist_bg_normal = "linear:0,0:0,21:0,#2B2E38:1,#1B1D24"
     theme.tasklist_bg_focus = "linear:0,0:0,21:0,#484d5e:1,#23262e"
     theme.tasklist_bg_urgent = "#E91E63" .. "99"
     theme.tasklist_fg_focus = "#f4f4f7"
@@ -360,7 +361,7 @@ local awesome_overrides = function(theme)
     -- ########################################################################
     -- ########################################################################
     -- Exit Screen
-    theme.exit_screen_bg = "linear:0,0:0,21:0,#00000077:1,#1C1E24aa"
+    theme.exit_screen_bg = "linear:0,0:0,21:0,#00000077:1,#1B1D24aa"
     theme.exit_screen_font = "SFMono Nerd Font Mono Heavy 16"
     -- ########################################################################
     -- ########################################################################
