@@ -62,9 +62,7 @@ return {
             '/.config/awesome/bin/applauncher.sh ' .. screen.primary.dpi .. ' ' ..
             filesystem.get_configuration_dir()
         -- ########################################################################
-        
-        --
-    },
+        },
     -- ########################################################################
     -- List of apps to start once on start-up
     run_on_start_up = {
@@ -75,7 +73,7 @@ return {
         '/usr/bin/lxqt-policykit-agent &',
         ' eval "$(gnome-keyring-daemon -s --components=pkcs11,secrets,ssh,gpg)" &',
         'xcape -e "Super_L=Super_L|Control_L|Escape" &', 'greenclip daemon &',
-        'udiskie &', 'picom -b   &',
+        'udiskie &', -- ########################################################################'picom -b --experimental-backends  &',
         'bash ' .. config_dir .. '/bin/autorun.sh &'
     },
     -- ########################################################################
