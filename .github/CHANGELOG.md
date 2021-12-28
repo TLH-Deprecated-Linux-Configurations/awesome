@@ -19,7 +19,7 @@
 ### Fixed
 - The issue where popups cause the other windows to be hidden re-emerged, picom based, needed to roll back that config
   - next time I feel the impulse to change that config, don't  
-  - if picom is started with any options through Awesome, it causes problems, so it is run as `picom &` and works 
+  - if picom is started with any options through Awesome, it causes problems, so it is run as `picom -b &` and should work 
   
 
 

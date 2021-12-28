@@ -88,6 +88,15 @@ bri_osd_slider:connect_signal(
 -- ########################################################################
 -- ########################################################################
 bri_osd_slider:connect_signal(
+    "mouse::leave",
+    function()
+        awful.screen.focused().show_bri_osd = false
+    end
+)
+-- ########################################################################
+-- ########################################################################
+-- ########################################################################
+bri_osd_slider:connect_signal(
     "mouse::enter",
     function()
         awful.screen.focused().show_bri_osd = true
@@ -202,20 +211,16 @@ screen.connect_signal(
 -- ########################################################################
 -- ########################################################################
 -- ########################################################################
-hide_osd = function()
-    local focused = awful.screen.focused()
-    focused.brightness_osd_overlay.visible = false
-    focused.show_bri_osd = false
+local hide_osd = function()
+    
+    awful.screen.focused().brightness_osd_overlay.visible = false
+    awful.screen.focused().show_bri_osd = false
 end
 
 awesome.connect_signal(
     "module::brightness_osd:rerun",
     function()
-        if hide_osd.started then
-            hide_osd()
-        else
-            hide_osd()
-        end
+           hide_osd()
     end
 )
 
@@ -244,9 +249,7 @@ awesome.connect_signal(
             awesome.emit_signal("module::brightness_osd:rerun")
             awesome.emit_signal("module::volume_osd:show", false)
         else
-            if hide_osd.started then
-                hide_osd:stop()
-            end
+                hide_osd()
         end
     end
 )

@@ -41,3 +41,6 @@ luac.out
 
 # README from wrong place
 /README.md
+
+# VSCode's ubiquitos configuration jsons that aren't very helpful anyways
+.vscode
