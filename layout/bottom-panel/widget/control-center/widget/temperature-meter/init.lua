@@ -14,9 +14,9 @@ local dpi = beautiful.xresources.apply_dpi
 -- ########################################################################
 local meter_name =
     wibox.widget {
-    text = "Temperature",
-    font = "SFMono Nerd Font Mono Heavy  10",
-    align = "left",
+    text = 'Temperature',
+    font = 'SFMono Nerd Font Mono Heavy  10',
+    align = 'left',
     widget = wibox.widget.textbox
 }
 -- ########################################################################
@@ -25,7 +25,7 @@ local meter_name =
 local icon =
     wibox.widget {
     layout = wibox.layout.align.vertical,
-    expand = "none",
+    expand = 'none',
     nil,
     {
         image = icons.thermometer,
@@ -57,17 +57,17 @@ local slider =
     wibox.widget {
     nil,
     {
-        id = "temp_status",
+        id = 'temp_status',
         max_value = 100,
         value = 29,
         forced_height = dpi(48),
-        color = "#f2f2f2EE",
-        background_color = "#22262d",
+        color = '#f2f2f2EE',
+        background_color = '#22262d',
         shape = gears.shape.rounded_rect,
         widget = wibox.widget.progressbar
     },
     nil,
-    expand = "none",
+    expand = 'none',
     forced_height = dpi(36),
     layout = wibox.layout.align.vertical
 }
@@ -99,9 +99,9 @@ awful.spawn.easy_async_with_shell(
     -- ########################################################################
     -- Format the output
     function(stdout)
-        local temp_path = stdout:gsub("%\n", "")
-        if temp_path == "" or not temp_path then
-            temp_path = "/sys/class/thermal/thermal_zone0/temp"
+        local temp_path = stdout:gsub('%\n', '')
+        if temp_path == '' or not temp_path then
+            temp_path = '/sys/class/thermal/thermal_zone0/temp'
         end
 
         watch(
@@ -110,7 +110,8 @@ awful.spawn.easy_async_with_shell(
 			]],
             15,
             function(_, stdout)
-                local temp = stdout:match("(%d+)")
+                local temp = 0
+                temp = temp + stdout:match('(%d+)')
                 slider.temp_status:set_value((temp / 1000) / max_temp * 100)
             end
         )
@@ -130,7 +131,7 @@ local temp_meter =
         spacing = dpi(5),
         {
             layout = wibox.layout.align.vertical,
-            expand = "none",
+            expand = 'none',
             nil,
             {
                 layout = wibox.layout.fixed.horizontal,

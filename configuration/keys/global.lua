@@ -569,16 +569,7 @@ local global_keys =
         end,
         {description = 'toggle exit screen', group = 'hotkeys'}
     ),
-    -- ########################################################################
 
-    awful.key(
-        {modkey},
-        '`',
-        function()
-            awesome.emit_signal('module::quake_terminal:toggle')
-        end,
-        {description = 'dropdown application', group = 'Launcher'}
-    ),
     -- ########################################################################
     -- ########################################################################
     -- ########################################################################

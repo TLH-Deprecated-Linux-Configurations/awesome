@@ -51,10 +51,7 @@ return {
         -- Default locker
         --
         lock = 'bash ' .. HOME .. '/.config/awesome/blur.sh',
-        -- ########################################################################
-        -- Default quake terminal
-        --
-        quake = 'kitty --name QuakeTerminal',
+ 
         -- ########################################################################
         -- Default app menu
         --

@@ -1,12 +1,30 @@
 # Changelog
 
-## 2021-12-26
+## 2021-12-28
 
 ### To Do Items 
 - make tooltip for resource monitors on control panel that displays the text that the bar is drawn with 
-- why application switcher is not displaying 
 - set volume to 100% at startup instead of 0
 - more expansive annotation commentary
+- make the attachdrop windows appear on the tasklist 
+
+### Added 
+- new module for wallpaper setting that is code from `rc.lua` originally
+
+### Changed
+
+
+### Fixed
+- why application switcher is not displaying 
+
+### Removed 
+- uneeded modules: 
+  - lockscreen - bin/blur.sh performs this beautifully 
+  - dynamic wallpaper - prefer a more stable wallpaper
+  - json - not useful to me at present 
+  - quake_terminal - attachdrop performs this role better
+
+## 2021-12-26
 
 ### Added
 - Assets folder for screenshots in `.github`
