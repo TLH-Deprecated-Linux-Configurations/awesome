@@ -2,8 +2,7 @@ configuration {
     show-icons:                     true;
     icon-theme:                     "chhinamasta";
     display-drun:                   "";
-    font:                           "SFMono Nerd Font Mono Heavy 10";
-
+    font:                           "SFMono Nerd Font Mono Heavy 18";
     drun-display-format:            "{name}";
     threads:                        0;
     scroll-method:                  0;
@@ -14,152 +13,189 @@ configuration {
 }
 
 * {
-    background:                     #17191ecc;
-    background-alt:                 #22262dcc;
-    background-ib:                  #0e121acc;
-    foreground:                     #e9e9ffff;
-    border:                         #0e121acc;
-    border-sel:                     #8b9cbe99;
-    selected:                       #3c3f4c99;
-    urgent:                         #FF00AA;
+    /** Anon colors **/
+    foreground:                  rgba ( 247, 247, 247, 100 % );
+    background:                  rgba ( 21, 24, 28, 100 % );
+
+    /* black + Grey */
+    color0:                      #1b1d24cc;
+    color8:                      #8b9cbecc;
+    color15:                     #b2bfd9cc;
+    /* Red */
+    color1:                      #FF00AA;
+
+    
+    selected-normal-foreground:  @color15;
+    selected-urgent-background:  @color8;
+    selected-active-background:  @color8;
+    selected-urgent-foreground:  #f4f4f7ff;
+    selected-active-foreground:  #f4f4f7ff;
+    selected-normal-background:  @color0;
+
+    alternate-active-background: @background;
+    alternate-normal-foreground: @foreground;
+    alternate-normal-background: @background;
+    alternate-urgent-background: @color1;
+    alternate-urgent-foreground: @urgent-foreground;
+    alternate-active-foreground: @active-foreground;
+
+    normal-foreground:           @foreground;
+    normal-background:           @background;
+
+    urgent-foreground:           @color0;
+    urgent-background:           @color1;
+
+    active-foreground:           #f4f4f7ff;
+    active-background:           #555e70cc;
+
+    border-color:                #22262daa;
+    spacing:                     2;
+    separatorcolor:              rgba ( 29, 32, 33, 100 % );
+    background-color:            @background;
+}
+
+#window {
+    background-color: @background;
+    border:           2;
+    padding:          5;
 }
 
 
-
-window {
-    transparency:                   "real";
-    background-color:               @background;
-    text-color:                     @foreground;
-    border:                         0px;
-    border-radius:                  8px 8px 0px 0px;
-    border-color:                   @foreground;
-    height:                         43%;
-    width:                          100%;
-    location:                       south;
-    anchor:                         south;
-    x-offset:                       0;
-    y-offset:                       0;
+#listview {
+    background-color: @background;
+    columns:      5;
+    lines:        6;
+    spacing:      8px;
+    layout:       vertical; 
+    padding:      8;
 }
 
-prompt {
-    enabled:                        false;
-    padding:                        8px 8px 8px 8px;
-    background-color:               @background-ib;
-    text-color:                     @foreground;
-    font:                           "SFMono Nerd Font Mono Heavy 14";
+#message {
+    border:       2px 0px 0px ;
+    border-color: @separatorcolor;
+    padding:      1px ;
+}
+#textbox {
+    text-color: @foreground;
+}
+#scrollbar {
+    width:        4px ;
+    border:       0;
+    handle-color: @alternate-normal-background;
+    handle-width: 8px ;
+    padding:      0;
 }
 
-
-inputbar {
-    background-color:               @background-ib;
-    text-color:                     @foreground;
-    expand:                         false;
-    border:                         0px 0px 2px 0px;
-    border-radius:                  8px;
-    border-color:                   @foreground;
-    margin:                         10px 35% 0% 35%;
-    padding:                        6px 6px 6px 6px;
-    position:                       center;
-            font:                           "SFMono Nerd Font Mono Heavy 12";
-
+#sidebar {
+    border:       4px 0px 0px ;
+    border-color: @separatorcolor;
 }
 
-entry {
-    background-color:               @background-ib;
-    text-color:                     @foreground;
-    placeholder-color:              @foreground;
-    expand:                         true;
-    font:                           "SFMono Nerd Font Mono Heavy 9";
-    horizontal-align:               0.5;
-    vertical-align:                 0.5;
-    padding:                        3px 3px 3px 3px;
-    placeholder:                    "Search Applications";
-    blink:                          true;
+#button {
+    spacing:    0;
+    text-color: @normal-foreground;
 }
 
-case-indicator {
-    background-color:               @background-ib;
-    text-color:                     @foreground;
-    spacing:                        0;
+#button.selected {
+    background-color: @selected-normal-background;
+    text-color:       @selected-normal-foreground;
 }
 
-
-listview {
-    background-color:               @background;
-    columns:                        4;
-    spacing:                        5px;
-    cycle:                          true;
-    dynamic:                        true;
-    layout:                         vertical;
+#case-indicator {
+    spacing:    0;
+    text-color:  @foreground;
+    text-color: @normal-foreground;
 }
 
-mainbox {
-    background-color:               @background;
-    children:                       [ inputbar, listview ];
-    spacing:                        5px;
+#entry {
+    text-color:           @color1;
+    background-color:     @color0;
+    border-radius:        25px 25px 25px;
+    width:                20%;
+    horizontal-align:     0.5;
+    expand:               false;
+    padding:              3px 0px 3px 0px;
+    blink:                true;
 }
 
-element {
-    background-color:               @background;
-    text-color:                     @foreground;
-    orientation:                    vertical;
-    font:                           "SFMono Nerd Font Mono Heavy 12";
-    border:                         0px 0px 1px 0px;
-    border-radius:                  12px;
-    border-color:                   @border;
-    padding:                        10px 10px 10px 10px;
-    margin:                         0px 0px 0px 0px;
-    vertical-align:                 0.5;
-    horizontal-align:               0.5;
+#prompt {
+    enabled:    false;
+    padding:    0px 8px 0px 8px;
+    text-color: @normal-foreground;
+}
+
+#inputbar {
+  padding:  5px 5px 5px 180px;
+}
+ 
+#mainbox {
+    children:  [ inputbar,listview ];
+    spacing: 10px;
+    padding: 5px 5px 5px 5px;
 }
 
 
-element-text {
-    expand:                         true;
-    padding:        0px 0px 0px 0px;
-    margin:             0px 0px 0px 0px;
-    horizontal-align:               0.5;
-    vertical-align:                 0.5;
+#element {
+    border-radius:       0px;
+    text-color:   @foreground;
+    orientation:  vertical;
+    margin:       0px 5px 0px 5px;
+    padding:      10px 0px 10px 0px;
 }
 
-element normal.urgent,
-element alternate.urgent {
-    background-color:               @urgent;
-    text-color:                     @urgent;
-    border-radius:                  22px;
+#element-icon {
+    size:    64px;
+    border:  0px;
 }
 
-element normal.active,
-element alternate.active {
-    text-color:                     @foreground;
-
-
-
-}
-element normal,
-element normal.active{
-    background: @background;
-}
-element alternative,
-element alternative.active{
-    background: @background-alt;
+#element-text {
+    expand:              true;
+    horizontal-align:    0.5;
+    vertical-align:      0.5;
+    margin:              5px 10px 0px 10px;
 }
 
-element selected
- {
-    background-color:               @selected;
-    text-color:                     @foreground;
-    border:                         1px 1px 1px 1px;
-    border-radius:                  22px;
-    border-color:                   @border-sel;
+#element.normal.normal {
+    background-color: @normal-background;
+    text-color:       @normal-foreground;
 }
 
-element selected.urgent {
-    background-color:               @background-alt;
-    text-color:                     @foreground;
+#element.normal.urgent {
+    background-color: @urgent-background;
+    text-color:       @urgent-foreground;
 }
 
-element selected.active {
-    background-color:               @background-alt;
-    text-color:                     @foreground;
+#element.normal.active {
+    background-color: @active-background;
+    text-color:       @active-foreground;
+}
+
+#element.selected.normal {
+    background-color: @selected-normal-background;
+    text-color:       @selected-normal-foreground;
+}
+
+#element.selected.urgent {
+    background-color: @selected-urgent-background;
+    text-color:       @selected-urgent-foreground;
+}
+
+#element.selected.active {
+    background-color: @selected-active-background;
+    text-color:       @selected-active-foreground;
+}
+
+#element.alternate.normal {
+    background-color: @alternate-normal-background;
+    text-color:       @alternate-normal-foreground;
+}
+
+#element.alternate.urgent {
+    background-color: @alternate-urgent-background;
+    text-color:       @alternate-urgent-foreground;
+}
+
+#element.alternate.active {
+    background-color: @alternate-active-background;
+    text-color:       @alternate-active-foreground;
 }

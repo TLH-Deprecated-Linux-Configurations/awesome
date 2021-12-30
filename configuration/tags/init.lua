@@ -22,6 +22,8 @@ local thrizen = require('configuration.tags.layouts.thrizen')
 -- ########################################################################
 -- ########################################################################
 -- ########################################################################
+-- define the default layouts, incliding the custom ones called above
+--
 tag.connect_signal(
     'request::default_layouts',
     function(s)
@@ -33,9 +35,10 @@ tag.connect_signal(
                 thrizen,
                 awful.layout.suit.max,
                 awful.layout.suit.spiral.dwindle
-                --awful.layout.suit.floating,
+                -- awful.layout.suit.corner.ne,
+                -- awful.layout.suit.fair
+                --awful.layout.suit.floating, -- <-- Don't need when I have floating mode for windows as needed
                 --awful.layout.suit.tile,
-                --awful.layout.suit.fair,
                 --awful.layout.suit.magnifier,
                 --awful.layout.suit.fair.horizontal
                 --awful.layout.suit.tile.left,
@@ -45,7 +48,6 @@ tag.connect_signal(
                 --awful.layout.suit.fair.horizontal,
                 --awful.layout.suit.max.fullscreen,
                 --awful.layout.suit.corner.nw
-                --awful.layout.suit.corner.ne,
                 --awful.layout.suit.corner.sw,
                 --awful.layout.suit.corner.se,
             }
@@ -58,8 +60,9 @@ tag.connect_signal(
 -- ########################################################################
 awful.screen.connect_for_each_screen(
     function(s)
-        -- Each screen has its own tag table.
-
+        -- Each screen has its own tag table, which I have styled using
+        -- the name of the window manager. Still not as lame as using sway
+        --
         local tag_names = {'A', 'W', 'E', 'S', 'O', 'M', 'E'}
         for idx, name in ipairs(tag_names) do
             local selected = false
@@ -79,6 +82,8 @@ awful.screen.connect_for_each_screen(
             )
         end
         -- ########################################################################
+        -- assign properties to the taglist
+        --
         local tags =
             awful.widget.taglist {
             screen = s,
@@ -90,6 +95,8 @@ awful.screen.connect_for_each_screen(
 -- ########################################################################
 -- ########################################################################
 -- ########################################################################
+-- gaps determined by layout type
+--
 tag.connect_signal(
     'property::layout',
     function(t)

@@ -118,11 +118,7 @@ awesome.connect_signal(
 -- ########################################################################
 local icon =
     wibox.widget {
-    {
-        image = icons.brightness,
-        resize = true,
-        widget = wibox.widget.imagebox
-    },
+    {image = icons.brightness, resize = true, widget = wibox.widget.imagebox},
     forced_height = dpi(150),
     top = dpi(12),
     bottom = dpi(12),
@@ -211,15 +207,25 @@ screen.connect_signal(
 -- ########################################################################
 -- ########################################################################
 -- ########################################################################
-local hide_osd = function()
-    awful.screen.focused().brightness_osd_overlay.visible = false
-    awful.screen.focused().show_bri_osd = false
-end
+local hide_osd =
+    gears.timer {
+    timeout = 2,
+    autostart = true,
+    callback = function()
+        local focused = awful.screen.focused()
+        focused.brightness_osd_overlay.visible = false
+        focused.show_vol_osd = false
+    end
+}
 
 awesome.connect_signal(
     'module::brightness_osd:rerun',
     function()
-        hide_osd()
+        if hide_osd.started then
+            hide_osd:again()
+        else
+            hide_osd:start()
+        end
     end
 )
 
@@ -229,9 +235,9 @@ local placement_placer = function()
     awful.placement.next_to(
         brightness_osd,
         {
-            preferred_positions = 'top',
+            preferred_positions = 'bottom',
             preferred_anchors = 'middle',
-            geometry = focused.bottom_panel or s,
+            geometry = focused.bottom_panel or awful.screen.focused(),
             offset = {x = 0, y = dpi(-20)}
         }
     )

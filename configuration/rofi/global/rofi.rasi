@@ -123,30 +123,30 @@ element-text {
 	margin: 0 10px 0 10px;
 }
 
-element normal.urgent,
+element.normal.urgent,
 element alternate.urgent {
 	background-color: @urgent;
 	text-color: @foreground;
 	border-radius: 9px;
 }
 
-element normal.active,
+element.normal.active,
 element alternate.active {
 	background-color: @background-active;
 	text-color: @foreground;
 }
 
-element selected {
+element.selected {
 	background-color: @background-selected;
 	text-color: @foreground;
 }
 
-element selected.urgent {
+element.selected.urgent {
 	background-color: @urgent-selected;
 	text-color: @foreground;
 }
 
-element selected.active {
+element.selected.active {
 	background-color: @background-active;
 	color: @foreground-selected;
 }

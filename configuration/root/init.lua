@@ -37,6 +37,8 @@ root.buttons(
                 awful.util.spawn(apps.default.rofi_appmenu)
             end
         ),
+        -- ########################################################################
+        -- with modifier
         awful.button(
             {'Control'},
             2,
@@ -44,6 +46,8 @@ root.buttons(
                 awesome.emit_signal('module::exit_screen:show')
             end
         ),
+        -- ########################################################################
+        -- buttons next to scrollwheel
         awful.button(
             {},
             8,
@@ -62,6 +66,8 @@ root.buttons(
                 awesome.emit_signal('module::brightness_osd:show', true)
             end
         ),
+        -- ########################################################################
+        -- With modifiers
         awful.button(
             {'Control'},
             8,

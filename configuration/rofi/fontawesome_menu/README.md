@@ -1,8 +1,10 @@
+# Font Awesome Icon Selection Menu
+
 `fontawesome-menu` - Display all FontAwesome icons in a rofi menu
 
 ## SYNOPSIS
 
-`fontawesome-menu` [`-v`|`-h`] [-f *LISTfile*] [-p PROMPT] [OUTPUT]
+`fontawesome-menu` [`-v`|`-h`][-f *listfile*] [-p PROMPT][output]
 
 ## DESCRIPTION
 
@@ -10,6 +12,15 @@ If `fontawesome-menu` is executed without options
 or arguments, a list of all FontAwesome 5 Free
 icons is displayed in a rofi menu. The selected icon
 will be put into the clipboard.
+
+
+> Note: This is mostly used internally without using 
+> the terminal, but called from the keybinding `mod4+F4`,
+>  the inclusion of the terminal options are a hold 
+> over from the upstream source but retained to make 
+> this potentially more useful to others interested 
+> in this but not in the rest of the configuration
+>  this is nested within.
 
 ## OPTIONS
 

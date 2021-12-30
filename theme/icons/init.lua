@@ -1,22 +1,34 @@
--- Icons directory
+--  _______
+-- |_     _|.----.-----.-----.-----.
+--  _|   |_ |  __|  _  |     |__ --|
+-- |_______||____|_____|__|__|_____|
+-- ########################################################################
+-- ########################################################################
+-- ########################################################################
+--  This is to call all of the icon files that are stored configuration-wide
+-- for whatever reason. I also try to keep icons in the directory of the
+-- widget calling them but that is an on-going process and so this fills in
+-- the gap for now
+-- ########################################################################
+-- ########################################################################
+-- ########################################################################
 local dir = os.getenv('HOME') .. '/.config/awesome/theme/icons/'
 
 return {
     -- ########################################################################
     -- ########################################################################
     -- ########################################################################
-
-    text_editor = dir .. 'tag-list/' .. 'text-editor.svg',
-    social = dir .. 'tag-list/' .. 'social.svg',
-    file_manager = dir .. 'tag-list/' .. 'file-manager.svg',
-    multimedia = dir .. 'tag-list/' .. 'multimedia.svg',
-    games = dir .. 'tag-list/' .. 'games.svg',
-    development = dir .. 'tag-list/' .. 'development.svg',
-    sandbox = dir .. 'tag-list/' .. 'sandbox.svg',
-    terminal = dir .. 'tag-list/' .. 'terminal.svg',
-    graphics = dir .. 'tag-list/' .. 'graphics.svg',
+    -- Taglist Directory
+    text_editor = dir .. 'text-editor.svg',
+    social = dir .. 'social.svg',
+    file_manager = dir .. 'file-manager.svg',
+    multimedia = dir .. 'multimedia.svg',
+    development = dir .. 'development.svg',
+    sandbox = dir .. 'sandbox.svg',
+    terminal = dir .. 'terminal.svg',
+    graphics = dir .. 'graphics.svg',
     menu = dir .. 'menu.svg',
-    close_small = dir .. 'tag-list/' .. 'close-small.svg',
+    close_small = dir .. 'close-small.svg',
     -- ########################################################################
     -- ########################################################################
     -- ########################################################################

@@ -17,7 +17,7 @@ return {
         -- ########################################################################
         -- Default web browser
         --
-        browser = 'firefox-nightly',
+        browser = 'firefox',
         -- ########################################################################
         -- Default text editor
         text_editor = 'nvim',

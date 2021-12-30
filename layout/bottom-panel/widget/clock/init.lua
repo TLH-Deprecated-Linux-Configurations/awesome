@@ -5,7 +5,7 @@
 -- ########################################################################
 -- ########################################################################
 -- ########################################################################
-local config = require("configuration.config")
+
 local military_mode = true
 -- ########################################################################
 -- ########################################################################
@@ -45,12 +45,12 @@ local create_clock = function(s)
     -- change cursor
     --
     s.clock_widget:connect_signal(
-        "mouse::enter",
+        'mouse::enter',
         function()
             local w = mouse.current_wibox
             if w then
                 old_cursor, old_wibox = w.cursor, w
-                w.cursor = "hand3"
+                w.cursor = 'hand3'
             end
         end
     )
@@ -58,7 +58,7 @@ local create_clock = function(s)
     -- ########################################################################
     -- ########################################################################
     s.clock_widget:connect_signal(
-        "mouse::leave",
+        'mouse::leave',
         function()
             if old_wibox then
                 old_wibox.cursor = old_cursor
@@ -74,38 +74,38 @@ local create_clock = function(s)
     s.clock_tooltip =
         awful.tooltip {
         objects = {s.clock_widget},
-        mode = "outside",
+        mode = 'outside',
         delay_show = 1,
-        preferred_positions = {"right", "bottom", "left", "top"},
-        preferred_alignments = {"middle", "front", "back"},
+        preferred_positions = {'right', 'bottom', 'left', 'top'},
+        preferred_alignments = {'middle', 'front', 'back'},
         margin_leftright = dpi(8),
         margin_topbottom = dpi(8),
         timer_function = function()
             local ordinal = nil
 
-            local day = os.date("%d")
-            local month = os.date("%B")
+            local day = os.date('%d')
+            local month = os.date('%B')
 
             local first_digit = string.sub(day, 0, 1)
             local last_digit = string.sub(day, -1)
 
-            if first_digit == "0" then
+            if first_digit == '0' then
                 day = last_digit
             end
 
-            if last_digit == "1" and day ~= "11" then
-                ordinal = "st"
-            elseif last_digit == "2" and day ~= "12" then
-                ordinal = "nd"
-            elseif last_digit == "3" and day ~= "13" then
-                ordinal = "rd"
+            if last_digit == '1' and day ~= '11' then
+                ordinal = 'st'
+            elseif last_digit == '2' and day ~= '12' then
+                ordinal = 'nd'
+            elseif last_digit == '3' and day ~= '13' then
+                ordinal = 'rd'
             else
-                ordinal = "th"
+                ordinal = 'th'
             end
 
             local date_str =
-                "Today is <b>" ..
-                os.date("%A") .. "</b> the " .. "<b>" .. day .. ordinal .. "</b> of <b>" .. month .. "</b>.\n" .. " "
+                'Today is <b>' ..
+                os.date('%A') .. '</b> the ' .. '<b>' .. day .. ordinal .. '</b> of <b>' .. month .. '</b>.\n' .. ' '
 
             return date_str
         end
@@ -116,7 +116,7 @@ local create_clock = function(s)
     -- button press functionality
     --
     s.clock_widget:connect_signal(
-        "button::press",
+        'button::press',
         function(self, lx, ly, button)
             -- Hide the tooltip when you press the clock widget
             if s.clock_tooltip.visible and button == 1 then
@@ -133,7 +133,7 @@ local create_clock = function(s)
         {
             start_sunday = true,
             spacing = dpi(5),
-            font = "SFMono Nerd Font Mono Heavy  14",
+            font = 'SFMono Nerd Font Mono Heavy  14',
             long_weekdays = true,
             margin = dpi(5),
             screen = s,
@@ -181,7 +181,7 @@ local create_clock = function(s)
     -- ########################################################################
     s.month_calendar:attach(
         s.clock_widget,
-        "br",
+        'br',
         {
             on_pressed = true,
             on_hover = false

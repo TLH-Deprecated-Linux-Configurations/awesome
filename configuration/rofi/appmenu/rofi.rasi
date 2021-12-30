@@ -138,7 +138,7 @@ element-text selected {
   text-color: @foreground-selected;
   background-color: @background;
 }
-element normal.urgent,
+element.normal.urgent,
 element alternate.urgent {
   background-color: @urgent;
   text-color: @foreground;
@@ -146,23 +146,23 @@ element alternate.urgent {
   background-color: @background;
 }
 
-element normal.active,
+element.normal.active,
 element alternate.active {
   background-color: @background;
   text-color: @foreground;
 }
 
-element selected {
+element.selected {
   background-color: @background-selected;
   text-color: @foreground-selected;
 }
 
-element selected.urgent {
+element.selected.urgent {
   background-color: @urgent-selected;
   text-color: @foreground;
 }
 
-element selected.active {
+element.selected.active {
   background-color: @background;
   text-color: @foreground-selected;
 }

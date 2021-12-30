@@ -14,7 +14,7 @@ local awful = require('awful')
 local beautiful = require('beautiful')
 local drop = require('module.attachdrop')
 require('awful.autofocus')
-
+local HOME = os.getenv 'HOME'
 local hotkeys_popup = require('awful.hotkeys_popup').widget
 _G.switcher = require('module.application-switcher')
 local modkey = require('configuration.keys.mod').mod_key
@@ -34,7 +34,7 @@ local global_keys =
             awful.menu.menu_keys.up = {'Up', 'Alt_R'}
             awful.menu.clients({theme = {width = 450}}, {keygrabber = true})
         end,
-        {description = 'Open Window Menu', group = 'Utility'}
+        {description = 'Launch Menu of Open Windows', group = 'Utility'}
     ),
     -- Hotkeys
     -- ########################################################################
@@ -60,16 +60,16 @@ local global_keys =
         {modkey},
         'F2',
         function()
-            awful.spawn('firefox-nightly')
+            awful.spawn('firefox')
         end,
-        {description = 'Launch firefox-nightly Browser', group = 'Launcher'}
+        {description = 'Launch firefox Browser', group = 'Launcher'}
     ),
     -- #############################################################################
     awful.key(
         {modkey, 'Control'},
         'F2',
         function()
-            awful.spawn('firefox-nightly')
+            awful.spawn('firefox')
         end,
         {description = 'Launch New Epiphany Instance', group = 'Launcher'}
     ),
@@ -122,7 +122,7 @@ local global_keys =
         {modkey},
         'F4',
         function()
-            awful.spawn.easy_async_with_shell('~/.config/awesome/external/rofi/fontawesome_menu/fontawesome-menu')
+            awful.spawn.easy_async_with_shell('~/.config/awesome/configuration/rofi/fontawesome_menu/fontawesome-menu')
         end,
         {
             description = 'Copy FontAwesome Icons to Clipboard',
@@ -212,6 +212,18 @@ local global_keys =
         end,
         {
             description = 'Open Display Configuration Application',
+            group = 'Launcher'
+        }
+    ),
+    -- #############################################################################
+    awful.key(
+        {modkey},
+        'F6',
+        function()
+            awful.spawn.easy_async_with_shell(HOME .. '.config/awesome/bin/wifi.sh')
+        end,
+        {
+            description = 'Open Rofi Wifi Menu',
             group = 'Launcher'
         }
     ),
@@ -448,7 +460,7 @@ local global_keys =
             awesome.emit_signal('widget::brightness')
             awesome.emit_signal('module::brightness_osd:show', true)
         end,
-        {description = 'increase brightness by 10%', group = 'hotkeys'}
+        {description = 'increase brightness by 10%', group = 'Hotkeys'}
     ),
     -- ########################################################################
 
@@ -460,7 +472,7 @@ local global_keys =
             awesome.emit_signal('widget::brightness')
             awesome.emit_signal('module::brightness_osd:show', true)
         end,
-        {description = 'decrease brightness by 10%', group = 'hotkeys'}
+        {description = 'decrease brightness by 10%', group = 'Hotkeys'}
     ),
     -- ########################################################################
     -- ########################################################################
@@ -471,11 +483,11 @@ local global_keys =
         {},
         'XF86AudioRaiseVolume',
         function()
-            awful.spawn('amixer sset Master 5%+')
+            awful.spawn('amixer sset Master 5%+', true)
             awesome.emit_signal('widget::volume')
             awesome.emit_signal('module::volume_osd:show', true)
         end,
-        {description = 'increase volume up by 5%', group = 'hotkeys'}
+        {description = 'Increase Volume to 100', group = 'Hotkeys'}
     ),
     -- ########################################################################
 
@@ -483,11 +495,11 @@ local global_keys =
         {},
         'XF86AudioLowerVolume',
         function()
-            awful.spawn('amixer sset Master 5%-', false)
+            awful.spawn('amixer sset Master 5%-', true)
             awesome.emit_signal('widget::volume')
             awesome.emit_signal('module::volume_osd:show', true)
         end,
-        {description = 'decrease volume up by 5%', group = 'hotkeys'}
+        {description = 'Reduce Volume to 0', group = 'Hotkeys'}
     ),
     -- ########################################################################
 
@@ -497,7 +509,7 @@ local global_keys =
         function()
             awful.spawn('amixer  set Master 1+ toggle', false)
         end,
-        {description = 'toggle mute', group = 'hotkeys'}
+        {description = 'toggle mute', group = 'Hotkeys'}
     ),
     -- ########################################################################
 
@@ -507,7 +519,7 @@ local global_keys =
         function()
             awful.spawn('mpc next', false)
         end,
-        {description = 'next music', group = 'hotkeys'}
+        {description = 'next music', group = 'Hotkeys'}
     ),
     -- ########################################################################
 
@@ -517,7 +529,7 @@ local global_keys =
         function()
             awful.spawn('mpc prev', false)
         end,
-        {description = 'previous music', group = 'hotkeys'}
+        {description = 'previous music', group = 'Hotkeys'}
     ),
     -- ########################################################################
 
@@ -527,7 +539,7 @@ local global_keys =
         function()
             awful.spawn('mpc toggle', false)
         end,
-        {description = 'play/pause music', group = 'hotkeys'}
+        {description = 'play/pause music', group = 'Hotkeys'}
     ),
     -- ########################################################################
 
@@ -537,7 +549,7 @@ local global_keys =
         function()
             awful.spawn('amixer sset Capture toggle', false)
         end,
-        {description = 'mute microphone', group = 'hotkeys'}
+        {description = 'mute microphone', group = 'Hotkeys'}
     ),
     -- ########################################################################
     -- ########################################################################
@@ -549,7 +561,7 @@ local global_keys =
         function()
             awesome.emit_signal('module::exit_screen:show')
         end,
-        {description = 'shutdown skynet', group = 'hotkeys'}
+        {description = 'shutdown skynet', group = 'Hotkeys'}
     ),
     -- ########################################################################
 
@@ -559,7 +571,7 @@ local global_keys =
         function()
             awesome.emit_signal('module::exit_screen:show')
         end,
-        {description = 'toggle exit screen', group = 'hotkeys'}
+        {description = 'toggle exit screen', group = 'Hotkeys'}
     ),
     awful.key(
         {modkey},
@@ -567,9 +579,8 @@ local global_keys =
         function()
             awesome.emit_signal('module::exit_screen:show')
         end,
-        {description = 'toggle exit screen', group = 'hotkeys'}
+        {description = 'toggle exit screen', group = 'Hotkeys'}
     ),
-
     -- ########################################################################
     -- ########################################################################
     -- ########################################################################
@@ -580,7 +591,7 @@ local global_keys =
         function()
             awful.spawn.single_instance('arandr', false)
         end,
-        {description = 'arandr', group = 'hotkeys'}
+        {description = 'arandr', group = 'Hotkeys'}
     ),
     -- ########################################################################
     -- ########################################################################
