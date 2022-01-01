@@ -4,6 +4,7 @@
 -- |_______||__|__|__|   __|___._||____|__|__|___  |
 --                   |__|                    |_____|
 -- Adapted from the work of lilydjwg <lilydjwg@gmail.com>
+-- https://github.com/lilydjwg/myawesomerc
 -- ########################################################################
 -- ########################################################################
 -- ########################################################################
@@ -13,7 +14,7 @@ local ipairs = ipairs
 local math = math
 local table = table
 -- “Width of contacts list
-local buddylist_width = 295
+local empathy_width = 295
 -- local naughty = naughty
 -- ########################################################################
 -- ########################################################################
@@ -32,30 +33,27 @@ local function do_empathy(p)
         -- ########################################################################
         -- Contact Window List
         local cls = {}
-        local buddylist_swap
+        local empathy_swap
         -- ########################################################################
         -- ########################################################################
         -- ########################################################################
         for k, c in ipairs(p.clients) do
-            if c.name ~= "Contact List" and c.name ~= "Contact List" and c.name ~= "Friends List" then
-                table.insert(cls, c)
-            else
-                if k ~= 1 then
-                    buddylist_swap = c
-                end
-                c:geometry(
-                    {
-                        width = buddylist_width - 2,
-                        height = area.height - 4,
-                        x = area.x,
-                        y = area.y
-                    }
-                )
-                cols = cols - 1
-                area.x = area.x + buddylist_width
-                area.width = area.width - buddylist_width
+            if k ~= 1 then
+                empathy_swap = c
             end
+            c:geometry(
+                {
+                    width = empathy_width - 2,
+                    height = area.height - 4,
+                    x = area.x,
+                    y = area.y
+                }
+            )
+            cols = cols - 1
+            area.x = area.x + empathy_width
+            area.width = area.width - empathy_width
         end
+
         -- ########################################################################
         -- ########################################################################
         -- ########################################################################
@@ -99,11 +97,9 @@ local function do_empathy(p)
             -- ########################################################################
             -- ########################################################################
             c:geometry(g)
-            -- naughty.notify({ title=c.name, text= 'w: '.. g.width .. '\th: '.. g.height .. '\nx: '.. g.x .. '\ty: '.. g.y,
-            -- timeout = 0 })
         end
-        if #cls > 0 and buddylist_swap then
-            buddylist_swap:swap(cls[1])
+        if #cls > 0 and empathy_swap then
+            empathy_swap:swap(cls[1])
         end
     end
 end
@@ -111,11 +107,10 @@ end
 -- ########################################################################
 -- ########################################################################
 local empathy = {}
-empathy.name = "empathy"
+empathy.name = 'empathy'
 -- ########################################################################
 -- ########################################################################
 -- ########################################################################
--- @param screen The screen to arrange.
 function empathy.arrange(p)
     return do_empathy(p)
 end

@@ -19,7 +19,7 @@ local hotkeys_popup = require('awful.hotkeys_popup').widget
 _G.switcher = require('module.application-switcher')
 local modkey = require('configuration.keys.mod').mod_key
 local altkey = require('configuration.keys.mod').alt_key
-local apps = require('configuration.apps')
+local apps = require('configuration.root.apps')
 
 -- Key bindings
 local global_keys =

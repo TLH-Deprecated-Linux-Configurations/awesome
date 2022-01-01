@@ -43,4 +43,4 @@ luac.out
 /README.md
 
 # VSCode's ubiquitos configuration jsons that aren't very helpful anyways
-.vscode
+.vscode/

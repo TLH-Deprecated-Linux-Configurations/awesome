@@ -9,12 +9,12 @@
 -- ########################################################################
 -- ########################################################################
 -- ########################################################################
-require("configuration.global_variables")
+require('configuration.root.global_variables')
 local action_name =
     wibox.widget {
-    text = "Volume",
-    font = "SFMono Nerd Font Mono Heavy  10",
-    align = "left",
+    text = 'Volume',
+    font = 'SFMono Nerd Font Mono Heavy  10',
+    align = 'left',
     widget = wibox.widget.textbox
 }
 -- ########################################################################
@@ -23,7 +23,7 @@ local action_name =
 local icon =
     wibox.widget {
     layout = wibox.layout.align.vertical,
-    expand = "none",
+    expand = 'none',
     nil,
     {image = icons.volume, resize = true, widget = wibox.widget.imagebox},
     nil
@@ -39,7 +39,7 @@ local action_level =
     },
     bg = beautiful.groups_bg,
     shape = function(cr, width, height)
-        gears.shape.rounded_rect(cr, width, height,2)
+        gears.shape.rounded_rect(cr, width, height, 2)
     end,
     widget = wibox.container.background
 }
@@ -50,21 +50,21 @@ local slider =
     wibox.widget {
     nil,
     {
-        id = "volume_slider",
+        id = 'volume_slider',
         bar_shape = gears.shape.rounded_rect,
         bar_height = dpi(24),
-        bar_color = "#22262d",
-        bar_active_color = "#b2bfd9cc",
-        handle_color = "#e9efff",
+        bar_color = '#22262d',
+        bar_active_color = '#b2bfd9cc',
+        handle_color = '#e9efff',
         handle_shape = gears.shape.circle,
         handle_width = dpi(24),
-        handle_border_color = "#000000aa",
+        handle_border_color = '#000000aa',
         handle_border_width = dpi(2),
         maximum = 100,
         widget = wibox.widget.slider
     },
     nil,
-    expand = "none",
+    expand = 'none',
     forced_height = dpi(24),
     layout = wibox.layout.align.vertical
 }
@@ -76,14 +76,14 @@ local volume_slider = slider.volume_slider
 -- ########################################################################
 -- ########################################################################
 volume_slider:connect_signal(
-    "property::value",
+    'property::value',
     function()
         local volume_level = volume_slider:get_value()
 
-        spawn("amixer sset Master " .. volume_level .. "%", false)
+        spawn('amixer sset Master ' .. volume_level .. '%', false)
 
         -- Update volume osd
-        awesome.emit_signal("module::volume_osd", volume_level)
+        awesome.emit_signal('module::volume_osd', volume_level)
     end
 )
 -- ########################################################################
@@ -122,9 +122,9 @@ volume_slider:buttons(
 -- ########################################################################
 local update_slider = function()
     awful.spawn.easy_async_with_shell(
-        "amixer sget Master",
+        'amixer sget Master',
         function(stdout)
-            local volume = string.match(stdout, "(%d?%d?%d)%%")
+            local volume = string.match(stdout, '(%d?%d?%d)%%')
             volume_slider:set_value(tonumber(volume))
         end
     )
@@ -170,7 +170,7 @@ action_level:buttons(
 -- The emit will come from the global keybind
 --
 awesome.connect_signal(
-    "widget::volume",
+    'widget::volume',
     function()
         update_slider()
     end
@@ -181,7 +181,7 @@ awesome.connect_signal(
 -- The emit will come from the OSD
 --
 awesome.connect_signal(
-    "widget::volume:update",
+    'widget::volume:update',
     function(value)
         volume_slider:set_value(tonumber(value))
     end
@@ -200,7 +200,7 @@ local volume_setting =
         spacing = dpi(5),
         {
             layout = wibox.layout.align.vertical,
-            expand = "none",
+            expand = 'none',
             nil,
             {
                 layout = wibox.layout.fixed.horizontal,

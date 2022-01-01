@@ -50,7 +50,7 @@ return {
         -- ########################################################################
         -- Default locker
         --
-        lock = 'bash ' .. HOME .. '/.config/awesome/blur.sh',
+        lock = 'bash ' .. HOME .. '/.config/awesome/bin/blur.sh',
         -- ########################################################################
         -- Default app menu
         --

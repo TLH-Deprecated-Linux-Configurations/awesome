@@ -11,8 +11,8 @@
 -- ########################################################################
 -- ########################################################################
 
-require('configuration.global_variables')
-require('configuration.garbage_collection')
+require('configuration.root.global_variables')
+require('configuration.root.garbage_collection')
 require('awful.autofocus')
 -- ########################################################################
 -- ########################################################################

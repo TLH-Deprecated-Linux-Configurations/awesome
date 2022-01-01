@@ -56,7 +56,7 @@ awful.util.shell = 'zsh'
 dpi = beautiful.xresources.apply_dpi
 config_dir = filesystem.get_configuration_dir()
 utils_dir = config_dir .. 'bin/'
-apps = require('configuration.apps')
+apps = require('configuration.root.apps')
 
 terminal = apps.default.terminal
 web_browser = apps.default.web_browser

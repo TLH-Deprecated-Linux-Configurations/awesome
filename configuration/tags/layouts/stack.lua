@@ -63,7 +63,7 @@ local function arrange(p, dir)
     g.width = math.max(mstrWidth, 1)
 
     g.y = wa.y
-    g.x = (dir == "right") and (wa.x) or (wa.x + slavesWidth)
+    g.x = (dir == 'right') and (wa.x) or (wa.x + slavesWidth)
     -- ########################################################################
     -- ########################################################################
     -- ########################################################################
@@ -85,7 +85,7 @@ local function arrange(p, dir)
         g.width = math.max(slavesWidth, 1)
 
         g.y = wa.y
-        g.x = (dir == "right") and (wa.x + mstrWidth) or (wa.x)
+        g.x = (dir == 'right') and (wa.x + mstrWidth) or (wa.x)
 
         p.geometries[c] = g
     end
@@ -93,17 +93,17 @@ end
 -- ########################################################################
 -- ########################################################################
 -- ########################################################################
-stack.name = "stack"
+stack.name = 'stack'
 function stack.arrange(p)
-    return arrange(p, "right")
+    return arrange(p, 'right')
 end
 -- ########################################################################
 -- ########################################################################
 -- ########################################################################
 stack.left = {}
-stack.left.name = "stackLeft"
+stack.left.name = 'stackLeft'
 function stack.left.arrange(p)
-    return arrange(p, "left")
+    return arrange(p, 'left')
 end
 -- ########################################################################
 -- ########################################################################

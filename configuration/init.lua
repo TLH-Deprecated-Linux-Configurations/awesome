@@ -13,10 +13,10 @@
 -- ########################################################################
 return {
     keys = require('configuration.keys'),
-    apps = require('configuration.apps'),
+    apps = require('configuration.root.apps'),
     require('configuration.client'),
     require('configuration.root'),
     require('configuration.tags'),
-    require('configuration.garbage_collection'),
+    require('configuration.root.garbage_collection'),
     root.keys(require('configuration.keys.global'))
 }
