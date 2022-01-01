@@ -34,7 +34,7 @@ return {
         graphics = 'gimp',
         -- ########################################################################
         -- Default network manager
---
+        --
         network_manager = 'sh ' .. HOME .. '/.config/awesome/bin/wifi.sh',
         -- ########################################################################
         -- Default bluetooth manager
@@ -51,27 +51,31 @@ return {
         -- Default locker
         --
         lock = 'bash ' .. HOME .. '/.config/awesome/blur.sh',
- 
         -- ########################################################################
         -- Default app menu
         --
-        rofi_appmenu = ' bash ' .. HOME ..
-            '/.config/awesome/bin/applauncher.sh ' .. screen.primary.dpi .. ' ' ..
-            filesystem.get_configuration_dir()
+        rofi_appmenu = ' bash ' ..
+            HOME ..
+                '/.config/awesome/bin/applauncher.sh ' ..
+                    screen.primary.dpi .. ' ' .. filesystem.get_configuration_dir()
         -- ########################################################################
-        },
+    },
     -- ########################################################################
     -- List of apps to start once on start-up
     run_on_start_up = {
-        'xsettingsd &', 'xrdb "$HOME"/.Xresources &', 'pnmixer &',
+        'xsettingsd &',
+        'xrdb "$HOME"/.Xresources &',
+        'pnmixer &',
         'xinpt set-prop "ELAN1301:00 04F3:30C6 Touchpad" "libinput Tapping Enabled" 1 &',
         'goautolock --time 360 --notify 30 --locker "$HOME/.config/awesome/bin/blur.sh" &',
-        'dropbox start &', 'pulseeffects --gapplication-service &',
+        'dropbox start &',
+        'pulseeffects --gapplication-service &',
         '/usr/bin/lxqt-policykit-agent &',
         ' eval "$(gnome-keyring-daemon -s --components=pkcs11,secrets,ssh,gpg)" &',
-        'xcape -e "Super_L=Super_L|Control_L|Escape" &', 'greenclip daemon &',
-        'udiskie &', -- ########################################################################'picom -b --experimental-backends  &',
-        'bash ' .. config_dir .. '/bin/autorun.sh &'
+        'xcape -e "Super_L=Super_L|Control_L|Escape" &',
+        'greenclip daemon &',
+        'udiskie &',
+        'picom -b --experimental-backends &'
     },
     -- ########################################################################
     -- List of binaries/shell scripts that will execute for a certain task

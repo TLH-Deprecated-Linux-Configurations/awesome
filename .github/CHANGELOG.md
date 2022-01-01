@@ -1,6 +1,20 @@
 # Changelog
+Below is the changelog, arranged by dates. In it you will find most of the items I completed from a given day I worked on this project with the template coming first. The last day's `To Do Items` are copied to the top of the day work is actively being done, this is because if the to-do is finished, it goes into one of the categories below and so that's sufficient tracking for my purposes here. This is a list of done items after all, not a determination of if I can wholly imagine all of the work before doing it. 
+-----------------------------------------------------------------------------------------------------------------------
+## Template
 
-## 2021-12-30
+### Added
+
+### Fixed 
+
+### Removed 
+
+### Changed 
+
+### Notes 
+
+-----------------------------------------------------------------------------------------------------------------------
+## 2021-12-31
 
 ### To Do Items
 
@@ -8,14 +22,39 @@
   - or make it such that clicking one of the resource monitor buttons shows a window
 - more expansive annotation commentary
 - make the attachdrop windows appear on the tasklist
+- in the menus, make bg of components different (probably lighter) than those of the menu itself. 
 
+### Added 
+- more to do items (of course)
+
+### Fixed 
+
+### Removed 
+- `bin/autorun.sh`, handling it all internally to the lua itself, hopefully 
+### Changed
+- some aspects of the system start up commands from dotfiles to adjust for the lack of the autorun script, had to make sure things were the same to produce the more consistent environment I seek. 
+- 
+ 
+### Notes 
+- about the tooltip or the popup window on the resource monitor, so far all efforts to achieve this have been unsuccessful 
+  - issues arise in nesting it into the watch command, most clearly and my prior examples were leveraging the vicious library I would prefer not to use, simply to minimize the amount of external code and due to the modules themselves being simple enough if I had to I could easily replicate. 
+    - I could try to overlay the number into the bar
+    - or I could put them on the same line 
+      - neither requiring additional portions be added to the widgets nor new files be tacted on.
+- picom is an issue at startup still, implying an issue with the .xprofile or .xinit file will test now. 
+- personal note: still considering moving to luakit. My configuration of it would be the only viable one on Github, which means no examples but I am now practiced in the ways of Lua well enough I can probably achieve most of what I need or stare at its source code long enough to deduce as much from that source if need be. 
+
+--------------------------------------------------------------------------------------------------------------------------
+
+## 2021-12-30
 
 ### Added 
 - blur kernel to picom 
+- `.github/docs` for documentation
 
 ### Fixed 
 - rofi stylesheets 
-- 
+
 ### Removed 
 - modules lockscreen & json (again? God those stupid things)
 - eliminate `configuration/config`
@@ -23,6 +62,7 @@
 ### Changed
 - functions using picom.conf to correct source directory
 
+--------------------------------------------------------------------------------------------------------------------------
 ## 2021-12-29
 
 ### Fixed
@@ -39,6 +79,8 @@
 ### Changed
 
 - icons in png to all `#f4f4f7`
+
+--------------------------------------------------------------------------------------------------------------------------
 
 ## 2021-12-28
 
@@ -60,6 +102,7 @@
   - json - not useful to me at present
   - quake_terminal - attachdrop performs this role better
 
+--------------------------------------------------------------------------------------------------------------------------
 ## 2021-12-26
 
 ### Added
@@ -103,7 +146,7 @@
 
 - library directory, again.
 
----
+--------------------------------------------------------------------------------------------------------------------------
 
 ## 2021-12-23
 
@@ -111,7 +154,7 @@
 
 - Worked on documentation, contained in this folder, which will be used later to populate the Github wiki for the configuration.
 
----
+--------------------------------------------------------------------------------------------------------------------------
 
 ## 2021-12-22
 
@@ -142,7 +185,7 @@
 
 - library directory
 
----
+--------------------------------------------------------------------------------------------------------------------------
 
 ## 2021-12-21
 
@@ -173,7 +216,7 @@
 - timer form brightness osd, changing the timer into a function without removing functionality of the widget to change the backlight
 - Annoying exit screen messages (they really weren't funny at all, just annoying)
 
----
+--------------------------------------------------------------------------------------------------------------------------
 
 ## 2021-12-20
 

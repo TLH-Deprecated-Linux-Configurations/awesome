@@ -7,7 +7,6 @@ Below is a description of the scripts.
 | Script | Notes |
 |--------x-------|
 | applauncher | the menu that comes up at pressing just mod4 |
-| autorun | Similar to  `~/.xinitrc` or  `~/.xprofile` runs commands at startup |
 | blur | makes screensaver out of a distorted desktp background |
 | snapshot | screenshot script |
 | wifi | provide wifi functionality via rofi |

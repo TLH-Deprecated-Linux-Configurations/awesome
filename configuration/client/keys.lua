@@ -36,7 +36,7 @@ local client_keys =
             c.fullscreen = not c.fullscreen
             c:raise()
         end,
-        {description = 'toggle fullscreen', group = 'client'}
+        {description = 'Toggle Fullscreen', group = 'Client'}
     ),
     -- ########################################################################
     awful.key(
@@ -45,7 +45,7 @@ local client_keys =
         function(c)
             c:kill()
         end,
-        {description = 'close', group = 'client'}
+        {description = 'Close', group = 'Client'}
     ),
     -- ########################################################################
     awful.key(
@@ -54,7 +54,7 @@ local client_keys =
         function()
             awful.client.focus.byidx(1)
         end,
-        {description = 'focus next by index', group = 'client'}
+        {description = 'Focus Next by Index', group = 'Client'}
     ),
     -- ########################################################################
     awful.key(
@@ -63,7 +63,7 @@ local client_keys =
         function()
             awful.client.focus.byidx(-1)
         end,
-        {description = 'focus previous by index', group = 'client'}
+        {description = 'Focus Previous by Index', group = 'Client'}
     ),
     -- ########################################################################
     awful.key(
@@ -72,7 +72,7 @@ local client_keys =
         function()
             awful.client.swap.byidx(1)
         end,
-        {description = 'swap with next client by index', group = 'client'}
+        {description = 'Swap with Next Client by Index', group = 'Client'}
     ),
     -- ########################################################################
     awful.key(
@@ -81,10 +81,10 @@ local client_keys =
         function()
             awful.client.swap.byidx(-1)
         end,
-        {description = 'swap with next client by index', group = 'client'}
+        {description = 'Swap with Next Client by Index', group = 'Client'}
     ),
     -- ########################################################################
-    awful.key({modkey}, 'u', awful.client.urgent.jumpto, {description = 'jump to urgent client', group = 'client'}),
+    awful.key({modkey}, 'u', awful.client.urgent.jumpto, {description = 'Jump to Urgent Client', group = 'Client'}),
     -- ########################################################################
     awful.key(
         {modkey},
@@ -95,7 +95,7 @@ local client_keys =
                 client.focus:raise()
             end
         end,
-        {description = 'go back', group = 'client'}
+        {description = 'Go Back', group = 'Client'}
     ),
     -- ########################################################################
     awful.key(
@@ -104,12 +104,12 @@ local client_keys =
         function(c)
             c.minimized = true
         end,
-        {description = 'minimize client', group = 'client'}
+        {description = 'Minimize Client', group = 'Client'}
     ),
     -- ########################################################################
     awful.key(
         {modkey, 'Shift'},
-        'c',
+        'f',
         function(c)
             local focused = awful.screen.focused()
 
@@ -120,19 +120,19 @@ local client_keys =
                 }
             )
         end,
-        {description = 'align a client to the center of the focused screen', group = 'client'}
+        {description = 'Align a Client to the Center of the Focused Screen', group = 'client'}
     ),
     -- ########################################################################
     awful.key(
         {modkey},
-        'c',
+        'f',
         function(c)
             c.fullscreen = false
             c.maximized = false
             c.floating = not c.floating
             c:raise()
         end,
-        {description = 'toggle floating', group = 'client'}
+        {description = 'Toggle Floating', group = 'client'}
     ),
     -- ########################################################################
     awful.key(
@@ -141,7 +141,7 @@ local client_keys =
         function(c)
             c:relative_move(0, dpi(-10), 0, 0)
         end,
-        {description = 'move floating client up by 10 px', group = 'client'}
+        {description = 'Move Floating Client up by 10px', group = 'client'}
     ),
     -- ########################################################################
     awful.key(
@@ -150,7 +150,7 @@ local client_keys =
         function(c)
             c:relative_move(0, dpi(10), 0, 0)
         end,
-        {description = 'move floating client down by 10 px', group = 'client'}
+        {description = 'Move Floating Client down by 10px', group = 'client'}
     ),
     -- ########################################################################
     awful.key(
@@ -159,7 +159,7 @@ local client_keys =
         function(c)
             c:relative_move(dpi(-10), 0, 0, 0)
         end,
-        {description = 'move floating client to the left by 10 px', group = 'client'}
+        {description = 'Move Floating Client to the Left by 10px', group = 'client'}
     ),
     -- ########################################################################
     awful.key(
@@ -168,7 +168,7 @@ local client_keys =
         function(c)
             c:relative_move(dpi(10), 0, 0, 0)
         end,
-        {description = 'move floating client to the right by 10 px', group = 'client'}
+        {description = 'Move Floating Client to the Right by 10px', group = 'client'}
     ),
     -- ########################################################################
     awful.key(
@@ -177,7 +177,7 @@ local client_keys =
         function(c)
             c:relative_move(0, dpi(-10), 0, dpi(10))
         end,
-        {description = 'increase floating client size vertically by 10 px up', group = 'client'}
+        {description = 'Increase Floating Client Size Vertically by 10px up', group = 'client'}
     ),
     -- ########################################################################
     awful.key(
@@ -186,7 +186,7 @@ local client_keys =
         function(c)
             c:relative_move(0, 0, 0, dpi(10))
         end,
-        {description = 'increase floating client size vertically by 10 px down', group = 'client'}
+        {description = 'Increase Floating Client Size Vertically by 10px down', group = 'client'}
     ),
     -- ########################################################################
     awful.key(
@@ -195,7 +195,7 @@ local client_keys =
         function(c)
             c:relative_move(dpi(-10), 0, dpi(10), 0)
         end,
-        {description = 'increase floating client size horizontally by 10 px left', group = 'client'}
+        {description = 'Increase Floating Client Size Horizontally by 10px Left', group = 'client'}
     ),
     -- ########################################################################
     awful.key(
@@ -204,7 +204,7 @@ local client_keys =
         function(c)
             c:relative_move(0, 0, dpi(10), 0)
         end,
-        {description = 'increase floating client size horizontally by 10 px right', group = 'client'}
+        {description = 'Increase Floating Client Size Horizontally by 10px Right', group = 'client'}
     ),
     -- ########################################################################
     awful.key(
@@ -215,7 +215,7 @@ local client_keys =
                 c:relative_move(0, 0, 0, dpi(-10))
             end
         end,
-        {description = 'decrease floating client size vertically by 10 px up', group = 'client'}
+        {description = 'Decrease Floating Client Size Vertically by 10px up', group = 'client'}
     ),
     -- ########################################################################
     awful.key(
@@ -228,7 +228,7 @@ local client_keys =
                 c:relative_move(0, dpi(10), 0, 0)
             end
         end,
-        {description = 'decrease floating client size vertically by 10 px down', group = 'client'}
+        {description = 'Decrease Floating Client Size Vertically by 10px down', group = 'client'}
     ),
     -- ########################################################################
     awful.key(
@@ -239,7 +239,7 @@ local client_keys =
                 c:relative_move(0, 0, dpi(-10), 0)
             end
         end,
-        {description = 'decrease floating client size horizontally by 10 px left', group = 'client'}
+        {description = 'Decrease Floating Client Size Horizontally by 10px Left', group = 'client'}
     ),
     -- ########################################################################
     awful.key(
@@ -252,7 +252,7 @@ local client_keys =
                 c:relative_move(dpi(10), 0, 0, 0)
             end
         end,
-        {description = 'decrease floating client size horizontally by 10 px right', group = 'client'}
+        {description = 'Decrease Floating Client Size Horizontally by 10px Right', group = 'client'}
     )
 )
 
