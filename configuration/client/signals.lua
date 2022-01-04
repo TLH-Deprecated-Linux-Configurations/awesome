@@ -53,10 +53,19 @@ client.connect_signal(
 -- ########################################################################
 -- ########################################################################
 -- Enable sloppy focus, so that focus follows mouse then raises it.
+-- modified using the pull request for awesome by blue-eyed
+-- https://github.com/awesomeWM/awesome/pull/183
+local sloppyfocus_last = {c = nil}
 client.connect_signal(
     'mouse::enter',
     function(c)
-        c:emit_signal('request::activate', 'mouse_enter')
+        if awful.layout.get(c.screen) ~= awful.layout.suit.magnifier and awful.client.focus.filter(c) then
+            -- Skip focusing the client if the mouse wasn't moved.
+            if c ~= sloppyfocus_last.c then
+                client.focus = c
+                sloppyfocus_last.c = c
+            end
+        end
     end
 )
 -- ########################################################################

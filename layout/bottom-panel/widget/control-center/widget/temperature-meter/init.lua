@@ -61,7 +61,7 @@ local slider =
         max_value = 100,
         value = 29,
         forced_height = dpi(48),
-        color = '#f2f2f2EE',
+        color = '#f4f4f7ee',
         background_color = '#22262d',
         shape = gears.shape.rounded_rect,
         widget = wibox.widget.progressbar
@@ -70,6 +70,19 @@ local slider =
     expand = 'none',
     forced_height = dpi(36),
     layout = wibox.layout.align.vertical
+}
+-- ########################################################################
+-- ########################################################################
+-- ########################################################################
+local temp_tooltip =
+    awful.tooltip {
+    objects = {meter_icon},
+    text = 'None',
+    mode = 'outside',
+    align = 'right',
+    margin_leftright = dpi(8),
+    margin_topbottom = dpi(8),
+    preferred_positions = {'right', 'left', 'top', 'bottom'}
 }
 -- ########################################################################
 -- ########################################################################
@@ -113,6 +126,9 @@ awful.spawn.easy_async_with_shell(
                 local temp = 0
                 temp = temp + stdout:match('(%d+)')
                 slider.temp_status:set_value((temp / 1000) / max_temp * 100)
+                local tip = (temp / 1000) / max_temp * 100
+                tip = string.sub(tip, 1, 2)
+                temp_tooltip:set_text('Internal Temperature is ' .. tip .. '* Degrees Celsius')
             end
         )
     end

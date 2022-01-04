@@ -43,7 +43,9 @@
         "web_browser",
         "file_manager",
         "text_editor",
-        "editor_cmd"
+        "editor_cmd",
+        "tip",
+        "panel_visible"
     ],
     "cSpell.words": [
         "Skeudomorphic"

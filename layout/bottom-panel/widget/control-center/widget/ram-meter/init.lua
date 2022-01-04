@@ -11,9 +11,9 @@
 -- ########################################################################
 local meter_name =
     wibox.widget {
-    text = "RAM",
-    font = "SFMono Nerd Font Mono Heavy  10",
-    align = "left",
+    text = 'RAM',
+    font = 'SFMono Nerd Font Mono Heavy  10',
+    align = 'left',
     widget = wibox.widget.textbox
 }
 -- ########################################################################
@@ -22,7 +22,7 @@ local meter_name =
 local icon =
     wibox.widget {
     layout = wibox.layout.align.vertical,
-    expand = "none",
+    expand = 'none',
     nil,
     {
         image = icons.memory,
@@ -52,30 +52,45 @@ local slider =
     wibox.widget {
     nil,
     {
-        id = "ram_usage",
+        id = 'ram_usage',
         max_value = 100,
         value = 29,
         forced_height = dpi(48),
-        color = "#f2f2f2EE",
-        background_color = "#22262d",
+        color = '#f4f4f7ee',
+        background_color = '#22262d',
         shape = gears.shape.rounded_rect,
         widget = wibox.widget.progressbar
     },
     nil,
-    expand = "none",
+    expand = 'none',
     forced_height = dpi(36),
     layout = wibox.layout.align.vertical
+}
+
+local ram_tooltip =
+    awful.tooltip {
+    objects = {meter_icon},
+    text = 'None',
+    mode = 'outside',
+    align = 'right',
+    margin_leftright = dpi(8),
+    margin_topbottom = dpi(8),
+    preferred_positions = {'right', 'left', 'top', 'bottom'}
 }
 -- ########################################################################
 -- ########################################################################
 -- ########################################################################
 watch(
     'bash -c "free | grep -z Mem.*Swap.*"',
-    30,
+    15,
     function(_, stdout)
         local total, used, free, shared, buff_cache, available, total_swap, used_swap, free_swap =
-            stdout:match("(%d+)%s*(%d+)%s*(%d+)%s*(%d+)%s*(%d+)%s*(%d+)%s*Swap:%s*(%d+)%s*(%d+)%s*(%d+)")
+            stdout:match('(%d+)%s*(%d+)%s*(%d+)%s*(%d+)%s*(%d+)%s*(%d+)%s*Swap:%s*(%d+)%s*(%d+)%s*(%d+)')
         slider.ram_usage:set_value(used / total * 100)
+        local tip = (used / total * 100)
+        tip = string.sub(tip, 1, 2)
+        ram_tooltip:set_text('RAM Utilization: ' .. tip .. '%')
+        collectgarbage('collect')
     end
 )
 -- ########################################################################
@@ -91,7 +106,7 @@ local ram_meter =
         spacing = dpi(5),
         {
             layout = wibox.layout.align.vertical,
-            expand = "none",
+            expand = 'none',
             nil,
             {
                 layout = wibox.layout.fixed.horizontal,

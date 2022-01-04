@@ -11,9 +11,9 @@
 -- ########################################################################
 local meter_name =
     wibox.widget {
-    text = "CPU",
-    font = "SFMono Nerd Font Mono Heavy  10",
-    align = "left",
+    text = 'CPU',
+    font = 'SFMono Nerd Font Mono Heavy  10',
+    align = 'left',
     widget = wibox.widget.textbox
 }
 -- ########################################################################
@@ -22,7 +22,7 @@ local meter_name =
 local icon =
     wibox.widget {
     layout = wibox.layout.align.vertical,
-    expand = "none",
+    expand = 'none',
     nil,
     {
         image = icons.chart,
@@ -54,19 +54,29 @@ local slider =
     wibox.widget {
     nil,
     {
-        id = "cpu_usage",
+        id = 'cpu_usage',
         max_value = 100,
         value = 29,
         forced_height = dpi(48),
-        color = "#f2f2f2EE",
-        background_color = "#22262d",
+        color = '#f4f4f7ee',
+        background_color = '#22262d',
         shape = gears.shape.rounded_rect,
         widget = wibox.widget.progressbar
     },
     nil,
-    expand = "none",
+    expand = 'none',
     forced_height = dpi(48),
     layout = wibox.layout.align.vertical
+}
+local cpu_tooltip =
+    awful.tooltip {
+    objects = {meter_icon},
+    text = 'None',
+    mode = 'outside',
+    align = 'right',
+    margin_leftright = dpi(8),
+    margin_topbottom = dpi(8),
+    preferred_positions = {'right', 'left', 'top', 'bottom'}
 }
 -- ########################################################################
 -- ########################################################################
@@ -80,10 +90,10 @@ watch(
     [[bash -c "
 	cat /proc/stat | grep '^cpu '
 	"]],
-    20,
+    15,
     function(_, stdout)
         local user, nice, system, idle, iowait, irq, softirq, steal, guest, guest_nice =
-            stdout:match("(%d+)%s(%d+)%s(%d+)%s(%d+)%s(%d+)%s(%d+)%s(%d+)%s(%d+)%s(%d+)%s(%d+)%s")
+            stdout:match('(%d+)%s(%d+)%s(%d+)%s(%d+)%s(%d+)%s(%d+)%s(%d+)%s(%d+)%s(%d+)%s(%d+)%s')
 
         local total = user + nice + system + idle + iowait + irq + softirq + steal
 
@@ -92,9 +102,11 @@ watch(
         local diff_usage = (1000 * (diff_total - diff_idle) / diff_total + 5) / 10
 
         slider.cpu_usage:set_value(diff_usage)
-
+        local tip = string.sub(diff_usage, 1, 2)
+        cpu_tooltip:set_text('CPU Utilization: ' .. tip .. '%')
         total_prev = total
         idle_prev = idle
+        collectgarbage('collect')
     end
 )
 -- ########################################################################
@@ -110,7 +122,7 @@ local cpu_meter =
         spacing = dpi(5),
         {
             layout = wibox.layout.align.vertical,
-            expand = "none",
+            expand = 'none',
             nil,
             {
                 layout = wibox.layout.fixed.horizontal,

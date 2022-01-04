@@ -16,7 +16,7 @@ panel_visible = false
 -- ########################################################################
 local vertical_separator =
     wibox.widget {
-    orientation = "vertical",
+    orientation = 'vertical',
     forced_height = dpi(1),
     forced_width = dpi(1),
     span_ratio = 0.55,
@@ -40,12 +40,12 @@ local info_center = function(s)
                     layout = wibox.layout.fixed.vertical,
                     forced_width = dpi(panel_width),
                     spacing = dpi(10),
-                    require("layout.bottom-panel.widget.info-center.widget.notif-center")(s)
+                    require('layout.bottom-panel.widget.info-center.widget.notif-center')(s)
                 },
                 margins = dpi(16),
                 widget = wibox.container.margin
             },
-            id = "info_center",
+            id = 'info_center',
             bg = beautiful.background,
             shape = function(cr, w, h)
                 gears.shape.rounded_rect(cr, w, h, beautiful.groups_radius)
@@ -53,7 +53,7 @@ local info_center = function(s)
             widget = wibox.container.background
         },
         screen = s,
-        type = "dock",
+        type = 'dock',
         visible = false,
         ontop = true,
         width = dpi(panel_width),
@@ -66,13 +66,13 @@ local info_center = function(s)
     -- ########################################################################
     -- ########################################################################
     -- ########################################################################
-    awful.placement.top_right(
+    awful.placement.bottom_right(
         panel,
         {
             honor_workarea = true,
             parent = s,
             margins = {
-                top = dpi(33),
+                bottom = dpi(493),
                 right = dpi(5)
             }
         }
@@ -89,7 +89,7 @@ local info_center = function(s)
         ontop = true,
         screen = s,
         bg = beautiful.transparent,
-        type = "utility",
+        type = 'utility',
         x = s.geometry.x,
         y = s.geometry.y,
         width = s.geometry.width,
@@ -101,11 +101,9 @@ local info_center = function(s)
     local open_panel = function()
         local focused = awful.screen.focused()
         panel_visible = true
-
         focused.backdrop_info_center.visible = true
         focused.info_center.visible = true
-
-        panel:emit_signal("opened")
+        panel:emit_signal('opened')
     end
     -- ########################################################################
     -- ########################################################################
@@ -117,7 +115,7 @@ local info_center = function(s)
         focused.info_center.visible = false
         focused.backdrop_info_center.visible = false
 
-        panel:emit_signal("closed")
+        panel:emit_signal('closed')
     end
     -- ########################################################################
     -- ########################################################################

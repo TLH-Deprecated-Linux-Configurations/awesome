@@ -76,9 +76,10 @@ local awesome_overrides = function(theme)
     -- ########################################################################
     -- ########################################################################
     -- Background
-    theme.bg_normal = 'linear:0,0:0,21:0,#2B2E38:1,#1B1D24'
-    theme.bg_focus = 'linear:0,0:0,21:0,#484d5e:1,#23262e'
-    theme.bg_urgent = 'linear:0,0:0,21:0,#2B2E38:1,#1B1D24'
+    theme.bg_normal = 'linear:0,0:0,21:0,#484d5e:1,#272A34'
+    theme.bg_focus = 'linear:0,0:0,21:0,#555e70:1,#323643'
+    theme.bg_urgent = 'linear:0,0:0,21:0,#272A34:1,#1B1D24'
+    theme.bg_menu = 'linear:0,0:0,21:0,#484d5e:1,#323643'
     -- ########################################################################
     -- ########################################################################
     -- ########################################################################
@@ -97,14 +98,14 @@ local awesome_overrides = function(theme)
     -- ########################################################################
     -- UI Groups
     --
-    theme.groups_title_bg = 'linear:0,0:0,21:0,#484d5e:1,#23262e'
-    theme.groups_bg = 'linear:0,0:0,21:0,#484d5e:1,#23262e'
+    theme.groups_title_bg = 'linear:0,0:0,21:0,#484d5e:1,#272A34'
+    theme.groups_bg = 'linear:0,0:0,21:0,#484d5e:1,#272A34'
     theme.groups_radius = dpi(16)
     -- ########################################################################
     -- ########################################################################
     -- ########################################################################
     -- UI events
-    theme.leave_event = 'linear:0,0:0,21:0,#484d5e:1,#23262e'
+    theme.leave_event = 'linear:0,0:0,21:0,#484d5e:1,#272A34'
     theme.enter_event = '#f4f4f7' .. '10'
     theme.press_event = '#f4f4f7' .. '15'
     theme.release_event = '#f4f4f7' .. '10'
@@ -275,19 +276,19 @@ local awesome_overrides = function(theme)
     theme.menu_width = dpi(200)
     theme.menu_border_width = dpi(20)
     theme.menu_bg_focus = theme.accent .. 'CC'
-    theme.menu_accent = '#2B2E38'
-    theme.menu_bg_normal = 'linear:0,0:0,21:0,#2B2E38:1,#1B1D24'
+    theme.menu_accent = '#272A34'
+    theme.menu_bg_normal = 'linear:0,0:0,21:0,#272A34:1,#1B1D24'
 
     theme.menu_fg_normal = '#b2bfd9'
     theme.menu_fg_focus = '#f4f4f7'
-    theme.menu_border_color = 'linear:0,0:0,21:0,#2B2E38:1,#1B1D24'
+    theme.menu_border_color = 'linear:0,0:0,21:0,#272A34:1,#1B1D24'
     -- ########################################################################
     -- ########################################################################
     -- ########################################################################
     -- Tooltips
 
     theme.tooltip_bg = theme.background
-    theme.tooltip_border_color = 'linear:0,0:0,21:0,#484d5e:1,#23262e'
+    theme.tooltip_border_color = 'linear:0,0:0,21:0,#484d5e:1,#272A34'
     theme.tooltip_border_width = 0
     theme.tooltip_gaps = dpi(5)
     theme.tooltip_shape = function(cr, w, h)
@@ -305,8 +306,8 @@ local awesome_overrides = function(theme)
     -- Titlebar
     --
     theme.titlebar_size = dpi(24)
-    theme.titlebar_bg_focus = 'linear:0,0:0,21:0,#484d5e:1,#23262e'
-    theme.titlebar_bg_normal = 'linear:0,0:0,21:0,#2B2E38:1,#1B1D24'
+    theme.titlebar_bg_focus = 'linear:0,0:0,21:0,#484d5e:1,#272A34'
+    theme.titlebar_bg_normal = 'linear:0,0:0,21:0,#272A34:1,#1B1D24'
     theme.titlebar_fg_focus = gtk_variable().fg_color
     theme.titlebar_fg_normal = gtk_variable().fg_color
 
@@ -316,7 +317,7 @@ local awesome_overrides = function(theme)
     -- Taglist
     --
     theme.taglist_font = 'awesomewm-font 16'
-    theme.taglist_bg = 'linear:0,0:0,21:0,#2B2E38:1,#1B1D24'
+    theme.taglist_bg = 'linear:0,0:0,21:0,#272A34:1,#1B1D24'
     theme.taglist_fg_focus = '#f4f4f7'
     theme.taglist_fg = '#e9efff'
     theme.taglist_fg_occupied = '#b2bfd9'
@@ -328,8 +329,8 @@ local awesome_overrides = function(theme)
     -- Tasklist
     --
     theme.tasklist_font = 'SFMono Nerd Font Mono Heavy  10'
-    theme.tasklist_bg_normal = 'linear:0,0:0,21:0,#2B2E38:1,#1B1D24'
-    theme.tasklist_bg_focus = 'linear:0,0:0,21:0,#484d5e:1,#23262e'
+    theme.tasklist_bg_normal = 'linear:0,0:0,21:0,#272A34:1,#1B1D24'
+    theme.tasklist_bg_focus = 'linear:0,0:0,21:0,#484d5e:1,#272A34'
     theme.tasklist_bg_urgent = '#E91E63' .. '99'
     theme.tasklist_fg_focus = '#f4f4f7'
     theme.tasklist_fg_urgent = '#f4f4f7'
@@ -340,10 +341,10 @@ local awesome_overrides = function(theme)
     -- Notification
     --
     theme.notification_position = 'top_right'
-    theme.notification_bg = 'linear:0,0:0,21:0,#484d5e:1,#23262e'
+    theme.notification_bg = 'linear:0,0:0,21:0,#484d5e:1,#272A34'
     theme.notification_margin = dpi(5)
     theme.notification_border_width = dpi(0)
-    theme.notification_border_color = 'linear:0,0:0,21:0,#484d5e:1,#23262e'
+    theme.notification_border_color = 'linear:0,0:0,21:0,#484d5e:1,#272A34'
     theme.notification_spacing = dpi(5)
     theme.notification_icon_resize_strategy = 'center'
     theme.notification_icon_size = dpi(32)

@@ -19,7 +19,7 @@ local format_item = function(widget)
         {
             {
                 layout = wibox.layout.align.vertical,
-                expand = "none",
+                expand = 'none',
                 nil,
                 widget,
                 nil
@@ -28,7 +28,11 @@ local format_item = function(widget)
             widget = wibox.container.margin
         },
         forced_height = dpi(88),
-        widget = wibox.container.background
+        widget = wibox.container.background,
+        bg = '#323643cc',
+        shape = function(cr, w, h)
+            gears.shape.rounded_rect(cr, w, h, 6)
+        end
     }
 end
 -- ########################################################################
@@ -39,7 +43,7 @@ local format_item_no_fix_height = function(widget)
         {
             {
                 layout = wibox.layout.align.vertical,
-                expand = "none",
+                expand = 'none',
                 nil,
                 widget,
                 nil
@@ -47,36 +51,41 @@ local format_item_no_fix_height = function(widget)
             margins = dpi(10),
             widget = wibox.container.margin
         },
-        widget = wibox.container.background
+        widget = wibox.container.background,
+        bg = '#323643cc',
+        shape = function(cr, w, h)
+            gears.shape.rounded_rect(cr, w, h, 6)
+        end
     }
 end
 -- ########################################################################
 -- ########################################################################
 -- ########################################################################
-local vertical_separator = wibox.widget {
-    orientation = "vertical",
+local vertical_separator =
+    wibox.widget {
+    orientation = 'vertical',
     forced_height = dpi(1),
     forced_width = dpi(1),
     span_ratio = 0.55,
     widget = wibox.widget.separator
 }
 
-local control_center_row_one = wibox.widget {
+local control_center_row_one =
+    wibox.widget {
     layout = wibox.layout.align.horizontal,
     forced_height = dpi(48),
     nil,
-    format_item(require(
-                    "layout.bottom-panel.widget.control-center.widget.user-profile")()),
+    format_item(require('layout.bottom-panel.widget.control-center.widget.user-profile')()),
     {
-        format_item({
-            layout = wibox.layout.fixed.horizontal,
-            spacing = dpi(10),
-            require(
-                "layout.bottom-panel.widget.control-center.widget.control-center-switch")(),
-            vertical_separator,
-            require(
-                "layout.bottom-panel.widget.control-center.widget.exit-screen-toggle")()
-        }),
+        format_item(
+            {
+                layout = wibox.layout.fixed.horizontal,
+                spacing = dpi(10),
+                require('layout.bottom-panel.widget.control-center.widget.control-center-switch')(),
+                vertical_separator,
+                require('layout.bottom-panel.widget.control-center.widget.exit-screen-toggle')()
+            }
+        ),
         left = dpi(10),
         widget = wibox.container.margin
     }
@@ -84,77 +93,83 @@ local control_center_row_one = wibox.widget {
 -- ########################################################################
 -- ########################################################################
 -- ########################################################################
-local main_control_row_two = wibox.widget {
+local main_control_row_two =
+    wibox.widget {
     layout = wibox.layout.flex.horizontal,
     spacing = dpi(10),
-    format_item_no_fix_height({
-        layout = wibox.layout.fixed.vertical,
-        spacing = dpi(5),
-        require("layout.bottom-panel.widget.control-center.widget.airplane-mode"),
-        require(
-            "layout.bottom-panel.widget.control-center.widget.bluetooth-toggle"),
-        require(
-            "layout.bottom-panel.widget.control-center.widget.dropbox-toggle")
-    }),
+    format_item_no_fix_height(
+        {
+            layout = wibox.layout.fixed.vertical,
+            spacing = dpi(5),
+            require('layout.bottom-panel.widget.control-center.widget.airplane-mode'),
+            require('layout.bottom-panel.widget.control-center.widget.bluetooth-toggle'),
+            require('layout.bottom-panel.widget.control-center.widget.dropbox-toggle')
+        }
+    ),
     {
         layout = wibox.layout.flex.vertical,
         spacing = dpi(10),
-        format_item_no_fix_height({
-            layout = wibox.layout.align.vertical,
-            expand = "none",
-            nil,
-            require(
-                "layout.bottom-panel.widget.control-center.widget.dont-disturb"),
-            nil
-        }),
-        format_item_no_fix_height({
-            layout = wibox.layout.align.vertical,
-            expand = "none",
-            nil,
-            require(
-                "layout.bottom-panel.widget.control-center.widget.blur-toggle"),
-            nil
-        })
+        format_item_no_fix_height(
+            {
+                layout = wibox.layout.align.vertical,
+                expand = 'none',
+                nil,
+                require('layout.bottom-panel.widget.control-center.widget.dont-disturb'),
+                nil
+            }
+        ),
+        format_item_no_fix_height(
+            {
+                layout = wibox.layout.align.vertical,
+                expand = 'none',
+                nil,
+                require('layout.bottom-panel.widget.control-center.widget.blur-toggle'),
+                nil
+            }
+        )
     }
 }
 
 -- ########################################################################
 -- ########################################################################
 -- ########################################################################
-local main_control_row_sliders = wibox.widget {
+local main_control_row_sliders =
+    wibox.widget {
     layout = wibox.layout.fixed.vertical,
     spacing = dpi(10),
-    format_item({
-        require("layout.bottom-panel.widget.control-center.widget.blur-slider"),
-        margins = dpi(10),
-        widget = wibox.container.margin
-    }),
-    format_item({
-        require(
-            "layout.bottom-panel.widget.control-center.widget.brightness-slider"),
-        margins = dpi(10),
-        widget = wibox.container.margin
-    }),
-    format_item({
-        require("layout.bottom-panel.widget.control-center.widget.volume-slider"),
-        margins = dpi(10),
-        widget = wibox.container.margin
-    })
+    format_item(
+        {
+            require('layout.bottom-panel.widget.control-center.widget.blur-slider'),
+            margins = dpi(10),
+            widget = wibox.container.margin
+        }
+    ),
+    format_item(
+        {
+            require('layout.bottom-panel.widget.control-center.widget.brightness-slider'),
+            margins = dpi(10),
+            widget = wibox.container.margin
+        }
+    ),
+    format_item(
+        {
+            require('layout.bottom-panel.widget.control-center.widget.volume-slider'),
+            margins = dpi(10),
+            widget = wibox.container.margin
+        }
+    )
 }
 -- ########################################################################
 -- ########################################################################
 -- ########################################################################
-local monitor_control_row_progressbars = wibox.widget {
+local monitor_control_row_progressbars =
+    wibox.widget {
     layout = wibox.layout.fixed.vertical,
     spacing = dpi(10),
-    format_item(require(
-                    "layout.bottom-panel.widget.control-center.widget.cpu-meter")),
-    format_item(require(
-                    "layout.bottom-panel.widget.control-center.widget.ram-meter")),
-    format_item(require(
-                    "layout.bottom-panel.widget.control-center.widget.temperature-meter")),
-    format_item(require(
-                    "layout.bottom-panel.widget.control-center.widget.harddrive-meter"))
+    format_item(require('layout.bottom-panel.widget.control-center.widget.cpu-meter')),
+    format_item(require('layout.bottom-panel.widget.control-center.widget.ram-meter')),
+    format_item(require('layout.bottom-panel.widget.control-center.widget.temperature-meter')),
+    format_item(require('layout.bottom-panel.widget.control-center.widget.harddrive-meter'))
 }
 
 local control_center = function(s)
@@ -164,7 +179,8 @@ local control_center = function(s)
     -- ########################################################################
     -- ########################################################################
     -- ########################################################################
-    local panel = awful.popup {
+    local panel =
+        awful.popup {
         widget = {
             {
                 {
@@ -174,7 +190,7 @@ local control_center = function(s)
                     {
                         layout = wibox.layout.stack,
                         {
-                            id = "main_control",
+                            id = 'main_control',
                             visible = true,
                             layout = wibox.layout.fixed.vertical,
                             spacing = dpi(10),
@@ -182,7 +198,7 @@ local control_center = function(s)
                             main_control_row_sliders
                         },
                         {
-                            id = "monitor_control",
+                            id = 'monitor_control',
                             visible = false,
                             layout = wibox.layout.fixed.vertical,
                             spacing = dpi(10),
@@ -193,7 +209,7 @@ local control_center = function(s)
                 margins = dpi(16),
                 widget = wibox.container.margin
             },
-            id = "control_center",
+            id = 'control_center',
             bg = beautiful.bg_normal,
             shape = function(cr, w, h)
                 gears.shape.rounded_rect(cr, w, h, 6)
@@ -201,23 +217,28 @@ local control_center = function(s)
             widget = wibox.container.background
         },
         screen = s,
-        type = "dock",
+        type = 'dock',
         visible = false,
         ontop = true,
         width = dpi(panel_width),
         maximum_width = dpi(panel_width),
-        bg = beautiful.bg_normal,
+        bg = beautiful.bg_focus,
         fg = beautiful.fg_normal,
-        shape = gears.shape.rectangle
+        shape = function(cr, w, h)
+            gears.shape.rounded_rect(cr, w, h, 12)
+        end
     }
     -- ########################################################################
     -- ########################################################################
     -- ########################################################################
-    awful.placement.bottom_right(panel, {
-        honor_workarea = true,
-        parent = s,
-        margins = {bottom = dpi(s.geometry.height - 478), right = dpi(5)}
-    })
+    awful.placement.bottom_right(
+        panel,
+        {
+            honor_workarea = true,
+            parent = s,
+            margins = {bottom = dpi(s.geometry.height - 478), right = dpi(5)}
+        }
+    )
     -- ########################################################################
     -- ########################################################################
     -- ########################################################################
@@ -225,11 +246,12 @@ local control_center = function(s)
     -- ########################################################################
     -- ########################################################################
     -- ########################################################################
-    s.backdrop_control_center = wibox {
+    s.backdrop_control_center =
+        wibox {
         ontop = true,
         screen = s,
-        bg = "#00000011",
-        type = "utility",
+        bg = '#00000011',
+        type = 'utility',
         x = s.geometry.x,
         y = s.geometry.y,
         width = s.geometry.width,
@@ -245,7 +267,7 @@ local control_center = function(s)
         focused.backdrop_control_center.visible = true
         focused.control_center.visible = true
 
-        panel:emit_signal("opened")
+        panel:emit_signal('opened')
     end
     -- ########################################################################
     -- ########################################################################
@@ -257,13 +279,15 @@ local control_center = function(s)
         focused.control_center.visible = false
         focused.backdrop_control_center.visible = false
 
-        panel:emit_signal("closed")
+        panel:emit_signal('closed')
     end
     -- ########################################################################
     -- ########################################################################
     -- ########################################################################
     -- Hide this panel when app dashboard is called.
-    function panel:hide_dashboard() close_panel() end
+    function panel:hide_dashboard()
+        close_panel()
+    end
     -- ########################################################################
     -- ########################################################################
     -- ########################################################################
@@ -276,11 +300,18 @@ local control_center = function(s)
         end
     end
 
-    s.backdrop_control_center:buttons(awful.util.table.join(awful.button({}, 1,
-                                                                         nil,
-                                                                         function()
-        panel:toggle()
-    end)))
+    s.backdrop_control_center:buttons(
+        awful.util.table.join(
+            awful.button(
+                {},
+                1,
+                nil,
+                function()
+                    panel:toggle()
+                end
+            )
+        )
+    )
 
     return panel
 end

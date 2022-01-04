@@ -75,7 +75,8 @@ return {
         'xcape -e "Super_L=Super_L|Control_L|Escape" &',
         'greenclip daemon &',
         'udiskie &',
-        'picom -b --experimental-backends &'
+        'picom -b --experimental-backends &',
+        'sh $HOME/.screenlayout/1.sh'
     },
     -- ########################################################################
     -- List of binaries/shell scripts that will execute for a certain task

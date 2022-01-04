@@ -16,18 +16,45 @@
 
 ---
 
-## 2021-12-31
+## 2022-01-02
 
 ### To Do Items
 
-- make tooltip for resource monitors on control panel that displays the text
-  that the bar is drawn with
-  - or make it such that clicking one of the resource monitor buttons shows a
-    window
-- more expansive annotation commentary
+- turn meter tooltips for cpu, ram, temperature, harddrive into popup windows
+  (after first release)
+- more expansive annotation commentary (after first release)
 - make the attachdrop windows appear on the tasklist
-- in the menus, make bg of components different (probably lighter) than those of
-  the menu itself.
+
+### Added
+
+- Tooltip for CPU added and functional, including the rounding of the displayed
+  number to the nearest whole number. Which is pretty slick. Still not the total
+  ideal, but will work for now and the initial release. In time this will be
+  replaced by the much more slick popup window inspired by streetturtle's
+  awesomewm-widgets cpu pop up.
+  - Additionally added a tooltip for ram, harddrive and temperature meters
+
+
+### Fixed
+
+- Made items in control center's bg lighter
+- changed the shape of the control center to match everything else. 
+- 
+
+### Removed
+
+### Changed
+
+### Notes
+
+- I did work on the project yesterday but slipped and forgot to record what I
+  was doing, so I deleted the entry that was left blank. Oops.
+- I was planning on not working on the project today, but personal issues mean I
+  might as well get back to work
+
+---
+
+## 2021-12-31
 
 ### Added
 
