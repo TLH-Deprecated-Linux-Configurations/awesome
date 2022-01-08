@@ -15,15 +15,17 @@
 -- ########################################################################
 local gears = require('gears')
 -- Run garbage collector regularly to prevent memory leaks
---
 local _M = function()
     gears.timer {
-        timeout = 30,
+        timeout = 60,
         autostart = true,
         callback = function()
             collectgarbage('collect')
-            collectgarbage('setpause', 110)
-            collectgarbage('setstepmul', 1000)
+            collectgarbage('setpause', 160)
+            collectgarbage('setstepmul', 400)
+            -- -- or
+            -- collectgarbage('setpause', 110)
+            -- collectgarbage('setstepmul', 1000)
         end
     }
 end

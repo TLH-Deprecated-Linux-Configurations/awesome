@@ -41,6 +41,7 @@ end
 -- ########################################################################
 -- ########################################################################
 -- Update the widgets, creating them if needed
+--
 local function list_update(w, buttons, label, data, objects)
     w:reset()
     for i, o in ipairs(objects) do
@@ -73,7 +74,7 @@ local function list_update(w, buttons, label, data, objects)
             -- Close Button
             --
             cb.shape = function(cr, width, height)
-                gears.shape.rounded_rect(cr, width, height, 3)
+                gears.shape.rounded_rect(cr, width, height, 1)
             end
 
             cbm =
@@ -181,7 +182,7 @@ local function list_update(w, buttons, label, data, objects)
                 tb:set_markup('<i>&lt;Invalid text&gt;</i>')
             end
         end
-        bgb:set_bg(bg)
+        --bgb:set_bg(bg)
         if type(bg_image) == 'function' then
             bg_image = bg_image(tb, o, nil, objects, i)
         end

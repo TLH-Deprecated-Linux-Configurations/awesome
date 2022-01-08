@@ -3,9 +3,11 @@
 -- |   _|  |   _|  ||  -__||  _  |  _  |   _|__ --|
 -- |____|__|____|__||_____||_____|___._|__| |_____|
 -- ########################################################################
--- Note: No included icons because otherwise there are issues with how the
--- theme is determined, which until I figure out how to mitigate, I will
--- leave in the theme directory.
+-- because I like titlebars, what is wrong with sway/i3 users not using them
+-- I can't tell you precisely but its weird to me too. I am using icons
+--  defined in themes, and the icons are kept in that directory. The icons
+-- originate from my GTK theme which generates icons as part of its build
+-- cycle, both due to ease and to
 -- ########################################################################
 -- ########################################################################
 -- ########################################################################

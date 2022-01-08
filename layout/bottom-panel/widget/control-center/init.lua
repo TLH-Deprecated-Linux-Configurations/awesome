@@ -250,7 +250,7 @@ local control_center = function(s)
         wibox {
         ontop = true,
         screen = s,
-        bg = '#00000011',
+        bg = '#000000cc',
         type = 'utility',
         x = s.geometry.x,
         y = s.geometry.y,

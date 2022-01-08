@@ -45,7 +45,10 @@
         "text_editor",
         "editor_cmd",
         "tip",
-        "panel_visible"
+        "panel_visible",
+        "quicklaunch",
+        "rubato",
+        "keygrabber"
     ],
     "cSpell.words": [
         "Skeudomorphic"

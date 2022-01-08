@@ -88,7 +88,7 @@ local info_center = function(s)
         wibox {
         ontop = true,
         screen = s,
-        bg = beautiful.transparent,
+        bg = '#000000cc',
         type = 'utility',
         x = s.geometry.x,
         y = s.geometry.y,

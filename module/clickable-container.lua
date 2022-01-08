@@ -15,10 +15,12 @@
 -- for the user to interact with. A number of files more finely grained
 -- to use case adds additional layers of complexity and styling error
 -- exposure making the best file one featureful enough for all use cases
--- with a consistent appearance and interaction behaviors in terms of UI effect
+-- with a consistent appearance and interaction behaviors in terms of UI
+-- effect
 -- ########################################################################
 -- ########################################################################
 -- ########################################################################
+-- create the template
 local create_click_events = function(widget)
     local container =
         wibox.widget {
@@ -28,15 +30,9 @@ local create_click_events = function(widget)
             gears.shape.rounded_rect(cr, width, height, 4)
         end,
         bg = beautiful.bg_focus,
-        border_width = dpi(2),
-        border_color = '#1b1d2488'
+        border_width = dpi(3),
+        border_color = '#1b1d2444'
     }
-    -- ########################################################################
-    -- ########################################################################
-    -- ########################################################################
-    -- Old and new widget
-    --
-    local old_cursor, old_wibox
     -- ########################################################################
     -- ########################################################################
     -- ########################################################################
@@ -46,7 +42,6 @@ local create_click_events = function(widget)
         'mouse::enter',
         function()
             container.bg = beautiful.accent
-            -- Hm, no idea how to get the wibox from this signal's arguments...
         end
     )
     -- ########################################################################
@@ -74,7 +69,7 @@ local create_click_events = function(widget)
     -- ########################################################################
     -- ########################################################################
     -- ########################################################################
-    -- Mouse releases the widget\
+    -- Mouse releases the widget
     --
     container:connect_signal(
         'button::release',

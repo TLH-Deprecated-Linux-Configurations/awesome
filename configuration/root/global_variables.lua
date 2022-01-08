@@ -38,7 +38,7 @@ ruled = require('ruled')
 
 client_keys = require('configuration.client.keys')
 client_buttons = require('configuration.client.buttons')
-
+rubato = require('library.rubato')
 menubar = require('menubar')
 awful_menu = awful.menu
 menu_gen = menubar.menu_gen

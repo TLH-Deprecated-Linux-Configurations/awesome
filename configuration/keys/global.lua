@@ -12,11 +12,11 @@
 -- ########################################################################
 local awful = require('awful')
 local beautiful = require('beautiful')
-local drop = require('module.attachdrop')
+local drop = require('module.dropdown')
 require('awful.autofocus')
 local HOME = os.getenv 'HOME'
 local hotkeys_popup = require('awful.hotkeys_popup').widget
-_G.switcher = require('module.application-switcher')
+_G.switcher = require('library.application-switcher')
 local modkey = require('configuration.keys.mod').mod_key
 local altkey = require('configuration.keys.mod').alt_key
 local apps = require('configuration.root.apps')

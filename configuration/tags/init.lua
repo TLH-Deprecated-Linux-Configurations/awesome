@@ -6,7 +6,9 @@
 -- ########################################################################
 -- ########################################################################
 -- ########################################################################
-local awful = require('awful') -- necessary here for reasons of ordering
+-- because of the order at which the files are called, I can't rely on the
+-- global_variables to call libraries for this file. I know, lame.
+local awful = require('awful')
 local beautiful = require('beautiful')
 local gears = require('gears')
 local tag = tag

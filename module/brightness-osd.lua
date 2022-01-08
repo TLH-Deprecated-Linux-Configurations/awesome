@@ -10,6 +10,14 @@
 -- ########################################################################
 -- ########################################################################
 -- ########################################################################
+-- OSD in this case means on screen display. This renders the dialog that
+--  appears when/if you use the function keys to change the brightness as
+-- opposed to the control center.
+-- ########################################################################
+-- ########################################################################
+-- ########################################################################
+-- header
+--
 local osd_header =
     wibox.widget {
     text = 'Brightness',
@@ -21,6 +29,8 @@ local osd_header =
 -- ########################################################################
 -- ########################################################################
 -- ########################################################################
+-- value of the brightness
+--
 local osd_value =
     wibox.widget {
     text = '0%',
@@ -78,6 +88,8 @@ bri_osd_slider:connect_signal(
 -- ########################################################################
 -- ########################################################################
 -- ########################################################################
+-- if pressing the popup, keep it open
+--
 bri_osd_slider:connect_signal(
     'button::press',
     function()
@@ -87,6 +99,7 @@ bri_osd_slider:connect_signal(
 -- ########################################################################
 -- ########################################################################
 -- ########################################################################
+-- on mouse leaving the popup, close it
 bri_osd_slider:connect_signal(
     'mouse::leave',
     function()
@@ -96,6 +109,8 @@ bri_osd_slider:connect_signal(
 -- ########################################################################
 -- ########################################################################
 -- ########################################################################
+-- on mouse entering the popup, keep it open
+--
 bri_osd_slider:connect_signal(
     'mouse::enter',
     function()
@@ -116,6 +131,8 @@ awesome.connect_signal(
 -- ########################################################################
 -- ########################################################################
 -- ########################################################################
+-- icon used
+--
 local icon =
     wibox.widget {
     {image = icons.brightness, resize = true, widget = wibox.widget.imagebox},
@@ -124,13 +141,19 @@ local icon =
     bottom = dpi(12),
     widget = wibox.container.margin
 }
-
+-- ########################################################################
+-- ########################################################################
+-- ########################################################################
+--  set dimensions
+--
 local osd_height = dpi(250)
 local osd_width = dpi(250)
-local osd_margin = dpi(10)
+
 -- ########################################################################
 -- ########################################################################
 -- ########################################################################
+-- add into the desktop decorations signal
+--
 screen.connect_signal(
     'request::desktop_decoration',
     function(s)
@@ -149,8 +172,10 @@ screen.connect_signal(
             maximum_height = osd_height,
             maximum_width = osd_width,
             offset = dpi(5),
-            shape = gears.shape.rectangle,
-            bg = beautiful.transparent,
+            shape = function(cr, width, height)
+                gears.shape.rounded_rect(cr, width, height, 12)
+            end,
+            bg = beautiful.bg_focus,
             preferred_anchors = 'middle',
             preferred_positions = {'left', 'right', 'top', 'bottom'}
         }
@@ -190,11 +215,16 @@ screen.connect_signal(
                 widget = wibox.container.margin
             },
             bg = beautiful.background,
-            shape = gears.shape.rounded_rect,
+            shape = function(cr, width, height)
+                gears.shape.rounded_rect(cr, width, height, 2)
+            end,
             widget = wibox.container.background()
         }
-
+        -- ########################################################################
+        -- ########################################################################
+        -- ########################################################################
         -- Reset timer on mouse hover
+        --
         s.brightness_osd_overlay:connect_signal(
             'mouse::enter',
             function()
@@ -207,6 +237,7 @@ screen.connect_signal(
 -- ########################################################################
 -- ########################################################################
 -- ########################################################################
+-- hide popup function
 local hide_osd =
     gears.timer {
     timeout = 2,
@@ -217,7 +248,11 @@ local hide_osd =
         focused.show_vol_osd = false
     end
 }
-
+-- ########################################################################
+-- ########################################################################
+-- ########################################################################
+--  rerun popup
+--
 awesome.connect_signal(
     'module::brightness_osd:rerun',
     function()
@@ -229,6 +264,11 @@ awesome.connect_signal(
     end
 )
 
+-- ########################################################################
+-- ########################################################################
+-- ########################################################################
+-- provide the coordinates for the popup
+--
 local placement_placer = function()
     local focused = awful.screen.focused()
     local brightness_osd = focused.brightness_osd_overlay
@@ -245,6 +285,7 @@ end
 -- ########################################################################
 -- ########################################################################
 -- ########################################################################
+-- signal for showing popup
 awesome.connect_signal(
     'module::brightness_osd:show',
     function(bool)
@@ -253,6 +294,7 @@ awesome.connect_signal(
         if bool then
             awesome.emit_signal('module::brightness_osd:rerun')
             awesome.emit_signal('module::volume_osd:show', false)
+            collectgarbage('collect')
         else
             hide_osd()
         end

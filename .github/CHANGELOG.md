@@ -16,14 +16,154 @@
 
 ---
 
-## 2022-01-02
-
 ### To Do Items
 
 - turn meter tooltips for cpu, ram, temperature, harddrive into popup windows
   (after first release)
 - more expansive annotation commentary (after first release)
-- make the attachdrop windows appear on the tasklist
+- make the `dropdown` windows appear on the tasklist
+  - make `dropdown` not apply the same dimensions and rules to new, unrelated
+    windows
+- fix button borders in control panel and on the screen recorder
+- add keygrabber to terminate control center, info center, screen recorder, etc
+  with escape at least (and probably expanding to include other keys as it was
+  before)
+- (meta) new wallpapers/enhance current wallpapers
+- fix the issue causing network display notification to display twice at
+  awesomewm startup.
+
+## 2022-01-06
+
+### Added
+
+- Additional Documentation for potential contributors
+
+### Fixed
+
+- formating for Volume OSD and Wallpaper
+- border of the clickable-container object so it is wider and has less opacity,
+  enhancing the button effect
+
+### Removed
+
+### Changed
+
+### Notes
+
+- considering rewriting the README if not from scratch than through substantial
+  modifications thereof.
+
+## 2022-01-05
+
+### Fixed
+
+- volume OSD works as expected now
+
+  - break was due to its last signal being badly configured and referring to
+    brightness (oopsies)
+
+- both OSDs background color, normalized to the rest of the config (`bg_focus`)
+
+### Notes
+
+- performance: after reboot we are averaging around 8% per core with code
+  running but focus on htop. With focus on code, this jumps to about 20% per
+  core (makes sense due to it being electron after all).
+  - reduces to ~12% once core is running, but the spikes are dramatic, not
+    awesomewm related it seems
+  - obviously firefox is more resource hungry, especially with large numbers of
+    tabs open
+    - switching to neovim, drops to about 9%
+      - at this level, it appears ram is down to about 900M used (wow)
+      - being unnecessary to have on all the time, it may improve performance to
+        turn off dropboxd most of the time.
+      - makes a strong case for neovim in terms of using it as a daily code
+        editor
+
+---
+
+## 2022-01-04
+
+### Added
+
+- additional documentation in several files in `module`
+
+### Fixed
+
+- brightness OSD shape
+
+### Changed
+
+- created a directory for code I don't want to maintain, `library`, to keep any
+  external code I am not working on for whatever reason.
+- added in rubato as a module in `library`
+
+### Notes
+
+- adding in rubato means I have some extra work ahead of me in terms of getting
+  animations added in to various places, but hopefully not sacrificing too much
+  performance in so doing. If it costs too much performance, I will scrap it.
+- speaking of performance, I need to get that under control. Sure, there is only
+  ~15% usage of ram and cpu at any given time, but still I can get this lower as
+  it has been lower (down to like 6% cpu and 10% ram even). Not sure how to
+  carve this bird, but there has to
+
+---
+
+## 2022-01-03
+
+### Added
+
+- default luarocks loader to rc.lua
+
+#### Final Leg of the Race
+
+- project is looking close, so I spent some time on NeoVim and Luakit, then had
+  to go to San Bruno to go to Lowes so we can shower and use the sink again.
+- first recorded some thoughts about moving forward
+  - final portion of built up to final release of version one, two years in the
+    making
+  - fixing dropdown is the final obstacle
+    - needs to show clients on bottom bar tasklist
+    - they already do appear on the window list (alt+esc I always forget this
+      binding)
+    - that file is an inherited mess, that is powerful but a mess. Need to get
+      some order over it and learn how its working.
+    - need to prevent new clients opening into the scratch buffer, taking its
+      size and being floating, which is extremely frustrating.
+  - if possible fixing the backdrop blur darkness would be nice
+  - while luarocks loader has been restored, I am not presently using **any**
+    luarocks modules due to issues it presented before the latest reworking.
+
+#### Putting It All Together
+
+- need to finish the rest of the custom void iso creation process, including
+  making awesome-git a template to build it in a way easily done via script (or
+  fast remaster chroot maybe if the need be) **otherwise** prompt return to Arch
+  based systems likely via Artix. I don't care about package size, nor debugging
+  and devel split from packages (actually somewhat hate that aspect of void) but
+  void is all sorts of light and its package manager schools any other I've used
+  in terms of speed and power, though since I have all the repos archived from
+  when the Electric Tantra Linux was Arch based, moving back to this wouldn't be
+  too hard and I know what to do right away
+  - this will be solved quickly once I am actually done with this part, I need
+    not obsess too hard
+- dependency round up of my own code and how to get it in the iso still is
+  looming
+  - gtk theme, easily included with `includeDir`
+  - lightdm theme will require the inclusion of the theme and the configuration
+    files
+  - icon theme may have to be skipped or programmatically included, due to its
+    sheer size. Though having access to the desktop again might mitigate the
+    headache here
+  - awesome's git version in void, likely using a template or some craftiness
+  - include xfce4 desktop environment for the testing phase at least, provide
+    more customizations for it with second release.
+  -
+
+---
+
+## 2022-01-02
 
 ### Added
 
@@ -34,16 +174,10 @@
   awesomewm-widgets cpu pop up.
   - Additionally added a tooltip for ram, harddrive and temperature meters
 
-
 ### Fixed
 
 - Made items in control center's bg lighter
-- changed the shape of the control center to match everything else. 
-- 
-
-### Removed
-
-### Changed
+- changed the shape of the control center to match everything else.
 
 ### Notes
 
@@ -161,7 +295,7 @@
   - lockscreen - bin/blur.sh performs this beautifully
   - dynamic wallpaper - prefer a more stable wallpaper
   - json - not useful to me at present
-  - quake_terminal - attachdrop performs this role better
+  - quake_terminal - dropdown performs this role better
 
 ---
 
