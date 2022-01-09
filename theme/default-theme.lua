@@ -71,15 +71,15 @@ local awesome_overrides = function(theme)
     -- ########################################################################
     -- Accent color
     --
-    theme.accent = 'linear:0,0:0,51:0,#8b9cbe:1,#5A647A'
+    theme.accent = 'linear:0,0:0,51:0,#8b9cbe:1,#555e70'
     -- ########################################################################
     -- ########################################################################
     -- ########################################################################
     -- Background
-    theme.bg_normal = 'linear:0,0:0,21:0,#484d5e:1,#272A34'
-    theme.bg_focus = 'linear:0,0:0,21:0,#555e70:1,#323643'
+    theme.bg_normal = 'linear:0,0:0,21:0,#272A34:1,#1B1D24'
+    theme.bg_focus = 'linear:0,0:0,21:0,#323643:1,#1b1d24'
     theme.bg_urgent = 'linear:0,0:0,21:0,#272A34:1,#1B1D24'
-    theme.bg_menu = 'linear:0,0:0,21:0,#484d5e:1,#323643'
+    theme.bg_menu = 'linear:0,0:0,21:0,#323643:1,#1b1d24'
     -- ########################################################################
     -- ########################################################################
     -- ########################################################################
@@ -108,7 +108,7 @@ local awesome_overrides = function(theme)
     theme.leave_event = 'linear:0,0:0,21:0,#484d5e:1,#272A34'
     theme.enter_event = '#f4f4f7' .. '10'
     theme.press_event = '#f4f4f7' .. '15'
-    theme.release_event = '#f4f4f7' .. '10'
+    theme.release_event = '#1b1d24' .. '10'
 
     -- ########################################################################
     -- ########################################################################
@@ -274,7 +274,7 @@ local awesome_overrides = function(theme)
 
     theme.menu_height = dpi(34)
     theme.menu_width = dpi(200)
-    theme.menu_border_width = dpi(20)
+    theme.menu_border_width = dpi(2)
     theme.menu_bg_focus = theme.accent .. 'CC'
     theme.menu_accent = '#272A34'
     theme.menu_bg_normal = 'linear:0,0:0,21:0,#272A34:1,#1B1D24'

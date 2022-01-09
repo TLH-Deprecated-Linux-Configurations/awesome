@@ -129,13 +129,15 @@ function dropdown.toggle(prog, vert, horiz, width, height, sticky, screen)
             c:geometry({x = x, y = y, width = width, height = height})
             c.ontop = true
             c.above = true
-            c.skip_taskbar = true
+            -- no way Jose, the below will make the number of ghost
+            --clients way too spooky for me. But I left it just in case.
+            -- c.skip_taskbar = true
             if sticky then
                 c.sticky = true
             end
-            if c.titlebar then
-                awful.titlebar.remove(c)
-            end
+            -- if c.titlebar then
+            --     awful.titlebar.remove(c)
+            -- end
 
             c:raise()
             capi.client.focus = c

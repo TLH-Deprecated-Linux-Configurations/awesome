@@ -14,7 +14,7 @@
 -- ########################################################################
 -- ########################################################################
 local config_dir = gears.filesystem.get_configuration_dir()
-local widget_icon_dir = config_dir .. "layout/bottom-panel/widget/screen-recorder/icons/"
+local widget_icon_dir = config_dir .. 'layout/bottom-panel/widget/screen-recorder/icons/'
 local record_tbl = {}
 -- ########################################################################
 -- ########################################################################
@@ -23,7 +23,7 @@ local record_tbl = {}
 --
 record_tbl.screen_rec_toggle_imgbox =
     wibox.widget {
-    image = widget_icon_dir .. "start-recording-button" .. ".svg",
+    image = widget_icon_dir .. 'start-recording-button' .. '.svg',
     resize = true,
     widget = wibox.widget.imagebox
 }
@@ -44,11 +44,11 @@ record_tbl.screen_rec_toggle_button =
 -- ########################################################################
 record_tbl.screen_rec_countdown_txt =
     wibox.widget {
-    id = "countdown_text",
-    font = "SFMono Nerd Font Mono Heavy  64",
-    text = "4",
-    align = "center",
-    valign = "bottom",
+    id = 'countdown_text',
+    font = 'SFMono Nerd Font Mono Heavy  64',
+    text = '4',
+    align = 'center',
+    valign = 'bottom',
     opacity = 0.0,
     widget = wibox.widget.textbox
 }
@@ -57,7 +57,7 @@ record_tbl.screen_rec_countdown_txt =
 -- ########################################################################
 record_tbl.screen_rec_main_imgbox =
     wibox.widget {
-    image = widget_icon_dir .. "recorder-off" .. ".svg",
+    image = widget_icon_dir .. 'recorder-off' .. '.svg',
     resize = true,
     widget = wibox.widget.imagebox
 }
@@ -77,8 +77,9 @@ record_tbl.screen_rec_main_button =
         },
         forced_width = dpi(200),
         forced_height = dpi(200),
-        bg = beautiful.groups_bg,
-        shape = gears.shape.circle,
+        shape = function(cr, w, h)
+            gears.shape.rounded_rect(cr, w, h, 6)
+        end,
         widget = wibox.container.background
     },
     margins = dpi(24),
@@ -89,7 +90,7 @@ record_tbl.screen_rec_main_button =
 -- ########################################################################
 record_tbl.screen_rec_audio_imgbox =
     wibox.widget {
-    image = widget_icon_dir .. "audio" .. ".svg",
+    image = widget_icon_dir .. 'audio' .. '.svg',
     resize = true,
     widget = wibox.widget.imagebox
 }
@@ -109,13 +110,16 @@ record_tbl.screen_rec_audio_button =
             widget = clickable_container
         },
         nil,
-        expand = "none",
-        layout = wibox.layout.align.vertical
+        expand = 'none',
+        layout = wibox.layout.align.vertical,
+        bg = beautiful.transparent
     },
     forced_width = dpi(60),
     forced_height = dpi(60),
-    bg = beautiful.groups_bg,
-    shape = gears.shape.circle,
+    bg = beautiful.transparent,
+    shape = function(cr, w, h)
+        gears.shape.rounded_rect(cr, w, h, 6)
+    end,
     widget = wibox.container.background
 }
 -- ########################################################################
@@ -123,7 +127,7 @@ record_tbl.screen_rec_audio_button =
 -- ########################################################################
 record_tbl.screen_rec_close_imgbox =
     wibox.widget {
-    image = widget_icon_dir .. "close-screen" .. ".svg",
+    image = widget_icon_dir .. 'close-screen' .. '.svg',
     resize = true,
     widget = wibox.widget.imagebox
 }
@@ -143,13 +147,14 @@ record_tbl.screen_rec_close_button =
             widget = clickable_container
         },
         nil,
-        expand = "none",
+        expand = 'none',
         layout = wibox.layout.align.horizontal
     },
     forced_width = dpi(60),
     forced_height = dpi(60),
-    bg = beautiful.groups_bg,
-    shape = gears.shape.circle,
+    shape = function(cr, w, h)
+        gears.shape.rounded_rect(cr, w, h, 6)
+    end,
     widget = wibox.container.background
 }
 -- ########################################################################
@@ -157,7 +162,7 @@ record_tbl.screen_rec_close_button =
 -- ########################################################################
 record_tbl.screen_rec_settings_imgbox =
     wibox.widget {
-    image = widget_icon_dir .. "settings" .. ".svg",
+    image = widget_icon_dir .. 'settings' .. '.svg',
     resize = true,
     widget = wibox.widget.imagebox
 }
@@ -177,13 +182,14 @@ record_tbl.screen_rec_settings_button =
             widget = clickable_container
         },
         nil,
-        expand = "none",
+        expand = 'none',
         layout = wibox.layout.align.vertical
     },
     forced_width = dpi(60),
     forced_height = dpi(60),
-    bg = beautiful.groups_bg,
-    shape = gears.shape.circle,
+    shape = function(cr, w, h)
+        gears.shape.rounded_rect(cr, w, h, 6)
+    end,
     widget = wibox.container.background
 }
 -- ########################################################################
@@ -191,7 +197,7 @@ record_tbl.screen_rec_settings_button =
 -- ########################################################################
 record_tbl.screen_rec_back_imgbox =
     wibox.widget {
-    image = widget_icon_dir .. "back" .. ".svg",
+    image = widget_icon_dir .. 'back' .. '.svg',
     resize = true,
     widget = wibox.widget.imagebox
 }
@@ -211,12 +217,11 @@ record_tbl.screen_rec_back_button =
             widget = clickable_container
         },
         nil,
-        expand = "none",
+        expand = 'none',
         layout = wibox.layout.align.vertical
     },
     forced_width = dpi(48),
     forced_height = dpi(48),
-    bg = beautiful.groups_bg,
     shape = function(cr, width, height)
         gears.shape.rounded_rect(cr, width, height, beautiful.groups_radius)
     end,
@@ -228,10 +233,10 @@ record_tbl.screen_rec_back_button =
 record_tbl.screen_rec_back_txt =
     wibox.widget {
     {
-        text = "Back",
-        font = "SFMono Nerd Font Mono Heavy  16",
-        align = "left",
-        valign = "center",
+        text = 'Back',
+        font = 'SFMono Nerd Font Mono Heavy  16',
+        align = 'left',
+        valign = 'center',
         widget = wibox.widget.textbox
     },
     margins = dpi(5),
@@ -243,10 +248,10 @@ record_tbl.screen_rec_back_txt =
 record_tbl.screen_rec_res_txt =
     wibox.widget {
     {
-        text = "Resolution",
-        font = "SFMono Nerd Font Mono Heavy  16",
-        align = "left",
-        valign = "center",
+        text = 'Resolution',
+        font = 'SFMono Nerd Font Mono Heavy  16',
+        align = 'left',
+        valign = 'center',
         widget = wibox.widget.textbox
     },
     margins = dpi(5),
@@ -260,11 +265,11 @@ record_tbl.screen_rec_res_txtbox =
     {
         {
             {
-                id = "res_tbox",
-                markup = '<span foreground="#FFFFFF66">' .. "1366x768" .. "</span>",
-                font = "SFMono Nerd Font Mono Heavy  16",
-                align = "left",
-                valign = "center",
+                id = 'res_tbox',
+                markup = '<span foreground="#FFFFFF66">' .. '1366x768' .. '</span>',
+                font = 'SFMono Nerd Font Mono Heavy  16',
+                align = 'left',
+                valign = 'center',
                 widget = wibox.widget.textbox
             },
             margins = dpi(5),
@@ -274,7 +279,6 @@ record_tbl.screen_rec_res_txtbox =
     },
     forced_width = dpi(60),
     forced_height = dpi(60),
-    bg = beautiful.groups_bg,
     shape = function(cr, width, height)
         gears.shape.rounded_rect(cr, width, height, beautiful.groups_radius)
     end,
@@ -286,10 +290,10 @@ record_tbl.screen_rec_res_txtbox =
 record_tbl.screen_rec_offset_txt =
     wibox.widget {
     {
-        text = "Offset",
-        font = "SFMono Nerd Font Mono Heavy  16",
-        align = "left",
-        valign = "center",
+        text = 'Offset',
+        font = 'SFMono Nerd Font Mono Heavy  16',
+        align = 'left',
+        valign = 'center',
         widget = wibox.widget.textbox
     },
     margins = dpi(5),
@@ -303,12 +307,12 @@ record_tbl.screen_rec_offset_txtbox =
     {
         {
             {
-                id = "offset_tbox",
-                markup = '<span foreground="#FFFFFF66">' .. "0,0" .. "</span>",
-                font = "SFMono Nerd Font Mono Heavy  16",
-                ellipsize = "start",
-                align = "left",
-                valign = "center",
+                id = 'offset_tbox',
+                markup = '<span foreground="#FFFFFF66">' .. '0,0' .. '</span>',
+                font = 'SFMono Nerd Font Mono Heavy  16',
+                ellipsize = 'start',
+                align = 'left',
+                valign = 'center',
                 widget = wibox.widget.textbox
             },
             margins = dpi(5),
@@ -318,7 +322,6 @@ record_tbl.screen_rec_offset_txtbox =
     },
     forced_width = dpi(60),
     forced_height = dpi(60),
-    bg = beautiful.groups_bg,
     shape = function(cr, width, height)
         gears.shape.rounded_rect(cr, width, height, beautiful.groups_radius)
     end,
@@ -328,14 +331,14 @@ record_tbl.screen_rec_offset_txtbox =
 -- ########################################################################
 -- ########################################################################
 screen.connect_signal(
-    "request::desktop_decoration",
+    'request::desktop_decoration',
     function(s)
         s.recorder_screen =
             wibox(
             {
                 ontop = true,
                 screen = s,
-                type = "dock",
+                type = 'dock',
                 height = s.geometry.height,
                 width = s.geometry.width,
                 x = s.geometry.x,
@@ -350,14 +353,14 @@ screen.connect_signal(
         s.recorder_screen:setup {
             layout = wibox.layout.stack,
             {
-                id = "recorder_panel",
+                id = 'recorder_panel',
                 visible = true,
                 layout = wibox.layout.align.vertical,
-                expand = "none",
+                expand = 'none',
                 nil,
                 {
                     layout = wibox.layout.align.horizontal,
-                    expand = "none",
+                    expand = 'none',
                     nil,
                     {
                         layout = wibox.layout.fixed.vertical,
@@ -375,14 +378,14 @@ screen.connect_signal(
                 nil
             },
             {
-                id = "recorder_settings",
+                id = 'recorder_settings',
                 visible = false,
                 layout = wibox.layout.align.vertical,
-                expand = "none",
+                expand = 'none',
                 nil,
                 {
                     layout = wibox.layout.align.horizontal,
-                    expand = "none",
+                    expand = 'none',
                     nil,
                     {
                         layout = wibox.layout.fixed.vertical,

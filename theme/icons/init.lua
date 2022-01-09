@@ -52,5 +52,7 @@ return {
     batt_charging = dir .. 'battery-charge.svg',
     batt_discharging = dir .. 'battery-discharge.svg',
     toggled_on = dir .. 'toggled-on.svg',
-    toggled_off = dir .. 'toggled-off.svg'
+    toggled_off = dir .. 'toggled-off.svg',
+    void = dir .. 'void.png',
+    electric_tantra_linux = dir .. 'electric-tantra-linux.png'
 }

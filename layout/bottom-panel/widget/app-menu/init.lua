@@ -20,7 +20,7 @@ local return_button = function()
         wibox.widget {
         {
             id = 'icon',
-            image = icons.menu,
+            image = icons.electric_tantra_linux,
             widget = wibox.widget.imagebox,
             resize = true,
             bg = beautiful.groups_bg
@@ -34,7 +34,7 @@ local return_button = function()
         wibox.widget {
         {
             widget,
-            margins = dpi(8),
+            margins = dpi(2),
             widget = wibox.container.margin
         },
         widget = clickable_container

@@ -21,16 +21,44 @@
 - turn meter tooltips for cpu, ram, temperature, harddrive into popup windows
   (after first release)
 - more expansive annotation commentary (after first release)
-- make the `dropdown` windows appear on the tasklist
-  - make `dropdown` not apply the same dimensions and rules to new, unrelated
-    windows
-- fix button borders in control panel and on the screen recorder
+- make `dropdown` not apply the same dimensions and rules to new, unrelated
+  windows
+- fix button borders on the screen recorder
 - add keygrabber to terminate control center, info center, screen recorder, etc
   with escape at least (and probably expanding to include other keys as it was
   before)
 - (meta) new wallpapers/enhance current wallpapers
 - fix the issue causing network display notification to display twice at
   awesomewm startup.
+
+---
+
+## 2022-01-08
+
+### Added
+
+- New icon for app menu widget on bottom panel, using the void linux logo for
+  now
+
+### Fixed
+
+- fix button borders in control panel
+
+### Removed
+
+### Changed
+
+### Notes
+
+---
+
+## 2022-01-08
+
+### Fixed
+
+- make the `dropdown` windows appear on the tasklist
+
+---
 
 ## 2022-01-06
 

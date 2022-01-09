@@ -42,6 +42,7 @@ local create_click_events = function(widget)
         'mouse::enter',
         function()
             container.bg = beautiful.accent
+            container.border_color = beautiful.enter_event
         end
     )
     -- ########################################################################
@@ -53,6 +54,7 @@ local create_click_events = function(widget)
         'mouse::leave',
         function()
             container.bg = beautiful.bg_focus
+            container.border_color = beautiful.release_event
         end
     )
     -- ########################################################################
@@ -64,6 +66,7 @@ local create_click_events = function(widget)
         'button::press',
         function()
             container.bg = beautiful.accent
+            container.border_color = beautiful.enter_event
         end
     )
     -- ########################################################################
@@ -75,6 +78,7 @@ local create_click_events = function(widget)
         'button::release',
         function()
             container.bg = beautiful.bg_focus
+            container.border_color = beautiful.release_event
         end
     )
 

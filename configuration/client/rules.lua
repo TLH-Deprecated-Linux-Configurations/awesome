@@ -32,7 +32,7 @@ ruled.client.connect_signal(
                 keys = client_keys,
                 buttons = client_buttons,
                 screen = awful.screen.preferred,
-                placement = awful.placement.no_overlap + awful.placement.no_offscreen
+                placement = awful.placement.no_offscreen + awful.placement.centered
             }
         }
         -- ########################################################################
@@ -43,7 +43,9 @@ ruled.client.connect_signal(
             rule_any = {
                 type = {
                     'normal',
-                    'dialog'
+                    'dialog',
+                    'modal',
+                    'utility'
                 }
             },
             except_any = {
@@ -88,7 +90,7 @@ ruled.client.connect_signal(
                 titlebars_enabled = true,
                 floating = true,
                 above = true,
-                skip_decoration = true,
+                skip_decoration = false,
                 placement = awful.placement.centered + awful.placement.no_offscreen
             }
         }
@@ -107,7 +109,7 @@ ruled.client.connect_signal(
                 floating = true,
                 above = true,
                 skip_decoration = true,
-                placement = awful.placement + awful.placement.no_offscreen
+                placement = awful.placement.centered + awful.placement.no_offscreen
             }
         }
         -- ########################################################################
@@ -165,8 +167,7 @@ ruled.client.connect_signal(
                 }
             },
             properties = {
-                switch_to_tags = true,
-                size_hints_honor = false,
+                size_hints_honor = true,
                 titlebars_enabled = true
             }
         }
@@ -184,7 +185,10 @@ ruled.client.connect_signal(
                 }
             },
             properties = {
-                placement = awful.placement.centered + awful.placement.no_offscreen
+                placement = awful.placement.centered + awful.placement.no_offscreen,
+                floating = true,
+                titlebars_enabled = true,
+                size_hints_honor = true
             }
         }
         -- ########################################################################
@@ -203,6 +207,7 @@ ruled.client.connect_signal(
             },
             properties = {
                 titlebars_enabled = true,
+                size_hints_honor = true,
                 skip_decoration = true,
                 floating = true,
                 ontop = true,

@@ -29,7 +29,7 @@ local format_item = function(widget)
         },
         forced_height = dpi(88),
         widget = wibox.container.background,
-        bg = '#323643cc',
+        bg = beautiful.bg_normal,
         shape = function(cr, w, h)
             gears.shape.rounded_rect(cr, w, h, 6)
         end
@@ -52,7 +52,7 @@ local format_item_no_fix_height = function(widget)
             widget = wibox.container.margin
         },
         widget = wibox.container.background,
-        bg = '#323643cc',
+        bg = beautiful.bg_normal,
         shape = function(cr, w, h)
             gears.shape.rounded_rect(cr, w, h, 6)
         end
@@ -210,7 +210,7 @@ local control_center = function(s)
                 widget = wibox.container.margin
             },
             id = 'control_center',
-            bg = beautiful.bg_normal,
+            bg = beautiful.bg_focus,
             shape = function(cr, w, h)
                 gears.shape.rounded_rect(cr, w, h, 6)
             end,
