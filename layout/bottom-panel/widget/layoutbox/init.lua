@@ -52,9 +52,11 @@ local layout_popup =
     widget = wibox.widget {
         ll,
         margins = dpi(36),
+        screen = mouse.screen,
         widget = wibox.container.margin
     },
     border_width = dpi(3),
+    screen = mouse.screen,
     placement = awful.placement.centered,
     ontop = true,
     visible = false
@@ -67,6 +69,7 @@ layout_popup.timer:connect_signal(
     'timeout',
     function()
         layout_popup.visible = false
+        layout_popup.screen = mouse.screen
     end
 )
 -- ########################################################################
@@ -77,7 +80,7 @@ function gears.table.iterate_value(t, value, step_size, filter, start_at)
     if not k then
         return
     end
-    step_size = step_size or 1
+    step_size = 1
     local new_key = gears.math.cycle(#t, k + step_size)
     if filter and not filter(t[new_key]) then
         for i = 1, #t do
@@ -96,6 +99,7 @@ end
 awful.keygrabber {
     start_callback = function()
         layout_popup.visible = true
+        layout_popup.screen = mouse.screen
     end,
     stop_callback = function()
         layout_popup.timer:start()
@@ -108,7 +112,7 @@ awful.keygrabber {
             {'Mod4', 'Shift'},
             ' ',
             function()
-                awful.layout.set(gears.table.iterate_value(ll.layouts, ll.current_layout, -1), nil)
+                awful.layout.inc(-1)
                 layout_popup.timer:start()
                 layout_popup.visible = true
             end
@@ -117,7 +121,7 @@ awful.keygrabber {
             {'Mod4'},
             ' ',
             function()
-                awful.layout.set(gears.table.iterate_value(ll.layouts, ll.current_layout, 1), nil)
+                awful.layout.inc(1)
                 layout_popup.timer:start()
                 layout_popup.visible = true
             end

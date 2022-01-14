@@ -2,6 +2,25 @@
 
 ## Below is the changelog, arranged by dates. In it you will find most of the items I completed from a given day I worked on this project with the template coming first. The last day's `To Do Items` are copied to the top of the day work is actively being done, this is because if the to-do is finished, it goes into one of the categories below and so that's sufficient tracking for my purposes here. This is a list of done items after all, not a determination of if I can wholly imagine all of the work before doing it.
 
+---
+
+### To Do Items
+
+- turn meter tooltips for cpu, ram, temperature, harddrive into popup windows
+  (after first release)
+- more expansive annotation commentary (after first release)
+- figure out why `meta+space` skips empathy layout the first time (after first
+  release?)
+
+- add keygrabber to terminate control center, info center, screen recorder, etc
+  with escape at least (and probably expanding to include other keys as it was
+  before)
+- (meta) new wallpapers/enhance current wallpapers (25% done)
+- fix the issue causing network display notification to display twice at
+  awesomewm startup.
+
+---
+
 ## Template
 
 ### Added
@@ -16,20 +35,129 @@
 
 ---
 
-### To Do Items
+## 01-13-2021
 
-- turn meter tooltips for cpu, ram, temperature, harddrive into popup windows
-  (after first release)
-- more expansive annotation commentary (after first release)
+### Added
+
+### Fixed
+
+### Removed
+
+### Changed
+
+### Notes
+- Why not spend some time trying to implement signals in place of present watch commands, at least in the case of the network widget.
+  - there is a signal emit, but therefore if I add a connect to the update function, will that alone do?
+---
+
+---
+
+## 01-12-2022
+
+### Fixed
+
+- added a kill statement to polkit to make the configuration idemopotent
+- network timer to 30 since we don't change network that much, why even eat
+  compute space for that
+
+### Changed
+
+- garbage collector settings have been adjusted while watching the performance
+  metrics on my laptop to make sure that a huge spike in compute power occured
+  - at present the spikes in processing power are truly bedeviling me, I have to
+    get the cpu usage down before releas but where the spikes are coming from is
+    beyond me
+
+### Notes
+
+- continuing to explore the network app looking to find out why its displaying
+  the notification twice
+  - so far everything I have turned off either does nothing or makes it still
+    display twice
+  - not being caused by the network cable being plugged in with the wifi
+    connected
+  - I also tried to determine if an alternative means of implementing the network widget (or other widgets functioning as daemons, aka running all the time in the background) to help improve compute performance of the configuration, but alas I have not yet determined one other than the labor intensive addition of an onerous amount of signals 
+
+---
+
+# 1-11-2022
+
+### Added
+
+- added `raise = false` to the client focus signal
+
+### Fixed
+
+- have the layoyut popup display on the same screen as its changing layouts for
+
+### Removed
+
+- signals changing the shape of maximized windows (maximized by layout or window
+  control action) to rectangles since I will still apply gap to them, this makes
+  little sense as it was
+- redundant rules
+  - artifacts of tags having classes assigned to them, without tag assignments
+    meant different sets of rules that all did the same thing, so this was
+    condensed.
+
+### Changed
+
+- rules reflect my older set of rules while retaining the functional design I
+  have moved to using
+- signals include some of the functions from before I found invaluable
+- Notification background
+- removed requiring `not c.rounded_corners` in the client signals
+
+### Notes
+
+- the level of debugging currently presently underway is way in excess of any
+  configuration I have ever used
+  - goal is to eliminate all the bugs I am aware of before posting this
+    anywhere,
+    - luckily I wrote this pretty well, debugging most issues along the way and
+      have been at this project in some way or another for a while
+  - partially foot dragging about the onerous ISO compilation process
+  - partially due to professional facing quality of this project
+  - mostly due to the saying I live by "if you are gonna do something, do it
+    well"
+  - trying to use my old rules entirely failed, as did my first set of attempts
+    to integrate old signals into this configuration, however this was fixed by
+    using the function based approach of this rewrite with the rules from the
+    last version and by experimenting with signals
+    - neither respond well to being wrapped in `_M` functions in this config
+      - broke client keybindings
+      - broke focus
+        - this was easily mitigated thanks to the window menu `alt+escape`
+
+---
+
+## 01-10-2021
+
+### Added
+
+- custom icon, needs more work but the idea is coming together.
+  - done, that process was miserable as always and way longer than it should
+    have been but the new one features elements of the Kali Yantra and my logo
+    so its completed.
+
+### Fixed
+
+- empathy layout, now it actually works
+- documentation for the layouts
 - make `dropdown` not apply the same dimensions and rules to new, unrelated
-  windows
-- fix button borders on the screen recorder
-- add keygrabber to terminate control center, info center, screen recorder, etc
-  with escape at least (and probably expanding to include other keys as it was
-  before)
-- (meta) new wallpapers/enhance current wallpapers
-- fix the issue causing network display notification to display twice at
-  awesomewm startup.
+  windows <-- no longer necessary as the `sticky` attribute is removed and I am
+  thinking that was the source of this issue
+
+### Removed
+
+- Showall function from dropdown that apparently wasn't working and I don't
+  really need with the scratchpad appearing on the taskbar
+-
+
+### Changed
+
+- taskbar close button, switched with a close button generated by the GTK theme
+  (duh! can't believe I didn't think of this immeadiately)
 
 ---
 
@@ -39,16 +167,30 @@
 
 - New icon for app menu widget on bottom panel, using the void linux logo for
   now
+  - now have a tenative icon placed instead that is subject to change but
+    invokes the yantra
 
 ### Fixed
 
 - fix button borders in control panel
+- fix button borders on the screen recorder
 
 ### Removed
 
+- rubato - no offense its an awesome library, just not what I need right now
+  with some lingering ineffciencies already taking my CPU cycles higher than I
+  would prefer.
+
 ### Changed
 
+- colors of the panel and menu to reflect the firefox theme (of personal
+  interest since not likely to be reflected in the Electric Tantra Linux's final
+  form)
+
 ### Notes
+
+- my void-packages template for the development branch of awesomewm works, so
+  the efforts to pull this all together are about to begin
 
 ---
 

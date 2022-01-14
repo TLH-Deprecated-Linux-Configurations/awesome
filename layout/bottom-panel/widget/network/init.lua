@@ -16,19 +16,15 @@ local interfaces = {
     wlan_interface = 'wlp3s0',
     lan_interface = 'enp1s0'
 }
--- ########################################################################
--- ########################################################################
--- ########################################################################
+
 local network_mode = nil
--- ########################################################################
--- ########################################################################
--- ########################################################################
+
 local return_button = function()
-    local update_notify_no_access = true
+    local update_notify_no_access = false
     local notify_no_access_quota = 0
 
     local startup = true
-    local reconnect_startup = true
+    local reconnect_startup = false
     local notify_new_wifi_conn = false
 
     local widget =
@@ -64,9 +60,7 @@ local return_button = function()
             )
         )
     )
-    -- ########################################################################
-    -- ########################################################################
-    -- ########################################################################
+
     local network_tooltip =
         awful.tooltip {
         text = 'Loading...',
@@ -77,9 +71,7 @@ local return_button = function()
         margin_leftright = dpi(8),
         margin_topbottom = dpi(8)
     }
-    -- ########################################################################
-    -- ########################################################################
-    -- ########################################################################
+
     local check_internet_health =
         [=[
 	status_ping=0
@@ -94,35 +86,27 @@ local return_button = function()
 
 	if [ $status_ping -eq 0 ];
 	then
-		echo 'Connected to Network but Not to the Internet'
+		echo 'Connected but no internet'
 	fi
 	]=]
-    -- ########################################################################
-    -- ########################################################################
-    -- ########################################################################
+
     -- Awesome/System startup
     local update_startup = function()
         if startup then
             startup = false
         end
     end
-    -- ########################################################################
-    -- ########################################################################
-    -- ########################################################################
+
     -- Consider reconnecting a startup
     local update_reconnect_startup = function(status)
         reconnect_startup = status
     end
-    -- ########################################################################
-    -- ########################################################################
-    -- ########################################################################
+
     -- Update tooltip
     local update_tooltip = function(message)
         network_tooltip:set_markup(message)
     end
-    -- ########################################################################
-    -- ########################################################################
-    -- ########################################################################
+
     local network_notify = function(message, title, app_name, icon)
         naughty.notification(
             {
@@ -133,18 +117,12 @@ local return_button = function()
             }
         )
     end
-    -- ########################################################################
-    -- ########################################################################
-    -- ########################################################################
+
     -- Wireless mode / Update
-    --
     local update_wireless = function()
         network_mode = 'wireless'
-        -- ########################################################################
-        -- ########################################################################
-        -- ########################################################################
+
         -- Create wireless connection notification
-        --
         local notify_connected = function(essid)
             local message = 'You are now connected to <b>"' .. essid .. '"</b>'
             local title = 'Connection Established'
@@ -152,11 +130,8 @@ local return_button = function()
             local icon = widget_icon_dir .. 'wifi.svg'
             network_notify(message, title, app_name, icon)
         end
-        -- ########################################################################
-        -- ########################################################################
-        -- ########################################################################
+
         -- Get wifi essid and bitrate
-        --
         local update_wireless_data = function(strength, healthy)
             awful.spawn.easy_async_with_shell(
                 [[
@@ -177,7 +152,7 @@ local return_button = function()
                     if healthy then
                         update_tooltip(message)
                     else
-                        update_tooltip('<b>Connected to Network but Not to the Internet!</b>\n' .. message)
+                        update_tooltip('<b>Connected but no internet!</b>\n' .. message)
                     end
 
                     if reconnect_startup or startup then
@@ -187,11 +162,8 @@ local return_button = function()
                 end
             )
         end
-        -- ########################################################################
-        -- ########################################################################
-        -- ########################################################################
+
         -- Update wifi icon based on wifi strength and health
-        --
         local update_wireless_icon = function(strength)
             awful.spawn.easy_async_with_shell(
                 check_internet_health,
@@ -211,11 +183,8 @@ local return_button = function()
                 end
             )
         end
-        -- ########################################################################
-        -- ########################################################################
-        -- ########################################################################
+
         -- Get wifi strength
-        --
         local update_wireless_strength = function()
             awful.spawn.easy_async_with_shell(
                 [[
@@ -226,7 +195,7 @@ local return_button = function()
                         return
                     end
                     wifi_strength = tonumber(stdout)
-                    local wifi_strength_rounded = math.floor(wifi_strength / 25 + 0.5)
+                    wifi_strength_rounded = math.floor(wifi_strength / 25 + 0.5)
                     update_wireless_icon(wifi_strength_rounded)
                 end
             )
@@ -235,9 +204,6 @@ local return_button = function()
         update_wireless_strength()
         update_startup()
     end
-    -- ########################################################################
-    -- ########################################################################
-    -- ########################################################################
 
     local update_wired = function()
         network_mode = 'wired'
@@ -266,7 +232,7 @@ local return_button = function()
                     if startup or reconnect_startup then
                         awesome.emit_signal('system::network_connected')
                         notify_connected()
-                        update_startup(false)
+                        update_startup()
                     end
                     update_reconnect_startup(false)
                 end
@@ -274,9 +240,7 @@ local return_button = function()
             end
         )
     end
-    -- ########################################################################
-    -- ########################################################################
-    -- ########################################################################
+
     local update_disconnected = function()
         local notify_wireless_disconnected = function(essid)
             local message = 'Wi-Fi network has been disconnected'
@@ -299,22 +263,20 @@ local return_button = function()
         if network_mode == 'wireless' then
             widget_icon_name = 'wifi-strength-off'
             if not reconnect_startup then
-                update_reconnect_startup(true)
+                update_reconnect_startup(false)
                 notify_wireless_disconnected()
             end
         elseif network_mode == 'wired' then
             widget_icon_name = 'wired-off'
             if not reconnect_startup then
-                update_reconnect_startup(true)
+                update_reconnect_startup()
                 notify_wired_disconnected()
             end
         end
         update_tooltip('Network is currently disconnected')
         widget.icon:set_image(widget_icon_dir .. widget_icon_name .. '.svg')
     end
-    -- ########################################################################
-    -- ########################################################################
-    -- ########################################################################
+
     local check_network_mode = function()
         awful.spawn.easy_async_with_shell(
             [=[
@@ -382,7 +344,16 @@ local return_button = function()
     -- ########################################################################
     -- ########################################################################
     -- ########################################################################
-    check_network_mode()
+    local network_updater =
+        gears.timer {
+        timeout = 5,
+        autostart = true,
+        call_now = true,
+        callback = function()
+            check_network_mode()
+        end
+    }
+
     return widget_button
 end
 

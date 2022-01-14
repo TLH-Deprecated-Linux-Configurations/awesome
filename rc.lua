@@ -10,13 +10,15 @@
 -- ########################################################################
 -- ########################################################################
 -- ########################################################################
-
 -- If LuaRocks is installed, make sure that packages installed through it
 -- are found (e.g. lgi). If LuaRocks is not installed, do nothing.
-
+--
 pcall(require, 'luarocks.loader')
+
+-- Insure these are called, they are needed before the rest of configuration
 require('configuration.root.global_variables')
 require('configuration.root.garbage_collection')
+-- necessary libraru not called in global_variables
 require('awful.autofocus')
 -- ########################################################################
 -- ########################################################################
@@ -28,23 +30,24 @@ beautiful.init(require('theme'))
 -- ########################################################################
 -- ########################################################################
 -- Layout
+--
 require('layout')
 -- ########################################################################
 -- ########################################################################
 -- ########################################################################
 -- Configuration
-
+--
 require('configuration')
 
 -- ########################################################################
 -- ########################################################################
 -- ########################################################################
-require('module.notifications')
-require('module.auto-start')
-require('module.exit-screen')
-require('module.menu')
-require('module.titlebar')
-require('module.brightness-osd')
-require('module.volume-osd')
+-- Modules
+--
+require('module')
+-- ########################################################################
+-- ########################################################################
+-- ########################################################################
+-- Library
+--
 require('library.application-switcher')
-require('module.wallpaper')

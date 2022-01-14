@@ -294,7 +294,6 @@ awesome.connect_signal(
         if bool then
             awesome.emit_signal('module::brightness_osd:rerun')
             awesome.emit_signal('module::volume_osd:show', false)
-            collectgarbage('collect')
         else
             hide_osd()
         end

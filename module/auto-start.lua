@@ -35,7 +35,7 @@ local run_once = function(cmd)
             naughty.notification(
                 {
                     app_name = 'Start-up Applications',
-                    title = '<b>Danger Will Robinson! Danger! Danger! Error detected when starting an application!</b>',
+                    title = 'Error detected when starting an application!</b>',
                     message = stderr:gsub('%\n', ''),
                     timeout = 20,
                     icon = require('beautiful').awesome_icon

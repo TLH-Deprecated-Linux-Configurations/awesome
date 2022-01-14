@@ -106,7 +106,6 @@ watch(
         cpu_tooltip:set_text('CPU Utilization: ' .. tip .. '%')
         total_prev = total
         idle_prev = idle
-        collectgarbage('collect')
     end
 )
 -- ########################################################################

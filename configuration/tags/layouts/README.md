@@ -10,7 +10,9 @@ ownership of the code so that I could
 
 ## Layouts
 
-| Layout       | CHaracteristics                                                                              |
-| ------------ | -------------------------------------------------------------------------------------------- |
-| centermaster | center of the layout is most of the screen, additional windows on sides of the master client |
-| empathy      | provides                                                                                     |
+| Layout       | Characteristics                                                                                                  |
+| ------------ | ---------------------------------------------------------------------------------------------------------------- |
+| centermaster | center of the layout is most of the screen, additional windows on sides of the master client                     |
+| empathy      | Three windows in a row and then the second row is populated, same for the next row                               |
+| stack        | Two clients, with the master to the left and new windows stacking on the right (can be switched, check the code) |
+| Thrizen      | Similar to empathy but the next row shrinks only the row above it                                                |

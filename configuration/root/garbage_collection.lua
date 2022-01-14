@@ -7,9 +7,9 @@
 -- ########################################################################
 -- ########################################################################
 -- ########################################################################
--- No this doesn't contain the whole of AwesomeWM in one file, its for the
--- least annoying feature of Lua, a garbage collector that runs to save
--- memory (at the expense of compute power).Which is run on a timer here
+--  this runs the garbage collector globally, so no need for tacking on the
+--  collectgrabage function at the end of every watch function. Currently
+--  set with settings that inhibit my laptop the least.
 -- ########################################################################
 -- ########################################################################
 -- ########################################################################
@@ -17,15 +17,14 @@ local gears = require('gears')
 -- Run garbage collector regularly to prevent memory leaks
 local _M = function()
     gears.timer {
-        timeout = 60,
+        timeout = 30,
         autostart = true,
         callback = function()
+            collectgarbage()
             collectgarbage('collect')
-            collectgarbage('setpause', 160)
             collectgarbage('setstepmul', 400)
-            -- -- or
-            -- collectgarbage('setpause', 110)
-            -- collectgarbage('setstepmul', 1000)
+
+            collectgarbage('setpause', 110)
         end
     }
 end

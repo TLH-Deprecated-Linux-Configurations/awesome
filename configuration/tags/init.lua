@@ -8,11 +8,13 @@
 -- ########################################################################
 -- because of the order at which the files are called, I can't rely on the
 -- global_variables to call libraries for this file. I know, lame.
+--
 local awful = require('awful')
 local beautiful = require('beautiful')
 local gears = require('gears')
 local tag = tag
 local dpi = beautiful.xresources.apply_dpi
+-- ########################################################################
 -- These are only called here, so they are retained in this file
 -- instead of configuration.settings.global_var
 --
@@ -63,7 +65,9 @@ tag.connect_signal(
 awful.screen.connect_for_each_screen(
     function(s)
         -- Each screen has its own tag table, which I have styled using
-        -- the name of the window manager. Still not as lame as using sway
+        -- the name of the window manager. Still not as lame as using sway.
+        -- Only using 7 tags per screen because the extra "WM" makes the
+        -- taglist too long for the wibar
         --
         local tag_names = {'A', 'W', 'E', 'S', 'O', 'M', 'E'}
         for idx, name in ipairs(tag_names) do

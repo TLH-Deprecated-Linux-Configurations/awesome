@@ -90,7 +90,6 @@ watch(
         local tip = (used / total * 100)
         tip = string.sub(tip, 1, 2)
         ram_tooltip:set_text('RAM Utilization: ' .. tip .. '%')
-        collectgarbage('collect')
     end
 )
 -- ########################################################################

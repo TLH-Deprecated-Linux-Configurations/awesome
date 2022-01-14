@@ -61,30 +61,31 @@ local function list_update(w, buttons, label, data, objects)
                 wibox.widget {
                 {
                     {
-                        image = icons.close,
+                        image = config_dir .. 'theme/icons/titlebar/dhumavati/close-alt.png',
+                        config_dir = filesystem.get_configuration_dir(),
                         resize = true,
                         widget = wibox.widget.imagebox
                     },
                     margins = dpi(4),
                     widget = wibox.container.margin
                 },
-                widget = clickable_container
+                widget = wibox.container.background
             }
 
             -- Close Button
             --
             cb.shape = function(cr, width, height)
-                gears.shape.rounded_rect(cr, width, height, 1)
+                gears.shape.rounded_rect(cr, width, height, 3)
             end
 
             cbm =
                 wibox.widget {
                 -- 4, 8 ,12 ,12 -- close button
                 cb,
-                left = dpi(10),
-                right = dpi(14),
-                top = dpi(10),
-                bottom = dpi(10),
+                left = dpi(6),
+                right = dpi(6),
+                top = dpi(6),
+                bottom = dpi(6),
                 widget = wibox.container.margin
             }
             cbm:buttons(
@@ -182,7 +183,6 @@ local function list_update(w, buttons, label, data, objects)
                 tb:set_markup('<i>&lt;Invalid text&gt;</i>')
             end
         end
-        --bgb:set_bg(bg)
         if type(bg_image) == 'function' then
             bg_image = bg_image(tb, o, nil, objects, i)
         end

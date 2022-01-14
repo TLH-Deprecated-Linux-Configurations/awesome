@@ -9,12 +9,9 @@
 -- ########################################################################
 local update_client = function(c)
     -- Set client's shape based on its tag's layout and status (floating, maximized, etc.)
-    local current_layout = awful.tag.getproperty(c.first_tag, 'layout')
-    if current_layout == awful.layout.suit.max and not c.floating then
-        c.shape = beautiful.client_shape_rectangle
-    elseif c.maximized or c.fullscreen then
-        c.shape = beautiful.client_shape_rectangle
-    elseif (not c.round_corners) then
+    --
+
+    if c.fullscreen then
         c.shape = beautiful.client_shape_rectangle
     else
         c.shape = beautiful.client_shape_rounded
@@ -33,18 +30,33 @@ client.connect_signal(
         -- ########################################################################
         -- ########################################################################
         -- Set the windows at the slave,
-        -- i.e. put it at the end of others instead of setting it master.
+        -- i.e. put it at the end of others
+        --
         if not awesome.startup then
             awful.client.setslave(c)
         end
-
+        -- ########################################################################
         if awesome.startup then
             if not c.size_hints.user_position and not c.size_hints.program_position then
                 -- Prevent clients from being unreachable after screen count changes.
+                --
                 awful.placement.no_offscreen(c)
             end
         end
-
+        -- ########################################################################
+        if not c.size_hints.user_position and not c.size_hints.program_position then
+            awful.placement.no_offscreen(
+                c,
+                {
+                    honor_workarea = true
+                }
+            )
+        end
+        -- ########################################################################
+        if c.transient_for then
+            awful.placement.centered(c, {parent = c.transient_for})
+            awful.placement.no_offscreen(c)
+        end
         -- Update client shape
         update_client(c)
     end
@@ -71,10 +83,14 @@ client.connect_signal(
 -- ########################################################################
 -- ########################################################################
 -- ########################################################################
+-- manipulate client upon focus
+-- raise is set to false due to the specific firefox extensions I use not
+--  cooperaitng well with such a setting
 client.connect_signal(
     'focus',
     function(c)
         c.border_color = beautiful.border_focus
+        c.raise = false
     end
 )
 -- ########################################################################
@@ -100,31 +116,15 @@ client.connect_signal(
         end
     end
 )
-
--- Manipulate client shape on maximized
-client.connect_signal(
-    'property::maximized',
-    function(c)
-        local current_layout = awful.tag.getproperty(c.first_tag, 'layout')
-        if c.maximized then
-            c.shape = beautiful.client_shape_rectangle
-        else
-            update_client(c)
-        end
-    end
-)
-
+-- ########################################################################
+-- ########################################################################
+-- ########################################################################
 -- Manipulate client shape on floating
 client.connect_signal(
     'property::floating',
     function(c)
-        local current_layout = awful.tag.getproperty(c.first_tag, 'layout')
-        if c.floating and not c.maximized then
+        if c.floating then
             c.shape = beautiful.client_shape_rounded
-        else
-            if current_layout == awful.layout.suit.max then
-                c.shape = beautiful.client_shape_rectangle
-            end
         end
     end
 )

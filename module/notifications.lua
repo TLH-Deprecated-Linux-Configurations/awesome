@@ -64,11 +64,11 @@ ruled.notification.connect_signal(
             rule = {urgency = 'normal'},
             properties = {
                 font = 'SFMono Nerd Font Mono Heavy  10',
-                bg = beautiful.transparent,
+                bg = beautiful.bg_focus,
                 fg = beautiful.fg_normal,
                 margin = dpi(16),
                 position = 'top_right',
-                implicit_timeout = 5
+                implicit_timeout = 10
             }
         }
         -- ########################################################################
@@ -78,11 +78,11 @@ ruled.notification.connect_signal(
             rule = {urgency = 'low'},
             properties = {
                 font = 'SFMono Nerd Font Mono Heavy  10',
-                bg = beautiful.transparent,
+                bg = beautiful.bg_normal,
                 fg = beautiful.fg_normal,
                 margin = dpi(16),
                 position = 'top_right',
-                implicit_timeout = 5
+                implicit_timeout = 10
             }
         }
     end
@@ -97,7 +97,7 @@ naughty.connect_signal(
     function(message, startup)
         naughty.notification {
             urgency = 'critical',
-            title = 'Oops, an error happened' .. (startup and ' during startup!' or '!'),
+            title = 'Error! ' .. (startup and ' during startup!' or '!'),
             message = message,
             app_name = 'System Notification',
             icon = beautiful.awesome_icon

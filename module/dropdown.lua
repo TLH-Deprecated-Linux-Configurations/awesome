@@ -1,8 +1,8 @@
---  _______ __   __               __       __
--- |   _   |  |_|  |_.---.-.----.|  |--.--|  |.----.-----.-----.
--- |       |   _|   _|  _  |  __||     |  _  ||   _|  _  |  _  |
--- |___|___|____|____|___._|____||__|__|_____||__| |_____|   __|
---                                                       |__|
+--  _____                      __
+-- |     \.----.-----.-----.--|  |.-----.--.--.--.-----.
+-- |  --  |   _|  _  |  _  |  _  ||  _  |  |  |  |     |
+-- |_____/|__| |_____|   __|_____||_____|________|__|__|
+--                   |__|
 -- ########################################################################
 -- ########################################################################
 -- ########################################################################
@@ -15,6 +15,9 @@
 --   height - Height in absolute pixels, or height percentage
 --   sticky - Visible on all tags
 --   screen - Screen (optional)
+-- based largely off of attachdrop, just stripped of some really irritating
+-- features like skipping the taskbar or being sticky by default and commented
+-- https://github.com/tumurzakov/attachdrop
 -- ########################################################################
 -- ########################################################################
 -- ########################################################################
@@ -37,21 +40,8 @@ local dropdown = {}
 -- ########################################################################
 -- ########################################################################
 -- ########################################################################
--- Use Meta + X to run
---      require('dropdown').showall()
--- if some of your windows lost in hidden space
-function dropdown.showall()
-    for prog, scrs in pairs(dropdown) do
-        for src, c in pairs(scrs) do
-            awful.client.movetotag(awful.tag.selected(capi.mouse.screen), c)
-            c.hidden = false
-            c:raise()
-            capi.client.focus = c
-        end
-    end
-end
-
 -- Attach window under cursor to prog
+--
 function dropdown.attach(prog)
     if not dropdown[prog] then
         dropdown[prog] = {}
@@ -61,7 +51,9 @@ function dropdown.attach(prog)
     c = awful.mouse.client_under_pointer()
     dropdown[prog][screen] = c
 end
-
+-- ########################################################################
+-- ########################################################################
+-- ########################################################################
 -- Create a new window for the drop-down application when it doesn't
 -- exist, or toggle between hidden and visible states when it does
 function dropdown.toggle(prog, vert, horiz, width, height, sticky, screen)
@@ -78,8 +70,11 @@ function dropdown.toggle(prog, vert, horiz, width, height, sticky, screen)
 
     if not dropdown[prog] then
         dropdown[prog] = {}
-
+        -- ########################################################################
+        -- ########################################################################
+        -- ########################################################################
         -- Add unmanage signal for scratchdrop programs
+        --
         attach_signal(
             'unmanage',
             function(c)
@@ -95,11 +90,17 @@ function dropdown.toggle(prog, vert, horiz, width, height, sticky, screen)
     if not dropdown[prog][screen] then
         spawnw = function(c)
             dropdown[prog][screen] = c
-
+            -- ########################################################################
+            -- ########################################################################
+            -- ########################################################################
             -- Scratchdrop clients are floaters
+            --
             awful.client.floating.set(c, true)
-
+            -- ########################################################################
+            -- ########################################################################
+            -- ########################################################################
             -- Client geometry and placement
+            --
             local screengeom = capi.screen[screen].workarea
 
             if width <= 1 then
@@ -124,31 +125,29 @@ function dropdown.toggle(prog, vert, horiz, width, height, sticky, screen)
             else
                 y = screengeom.y
             end
-
+            -- ########################################################################
+            -- ########################################################################
+            -- ########################################################################
             -- Client properties
+            --
             c:geometry({x = x, y = y, width = width, height = height})
             c.ontop = true
             c.above = true
-            -- no way Jose, the below will make the number of ghost
-            --clients way too spooky for me. But I left it just in case.
-            -- c.skip_taskbar = true
-            if sticky then
-                c.sticky = true
-            end
-            -- if c.titlebar then
-            --     awful.titlebar.remove(c)
-            -- end
 
             c:raise()
             capi.client.focus = c
             detach_signal('manage', spawnw)
         end
-
+        -- ########################################################################
+        -- ########################################################################
+        -- ########################################################################
         -- Add manage signal and spawn the program
+        --
         attach_signal('manage', spawnw)
         awful.util.spawn_with_shell(prog, false) -- original without '_with_shell'
     else
         -- Get a running client
+        --
         c = dropdown[prog][screen]
 
         status, err = pcall(awful.client.movetotag, awful.tag.selected(screen), c)
@@ -156,16 +155,23 @@ function dropdown.toggle(prog, vert, horiz, width, height, sticky, screen)
             dropdown[prog][screen] = false
             return
         end
-
+        -- ########################################################################
+        -- ########################################################################
+        -- ########################################################################
         -- Switch the client to the current workspace
+        --
         if c:isvisible() == false then
             c.hidden = true
             awful.client.movetotag(awful.tag.selected(screen), c)
         end
-
+        -- ########################################################################
+        -- ########################################################################
+        -- ########################################################################
         -- Focus and raise if hidden
+        --
         if c.hidden then
             -- Make sure it is centered
+            --
             if vert == 'center' then
                 awful.placement.center_vertical(c)
             end
@@ -175,7 +181,9 @@ function dropdown.toggle(prog, vert, horiz, width, height, sticky, screen)
             c.hidden = false
             c:raise()
             capi.client.focus = c
-        else -- Hide and detach tags if not
+        else
+            -- Hide and detach tags if not
+            --
             c.hidden = true
             local ctags = c:tags()
             for i, t in pairs(ctags) do

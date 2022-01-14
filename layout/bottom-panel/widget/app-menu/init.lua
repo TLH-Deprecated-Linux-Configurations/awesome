@@ -34,7 +34,7 @@ local return_button = function()
         wibox.widget {
         {
             widget,
-            margins = dpi(2),
+            margins = dpi(6),
             widget = wibox.container.margin
         },
         widget = clickable_container
