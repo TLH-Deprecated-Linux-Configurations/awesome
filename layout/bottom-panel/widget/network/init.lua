@@ -25,7 +25,7 @@ local return_button = function()
 
     local startup = true
     local reconnect_startup = true
-    local notify_new_wifi_conn = false
+    local notify_new_wifi_conn = true
 
     local widget =
         wibox.widget {
