@@ -76,7 +76,7 @@ ruled.client.connect_signal(
                 titlebars_enabled = true,
                 floating = true,
                 above = true,
-                placement = awful.placement.centered + awful.placement.no_offscreen
+                placement = awful.placement.centered
             }
         }
         -- ------------------------------------------------- --
@@ -94,7 +94,7 @@ ruled.client.connect_signal(
                 floating = true,
                 above = true,
                 skip_decoration = true,
-                placement = awful.placement.centered + awful.placement.no_offscreen
+                placement = awful.placement.centered
             }
         }
         -- ------------------------------------------------- --
@@ -110,7 +110,7 @@ ruled.client.connect_signal(
             properties = {
                 titlebars_enabled = false,
                 floating = true,
-                placement = awful.placement.centered + awful.placement.no_offscreen
+                placement = awful.placement.centered
             }
         }
         -- ------------------------------------------------- --
@@ -129,7 +129,7 @@ ruled.client.connect_signal(
                 floating = true,
                 above = true,
                 skip_decoration = true,
-                placement = awful.placement.centered + awful.placement.no_offscreen
+                placement = awful.placement.centered
             }
         }
         -- ------------------------------------------------- --
@@ -174,7 +174,7 @@ ruled.client.connect_signal(
                 skip_decoration = true,
                 floating = true,
                 ontop = true,
-                placement = awful.placement.centered + awful.placement.no_offscreen
+                placement = awful.placement.centered
             }
         }
         -- ------------------------------------------------- --
