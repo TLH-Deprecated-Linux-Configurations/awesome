@@ -135,7 +135,7 @@ brightness_slider:buttons(
 --  is where the slide renders next.
 local update_slider = function()
     awful.spawn.easy_async_with_shell(
-        'light -G',
+        'light ',
         function(stdout)
             local brightness = string.match(stdout, '(%d+)')
             brightness_slider:set_value(tonumber(brightness))
@@ -146,7 +146,7 @@ end
 -- ------------------------------------------------- --
 -- ------------------------------------------------- --
 -- Update on startup
-update_slider()
+-- update_slider()
 
 -- Assign default position of the slider at startup, I default to 100 here
 local action_jump = function()

@@ -68,7 +68,7 @@ return {
         'pnmixer &',
         'xinput set-prop "ELAN1301:00 04F3:30C6 Touchpad" "libinput Tapping Enabled" 1 &',
         'goautolock --time 600 --notify 30 --locker "$HOME/.config/awesome/bin/blur.sh" &',
-        'dropbox start &',
+        --'dropbox start &',
         'sudo pkill /usr/libexec/xfce-polkit && /usr/libexec/xfce-polkit &',
         ' eval "$(gnome-keyring-daemon -s --components=pkcs11,secrets,ssh,gpg)" &',
         'xcape -e "Super_L=Super_L|Control_L|Escape" &',
