@@ -129,6 +129,7 @@ client.connect_signal(
             c.shape = beautiful.client_shape_rounded
             awful.placement.no_offscreen(c)
             awful.placement.centered(c)
+            c.screen = awful.screen.focused()
         end
     end
 )

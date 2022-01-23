@@ -2,11 +2,23 @@
 
 The following packages are the `Void Linux` required packages. For other distros, obviously there will be other package names, as these are approached in a highly idiosyncratic way in the `Void Linux` repositories.
 
-| Package          | Description                 |
-| ---------------- | --------------------------- |
-| `awesome-git`    | Must be built from source   |
-| `xclip`          | clipboard for font awesome  |
-| `goautolock`     | applying the lock screen    |
-| `i3lock-color`   | the lock screen application |
-| `greenclip`      | clipboard manager daemon    |
-| `picom-ibhagwan` | Many compositing uses       |
+| Package                              | Description                 |
+| ------------------------------------ | --------------------------- |
+| `awesome-git`                        | Must be built from source   |
+| `xclip`                              | clipboard for font awesome  |
+| `goautolock`                         | applying the lock screen    |
+| `i3lock-color`                       | the lock screen application |
+| `greenclip`                          | clipboard manager daemon    |
+| `picom-ibhagwan`                     | Many compositing uses       |
+| `upower`                             | Power management            |
+| `gnome-keyring` & `libgnome-keyring` | Key Management              |
+| `light`                              | backlight brightness        |
+
+## LuaRocks
+
+These are more enhancements than dependencies, as the configuration will work fine without them and they probably are not contributing anything, but are installed anyway locally so here it is
+
+| Package   | Explanation                                                 |
+| --------- | ----------------------------------------------------------- |
+| `lgi`     | Gnome GObject Introspection (whatever that hyperbole means) |
+| `oocairo` | Cairo support in lua                                        |

@@ -108,8 +108,8 @@ local get_taglist = function(s)
                 border_width = dpi(0)
             },
             id = 'background_role',
-            top = dpi(2),
-            bottom = dpi(2),
+            top = dpi(0),
+            bottom = dpi(0),
             border_width = dpi(0),
             widget = wibox.container.background,
             create_callback = function(self, c3, index, objects)
@@ -119,10 +119,6 @@ local get_taglist = function(s)
                         if #c3:clients() > 0 then
                             awesome.emit_signal('tag_preview::update', c3)
                             awesome.emit_signal('tag_preview::visibility', s, true)
-                        end
-                        if self.bg ~= '#f4f4f7cc' then
-                            self.backup = self.bg
-                            self.has_backup = true
                         end
                     end
                 )
