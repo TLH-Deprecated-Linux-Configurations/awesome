@@ -66,7 +66,7 @@ local create_click_events = function(widget)
         'button::press',
         function()
             container.bg = beautiful.accent
-            container.border_color = beautiful.enter_event
+            container.border_color = '#555e70'
         end
     )
     -- ------------------------------------------------- --
@@ -78,7 +78,7 @@ local create_click_events = function(widget)
         'button::release',
         function()
             container.bg = beautiful.bg_focus
-            container.border_color = beautiful.release_event
+            container.border_color = '#1b1d24aa'
         end
     )
 
