@@ -56,7 +56,7 @@ local slider =
     {
         id = 'cpu_usage',
         max_value = 100,
-        value = 29,
+        value = 0,
         forced_height = dpi(48),
         color = '#f4f4f7ee',
         background_color = '#22262d',
@@ -90,7 +90,7 @@ watch(
     [[bash -c "
 	cat /proc/stat | grep '^cpu '
 	"]],
-    15,
+    5,
     function(_, stdout)
         local user,
             nice,
