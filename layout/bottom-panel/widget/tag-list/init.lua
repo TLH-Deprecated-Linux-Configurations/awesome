@@ -102,7 +102,7 @@ local get_taglist = function(s)
                 },
                 widget = wibox.container.background,
                 shape = function(cr, width, height)
-                    gears.shape.rounded_rect(cr, width, height, 12)
+                    gears.shape.rounded_rect(cr, width, height, 6)
                 end,
                 forced_width = dpi(36),
                 border_width = dpi(0)
