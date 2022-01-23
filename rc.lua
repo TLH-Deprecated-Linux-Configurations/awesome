@@ -17,8 +17,9 @@ pcall(require, 'luarocks.loader')
 
 -- Insure these are called, they are needed before the rest of configuration
 require('configuration.root.global_variables')
-require('configuration.root.garbage_collection')
 require('module.notifications')
+require('configuration.root.garbage_collection')
+
 -- necessary libraru not called in global_variables
 require('awful.autofocus')
 -- ------------------------------------------------- --
