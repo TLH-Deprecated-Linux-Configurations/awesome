@@ -2,35 +2,27 @@
 -- |   __ \.--.--.|  |.-----.-----.
 -- |      <|  |  ||  ||  -__|__ --|
 -- |___|__||_____||__||_____|_____|
--- ########################################################################
--- ########################################################################
--- ########################################################################
+-- ------------------------------------------------- --
+-- ------------------------------------------------- --
+-- ------------------------------------------------- --
 -- This requires the development branch of Awesome or it will throw an
 -- error as `ruled` was included after the release of Awesome 4.3
---
---  And no, I don't use all of the apps that mentioned in these rules,
--- just kept here as a just in case sort of thing for future convenience
--- ########################################################################
--- ########################################################################
--- ########################################################################
-
+-- ------------------------------------------------- --
+-- ------------------------------------------------- --
+-- ------------------------------------------------- --
 ruled.client.connect_signal(
     'request::rules',
     function()
-        -- All clients will match this rule.
+        -- ------------------------------------------------- --
+        -- ---------------------- ALL ---------------------- --
+        -- All clients will match this rule
         --
         ruled.client.append_rule {
+            id = 'global',
             rule = {},
-            except_any = {
-                instance = {'nm-connection-editor', 'file_progress'}
-            },
             properties = {
                 focus = awful.client.focus.filter,
-                keys = client_keys,
-                buttons = client_buttons,
-                screen = awful.screen.preferred,
-                placement = awful.placement.no_overlap + awful.placement.no_offscreen,
-                floating = false,
+                raise = true,
                 maximized = false,
                 above = false,
                 below = false,
@@ -38,19 +30,91 @@ ruled.client.connect_signal(
                 sticky = false,
                 maximized_horizontal = false,
                 maximized_vertical = false,
+                keys = client_keys,
+                buttons = client_buttons,
+                screen = awful.screen.preferred,
+                placement = awful.placement.no_offscreen
+            }
+        }
+
+        -- ------------------------------------------------- --
+        -- ------------------------------------------------- --
+        -- ------------------------------------------------- --
+        -- ----------------- Titlebar rules ---------------- --
+        --
+        ruled.client.append_rule {
+            id = 'titlebars',
+            rule_any = {
+                type = {
+                    'normal',
+                    'dialog',
+                    'modal',
+                    'utility'
+                }
+            },
+            except_any = {
+                name = {'Discord Updater'}
+            },
+            properties = {
                 titlebars_enabled = true,
-                skip_decoration = false,
-                raise = false,
-                honor_padding = true,
-                honor_workarea = true,
                 round_corners = true,
                 shape = beautiful.client_shape_rounded
             }
         }
-
-        -- ########################################################################
-        -- ########################################################################
-        -- ########################################################################
+        -- ------------------------------------------------- --
+        -- ------------------------------------------------- --
+        -- ------------------------------------------------- --
+        -- -------------------- Dialogs -------------------- --
+        --
+        ruled.client.append_rule {
+            id = 'dialog',
+            rule_any = {
+                type = {'dialog'},
+                class = {'Wicd-client.py', 'calendar.google.com'}
+            },
+            properties = {
+                titlebars_enabled = true,
+                floating = true,
+                above = true,
+                placement = awful.placement.centered + awful.placement.no_offscreen
+            }
+        }
+        -- ------------------------------------------------- --
+        -- ------------------------------------------------- --
+        -- ------------------------------------------------- --
+        -- --------------------- Modals -------------------- --
+        --
+        ruled.client.append_rule {
+            id = 'modal',
+            rule_any = {
+                type = {'modal'}
+            },
+            properties = {
+                titlebars_enabled = true,
+                floating = true,
+                above = true,
+                skip_decoration = true,
+                placement = awful.placement.centered + awful.placement.no_offscreen
+            }
+        }
+        -- ------------------------------------------------- --
+        -- ------------------------------------------------- --
+        -- ------------------------------------------------- --
+        -- ------------------- Utilities ------------------- --
+        --
+        ruled.client.append_rule {
+            id = 'utility',
+            rule_any = {
+                type = {'utility'}
+            },
+            properties = {
+                titlebars_enabled = false,
+                floating = true,
+                placement = awful.placement.centered + awful.placement.no_offscreen
+            }
+        }
+        -- ------------------------------------------------- --
+        -- ------------------------------------------------- --
         -- Splash
         --
         ruled.client.append_rule {
@@ -68,65 +132,80 @@ ruled.client.connect_signal(
                 placement = awful.placement.centered + awful.placement.no_offscreen
             }
         }
+        -- ------------------------------------------------- --
+        -- ------------------------------------------------- --
+        -- Terminal emulators
+        --
+        ruled.client.append_rule {
+            id = 'terminals',
+            rule_any = {
+                class = {
+                    'URxvt',
+                    'XTerm',
+                    'Alacritty',
+                    'UXTerm',
+                    'kitty',
+                    'K3rmit'
+                }
+            },
+            properties = {
+                size_hints_honor = false,
+                titlebars_enabled = true
+            }
+        }
 
-        -- ########################################################################
-        -- ########################################################################
-        -- ########################################################################
+        -- ------------------------------------------------- --
+        -- ------------------------------------------------- --
+        -- ------------------------------------------------- --
+        -- Image viewers
+        --
+        ruled.client.append_rule {
+            id = 'image_viewers',
+            rule_any = {
+                class = {
+                    'feh',
+                    'Pqiv',
+                    'Sxiv',
+                    'imv'
+                }
+            },
+            properties = {
+                titlebars_enabled = true,
+                skip_decoration = true,
+                floating = true,
+                ontop = true,
+                placement = awful.placement.centered + awful.placement.no_offscreen
+            }
+        }
+        -- ------------------------------------------------- --
+        -- ------------------------------------------------- --
         -- Floating
         --
         ruled.client.append_rule {
-            {
-                rule_any = {
-                    instance = {
-                        'DTA', -- Firefox addon DownThemAll.
-                        'copyq', -- Includes session name in class.
-                        'pinentry'
-                    },
-                    class = {
-                        'Arandr',
-                        'Blueman-manager',
-                        'Gpick',
-                        'Kruler',
-                        'MessageWin',
-                        'feh',
-                        'Pqiv',
-                        'Sxiv',
-                        -- Needs a fixed window size to avoid fingerprinting by screen size.
-                        --
-                        'Tor Browser',
-                        'VirtualBox Machine',
-                        'VirtualBox Machine',
-                        'Wpa_gui',
-                        'veromix',
-                        'mini panel',
-                        'Popup',
-                        'popup',
-                        'dialog',
-                        'Wicd-client.py',
-                        'calendar.google.com',
-                        'Dialog',
-                        'xtightvncviewer',
-                        'Wicd-client.py',
-                        'calendar.google.com'
-                    },
-                    name = {
-                        'Event Tester'
-                        -- xev.
-                    },
-                    role = {
-                        'AlarmWindow', -- Thunderbird's calendar.
-                        'ConfigManager', -- Thunderbird's about:config.
-                        'pop-up', -- e.g. Google Chrome's (detached) Developer Tools.
-                        'Popup'
-                    },
-                    type = {'utility', 'dialog', 'modal'}
+            id = 'floating',
+            rule_any = {
+                instance = {
+                    'file_progress',
+                    'Popup',
+                    'nm-connection-editor'
                 },
-                properties = {
-                    floating = true,
-                    ontop = true,
-                    raise = true,
-                    visible = true
+                class = {
+                    'scrcpy',
+                    'Mugshot',
+                    'Pulseeffects'
+                },
+                role = {
+                    'AlarmWindow',
+                    'ConfigManager',
+                    'pop-up'
                 }
+            },
+            properties = {
+                titlebars_enabled = true,
+                ontop = true,
+                floating = true,
+                raise = true,
+                placement = awful.placement.centered
             }
         }
     end

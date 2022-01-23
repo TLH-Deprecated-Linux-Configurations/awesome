@@ -3,18 +3,18 @@
 -- |       |  _  |  |  |  _  |  |  ||   _|
 -- |_______|___._|___  |_____|_____||____|
 --               |_____|
--- ########################################################################
--- ########################################################################
--- ########################################################################
+-- ------------------------------------------------- --
+-- ------------------------------------------------- --
+-- ------------------------------------------------- --
 -- Don't move these to global, it breaks everything lol
 --
-local bottom_panel = require("layout.bottom-panel")
-local control_center = require("layout.bottom-panel.widget.control-center")
-local info_center = require("layout.bottom-panel.widget.info-center")
+local bottom_panel = require('layout.bottom-panel')
+local control_center = require('layout.bottom-panel.widget.control-center')
+local info_center = require('layout.bottom-panel.widget.info-center')
 
 -- Create a wibox panel for each screen and add it
 screen.connect_signal(
-    "request::desktop_decoration",
+    'request::desktop_decoration',
     function(s)
         s.bottom_panel = bottom_panel(s)
 
@@ -56,14 +56,14 @@ function update_bars_visibility()
 end
 
 tag.connect_signal(
-    "property::selected",
+    'property::selected',
     function(t)
         update_bars_visibility()
     end
 )
 
 client.connect_signal(
-    "property::fullscreen",
+    'property::fullscreen',
     function(c)
         if c.first_tag then
             c.first_tag.fullscreen_mode = c.fullscreen
@@ -73,7 +73,7 @@ client.connect_signal(
 )
 
 client.connect_signal(
-    "unmanage",
+    'unmanage',
     function(c)
         if c.fullscreen then
             c.screen.selected_tag.fullscreen_mode = false

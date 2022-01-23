@@ -6,50 +6,50 @@
 -- |      |.-----.-----.|  |_.-----.----.
 -- |   ---||  -__|     ||   _|  -__|   _|
 -- |______||_____|__|__||____|_____|__|
--- ########################################################################
--- ########################################################################
--- ########################################################################
+-- ------------------------------------------------- --
+-- ------------------------------------------------- --
+-- ------------------------------------------------- --
 -- Contains the content of the 'info-center', abstracted from it for ease of
 -- reading purposes, this way I can abstract away the logic of the button of
 --  the 'info-center' and the content thereof (which is this file)
--- ########################################################################
--- ########################################################################
--- ########################################################################
+-- ------------------------------------------------- --
+-- ------------------------------------------------- --
+-- ------------------------------------------------- --
 -- Popup Header
 --
 local notif_header =
     wibox.widget {
-    text = "Notification Center",
-    font = "SFMono Nerd Font Mono Heavy  14",
-    align = "left",
-    valign = "center",
+    text = 'Notification Center',
+    font = 'SFMono Nerd Font Mono Heavy  14',
+    align = 'left',
+    valign = 'center',
     widget = wibox.widget.textbox
 }
--- ########################################################################
--- ########################################################################
--- ########################################################################
+-- ------------------------------------------------- --
+-- ------------------------------------------------- --
+-- ------------------------------------------------- --
 -- Declare widget's variables
 --
 local notif_center = function(s)
     -- Create clear-all button
     --
-    s.clear_all = require("layout.bottom-panel.widget.info-center.widget.notif-center.clear-all")
-    -- ########################################################################
+    s.clear_all = require('layout.bottom-panel.widget.info-center.widget.notif-center.clear-all')
+    -- ------------------------------------------------- --
     -- Create the center of the popup
     --
     s.notifbox_layout =
-        require("layout.bottom-panel.widget.info-center.widget.notif-center.build-notifbox").notifbox_layout
+        require('layout.bottom-panel.widget.info-center.widget.notif-center.build-notifbox').notifbox_layout
     -- Widget Template
     --
     return wibox.widget {
         {
             {
-                expand = "none",
+                expand = 'none',
                 layout = wibox.layout.fixed.vertical,
                 spacing = dpi(10),
                 {
                     layout = wibox.layout.align.horizontal,
-                    expand = "none",
+                    expand = 'none',
                     notif_header,
                     nil,
                     s.clear_all
@@ -66,8 +66,8 @@ local notif_center = function(s)
         widget = wibox.container.background
     }
 end
--- ########################################################################
--- ########################################################################
--- ########################################################################
+-- ------------------------------------------------- --
+-- ------------------------------------------------- --
+-- ------------------------------------------------- --
 -- return statement
 return notif_center

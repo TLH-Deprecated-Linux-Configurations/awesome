@@ -3,43 +3,43 @@
 -- |   __ <|  _  ||   _|   _|  -__|   _|  |  |
 -- |______/|___._||____|____|_____|__| |___  |
 --                                     |_____|
--- ########################################################################
--- ########################################################################
--- ########################################################################
-local widget_icon_dir = config_dir .. "layout/bottom-panel/widget/battery/icons/"
--- ########################################################################
--- ########################################################################
--- ########################################################################
+-- ------------------------------------------------- --
+-- ------------------------------------------------- --
+-- ------------------------------------------------- --
+local widget_icon_dir = config_dir .. 'layout/bottom-panel/widget/battery/icons/'
+-- ------------------------------------------------- --
+-- ------------------------------------------------- --
+-- ------------------------------------------------- --
 local return_button = function()
     local battery_imagebox =
         wibox.widget {
         nil,
         {
-            id = "icon",
-            image = widget_icon_dir .. "battery" .. ".svg",
+            id = 'icon',
+            image = widget_icon_dir .. 'battery' .. '.svg',
             widget = wibox.widget.imagebox,
             resize = true
         },
         nil,
-        expand = "none",
+        expand = 'none',
         layout = wibox.layout.align.vertical
     }
-    -- ########################################################################
-    -- ########################################################################
-    -- ########################################################################
+    -- ------------------------------------------------- --
+    -- ------------------------------------------------- --
+    -- ------------------------------------------------- --
     local battery_percentage_text =
         wibox.widget {
-        id = "percent_text",
-        text = "100%",
-        font = "SFMono Nerd Font Mono Heavy  13",
-        align = "center",
-        valign = "center",
+        id = 'percent_text',
+        text = '100%',
+        font = 'SFMono Nerd Font Mono Heavy  13',
+        align = 'center',
+        valign = 'center',
         visible = false,
         widget = wibox.widget.textbox
     }
-    -- ########################################################################
-    -- ########################################################################
-    -- ########################################################################
+    -- ------------------------------------------------- --
+    -- ------------------------------------------------- --
+    -- ------------------------------------------------- --
     local battery_widget =
         wibox.widget {
         layout = wibox.layout.fixed.horizontal,
@@ -47,9 +47,9 @@ local return_button = function()
         battery_imagebox,
         battery_percentage_text
     }
-    -- ########################################################################
-    -- ########################################################################
-    -- ########################################################################
+    -- ------------------------------------------------- --
+    -- ------------------------------------------------- --
+    -- ------------------------------------------------- --
     local battery_button =
         wibox.widget {
         {
@@ -59,9 +59,9 @@ local return_button = function()
         },
         widget = clickable_container
     }
-    -- ########################################################################
-    -- ########################################################################
-    -- ########################################################################
+    -- ------------------------------------------------- --
+    -- ------------------------------------------------- --
+    -- ------------------------------------------------- --
     battery_button:buttons(
         gears.table.join(
             awful.button(
@@ -74,28 +74,28 @@ local return_button = function()
             )
         )
     )
-    -- ########################################################################
-    -- ########################################################################
-    -- ########################################################################
+    -- ------------------------------------------------- --
+    -- ------------------------------------------------- --
+    -- ------------------------------------------------- --
     local battery_tooltip =
         awful.tooltip {
         objects = {battery_button},
-        text = "None",
-        mode = "outside",
-        align = "right",
+        text = 'None',
+        mode = 'outside',
+        align = 'right',
         margin_leftright = dpi(8),
         margin_topbottom = dpi(8),
-        preferred_positions = {"right", "left", "top", "bottom"}
+        preferred_positions = {'right', 'left', 'top', 'bottom'}
     }
-    -- ########################################################################
-    -- ########################################################################
-    -- ########################################################################
+    -- ------------------------------------------------- --
+    -- ------------------------------------------------- --
+    -- ------------------------------------------------- --
     local get_battery_info = function()
         awful.spawn.easy_async_with_shell(
-            "upower -i $(upower -e | grep BAT)",
+            'upower -i $(upower -e | grep BAT)',
             function(stdout)
-                if stdout == nil or stdout == "" then
-                    battery_tooltip:set_text("No battery detected!")
+                if stdout == nil or stdout == '' then
+                    battery_tooltip:set_text('No battery detected!')
                     return
                 end
 
@@ -107,31 +107,31 @@ local return_button = function()
     get_battery_info()
 
     battery_widget:connect_signal(
-        "mouse::enter",
+        'mouse::enter',
         function()
             get_battery_info()
         end
     )
-    -- ########################################################################
-    -- ########################################################################
-    -- ########################################################################
+    -- ------------------------------------------------- --
+    -- ------------------------------------------------- --
+    -- ------------------------------------------------- --
     local last_battery_check = os.time()
     local notify_critcal_battery = true
 
     local show_battery_warning = function()
         naughty.notification(
             {
-                icon = widget_icon_dir .. "battery-alert.svg",
-                app_name = "System notification",
-                title = "Low Battery!",
+                icon = widget_icon_dir .. 'battery-alert.svg',
+                app_name = 'System notification',
+                title = 'Low Battery!',
                 message = "I pity the fool who doesn't save his work and plug in his laptop!",
-                urgency = "critical"
+                urgency = 'critical'
             }
         )
     end
-    -- ########################################################################
-    -- ########################################################################
-    -- ########################################################################
+    -- ------------------------------------------------- --
+    -- ------------------------------------------------- --
+    -- ------------------------------------------------- --
     local update_battery = function(status)
         awful.spawn.easy_async_with_shell(
             [[sh -c "
@@ -139,7 +139,7 @@ local return_button = function()
 			"]],
             function(stdout)
                 local battery_percentage = tonumber(stdout)
-                -- ########################################################################
+                -- ------------------------------------------------- --
                 -- Stop if null
                 --
                 if not battery_percentage then
@@ -148,55 +148,55 @@ local return_button = function()
 
                 battery_widget.spacing = dpi(5)
                 battery_percentage_text.visible = true
-                battery_percentage_text:set_text(battery_percentage .. "%")
+                battery_percentage_text:set_text(battery_percentage .. '%')
 
-                local icon_name = "battery"
-                -- ########################################################################
+                local icon_name = 'battery'
+                -- ------------------------------------------------- --
                 -- Fully charged
                 --
-                if (status == "fully-charged" or status == "charging") and battery_percentage == 100 then
-                    icon_name = icon_name .. "-" .. "fully-charged"
-                    battery_imagebox.icon:set_image(gears.surface.load_uncached(widget_icon_dir .. icon_name .. ".svg"))
+                if (status == 'fully-charged' or status == 'charging') and battery_percentage == 100 then
+                    icon_name = icon_name .. '-' .. 'fully-charged'
+                    battery_imagebox.icon:set_image(gears.surface.load_uncached(widget_icon_dir .. icon_name .. '.svg'))
                     return
                 end
-                -- ########################################################################
+                -- ------------------------------------------------- --
                 -- Critical level warning message
-                if (battery_percentage > 0 and battery_percentage < 10) and status == "discharging" then
-                    icon_name = icon_name .. "-" .. "alert-red"
+                if (battery_percentage > 0 and battery_percentage < 10) and status == 'discharging' then
+                    icon_name = icon_name .. '-' .. 'alert-red'
 
                     if os.difftime(os.time(), last_battery_check) > 300 or notify_critcal_battery then
                         last_battery_check = os.time()
                         notify_critcal_battery = false
                         show_battery_warning()
                     end
-                    battery_imagebox.icon:set_image(gears.surface.load_uncached(widget_icon_dir .. icon_name .. ".svg"))
+                    battery_imagebox.icon:set_image(gears.surface.load_uncached(widget_icon_dir .. icon_name .. '.svg'))
                     return
                 end
-                -- ########################################################################
+                -- ------------------------------------------------- --
                 -- Discharging
                 if battery_percentage > 0 and battery_percentage < 20 then
-                    icon_name = icon_name .. "-" .. status .. "-" .. "10"
+                    icon_name = icon_name .. '-' .. status .. '-' .. '10'
                 elseif battery_percentage >= 20 and battery_percentage < 30 then
-                    icon_name = icon_name .. "-" .. status .. "-" .. "20"
+                    icon_name = icon_name .. '-' .. status .. '-' .. '20'
                 elseif battery_percentage >= 30 and battery_percentage < 50 then
-                    icon_name = icon_name .. "-" .. status .. "-" .. "30"
+                    icon_name = icon_name .. '-' .. status .. '-' .. '30'
                 elseif battery_percentage >= 50 and battery_percentage < 60 then
-                    icon_name = icon_name .. "-" .. status .. "-" .. "50"
+                    icon_name = icon_name .. '-' .. status .. '-' .. '50'
                 elseif battery_percentage >= 60 and battery_percentage < 80 then
-                    icon_name = icon_name .. "-" .. status .. "-" .. "60"
+                    icon_name = icon_name .. '-' .. status .. '-' .. '60'
                 elseif battery_percentage >= 80 and battery_percentage < 90 then
-                    icon_name = icon_name .. "-" .. status .. "-" .. "80"
+                    icon_name = icon_name .. '-' .. status .. '-' .. '80'
                 elseif battery_percentage >= 90 and battery_percentage < 100 then
-                    icon_name = icon_name .. "-" .. status .. "-" .. "90"
+                    icon_name = icon_name .. '-' .. status .. '-' .. '90'
                 end
 
-                battery_imagebox.icon:set_image(gears.surface.load_uncached(widget_icon_dir .. icon_name .. ".svg"))
+                battery_imagebox.icon:set_image(gears.surface.load_uncached(widget_icon_dir .. icon_name .. '.svg'))
             end
         )
     end
-    -- ########################################################################
-    -- ########################################################################
-    -- ########################################################################
+    -- ------------------------------------------------- --
+    -- ------------------------------------------------- --
+    -- ------------------------------------------------- --
     -- Watch status if charging, discharging, fully-charged
     --
     watch(
@@ -205,15 +205,15 @@ local return_button = function()
 		"]],
         15,
         function(widget, stdout)
-            local status = stdout:gsub("%\n", "")
+            local status = stdout:gsub('%\n', '')
 
             -- If no output or no battery detected
-            if status == nil or status == "" then
+            if status == nil or status == '' then
                 battery_widget.spacing = dpi(0)
                 battery_percentage_text.visible = false
-                battery_tooltip:set_text("No battery detected!")
+                battery_tooltip:set_text('No battery detected!')
                 battery_imagebox.icon:set_image(
-                    gears.surface.load_uncached(widget_icon_dir .. "battery-unknown" .. ".svg")
+                    gears.surface.load_uncached(widget_icon_dir .. 'battery-unknown' .. '.svg')
                 )
                 return
             end

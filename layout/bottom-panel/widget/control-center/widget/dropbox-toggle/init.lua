@@ -8,53 +8,53 @@
 --   |   |  |  _  |  _  |  _  ||  ||  -__|
 --   |___|  |_____|___  |___  ||__||_____|
 --                |_____|_____|
--- ########################################################################
--- ########################################################################
--- ########################################################################
-local clickable_container = require("module.clickable-container")
+-- ------------------------------------------------- --
+-- ------------------------------------------------- --
+-- ------------------------------------------------- --
+local clickable_container = require('module.clickable-container')
 local config_dir = gears.filesystem.get_configuration_dir()
-local widget_dir = config_dir .. "layout/bottom-panel/widget/control-center/widget/dropbox-toggle/"
-local widget_icon_dir = widget_dir .. "icons/"
-local icons = require("theme.icons")
+local widget_dir = config_dir .. 'layout/bottom-panel/widget/control-center/widget/dropbox-toggle/'
+local widget_icon_dir = widget_dir .. 'icons/'
+local icons = require('theme.icons')
 local device_state = false
--- ########################################################################
--- ########################################################################
--- ########################################################################
+-- ------------------------------------------------- --
+-- ------------------------------------------------- --
+-- ------------------------------------------------- --
 -- Icons
 --
-local dropbox_status_blank = widget_icon_dir .. "dropboxstatus-blank.png"
-local dropbox_status_busy2 = widget_icon_dir .. "dropboxstatus-busy2.png"
-local dropbox_status_busy1 = widget_icon_dir .. "dropboxstatus-busy1.png"
-local dropbox_status_idle = widget_icon_dir .. "dropboxstatus-idle.png"
-local dropbox_status_logo = widget_icon_dir .. "dropboxstatus-logo.png"
-local dropbox_status_x = widget_icon_dir .. "dropboxstatus-x.png"
--- ########################################################################
--- ########################################################################
--- ########################################################################
+local dropbox_status_blank = widget_icon_dir .. 'dropboxstatus-blank.png'
+local dropbox_status_busy2 = widget_icon_dir .. 'dropboxstatus-busy2.png'
+local dropbox_status_busy1 = widget_icon_dir .. 'dropboxstatus-busy1.png'
+local dropbox_status_idle = widget_icon_dir .. 'dropboxstatus-idle.png'
+local dropbox_status_logo = widget_icon_dir .. 'dropboxstatus-logo.png'
+local dropbox_status_x = widget_icon_dir .. 'dropboxstatus-x.png'
+-- ------------------------------------------------- --
+-- ------------------------------------------------- --
+-- ------------------------------------------------- --
 -- Text for toggle button
 --
 local action_name =
     wibox.widget {
-    text = "Dropbox",
-    font = "SFMono Nerd Font Mono Heavy  10",
-    align = "left",
+    text = 'Dropbox',
+    font = 'SFMono Nerd Font Mono Heavy  10',
+    align = 'left',
     widget = wibox.widget.textbox
 }
--- ########################################################################
--- ########################################################################
--- ########################################################################
+-- ------------------------------------------------- --
+-- ------------------------------------------------- --
+-- ------------------------------------------------- --
 -- text for dropbox status (on of off)
 --
 local action_status =
     wibox.widget {
-    text = "Off",
-    font = "SFMono Nerd Font Mono Heavy  10",
-    align = "left",
+    text = 'Off',
+    font = 'SFMono Nerd Font Mono Heavy  10',
+    align = 'left',
     widget = wibox.widget.textbox
 }
--- ########################################################################
--- ########################################################################
--- ########################################################################
+-- ------------------------------------------------- --
+-- ------------------------------------------------- --
+-- ------------------------------------------------- --
 -- Title and status in box
 --
 local action_info =
@@ -63,24 +63,24 @@ local action_info =
     action_name,
     action_status
 }
--- ########################################################################
--- ########################################################################
--- ########################################################################
--- button template 
+-- ------------------------------------------------- --
+-- ------------------------------------------------- --
+-- ------------------------------------------------- --
+-- button template
 local button_widget =
     wibox.widget {
     {
-        id = "icon",
-        image = widget_icon_dir .. "dropboxstatus-logo.png",
+        id = 'icon',
+        image = widget_icon_dir .. 'dropboxstatus-logo.png',
         widget = wibox.widget.imagebox,
         resize = true
     },
     layout = wibox.layout.align.horizontal
 }
 
--- ########################################################################
--- ########################################################################
--- ########################################################################
+-- ------------------------------------------------- --
+-- ------------------------------------------------- --
+-- ------------------------------------------------- --
 -- button template wrapper for sizing etc
 --
 local widget_button =
@@ -101,33 +101,33 @@ local widget_button =
     end,
     widget = wibox.container.background
 }
--- ########################################################################
--- ########################################################################
--- ########################################################################
+-- ------------------------------------------------- --
+-- ------------------------------------------------- --
+-- ------------------------------------------------- --
 -- update the widget
 --
 local update_widget = function()
     if device_state then
-        action_status:set_text("On")
+        action_status:set_text('On')
         widget_button.bg = beautiful.accent
-        button_widget.icon:set_image(widget_icon_dir .. "dropboxstatus-logo.png")
+        button_widget.icon:set_image(widget_icon_dir .. 'dropboxstatus-logo.png')
     else
-        action_status:set_text("Off")
+        action_status:set_text('Off')
         widget_button.bg = beautiful.groups_bg
-        button_widget.icon:set_image(widget_icon_dir .. "dropboxstatus-x.svg")
+        button_widget.icon:set_image(widget_icon_dir .. 'dropboxstatus-x.svg')
     end
 end
 
--- ########################################################################
--- ########################################################################
--- ########################################################################
--- checks state of the widget 
+-- ------------------------------------------------- --
+-- ------------------------------------------------- --
+-- ------------------------------------------------- --
+-- checks state of the widget
 --
 local check_device_state = function()
     awful.spawn.easy_async_with_shell(
-        "dropbox running",
+        'dropbox running',
         function(stdout)
-            if stdout:match("*") then
+            if stdout:match('*') then
                 device_state = false
             else
                 device_state = true
@@ -137,9 +137,9 @@ local check_device_state = function()
         end
     )
 end
--- ########################################################################
--- ########################################################################
--- ########################################################################
+-- ------------------------------------------------- --
+-- ------------------------------------------------- --
+-- ------------------------------------------------- --
 -- provides on command
 check_device_state()
 local power_on_cmd =
@@ -154,10 +154,10 @@ dropbox start &
 		title = 'System Notification',
 		message = 'Initializing Dropbox...',
 		icon = ']] ..
-    widget_icon_dir .. "dropboxstatus-logo" .. ".png" 
--- ########################################################################
--- ########################################################################
--- ########################################################################
+    widget_icon_dir .. 'dropboxstatus-logo' .. '.png'
+-- ------------------------------------------------- --
+-- ------------------------------------------------- --
+-- ------------------------------------------------- --
 -- power off command
 --
 local power_off_cmd =
@@ -172,13 +172,13 @@ sleep 1
 		title = 'System Notification',
 		message = 'The dropbox daemon has been disabled.',
 		icon = ']] ..
-    widget_icon_dir .. "dropboxstatus-x" .. ".png" .. [['
+    widget_icon_dir .. 'dropboxstatus-x' .. '.png' .. [['
 	})
 	"
 ]]
--- ########################################################################
--- ########################################################################
--- ########################################################################
+-- ------------------------------------------------- --
+-- ------------------------------------------------- --
+-- ------------------------------------------------- --
 -- Toggles the command between on & off + vice versa
 local toggle_action = function()
     if device_state then
@@ -199,9 +199,9 @@ local toggle_action = function()
         )
     end
 end
--- ########################################################################
--- ########################################################################
--- ########################################################################
+-- ------------------------------------------------- --
+-- ------------------------------------------------- --
+-- ------------------------------------------------- --
 -- provides buttons
 --
 widget_button:buttons(
@@ -229,21 +229,21 @@ action_info:buttons(
         )
     )
 )
--- ########################################################################
--- ########################################################################
--- ########################################################################
+-- ------------------------------------------------- --
+-- ------------------------------------------------- --
+-- ------------------------------------------------- --
 -- determine state by watching command
 --
 watch(
-    "dropbox status &",
+    'dropbox status &',
     5,
     function(_, stdout)
         check_device_state()
     end
 )
--- ########################################################################
--- ########################################################################
--- ########################################################################
+-- ------------------------------------------------- --
+-- ------------------------------------------------- --
+-- ------------------------------------------------- --
 -- final wrapper around button/command
 --
 local action_widget =
@@ -253,7 +253,7 @@ local action_widget =
     widget_button,
     {
         layout = wibox.layout.align.vertical,
-        expand = "none",
+        expand = 'none',
         nil,
         action_info,
         nil

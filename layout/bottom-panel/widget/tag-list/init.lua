@@ -7,10 +7,10 @@
 -- |     |_|__|.-----.|  |_
 -- |       |  ||__ --||   _|
 -- |_______|__||_____||____|
--- ########################################################################
--- ########################################################################
--- ########################################################################
-local tag_preview_box = require("layout.bottom-panel.widget.tag-list.tag-preview")
+-- ------------------------------------------------- --
+-- ------------------------------------------------- --
+-- ------------------------------------------------- --
+local tag_preview_box = require('layout.bottom-panel.widget.tag-list.tag-preview')
 tag_preview_box.enable {
     show_client_content = true,
     -- Whether or not to show the client content
@@ -36,9 +36,9 @@ tag_preview_box.enable {
     end
 }
 
--- ########################################################################
--- ########################################################################
--- ########################################################################
+-- ------------------------------------------------- --
+-- ------------------------------------------------- --
+-- ------------------------------------------------- --
 local get_taglist = function(s)
     -- Taglist buttons
     local taglist_buttons =
@@ -70,9 +70,9 @@ local get_taglist = function(s)
             end
         )
     )
-    -- ########################################################################
-    -- ########################################################################
-    -- ########################################################################
+    -- ------------------------------------------------- --
+    -- ------------------------------------------------- --
+    -- ------------------------------------------------- --
     -- Function to update the tags
 
     local taglist =
@@ -91,12 +91,12 @@ local get_taglist = function(s)
                         -- of the text role means the text is centered
                         nil,
                         {
-                            id = "text_role",
+                            id = 'text_role',
                             widget = wibox.widget.textbox
                         },
                         nil,
                         layout = wibox.layout.align.horizontal,
-                        expand = "outside"
+                        expand = 'outside'
                     },
                     widget = clickable_container
                 },
@@ -107,29 +107,29 @@ local get_taglist = function(s)
                 forced_width = dpi(36),
                 border_width = dpi(0)
             },
-            id = "background_role",
+            id = 'background_role',
             top = dpi(2),
             bottom = dpi(2),
             border_width = dpi(0),
             widget = wibox.container.background,
             create_callback = function(self, c3, index, objects)
                 self:connect_signal(
-                    "mouse::enter",
+                    'mouse::enter',
                     function()
                         if #c3:clients() > 0 then
-                            awesome.emit_signal("tag_preview::update", c3)
-                            awesome.emit_signal("tag_preview::visibility", s, true)
+                            awesome.emit_signal('tag_preview::update', c3)
+                            awesome.emit_signal('tag_preview::visibility', s, true)
                         end
-                        if self.bg ~= "#f4f4f7cc" then
+                        if self.bg ~= '#f4f4f7cc' then
                             self.backup = self.bg
                             self.has_backup = true
                         end
                     end
                 )
                 self:connect_signal(
-                    "mouse::leave",
+                    'mouse::leave',
                     function()
-                        awesome.emit_signal("tag_preview::visibility", s, false)
+                        awesome.emit_signal('tag_preview::visibility', s, false)
                         if self.has_backup then
                             self.bg = beautiful.bg_focus
                         end
