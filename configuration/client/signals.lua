@@ -10,7 +10,6 @@
 local update_client = function(c)
     -- Set client's shape based on its tag's layout and status (floating, maximized, etc.)
     --
-
     if c.fullscreen then
         c.shape = beautiful.client_shape_rectangle
     else
@@ -25,6 +24,7 @@ client.connect_signal(
     'manage',
     function(c)
         -- Focus, raise and activate
+        --
         c:emit_signal('request::activate', 'mouse_enter')
         -- ------------------------------------------------- --
         -- ------------------------------------------------- --
@@ -41,6 +41,7 @@ client.connect_signal(
                 -- Prevent clients from being unreachable after screen count changes.
                 --
                 awful.placement.no_offscreen(c)
+                awful.placement.no_overlap(c)
             end
         end
         -- ------------------------------------------------- --
@@ -48,7 +49,8 @@ client.connect_signal(
             awful.placement.no_offscreen(
                 c,
                 {
-                    honor_workarea = true
+                    honor_workarea = true,
+                    honor_padding = true
                 }
             )
         end
@@ -125,6 +127,8 @@ client.connect_signal(
     function(c)
         if c.floating then
             c.shape = beautiful.client_shape_rounded
+            awful.placement.no_offscreen(c)
+            awful.placement.centered(c)
         end
     end
 )

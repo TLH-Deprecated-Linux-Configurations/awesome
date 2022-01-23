@@ -204,8 +204,7 @@ ruled.client.connect_signal(
                 titlebars_enabled = true,
                 ontop = true,
                 floating = true,
-                raise = true,
-                placement = awful.placement.centered
+                raise = true
             }
         }
     end
