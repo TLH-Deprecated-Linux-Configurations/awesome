@@ -122,7 +122,7 @@ local function list_update(w, buttons, label, data, objects)
                 right = dpi(4),
                 widget = wibox.container.constraint()
             }
-            tbm.width = dpi(72)
+            tbm.width = dpi(84)
 
             -- Size the application's icon
             --

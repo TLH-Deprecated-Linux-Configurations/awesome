@@ -1,58 +1,50 @@
---  ______        __         __     __
--- |   __ \.----.|__|.-----.|  |--.|  |_.-----.-----.-----.-----.
--- |   __ <|   _||  ||  _  ||     ||   _|     |  -__|__ --|__ --|
--- |______/|__|  |__||___  ||__|__||____|__|__|_____|_____|_____|
---                   |_____|
---  _______ __ __     __
--- |     __|  |__|.--|  |.-----.----.
--- |__     |  |  ||  _  ||  -__|   _|
--- |_______|__|__||_____||_____|__|
+local wibox = require('wibox')
+local gears = require('gears')
+local awful = require('awful')
+local beautiful = require('beautiful')
+local spawn = awful.spawn
+local dpi = beautiful.xresources.apply_dpi
+local icons = require('theme.icons')
+local clickable_container = require('module.clickable-container')
 
--- ------------------------------------------------- --
--- ------------------------------------------------- --
--- ------------------------------------------------- --
--- widget's title in popup
 local action_name =
     wibox.widget {
     text = 'Brightness',
-    font = 'SFMono Nerd Font Mono Heavy  10',
+    font = 'Inter Bold 10',
     align = 'left',
     widget = wibox.widget.textbox
 }
--- ------------------------------------------------- --
--- ------------------------------------------------- --
--- ------------------------------------------------- --
--- icon the widget will be using
+
 local icon =
     wibox.widget {
     layout = wibox.layout.align.vertical,
     expand = 'none',
     nil,
-    {image = icons.brightness, resize = true, widget = wibox.widget.imagebox},
+    {
+        image = icons.brightness,
+        resize = true,
+        widget = wibox.widget.imagebox
+    },
     nil
 }
--- ------------------------------------------------- --
--- ------------------------------------------------- --
--- ------------------------------------------------- --
--- widget template  making the icon a clickable container button,
--- giving it a shape, etc
+
 local action_level =
     wibox.widget {
     {
-        {icon, margins = dpi(5), widget = wibox.container.margin},
+        {
+            icon,
+            margins = dpi(5),
+            widget = wibox.container.margin
+        },
         widget = clickable_container
     },
-    bg = beautiful.groups_bg,
+    bg = beautiful.bg_focus,
     shape = function(cr, width, height)
-        gears.shape.rounded_rect(cr, width, height, 2)
+        gears.shape.rounded_rect(cr, width, height, beautiful.groups_radius)
     end,
     widget = wibox.container.background
 }
--- ------------------------------------------------- --
--- ------------------------------------------------- --
--- ------------------------------------------------- --
--- Gives the slider its look overall, assign the shapes of its pieces,
--- length and all that jazz
+
 local slider =
     wibox.widget {
     nil,
@@ -60,13 +52,13 @@ local slider =
         id = 'brightness_slider',
         bar_shape = gears.shape.rounded_rect,
         bar_height = dpi(24),
-        bar_color = '#22262d',
-        bar_active_color = '#b2bfd9cc',
-        handle_color = '#e9efff',
+        bar_color = '#ffffff20',
+        bar_active_color = '#f2f2f2EE',
+        handle_color = '#ffffff',
         handle_shape = gears.shape.circle,
         handle_width = dpi(24),
-        handle_border_color = '#000000aa',
-        handle_border_width = dpi(2),
+        handle_border_color = '#00000012',
+        handle_border_width = dpi(1),
         maximum = 100,
         widget = wibox.widget.slider
     },
@@ -75,15 +67,9 @@ local slider =
     forced_height = dpi(24),
     layout = wibox.layout.align.vertical
 }
--- ------------------------------------------------- --
--- ------------------------------------------------- --
--- ------------------------------------------------- --
--- bringing the slider within the local scope
+
 local brightness_slider = slider.brightness_slider
--- ------------------------------------------------- --
--- ------------------------------------------------- --
--- ------------------------------------------------- --
--- when the slider recieves a connection event (like you clicking the handle)
+
 brightness_slider:connect_signal(
     'property::value',
     function()
@@ -95,11 +81,7 @@ brightness_slider:connect_signal(
         awesome.emit_signal('module::brightness_osd', brightness_level)
     end
 )
--- ------------------------------------------------- --
--- ------------------------------------------------- --
--- ------------------------------------------------- --
--- buttons or what happens when clicked, assigns increment and decrement
--- values, I like 5 for this
+
 brightness_slider:buttons(
     gears.table.join(
         awful.button(
@@ -128,24 +110,20 @@ brightness_slider:buttons(
         )
     )
 )
--- ------------------------------------------------- --
--- ------------------------------------------------- --
--- ------------------------------------------------- --
--- update the brightness via the sliders new position whole insuring that value
---  is where the slide renders next.
+
 local update_slider = function()
     awful.spawn.easy_async_with_shell(
-        'light',
+        'light -G',
         function(stdout)
             local brightness = string.match(stdout, '(%d+)')
             brightness_slider:set_value(tonumber(brightness))
         end
     )
 end
--- ------------------------------------------------- --
--- ------------------------------------------------- --
--- ------------------------------------------------- --
--- Assign default position of the slider at startup, I default to 100 here
+
+-- Update on startup
+--update_slider()
+
 local action_jump = function()
     local sli_value = brightness_slider:get_value()
     local new_value = 0
@@ -159,7 +137,7 @@ local action_jump = function()
     end
     brightness_slider:set_value(new_value)
 end
--- assign the reset a button
+
 action_level:buttons(
     awful.util.table.join(
         awful.button(
@@ -172,30 +150,23 @@ action_level:buttons(
         )
     )
 )
--- ------------------------------------------------- --
--- ------------------------------------------------- --
--- ------------------------------------------------- --
--- event handling when the emit comes from the global keybind
+
+-- The emit will come from the global keybind
 awesome.connect_signal(
     'widget::brightness',
     function()
         update_slider()
     end
 )
--- ------------------------------------------------- --
--- ------------------------------------------------- --
--- ------------------------------------------------- --
--- Event handiing when the emit comes from the on screen display (popup)
+
+-- The emit will come from the OSD
 awesome.connect_signal(
     'widget::brightness:update',
     function(value)
         brightness_slider:set_value(tonumber(value))
     end
 )
--- ------------------------------------------------- --
--- ------------------------------------------------- --
--- ------------------------------------------------- --
--- button styling
+
 local brightness_setting =
     wibox.widget {
     layout = wibox.layout.fixed.vertical,
@@ -219,7 +190,5 @@ local brightness_setting =
         slider
     }
 }
--- ------------------------------------------------- --
--- ------------------------------------------------- --
--- ------------------------------------------------- --
+
 return brightness_setting
