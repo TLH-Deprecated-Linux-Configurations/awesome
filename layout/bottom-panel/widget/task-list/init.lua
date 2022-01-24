@@ -44,6 +44,7 @@ end
 --
 local function list_update(w, buttons, label, data, objects)
     w:reset()
+
     for i, o in ipairs(objects) do
         local cache = data[o]
         local ib,
@@ -119,8 +120,10 @@ local function list_update(w, buttons, label, data, objects)
                 tb,
                 left = dpi(4),
                 right = dpi(4),
-                widget = wibox.container.margin
+                widget = wibox.container.constraint()
             }
+            tbm.width = dpi(72)
+
             -- Size the application's icon
             --
             ibm =
@@ -170,6 +173,7 @@ local function list_update(w, buttons, label, data, objects)
                 ibm = ibm,
                 tt = tt
             }
+            local cache = data[o]
         end
 
         local text,
@@ -177,6 +181,7 @@ local function list_update(w, buttons, label, data, objects)
             bg_image,
             icon,
             args = label(o, tb)
+
         args = args or {}
 
         -- The text might be invalid, so use pcall.
@@ -186,16 +191,17 @@ local function list_update(w, buttons, label, data, objects)
         else
             -- Truncate when title is too long
             local text_only = text:match('>(.-)<')
-            if (utf8.len(text_only) > 24) then
-                text = text:gsub('>(.-)<', '>' .. string.sub(text_only, 1, utf8.offset(text_only, 22) - 1) .. '...<')
+            tb:set_markup_silently(text)
+
+            if (utf8.len(text_only) > 16) then
+                text = text:gsub('>(.-)<', '>' .. string.sub(text_only, 1, utf8.offset(text_only, 16) - 1) .. '...<')
                 tt:set_text(text_only)
                 tt:add_to_object(tb)
             else
                 tt:remove_from_object(tb)
             end
-            if not tb:set_markup_silently(text) then
-                tb:set_markup('<i>&lt;Invalid text&gt;</i>')
-            end
+            tb:set_text(text_only)
+            tb:set_markup_silently('<b><i>' .. text .. '</i></b>')
         end
         if type(bg_image) == 'function' then
             bg_image = bg_image(tb, o, nil, objects, i)
