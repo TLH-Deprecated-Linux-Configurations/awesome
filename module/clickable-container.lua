@@ -29,7 +29,7 @@ local create_click_events = function(widget)
         shape = function(cr, width, height)
             gears.shape.rounded_rect(cr, width, height, 4)
         end,
-        bg = beautiful.bg_focus,
+        bg = beautiful.bg_button,
         border_width = dpi(3),
         border_color = '#1b1d24aa'
     }
@@ -53,7 +53,7 @@ local create_click_events = function(widget)
     container:connect_signal(
         'mouse::leave',
         function()
-            container.bg = beautiful.bg_focus
+            container.bg = beautiful.bg_button
             container.border_color = '#1b1d24aa'
         end
     )
@@ -77,7 +77,7 @@ local create_click_events = function(widget)
     container:connect_signal(
         'button::release',
         function()
-            container.bg = beautiful.bg_focus
+            container.bg = beautiful.bg_button
             container.border_color = '#1b1d24aa'
         end
     )
