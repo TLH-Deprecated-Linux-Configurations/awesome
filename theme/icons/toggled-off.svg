@@ -1,6 +1,40 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="512" height="512" viewBox="0 0 135.467 135.467">
-    <g transform="translate(0 -170)">
-        <ellipse ry="22.235" rx="21.682" cy="237.583" cx="32.932" style="opacity:.95;fill:#fff;fill-opacity:1;stroke-width:.59687734"/>
-        <path style="opacity:.95;fill:#fff;fill-opacity:1;stroke-width:2.2001276" d="M102.4 206.456H33.067c-16.727 0-30.334 14.03-30.334 31.277 0 17.248 13.607 31.278 30.334 31.278H102.4c16.727 0 30.333-14.03 30.333-31.278 0-17.247-13.606-31.277-30.333-31.277zm0 58.087H33.067c-14.337 0-26-12.027-26-26.81s11.663-26.809 26-26.809H102.4c14.337 0 26 12.026 26 26.81 0 14.782-11.663 26.809-26 26.809z"/>
-    </g>
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   width="16"
+   height="16"
+   fill="currentColor"
+   class="bi bi-toggle-off"
+   viewBox="0 0 16 16"
+   version="1.1"
+   id="svg4"
+   sodipodi:docname="toggled-off.svg"
+   inkscape:version="1.1.1 (3bf5ae0d25, 2021-09-20)"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <defs
+     id="defs8" />
+  <sodipodi:namedview
+     id="namedview6"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     showgrid="false"
+     inkscape:zoom="48.5625"
+     inkscape:cx="8"
+     inkscape:cy="8"
+     inkscape:window-width="1886"
+     inkscape:window-height="999"
+     inkscape:window-x="0"
+     inkscape:window-y="45"
+     inkscape:window-maximized="0"
+     inkscape:current-layer="svg4" />
+  <path
+     d="M11 4a4 4 0 0 1 0 8H8a4.992 4.992 0 0 0 2-4 4.992 4.992 0 0 0-2-4h3zm-6 8a4 4 0 1 1 0-8 4 4 0 0 1 0 8zM0 8a5 5 0 0 0 5 5h6a5 5 0 0 0 0-10H5a5 5 0 0 0-5 5z"
+     id="path2"
+     style="fill:#f4f4f7;fill-opacity:1" />
 </svg>
