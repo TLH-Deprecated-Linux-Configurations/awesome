@@ -1,13 +1,13 @@
-local wibox = require("wibox")
-local awful = require("awful")
-local gears = require("gears")
-local beautiful = require("beautiful")
+local wibox = require('wibox')
+local awful = require('awful')
+local gears = require('gears')
+local beautiful = require('beautiful')
 
 local dpi = beautiful.xresources.apply_dpi
 
 local builder =
-    require("layout.bottom-panel.widget.info-center.widget.notif-center.build-notifbox.notifbox-ui-elements")
-local notifbox_core = require("layout.bottom-panel.widget.info-center.widget.notif-center.build-notifbox")
+    require('layout.bottom-panel.widget.info-center.widget.notif-center.build-notifbox.notifbox-ui-elements')
+local notifbox_core = require('layout.bottom-panel.widget.info-center.widget.notif-center.build-notifbox')
 
 local notifbox_layout = notifbox_core.notifbox_layout
 local remove_notifbox_empty = notifbox_core.remove_notifbox_empty
@@ -25,17 +25,17 @@ local parse_to_seconds = function(time)
 end
 
 notifbox_box = function(notif, icon, title, message, app, bgcolor)
-    local time_of_pop = return_date_time("%H:%M:%S")
-    local exact_time = return_date_time("%I:%M %p")
-    local exact_date_time = return_date_time("%b %d, %I:%M %p")
+    local time_of_pop = return_date_time('%H:%M:%S')
+    local exact_time = return_date_time('%I:%M %p')
+    local exact_date_time = return_date_time('%b %d, %I:%M %p')
 
     local notifbox_timepop =
         wibox.widget {
-        id = "time_pop",
+        id = 'time_pop',
         markup = nil,
-        font = "SFMono Nerd Font Mono Heavy  10",
-        align = "left",
-        valign = "center",
+        font = 'Nineteen Ninety Seven Regular  10',
+        align = 'left',
+        valign = 'center',
         visible = true,
         widget = wibox.widget.textbox
     }
@@ -50,14 +50,14 @@ notifbox_box = function(notif, icon, title, message, app, bgcolor)
         callback = function()
             local time_difference = nil
 
-            time_difference = parse_to_seconds(return_date_time("%H:%M:%S")) - parse_to_seconds(time_of_pop)
+            time_difference = parse_to_seconds(return_date_time('%H:%M:%S')) - parse_to_seconds(time_of_pop)
             time_difference = tonumber(time_difference)
 
             if time_difference < 60 then
-                notifbox_timepop:set_markup("now")
+                notifbox_timepop:set_markup('now')
             elseif time_difference >= 60 and time_difference < 3600 then
                 local time_in_minutes = math.floor(time_difference / 60)
-                notifbox_timepop:set_markup(time_in_minutes .. "m ago")
+                notifbox_timepop:set_markup(time_in_minutes .. 'm ago')
             elseif time_difference >= 3600 and time_difference < 86400 then
                 notifbox_timepop:set_markup(exact_time)
             elseif time_difference >= 86400 then
@@ -69,14 +69,14 @@ notifbox_box = function(notif, icon, title, message, app, bgcolor)
 
     local notifbox_template =
         wibox.widget {
-        id = "notifbox_template",
-        expand = "none",
+        id = 'notifbox_template',
+        expand = 'none',
         {
             {
                 layout = wibox.layout.fixed.vertical,
                 spacing = dpi(5),
                 {
-                    expand = "none",
+                    expand = 'none',
                     layout = wibox.layout.align.horizontal,
                     {
                         layout = wibox.layout.fixed.horizontal,
@@ -146,7 +146,7 @@ notifbox_box = function(notif, icon, title, message, app, bgcolor)
 
     -- Add hover, and mouse leave events
     notifbox_template:connect_signal(
-        "mouse::enter",
+        'mouse::enter',
         function()
             notifbox.bg = beautiful.groups_bg
             notifbox_timepop.visible = false
@@ -155,7 +155,7 @@ notifbox_box = function(notif, icon, title, message, app, bgcolor)
     )
 
     notifbox_template:connect_signal(
-        "mouse::leave",
+        'mouse::leave',
         function()
             notifbox.bg = beautiful.tranparent
             notifbox_timepop.visible = true

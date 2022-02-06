@@ -23,7 +23,7 @@ local ap_state = false
 local action_name =
     wibox.widget {
     text = 'Airplane Mode',
-    font = 'SFMono Nerd Font Mono Heavy  10',
+    font = 'Nineteen Ninety Seven Regular  10',
     align = 'left',
     widget = wibox.widget.textbox
 }
@@ -34,7 +34,7 @@ local action_name =
 local action_status =
     wibox.widget {
     text = 'Off',
-    font = 'SFMono Nerd Font Mono Heavy  10',
+    font = 'Nineteen Ninety Seven Regular  10',
     align = 'left',
     widget = wibox.widget.textbox
 }

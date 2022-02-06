@@ -57,7 +57,7 @@ local create_profile = function()
     -- ------------------------------------------------- --
     local profile_name =
         wibox.widget {
-        font = 'SFMono Nerd Font Mono Heavy  10',
+        font = 'Nineteen Ninety Seven Regular  10',
         markup = 'User',
         align = 'left',
         valign = 'center',

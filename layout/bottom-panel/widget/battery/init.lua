@@ -31,7 +31,7 @@ local return_button = function()
         wibox.widget {
         id = 'percent_text',
         text = '100%',
-        font = 'SFMono Nerd Font Mono Heavy  13',
+        font = 'Nineteen Ninety Seven Regular  13',
         align = 'center',
         valign = 'center',
         visible = false,

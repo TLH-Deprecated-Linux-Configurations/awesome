@@ -15,9 +15,9 @@ local military_mode = true
 local create_clock = function(s)
     local clock_format = nil
     if not military_mode then
-        clock_format = '<span font="SFMono Nerd Font Mono Heavy  13">%I:%M %p</span>'
+        clock_format = '<span font="Nineteen Ninety Seven Regular  13">%I:%M %p</span>'
     else
-        clock_format = '<span font="SFMono Nerd Font Mono Heavy  13">%H:%M</span>'
+        clock_format = '<span font="Nineteen Ninety Seven Regular  13">%H:%M</span>'
     end
     -- ------------------------------------------------- --
     -- ------------------------------------------------- --
@@ -134,7 +134,7 @@ local create_clock = function(s)
         {
             start_sunday = true,
             spacing = dpi(5),
-            font = 'SFMono Nerd Font Mono Heavy  14',
+            font = 'Nineteen Ninety Seven Regular  14',
             long_weekdays = true,
             margin = dpi(5),
             screen = s,

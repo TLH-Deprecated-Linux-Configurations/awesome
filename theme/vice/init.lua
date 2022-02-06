@@ -33,8 +33,8 @@ local theme = {}
 -- Set Icons Location and Default Font
 --
 theme.icons = theme_dir .. '/icons/'
-theme.font = 'SFMono Nerd Font Mono Heavy  10'
-theme.font_bold = 'SFMono Nerd Font Mono Heavy  10'
+theme.font = 'Nineteen Ninety Seven Regular  10'
+theme.font_bold = 'Nineteen Ninety Seven Regular  10'
 -- ------------------------------------------------- --
 -- ------------------------------------------------- --
 -- ------------------------------------------------- --

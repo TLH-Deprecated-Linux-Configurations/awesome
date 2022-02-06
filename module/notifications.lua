@@ -49,7 +49,7 @@ ruled.notification.connect_signal(
         ruled.notification.append_rule {
             rule = {urgency = 'critical'},
             properties = {
-                font = 'SFMono Nerd Font Mono Heavy  10',
+                font = 'Nineteen Ninety Seven Regular  10',
                 bg = '#ff00b9',
                 fg = '#1c1e24',
                 margin = dpi(16),
@@ -63,7 +63,7 @@ ruled.notification.connect_signal(
         ruled.notification.append_rule {
             rule = {urgency = 'normal'},
             properties = {
-                font = 'SFMono Nerd Font Mono Heavy  10',
+                font = 'Nineteen Ninety Seven Regular  10',
                 bg = beautiful.bg_focus,
                 fg = beautiful.fg_normal,
                 margin = dpi(16),
@@ -77,7 +77,7 @@ ruled.notification.connect_signal(
         ruled.notification.append_rule {
             rule = {urgency = 'low'},
             properties = {
-                font = 'SFMono Nerd Font Mono Heavy  10',
+                font = 'Nineteen Ninety Seven Regular  10',
                 bg = beautiful.bg_normal,
                 fg = beautiful.fg_normal,
                 margin = dpi(16),
@@ -145,7 +145,7 @@ naughty.connect_signal(
                         {
                             {
                                 id = 'text_role',
-                                font = 'SFMono Nerd Font Mono Heavy  10',
+                                font = 'Nineteen Ninety Seven Regular  10',
                                 widget = wibox.widget.textbox
                             },
                             widget = wibox.container.place
@@ -185,7 +185,7 @@ naughty.connect_signal(
                                                 {
                                                     {
                                                         markup = n.app_name or 'System Notification',
-                                                        font = 'SFMono Nerd Font Mono Heavy  10',
+                                                        font = 'Nineteen Ninety Seven Regular  10',
                                                         align = 'center',
                                                         valign = 'center',
                                                         widget = wibox.widget.textbox

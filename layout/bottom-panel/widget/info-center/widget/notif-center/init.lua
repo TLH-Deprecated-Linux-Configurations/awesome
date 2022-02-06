@@ -20,7 +20,7 @@
 local notif_header =
     wibox.widget {
     text = 'Notification Center',
-    font = 'SFMono Nerd Font Mono Heavy  14',
+    font = 'Nineteen Ninety Seven Regular  14',
     align = 'left',
     valign = 'center',
     widget = wibox.widget.textbox

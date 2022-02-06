@@ -46,7 +46,7 @@ local empty_notifbox =
             -- ------------------------------------------------- --
             -- Heading
             text = 'All Cleared',
-            font = 'SFMono Nerd Font Mono Heavy  14',
+            font = 'Nineteen Ninety Seven Regular  14',
             align = 'center',
             valign = 'center',
             widget = wibox.widget.textbox
@@ -56,7 +56,7 @@ local empty_notifbox =
             -- Body
 
             text = 'There are no notifications for you to review at this time.',
-            font = 'SFMono Nerd Font Mono Heavy  10',
+            font = 'Nineteen Ninety Seven Regular  10',
             align = 'center',
             valign = 'center',
             widget = wibox.widget.textbox

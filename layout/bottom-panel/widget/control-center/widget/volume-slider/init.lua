@@ -13,7 +13,7 @@ require('configuration.root.global_variables')
 local action_name =
     wibox.widget {
     text = 'Volume',
-    font = 'SFMono Nerd Font Mono Heavy  10',
+    font = 'Nineteen Ninety Seven Regular  10',
     align = 'left',
     widget = wibox.widget.textbox
 }

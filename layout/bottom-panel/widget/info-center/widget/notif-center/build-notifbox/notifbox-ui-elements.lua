@@ -1,7 +1,7 @@
 local config_dir = gears.filesystem.get_configuration_dir()
-local widget_icon_dir = config_dir .. "layout/bottom-panel/widget/info-center/widget/notif-center/icons/"
+local widget_icon_dir = config_dir .. 'layout/bottom-panel/widget/info-center/widget/notif-center/icons/'
 
-local clickable_container = require("module.clickable-container")
+local clickable_container = require('module.clickable-container')
 
 local ui_noti_builder = {}
 
@@ -10,7 +10,7 @@ ui_noti_builder.notifbox_icon = function(ico_image)
     local noti_icon =
         wibox.widget {
         {
-            id = "icon",
+            id = 'icon',
             resize = true,
             forced_height = dpi(25),
             forced_width = dpi(25),
@@ -26,9 +26,9 @@ end
 ui_noti_builder.notifbox_title = function(title)
     return wibox.widget {
         markup = title,
-        font = "SFMono Nerd Font Mono Heavy  12",
-        align = "left",
-        valign = "center",
+        font = 'Nineteen Ninety Seven Regular  12',
+        align = 'left',
+        valign = 'center',
         widget = wibox.widget.textbox
     }
 end
@@ -37,9 +37,9 @@ end
 ui_noti_builder.notifbox_message = function(msg)
     return wibox.widget {
         markup = msg,
-        font = "SFMono Nerd Font Mono Heavy  12",
-        align = "left",
-        valign = "center",
+        font = 'Nineteen Ninety Seven Regular  12',
+        align = 'left',
+        valign = 'center',
         widget = wibox.widget.textbox
     }
 end
@@ -48,9 +48,9 @@ end
 ui_noti_builder.notifbox_appname = function(app)
     return wibox.widget {
         markup = app,
-        font = "SFMono Nerd Font Mono Heavy  12",
-        align = "left",
-        valign = "center",
+        font = 'Nineteen Ninety Seven Regular  12',
+        align = 'left',
+        valign = 'center',
         widget = wibox.widget.textbox
     }
 end
@@ -69,8 +69,8 @@ ui_noti_builder.notifbox_actions = function(n)
                 {
                     {
                         {
-                            id = "text_role",
-                            font = "SFMono Nerd Font Mono Heavy  10",
+                            id = 'text_role',
+                            font = 'Nineteen Ninety Seven Regular  10',
                             widget = wibox.widget.textbox
                         },
                         widget = wibox.container.place
@@ -97,8 +97,8 @@ ui_noti_builder.notifbox_dismiss = function()
     local dismiss_imagebox =
         wibox.widget {
         {
-            id = "dismiss_icon",
-            image = widget_icon_dir .. "delete.svg",
+            id = 'dismiss_icon',
+            image = widget_icon_dir .. 'delete.svg',
             resize = true,
             forced_height = dpi(5),
             widget = wibox.widget.imagebox
