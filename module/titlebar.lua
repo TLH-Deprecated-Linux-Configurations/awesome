@@ -144,10 +144,10 @@ _G.client.connect_signal(
                     --  awful.titlebar.widget.stickybutton(c),
                     --   awful.titlebar.widget.ontopbutton(c),
                     buttons = buttons,
-                    layout = wibox.layout.flex.horizontal
+                    layout = wibox.layout.align.horizontal
                 },
                 margins = dpi(4),
-                left = dpi(20),
+                left = dpi(12),
                 right = dpi(12),
                 widget = wibox.container.margin
             },
@@ -174,7 +174,7 @@ _G.client.connect_signal(
                     width = 0,
                     height = 0,
                     strategy = 'exact',
-                    layout = wibox.layout.constraint
+                    layout = wibox.container.constraint
                 },
                 {
                     {
@@ -207,7 +207,7 @@ _G.client.connect_signal(
                     width = 0,
                     height = 0,
                     strategy = 'exact',
-                    layout = wibox.layout.constraint
+                    layout = wibox.container.constraint
                 },
                 top = dpi(2),
                 right = dpi(2),

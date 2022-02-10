@@ -12,10 +12,10 @@
 -- ------------------------------------------------- --
 -- ------------------------------------------------- --
 return {
-    keys = require('configuration.keys'),
-    apps = require('configuration.root.apps'),
-    require('configuration.client'),
-    require('configuration.root'),
-    require('configuration.tags'),
-    root.keys(require('configuration.keys.global'))
+    keys = require(... .. '.keys'),
+    apps = require(... .. '.root.apps'),
+    require(... .. '.client'),
+    require(... .. '.root'),
+    require(... .. '.tags'),
+    root.keys(require(... .. '.keys.global'))
 }

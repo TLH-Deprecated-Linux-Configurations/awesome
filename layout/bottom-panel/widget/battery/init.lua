@@ -34,7 +34,7 @@ local return_button = function()
         font = 'Nineteen Ninety Seven Regular  13',
         align = 'center',
         valign = 'center',
-        visible = false,
+        visible = true,
         widget = wibox.widget.textbox
     }
     -- ------------------------------------------------- --
@@ -43,7 +43,7 @@ local return_button = function()
     local battery_widget =
         wibox.widget {
         layout = wibox.layout.fixed.horizontal,
-        spacing = dpi(0),
+        spacing = dpi(2),
         battery_imagebox,
         battery_percentage_text
     }
@@ -92,7 +92,7 @@ local return_button = function()
     -- ------------------------------------------------- --
     local get_battery_info = function()
         awful.spawn.easy_async_with_shell(
-            'upower -i $(upower -e | grep BAT)',
+            'upower -i $(upower -e | grep BAT0)',
             function(stdout)
                 if stdout == nil or stdout == '' then
                     battery_tooltip:set_text('No battery detected!')
@@ -194,6 +194,7 @@ local return_button = function()
             end
         )
     end
+
     -- ------------------------------------------------- --
     -- ------------------------------------------------- --
     -- ------------------------------------------------- --
@@ -203,7 +204,7 @@ local return_button = function()
         [[sh -c "
 		upower -i $(upower -e | grep BAT) | grep state | awk '{print \$2}' | tr -d '\n'
 		"]],
-        15,
+        5,
         function(widget, stdout)
             local status = stdout:gsub('%\n', '')
 

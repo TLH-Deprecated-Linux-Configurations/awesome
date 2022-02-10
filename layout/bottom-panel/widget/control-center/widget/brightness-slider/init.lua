@@ -53,12 +53,12 @@ local slider =
         bar_shape = gears.shape.rounded_rect,
         bar_height = dpi(24),
         bar_color = '#ffffff20',
-        bar_active_color = '#f2f2f2EE',
+        bar_active_color = '#8b9cbe',
         handle_color = '#ffffff',
         handle_shape = gears.shape.circle,
         handle_width = dpi(24),
-        handle_border_color = '#00000012',
-        handle_border_width = dpi(1),
+        handle_border_color = '#1b1d24',
+        handle_border_width = dpi(2),
         maximum = 100,
         widget = wibox.widget.slider
     },
@@ -126,6 +126,7 @@ end
 
 local action_jump = function()
     local sli_value = brightness_slider:get_value()
+    ---@diagnostic disable-next-line: W311
     local new_value = 0
 
     if sli_value >= 0 and sli_value < 50 then

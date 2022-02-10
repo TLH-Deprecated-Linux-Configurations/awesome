@@ -6,5 +6,6 @@
 -- ------------------------------------------------- --
 -- ------------------------------------------------- --
 -- ------------------------------------------------- --
-require('configuration.client.rules')
-require('configuration.client.signals')
+
+require(... .. '.rules')
+require(... .. '.signals')

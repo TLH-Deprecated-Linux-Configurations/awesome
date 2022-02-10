@@ -103,12 +103,12 @@ local bottom_panel = function(s)
                 widget = wibox.container.margin
             },
             s.tray_toggler,
-            s.network,
             layout_box,
+            s.network,
+            s.battery,
             s.control_center_toggle,
             s.info_center_toggle,
             s.screen_rec,
-            s.battery,
             clock
         }
     }

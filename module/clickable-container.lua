@@ -31,7 +31,7 @@ local create_click_events = function(widget)
         end,
         bg = beautiful.bg_button,
         border_width = dpi(3),
-        border_color = '#1b1d24aa'
+        border_color = '#1b1d2466'
     }
     -- ------------------------------------------------- --
     -- ------------------------------------------------- --
@@ -42,7 +42,7 @@ local create_click_events = function(widget)
         'mouse::enter',
         function()
             container.bg = beautiful.accent
-            container.border_color = '#555e70'
+            container.border_color = '#555e70aa'
         end
     )
     -- ------------------------------------------------- --
@@ -54,7 +54,7 @@ local create_click_events = function(widget)
         'mouse::leave',
         function()
             container.bg = beautiful.bg_button
-            container.border_color = '#1b1d24aa'
+            container.border_color = '#1b1d2466'
         end
     )
     -- ------------------------------------------------- --
@@ -66,7 +66,7 @@ local create_click_events = function(widget)
         'button::press',
         function()
             container.bg = beautiful.accent
-            container.border_color = '#555e70'
+            container.border_color = '#555e70aa'
         end
     )
     -- ------------------------------------------------- --
@@ -78,7 +78,7 @@ local create_click_events = function(widget)
         'button::release',
         function()
             container.bg = beautiful.bg_button
-            container.border_color = '#1b1d24aa'
+            container.border_color = '#1b1d2466'
         end
     )
 

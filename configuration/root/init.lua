@@ -7,8 +7,8 @@
 -- ------------------------------------------------- --
 
 return {
+    require(... .. '.global_variables'),
     require(... .. '.apps'),
     require(... .. '.buttons'),
-    require(... .. '.garbage_collection'),
-    require(... .. '.global_variables')
+    require(... .. '.garbage_collection')
 }
