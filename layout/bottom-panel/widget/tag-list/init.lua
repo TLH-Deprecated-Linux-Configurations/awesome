@@ -10,7 +10,7 @@
 -- ------------------------------------------------- --
 -- ------------------------------------------------- --
 -- ------------------------------------------------- --
-local tag_preview_box = require('layout.bottom-panel.widget.tag-list.tag-preview')
+local tag_preview_box = require("layout.bottom-panel.widget.tag-list.tag-preview")
 tag_preview_box.enable {
     show_client_content = true,
     -- Whether or not to show the client content
@@ -91,12 +91,20 @@ local get_taglist = function(s)
                         -- of the text role means the text is centered
                         nil,
                         {
-                            id = 'text_role',
-                            widget = wibox.widget.textbox
+                            widget = wibox.container.place,
+                            halign = "center",
+                            valign = "center",
+                            {
+                                id = "text_role",
+                                widget = wibox.widget.textbox,
+                                align = "center",
+                                valign = "center"
+                            }
                         },
                         nil,
-                        layout = wibox.layout.align.horizontal,
-                        expand = 'outside'
+                        width = 300,
+                        strategy = "min",
+                        layout = wibox.layout.constraint
                     },
                     widget = clickable_container
                 },
@@ -107,25 +115,22 @@ local get_taglist = function(s)
                 forced_width = dpi(36),
                 border_width = dpi(0)
             },
-            id = 'background_role',
-            top = dpi(0),
-            bottom = dpi(0),
-            border_width = dpi(0),
+            id = "background_role",
             widget = wibox.container.background,
             create_callback = function(self, c3, index, objects)
                 self:connect_signal(
-                    'mouse::enter',
+                    "mouse::enter",
                     function()
                         if #c3:clients() > 0 then
-                            awesome.emit_signal('tag_preview::update', c3)
-                            awesome.emit_signal('tag_preview::visibility', s, true)
+                            awesome.emit_signal("tag_preview::update", c3)
+                            awesome.emit_signal("tag_preview::visibility", s, true)
                         end
                     end
                 )
                 self:connect_signal(
-                    'mouse::leave',
+                    "mouse::leave",
                     function()
-                        awesome.emit_signal('tag_preview::visibility', s, false)
+                        awesome.emit_signal("tag_preview::visibility", s, false)
                         if self.has_backup then
                             self.bg = beautiful.bg_focus
                         end

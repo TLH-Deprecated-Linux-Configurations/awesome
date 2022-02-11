@@ -13,45 +13,51 @@
 -- If LuaRocks is installed, make sure that packages installed through it
 -- are found (e.g. lgi). If LuaRocks is not installed, do nothing.
 --
-pcall(require, 'luarocks.loader')
+pcall(require, "luarocks.loader")
 
 -- Insure these are called, they are needed before the rest of configuration
-require('configuration.root.global_variables')
-require('module.notifications')
-require('configuration.root.garbage_collection')
+require("configuration.root.global_variables")
+require("module.notifications")
+require("configuration.root.garbage_collection")
 
 -- necessary libraru not called in global_variables
-require('awful.autofocus')
+require("awful.autofocus")
 -- ------------------------------------------------- --
 -- ------------------------------------------------- --
 -- ------------------------------------------------- --
 -- Theme
 --
-beautiful.init(require('theme'))
+beautiful.init(require("theme"))
 -- ------------------------------------------------- --
 -- ------------------------------------------------- --
 -- ------------------------------------------------- --
 -- Layout
 --
-require('layout')
+require("signal")
+-- ------------------------------------------------- --
+-- ------------------------------------------------- --
+-- ------------------------------------------------- --
+-- Layout
+--
+require("layout")
 
 -- ------------------------------------------------- --
 -- ------------------------------------------------- --
 -- ------------------------------------------------- --
 -- Modules
 --
-require('module')
+require("module")
 
 -- ------------------------------------------------- --
 -- ------------------------------------------------- --
 -- ------------------------------------------------- --
 -- Configuration
 --
-require('configuration')
+require("configuration")
 
 -- ------------------------------------------------- --
 -- ------------------------------------------------- --
 -- ------------------------------------------------- --
 -- Library
 --
-require('library.application-switcher')
+require("library.application-switcher")

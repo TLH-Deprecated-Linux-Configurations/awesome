@@ -1,84 +1,92 @@
-local wibox = require('wibox')
-local gears = require('gears')
-local awful = require('awful')
-local beautiful = require('beautiful')
+local wibox = require("wibox")
+local gears = require("gears")
+local awful = require("awful")
+local beautiful = require("beautiful")
 local spawn = awful.spawn
 local dpi = beautiful.xresources.apply_dpi
-local icons = require('theme.icons')
-local clickable_container = require('module.clickable-container')
+local icons = require("theme.icons")
+local clickable_container = require("module.clickable-container")
 
 local action_name =
-    wibox.widget {
-    text = 'Brightness',
-    font = 'Inter Bold 10',
-    align = 'left',
-    widget = wibox.widget.textbox
-}
+    wibox.widget(
+    {
+        text = "Brightness",
+        font = "Inter Bold 10",
+        align = "left",
+        widget = wibox.widget.textbox
+    }
+)
 
 local icon =
-    wibox.widget {
-    layout = wibox.layout.align.vertical,
-    expand = 'none',
-    nil,
+    wibox.widget(
     {
-        image = icons.brightness,
-        resize = true,
-        widget = wibox.widget.imagebox
-    },
-    nil
-}
+        layout = wibox.layout.align.vertical,
+        expand = "none",
+        nil,
+        {
+            image = icons.brightness,
+            resize = true,
+            widget = wibox.widget.imagebox
+        },
+        nil
+    }
+)
 
 local action_level =
-    wibox.widget {
+    wibox.widget(
     {
         {
-            icon,
-            margins = dpi(5),
-            widget = wibox.container.margin
+            {
+                icon,
+                margins = dpi(5),
+                widget = wibox.container.margin
+            },
+            widget = clickable_container
         },
-        widget = clickable_container
-    },
-    bg = beautiful.bg_focus,
-    shape = function(cr, width, height)
-        gears.shape.rounded_rect(cr, width, height, beautiful.groups_radius)
-    end,
-    widget = wibox.container.background
-}
+        bg = beautiful.bg_focus,
+        shape = function(cr, width, height)
+            gears.shape.rounded_rect(cr, width, height, beautiful.groups_radius)
+        end,
+        widget = wibox.container.background
+    }
+)
 
 local slider =
-    wibox.widget {
-    nil,
+    wibox.widget(
     {
-        id = 'brightness_slider',
-        bar_shape = gears.shape.rounded_rect,
-        bar_height = dpi(24),
-        bar_color = '#ffffff20',
-        bar_active_color = '#8b9cbe',
-        handle_color = '#ffffff',
-        handle_shape = gears.shape.circle,
-        handle_width = dpi(24),
-        handle_border_color = '#1b1d24',
-        handle_border_width = dpi(2),
-        maximum = 100,
-        widget = wibox.widget.slider
-    },
-    nil,
-    expand = 'none',
-    forced_height = dpi(24),
-    layout = wibox.layout.align.vertical
-}
+        nil,
+        {
+            id = "brightness_slider",
+            bar_shape = gears.shape.rounded_rect,
+            bar_height = dpi(24),
+            bar_color = "#ffffff20",
+            bar_active_color = "#8b9cbe",
+            handle_color = "#f4f4f7",
+            handle_shape = gears.shape.circle,
+            handle_width = dpi(24),
+            handle_border_color = "#1b1d24",
+            handle_border_width = dpi(2),
+            maximum = 100,
+            widget = wibox.widget.slider
+        },
+        nil,
+        expand = "none",
+        forced_height = dpi(24),
+        layout = wibox.layout.align.vertical
+    }
+)
 
 local brightness_slider = slider.brightness_slider
 
 brightness_slider:connect_signal(
-    'property::value',
+    "property::value",
     function()
         local brightness_level = brightness_slider:get_value()
 
-        spawn('light -S ' .. math.max(brightness_level, 5), false)
+        spawn("light -S " .. math.max(brightness_level), false)
 
         -- Update brightness osd
-        awesome.emit_signal('module::brightness_osd', brightness_level)
+        awesome.emit_signal("module::brightness_osd", brightness_level)
     end
 )
 
@@ -86,7 +94,7 @@ brightness_slider:buttons(
     gears.table.join(
         awful.button(
             {},
-            4,
+            9,
             nil,
             function()
                 if brightness_slider:get_value() > 100 then
@@ -98,7 +106,7 @@ brightness_slider:buttons(
         ),
         awful.button(
             {},
-            5,
+            8,
             nil,
             function()
                 if brightness_slider:get_value() < 0 then
@@ -113,20 +121,18 @@ brightness_slider:buttons(
 
 local update_slider = function()
     awful.spawn.easy_async_with_shell(
-        'light -G',
+        "light -G",
         function(stdout)
-            local brightness = string.match(stdout, '(%d+)')
+            local brightness = string.match(stdout, "(%d+)")
             brightness_slider:set_value(tonumber(brightness))
+            awesome.emit_signal("module::brightness_osd", tonumber(brightness))
         end
     )
 end
 
--- Update on startup
---update_slider()
-
 local action_jump = function()
     local sli_value = brightness_slider:get_value()
-    ---@diagnostic disable-next-line: W311
+
     local new_value = 0
 
     if sli_value >= 0 and sli_value < 50 then
@@ -154,7 +160,7 @@ action_level:buttons(
 
 -- The emit will come from the global keybind
 awesome.connect_signal(
-    'widget::brightness',
+    "widget::brightness",
     function()
         update_slider()
     end
@@ -162,34 +168,37 @@ awesome.connect_signal(
 
 -- The emit will come from the OSD
 awesome.connect_signal(
-    'widget::brightness:update',
+    "widget::brightness:update",
     function(value)
         brightness_slider:set_value(tonumber(value))
+        awesome.emit_signal("module::brightness_osd", tonumber(value))
     end
 )
 
 local brightness_setting =
-    wibox.widget {
-    layout = wibox.layout.fixed.vertical,
-    spacing = dpi(5),
-    action_name,
+    wibox.widget(
     {
-        layout = wibox.layout.fixed.horizontal,
+        layout = wibox.layout.fixed.vertical,
         spacing = dpi(5),
+        action_name,
         {
-            layout = wibox.layout.align.vertical,
-            expand = 'none',
-            nil,
+            layout = wibox.layout.fixed.horizontal,
+            spacing = dpi(5),
             {
-                layout = wibox.layout.fixed.horizontal,
-                forced_height = dpi(24),
-                forced_width = dpi(24),
-                action_level
+                layout = wibox.layout.align.vertical,
+                expand = "none",
+                nil,
+                {
+                    layout = wibox.layout.fixed.horizontal,
+                    forced_height = dpi(24),
+                    forced_width = dpi(24),
+                    action_level
+                },
+                nil
             },
-            nil
-        },
-        slider
+            slider
+        }
     }
-}
+)
 
 return brightness_setting

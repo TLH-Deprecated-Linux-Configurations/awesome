@@ -26,12 +26,10 @@ local create_click_events = function(widget)
         wibox.widget {
         widget,
         widget = wibox.container.background,
-        shape = function(cr, width, height)
-            gears.shape.rounded_rect(cr, width, height, 4)
-        end,
+        shape = beautiful.client_shape_rounded,
         bg = beautiful.bg_button,
         border_width = dpi(3),
-        border_color = '#1b1d2466'
+        border_color = "#1b1d2466"
     }
     -- ------------------------------------------------- --
     -- ------------------------------------------------- --
@@ -39,10 +37,10 @@ local create_click_events = function(widget)
     -- Mouse hovers on the widget
     --
     container:connect_signal(
-        'mouse::enter',
+        "mouse::enter",
         function()
             container.bg = beautiful.accent
-            container.border_color = '#555e70aa'
+            container.border_color = "#555e70aa"
         end
     )
     -- ------------------------------------------------- --
@@ -51,10 +49,10 @@ local create_click_events = function(widget)
     -- Mouse leaves the widget
     --
     container:connect_signal(
-        'mouse::leave',
+        "mouse::leave",
         function()
             container.bg = beautiful.bg_button
-            container.border_color = '#1b1d2466'
+            container.border_color = "#1b1d2466"
         end
     )
     -- ------------------------------------------------- --
@@ -63,10 +61,10 @@ local create_click_events = function(widget)
     -- Mouse pressed the widget
     --
     container:connect_signal(
-        'button::press',
+        "button::press",
         function()
             container.bg = beautiful.accent
-            container.border_color = '#555e70aa'
+            container.border_color = "#555e70aa"
         end
     )
     -- ------------------------------------------------- --
@@ -75,10 +73,10 @@ local create_click_events = function(widget)
     -- Mouse releases the widget
     --
     container:connect_signal(
-        'button::release',
+        "button::release",
         function()
             container.bg = beautiful.bg_button
-            container.border_color = '#1b1d2466'
+            container.border_color = "#1b1d2466"
         end
     )
 
