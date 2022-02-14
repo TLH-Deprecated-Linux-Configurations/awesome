@@ -4,5 +4,6 @@ return {
     require(... .. ".exit-screen"),
     require(... .. ".menu"),
     require(... .. ".titlebar"),
-    require(... .. ".wallpaper")
+    require(... .. ".wallpaper"),
+    require(... .. ".battery")
 }

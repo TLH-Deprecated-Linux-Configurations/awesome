@@ -16,92 +16,93 @@ local update_client = function(c)
         c.shape = beautiful.client_shape_rounded
     end
 end
+
 -- ------------------------------------------------- --
 -- ------------------------------------------------- --
 -- ------------------------------------------------- --
--- Signal function to execute when a new client appears.
 client.connect_signal(
-    'manage',
+    "request::manage",
     function(c)
-        -- Focus, raise and activate
-        --
-        c:emit_signal('request::activate', 'mouse_enter')
-        -- ------------------------------------------------- --
-        -- ------------------------------------------------- --
+        -- Fade in animation (fade out is in keys)
+
+        if not c.icon then
+            local i = gears.surface(gfs.get_configuration_dir() .. "icons/ghosts/awesome.png")
+            c.icon = i._native
+        end
+
+        local fade_in =
+            awestore.tweened(
+            0,
+            {
+                duration = beautiful.fade_duration,
+                easing = awestore.easing.linear
+            }
+        )
+        local unsub =
+            fade_in:subscribe(
+            function(o)
+                if c and c.valid then
+                    c.opacity = o / 50
+                end
+            end
+        )
+        fade_in:set(50)
+        fade_in.ended:subscribe(
+            function()
+                unsub()
+            end
+        )
         -- ------------------------------------------------- --
         -- Set the windows at the slave,
-        -- i.e. put it at the end of others
-        --
-        if not awesome.startup then
-            awful.client.setslave(c)
-        end
-        -- ------------------------------------------------- --
-        if awesome.startup then
-            if not c.size_hints.user_position and not c.size_hints.program_position then
+        -- i.e. put it at the end of others instead of setting it master.
+        -- if not awesome.startup then awful.client.setslave(c) end
+        if awesome.startup and not c.size_hints.user_position and not c.size_hints.program_position then
+            -- Prevent clients from being unreachable after screen count changes.
+            if awesome.startup and not c.size_hints.user_position and not c.size_hints.program_position then
                 -- Prevent clients from being unreachable after screen count changes.
-                --
                 awful.placement.no_offscreen(c)
                 awful.placement.no_overlap(c)
             end
         end
-        -- ------------------------------------------------- --
-        if not c.size_hints.user_position and not c.size_hints.program_position then
-            awful.placement.no_offscreen(
-                c,
-                {
-                    honor_workarea = true,
-                    honor_padding = true
-                }
-            )
-        end
-        -- ------------------------------------------------- --
-        if c.transient_for then
-            awful.placement.centered(c, {parent = c.transient_for})
-            awful.placement.no_offscreen(c)
-        end
-        -- Update client shape
-        update_client(c)
     end
 )
--- ------------------------------------------------- --
--- ------------------------------------------------- --
--- ------------------------------------------------- --
--- Enable sloppy focus, so that focus follows mouse then raises it.
--- modified using the pull request for awesome by blue-eyed
--- https://github.com/awesomeWM/awesome/pull/183
-local sloppyfocus_last = {c = nil}
+
+-- Enable sloppy focus, so that focus follows mouse.
 client.connect_signal(
-    'mouse::enter',
+    "mouse::enter",
     function(c)
-        if awful.layout.get(c.screen) ~= awful.layout.suit.magnifier and awful.client.focus.filter(c) then
-            -- Skip focusing the client if the mouse wasn't moved.
-            if c ~= sloppyfocus_last.c then
-                client.focus = c
-                sloppyfocus_last.c = c
-            end
-        end
+        c:emit_signal("request::activate", "mouse_enter", {raise = false})
     end
 )
--- ------------------------------------------------- --
--- ------------------------------------------------- --
--- ------------------------------------------------- --
--- manipulate client upon focus
--- raise is set to false due to the specific firefox extensions I use not
---  cooperaitng well with such a setting
+
 client.connect_signal(
-    'focus',
+    "focus",
     function(c)
         c.border_color = beautiful.border_focus
         c.raise = false
     end
 )
--- ------------------------------------------------- --
--- ------------------------------------------------- --
--- ------------------------------------------------- --
+
 client.connect_signal(
-    'unfocus',
+    "unfocus",
     function(c)
         c.border_color = beautiful.border_normal
+    end
+)
+
+-- ------------------------------------------------- --
+-- ------------------------------------------------- --
+-- ------------------------------------------------- --
+-- Manipulate client shape on floating
+client.connect_signal(
+    "property::floating",
+    function(c)
+        if c.floating then
+            c.shape = beautiful.client_shape_rounded
+            awful.placement.no_offscreen(c)
+            awful.placement.centered(c)
+            c.screen = awful.screen.focused()
+        end
     end
 )
 -- ------------------------------------------------- --
@@ -109,7 +110,7 @@ client.connect_signal(
 -- ------------------------------------------------- --
 -- Manipulate client shape on fullscreen/non-fullscreen
 client.connect_signal(
-    'property::fullscreen',
+    "property::fullscreen",
     function(c)
         if c.fullscreen then
             c.shape = beautiful.client_shape_rectangle
@@ -121,15 +122,54 @@ client.connect_signal(
 -- ------------------------------------------------- --
 -- ------------------------------------------------- --
 -- ------------------------------------------------- --
--- Manipulate client shape on floating
+-- Manipulate client shape on fullscreen/non-fullscreen
 client.connect_signal(
-    'property::floating',
+    "property::maximized",
     function(c)
-        if c.floating then
-            c.shape = beautiful.client_shape_rounded
-            awful.placement.no_offscreen(c)
-            awful.placement.centered(c)
-            c.screen = awful.screen.focused()
+        if c.maximized then
+            c.shape = beautiful.client_shape_rectangle
+        else
+            update_client(c)
+        end
+    end
+)
+-- ------------------------------------------------- --
+-- Set mouse resize mode (live or after)
+awful.mouse.resize.set_mode("live")
+-- ------------------------------------------------- --
+-- ------------------------------------------------- --
+-- ------------------------------------------------- --
+-- Restore geometry for floating clients
+-- (for example after swapping from tiling mode to floating mode)
+
+tag.connect_signal(
+    "property::layout",
+    function(t)
+        for k, c in ipairs(t:clients()) do
+            if awful.layout.get(mouse.screen) == awful.layout.suit.floating then
+                local cgeo = awful.client.property.get(c, "floating_geometry")
+                if cgeo then
+                    c:geometry(awful.client.property.get(c, "floating_geometry"))
+                end
+            end
+        end
+    end
+)
+
+client.connect_signal(
+    "manage",
+    function(c)
+        if awful.layout.get(mouse.screen) == awful.layout.suit.floating then
+            awful.client.property.set(c, "floating_geometry", c:geometry())
+        end
+    end
+)
+
+client.connect_signal(
+    "property::geometry",
+    function(c)
+        if awful.layout.get(mouse.screen) == awful.layout.suit.floating then
+            awful.client.property.set(c, "floating_geometry", c:geometry())
         end
     end
 )

@@ -50,7 +50,11 @@
     "rubato",
     "keygrabber",
     "wifi_strength_rounded",
-    "wifi_strength"
+    "wifi_strength",
+    "freedesktop",
+    "update_bars_visibility",
+    "awestore",
+    "gfs"
   ],
   "cSpell.words": [
     "goautolock",

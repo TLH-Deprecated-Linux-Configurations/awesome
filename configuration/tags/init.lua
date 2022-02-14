@@ -69,7 +69,7 @@ awful.screen.connect_for_each_screen(
         -- Only using 7 tags per screen because the extra "WM" makes the
         -- taglist too long for the wibar
         --
-        local tag_names = {"a", "w", "e", "s", "o", "m", "e"}
+        local tag_names = {"A", "W", "E", "S", "O", "M", "E"}
         for idx, name in ipairs(tag_names) do
             local selected = false
             if idx == 1 then

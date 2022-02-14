@@ -8,13 +8,13 @@
 -- ------------------------------------------------- --
 -- Don't move these to global, it breaks everything lol
 --
-local bottom_panel = require('layout.bottom-panel')
-local control_center = require('layout.bottom-panel.widget.control-center')
-local info_center = require('layout.bottom-panel.widget.info-center')
-
+local bottom_panel = require("layout.bottom-panel")
+local control_center = require("layout.bottom-panel.widget.control-center")
+local info_center = require("layout.bottom-panel.widget.info-center")
+-- ------------------------------------------------- --
 -- Create a wibox panel for each screen and add it
 screen.connect_signal(
-    'request::desktop_decoration',
+    "request::desktop_decoration",
     function(s)
         s.bottom_panel = bottom_panel(s)
 
@@ -24,14 +24,16 @@ screen.connect_signal(
         s.info_center_show_again = false
     end
 )
-
+-- ------------------------------------------------- --
 -- Hide bars when app go fullscreen
 function update_bars_visibility()
     for s in screen do
-        if s.selected_tag then
+        if c.fullscreen or c.maximized then
             local fullscreen = s.selected_tag.fullscreen_mode
+            local maximized = c.maximized
+            -- ------------------------------------------------- --
             -- Order matter here for shadow
-            s.bottom_panel.visible = not fullscreen
+            c.bottom_panel.visible = not fullscreen and not maximized
 
             if s.control_center then
                 if fullscreen and s.control_center.visible then
@@ -56,14 +58,14 @@ function update_bars_visibility()
 end
 
 tag.connect_signal(
-    'property::selected',
+    "property::selected",
     function(t)
         update_bars_visibility()
     end
 )
 
 client.connect_signal(
-    'property::fullscreen',
+    "property::fullscreen",
     function(c)
         if c.first_tag then
             c.first_tag.fullscreen_mode = c.fullscreen
@@ -71,9 +73,17 @@ client.connect_signal(
         update_bars_visibility()
     end
 )
-
 client.connect_signal(
-    'unmanage',
+    "property::maximized",
+    function(c)
+        if c.first_tag then
+            c.first_tag.fullscreen_mode = c.maximized
+        end
+        update_bars_visibility()
+    end
+)
+client.connect_signal(
+    "unmanage",
     function(c)
         if c.fullscreen then
             c.screen.selected_tag.fullscreen_mode = false

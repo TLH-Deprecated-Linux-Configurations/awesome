@@ -37,7 +37,7 @@ local bright_adjust =
         height = height,
         visible = false,
         ontop = true,
-        bg = beautiful.bg_normal
+        bg = "#1b1d24aa"
     }
 )
 
@@ -47,7 +47,7 @@ local bright_bar =
     shape = gears.shape.rounded_bar,
     bar_shape = gears.shape.rounded_bar,
     color = active_color_1,
-    background_color = beautiful.bg_normal,
+    background_color = "#3c3f4caa",
     max_value = 100,
     value = 0
 }
@@ -72,9 +72,9 @@ bright_adjust:setup {
         }
     },
     shape = beautiful.client_shape_rounded,
-    bg = beautiful.bg_normal,
-    border_width = beautiful.widget_border_width,
-    border_color = beautiful.widget_border_color,
+    bg = "#1b1d24aa",
+    border_width = dpi(2),
+    border_color = "#2f303daa",
     widget = wibox.container.background
 }
 

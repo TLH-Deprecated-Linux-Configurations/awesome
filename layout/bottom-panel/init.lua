@@ -16,9 +16,9 @@ local bottom_panel = function(s)
         awful.wibar {
         ontop = true,
         screen = s,
-        type = 'dock',
+        type = "dock",
         height = dpi(36),
-        position = 'bottom',
+        position = "bottom",
         width = s.geometry.width,
         maximum_width = s.geometry.width,
         x = s.geometry.x,
@@ -37,11 +37,11 @@ local bottom_panel = function(s)
     -- ------------------------------------------------- --
     -- ------------------------------------------------- --
     panel:connect_signal(
-        'mouse::enter',
+        "mouse::enter",
         function()
             local w = mouse.current_wibox
             if w then
-                w.cursor = 'left_hand'
+                w.cursor = "left_hand"
             end
         end
     )
@@ -53,7 +53,7 @@ local bottom_panel = function(s)
         visible = false,
         base_size = dpi(26),
         horizontal = true,
-        screen = 'primary',
+        screen = "primary",
         widget = wibox.widget.systray
     }
     -- ------------------------------------------------- --
@@ -61,25 +61,25 @@ local bottom_panel = function(s)
     -- ------------------------------------------------- --
     -- Define Widgets
     --
-    local tag_list = require('layout.bottom-panel.widget.tag-list')
-    s.search = require('layout.bottom-panel.widget.app-menu')()
-    local clock = require('layout.bottom-panel.widget.clock')(s)
-    local layout_box = require('layout.bottom-panel.widget.layoutbox')(s)
+    local tag_list = require("layout.bottom-panel.widget.tag-list")
+    s.search = require("layout.bottom-panel.widget.app-menu")()
+    local clock = require("layout.bottom-panel.widget.clock")(s)
+    local layout_box = require("layout.bottom-panel.widget.layoutbox")(s)
 
-    s.tray_toggler = require('layout.bottom-panel.widget.tray-toggle')
+    s.tray_toggler = require("layout.bottom-panel.widget.tray-toggle")
 
-    s.screen_rec = require('layout.bottom-panel.widget.screen-recorder')()
-    s.battery = require('layout.bottom-panel.widget.battery')()
-    s.network = require('layout.bottom-panel.widget.network')()
-    s.control_center_toggle = require('layout.bottom-panel.widget.control-center-toggle')()
+    s.screen_rec = require("layout.bottom-panel.widget.screen-recorder")()
+    local battery = require("layout.bottom-panel.widget.battery")
+    s.network = require("layout.bottom-panel.widget.network")()
+    s.control_center_toggle = require("layout.bottom-panel.widget.control-center-toggle")()
 
-    s.info_center_toggle = require('layout.bottom-panel.widget.info-center-toggle')()
+    s.info_center_toggle = require("layout.bottom-panel.widget.info-center-toggle")()
     -- ------------------------------------------------- --
     -- ------------------------------------------------- --
     -- ------------------------------------------------- --
     panel:setup {
         layout = wibox.layout.align.horizontal,
-        position = 'bottom',
+        position = "bottom",
         {
             spacing = dpi(12),
             margins = dpi(8),
@@ -105,10 +105,10 @@ local bottom_panel = function(s)
             s.tray_toggler,
             layout_box,
             s.network,
-            s.battery,
             s.control_center_toggle,
             s.info_center_toggle,
             s.screen_rec,
+            battery,
             clock
         }
     }

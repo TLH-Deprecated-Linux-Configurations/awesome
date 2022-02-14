@@ -1,17 +1,17 @@
-local naughty = require("naughty")
-local beautiful = require("beautiful")
-local gears = require("gears")
-local wibox = require("wibox")
-local awful = require("awful")
-local dpi = beautiful.xresources.apply_dpi
+--  _______         __   __   ___ __              __   __
+-- |    |  |.-----.|  |_|__|.'  _|__|.----.---.-.|  |_|__|.-----.-----.
+-- |       ||  _  ||   _|  ||   _|  ||  __|  _  ||   _|  ||  _  |     |
+-- |__|____||_____||____|__||__| |__||____|___._||____|__||_____|__|__|
 
-local ruled = require("ruled")
-
+-- ------------------------------------------------- --
+-- call the associated modules within this directory
+--
 require("module.notifications.brightness")
 
 require("module.notifications.volume")
 require("module.notifications.battery")
-
+-- ------------------------------------------------- --
+--  naughty options
 naughty.config.defaults.ontop = true
 naughty.config.defaults.screen = awful.screen.focused()
 naughty.config.defaults.timeout = 3
@@ -23,11 +23,12 @@ naughty.config.icon_dirs = {
     "/usr/share/pixmaps/"
 }
 naughty.config.icon_formats = {"png", "svg"}
-
+-- ------------------------------------------------- --
 -- Timeouts
 naughty.config.presets.low.timeout = 3
 naughty.config.presets.critical.timeout = 0
-
+-- ------------------------------------------------- --
+-- Configure Notifications of differing priority
 naughty.config.presets.normal = {
     font = "Nineteen Ninety Seven 18",
     fg = beautiful.fg_normal,
@@ -46,11 +47,14 @@ naughty.config.presets.critical = {
     bg = beautiful.bg_normal,
     timeout = 0
 }
-
+-- ------------------------------------------------- --
+-- assign priorities
 naughty.config.presets.ok = naughty.config.presets.normal
 naughty.config.presets.info = naughty.config.presets.normal
 naughty.config.presets.warn = naughty.config.presets.critical
-
+-- ------------------------------------------------- --
+--  RUles for notifications.
+--
 ruled.notification.connect_signal(
     "request::rules",
     function()
