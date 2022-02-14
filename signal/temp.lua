@@ -3,7 +3,7 @@
 --      temperature (integer - in Celcius)
 local awful = require("awful")
 
-local update_interval = 15
+local update_interval = 10
 local temp_script = [[
   sh -c "
   sensors | grep CPU | awk '{print $2}' | cut -c 2-3

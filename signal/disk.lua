@@ -7,10 +7,9 @@ local awful = require("awful")
 local update_interval = 10 -- every 3 minutes
 
 -- Use /dev/sdxY according to your setup
-local disk_script =
-    [[
+local disk_script = [[
     sh -c "
-    df -kh -B 1MB /dev/nvme0n1p1 | tail -1 | awk '{printf \"%d@%d\", $4, $3}'
+    df -kh -B 1MB /dev/sda2 | tail -1 | awk '{printf \"%d@%d\", $4, $3}'
     "
 ]]
 
