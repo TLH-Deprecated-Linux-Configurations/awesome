@@ -36,7 +36,7 @@ local volume_adjust =
         height = height,
         visible = false,
         ontop = true,
-        bg = beautiful.bg_normal
+        bg = "#1b1d24aa"
     }
 )
 
@@ -46,7 +46,7 @@ local volume_bar =
     shape = gears.shape.rounded_bar,
     bar_shape = gears.shape.rounded_bar,
     color = active_color_1,
-    background_color = beautiful.bg_normal,
+    background_color = "#3c3f4caa",
     max_value = 100,
     value = 0
 }
@@ -71,7 +71,7 @@ volume_adjust:setup {
         }
     },
     shape = beautiful.client_shape_rounded,
-    bg = beautiful.bg_normal,
+    bg = "#1b1d24aa",
     border_width = beautiful.widget_border_width,
     border_color = beautiful.widget_border_color,
     widget = wibox.container.background
@@ -93,9 +93,9 @@ awesome.connect_signal(
     function(vol, muted)
         volume_bar.value = vol
         if muted or vol == 0 then
-            volume_icon.markup = "<span foreground='" .. "#555e70" .. "'><b>ﳌ</b></span>"
+            volume_icon.markup = "<span foreground='" .. "#ff3d81" .. "'><b>ﳌ</b></span>"
         else
-            volume_icon.markup = "<span foreground='" .. "#555e70" .. "'><b></b></span>"
+            volume_icon.markup = "<span foreground='" .. "#f4f4f7" .. "'><b></b></span>"
         end
 
         if volume_adjust.visible then
@@ -106,20 +106,3 @@ awesome.connect_signal(
         end
     end
 )
---[[
--- show volume-adjust when "volume_change" signal is emitted
-awesome.connect_signal("signal::volume", function(volume, muted)
-    if muted then
-        volume_bar.value = 0
-    else
-        volume_bar.value = volume
-    end
-    -- make volume_adjust component visible
-    if volume_adjust.visible then
-        hide_volume_adjust:again()
-    else
-        volume_adjust.visible = true
-        hide_volume_adjust:start()
-    end
-end)
-]] --

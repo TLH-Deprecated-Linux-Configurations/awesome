@@ -16,7 +16,7 @@ naughty.config.defaults.ontop = true
 naughty.config.defaults.screen = awful.screen.focused()
 naughty.config.defaults.timeout = 3
 naughty.config.defaults.title = "System Notification"
-naughty.config.defaults.position = "top_right"
+naughty.config.defaults.position = "bottom_right"
 
 naughty.config.icon_dirs = {
     "/usr/share/icons/chhinamasta/",

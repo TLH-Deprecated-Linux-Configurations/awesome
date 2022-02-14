@@ -1,219 +1,123 @@
---  ___ ___         __
--- |   |   |.-----.|  |.--.--.--------.-----.
--- |   |   ||  _  ||  ||  |  |        |  -__|
---  \_____/ |_____||__||_____|__|__|__|_____|
---  _______ __ __     __
--- |     __|  |__|.--|  |.-----.----.
--- |__     |  |  ||  _  ||  -__|   _|
--- |_______|__|__||_____||_____|__|
--- ########################################################################
--- ########################################################################
--- ########################################################################
-require('configuration.root.global_variables')
-local action_name =
+--  ______ ______ _______
+-- |      |   __ \   |   |
+-- |   ---|    __/   |   |
+-- |______|___|  |_______|
+--  _______         __
+-- |   |   |.-----.|  |_.-----.----.
+-- |       ||  -__||   _|  -__|   _|
+-- |__|_|__||_____||____|_____|__|
+-- ------------------------------------------------- --
+-- ------------------------------------------------- --
+-- ------------------------------------------------- --
+local meter_name =
     wibox.widget {
-    text = 'Volume',
-    font = 'Nineteen Ninety Seven Regular  10',
-    align = 'left',
+    text = "Volume",
+    font = "Nineteen Ninety Seven Regular  10",
+    align = "left",
     widget = wibox.widget.textbox
 }
--- ########################################################################
--- ########################################################################
--- ########################################################################
+-- ------------------------------------------------- --
+-- ------------------------------------------------- --
+-- ------------------------------------------------- --
 local icon =
     wibox.widget {
     layout = wibox.layout.align.vertical,
-    expand = 'none',
+    expand = "none",
     nil,
-    {image = icons.volume, resize = true, widget = wibox.widget.imagebox},
+    {
+        image = icons.volume,
+        resize = true,
+        widget = wibox.widget.imagebox
+    },
     nil
 }
--- ########################################################################
--- ########################################################################
--- ########################################################################
-local action_level =
+-- ------------------------------------------------- --
+-- ------------------------------------------------- --
+-- ------------------------------------------------- --
+local meter_icon =
     wibox.widget {
     {
-        {icon, margins = dpi(5), widget = wibox.container.margin},
-        widget = clickable_container
+        icon,
+        margins = dpi(5),
+        widget = wibox.container.margin
     },
     bg = beautiful.groups_bg,
     shape = function(cr, width, height)
-        gears.shape.rounded_rect(cr, width, height, 2)
+        gears.shape.rounded_rect(cr, width, height, beautiful.groups_radius)
     end,
     widget = wibox.container.background
 }
--- ########################################################################
--- ########################################################################
--- ########################################################################
+-- ------------------------------------------------- --
+-- ------------------------------------------------- --
+-- ------------------------------------------------- --
 local slider =
     wibox.widget {
     nil,
     {
-        id = 'volume_slider',
-        bar_shape = gears.shape.rounded_rect,
-        bar_height = dpi(24),
-        bar_color = '#22262d',
-        bar_active_color = '#b2bfd9cc',
-        handle_color = '#e9efff',
-        handle_shape = gears.shape.circle,
-        handle_width = dpi(24),
-        handle_border_color = '#000000aa',
-        handle_border_width = dpi(2),
-        maximum = 100,
-        widget = wibox.widget.slider
+        id = "volume_usage",
+        max_value = 100,
+        value = 0,
+        forced_height = dpi(48),
+        color = "#f4f4f7ee",
+        background_color = "#22262d",
+        shape = gears.shape.rounded_rect,
+        widget = wibox.widget.progressbar
     },
     nil,
-    expand = 'none',
-    forced_height = dpi(24),
+    expand = "none",
+    forced_height = dpi(48),
     layout = wibox.layout.align.vertical
 }
--- ########################################################################
--- ########################################################################
--- ########################################################################
-local volume_slider = slider.volume_slider
--- ########################################################################
--- ########################################################################
--- ########################################################################
-volume_slider:connect_signal(
-    'property::value',
-    function()
-        local volume_level = volume_slider:get_value()
+local volume_tooltip =
+    awful.tooltip {
+    objects = {meter_icon},
+    text = "None",
+    mode = "outside",
+    align = "right",
+    margin_leftright = dpi(8),
+    margin_topbottom = dpi(8),
+    preferred_positions = {"right", "left", "top", "bottom"}
+}
 
-        spawn('amixer sset Master ' .. volume_level .. '%', false)
+-- ------------------------------------------------- --
+-- ------------------------------------------------- --
+-- ------------------------------------------------- --
 
-        -- Update volume osd
-        awesome.emit_signal('module::volume_osd', volume_level)
-    end
-)
--- ########################################################################
--- ########################################################################
--- ########################################################################
-volume_slider:buttons(
-    gears.table.join(
-        awful.button(
-            {},
-            4,
-            nil,
-            function()
-                if volume_slider:get_value() > 100 then
-                    volume_slider:set_value(100)
-                    return
-                end
-                volume_slider:set_value(volume_slider:get_value() + 5)
-            end
-        ),
-        awful.button(
-            {},
-            5,
-            nil,
-            function()
-                if volume_slider:get_value() < 0 then
-                    volume_slider:set_value(0)
-                    return
-                end
-                volume_slider:set_value(volume_slider:get_value() - 5)
-            end
-        )
-    )
-)
--- ########################################################################
--- ########################################################################
--- ########################################################################
-local update_slider = function()
-    awful.spawn.easy_async_with_shell(
-        'amixer sget Master',
-        function(stdout)
-            local volume = string.match(stdout, '(%d?%d?%d)%%')
-            volume_slider:set_value(tonumber(volume))
-        end
-    )
-end
--- ########################################################################
--- ########################################################################
--- ########################################################################
--- Update on startup
---
-update_slider()
--- ########################################################################
--- ########################################################################
--- ########################################################################
-local action_jump = function()
-    local sli_value = volume_slider:get_value()
-    local new_value = 0
-
-    if sli_value >= 0 and sli_value < 50 then
-        new_value = 50
-    elseif sli_value >= 50 and sli_value < 100 then
-        new_value = 100
-    else
-        new_value = 0
-    end
-    volume_slider:set_value(new_value)
-end
-
-action_level:buttons(
-    awful.util.table.join(
-        awful.button(
-            {},
-            1,
-            nil,
-            function()
-                action_jump()
-            end
-        )
-    )
-)
--- ########################################################################
--- ########################################################################
--- ########################################################################
--- The emit will come from the global keybind
---
 awesome.connect_signal(
-    'widget::volume',
-    function()
-        update_slider()
-    end
-)
--- ########################################################################
--- ########################################################################
--- ########################################################################
--- The emit will come from the OSD
---
-awesome.connect_signal(
-    'widget::volume:update',
+    "signal::volume",
     function(value)
-        volume_slider:set_value(tonumber(value))
+        -- Use this if you want to display usage percentage
+        slider.volume_usage:set_value(value)
+        volume_tooltip:set_text("Volume Level is Currently: " .. value .. "%")
     end
 )
--- ########################################################################
--- ########################################################################
--- ########################################################################
-local volume_setting =
+-- ------------------------------------------------- --
+-- ------------------------------------------------- --
+-- ------------------------------------------------- --
+local volume_meter =
     wibox.widget {
     layout = wibox.layout.fixed.vertical,
-    forced_height = dpi(48),
     spacing = dpi(5),
-    action_name,
+    meter_name,
     {
         layout = wibox.layout.fixed.horizontal,
         spacing = dpi(5),
         {
             layout = wibox.layout.align.vertical,
-            expand = 'none',
+            expand = "none",
             nil,
             {
                 layout = wibox.layout.fixed.horizontal,
-                forced_height = dpi(24),
-                forced_width = dpi(24),
-                action_level
+                forced_height = dpi(48),
+                forced_width = dpi(48),
+                meter_icon
             },
             nil
         },
         slider
     }
 }
--- ########################################################################
--- ########################################################################
--- ########################################################################
-return volume_setting
+-- ------------------------------------------------- --
+-- ------------------------------------------------- --
+-- ------------------------------------------------- --
+return volume_meter

@@ -1,204 +1,123 @@
-local wibox = require("wibox")
-local gears = require("gears")
-local awful = require("awful")
-local beautiful = require("beautiful")
-local spawn = awful.spawn
-local dpi = beautiful.xresources.apply_dpi
-local icons = require("theme.icons")
-local clickable_container = require("module.clickable-container")
-
-local action_name =
-    wibox.widget(
-    {
-        text = "Brightness",
-        font = "Inter Bold 10",
-        align = "left",
-        widget = wibox.widget.textbox
-    }
-)
-
+--  ______ ______ _______
+-- |      |   __ \   |   |
+-- |   ---|    __/   |   |
+-- |______|___|  |_______|
+--  _______         __
+-- |   |   |.-----.|  |_.-----.----.
+-- |       ||  -__||   _|  -__|   _|
+-- |__|_|__||_____||____|_____|__|
+-- ------------------------------------------------- --
+-- ------------------------------------------------- --
+-- ------------------------------------------------- --
+local meter_name =
+    wibox.widget {
+    text = "Brightness",
+    font = "Nineteen Ninety Seven Regular  10",
+    align = "left",
+    widget = wibox.widget.textbox
+}
+-- ------------------------------------------------- --
+-- ------------------------------------------------- --
+-- ------------------------------------------------- --
 local icon =
-    wibox.widget(
+    wibox.widget {
+    layout = wibox.layout.align.vertical,
+    expand = "none",
+    nil,
     {
-        layout = wibox.layout.align.vertical,
-        expand = "none",
-        nil,
-        {
-            image = icons.brightness,
-            resize = true,
-            widget = wibox.widget.imagebox
-        },
-        nil
-    }
-)
-
-local action_level =
-    wibox.widget(
+        image = icons.brightness,
+        resize = true,
+        widget = wibox.widget.imagebox
+    },
+    nil
+}
+-- ------------------------------------------------- --
+-- ------------------------------------------------- --
+-- ------------------------------------------------- --
+local meter_icon =
+    wibox.widget {
     {
-        {
-            {
-                icon,
-                margins = dpi(5),
-                widget = wibox.container.margin
-            },
-            widget = clickable_container
-        },
-        bg = beautiful.bg_focus,
-        shape = function(cr, width, height)
-            gears.shape.rounded_rect(cr, width, height, beautiful.groups_radius)
-        end,
-        widget = wibox.container.background
-    }
-)
-
+        icon,
+        margins = dpi(5),
+        widget = wibox.container.margin
+    },
+    bg = beautiful.groups_bg,
+    shape = function(cr, width, height)
+        gears.shape.rounded_rect(cr, width, height, beautiful.groups_radius)
+    end,
+    widget = wibox.container.background
+}
+-- ------------------------------------------------- --
+-- ------------------------------------------------- --
+-- ------------------------------------------------- --
 local slider =
-    wibox.widget(
+    wibox.widget {
+    nil,
     {
-        nil,
-        {
-            id = "brightness_slider",
-            bar_shape = gears.shape.rounded_rect,
-            bar_height = dpi(24),
-            bar_color = "#ffffff20",
-            bar_active_color = "#8b9cbe",
-            handle_color = "#f4f4f7",
-            handle_shape = gears.shape.circle,
-            handle_width = dpi(24),
-            handle_border_color = "#1b1d24",
-            handle_border_width = dpi(2),
-            maximum = 100,
-            widget = wibox.widget.slider
-        },
-        nil,
-        expand = "none",
-        forced_height = dpi(24),
-        layout = wibox.layout.align.vertical
-    }
-)
+        id = "brightness_usage",
+        max_value = 100,
+        value = 0,
+        forced_height = dpi(48),
+        color = "#f4f4f7ee",
+        background_color = "#22262d",
+        shape = gears.shape.rounded_rect,
+        widget = wibox.widget.progressbar
+    },
+    nil,
+    expand = "none",
+    forced_height = dpi(48),
+    layout = wibox.layout.align.vertical
+}
+local brightness_tooltip =
+    awful.tooltip {
+    objects = {meter_icon},
+    text = "None",
+    mode = "outside",
+    align = "right",
+    margin_leftright = dpi(8),
+    margin_topbottom = dpi(8),
+    preferred_positions = {"right", "left", "top", "bottom"}
+}
 
-local brightness_slider = slider.brightness_slider
+-- ------------------------------------------------- --
+-- ------------------------------------------------- --
+-- ------------------------------------------------- --
 
-brightness_slider:connect_signal(
-    "property::value",
-    function()
-        local brightness_level = brightness_slider:get_value()
-
-        spawn("light -S " .. math.max(brightness_level), false)
-
-        -- Update brightness osd
-        awesome.emit_signal("module::brightness_osd", brightness_level)
-    end
-)
-
-brightness_slider:buttons(
-    gears.table.join(
-        awful.button(
-            {},
-            9,
-            nil,
-            function()
-                if brightness_slider:get_value() > 100 then
-                    brightness_slider:set_value(100)
-                    return
-                end
-                brightness_slider:set_value(brightness_slider:get_value() + 5)
-            end
-        ),
-        awful.button(
-            {},
-            8,
-            nil,
-            function()
-                if brightness_slider:get_value() < 0 then
-                    brightness_slider:set_value(0)
-                    return
-                end
-                brightness_slider:set_value(brightness_slider:get_value() - 5)
-            end
-        )
-    )
-)
-
-local update_slider = function()
-    awful.spawn.easy_async_with_shell(
-        "light -G",
-        function(stdout)
-            local brightness = string.match(stdout, "(%d+)")
-            brightness_slider:set_value(tonumber(brightness))
-            awesome.emit_signal("module::brightness_osd", tonumber(brightness))
-        end
-    )
-end
-
-local action_jump = function()
-    local sli_value = brightness_slider:get_value()
-
-    local new_value = 0
-
-    if sli_value >= 0 and sli_value < 50 then
-        new_value = 50
-    elseif sli_value >= 50 and sli_value < 100 then
-        new_value = 100
-    else
-        new_value = 0
-    end
-    brightness_slider:set_value(new_value)
-end
-
-action_level:buttons(
-    awful.util.table.join(
-        awful.button(
-            {},
-            1,
-            nil,
-            function()
-                action_jump()
-            end
-        )
-    )
-)
-
--- The emit will come from the global keybind
 awesome.connect_signal(
-    "widget::brightness",
-    function()
-        update_slider()
-    end
-)
-
--- The emit will come from the OSD
-awesome.connect_signal(
-    "widget::brightness:update",
+    "signal::brightness",
     function(value)
-        brightness_slider:set_value(tonumber(value))
-        awesome.emit_signal("module::brightness_osd", tonumber(value))
+        -- Use this if you want to display usage percentage
+        slider.brightness_usage:set_value(value)
+        brightness_tooltip:set_text("Brightness Level is Currently: " .. value .. "%")
     end
 )
-
-local brightness_setting =
-    wibox.widget(
+-- ------------------------------------------------- --
+-- ------------------------------------------------- --
+-- ------------------------------------------------- --
+local brightness_meter =
+    wibox.widget {
+    layout = wibox.layout.fixed.vertical,
+    spacing = dpi(5),
+    meter_name,
     {
-        layout = wibox.layout.fixed.vertical,
+        layout = wibox.layout.fixed.horizontal,
         spacing = dpi(5),
-        action_name,
         {
-            layout = wibox.layout.fixed.horizontal,
-            spacing = dpi(5),
+            layout = wibox.layout.align.vertical,
+            expand = "none",
+            nil,
             {
-                layout = wibox.layout.align.vertical,
-                expand = "none",
-                nil,
-                {
-                    layout = wibox.layout.fixed.horizontal,
-                    forced_height = dpi(24),
-                    forced_width = dpi(24),
-                    action_level
-                },
-                nil
+                layout = wibox.layout.fixed.horizontal,
+                forced_height = dpi(48),
+                forced_width = dpi(48),
+                meter_icon
             },
-            slider
-        }
+            nil
+        },
+        slider
     }
-)
-
-return brightness_setting
+}
+-- ------------------------------------------------- --
+-- ------------------------------------------------- --
+-- ------------------------------------------------- --
+return brightness_meter

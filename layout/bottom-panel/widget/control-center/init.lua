@@ -141,24 +141,48 @@ local main_control_row_sliders =
         wibox.widget {
             layout = wibox.layout.fixed.vertical,
             spacing = dpi(5),
-            format_item(require("layout.bottom-panel.widget.control-center.widget.cpu-meter")),
-            format_item(require("layout.bottom-panel.widget.control-center.widget.ram-meter")),
-            format_item(require("layout.bottom-panel.widget.control-center.widget.temperature-meter")),
-            format_item(require("layout.bottom-panel.widget.control-center.widget.harddrive-meter"))
-        }
-    ),
-    format_item(
-        {
-            require("layout.bottom-panel.widget.control-center.widget.brightness-slider"),
-            margins = dpi(10),
-            widget = wibox.container.margin
-        }
-    ),
-    format_item(
-        {
-            require("layout.bottom-panel.widget.control-center.widget.volume-slider"),
-            margins = dpi(10),
-            widget = wibox.container.margin
+            format_item(
+                {
+                    require("layout.bottom-panel.widget.control-center.widget.cpu-meter"),
+                    margins = dpi(10),
+                    widget = wibox.container.margin
+                }
+            ),
+            format_item(
+                {
+                    require("layout.bottom-panel.widget.control-center.widget.ram-meter"),
+                    margins = dpi(10),
+                    widget = wibox.container.margin
+                }
+            ),
+            format_item(
+                {
+                    require("layout.bottom-panel.widget.control-center.widget.temperature-meter"),
+                    margins = dpi(10),
+                    widget = wibox.container.margin
+                }
+            ),
+            format_item(
+                {
+                    require("layout.bottom-panel.widget.control-center.widget.harddrive-meter"),
+                    margins = dpi(10),
+                    widget = wibox.container.margin
+                }
+            ),
+            format_item(
+                {
+                    require("layout.bottom-panel.widget.control-center.widget.brightness-slider"),
+                    margins = dpi(10),
+                    widget = wibox.container.margin
+                }
+            ),
+            format_item(
+                {
+                    require("layout.bottom-panel.widget.control-center.widget.volume-slider"),
+                    margins = dpi(10),
+                    widget = wibox.container.margin
+                }
+            )
         }
     )
 }

@@ -18,7 +18,7 @@ local brightness_script = [[
 
 local brightness_max = [[
    sh -c "
-   light -M
+   light -M 
 "]]
 
 local emit_brightness_info = function()
@@ -27,7 +27,7 @@ local emit_brightness_info = function()
         {
             stdout = function(value)
                 awful.spawn.with_line_callback(
-                    brightness_script,
+                    brightness_max,
                     {
                         stdout = function(max)
                             percentage = tonumber(value) / tonumber(max) * 100
