@@ -11,9 +11,9 @@
 -- ------------------------------------------------- --
 local meter_name =
     wibox.widget {
-    text = 'Hard Drive',
-    font = 'Nineteen Ninety Seven Regular  10',
-    align = 'left',
+    text = "Hard Drive",
+    font = "Nineteen Ninety Seven Regular  10",
+    align = "left",
     widget = wibox.widget.textbox
 }
 -- ------------------------------------------------- --
@@ -22,7 +22,7 @@ local meter_name =
 local icon =
     wibox.widget {
     layout = wibox.layout.align.vertical,
-    expand = 'none',
+    expand = "none",
     nil,
     {
         image = icons.harddisk,
@@ -54,17 +54,17 @@ local slider =
     wibox.widget {
     nil,
     {
-        id = 'hdd_usage',
+        id = "hdd_usage",
         max_value = 100,
         value = 29,
         forced_height = dpi(48),
-        color = '#f4f4f7ee',
-        background_color = '#22262d',
+        color = "#f4f4f7ee",
+        background_color = "#22262d",
         shape = gears.shape.rounded_rect,
         widget = wibox.widget.progressbar
     },
     nil,
-    expand = 'none',
+    expand = "none",
     forced_height = dpi(36),
     layout = wibox.layout.align.vertical
 }
@@ -74,25 +74,23 @@ local slider =
 local drive_tooltip =
     awful.tooltip {
     objects = {meter_icon},
-    text = 'None',
-    mode = 'outside',
-    align = 'right',
+    text = "None",
+    mode = "outside",
+    align = "right",
     margin_leftright = dpi(8),
     margin_topbottom = dpi(8),
-    preferred_positions = {'right', 'left', 'top', 'bottom'}
+    preferred_positions = {"right", "left", "top", "bottom"}
 }
 -- ------------------------------------------------- --
 -- ------------------------------------------------- --
 -- ------------------------------------------------- --
-watch(
-    [[bash -c "df -h /home|grep '^/' | awk '{print $5}'"]],
-    90,
-    function(_, stdout)
-        local space_consumed = stdout:match('(%d+)')
-        slider.hdd_usage:set_value(tonumber(space_consumed))
-        local tip = tonumber(space_consumed)
-        tip = string.sub(tip, 1, 2)
-        drive_tooltip:set_text('Drive is ' .. tip .. '% Occupied')
+
+awesome.connect_signal(
+    "signal::disk",
+    function(used, total)
+        slider.value = tonumber(100 * used / total)
+        tip = string.sub(slider.value, 1, 2)
+        drive_tooltip:set_text("Drive is " .. tip .. "% Occupied")
     end
 )
 -- ------------------------------------------------- --
@@ -108,7 +106,7 @@ local harddrive_meter =
         spacing = dpi(5),
         {
             layout = wibox.layout.align.vertical,
-            expand = 'none',
+            expand = "none",
             nil,
             {
                 layout = wibox.layout.fixed.horizontal,
