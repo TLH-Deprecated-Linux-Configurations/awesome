@@ -11,9 +11,9 @@
 -- ------------------------------------------------- --
 local meter_name =
     wibox.widget {
-    text = 'RAM',
-    font = 'Nineteen Ninety Seven Regular  10',
-    align = 'left',
+    text = "RAM",
+    font = "Nineteen Ninety Seven Regular  10",
+    align = "left",
     widget = wibox.widget.textbox
 }
 -- ------------------------------------------------- --
@@ -22,7 +22,7 @@ local meter_name =
 local icon =
     wibox.widget {
     layout = wibox.layout.align.vertical,
-    expand = 'none',
+    expand = "none",
     nil,
     {
         image = icons.memory,
@@ -31,6 +31,9 @@ local icon =
     },
     nil
 }
+-- ------------------------------------------------- --
+-- ------------------------------------------------- --
+-- ------------------------------------------------- --
 
 local meter_icon =
     wibox.widget {
@@ -52,51 +55,50 @@ local slider =
     wibox.widget {
     nil,
     {
-        id = 'ram_usage',
+        id = "ram_usage",
         max_value = 100,
         value = 29,
         forced_height = dpi(48),
-        color = '#f4f4f7ee',
-        background_color = '#22262d',
+        color = "#f4f4f7ee",
+        background_color = "#22262d",
         shape = gears.shape.rounded_rect,
         widget = wibox.widget.progressbar
     },
     nil,
-    expand = 'none',
+    expand = "none",
     forced_height = dpi(36),
     layout = wibox.layout.align.vertical
 }
-
+-- ------------------------------------------------- --
+-- ------------------------------------------------- --
+-- ------------------------------------------------- --
+-- provide the tooltip percentage number
 local ram_tooltip =
     awful.tooltip {
     objects = {meter_icon},
-    text = 'None',
-    mode = 'outside',
-    align = 'right',
+    text = "None",
+    mode = "outside",
+    align = "right",
     margin_leftright = dpi(8),
     margin_topbottom = dpi(8),
-    preferred_positions = {'right', 'left', 'top', 'bottom'}
+    preferred_positions = {"right", "left", "top", "bottom"}
 }
 -- ------------------------------------------------- --
 -- ------------------------------------------------- --
 -- ------------------------------------------------- --
-watch(
-    'bash -c "free | grep -z Mem.*Swap.*"',
-    15,
-    function(_, stdout)
-        local total,
-            used,
-            free,
-            shared,
-            buff_cache,
-            available,
-            total_swap,
-            used_swap,
-            free_swap = stdout:match('(%d+)%s*(%d+)%s*(%d+)%s*(%d+)%s*(%d+)%s*(%d+)%s*Swap:%s*(%d+)%s*(%d+)%s*(%d+)')
-        slider.ram_usage:set_value(used / total * 100)
-        local tip = (used / total * 100)
-        tip = string.sub(tip, 1, 2)
-        ram_tooltip:set_text('RAM Utilization: ' .. tip .. '%')
+local ram_script = [[
+  sh -c "
+  free -m | grep 'Mem:' | awk '{printf \"%d@@%d@\", $7, $2}'
+  "]]
+
+-- Ram info
+awesome.connect_signal(
+    "signal::ram",
+    function(used, total)
+        local used_ram_percentage = (used / total) * 100
+        slider.value = used_ram_percentage
+        -- TODO set this to chop off extraneous decimel place numbers and round up to 2 places after decimel
+        ram_tooltip:set_text("RAM Utilization: " .. used_ram_percentage .. "%")
     end
 )
 -- ------------------------------------------------- --
@@ -112,7 +114,7 @@ local ram_meter =
         spacing = dpi(5),
         {
             layout = wibox.layout.align.vertical,
-            expand = 'none',
+            expand = "none",
             nil,
             {
                 layout = wibox.layout.fixed.horizontal,
