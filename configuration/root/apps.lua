@@ -54,12 +54,8 @@ return {
 		-- ------------------------------------------------- --
 		-- Default app menu
 		--
-		rofi_appmenu = " bash "
-			.. HOME
-			.. "/.config/awesome/bin/applauncher.sh "
-			.. screen.primary.dpi
-			.. " "
-			.. filesystem.get_configuration_dir(),
+		rofi_appmenu = " bash " ..
+			HOME .. "/.config/awesome/bin/applauncher.sh " .. screen.primary.dpi .. " " .. filesystem.get_configuration_dir()
 		-- ------------------------------------------------- --
 	},
 	-- ------------------------------------------------- --
@@ -68,7 +64,6 @@ return {
 		"xsettingsd &",
 		'xrdb "$HOME"/.Xresources &',
 		"pnmixer &",
-		'sudo pkill goautolock && goautolock --time 600 --notify 30 --locker "$HOME/.config/awesome/bin/blur.sh" &',
 		--'dropbox start &',
 		"sudo pkill /usr/libexec/xfce-polkit && /usr/libexec/xfce-polkit &",
 		-- 	'xinput set-prop "ELAN1301:00 04F3:30C6 Touchpad" "libinput Tapping Enabled" 1 &',
@@ -77,9 +72,9 @@ return {
 		"greenclip daemon &",
 		"udiskie &",
 		"picom -b --experimental-backends &",
-
+		"xautolock -time 5 -locker /home/tlh/.config/awesome/bin/blur.sh & ",
 		"dbus-daemon --session --address=unix:path=$XDG_RUNTIME_DIR/bus &",
-		"xfce4-power-manager &",
+		"xfce4-power-manager &"
 	},
 	-- ------------------------------------------------- --
 	-- List of binaries/shell scripts that will execute for a certain task
@@ -96,6 +91,6 @@ return {
 		-- ------------------------------------------------- --
 		-- Update profile picture
 		--
-		update_profile = utils_dir .. "/profile-image",
-	},
+		update_profile = utils_dir .. "/profile-image"
+	}
 }

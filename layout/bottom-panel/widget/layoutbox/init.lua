@@ -10,8 +10,8 @@
 -- ------------------------------------------------- --
 -- ------------------------------------------------- --
 -- ------------------------------------------------- --
-local clickable_container = require('module.clickable-container')
-local mod_key = require('configuration.keys.mod')
+local clickable_container = require("module.clickable-container")
+local mod_key = require("configuration.keys.mod")
 -- ------------------------------------------------- --
 -- ------------------------------------------------- --
 -- ------------------------------------------------- --
@@ -29,7 +29,7 @@ local ll =
     widget_template = {
         {
             {
-                id = 'icon_role',
+                id = "icon_role",
                 forced_height = dpi(84),
                 forced_width = dpi(84),
                 widget = wibox.widget.imagebox
@@ -37,7 +37,7 @@ local ll =
             margins = dpi(15),
             widget = wibox.container.margin
         },
-        id = 'background_role',
+        id = "background_role",
         forced_width = dpi(84),
         forced_height = dpi(84),
         shape = gears.shape.rounded_rect,
@@ -66,7 +66,7 @@ local layout_popup =
 -- ------------------------------------------------- --
 layout_popup.timer = gears.timer {timeout = 2}
 layout_popup.timer:connect_signal(
-    'timeout',
+    "timeout",
     function()
         layout_popup.visible = false
         layout_popup.screen = mouse.screen
@@ -105,12 +105,12 @@ awful.keygrabber {
         layout_popup.timer:start()
     end,
     export_keybindings = true,
-    stop_event = 'release',
-    stop_key = {'Escape', 'Super_L', 'Super_R', 'Mod4'},
+    stop_event = "release",
+    stop_key = {"Escape", "Super_L", "Super_R", "Mod4"},
     keybindings = {
         {
-            {'Mod4', 'Shift'},
-            ' ',
+            {"Mod4", "Shift"},
+            " ",
             function()
                 awful.layout.inc(-1)
                 layout_popup.timer:start()
@@ -118,8 +118,8 @@ awful.keygrabber {
             end
         },
         {
-            {'Mod4'},
-            ' ',
+            {"Mod4"},
+            " ",
             function()
                 awful.layout.inc(1)
                 layout_popup.timer:start()

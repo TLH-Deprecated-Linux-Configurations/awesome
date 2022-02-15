@@ -321,7 +321,7 @@ local awesome_overrides = function(theme)
 	-- ------------------------------------------------- --
 	-- Taglist
 	--
-	theme.taglist_font = "awesomewm-font 16"
+	theme.taglist_font = "awesomewm-font 19"
 	theme.taglist_bg = "linear:0,0:0,21:0,#272A34:1,#1B1D24"
 	theme.taglist_fg_focus = "#f4f4f7"
 	theme.taglist_fg = "#e9efff"

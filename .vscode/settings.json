@@ -54,7 +54,8 @@
     "freedesktop",
     "update_bars_visibility",
     "awestore",
-    "gfs"
+    "gfs",
+    "class"
   ],
   "cSpell.words": [
     "goautolock",

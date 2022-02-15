@@ -102,7 +102,6 @@ local get_taglist = function(s)
                             }
                         },
                         nil,
-                        width = 300,
                         strategy = "min",
                         layout = wibox.layout.constraint
                     },
@@ -112,7 +111,7 @@ local get_taglist = function(s)
                 shape = function(cr, width, height)
                     gears.shape.rounded_rect(cr, width, height, 6)
                 end,
-                forced_width = dpi(36),
+                forced_width = dpi(42),
                 border_width = dpi(0)
             },
             id = "background_role",

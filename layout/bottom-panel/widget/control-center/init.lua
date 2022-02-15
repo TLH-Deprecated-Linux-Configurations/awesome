@@ -73,7 +73,7 @@ local vertical_separator =
 local control_center_row_one =
     wibox.widget {
     layout = wibox.layout.align.horizontal,
-    forced_height = dpi(48),
+    forced_height = dpi(64),
     nil,
     format_item(require("layout.bottom-panel.widget.control-center.widget.user-profile")()),
     {
@@ -81,9 +81,9 @@ local control_center_row_one =
             {
                 layout = wibox.layout.fixed.horizontal,
                 spacing = dpi(10),
-                require("layout.bottom-panel.widget.control-center.widget.control-center-switch")(),
                 vertical_separator,
-                require("layout.bottom-panel.widget.control-center.widget.exit-screen-toggle")()
+                require("layout.bottom-panel.widget.control-center.widget.exit-screen-toggle")(),
+                vertical_separator
             }
         ),
         left = dpi(10),
