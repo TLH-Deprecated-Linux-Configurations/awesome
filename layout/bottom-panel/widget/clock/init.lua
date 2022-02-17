@@ -168,7 +168,7 @@ local create_clock = function(s)
             },
             style_focus = {
                 border_width = dpi(0),
-                border_color = beautiful.fg_normal,
+                border_color = "#f4f4f7",
                 bg_color = beautiful.accent,
                 shape = function(cr, width, height)
                     gears.shape.partially_rounded_rect(cr, width, height, true, true, true, true, dpi(12))

@@ -37,7 +37,7 @@ local battery_pill =
     wibox.widget {
     widget = clickable_container {
         {
-            {battery_icon, margins = dpi(3), widget = wibox.container.margin},
+            {battery_icon, margins = dpi(7), widget = wibox.container.margin},
             {battery_text, margins = dpi(1), widget = wibox.container.margin},
             layout = wibox.layout.fixed.horizontal
         },

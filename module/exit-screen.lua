@@ -13,7 +13,7 @@
 -- Assign the directory to pull images for icons from
 --
 local config_dir = filesystem.get_configuration_dir()
-local widget_icon_dir = config_dir .. 'configuration/user-profile/'
+local widget_icon_dir = config_dir .. "configuration/user-profile/"
 
 -- ------------------------------------------------- --
 -- ------------------------------------------------- --
@@ -23,7 +23,7 @@ local widget_icon_dir = config_dir .. 'configuration/user-profile/'
 local profile_imagebox =
     wibox.widget(
     {
-        image = widget_icon_dir .. 'user.png',
+        image = widget_icon_dir .. "user.png",
         resize = true,
         forced_height = dpi(140),
         clip_shape = gears.shape.square,
@@ -39,13 +39,13 @@ local update_profile_pic = function()
     awful.spawn.easy_async_with_shell(
         apps.utils.update_profile,
         function(stdout)
-            stdout = stdout:gsub('%\n', '')
-            if not stdout:match('default') then
+            stdout = stdout:gsub("%\n", "")
+            if not stdout:match("default") then
                 profile_imagebox:set_image(stdout)
             else
-                profile_imagebox:set_image(widget_icon_dir .. 'user.png')
+                profile_imagebox:set_image(widget_icon_dir .. "user.png")
             end
-            profile_imagebox:emit_signal('widget::redraw_needed')
+            profile_imagebox:emit_signal("widget::redraw_needed")
         end
     )
 end
@@ -67,8 +67,8 @@ local build_power_button = function(name, icon, callback)
         {
             text = name,
             font = beautiful.exit_screen_font,
-            align = 'center',
-            valign = 'center',
+            align = "center",
+            valign = "center",
             widget = wibox.widget.textbox
         }
     )
@@ -121,7 +121,7 @@ local build_power_button = function(name, icon, callback)
     -- ------------------------------------------------- --
     -- signal indicating button press is released
     exit_screen_item:connect_signal(
-        'button::release',
+        "button::release",
         function()
             callback()
         end
@@ -133,8 +133,8 @@ end
 -- ------------------------------------------------- --
 -- Suspend Command
 local suspend_command = function()
-    awesome.emit_signal('module::exit_screen:hide')
-    awful.spawn.with_shell(apps.default.lock .. ' & loginctl suspend')
+    awesome.emit_signal("module::exit_screen:hide")
+    awful.spawn.with_shell(apps.default.lock .. " & loginctl suspend")
 end
 -- ------------------------------------------------- --
 -- ------------------------------------------------- --
@@ -146,31 +146,31 @@ end
 -- ------------------------------------------------- --
 -- ------------------------------------------------- --
 local lock_command = function()
-    awesome.emit_signal('module::exit_screen:hide')
+    awesome.emit_signal("module::exit_screen:hide")
     awful.spawn.with_shell(apps.default.lock)
 end
 -- ------------------------------------------------- --
 -- ------------------------------------------------- --
 -- ------------------------------------------------- --
 local poweroff_command = function()
-    awful.spawn.with_shell('poweroff')
-    awesome.emit_signal('module::exit_screen:hide')
+    awful.spawn.with_shell("poweroff")
+    awesome.emit_signal("module::exit_screen:hide")
 end
 -- ------------------------------------------------- --
 -- ------------------------------------------------- --
 -- ------------------------------------------------- --
 local reboot_command = function()
-    awful.spawn.with_shell('reboot')
-    awesome.emit_signal('module::exit_screen:hide')
+    awful.spawn.with_shell("reboot")
+    awesome.emit_signal("module::exit_screen:hide")
 end
 -- ------------------------------------------------- --
 -- ------------------------------------------------- --
 -- ------------------------------------------------- --
-local poweroff = build_power_button('Shutdown', icons.power, poweroff_command)
-local reboot = build_power_button('Restart', icons.restart, reboot_command)
-local suspend = build_power_button('Sleep', icons.sleep, suspend_command)
-local logout = build_power_button('Logout', icons.logout, logout_command)
-local lock = build_power_button('Lock', icons.lock, lock_command)
+local poweroff = build_power_button("Shutdown", icons.power, poweroff_command)
+local reboot = build_power_button("Restart", icons.restart, reboot_command)
+local suspend = build_power_button("Sleep", icons.sleep, suspend_command)
+local logout = build_power_button("Logout", icons.logout, logout_command)
+local lock = build_power_button("Lock", icons.lock, lock_command)
 -- ------------------------------------------------- --
 -- ------------------------------------------------- --
 -- ------------------------------------------------- --
@@ -179,11 +179,11 @@ local create_exit_screen = function(s)
         wibox(
         {
             screen = s,
-            type = 'splash',
+            type = "splash",
             visible = false,
             ontop = true,
             bg = beautiful.exit_screen_bg,
-            fg = beautiful.fg_normal,
+            fg = "#f4f4f7",
             height = s.geometry.height,
             width = s.geometry.width,
             x = s.geometry.x,
@@ -199,14 +199,14 @@ local create_exit_screen = function(s)
                 {},
                 2,
                 function()
-                    awesome.emit_signal('module::exit_screen:hide')
+                    awesome.emit_signal("module::exit_screen:hide")
                 end
             ),
             awful.button(
                 {},
                 3,
                 function()
-                    awesome.emit_signal('module::exit_screen:hide')
+                    awesome.emit_signal("module::exit_screen:hide")
                 end
             )
         )
@@ -217,7 +217,7 @@ local create_exit_screen = function(s)
     s.exit_screen:setup(
         {
             layout = wibox.layout.align.vertical,
-            expand = 'none',
+            expand = "none",
             nil,
             {
                 layout = wibox.layout.align.vertical,
@@ -228,18 +228,18 @@ local create_exit_screen = function(s)
                         spacing = dpi(5),
                         {
                             layout = wibox.layout.align.vertical,
-                            expand = 'none',
+                            expand = "none",
                             nil,
                             nil
                         }
                     },
                     nil,
-                    expand = 'none',
+                    expand = "none",
                     layout = wibox.layout.align.horizontal
                 },
                 {
                     layout = wibox.layout.align.horizontal,
-                    expand = 'none',
+                    expand = "none",
                     nil,
                     {
                         widget = wibox.container.margin,
@@ -249,7 +249,7 @@ local create_exit_screen = function(s)
                 },
                 {
                     layout = wibox.layout.align.horizontal,
-                    expand = 'none',
+                    expand = "none",
                     nil,
                     {
                         {
@@ -278,7 +278,7 @@ end
 -- ------------------------------------------------- --
 -- ------------------------------------------------- --
 screen.connect_signal(
-    'request::desktop_decoration',
+    "request::desktop_decoration",
     function(s)
         create_exit_screen(s)
     end
@@ -287,7 +287,7 @@ screen.connect_signal(
 -- ------------------------------------------------- --
 -- ------------------------------------------------- --
 screen.connect_signal(
-    'removed',
+    "removed",
     function(s)
         create_exit_screen(s)
     end
@@ -299,20 +299,20 @@ local exit_screen_grabber =
     awful.keygrabber(
     {
         auto_start = true,
-        stop_event = 'release',
+        stop_event = "release",
         keypressed_callback = function(self, mod, key, command)
-            if key == 's' then
+            if key == "s" then
                 suspend_command()
-            elseif key == 'e' then
+            elseif key == "e" then
                 logout_command()
-            elseif key == 'l' then
+            elseif key == "l" then
                 lock_command()
-            elseif key == 'p' then
+            elseif key == "p" then
                 poweroff_command()
-            elseif key == 'r' then
+            elseif key == "r" then
                 reboot_command()
-            elseif key == 'Escape' or key == 'q' or key == 'x' then
-                awesome.emit_signal('module::exit_screen:hide')
+            elseif key == "Escape" or key == "q" or key == "x" then
+                awesome.emit_signal("module::exit_screen:hide")
             end
         end
     }
@@ -321,7 +321,7 @@ local exit_screen_grabber =
 -- ------------------------------------------------- --
 -- ------------------------------------------------- --
 awesome.connect_signal(
-    'module::exit_screen:show',
+    "module::exit_screen:show",
     function()
         for s in screen do
             s.exit_screen.visible = false
@@ -334,7 +334,7 @@ awesome.connect_signal(
 -- ------------------------------------------------- --
 -- ------------------------------------------------- --
 awesome.connect_signal(
-    'module::exit_screen:hide',
+    "module::exit_screen:hide",
     function()
         exit_screen_grabber:stop()
         for s in screen do

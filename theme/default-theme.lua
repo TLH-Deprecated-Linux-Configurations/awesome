@@ -76,11 +76,11 @@ local awesome_overrides = function(theme)
 	-- ------------------------------------------------- --
 	-- ------------------------------------------------- --
 	-- Background
-	theme.bg_normal = "linear:0,0:0,21:0,#272A34:1,#1B1D24"
+	theme.bg_normal = "linear:0,0:0,21:0,#484d5e:1,#272A34"
 	theme.bg_focus = "linear:0,0:0,21:0,#323643:1,#23252e"
 	theme.bg_urgent = "linear:0,0:0,21:0,#272A34:1,#1B1D24"
 	theme.bg_menu = "linear:0,0:0,21:0,#323643:1,#1b1d24"
-	theme.bg_button = "linear:0,0:0,-21:0,#484d5e:1,#323643"
+	theme.bg_button = "linear:0,0:0,-21:0,#484d5e:1,#272A34"
 	-- ------------------------------------------------- --
 	-- ------------------------------------------------- --
 	-- ------------------------------------------------- --
@@ -333,7 +333,7 @@ local awesome_overrides = function(theme)
 	-- ------------------------------------------------- --
 	-- Tasklist
 	--
-	theme.tasklist_font = "Nineteen Ninety Seven Regular   10"
+	theme.tasklist_font = "Nineteen Ninety Seven Regular  10"
 	theme.tasklist_bg_normal = "linear:0,0:0,21:0,#272A34:1,#1B1D24"
 	theme.tasklist_bg_focus = "linear:0,0:0,21:0,#484d5e:1,#272A34"
 	theme.tasklist_bg_urgent = "#E91E63" .. "99"

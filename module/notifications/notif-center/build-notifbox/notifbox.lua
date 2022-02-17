@@ -15,15 +15,19 @@ notifbox.create = function(icon, n, width)
     local time = os.date("%H:%M")
     local box = {}
 
-    local dismiss = button.create_image_onclick(beautiful.delete_grey_icon,
-                                                beautiful.delete_icon,
-                                                function()
-        _G.remove_notifbox(box)
-    end)
+    local dismiss =
+        button.create_image_onclick(
+        beautiful.delete_grey_icon,
+        beautiful.delete_icon,
+        function()
+            _G.remove_notifbox(box)
+        end
+    )
     dismiss.forced_height = dpi(14)
     dismiss.forced_width = dpi(14)
 
-    local img_icon = wibox.widget {
+    local img_icon =
+        wibox.widget {
         image = icon,
         forced_width = dpi(35),
         forced_height = dpi(35),
@@ -34,7 +38,8 @@ notifbox.create = function(icon, n, width)
         widget = wibox.widget.imagebox
     }
 
-    box = wibox.widget {
+    box =
+        wibox.widget {
         {
             {
                 {
@@ -43,12 +48,10 @@ notifbox.create = function(icon, n, width)
                             {
                                 image = icon,
                                 resize = true,
-                                clip_shape = helpers.rrect(
-                                    beautiful.border_radius - 3),
+                                clip_shape = helpers.rrect(beautiful.border_radius - 3),
                                 widget = wibox.widget.imagebox
                             },
-                            -- bg = beautiful.xcolor1,
-                            strategy = 'exact',
+                            strategy = "exact",
                             height = 40,
                             width = 40,
                             widget = wibox.container.constraint
@@ -67,9 +70,7 @@ notifbox.create = function(icon, n, width)
                         {
                             {
                                 {
-                                    step_function = wibox.container.scroll
-                                        .step_functions
-                                        .waiting_nonlinear_back_and_forth,
+                                    step_function = wibox.container.scroll.step_functions.waiting_nonlinear_back_and_forth,
                                     speed = 50,
                                     {
                                         markup = "<b>" .. n.title .. "</b>",
@@ -123,7 +124,7 @@ notifbox.create = function(icon, n, width)
             bottom = dpi(2),
             widget = wibox.container.margin
         },
-        bg = beautiful.xcolor0 .. "55",
+        bg = beautiful.bg_normal,
         shape = helpers.rrect(beautiful.border_radius),
         widget = wibox.container.background
     }

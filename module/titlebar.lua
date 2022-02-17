@@ -12,15 +12,15 @@
 -- ------------------------------------------------- --
 -- ------------------------------------------------- --
 -- External Library Handling
-local awful = require('awful')
-local gears = require('gears')
+local awful = require("awful")
+local gears = require("gears")
 
 -- Widget and layout library
-local wibox = require('wibox')
+local wibox = require("wibox")
 
 -- Theme handling library
-local beautiful = require('beautiful')
-local dpi = require('beautiful.xresources').apply_dpi
+local beautiful = require("beautiful")
+local dpi = require("beautiful.xresources").apply_dpi
 -- ------------------------------------------------- --
 -- ------------------------------------------------- --
 -- ------------------------------------------------- --
@@ -34,7 +34,7 @@ end
 -- ------------------------------------------------- --
 -- ------------------------------------------------- --
 _G.client.connect_signal(
-    'manage',
+    "manage",
     function(c)
         awful.titlebar.show(c)
     end
@@ -46,7 +46,7 @@ _G.client.connect_signal(
 -- Add a titlebar if titlebars_enabled is set to true in the rules.
 --
 _G.client.connect_signal(
-    'request::titlebars',
+    "request::titlebars",
     function(c)
         -- mouse button handling for the titlebar
         --
@@ -57,8 +57,8 @@ _G.client.connect_signal(
                 1,
                 function()
                     c:emit_signal(
-                        'request::activate',
-                        'titlebar',
+                        "request::activate",
+                        "titlebar",
                         {
                             raise = true
                         }
@@ -72,8 +72,8 @@ _G.client.connect_signal(
                 3,
                 function()
                     c:emit_signal(
-                        'request::activate',
-                        'titlebar',
+                        "request::activate",
+                        "titlebar",
                         {
                             raise = true
                         }
@@ -133,7 +133,7 @@ _G.client.connect_signal(
         awful.titlebar(
             c,
             {
-                position = 'top',
+                position = "top",
                 size = beautiful.titlebar_size
             }
         ):setup {
@@ -157,9 +157,9 @@ _G.client.connect_signal(
 
                 {
                     -- Title
-                    align = 'center',
+                    align = "center",
                     widget = awful.titlebar.widget.titlewidget(c),
-                    fg = beautiful.xcolor15
+                    fg = "#f4f4f7"
                 },
                 buttons = buttons,
                 layout = wibox.layout.flex.horizontal
@@ -173,7 +173,7 @@ _G.client.connect_signal(
                     },
                     width = 0,
                     height = 0,
-                    strategy = 'exact',
+                    strategy = "exact",
                     layout = wibox.container.constraint
                 },
                 {
@@ -206,7 +206,7 @@ _G.client.connect_signal(
                     },
                     width = 0,
                     height = 0,
-                    strategy = 'exact',
+                    strategy = "exact",
                     layout = wibox.container.constraint
                 },
                 top = dpi(2),

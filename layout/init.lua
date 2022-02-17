@@ -11,6 +11,7 @@
 local bottom_panel = require("layout.bottom-panel")
 local control_center = require("layout.bottom-panel.widget.control-center")
 local info_center = require("layout.bottom-panel.widget.info-center")
+local c = client
 -- ------------------------------------------------- --
 -- Create a wibox panel for each screen and add it
 screen.connect_signal(

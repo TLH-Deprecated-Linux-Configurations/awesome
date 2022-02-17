@@ -250,7 +250,7 @@ local control_center = function(s)
         width = dpi(panel_width),
         maximum_width = dpi(panel_width),
         bg = beautiful.bg_focus,
-        fg = beautiful.fg_normal,
+        fg = "#f4f4f7",
         shape = function(cr, w, h)
             gears.shape.rounded_rect(cr, w, h, 12)
         end

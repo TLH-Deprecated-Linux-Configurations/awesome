@@ -31,19 +31,19 @@ naughty.config.presets.critical.timeout = 0
 -- Configure Notifications of differing priority
 naughty.config.presets.normal = {
     font = "Nineteen Ninety Seven 18",
-    fg = beautiful.fg_normal,
+    fg = "#f4f4f7",
     bg = beautiful.bg_normal
 }
 
 naughty.config.presets.low = {
     font = "Nineteen Ninety Seven 18",
-    fg = beautiful.fg_normal,
+    fg = "#f4f4f7",
     bg = beautiful.bg_normal
 }
 
 naughty.config.presets.critical = {
     font = "Nineteen Ninety Seven 18",
-    fg = beautiful.fg_normal,
+    fg = "#f4f4f7",
     bg = beautiful.bg_normal,
     timeout = 0
 }

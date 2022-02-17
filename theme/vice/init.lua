@@ -19,8 +19,8 @@
 -- ------------------------------------------------- --
 -- Import libraries and modules
 --
-local filesystem = require('gears.filesystem')
-local theme_dir = filesystem.get_configuration_dir() .. '/theme'
+local filesystem = require("gears.filesystem")
+local theme_dir = filesystem.get_configuration_dir() .. "/theme"
 -- ------------------------------------------------- --
 -- ------------------------------------------------- --
 -- ------------------------------------------------- --
@@ -32,63 +32,74 @@ local theme = {}
 -- ------------------------------------------------- --
 -- Set Icons Location and Default Font
 --
-theme.icons = theme_dir .. '/icons/'
-theme.font = 'Nineteen Ninety Seven Regular  10'
-theme.font_bold = 'Nineteen Ninety Seven Regular  10'
+theme.icons = theme_dir .. "/icons/"
+theme.font = "Nineteen Ninety Seven Regular  10"
+theme.font_bold = "Nineteen Ninety Seven Regular  10"
 -- ------------------------------------------------- --
 -- ------------------------------------------------- --
 -- ------------------------------------------------- --
 -- Colorscheme
 --
-theme.system_black_dark = '#17191e'
-theme.system_black_light = '#555e70'
+theme.system_black_dark = "#17191e"
+theme.xcolor0 = theme.system_black_dark
+theme.system_black_light = "#555e70"
+theme.xcolor8 = theme.system_black_light
 
-theme.system_red_dark = '#ff28a9'
-theme.system_red_light = '#ff3d81'
+theme.system_red_dark = "#ff28a9"
+theme.xcolor1 = theme.system_red_dark
+theme.system_red_light = "#ff3d81"
+theme.xcolor9 = theme.system_red_light
+theme.system_green_dark = "#44ffdd"
+theme.xcolor2 = theme.system_green_dark
+theme.system_green_light = "#00ffcc"
+theme.xcolor10 = theme.system_green_light
 
-theme.system_green_dark = '#44ffdd'
-theme.system_green_light = '#00ffcc'
-
-theme.system_yellow_dark = '#F9f871'
-theme.system_yellow_light = '#F0ffaa'
-
-theme.system_blue_dark = '#0badff'
-theme.system_blue_light = '#00caff'
-
-theme.system_magenta_dark = '#6c71c4'
-theme.system_magenta_light = '#8265ff'
-
-theme.system_cyan_dark = '#00eaff'
-theme.system_cyan_light = '#00fae9'
-
-theme.system_white_dark = '#b2bfd9'
-theme.system_white_light = '#F4f4f7'
+theme.system_yellow_dark = "#F9f871"
+theme.xcolor3 = theme.system_yellow_dark
+theme.system_yellow_light = "#F0ffaa"
+theme.xcolor11 = theme.system_yellow_light
+theme.system_blue_dark = "#0badff"
+theme.xcolor4 = theme.system_blue_dark
+theme.system_blue_light = "#00caff"
+theme.xcolor12 = theme.system_blue_light
+theme.system_magenta_dark = "#6c71c4"
+theme.xcolor5 = theme.system_magenta_dark
+theme.system_magenta_light = "#8265ff"
+theme.xcolor13 = theme.system_magenta_light
+theme.system_cyan_dark = "#00eaff"
+theme.xcolor6 = theme.system_cyan_dark
+theme.system_cyan_light = "#00fae9"
+theme.xcolor14 = theme.system_cyan_light
+theme.system_white_dark = "#b2bfd9"
+theme.xcolor7 = theme.system_white_dark
+theme.system_white_light = "#F4f4f7"
+theme.xcolor15 = theme.system_white_light
 
 -- ------------------------------------------------- --
 -- ------------------------------------------------- --
 -- ------------------------------------------------- --
 -- Accent color
 --
-theme.accent = 'linear:0,0:0,51:0,#8b9cbe:1,#5A647A'
+theme.accent = "linear:0,0:0,51:0,#8b9cbe:1,#5A647A"
 -- ------------------------------------------------- --
 -- ------------------------------------------------- --
 -- ------------------------------------------------- --
 -- Background color
 --
-theme.background = '#00000066'
-theme.background_light = '#f2f2f266'
+theme.background = "#00000066"
+theme.background_light = "#f2f2f266"
 -- ------------------------------------------------- --
 -- ------------------------------------------------- --
 -- ------------------------------------------------- --
 -- Transparent
 --
-theme.transparent = '#00000033'
+theme.transparent = "#00000033"
 -- ------------------------------------------------- --
 -- ------------------------------------------------- --
 -- ------------------------------------------------- --
 -- Awesome icon
 --
-theme.awesome_icon = theme.icons .. 'awesome.svg'
+theme.awesome_icon = theme.icons .. "awesome.svg"
 -- ------------------------------------------------- --
 -- ------------------------------------------------- --
 -- ------------------------------------------------- --
