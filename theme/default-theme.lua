@@ -53,7 +53,7 @@ local awesome_overrides = function(theme)
 	-- ------------------------------------------------- --
 	-- Default wallpaper path
 	--
-	theme.wallpaper = theme.dir .. "/wallpapers/6.png"
+	theme.wallpaper = theme.dir .. "/wallpapers/0.png"
 	-- ------------------------------------------------- --
 	-- ------------------------------------------------- --
 	-- ------------------------------------------------- --
@@ -63,8 +63,8 @@ local awesome_overrides = function(theme)
 	-- ------------------------------------------------- --
 	-- Foreground
 	--
-	theme.fg_normal = "#f4f4f7de"
-	theme.fg_focus = "#e9efff"
+	theme.fg_normal = "#e9efffff"
+	theme.fg_focus = "#f4f4f7ff"
 	theme.fg_urgent = "#E91E63cc"
 	-- ------------------------------------------------- --
 	-- ------------------------------------------------- --

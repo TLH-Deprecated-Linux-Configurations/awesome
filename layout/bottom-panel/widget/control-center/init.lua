@@ -135,56 +135,32 @@ local main_control_row_two =
 -- ------------------------------------------------- --
 local main_control_row_sliders =
     wibox.widget {
-    layout = wibox.layout.fixed.vertical,
+    layout = wibox.layout.flex.horizontal,
     spacing = dpi(10),
     format_item_no_fix_height(
         wibox.widget {
-            layout = wibox.layout.fixed.vertical,
-            spacing = dpi(5),
-            format_item(
-                {
-                    require("layout.bottom-panel.widget.control-center.widget.cpu-meter"),
-                    margins = dpi(10),
-                    widget = wibox.container.margin
-                }
-            ),
-            format_item(
-                {
-                    require("layout.bottom-panel.widget.control-center.widget.ram-meter"),
-                    margins = dpi(10),
-                    widget = wibox.container.margin
-                }
-            ),
-            format_item(
-                {
-                    require("layout.bottom-panel.widget.control-center.widget.temperature-meter"),
-                    margins = dpi(10),
-                    widget = wibox.container.margin
-                }
-            ),
-            format_item(
-                {
-                    require("layout.bottom-panel.widget.control-center.widget.harddrive-meter"),
-                    margins = dpi(10),
-                    widget = wibox.container.margin
-                }
-            ),
-            format_item(
-                {
-                    require("layout.bottom-panel.widget.control-center.widget.brightness-slider"),
-                    margins = dpi(10),
-                    widget = wibox.container.margin
-                }
-            ),
-            format_item(
-                {
-                    require("layout.bottom-panel.widget.control-center.widget.volume-slider"),
-                    margins = dpi(10),
-                    widget = wibox.container.margin
-                }
-            )
+            layout = wibox.layout.align.vertical,
+            spacing = dpi(15),
+            require("layout.bottom-panel.widget.control-center.widget.cpu-meter"),
+            require("layout.bottom-panel.widget.control-center.widget.ram-meter")
+        }
+    ),
+    format_item_no_fix_height(
+        wibox.widget {
+            layout = wibox.layout.align.vertical,
+            spacing = dpi(15),
+            require("layout.bottom-panel.widget.control-center.widget.temperature-meter"),
+            require("layout.bottom-panel.widget.control-center.widget.harddrive-meter")
         }
     )
+}
+
+local monitor_adjustables_row =
+    wibox.widget {
+    layout = wibox.layout.flex.horizontal,
+    spacing = dpi(10),
+    format_item(require("layout.bottom-panel.widget.control-center.widget.brightness-slider")),
+    format_item(require("layout.bottom-panel.widget.control-center.widget.volume-slider"))
 }
 -- ------------------------------------------------- --
 -- ------------------------------------------------- --
@@ -222,7 +198,8 @@ local control_center = function(s)
                             layout = wibox.layout.fixed.vertical,
                             spacing = dpi(10),
                             main_control_row_two,
-                            main_control_row_sliders
+                            main_control_row_sliders,
+                            monitor_adjustables_row
                         },
                         {
                             id = "monitor_control",

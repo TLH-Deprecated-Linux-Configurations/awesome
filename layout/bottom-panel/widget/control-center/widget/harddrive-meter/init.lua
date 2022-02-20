@@ -41,11 +41,9 @@ local meter_icon =
         margins = dpi(5),
         widget = wibox.container.margin
     },
-    bg = beautiful.groups_bg,
-    shape = function(cr, width, height)
-        gears.shape.rounded_rect(cr, width, height, beautiful.groups_radius)
-    end,
-    widget = wibox.container.background
+    bg = beautiful.bg_button,
+    shape = beautiful.client_shape_rounded,
+    widget = clickable_container
 }
 -- ------------------------------------------------- --
 -- ------------------------------------------------- --
@@ -57,7 +55,7 @@ local slider =
         id = "hdd_usage",
         max_value = 100,
         value = 29,
-        forced_height = dpi(48),
+        forced_height = dpi(36),
         color = "#f4f4f7ee",
         background_color = "#22262d",
         shape = gears.shape.rounded_rect,
@@ -110,8 +108,8 @@ local harddrive_meter =
             nil,
             {
                 layout = wibox.layout.fixed.horizontal,
-                forced_height = dpi(48),
-                forced_width = dpi(48),
+                forced_height = dpi(36),
+                forced_width = dpi(36),
                 meter_icon
             },
             nil

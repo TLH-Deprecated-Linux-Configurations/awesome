@@ -29,16 +29,16 @@ work out (which eats a lot of time sometimes as you probably can imagine)
 
 Unlike Tom Meyers' work,
 [available here for reference](https://github.com/ODEX-TOS/tos-desktop-environment/),
-I do institute the same form of source code or documentation as the project that
+I do not institute the same form of source code or documentation as the project that
 this project configures. There are manifold reasons here, detailed below, though
 I will first make a point of illuminating **that in the context of the window
 manager itself, I think this method is highly functional and amazingly
-effceint** and that **I have no problem whatsoever with that methodology but
-seek just prefer doing my own thing for my ease of understanding the code
+efficient** and that **I have no problem whatsoever with that methodology but
+just prefer doing my own thing for my ease of understanding the code
 later**. `AwesomeWM` is a C+Lua project spread over numerous files and
 maintained by numerous individuals. This project is a Lua (mostly) configuration
 of `awesomewm` spread over numerous files but maintained solely by me, Thomas
-Leon Highbaugh, thus there is a radically different pressure on it, hence me
+Leon Highbaugh, thus there are radically different developmental pressures on it, hence me
 eschewing the replication of the source projects comments or replication of its
 documentation.
 
@@ -57,9 +57,7 @@ documentation.
   project, for instance, so this is different for him. I totally get that, wish
   him the best in the process and deeply appreciate his work (in particular) but
   simply do not share that goal as well.
--
-
----
+- **Documentation Readability** - While bombastic and at times alliterative in my use of prose, my writing is somewhat more thorough and easy to understand than the majority of pages that are the result of awesome's method of auto-generating the code. Sometimes, this makes pages hard/impossible to read or pull relevant information from. Since this entire project is mine, I can easily type out a few pages of documentation
 
 ## Code of Conduct
 

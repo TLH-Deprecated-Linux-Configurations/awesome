@@ -11,23 +11,22 @@
 -- ------------------------------------------------- --
 -- ------------------------------------------------- --
 -- ------------------------------------------------- --
-local clickable_container = require('module.clickable-container')
 local config_dir = gears.filesystem.get_configuration_dir()
-local widget_dir = config_dir .. 'layout/bottom-panel/widget/control-center/widget/dropbox-toggle/'
-local widget_icon_dir = widget_dir .. 'icons/'
-local icons = require('theme.icons')
+local widget_dir = config_dir .. "layout/bottom-panel/widget/control-center/widget/dropbox-toggle/"
+local widget_icon_dir = widget_dir .. "icons/"
+
 local device_state = false
 -- ------------------------------------------------- --
 -- ------------------------------------------------- --
 -- ------------------------------------------------- --
 -- Icons
 --
-local dropbox_status_blank = widget_icon_dir .. 'dropboxstatus-blank.png'
-local dropbox_status_busy2 = widget_icon_dir .. 'dropboxstatus-busy2.png'
-local dropbox_status_busy1 = widget_icon_dir .. 'dropboxstatus-busy1.png'
-local dropbox_status_idle = widget_icon_dir .. 'dropboxstatus-idle.png'
-local dropbox_status_logo = widget_icon_dir .. 'dropboxstatus-logo.png'
-local dropbox_status_x = widget_icon_dir .. 'dropboxstatus-x.png'
+local dropbox_status_blank = widget_icon_dir .. "dropboxstatus-blank.png"
+local dropbox_status_busy2 = widget_icon_dir .. "dropboxstatus-busy2.png"
+local dropbox_status_busy1 = widget_icon_dir .. "dropboxstatus-busy1.png"
+local dropbox_status_idle = widget_icon_dir .. "dropboxstatus-idle.png"
+local dropbox_status_logo = widget_icon_dir .. "dropboxstatus-logo.png"
+local dropbox_status_x = widget_icon_dir .. "dropboxstatus-x.png"
 -- ------------------------------------------------- --
 -- ------------------------------------------------- --
 -- ------------------------------------------------- --
@@ -35,9 +34,9 @@ local dropbox_status_x = widget_icon_dir .. 'dropboxstatus-x.png'
 --
 local action_name =
     wibox.widget {
-    text = 'Dropbox',
-    font = 'Nineteen Ninety Seven Regular  10',
-    align = 'left',
+    text = "Dropbox",
+    font = "Nineteen Ninety Seven Regular  10",
+    align = "left",
     widget = wibox.widget.textbox
 }
 -- ------------------------------------------------- --
@@ -47,9 +46,9 @@ local action_name =
 --
 local action_status =
     wibox.widget {
-    text = 'Off',
-    font = 'Nineteen Ninety Seven Regular  10',
-    align = 'left',
+    text = "Off",
+    font = "Nineteen Ninety Seven Regular  10",
+    align = "left",
     widget = wibox.widget.textbox
 }
 -- ------------------------------------------------- --
@@ -70,8 +69,8 @@ local action_info =
 local button_widget =
     wibox.widget {
     {
-        id = 'icon',
-        image = widget_icon_dir .. 'dropboxstatus-logo.png',
+        id = "icon",
+        image = dropbox_status_blank,
         widget = wibox.widget.imagebox,
         resize = true
     },
@@ -108,13 +107,13 @@ local widget_button =
 --
 local update_widget = function()
     if device_state then
-        action_status:set_text('On')
-        widget_button.bg = beautiful.accent
-        button_widget.icon:set_image(widget_icon_dir .. 'dropboxstatus-logo.png')
+        action_status:set_text("On")
+
+        button_widget.icon:set_image(dropbox_status_logo)
     else
-        action_status:set_text('Off')
-        widget_button.bg = beautiful.groups_bg
-        button_widget.icon:set_image(widget_icon_dir .. 'dropboxstatus-x.svg')
+        action_status:set_text("Off")
+
+        button_widget.icon:set_image(dropbox_status_x)
     end
 end
 
@@ -125,9 +124,9 @@ end
 --
 local check_device_state = function()
     awful.spawn.easy_async_with_shell(
-        'dropbox running',
+        "dropbox running",
         function(stdout)
-            if stdout:match('*') then
+            if stdout:match("*") then
                 device_state = false
             else
                 device_state = true
@@ -154,15 +153,18 @@ dropbox start &
 		title = 'System Notification',
 		message = 'Initializing Dropbox...',
 		icon = ']] ..
-    widget_icon_dir .. 'dropboxstatus-logo' .. '.png'
--- ------------------------------------------------- --
+    widget_icon_dir .. "dropboxstatus-logo" .. ".png" .. [['
+	})
+	"
+]]
+-- ----- ------------------------------------------------- --
 -- ------------------------------------------------- --
 -- ------------------------------------------------- --
 -- power off command
 --
 local power_off_cmd =
     [[
-dropbox stop
+dropbox stop &https://github.com/endaaman/tym
 sleep 1
 	# Create an AwesomeWM Notification
 	awesome-client "
@@ -172,7 +174,7 @@ sleep 1
 		title = 'System Notification',
 		message = 'The dropbox daemon has been disabled.',
 		icon = ']] ..
-    widget_icon_dir .. 'dropboxstatus-x' .. '.png' .. [['
+    widget_icon_dir .. "dropboxstatus-x" .. ".png" .. [['
 	})
 	"
 ]]
@@ -235,8 +237,8 @@ action_info:buttons(
 -- determine state by watching command
 --
 watch(
-    'dropbox status &',
-    5,
+    "dropbox status &",
+    15,
     function(_, stdout)
         check_device_state()
     end
@@ -244,7 +246,8 @@ watch(
 -- ------------------------------------------------- --
 -- ------------------------------------------------- --
 -- ------------------------------------------------- --
--- final wrapper around button/command
+-- final wrapper around button/command,
+--  DESIGN NOTE: I hace used the align layout and the two nil values as a means of insuring the widget spaces out the icon on the button appropiately
 --
 local action_widget =
     wibox.widget {
@@ -253,7 +256,7 @@ local action_widget =
     widget_button,
     {
         layout = wibox.layout.align.vertical,
-        expand = 'none',
+        expand = "none",
         nil,
         action_info,
         nil

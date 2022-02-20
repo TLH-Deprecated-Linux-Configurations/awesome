@@ -11,9 +11,9 @@
 -- ------------------------------------------------- --
 local action_name =
     wibox.widget {
-    text = 'Blur Strength',
-    font = 'Nineteen Ninety Seven Regular  10',
-    align = 'left',
+    text = "Blur Strength",
+    font = "Nineteen Ninety Seven Regular  10",
+    align = "left",
     widget = wibox.widget.textbox
 }
 -- ------------------------------------------------- --
@@ -22,7 +22,7 @@ local action_name =
 local icon =
     wibox.widget {
     layout = wibox.layout.align.vertical,
-    expand = 'none',
+    expand = "none",
     nil,
     {image = icons.effects, resize = true, widget = wibox.widget.imagebox},
     nil
@@ -49,21 +49,21 @@ local slider =
     wibox.widget {
     nil,
     {
-        id = 'blur_strength_slider',
+        id = "blur_strength_slider",
         bar_shape = gears.shape.rounded_rect,
         bar_height = dpi(24),
-        bar_color = '#22262d',
-        bar_active_color = '#b2bfd9cc',
-        handle_color = '#e9efff',
+        bar_color = "#22262d",
+        bar_active_color = "#b2bfd9cc",
+        handle_color = "#e9efff",
         handle_shape = gears.shape.circle,
         handle_width = dpi(24),
-        handle_border_color = '#000000aa',
+        handle_border_color = "#000000aa",
         handle_border_width = dpi(2),
         maximum = 100,
         widget = wibox.widget.slider
     },
     nil,
-    expand = 'none',
+    expand = "none",
     forced_height = dpi(24),
     layout = wibox.layout.align.vertical
 }
@@ -82,7 +82,7 @@ local update_slider_value = function()
 		awk 'NR==1 {print $3}' | tr -d ';' 
 		"]],
         function(stdout, stderr)
-            local strength = stdout:match('%d+')
+            local strength = stdout:match("%d+")
             blur_strength = tonumber(strength) / 20 * 100
             blur_slider:set_value(tonumber(blur_strength))
             start_up = false
@@ -137,7 +137,7 @@ local adjust_blur = function(power)
 end
 
 blur_slider:connect_signal(
-    'property::value',
+    "property::value",
     function()
         if not start_up then
             strength = blur_slider:get_value() / 10
@@ -151,7 +151,7 @@ blur_slider:connect_signal(
 -- Adjust slider value to change blur strength
 --
 awesome.connect_signal(
-    'widget::blur:increase',
+    "widget::blur:increase",
     function()
         -- On startup, the slider.value returns nil so...
         if blur_slider:get_value() == nil then
@@ -175,7 +175,7 @@ awesome.connect_signal(
 -- Decrease blur
 --
 awesome.connect_signal(
-    'widget::blur:decrease',
+    "widget::blur:decrease",
     function()
         -- On startup, the slider.value returns nil so...
         if blur_slider:get_value() == nil then
@@ -199,7 +199,6 @@ awesome.connect_signal(
 local blur_setting =
     wibox.widget {
     layout = wibox.layout.fixed.vertical,
-    forced_height = dpi(48),
     spacing = dpi(5),
     action_name,
     {
@@ -207,7 +206,7 @@ local blur_setting =
         spacing = dpi(5),
         {
             layout = wibox.layout.align.vertical,
-            expand = 'none',
+            expand = "none",
             nil,
             {
                 layout = wibox.layout.fixed.horizontal,

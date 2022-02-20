@@ -222,9 +222,7 @@ record_tbl.screen_rec_back_button =
     },
     forced_width = dpi(48),
     forced_height = dpi(48),
-    shape = function(cr, width, height)
-        gears.shape.rounded_rect(cr, width, height, beautiful.groups_radius)
-    end,
+    shape = beautiful.client_shape_rounded,
     widget = wibox.container.background
 }
 -- ------------------------------------------------- --
@@ -279,9 +277,7 @@ record_tbl.screen_rec_res_txtbox =
     },
     forced_width = dpi(60),
     forced_height = dpi(60),
-    shape = function(cr, width, height)
-        gears.shape.rounded_rect(cr, width, height, beautiful.groups_radius)
-    end,
+    shape = beautiful.client_shape_rounded,
     widget = wibox.container.background
 }
 -- ------------------------------------------------- --
@@ -322,9 +318,7 @@ record_tbl.screen_rec_offset_txtbox =
     },
     forced_width = dpi(60),
     forced_height = dpi(60),
-    shape = function(cr, width, height)
-        gears.shape.rounded_rect(cr, width, height, beautiful.groups_radius)
-    end,
+    shape = beautiful.client_shape_rounded,
     widget = wibox.container.background
 }
 -- ------------------------------------------------- --

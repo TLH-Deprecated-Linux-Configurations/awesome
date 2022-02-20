@@ -1,29 +1,22 @@
-----------------------------------------------------------------------------
---- Simple Network Widget
---
--- Depends: iproute2, iw
---
---
--- @author manilarome &lt;gerome.matilla07@gmail.com&gt;
--- @copyright 2020 manilarome
--- @widget network
-----------------------------------------------------------------------------
-
 local awful = require("awful")
 local wibox = require("wibox")
 local gears = require("gears")
 local naughty = require("naughty")
 local dpi = require("beautiful").xresources.apply_dpi
-local clickable_container = require("module.clickable-container")
 local apps = require("configuration.root.apps")
+local clickable_container = require("module.clickable-container")
+
 local config_dir = gears.filesystem.get_configuration_dir()
 local widget_icon_dir = config_dir .. "theme/icons/network/"
 
-local network_mode = nil
-local network_interfaces = {
-    wlan = "wlan0",
-    lan = "enp1s0"
+-- Configuration
+local interfaces = {
+    wlan_interface = "wlan0",
+    lan_interface = "enp1s0"
 }
+
+local network_mode = nil
+
 local return_button = function()
     local update_notify_no_access = true
     local notify_no_access_quota = 0
@@ -36,7 +29,7 @@ local return_button = function()
         wibox.widget {
         {
             id = "icon",
-            image = widget_icon_dir .. "loading.svg",
+            image = widget_icon_dir .. "wifi-strength-off" .. ".svg",
             widget = wibox.widget.imagebox,
             resize = true
         },
@@ -60,7 +53,7 @@ local return_button = function()
                 1,
                 nil,
                 function()
-                    awful.spawn(apps.network_manager, false)
+                    awful.spawn(apps.default.network_manager, false)
                 end
             )
         )
@@ -81,7 +74,7 @@ local return_button = function()
         [=[
 	status_ping=0
 
-	packets="$(ping -q -w2 -c2 example.com | grep -o "100% packet loss")"
+	packets="$(ping -q -w2 -c2 1.1.1.1 | grep -o "100% packet loss")"
 	if [ ! -z "${packets}" ];
 	then
 		status_ping=0
@@ -91,7 +84,7 @@ local return_button = function()
 
 	if [ $status_ping -eq 0 ];
 	then
-		echo 'Connected but no internet'
+		echo 'Connected to Network but Not to the Internet'
 	fi
 	]=]
 
@@ -113,7 +106,7 @@ local return_button = function()
     end
 
     local network_notify = function(message, title, app_name, icon)
-        naughty.notify(
+        naughty.notification(
             {
                 message = message,
                 title = title,
@@ -132,33 +125,32 @@ local return_button = function()
             local message = 'You are now connected to <b>"' .. essid .. '"</b>'
             local title = "Connection Established"
             local app_name = "System Notification"
-            local icon = widget_icon_dir .. "connected_notification.svg"
+            local icon = widget_icon_dir .. "wifi.svg"
             network_notify(message, title, app_name, icon)
         end
 
         -- Get wifi essid and bitrate
-        local update_wireless_data = function(strength, healthy)
+        local update_wireless_data = function(wifi_strength, healthy)
             awful.spawn.easy_async_with_shell(
                 [[
-				iw dev wlan0 link
+				iw dev ]] .. interfaces.wlan_interface .. [[ link
 				]],
                 function(stdout)
                     local essid = stdout:match("SSID: (.-)\n") or "N/A"
                     local bitrate = stdout:match("tx bitrate: (.+/s)") or "N/A"
-
                     local message =
                         "Connected to: <b>" ..
                         (essid or "Loading...*") ..
                             "</b>\nWireless Interface: <b>" ..
-                                network_interfaces.wlan ..
+                                interfaces.wlan_interface ..
                                     "</b>\nWiFi-Strength: <b>" ..
-                                        tostring(strength) ..
+                                        tostring(wifi_strength) ..
                                             "%" .. "</b>\nBit rate: <b>" .. tostring(bitrate) .. "</b>"
 
                     if healthy then
                         update_tooltip(message)
                     else
-                        update_tooltip("<b>Connected but no internet!</b>\n" .. message)
+                        update_tooltip("<b>Connected to Network but Not to the Internet!</b>\n" .. message)
                     end
 
                     if reconnect_startup or startup then
@@ -170,7 +162,7 @@ local return_button = function()
         end
 
         -- Update wifi icon based on wifi strength and health
-        local update_wireless_icon = function(strength)
+        local update_wireless_icon = function(wifi_strength, wifi_strength_rounded)
             awful.spawn.easy_async_with_shell(
                 check_internet_health,
                 function(stdout)
@@ -179,11 +171,11 @@ local return_button = function()
                         if startup or reconnect_startup then
                             awesome.emit_signal("system::network_connected")
                         end
-                        widget_icon_name = widget_icon_name .. "-" .. tostring(strength)
-                        update_wireless_data(wifi_strength_rounded, true)
+                        widget_icon_name = widget_icon_name .. "-" .. tostring(wifi_strength_rounded)
+                        update_wireless_data(wifi_strength, true)
                     else
-                        widget_icon_name = widget_icon_name .. "-" .. tostring(strength) .. "-alert"
-                        update_wireless_data(wifi_strength_rounded, false)
+                        widget_icon_name = widget_icon_name .. "-" .. tostring(wifi_strength_rounded) .. "-alert"
+                        update_wireless_data(wifi_strength, false)
                     end
                     widget.icon:set_image(widget_icon_dir .. widget_icon_name .. ".svg")
                 end
@@ -197,17 +189,17 @@ local return_button = function()
 				awk 'NR==3 {printf "%3.0f" ,($3/70)*100}' /proc/net/wireless
 				]],
                 function(stdout)
+                    if not tonumber(stdout) then
+                        return
+                    end
                     wifi_strength = tonumber(stdout)
                     local wifi_strength_rounded = math.floor(wifi_strength / 25 + 0.5)
-                    update_wireless_icon(wifi_strength_rounded)
-                    return wifi_strength, wifi_strength_rounded
+                    update_wireless_icon(wifi_strength, wifi_strength_rounded)
                 end
             )
         end
 
         update_wireless_strength()
-        update_wireless_data(wifi_strength, true)
-
         update_startup()
     end
 
@@ -215,7 +207,7 @@ local return_button = function()
         network_mode = "wired"
 
         local notify_connected = function()
-            local message = 'Connected to internet with <b>"' .. network_interfaces.lan .. '"</b>'
+            local message = 'Connected to internet with <b>"' .. interfaces.lan_interface .. '"</b>'
             local title = "Connection Established"
             local app_name = "System Notification"
             local icon = widget_icon_dir .. "wired.svg"
@@ -231,10 +223,10 @@ local return_button = function()
                     widget_icon_name = widget_icon_name .. "-alert"
                     update_tooltip(
                         "<b>Connected but no internet!</b>" ..
-                            "\nEthernet Interface: <b>" .. network_interfaces.lan .. "</b>"
+                            "\nEthernet Interface: <b>" .. interfaces.lan_interface .. "</b>"
                     )
                 else
-                    update_tooltip("Ethernet Interface: <b>" .. network_interfaces.lan .. "</b>")
+                    update_tooltip("Ethernet Interface: <b>" .. interfaces.lan_interface .. "</b>")
                     if startup or reconnect_startup then
                         awesome.emit_signal("system::network_connected")
                         notify_connected()
@@ -286,8 +278,12 @@ local return_button = function()
     local check_network_mode = function()
         awful.spawn.easy_async_with_shell(
             [=[
-			wireless="wlan0"
-			wired="enp1s0"
+			wireless="]=] ..
+                tostring(interfaces.wlan_interface) ..
+                    [=["
+			wired="]=] ..
+                        tostring(interfaces.lan_interface) ..
+                            [=["
 			net="/sys/class/net/"
 
 			wired_state="down"
@@ -344,9 +340,8 @@ local return_button = function()
         )
     end
 
-    local network_updater =
-        gears.timer {
-        timeout = 5,
+    gears.timer {
+        timeout = 35,
         autostart = true,
         call_now = true,
         callback = function()

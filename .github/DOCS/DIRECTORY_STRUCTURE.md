@@ -1,6 +1,6 @@
 # Directory Structure 
 
-Just as a system of organization that is readily explainable and useful for my purposes maintaining the code base on the level of individual files, so to have I attempted to approach the layout of the configuration's subdirectories in such a way as to achieve the same results. 
+I have looked over a lot of complex `awesomewm` configurations to finish this one, which means I have a decent sense of how other people structure their configurations. From this, I am convinced no two people mean the same thing when using terms like `module` or `widget`, so I thought it is best to define my meanings here and give the user a sense of what can be found and where. 
 
 On the top level the only files are `rc.lua`, the project's `.gitignore` and a symlink from the `rc.lua` to `rc.lua.test` intended to mitigate an annoying error message when I remember to test changes first using `awmtt`. Everything else is delegated to a subdirectory which bares as the title of the subdirectory the functionality of the files therein. Additionally, the README, CHANGELOG and other files of interest to those inspecting the source code, likely using a platform like Github, in a `.github` subdirectory for purposes of keeping the root level as tidy as possible. 
 
@@ -11,9 +11,11 @@ The subdirectories and a bit about their contents is as follows:
 | bin           | Where the config's bash scripts are located                                                                      |
 | configuration | settings of the built in utilities that comes with the window manager                                            |
 | layout        | The screen layout, which is mostly to hold things relating to the bottom bar and its associated widgets          |
+| library       | Code I take no credt/responsibility for, ported in as-is                                                         |
 | module        | Menus, control screens and other widgets that allow operation of the computer as one would expect of a modern DE |
+| signal        | This is a recent adaption from elenapan to normalize the widget signals in the configuration                     |
 | theme         | Definition of configuration wide variables, icons, wallpapers and other style related settings                   |
-| widget        | Where the widgets live that are used in multiple places and fit no where else                                    |
+
 
 ## Nesting of Widgets
 
