@@ -1,239 +1,215 @@
 --  _______         __   __   ___ __              __   __
--- |    |  |.-----.|  |_|__|.'  _|__|.----.---.-.|  |_|__|.-----.-----.
--- |       ||  _  ||   _|  ||   _|  ||  __|  _  ||   _|  ||  _  |     |
--- |__|____||_____||____|__||__| |__||____|___._||____|__||_____|__|__|
+-- |    |  |.-----.|  |_|__|.'  _|__|.----.---.-.|  |_|__|.-----.-----.-----.
+-- |       ||  _  ||   _|  ||   _|  ||  __|  _  ||   _|  ||  _  |     |__ --|
+-- |__|____||_____||____|__||__| |__||____|___._||____|__||_____|__|__|_____|
+-- ------------------------------------------------- --
+-- ------------------------------------------------- --
+-- ------------------------------------------------- --
+require("widget.notification-center.notifications")
+-- Apply theme variables
+naughty.config.padding = dpi(8)
+naughty.config.spacing = dpi(8)
+naughty.config.icon_formats = {"svg", "png", "jpg", "gif"}
 
 -- ------------------------------------------------- --
--- call the associated modules within this directory
---
-require("module.notifications.brightness")
-
-require("module.notifications.volume")
-require("module.notifications.battery")
 -- ------------------------------------------------- --
---  naughty options
-naughty.config.defaults.ontop = true
-naughty.config.defaults.screen = awful.screen.focused()
-naughty.config.defaults.timeout = 3
-naughty.config.defaults.title = "System Notification"
-naughty.config.defaults.position = "bottom_right"
-
-naughty.config.icon_dirs = {
-    "/usr/share/icons/chhinamasta/",
-    "/usr/share/pixmaps/"
-}
-naughty.config.icon_formats = {"png", "svg"}
 -- ------------------------------------------------- --
--- Timeouts
-naughty.config.presets.low.timeout = 3
-naughty.config.presets.critical.timeout = 0
--- ------------------------------------------------- --
--- Configure Notifications of differing priority
-naughty.config.presets.normal = {
-    font = "Nineteen Ninety Seven 18",
-    fg = "#f4f4f7",
-    bg = beautiful.bg_normal
-}
-
-naughty.config.presets.low = {
-    font = "Nineteen Ninety Seven 18",
-    fg = "#f4f4f7",
-    bg = beautiful.bg_normal
-}
-
-naughty.config.presets.critical = {
-    font = "Nineteen Ninety Seven 18",
-    fg = "#f4f4f7",
-    bg = beautiful.bg_normal,
-    timeout = 0
-}
--- ------------------------------------------------- --
--- assign priorities
-naughty.config.presets.ok = naughty.config.presets.normal
-naughty.config.presets.info = naughty.config.presets.normal
-naughty.config.presets.warn = naughty.config.presets.critical
--- ------------------------------------------------- --
---  RUles for notifications.
---
+--  provide rules for the notifications
 ruled.notification.connect_signal(
-    "request::rules",
-    function()
-        -- All notifications will match this rule.
-        ruled.notification.append_rule {
-            rule = {},
-            properties = {screen = awful.screen.preferred, implicit_timeout = 6}
-        }
-    end
+	"request::rules",
+	function()
+		-- Critical notifs
+		ruled.notification.append_rule {
+			rule = {urgency = "critical"},
+			properties = {
+				implicit_timeout = 0
+			}
+		}
+
+		-- Normal notifs
+		ruled.notification.append_rule {
+			rule = {urgency = "normal"},
+			properties = {
+				implicit_timeout = 5
+			}
+		}
+
+		-- Low notifs
+		ruled.notification.append_rule {
+			rule = {urgency = "low"},
+			properties = {
+				implicit_timeout = 2
+			}
+		}
+	end
 )
+-- ------------------------------------------------- --
+-- ------------------------------------------------- --
+-- ------------------------------------------------- --
+--  connect to the error signal
+naughty.connect_signal(
+	"request::display_error",
+	function(message, startup)
+		naughty.notification {
+			urgency = "critical",
+			title = "Error!" .. (startup and "There was an error during startup!" or ""),
+			message = message,
+			app_name = "System Notification",
+			icon = icons.awesome
+		}
+	end
+)
+-- ------------------------------------------------- --
+-- ------------------------------------------------- --
+-- ------------------------------------------------- --
+--  color assignment
+local main_color = {
+	["low"] = colors.colorB,
+	["normal"] = colors.colorB,
+	["critical"] = colors.colorA
+}
+-- ------------------------------------------------- --
+local edge_color = {
+	["low"] = colors.colorB,
+	["normal"] = colors.colorB,
+	["critical"] = colors.color4
+}
+-- ------------------------------------------------- --
+-- ------------------------------------------------- --
+-- ------------------------------------------------- --
+-- template for the notifications in general, with icons
 
 naughty.connect_signal(
-    "request::display",
-    function(n)
-        local appicon = n.app_icon
-        if not appicon then
-            appicon = beautiful.notification_icon
-        end
-        local time = os.date("%H:%M")
+	"request::display",
+	function(n)
+		local custom_notification_icon =
+			wibox.widget {
+			font = "Nineteen Ninety Seven Regular 18",
+			align = "center",
+			valign = "center",
+			widget = wibox.widget.textbox
+		}
 
-        local action_widget = {
-            {
-                {
-                    id = "text_role",
-                    align = "center",
-                    valign = "center",
-                    font = "Nineteen Ninety Seven 18",
-                    widget = wibox.widget.textbox
-                },
-                left = dpi(6),
-                right = dpi(6),
-                widget = wibox.container.margin
-            },
-            bg = beautiful.bg_normal,
-            forced_height = dpi(25),
-            forced_width = dpi(20),
-            shape = beautiful.client_shape_rounded,
-            widget = wibox.container.background
-        }
+		local main_color = main_color[n.urgency]
+		local edge_color = edge_color[n.urgency]
+		local icon = icons.awesome
+		-- ------------------------------------------------- --
+		-- template for actions on notification
+		local actions =
+			wibox.widget {
+			notification = n,
+			widget_template = {
+				{
+					{
+						{
+							id = "text_role",
+							font = beautiful.notification_font,
+							widget = wibox.widget.textbox
+						},
+						left = dpi(6),
+						right = dpi(6),
+						widget = wibox.container.margin
+					},
+					widget = clickable_container
+				},
+				forced_height = dpi(25),
+				forced_width = dpi(180),
+				widget = wibox.container.background
+			},
+			style = {
+				underline_normal = false,
+				underline_selected = true
+			},
+			widget = naughty.list.actions
+		}
+		-- ------------------------------------------------- --
+		-- icon template
+		local notif_icon =
+			wibox.widget {
+			{
+				{
+					{
+						image = icons.awesome,
+						widget = wibox.widget.imagebox
+					},
+					margins = dpi(5),
+					widget = wibox.container.margin
+				},
+				shape = gears.shape.rect,
+				bg = edge_color,
+				widget = wibox.container.background
+			},
+			forced_width = dpi(90),
+			forced_height = dpi(90),
+			widget = clickable_container
+		}
 
-        local actions =
-            wibox.widget {
-            notification = n,
-            base_layout = wibox.widget {
-                spacing = dpi(8),
-                layout = wibox.layout.flex.horizontal
-            },
-            widget_template = action_widget,
-            style = {underline_normal = false, underline_selected = true},
-            widget = naughty.list.actions
-        }
+		naughty.layout.box {
+			notification = n,
+			type = "notification",
+			-- ------------------------------------------------- --
+			-- For antialiasing: The real shape is set in widget_template
+			shape = beautiful.client_shape_rounded,
+			position = "bottom_right",
+			widget_template = {
+				{
+					{
+						notif_icon,
+						{
+							{
+								{
+									align = "center",
+									visible = title_visible,
+									font = "Nineteen Ninety Seven  Regular 9",
+									markup = "<b>" .. n.title .. "</b>",
+									widget = wibox.widget.textbox
+									-- widget = naughty.widget.title,
+								},
+								{
+									align = "center",
+									--wrap = "char",
+									widget = naughty.widget.message
+								},
+								{
+									wibox.widget {
+										forced_height = dpi(10),
+										layout = wibox.layout.fixed.vertical
+									},
+									{
+										actions,
+										shape = beautiful.client_shape_rounded,
+										widget = wibox.container.background
+									},
+									visible = n.actions and #n.actions > 0,
+									layout = wibox.layout.fixed.vertical
+								},
+								layout = wibox.layout.align.vertical
+							},
+							margins = dpi(4),
+							widget = wibox.container.margin
+						},
+						layout = wibox.layout.fixed.horizontal
+					},
+					strategy = "max",
+					width = dpi(550),
+					height = dpi(280),
+					widget = wibox.container.constraint
+				},
+				-- ------------------------------------------------- --
+				-- Anti-aliasing container
+				shape = function(cr, width, height)
+					gears.shape.rounded_rect(cr, width, height, dpi(4))
+				end,
+				bg = main_color,
+				fg = colors.white,
+				border_width = dpi(1),
+				border_color = colors.colorA,
+				widget = wibox.container.background
+			}
+		}
 
-        naughty.layout.box {
-            notification = n,
-            type = "notification",
-            bg = beautiful.bg_normal,
-            widget_template = {
-                {
-                    {
-                        {
-                            {
-                                {
-                                    {
-                                        {
-                                            {
-                                                image = appicon,
-                                                resize = true,
-                                                clip_shape = beautiful.client_shape_rounded_small,
-                                                widget = wibox.widget.imagebox
-                                            },
-                                            strategy = "max",
-                                            height = dpi(20),
-                                            widget = wibox.container.constraint
-                                        },
-                                        right = dpi(10),
-                                        widget = wibox.container.margin
-                                    },
-                                    {
-                                        markup = n.app_name,
-                                        align = "left",
-                                        font = "Nineteen Ninety Seven 18",
-                                        widget = wibox.widget.textbox
-                                    },
-                                    {
-                                        markup = time,
-                                        align = "right",
-                                        font = "Nineteen Ninety Seven 18",
-                                        widget = wibox.widget.textbox
-                                    },
-                                    layout = wibox.layout.align.horizontal
-                                },
-                                top = dpi(7),
-                                left = dpi(20),
-                                right = dpi(20),
-                                bottom = dpi(5),
-                                widget = wibox.container.margin
-                            },
-                            bg = beautiful.bg_normal,
-                            widget = wibox.container.background
-                        },
-                        {
-                            {
-                                {
-                                    {
-                                        {
-                                            step_function = wibox.container.scroll.step_functions.waiting_nonlinear_back_and_forth,
-                                            speed = 50,
-                                            {
-                                                markup = "<span weight='bold'>" .. n.title .. "</span>",
-                                                font = "Nineteen Ninety Seven 18",
-                                                align = "left",
-                                                widget = wibox.widget.textbox
-                                            },
-                                            forced_width = dpi(204),
-                                            widget = wibox.container.scroll.horizontal
-                                        },
-                                        {
-                                            {
-                                                markup = n.message,
-                                                align = "left",
-                                                font = "Nineteen Ninety Seven 18",
-                                                widget = wibox.widget.textbox
-                                            },
-                                            right = 10,
-                                            widget = wibox.container.margin
-                                        },
-                                        spacing = 0,
-                                        layout = wibox.layout.flex.vertical
-                                    },
-                                    layout = wibox.layout.align.vertical
-                                },
-                                left = dpi(20),
-                                right = dpi(20),
-                                widget = wibox.container.margin
-                            },
-                            {
-                                {
-                                    nil,
-                                    {
-                                        {
-                                            image = n.icon,
-                                            resize = true,
-                                            clip_shape = beautiful.client_shape_rounded_small,
-                                            widget = wibox.widget.imagebox
-                                        },
-                                        strategy = "max",
-                                        height = 40,
-                                        widget = wibox.container.constraint
-                                    },
-                                    nil,
-                                    expand = "none",
-                                    layout = wibox.layout.align.vertical
-                                },
-                                top = dpi(0),
-                                left = dpi(10),
-                                right = dpi(10),
-                                bottom = dpi(0),
-                                widget = wibox.container.margin
-                            },
-                            layout = wibox.layout.fixed.horizontal
-                        },
-                        {
-                            {actions, layout = wibox.layout.fixed.vertical},
-                            margins = dpi(10),
-                            visible = n.actions and #n.actions > 0,
-                            widget = wibox.container.margin
-                        },
-                        layout = wibox.layout.fixed.vertical
-                    },
-                    top = dpi(0),
-                    bottom = dpi(5),
-                    widget = wibox.container.margin
-                },
-                bg = beautiful.xbackground,
-                border_width = beautiful.notif_border_width,
-                border_color = "#1b1d24aa",
-                shape = beautiful.client_shape_rounded,
-                widget = wibox.container.background
-            }
-        }
-    end
+		if _G.dnd_status or nc_status then
+			naughty.destroy_all_notifications(nil, 1)
+		end
+	end
 )

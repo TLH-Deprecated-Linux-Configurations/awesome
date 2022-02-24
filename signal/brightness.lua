@@ -3,6 +3,7 @@
 --      percentage (integer)
 local awful = require("awful")
 
+local percentage_old = 100
 -- Subscribe to backlight changes
 -- Requires inotify-tools
 local brightness_subscribe_script =
@@ -31,7 +32,10 @@ local emit_brightness_info = function()
                     {
                         stdout = function(max)
                             percentage = tonumber(value) / tonumber(max) * 100
-                            awesome.emit_signal("signal::brightness", percentage)
+                            if percentage ~= percentage_old then
+                                awesome.emit_signal("signal::brightness", percentage)
+                                percentage_old = percentage
+                            end
                         end
                     }
                 )

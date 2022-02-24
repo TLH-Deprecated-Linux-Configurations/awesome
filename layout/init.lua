@@ -6,89 +6,108 @@
 -- ------------------------------------------------- --
 -- ------------------------------------------------- --
 -- ------------------------------------------------- --
--- Don't move these to global, it breaks everything lol
+-- because of the order at which the files are called, I can't rely on the
+-- global_variables to call libraries for this file. I know, lame.
 --
-local bottom_panel = require("layout.bottom-panel")
-local control_center = require("layout.bottom-panel.widget.control-center")
-local info_center = require("layout.bottom-panel.widget.info-center")
-local c = client
+local awful = require("awful")
+require("startup.screen")
+local empathy = require("layout.layouts.empathy")
+local stack = require("layout.layouts.stack")
+local centermaster = require("layout.layouts.centermaster")
+local thrizen = require("layout.layouts.thrizen")
+
+local beautiful = require("beautiful")
+local tag = tag
+local dpi = beautiful.xresources.apply_dpi
 -- ------------------------------------------------- --
--- Create a wibox panel for each screen and add it
-screen.connect_signal(
-    "request::desktop_decoration",
-    function(s)
-        s.bottom_panel = bottom_panel(s)
-
-        s.control_center = control_center(s)
-        s.info_center = info_center(s)
-        s.control_center_show_again = false
-        s.info_center_show_again = false
-    end
-)
 -- ------------------------------------------------- --
--- Hide bars when app go fullscreen
-function update_bars_visibility()
-    for s in screen do
-        if c.fullscreen or c.maximized then
-            local fullscreen = s.selected_tag.fullscreen_mode
-            local maximized = c.maximized
-            -- ------------------------------------------------- --
-            -- Order matter here for shadow
-            c.bottom_panel.visible = not fullscreen and not maximized
-
-            if s.control_center then
-                if fullscreen and s.control_center.visible then
-                    s.control_center:toggle()
-                    s.control_center_show_again = true
-                elseif not fullscreen and not s.control_center.visible and s.control_center_show_again then
-                    s.control_center:toggle()
-                    s.control_center_show_again = false
-                end
-            end
-            if s.info_center then
-                if fullscreen and s.info_center.visible then
-                    s.info_center:toggle()
-                    s.info_center_show_again = true
-                elseif not fullscreen and not s.info_center.visible and s.info_center_show_again then
-                    s.info_center:toggle()
-                    s.info_center_show_again = false
-                end
-            end
-        end
-    end
-end
-
+-- ------------------------------------------------- --
+-- define the default layouts, incliding the custom ones called above
+--
 tag.connect_signal(
-    "property::selected",
-    function(t)
-        update_bars_visibility()
-    end
+  "request::default_layouts",
+  function(s)
+    awful.layout.append_default_layouts(
+      {
+        stack,
+        empathy,
+        centermaster,
+        thrizen,
+        awful.layout.suit.max,
+        awful.layout.suit.spiral.dwindle,
+        -- awful.layout.suit.corner.ne,
+        -- awful.layout.suit.fair
+        awful.layout.suit.floating
+        --awful.layout.suit.tile,
+        --awful.layout.suit.magnifier,
+        --awful.layout.suit.fair.horizontal
+        --awful.layout.suit.tile.left,
+        --awful.layout.suit.tile.bottom,
+        --awful.layout.suit.tile.top,
+        --awful.layout.suit.fair,
+        --awful.layout.suit.fair.horizontal,
+        --awful.layout.suit.max.fullscreen,
+        --awful.layout.suit.corner.nw
+        --awful.layout.suit.corner.sw,
+        --awful.layout.suit.corner.se,
+      }
+    )
+  end
 )
 
-client.connect_signal(
-    "property::fullscreen",
-    function(c)
-        if c.first_tag then
-            c.first_tag.fullscreen_mode = c.fullscreen
-        end
-        update_bars_visibility()
+-- ------------------------------------------------- --
+-- ------------------------------------------------- --
+-- ------------------------------------------------- --
+awful.screen.connect_for_each_screen(
+  function(s)
+    -- Each screen has its own tag table, which I have styled using
+    -- the name of the window manager. Still not as lame as using sway.
+    -- Only using 7 tags per screen because the extra "WM" makes the
+    -- taglist too long for the wibar
+    --
+    local tag_names = {"A", "W", "E", "S", "O", "M", "E"}
+    for idx, name in ipairs(tag_names) do
+      local selected = false
+      if idx == 1 then
+        selected = true
+      end
+
+      awful.tag.add(
+        name,
+        {
+          screen = s,
+          layout = stack,
+          selected = selected,
+          border_color = beautiful.border_color,
+          border_width = dpi(2)
+        }
+      )
     end
+    -- ------------------------------------------------- --
+    -- assign properties to the taglist
+    --
+    local tags =
+      awful.widget.taglist {
+      screen = s,
+      filter = awful.widget.taglist.filter.all
+    }
+    return tags
+  end
 )
-client.connect_signal(
-    "property::maximized",
-    function(c)
-        if c.first_tag then
-            c.first_tag.fullscreen_mode = c.maximized
-        end
-        update_bars_visibility()
+-- ------------------------------------------------- --
+-- ------------------------------------------------- --
+-- ------------------------------------------------- --
+-- gaps determined by layout type
+--
+tag.connect_signal(
+  "property::layout",
+  function(t)
+    local currentLayout = awful.tag.getproperty(t, "layout")
+    if (currentLayout == awful.layout.suit.max) then
+      t.gap = dpi(4)
+    else
+      t.gap = dpi(8)
     end
-)
-client.connect_signal(
-    "unmanage",
-    function(c)
-        if c.fullscreen then
-            c.screen.selected_tag.fullscreen_mode = false
-            update_bars_visibility()
-        end
-    end
+    t.master_count = 1
+  end
 )

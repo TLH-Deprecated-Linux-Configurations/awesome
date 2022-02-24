@@ -1,63 +1,21 @@
---  _______                                             ________ _______
--- |   _   |.--.--.--.-----.-----.-----.--------.-----.|  |  |  |   |   |
--- |       ||  |  |  |  -__|__ --|  _  |        |  -__||  |  |  |       |
--- |___|___||________|_____|_____|_____|__|__|__|_____||________|__|_|__|
--- ------------------------------------------------- --
--- ------------------------------------------------- --
--- ------------------------------------------------- --
--- Flying Spaghetti Monster of Code & Core of the Electric Tantra Linux
--- by Thomas Leon Highbaugh
--- ------------------------------------------------- --
--- ------------------------------------------------- --
--- ------------------------------------------------- --
--- If LuaRocks is installed, make sure that packages installed through it
--- are found (e.g. lgi). If LuaRocks is not installed, do nothing.
---
 pcall(require, "luarocks.loader")
+filesystem = require("gears.filesystem")
+config_dir = filesystem.get_configuration_dir()
 
--- Insure these are called, they are needed before the rest of configuration
-require("configuration.root.global_variables")
-require("module.notifications")
-require("configuration.root.garbage_collection")
+require("settings.global_variables")
+require("settings.garbage_collection")
 
--- necessary libraru not called in global_variables
 require("awful.autofocus")
--- ------------------------------------------------- --
--- ------------------------------------------------- --
--- ------------------------------------------------- --
--- Theme
---
-beautiful.init(require("theme"))
--- ------------------------------------------------- --
--- ------------------------------------------------- --
--- ------------------------------------------------- --
--- Layout
---
-require("signal")
--- ------------------------------------------------- --
--- ------------------------------------------------- --
--- ------------------------------------------------- --
--- Layout
---
+
+require("startup")
+require("config")
 require("layout")
+require("config.client")
 
--- ------------------------------------------------- --
--- ------------------------------------------------- --
--- ------------------------------------------------- --
--- Modules
---
+require("themes")
+
+_G.root.keys(require("config.keys.global"))
+
+require("utils")
+require("signal")
 require("module")
-
--- ------------------------------------------------- --
--- ------------------------------------------------- --
--- ------------------------------------------------- --
--- Configuration
---
-require("configuration")
-
--- ------------------------------------------------- --
--- ------------------------------------------------- --
--- ------------------------------------------------- --
--- Library
---
-require("library.application-switcher")
