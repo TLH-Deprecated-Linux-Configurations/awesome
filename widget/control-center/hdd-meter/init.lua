@@ -8,7 +8,7 @@ local active_color = {
   type = "linear",
   from = {0, 0},
   to = {200, 50}, -- replace with w,h later
-  stops = {{0, colors.color14}, {0.75, colors.color2}}
+  stops = {{0, colors.color12}, {0.75, colors.color2}}
 }
 local widget_text =
   wibox.widget {

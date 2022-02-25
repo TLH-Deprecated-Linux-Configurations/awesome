@@ -38,8 +38,8 @@ local widget =
 		forced_height = dpi(50),
 		widget = clickable_container
 	},
-	shape = beautiful.client_shape_rounded_small,
-	bg = beautiful.bg_normal,
+	shape = beautiful.client_shape_rounded,
+	bg = colors.colorA,
 	widget = wibox.container.background
 }
 
@@ -53,7 +53,7 @@ widget:connect_signal(
 widget:connect_signal(
 	"mouse::leave",
 	function()
-		widget.bg = beautiful.bg_normal
+		widget.bg = colors.colorA
 	end
 )
 

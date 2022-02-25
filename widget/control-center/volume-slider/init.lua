@@ -166,13 +166,24 @@ widget_content:buttons(
 		)
 	)
 )
+local volume_tooltip =
+	awful.tooltip {
+	objects = {widget_icon},
+	text = "None",
+	mode = "outside",
+	align = "right",
+	margin_leftright = dpi(8),
+	margin_topbottom = dpi(8),
+	preferred_positions = {"right", "left", "top", "bottom"}
+}
 
 -- The emit will come from the global keybind
 awesome.connect_signal(
 	"signal::volume",
-	function()
+	function(value)
 		update_slider()
 		update_slider_mute()
+		volume_tooltip:set_text("Volume Level is Currently: " .. value .. "%")
 	end
 )
 

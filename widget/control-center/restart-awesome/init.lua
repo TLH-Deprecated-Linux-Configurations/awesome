@@ -43,7 +43,7 @@ local widget =
 		widget = clickable_container
 	},
 	shape = beautiful.client_shape_rounded_small,
-	bg = beautiful.bg_normal,
+	bg = colors.colorA,
 	widget = wibox.container.background
 }
 
@@ -57,7 +57,7 @@ widget:connect_signal(
 widget:connect_signal(
 	"mouse::leave",
 	function()
-		widget.bg = beautiful.bg_normal
+		widget.bg = colors.colorA
 	end
 )
 

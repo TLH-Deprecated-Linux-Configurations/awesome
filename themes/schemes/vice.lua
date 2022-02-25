@@ -32,6 +32,7 @@ return {
     colorF = "#727f96",
     white = "#f4f4f7",
     black = "#1b1d24",
+    blacker = "#000000",
     icons = "#f4f4f7",
     alpha = function(color, alpha)
         return color .. alpha

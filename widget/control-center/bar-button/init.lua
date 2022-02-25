@@ -27,7 +27,7 @@ local widget =
 		widget = clickable_container
 	},
 	shape = beautiful.client_shape_rounded_small,
-	bg = beautiful.bg_normal,
+	bg = colors.colorA,
 	widget = wibox.container.background
 }
 
@@ -41,7 +41,7 @@ awesome.connect_signal(
 awesome.connect_signal(
 	"bar:true",
 	function()
-		widget.bg = beautiful.bg_normal
+		widget.bg = colors.colorA
 	end
 )
 
@@ -54,7 +54,7 @@ widget:buttons(
 			function()
 				awesome.emit_signal("bar:toggle")
 				cc_resize()
-				widget.bg = beautiful.bg_normal
+				widget.bg = colors.colorA
 			end
 		)
 	)

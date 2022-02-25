@@ -1,14 +1,12 @@
 --DEPENDENCIES
 --lm_sensors
 
-local wibox = require("wibox")
-local gears = require("gears")
-local dpi = require("beautiful").xresources.apply_dpi
-local colors = require("themes").colors
-local watch = require("awful.widget.watch")
-
-local main_color = colors.color5
-
+local active_color = {
+  type = "linear",
+  from = {0, 0},
+  to = {200, 50}, -- replace with w,h later
+  stops = {{0, colors.color6}, {0.75, colors.color4}}
+}
 local widget_text =
   wibox.widget {
   font = "Nineteen Ninety Seven  Regular  12",
@@ -17,53 +15,45 @@ local widget_text =
   align = "center",
   widget = wibox.widget.textbox
 }
-
-local slider =
+local temp_bar =
   wibox.widget {
-  widget_text,
-  colors = {"transparent", main_color},
-  border_width = dpi(1),
-  border_color = main_color,
-  thickness = dpi(10),
-  values = {96, 4},
-  max_value = 130,
-  min_value = 0,
-  rounded_edge = true,
-  start_angle = 47.5 / 130 * 2 * math.pi,
-  widget = wibox.container.arcchart
+  max_value = 100,
+  background_color = beautiful.bg_normal,
+  color = active_color,
+  shape = gears.shape.squircle,
+  widget = wibox.widget.progressbar
 }
-
-local max_temp = 80
-
-watch(
-  [[bash -c "free | grep Mem | awk '{print $3/$2*100}'"]],
-  20,
-  function(_, stdout)
-    local percentage = stdout:match("%d+%.%d+")
-    slider:set_values({(100 - percentage), percentage})
-    collectgarbage("collect")
+awesome.connect_signal(
+  "signal::temp",
+  function(temp)
+    temp_bar.value = temp
+    widget_text:set_text("Temp \n" .. math.floor(temp) .. "°")
   end
 )
+local max_temp = 80
 
 local temp_meter =
   wibox.widget {
   {
     {
       {
-        slider,
-        layout = wibox.layout.fixed.horizontal
+        {
+          direction = "east",
+          widget = wibox.container.rotate,
+          temp_bar
+        },
+        widget_text,
+        layout = wibox.layout.stack
       },
       margins = dpi(30),
       widget = wibox.container.margin
     },
     shape = gears.shape.rounded_rect,
     bg = colors.colorA,
-    fg = main_color,
+    fg = colors.white,
     widget = wibox.container.background
   },
-  left = dpi(24),
-  right = dpi(24),
-  forced_height = dpi(150),
+  forced_height = dpi(185),
   widget = wibox.container.margin
 }
 

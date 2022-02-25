@@ -104,9 +104,11 @@ local slider =
     bar_shape = gears.shape.rounded_rect,
     bar_height = dpi(40),
     bar_color = colors.colorA,
-    bar_active_color = colors.color7,
-    handle_color = colors.color7,
+    bar_active_color = colors.color10b,
+    handle_color = colors.white,
     handle_shape = gears.shape.rounded_rect,
+    handle_border_color = colors.black,
+    handle_border_width = dpi(2),
     handle_width = dpi(40),
     maximum = 100,
     widget = wibox.widget.slider
@@ -132,7 +134,7 @@ volume_slider:buttons(
   gears.table.join(
     awful.button(
       {},
-      4,
+      9,
       nil,
       function()
         if volume_slider:get_value() > 100 then
@@ -144,7 +146,7 @@ volume_slider:buttons(
     ),
     awful.button(
       {},
-      5,
+      8,
       nil,
       function()
         if volume_slider:get_value() < 0 then
@@ -173,27 +175,13 @@ local update_slider_mute = function()
     function(stdout)
       local status = string.match(stdout, "%a+")
       if status == "true" then
-        widget_icon.icon:set_image(icons.mute)
+        volumeIcon.icon:set_image(icons.mute)
       elseif status == "false" then
-        widget_icon.icon:set_image(icons.volume)
+        volumeIcon.icon:set_image(icons.volume)
       end
     end
   )
 end
-
-watch(
-  [[bash -c "pamixer --get-mute"]],
-  2,
-  function(_, stdout)
-    local status = string.match(stdout, "%a+")
-    if status == "true" then
-      widget_icon.icon:set_image(icons.mute)
-    elseif status == "false" then
-      widget_icon.icon:set_image(icons.volume)
-    end
-    collectgarbage("collect")
-  end
-)
 
 update_slider()
 
@@ -215,9 +203,7 @@ box =
     buttons,
     layout = wibox.layout.align.horizontal
   },
-  shape = function(cr, width, height)
-    gears.shape.rounded_rect(cr, width, height, dpi(4))
-  end,
+  shape = beautiful.client_shape_rounded_xl,
   fg = colors.white,
   border_width = dpi(1),
   border_color = colors.colorA,

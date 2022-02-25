@@ -167,10 +167,11 @@ local emit_wireless_connected = function()
     awful.spawn.easy_async_with_shell(
         wireless_data_script,
         function(data_stdout)
-            local interface = "enp1s0"
+            local interface = "wlan0"
             local essid = data_stdout:match("SSID: (.-)\n") or "N/A"
 
             awesome.emit_signal("network::connected::wireless", interface, essid)
+            emit_wireless_status()
         end
     )
 end
@@ -225,7 +226,7 @@ local check_network = function()
         end
     )
 end
-
+check_network()
 -- ========================================
 -- Initialization
 -- ========================================
@@ -234,5 +235,6 @@ gears.timer {
     timeout = update_interval,
     autostart = true,
     call_now = true,
-    callback = check_network
+    callback = check_network(),
+    collectgarbage("collect")
 }

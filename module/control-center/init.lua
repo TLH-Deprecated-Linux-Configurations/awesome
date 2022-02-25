@@ -1,9 +1,15 @@
---DEPENDENCIES
---pamixer
---lm_sensors
---free
---upower
-
+--  ______               __               __
+-- |      |.-----.-----.|  |_.----.-----.|  |
+-- |   ---||  _  |     ||   _|   _|  _  ||  |
+-- |______||_____|__|__||____|__| |_____||__|
+--  ______               __
+-- |      |.-----.-----.|  |_.-----.----.
+-- |   ---||  -__|     ||   _|  -__|   _|
+-- |______||_____|__|__||____|_____|__|
+-- ------------------------------------------------- --
+-- ------------------------------------------------- --
+-- ------------------------------------------------- --
+-- meter widgets
 local dials =
   wibox.widget {
   {
@@ -23,16 +29,14 @@ local dials =
           layout = wibox.layout.fixed.vertical,
           spacing = dpi(10),
           require("widget.control-center.hdd-meter"),
-          require("widget.control-center.battery-meter")
+          require("widget.control-center.temp-meter")
         }
       )
     },
     margins = dpi(5),
     widget = wibox.container.margin
   },
-  shape = function(cr, width, height)
-    gears.shape.rounded_rect(cr, width, height, beautiful.groups_radius)
-  end,
+  shape = beautiful.client_shape_rounded_xl,
   bg = beautiful.bg_normal,
   forced_width = 400,
   forced_height = 400,
@@ -40,7 +44,8 @@ local dials =
   border_color = colors.colorA,
   widget = wibox.container.background
 }
-
+-- ------------------------------------------------- --
+-- slider widgets
 local sliders =
   wibox.widget {
   {
@@ -59,9 +64,7 @@ local sliders =
     margins = dpi(5),
     widget = wibox.container.margin
   },
-  shape = function(cr, width, height)
-    gears.shape.rounded_rect(cr, width, height, beautiful.groups_radius)
-  end,
+  shape = beautiful.client_shape_rounded_xl,
   bg = beautiful.bg_normal,
   forced_width = 400,
   forced_height = 190,
@@ -69,40 +72,44 @@ local sliders =
   border_color = colors.colorA,
   widget = wibox.container.background
 }
-
+-- ------------------------------------------------- --
+-- panel buttons section
 local buttons =
   wibox.widget {
   {
     {
       spacing = dpi(0),
       layout = wibox.layout.flex.vertical,
-      format_item(
-        {
-          layout = wibox.layout.fixed.horizontal,
-          spacing = dpi(16),
-          require("widget.control-center.bar-button"),
-          require("widget.control-center.dropbox-toggle"),
-          require("widget.control-center.do-not-disturb"),
-          require("widget.control-center.screen-capture"),
-          require("widget.control-center.mute-button"),
-          require("widget.control-center.restart-awesome")
-        }
-      )
+      {
+        format_item(
+          {
+            layout = wibox.layout.fixed.horizontal,
+            spacing = dpi(16),
+            require("widget.control-center.bar-button"),
+            require("widget.control-center.dropbox-toggle"),
+            require("widget.control-center.do-not-disturb"),
+            require("widget.control-center.screen-capture"),
+            require("widget.control-center.mute-button"),
+            require("widget.control-center.restart-awesome")
+          }
+        ),
+        bg = colors.colorA,
+        widget = wibox.container.background
+      }
     },
-    margins = dpi(5),
+    margins = dpi(8),
     widget = wibox.container.margin
   },
-  shape = function(cr, width, height)
-    gears.shape.rounded_rect(cr, width, height, beautiful.groups_radius)
-  end,
+  shape = beautiful.client_shape_rounded_xl,
   bg = beautiful.bg_normal,
-  forced_width = 400,
-  forced_height = 70,
+  forced_width = dpi(400),
+  forced_height = dpi(120),
   border_width = dpi(2),
   border_color = colors.colorA,
   widget = wibox.container.background
 }
-
+-- ------------------------------------------------- --
+-- title of the center
 local title =
   wibox.widget {
   {
@@ -112,7 +119,7 @@ local title =
       format_item(
         {
           layout = wibox.layout.fixed.horizontal,
-          spacing = dpi(16),
+          spacing = dpi(36),
           require("widget.user-icon"),
           require("widget.control-center.title-text")
         }
@@ -121,9 +128,7 @@ local title =
     margins = dpi(5),
     widget = wibox.container.margin
   },
-  shape = function(cr, width, height)
-    gears.shape.rounded_rect(cr, width, height, beautiful.groups_radius)
-  end,
+  shape = beautiful.client_shape_rounded_xl,
   bg = beautiful.bg_normal,
   forced_width = 400,
   forced_height = 70,
@@ -131,58 +136,60 @@ local title =
   border_color = colors.colorA,
   widget = wibox.container.background
 }
-
 -- ------------------------------------------------- --
--- ------------------------------------------------- --
--- ------------------------------------------------- --
-backdrop_control_center =
-  wibox {
-  ontop = true,
-  visible = false,
-  screen = mouse.screen,
-  bg = "#00000033",
-  type = "splash",
-  width = screen_geometry.width,
-  height = screen_geometry.height
-}
-
+-- connect signal for toggle
 awesome.connect_signal(
   "cc:toggle",
   function()
     cc_toggle()
   end
 )
-awesome.connect_signal(
-  "cc:toggle:off",
-  function()
-    backdrop_control_center.visible = false
-    mouse.screen.controlCenter.visible = false
-  end
-)
-
+-- ------------------------------------------------- --
+-- connect signal for resize
 awesome.connect_signal(
   "cc:resize",
   function()
     cc_resize()
   end
 )
-
+-- ------------------------------------------------- --
+-- control center function
 local controlCenter = function(s)
+  -- backdrop
+  s.cc_unfocused =
+    wibox(
+    {
+      x = s.geometry.x,
+      y = s.geometry.y,
+      visible = false,
+      screen = s,
+      ontop = true,
+      type = "splash",
+      height = s.geometry.height,
+      width = s.geometry.width,
+      bg = colors.alpha(colors.blacker, "aa"),
+      fg = colors.white
+    }
+  )
+  -- ------------------------------------------------- --
+  -- template
   s.controlCenter =
     wibox(
     {
-      x = s.geometry.x + dpi(8),
+      x = s.geometry.x + dpi(770),
       y = s.geometry.y,
+      screen = s,
       visible = false,
       ontop = true,
-      type = "splash",
+      type = "popup",
       height = s.geometry.height - dpi(48),
       width = dpi(400),
       bg = "transparent",
       fg = colors.white
     }
   )
-
+  -- ------------------------------------------------- --
+  -- resize function
   function cc_resize()
     cc_height = s.geometry.height
     if s.controlCenter.height == s.geometry.height - dpi(48) then
@@ -191,17 +198,27 @@ local controlCenter = function(s)
       s.controlCenter:geometry {height = s.geometry.height - dpi(48), y = s.geometry.y}
     end
   end
-
+  -- ------------------------------------------------- --
+  --
   function cc_toggle()
     if mouse.screen.controlCenter.visible == false then
-      backdrop_control_center.visible = true
+      awful.screen.connect_for_each_screen(
+        function(s)
+          s.cc_unfocused.visible = true
+        end
+      )
       mouse.screen.controlCenter.visible = true
     elseif mouse.screen.controlCenter.visible == true then
-      backdrop_control_center.visible = false
+      awful.screen.connect_for_each_screen(
+        function(s)
+          s.cc_unfocused.visible = false
+        end
+      )
       mouse.screen.controlCenter.visible = false
     end
   end
-
+  -- ------------------------------------------------- --
+  -- template for control center
   s.controlCenter:setup {
     {
       spacing = dpi(15),
@@ -213,19 +230,50 @@ local controlCenter = function(s)
     },
     layout = wibox.layout.fixed.horizontal
   }
-end
-
-backdrop_control_center:buttons(
-  awful.util.table.join(
-    awful.button(
-      {},
-      1,
-      nil,
-      function()
-        awesome.emit_signal("cc:toggle:off")
-      end
+  -- ------------------------------------------------- --
+  -- template for backdrop
+  s.cc_unfocused:setup {
+    nil,
+    layout = wibox.layout.align.horizontal
+  }
+  -- ------------------------------------------------- --
+  -- if mouse clicked on backdrop, turns center OFF
+  s.cc_unfocused:buttons(
+    awful.util.table.join(
+      awful.button(
+        {},
+        1,
+        nil,
+        function()
+          awesome.emit_signal("cc:toggle:off")
+        end
+      ),
+      awful.button(
+        {},
+        2,
+        nil,
+        function()
+          awesome.emit_signal("cc:toggle:off")
+        end
+      ),
+      awful.button(
+        {},
+        3,
+        nil,
+        function()
+          awesome.emit_signal("cc:toggle:off")
+        end
+      )
     )
   )
-)
+
+  awesome.connect_signal(
+    "cc:toggle:off",
+    function()
+      s.cc_unfocused.visible = false
+      mouse.screen.controlCenter.visible = false
+    end
+  )
+end
 
 return controlCenter

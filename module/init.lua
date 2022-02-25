@@ -1,12 +1,11 @@
 local awful = require("awful")
 
 require("module.notifications")
-require("module.notification-center")
-require("module.bluetooth-center")
-require("module.network-center")
+awful.screen.connect_for_each_screen(require("module.notification-center"))
+awful.screen.connect_for_each_screen(require("module.bluetooth-center"))
+awful.screen.connect_for_each_screen(require("module.network-center"))
 require("module.volume-center")
 
-require("module.calendar")
 require("module.menu")
 
 awful.screen.connect_for_each_screen(require("module.exit-screen"))

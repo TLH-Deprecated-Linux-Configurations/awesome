@@ -78,8 +78,8 @@ awful.screen.connect_for_each_screen(
           screen = s,
           layout = stack,
           selected = selected,
-          border_color = beautiful.border_color,
-          border_width = dpi(2)
+          border_color = colors.colorB,
+          border_width = dpi(0)
         }
       )
     end
@@ -104,9 +104,9 @@ tag.connect_signal(
   function(t)
     local currentLayout = awful.tag.getproperty(t, "layout")
     if (currentLayout == awful.layout.suit.max) then
-      t.gap = dpi(4)
+      t.gap = dpi(2)
     else
-      t.gap = dpi(8)
+      t.gap = dpi(4)
     end
     t.master_count = 1
   end

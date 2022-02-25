@@ -1,11 +1,8 @@
---DEPENDENCIES
---free
-
 local active_color = {
   type = "linear",
   from = {0, 0},
   to = {200, 50}, -- replace with w,h later
-  stops = {{0, colors.color8}, {0.75, colors.color11}}
+  stops = {{0, colors.color14}, {0.75, colors.color6}}
 }
 
 local widget_text =
@@ -31,7 +28,7 @@ awesome.connect_signal(
   function(used, total)
     local used_ram_percentage = (used / total) * 100
     ram_bar.value = used_ram_percentage
-    widget_text:set_text("RAM " .. math.floor((used / total) * 100) .. "%")
+    widget_text:set_text("RAM \n" .. math.floor((used / total) * 100) .. "%")
   end
 )
 

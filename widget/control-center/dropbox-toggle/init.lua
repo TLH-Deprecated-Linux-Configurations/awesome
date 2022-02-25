@@ -93,7 +93,7 @@ local widget_button =
         },
         widget = clickable_container
     },
-    bg = beautiful.bg_normal,
+    bg = colors.colorA,
     shape = function(cr, w, h)
         gears.shape.rounded_rect(cr, w, h, 4)
     end,

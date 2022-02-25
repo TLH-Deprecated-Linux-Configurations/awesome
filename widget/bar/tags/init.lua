@@ -110,7 +110,7 @@ local get_taglist = function(s)
 							}
 						},
 						nil,
-						strategy = "min",
+						strategy = "max",
 						layout = wibox.layout.margin,
 						left = dpi(1),
 						right = dpi(1),
@@ -119,13 +119,15 @@ local get_taglist = function(s)
 					},
 					widget = clickable_container
 				},
-				shape = beautiful.client_shape_rounded_small,
-				forced_width = dpi(48),
+				shape = beautiful.client_shape_rounded,
+				forced_width = dpi(52),
 				border_width = dpi(0),
 				widget = wibox.container.margin
 			},
 			id = "background_role",
+			forced_width = dpi(52),
 			widget = wibox.container.background,
+			shape = beautiful.client_shape_rounded_xl,
 			create_callback = function(self, c3, index, objects)
 				self:connect_signal(
 					"mouse::enter",

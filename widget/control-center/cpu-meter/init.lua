@@ -2,7 +2,7 @@ local active_color = {
   type = "linear",
   from = {0, 0},
   to = {200, 50}, -- replace with w,h later
-  stops = {{0, colors.color3}, {0.75, colors.color4}}
+  stops = {{0, colors.color7}, {0.75, colors.color4}}
 }
 
 local widget_text =
@@ -27,7 +27,7 @@ awesome.connect_signal(
   "signal::cpu",
   function(value)
     cpu_bar.value = value
-    widget_text:set_text("CPU " .. value .. "%")
+    widget_text:set_text("CPU \n" .. value .. "%")
   end
 )
 

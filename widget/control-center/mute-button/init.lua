@@ -39,7 +39,7 @@ local widget =
 		widget = clickable_container
 	},
 	shape = beautiful.client_shape_rounded_small,
-	bg = beautiful.bg_normal,
+	bg = colors.colorA,
 	widget = wibox.container.background
 }
 
@@ -55,7 +55,7 @@ local mute_toggle = function()
 			elseif status == "false" then
 				awful.spawn("pamixer -m")
 				widget_icon.icon:set_image(icons.mute)
-				widget.bg = beautiful.bg_normal
+				widget.bg = colors.colorA
 			end
 		end
 	)

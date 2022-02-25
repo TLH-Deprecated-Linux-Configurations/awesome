@@ -143,7 +143,7 @@ local exit_screen = function(s)
 
   local exit_screen_grabber
 
-  function exit_screen_unfocused_hide(qqqq)
+  function exit_screen_unfocused_hide()
     s.exit_screen_unfocused.visible = false
   end
 

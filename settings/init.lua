@@ -23,6 +23,6 @@ return {
     screenshot = config_dir .. "bin/snapshot.sh area"
   },
   profile_picture = "user.png",
-  window_gaps = 12,
+  window_gaps = 4,
   window_border_size = 2
 }

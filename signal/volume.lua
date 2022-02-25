@@ -70,5 +70,6 @@ awesome.connect_signal(
     "signal::volume:update",
     function(volume)
         awesome.emit_signal("signal::volume", volume)
+        collectgarbage("collect")
     end
 )

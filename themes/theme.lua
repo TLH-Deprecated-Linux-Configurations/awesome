@@ -46,7 +46,7 @@ theme.bg_normal = "linear:0,0:0,-21:0,#323643:1,#1b1d24"
 theme.bg_focus = "linear:0,0:0,21:0,#323643:1,#22252e"
 theme.bg_urgent = "linear:0,0:0,21:0,#282B36:1,#1B1D24"
 theme.bg_menu = "linear:0,0:0,21:0,#323643:1,#1b1d24"
-theme.bg_button = "linear:0,0:0,51:0,#7B8394:1,#5b6270"
+theme.bg_button = "linear:0,0:0,51:0,#7F8AA1:1,#3F4859"
 
 -- ------------------------------------------------- --
 -- ------------------------------------------------- --
@@ -234,8 +234,14 @@ theme.border_radius = dpi(12)
 theme.client_shape_rounded_xl = function(cr, width, height)
     gears.shape.rounded_rect(cr, width, height, dpi(12))
 end
+theme.client_shape_rounded_lg = function(cr, width, height)
+    gears.shape.rounded_rect(cr, width, height, dpi(8))
+end
 theme.client_shape_rounded = function(cr, width, height)
     gears.shape.rounded_rect(cr, width, height, dpi(4))
+end
+theme.client_shape_rounded_medium = function(cr, width, height)
+    gears.shape.rounded_rect(cr, width, height, dpi(2))
 end
 theme.client_shape_rounded_small = function(cr, width, height)
     gears.shape.rounded_rect(cr, width, height, dpi(1))
@@ -294,10 +300,11 @@ theme.titlebar_fg_normal = gtk_variable().fg_color
 --
 theme.taglist_font = "awesomewm-font 19"
 
-theme.taglist_fg_focus = "#f4f4f7"
-theme.taglist_fg_empty = "#d0d0d9"
+theme.taglist_fg_focus = "#b2bfd9"
+theme.taglist_border_focus = "#f4f4f7"
+theme.taglist_fg_empty = "#f4f4f7"
 theme.taglist_fg = gtk_variable().fg_color
-theme.taglist_fg_occupied = "#b2bfd9"
+theme.taglist_fg_occupied = "#282b36"
 theme.taglist_bg_urgent = "#E91E63" .. "cc"
 theme.taglist_spacing = dpi(6)
 -- ------------------------------------------------- --
@@ -306,18 +313,19 @@ theme.taglist_spacing = dpi(6)
 -- Tasklist
 --
 theme.tasklist_font = "Nineteen Ninety Seven Regular  10"
+theme.tasklist_font_focus = "Nineteen Ninety Seven Bold 10"
 theme.tasklist_bg_normal = "linear:0,0:0,21:0,#282B36:1,#1B1D24"
 theme.tasklist_bg_focus = "linear:0,0:0,21:0,#4C5166:1,#282B36"
 theme.tasklist_bg_urgent = "#E91E63" .. "99"
 theme.tasklist_fg_focus = "#f4f4f7"
 theme.tasklist_fg_urgent = "#f4f4f7"
-theme.tasklist_fg_normal = "#d0d0d9"
+theme.tasklist_fg_normal = "#b2bfd9"
 -- ------------------------------------------------- --
 -- ------------------------------------------------- --
 -- ------------------------------------------------- --
 -- Notification
 --
-theme.notification_position = "top_right"
+theme.notification_position = "bottom_right"
 theme.notification_bg = "linear:0,0:0,21:0,#4C5166:1,#282B36"
 theme.notification_margin = dpi(5)
 theme.notification_border_width = dpi(0)

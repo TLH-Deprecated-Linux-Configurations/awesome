@@ -49,17 +49,12 @@ local spacer_bar =
 	widget = wibox.container.margin
 }
 
-local update_host = function()
-	awful.spawn.easy_async_with_shell(
-		[[bash -c "nmcli c | awk 'NF{NF-=3};1' | sed '2!d'"]],
-		function(stdout)
-			local networkName = stdout:gsub("\n", "")
-			right_content:set_text(networkName)
-		end
-	)
-end
-
-update_host()
+awesome.connect_signal(
+	"network::connected::wireless",
+	function(interface, essid)
+		right_content:set_text(essid)
+	end
+)
 
 local widget =
 	wibox.widget {

@@ -1,3 +1,11 @@
+--  ______
+-- |   __ \.---.-.----.
+-- |   __ <|  _  |   _|
+-- |______/|___._|__|
+-- ------------------------------------------------- --
+-- ------------------------------------------------- --
+-- ------------------------------------------------- --
+-- declare widget
 local bar = function(s)
 	s.panel =
 		awful.wibox(
@@ -16,11 +24,13 @@ local bar = function(s)
 			fg = colors.white
 		}
 	)
-
+	-- ------------------------------------------------- --
+	--  provide spacing
 	s.panel:struts {
 		bottom = dpi(42)
 	}
-
+	-- ------------------------------------------------- --
+	--  toggle function to make it disappear
 	function bar_toggle()
 		if s.panel.visible == false then
 			awful.screen.connect_for_each_screen(
@@ -38,7 +48,8 @@ local bar = function(s)
 			awesome.emit_signal("bar:false")
 		end
 	end
-
+	-- ------------------------------------------------- --
+	--  toggle for when in fullscreen mode
 	local function fullscreen_bar_toggle(c)
 		if c.screen and c.screen.index == 1 and c == client.focus then
 			if c.fullscreen then
@@ -48,38 +59,59 @@ local bar = function(s)
 			end
 		end
 	end
-
+	-- ------------------------------------------------- --
+	--  signal to apply fullscreen toggle
 	for _, signal in pairs({"property::fullscreen", "focus"}) do
 		client.connect_signal(signal, fullscreen_bar_toggle)
 	end
-
+	-- ------------------------------------------------- --
+	--  left portion of the panel
 	local leftBar = {
 		layout = wibox.layout.fixed.horizontal,
 		spacing = dpi(5)
 	}
-
+	-- ------------------------------------------------- --
+	--  center portion of the panel, used for spacing purposes
 	local centerBar = {
-		layout = wibox.layout.fixed.horizontal,
-		spacing = dpi(5)
+		layout = wibox.layout.align.horizontal,
+		spacing = dpi(5),
+		{
+			layout = wibox.layout.fixed.horizontal,
+			nil
+		},
+		{
+			require("widget.bar.task")(s),
+			layout = wibox.layout.fixed.horizontal
+		},
+		{
+			nil,
+			layout = wibox.layout.fixed.horizontal
+		}
 	}
-
+	-- ------------------------------------------------- --
+	--  right portion of the panel, used for widgets
 	local rightBar = {
 		layout = wibox.layout.fixed.horizontal,
 		spacing = dpi(5)
 	}
-
+	-- ------------------------------------------------- --
+	--  inserting widgets as tables on the left portion
 	table.insert(leftBar, require("widget.bar.menu")({color = colors[beautiful.bg_button]}, 0, 0, 0, 0))
 	table.insert(leftBar, require("widget.bar.tags")(s))
-	table.insert(leftBar, require("widget.bar.task")(s))
-	-- table.insert(centerBar, require("widget.bar.focused")({color = colors[beautiful.bg_button]}, 0, 0, 0, 0))
+	-- table.insert(leftBar, require("widget.bar.task")(s))
+	-- ------------------------------------------------- --
+	-- ------------------------------------------------- --
+	--  right widget insertions
 	table.insert(rightBar, require("widget.bar.volume")({color = colors[beautiful.bg_button]}, 0, 0))
-	table.insert(rightBar, require("widget.bar.battery")({color = colors[beautiful.bg_button]}, 0, 0))
+
 	table.insert(rightBar, require("widget.bar.network")({color = colors[beautiful.bg_button]}, 0, 0))
 	table.insert(rightBar, require("widget.bar.notifications-bar")({color = colors[beautiful.bg_button]}, 0, 0))
 	table.insert(rightBar, require("widget.bar.bluetooth")({color = colors[beautiful.bg_button]}, 0, 0))
+	table.insert(rightBar, require("widget.bar.battery")({color = colors[beautiful.bg_button]}, 0, 0))
 	table.insert(rightBar, require("widget.bar.clock")({color = colors[beautiful.bg_button]}, 0, 0))
 	table.insert(rightBar, require("widget.bar.end-session")({color = colors[beautiful.bg_button]}, 0, 0))
-
+	-- ------------------------------------------------- --
+	-- panel template
 	s.panel:setup {
 		layout = wibox.layout.align.horizontal,
 		expand = "none",
@@ -105,14 +137,16 @@ local bar = function(s)
 
 	return s.panel
 end
-
+-- ------------------------------------------------- --
+--  connect signal for the bar toggle to run the function
 awesome.connect_signal(
 	"bar:toggle",
 	function()
 		bar_toggle()
 	end
 )
-
+-- ------------------------------------------------- --
+-- universal toggle to turn off all the centers spawned from widgets
 awesome.connect_signal(
 	"bar::centers:toggle:off",
 	function()
@@ -123,5 +157,5 @@ awesome.connect_signal(
 		awesome.emit_signal("cal::center:toggle:off")
 	end
 )
-
+-- ------------------------------------------------- --
 return bar

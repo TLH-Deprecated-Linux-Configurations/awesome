@@ -21,5 +21,6 @@ awful.widget.watch(
         local available = tonumber(stdout:match("^(.*)@")) / 1000
         local used = tonumber(stdout:match("@(.*)$")) / 1000
         awesome.emit_signal("signal::disk", used, available + used)
+        collectgarbage("collect")
     end
 )

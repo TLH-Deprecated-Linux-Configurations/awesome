@@ -9,14 +9,7 @@ local watch = require("awful.widget.watch")
 
 local user_content =
 	wibox.widget {
-	text = "network",
-	font = "Nineteen Ninety Seven  Regular  14",
-	widget = wibox.widget.textbox
-}
-
-local host_content =
-	wibox.widget {
-	text = "placeholder",
+	text = " Network Center ",
 	font = "Nineteen Ninety Seven  Regular  14",
 	widget = wibox.widget.textbox
 }
@@ -24,23 +17,11 @@ local host_content =
 local widget_user =
 	wibox.widget {
 	layout = wibox.layout.align.vertical,
-	expand = "none",
+	expand = "max",
 	nil,
 	{
 		user_content,
-		layout = wibox.layout.align.horizontal
-	},
-	nil
-}
-
-local widget_host =
-	wibox.widget {
-	layout = wibox.layout.align.vertical,
-	expand = "none",
-	nil,
-	{
-		host_content,
-		layout = wibox.layout.align.horizontal
+		layout = wibox.layout.flex.horizontal
 	},
 	nil
 }
@@ -58,24 +39,12 @@ local spacer_bar =
 	widget = wibox.container.margin
 }
 
-local update_host = function()
-	awful.spawn.easy_async_with_shell(
-		[[bash -c "uname -n"]],
-		function(stdout)
-			local hostname = stdout:gsub("\n", "")
-			host_content:set_text(hostname)
-		end
-	)
-end
-
-update_host()
-
 local widget =
 	wibox.widget {
 	{
+		spacer_bar,
 		widget_user,
 		spacer_bar,
-		widget_host,
 		layout = wibox.layout.fixed.horizontal
 	},
 	fg = colors.white,

@@ -14,5 +14,6 @@ battery_listener:connect_signal(
     "upower::update",
     function(_, device)
         awesome.emit_signal("signal::battery", device.percentage, device.state)
+        collectgarbage("collect")
     end
 )

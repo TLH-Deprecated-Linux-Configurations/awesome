@@ -58,7 +58,8 @@ awful.spawn.easy_async_with_shell(
                 stdout = function(_)
                     emit_brightness_info()
                 end
-            }
+            },
+            collectgarbage("collect")
         )
     end
 )

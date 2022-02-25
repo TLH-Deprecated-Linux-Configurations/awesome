@@ -36,7 +36,7 @@ local widget_content =
 		widget = clickable_container
 	},
 	bg = beautiful.bg_button,
-	shape = beautiful.client_shape_rounded_xl,
+	shape = beautiful.client_shape_rounded,
 	widget = wibox.container.background
 }
 
@@ -107,6 +107,16 @@ brightness_slider:buttons(
 		)
 	)
 )
+local brightness_tooltip =
+	awful.tooltip {
+	objects = {widget_icon},
+	text = "None",
+	mode = "outside",
+	align = "right",
+	margin_leftright = dpi(8),
+	margin_topbottom = dpi(8),
+	preferred_positions = {"right", "left", "top", "bottom"}
+}
 
 local update_slider = function()
 	awful.spawn.easy_async_with_shell(
@@ -116,6 +126,7 @@ local update_slider = function()
 				local brightness = stdout
 				brightness_slider:set_value(tonumber(stdout))
 				awesome.emit_signal("signal::brightness", tonumber(brightness))
+				brightness_tooltip:set_text("Brightness Level is Currently: " .. stdout .. "%")
 			end
 		end
 	)

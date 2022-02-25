@@ -9,15 +9,25 @@ local dpi = require("beautiful").xresources.apply_dpi
 local icons = require("themes.icons")
 
 local return_button = function(color, lspace, rspace)
+	local widget_icon =
+		wibox.widget {
+		layout = wibox.layout.align.vertical,
+		expand = "none",
+		nil,
+		{
+			id = "icon",
+			image = icons.wired_off,
+			resize = true,
+			widget = wibox.widget.imagebox
+		},
+		nil
+	}
 	local widget_button =
 		wibox.widget {
 		{
 			{
 				{
-					{
-						image = icons.wifi_2,
-						widget = wibox.widget.imagebox
-					},
+					widget_icon,
 					top = dpi(4),
 					bottom = dpi(4),
 					left = dpi(12),
@@ -46,12 +56,52 @@ local return_button = function(color, lspace, rspace)
 				1,
 				nil,
 				function()
-					awesome.emit_signal("bar::centers:toggle:off")
 					awesome.emit_signal("network::center:toggle")
 					awesome.emit_signal("network::networks:refreshPanel")
 				end
 			)
 		)
+	)
+	awesome.connect_signal(
+		"network::status::wireless",
+		function(interface, healthy, essid, bitrate, strength)
+			if healthy == true then
+				if strength <= 100 then
+					widget_icon.icon:set_image(icons.wifi_3)
+				elseif strength <= 75 then
+					widget_icon.icon:set_image(icons.wifi_2)
+				elseif strength <= 50 then
+					widget_icon.icon:set_image(icons.wifi_1)
+				elseif strength <= 25 then
+					widget_icon.icon:set_image(icons.wifi_0)
+				end
+			else
+				widget_icon.icon:set_image(icons.wifi_problem)
+			end
+		end
+	)
+	awesome.connect_signal(
+		"network::connected::wired",
+		function(interface, healthy)
+			if healthy == true then
+				widget_icon.icon:set_image(icons.wired)
+			else
+				widget_icon.icon:set_image(icons.wired_alert)
+			end
+		end
+	)
+
+	awesome.connect_signal(
+		"network::disconnected::wireless",
+		function()
+			widget_icon.icon:set_image(icons.wifi_off)
+		end
+	)
+	awesome.connect_signal(
+		"network::disconnected::wired",
+		function()
+			widget_icon.icon:set_image(icons.wired_off)
+		end
 	)
 
 	return widget_button

@@ -15,5 +15,6 @@ awful.widget.watch(
   update_interval,
   function(widget, stdout)
     awesome.emit_signal("signal::temp", tonumber(stdout))
+    collectgarbage("collect")
   end
 )
