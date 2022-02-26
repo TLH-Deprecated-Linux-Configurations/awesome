@@ -74,6 +74,38 @@ brightness_slider:connect_signal(
 		end
 	end
 )
+widget_icon:buttons(
+	gears.table.join(
+		awful.button(
+			{},
+			1,
+			nil,
+			function()
+				if brightness_slider:get_value() > 100 then
+					brightness_slider:set_value(100)
+					return
+				end
+				brightness_slider:set_value(brightness_slider:get_value() + 5)
+				local updated_value = brightness_slider:get_value()
+				awesome.emit_signal("signal::brightness", tonumber(updated_value))
+			end
+		),
+		awful.button(
+			{},
+			3,
+			nil,
+			function()
+				if brightness_slider:get_value() < 0 then
+					brightness_slider:set_value(0)
+					return
+				end
+				brightness_slider:set_value(brightness_slider:get_value() - 5)
+				local updated_value = brightness_slider:get_value()
+				awesome.emit_signal("signal::brightness", tonumber(updated_value))
+			end
+		)
+	)
+)
 
 brightness_slider:buttons(
 	gears.table.join(

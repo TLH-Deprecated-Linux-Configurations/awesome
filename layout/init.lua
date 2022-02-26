@@ -83,6 +83,7 @@ awful.screen.connect_for_each_screen(
         }
       )
     end
+
     -- ------------------------------------------------- --
     -- assign properties to the taglist
     --

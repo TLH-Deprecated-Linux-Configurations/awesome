@@ -14,12 +14,12 @@ local dials =
   wibox.widget {
   {
     {
-      spacing = dpi(0),
+      spacing = dpi(30),
       layout = wibox.layout.flex.horizontal,
       format_item(
         {
           layout = wibox.layout.fixed.vertical,
-          spacing = dpi(10),
+          spacing = dpi(15),
           require("widget.control-center.ram-meter"),
           require("widget.control-center.cpu-meter")
         }
@@ -27,7 +27,7 @@ local dials =
       format_item(
         {
           layout = wibox.layout.fixed.vertical,
-          spacing = dpi(10),
+          spacing = dpi(15),
           require("widget.control-center.hdd-meter"),
           require("widget.control-center.temp-meter")
         }
@@ -38,8 +38,8 @@ local dials =
   },
   shape = beautiful.client_shape_rounded_xl,
   bg = beautiful.bg_normal,
-  forced_width = 400,
-  forced_height = 400,
+  forced_width = 475,
+  forced_height = 450,
   border_width = dpi(2),
   border_color = colors.colorA,
   widget = wibox.container.background
@@ -66,7 +66,7 @@ local sliders =
   },
   shape = beautiful.client_shape_rounded_xl,
   bg = beautiful.bg_normal,
-  forced_width = 400,
+  forced_width = 475,
   forced_height = 190,
   border_width = dpi(2),
   border_color = colors.colorA,
@@ -102,7 +102,7 @@ local buttons =
   },
   shape = beautiful.client_shape_rounded_xl,
   bg = beautiful.bg_normal,
-  forced_width = dpi(400),
+  forced_width = dpi(475),
   forced_height = dpi(120),
   border_width = dpi(2),
   border_color = colors.colorA,
@@ -119,9 +119,10 @@ local title =
       format_item(
         {
           layout = wibox.layout.fixed.horizontal,
-          spacing = dpi(36),
+          spacing = dpi(30),
           require("widget.user-icon"),
-          require("widget.control-center.title-text")
+          require("widget.control-center.title-text"),
+          require("widget.user-icon")
         }
       )
     },
@@ -130,7 +131,7 @@ local title =
   },
   shape = beautiful.client_shape_rounded_xl,
   bg = beautiful.bg_normal,
-  forced_width = 400,
+  forced_width = 475,
   forced_height = 70,
   border_width = dpi(2),
   border_color = colors.colorA,
@@ -183,7 +184,7 @@ local controlCenter = function(s)
       ontop = true,
       type = "popup",
       height = s.geometry.height - dpi(48),
-      width = dpi(400),
+      width = dpi(475),
       bg = "transparent",
       fg = colors.white
     }

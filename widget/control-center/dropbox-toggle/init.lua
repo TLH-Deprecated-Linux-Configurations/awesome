@@ -20,12 +20,12 @@ local device_state = false
 -- ------------------------------------------------- --
 -- Icons
 --
-local dropbox_status_blank = widget_icon_dir .. "dropboxstatus-blank.png"
+local dropbox_status_blank = widget_icon_dir .. "dropbox.svg"
 local dropbox_status_busy2 = widget_icon_dir .. "dropboxstatus-busy2.png"
 local dropbox_status_busy1 = widget_icon_dir .. "dropboxstatus-busy1.png"
 local dropbox_status_idle = widget_icon_dir .. "dropboxstatus-idle.png"
-local dropbox_status_logo = widget_icon_dir .. "dropboxstatus-logo.png"
-local dropbox_status_x = widget_icon_dir .. "dropboxstatus-x.png"
+local dropbox_status_logo = widget_icon_dir .. "dropbox.svg"
+local dropbox_status_x = widget_icon_dir .. "dropbox-x.svg"
 -- ------------------------------------------------- --
 -- ------------------------------------------------- --
 -- ------------------------------------------------- --
@@ -67,12 +67,15 @@ local action_info =
 -- button template
 local button_widget =
     wibox.widget {
+    nil,
     {
         id = "icon",
         image = dropbox_status_blank,
         widget = wibox.widget.imagebox,
         resize = true
     },
+    nil,
+    expand = "none",
     layout = wibox.layout.align.horizontal
 }
 
@@ -85,18 +88,18 @@ local widget_button =
     wibox.widget {
     {
         {
-            button_widget,
+            {
+                button_widget,
+                widget = wibox.container.margin
+            },
             margins = dpi(12),
-            forced_height = dpi(48),
-            forced_width = dpi(48),
             widget = wibox.container.margin
         },
+        forced_height = dpi(60),
         widget = clickable_container
     },
     bg = colors.colorA,
-    shape = function(cr, w, h)
-        gears.shape.rounded_rect(cr, w, h, 4)
-    end,
+    shape = beautiful.client_shape_rounded_small,
     widget = wibox.container.background
 }
 -- ------------------------------------------------- --

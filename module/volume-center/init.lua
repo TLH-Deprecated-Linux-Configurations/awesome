@@ -96,9 +96,7 @@ local devices_text =
     margins = dpi(5),
     widget = wibox.container.margin
   },
-  shape = function(cr, width, height)
-    gears.shape.rounded_rect(cr, width, height, beautiful.groups_radius)
-  end,
+  shape = beautiful.client_shape_rounded_xl,
   bg = beautiful.bg_normal,
   forced_width = width,
   forced_height = 70,
@@ -136,76 +134,128 @@ local devices_panel =
   border_color = colors.colorA,
   widget = wibox.container.background
 }
--- ------------------------------------------------- --
--- ------------------------------------------------- --
--- ------------------------------------------------- --
--- whole popup template
-volumeCenter =
-  wibox(
-  {
-    x = screen_geometry.width - width - dpi(8),
-    y = screen_geometry.y,
-    visible = false,
-    ontop = true,
-    screen = mouse.screen,
-    type = "popup",
-    height = screen_geometry.height - dpi(48),
-    width = width,
-    bg = "transparent",
-    fg = colors.white
-  }
-)
--- ------------------------------------------------- --
--- ------------------------------------------------- --
--- ------------------------------------------------- --
-backdrop_volume_center =
-  wibox {
-  ontop = true,
-  visible = false,
-  screen = mouse.screen,
-  bg = "#00000033",
-  type = "splash",
-  width = screen_geometry.width,
-  height = screen_geometry.height
-}
+
 awesome.connect_signal(
   "volume::center:toggle",
   function()
-    if volumeCenter.visible == false then
-      backdrop_volume_center.visible = true
-      volumeCenter.visible = true
-    elseif volumeCenter.visible == true then
-      backdrop_volume_center.visible = false
-      volumeCenter.visible = false
+    vc_toggle()
+  end
+)
+
+-- ------------------------------------------------- --
+-- whole popup template
+local volumeCenter = function(s)
+  -- backdrop
+  s.vc_unfocused =
+    wibox(
+    {
+      x = s.geometry.x,
+      y = s.geometry.y,
+      visible = false,
+      screen = s,
+      ontop = true,
+      type = "splash",
+      height = s.geometry.height,
+      width = s.geometry.width,
+      bg = colors.alpha(colors.blacker, "aa"),
+      fg = colors.white
+    }
+  )
+  -- ------------------------------------------------- --
+
+  s.volumeCenter =
+    wibox(
+    {
+      x = screen_geometry.width - width - dpi(8),
+      y = screen_geometry.y,
+      visible = false,
+      ontop = true,
+      screen = s,
+      type = "popup",
+      height = screen_geometry.height - dpi(48),
+      width = width,
+      bg = "transparent",
+      fg = colors.white
+    }
+  )
+  -- ------------------------------------------------- --
+  -- resize function
+  function vc_resize()
+    vc_height = s.geometry.height
+    if s.volumeCenter.height == s.geometry.height - dpi(48) then
+      s.volumeCenter:geometry {height = s.geometry.height, y = s.geometry.y}
+    elseif s.volumeCenter.height == s.geometry.height then
+      s.volumeCenter:geometry {height = s.geometry.height - dpi(48), y = s.geometry.y}
     end
   end
-)
-
-awesome.connect_signal(
-  "volume::center:toggle:off",
-  function()
-    backdrop_volume_center.visible = false
-    volumeCenter.visible = false
+  -- ------------------------------------------------- --
+  function vc_toggle()
+    if mouse.screen.volumeCenter.visible == false then
+      awful.screen.connect_for_each_screen(
+        function(s)
+          s.vc_unfocused.visible = true
+        end
+      )
+      mouse.screen.volumeCenter.visible = true
+    elseif mouse.screen.volumeCenter.visible == true then
+      awful.screen.connect_for_each_screen(
+        function(s)
+          s.vc_unfocused.visible = false
+        end
+      )
+      mouse.screen.volumeCenter.visible = false
+    end
   end
-)
 
-volumeCenter:setup {
-  spacing = dpi(15),
-  title,
-  sliders,
-  devices_text,
-  devices_panel,
-  layout = wibox.layout.fixed.vertical
-}
-backdrop_volume_center:buttons(
-  awful.util.table.join(
-    awful.button(
-      {},
-      1,
-      nil,
-      function()
-        awesome.emit_signal("volume::center:toggle:off")
-      end
+  awesome.connect_signal(
+    "volume::center:toggle:off",
+    function()
+      s.vc_unfocused.visible = false
+      s.volumeCenter.visible = false
+    end
+  )
+
+  s.volumeCenter:setup {
+    spacing = dpi(15),
+    title,
+    sliders,
+    devices_text,
+    devices_panel,
+    layout = wibox.layout.fixed.vertical
+  }
+  -- ------------------------------------------------- --
+  -- template for backdrop
+  s.vc_unfocused:setup {
+    nil,
+    layout = wibox.layout.align.horizontal
+  }
+  s.vc_unfocused:buttons(
+    awful.util.table.join(
+      awful.button(
+        {},
+        1,
+        nil,
+        function()
+          awesome.emit_signal("volume::center:toggle:off")
+        end
+      ),
+      awful.button(
+        {},
+        2,
+        nil,
+        function()
+          awesome.emit_signal("volume::center:toggle:off")
+        end
+      ),
+      awful.button(
+        {},
+        3,
+        nil,
+        function()
+          awesome.emit_signal("volume::center:toggle:off")
+        end
+      )
     )
   )
-)
+end
+return volumeCenter

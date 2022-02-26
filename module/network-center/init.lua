@@ -170,7 +170,6 @@ local networkCenter = function(s)
       mouse.screen.networkCenter.visible = false
     end
   end
-  -- ------------------------------------------------- --
 
   -- ------------------------------------------------- --
   s.networkCenter:setup {

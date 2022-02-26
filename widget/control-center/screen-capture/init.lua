@@ -17,7 +17,7 @@ local widget_icon =
 	nil,
 	{
 		id = "icon",
-		image = icons.dot,
+		image = icons.recording_button,
 		resize = true,
 		widget = wibox.widget.imagebox
 	},
@@ -35,7 +35,7 @@ local widget =
 			margins = dpi(15),
 			widget = wibox.container.margin
 		},
-		forced_height = dpi(50),
+		forced_height = dpi(60),
 		widget = clickable_container
 	},
 	shape = beautiful.client_shape_rounded,

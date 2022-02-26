@@ -1,7 +1,7 @@
 local host_content =
 	wibox.widget {
 	text = "Control Center",
-	font = "Nineteen Ninety Seven Regular  14",
+	font = "Nineteen Ninety Seven Regular  18",
 	widget = wibox.widget.textbox
 }
 

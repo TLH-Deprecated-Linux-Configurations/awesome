@@ -16,9 +16,9 @@ local format_item = function(widget)
 			margins = dpi(5),
 			widget = wibox.container.margin
 		},
-		shape = function(cr, width, height)
-			gears.shape.rounded_rect(cr, width, height, beautiful.groups_radius)
-		end,
+		shape =beautiful.client_shape_rounded_xl,
+
+
     bg = 'transparent',
 		widget = wibox.container.background
 	}

@@ -290,8 +290,8 @@ theme.separator_color = "#4C5166"
 theme.titlebar_size = dpi(22)
 theme.titlebar_bg_focus = "linear:0,0:0,21:0,#4C5166:1,#282B36"
 theme.titlebar_bg_normal = "linear:0,0:0,21:0,#282B36:1,#1B1D24"
-theme.titlebar_fg_focus = gtk_variable().fg_color
-theme.titlebar_fg_normal = gtk_variable().fg_color
+theme.titlebar_fg_focus = "#b2bfd9"
+theme.titlebar_fg_normal = "#f4f4f7"
 
 -- ------------------------------------------------- --
 -- ------------------------------------------------- --
@@ -303,9 +303,9 @@ theme.taglist_font = "awesomewm-font 19"
 theme.taglist_fg_focus = "#b2bfd9"
 theme.taglist_border_focus = "#f4f4f7"
 theme.taglist_fg_empty = "#f4f4f7"
-theme.taglist_fg = gtk_variable().fg_color
+theme.taglist_fg = "#f4f4f7"
 theme.taglist_fg_occupied = "#282b36"
-theme.taglist_bg_urgent = "#E91E63" .. "cc"
+theme.taglist_bg_urgent = "#E91E63cc"
 theme.taglist_spacing = dpi(6)
 -- ------------------------------------------------- --
 -- ------------------------------------------------- --
