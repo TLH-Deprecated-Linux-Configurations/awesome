@@ -81,7 +81,7 @@ local return_button = function(color, lspace, rspace)
 		end
 	)
 	awesome.connect_signal(
-		"network::connected::wired",
+		"network::status::wired",
 		function(interface, healthy)
 			if healthy == true then
 				widget_icon.icon:set_image(icons.wired)

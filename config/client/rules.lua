@@ -27,6 +27,8 @@ ruled.client.connect_signal(
         above = false,
         below = false,
         ontop = false,
+        honor_padding = true,
+        honor_workarea = true,
         sticky = false,
         maximized_horizontal = false,
         maximized_vertical = false,

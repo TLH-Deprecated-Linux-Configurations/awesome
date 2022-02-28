@@ -70,33 +70,32 @@ local notification_panel =
   ontop = true,
   border_width = dpi(2),
   border_color = colors.colorA,
-  widget = wibox.container.background,
-  layout
+  widget = wibox.container.background
 }
 -- ------------------------------------------------- -- -- ------------------------------------------------- --
 -- signal to resize the popup, insuring it is the right size
 awesome.connect_signal(
-  "nc:resize",
+  "notification::center:resize",
   function()
-    nc_resize()
+    noc_resize()
   end
 )
 
 -- ------------------------------------------------- --
 --  toggle signal
-_G.nc_status = false
+_G.noc_status = true
 
 awesome.connect_signal(
   "notifications::center:toggle",
   function()
-    nc_toggle()
+    noc_toggle()
   end
 )
 -- ------------------------------------------------- --
 --  template for the whole popup (transparent popup)
 notificationCenter = function(s)
   -- backdrop
-  s.nc_unfocused =
+  s.noc_unfocused =
     wibox(
     {
       x = s.geometry.x,
@@ -128,8 +127,8 @@ notificationCenter = function(s)
   )
   -- ------------------------------------------------- --
   -- resize function
-  function nc_resize()
-    nc_height = s.geometry.height
+  function noc_resize()
+    noc_height = s.geometry.height
     if s.notificationCenter.height == s.geometry.height - dpi(48) then
       s.notificationCenter:geometry {height = s.geometry.height, y = s.geometry.y}
     elseif s.notificationCenter.height == s.geometry.height then
@@ -138,18 +137,18 @@ notificationCenter = function(s)
   end
   -- ------------------------------------------------- --
   --
-  function nc_toggle()
+  function noc_toggle()
     if mouse.screen.notificationCenter.visible == false then
       awful.screen.connect_for_each_screen(
         function(s)
-          s.nc_unfocused.visible = true
+          s.noc_unfocused.visible = true
         end
       )
       mouse.screen.notificationCenter.visible = true
     elseif mouse.screen.notificationCenter.visible == true then
       awful.screen.connect_for_each_screen(
         function(s)
-          s.nc_unfocused.visible = false
+          s.noc_unfocused.visible = false
         end
       )
       mouse.screen.notificationCenter.visible = false
@@ -165,8 +164,8 @@ notificationCenter = function(s)
   awesome.connect_signal(
     "notifications::center:toggle:off",
     function()
-      nc_status = false
-      s.nc_unfocused.visible = false
+      noc_status = false
+      s.noc_unfocused.visible = false
       mouse.screen.notificationCenter.visible = false
     end
   )
@@ -182,7 +181,7 @@ notificationCenter = function(s)
   }
   -- ------------------------------------------------- --
   -- template for backdrop
-  s.nc_unfocused:setup {
+  s.noc_unfocused:setup {
     nil,
     layout = wibox.layout.align.horizontal
   }
@@ -190,7 +189,7 @@ notificationCenter = function(s)
   -- ------------------------------------------------- --
   -- ------------------------------------------------- --
   --  assign button to click to turn off popup & backdrop
-  s.nc_unfocused:buttons(
+  s.noc_unfocused:buttons(
     awful.util.table.join(
       awful.button(
         {},

@@ -59,6 +59,7 @@ autostart_apps = {
   "xautolock -time 5 -locker /home/tlh/.config/awesome/bin/blur.sh & ",
   "dbus-daemon --session --address=unix:path=$XDG_RUNTIME_DIR/bus &",
   "xfce4-power-manager &",
+  " gpg-agent --daemon",
   "feh --bg-fill ~/.config/awesome/themes/backgrounds/" .. settings.background
 }
 -- LuaFormatter on

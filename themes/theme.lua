@@ -128,7 +128,7 @@ theme.titlebar_minimize_button_focus = tip .. "hide-active.png"
 -- ------------------------------------------------- --
 -- ------------------------------------------------- --
 -- ------------------------------------------------- --
--- Maximized Button
+-- Maximize Button
 --
 theme.titlebar_maximized_button_normal_inactive = tip .. "maximize-inactive.png"
 theme.titlebar_maximized_button_focus_inactive = tip .. "maximize-prelight.png"

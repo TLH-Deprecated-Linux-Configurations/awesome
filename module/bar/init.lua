@@ -19,16 +19,14 @@ local bar = function(s)
 			x = s.geometry.x,
 			y = s.geometry.y,
 			stretch = true,
-			visible = true,
+			visible = false,
 			bg = beautiful.bg_normal,
 			fg = colors.white
 		}
 	)
 	-- ------------------------------------------------- --
 	--  provide spacing
-	s.panel:struts {
-		bottom = dpi(42)
-	}
+
 	-- ------------------------------------------------- --
 	--  toggle function to make it disappear
 	function bar_toggle()
@@ -36,6 +34,9 @@ local bar = function(s)
 			awful.screen.connect_for_each_screen(
 				function(s)
 					s.panel.visible = true
+					s.panel:struts {
+						bottom = dpi(42)
+					}
 				end
 			)
 			awesome.emit_signal("bar:true")
@@ -48,22 +49,7 @@ local bar = function(s)
 			awesome.emit_signal("bar:false")
 		end
 	end
-	-- ------------------------------------------------- --
-	--  toggle for when in fullscreen mode
-	local function fullscreen_bar_toggle(c)
-		if c.screen and c.screen.index == 1 and c == client.focus then
-			if c.fullscreen then
-				awful.screen.focused().panel.visible = false
-			else
-				awful.screen.focused().panel.visible = true
-			end
-		end
-	end
-	-- ------------------------------------------------- --
-	--  signal to apply fullscreen toggle
-	for _, signal in pairs({"property::fullscreen", "focus"}) do
-		client.connect_signal(signal, fullscreen_bar_toggle)
-	end
+
 	-- ------------------------------------------------- --
 	--  left portion of the panel
 	local leftBar = {
@@ -134,8 +120,57 @@ local bar = function(s)
 			widget = wibox.container.margin
 		}
 	}
+	s.detect =
+		gears.timer {
+		timeout = 3,
+		callback = function()
+			s.panel.visible = false
+			s.detect:stop()
+		end
+	}
 
+	s.enable_wibar = function()
+		s.panel.visible = true
+		if not s.detect.started then
+			s.detect:start()
+		end
+	end
 
+	s.activation_zone =
+		wibox(
+		{
+			x = s.geometry.x,
+			y = s.geometry.y + s.geometry.height - 1,
+			position = "bottom",
+			opacity = 1.0,
+			width = s.geometry.width,
+			height = 1,
+			screen = s,
+			input_passthrough = false,
+			visible = true,
+			ontop = true,
+			type = "dock"
+		}
+	)
+
+	s.activation_zone:connect_signal(
+		"mouse::enter",
+		function()
+			s.enable_wibar()
+		end
+	)
+	s.panel:connect_signal(
+		"mouse:enter",
+		function()
+			s.enable_wibar()
+		end
+	)
+	s.panel:connect_signal(
+		"mouse:leave",
+		function()
+			s.detect()
+		end
+	)
 	return s.panel
 end
 -- ------------------------------------------------- --

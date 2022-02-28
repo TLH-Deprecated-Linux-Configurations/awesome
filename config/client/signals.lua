@@ -140,7 +140,11 @@ client.connect_signal(
   function(c)
     if c.maximized then
       c.shape = beautiful.client_shape_rectangle
+
+      awful.screen.focused().padding = {top = "0", bottom = "0", left = "0", right = "0"}
     else
+      awful.screen.focused().padding = {top = "5", bottom = "20", left = "5", right = "5"}
+
       update_client(c)
     end
   end
