@@ -120,29 +120,36 @@ local bar = function(s)
 			widget = wibox.container.margin
 		}
 	}
+	-- ------------------------------------------------- --
+	-- ------------ auto hide functionality ------------ --
+	-- timer to close the bar
 	s.detect =
 		gears.timer {
-		timeout = 3,
+		timeout = 1,
 		callback = function()
 			s.panel.visible = false
+			s.activation_zone.visible = true
 			s.detect:stop()
 		end
 	}
-
+	-- ------------------------------------------------- --
+	-- holds the bar open
 	s.enable_wibar = function()
 		s.panel.visible = true
+		s.activation_zone.visible = false
 		if not s.detect.started then
 			s.detect:start()
 		end
 	end
-
+	-- ------------------------------------------------- --
+	-- if the bar is not present, this is
 	s.activation_zone =
 		wibox(
 		{
 			x = s.geometry.x,
 			y = s.geometry.y + s.geometry.height - 1,
 			position = "bottom",
-			opacity = 1.0,
+			opacity = 0.0,
 			width = s.geometry.width,
 			height = 1,
 			screen = s,
@@ -152,19 +159,24 @@ local bar = function(s)
 			type = "dock"
 		}
 	)
-
+	-- ------------------------------------------------- --
+	--  when mouse moves to this bar, the other opens
 	s.activation_zone:connect_signal(
 		"mouse::enter",
 		function()
 			s.enable_wibar()
 		end
 	)
+	-- ------------------------------------------------- --
+	-- this keeps the bar open so long is the mouse is within its boundaries so the other can be hidden
 	s.panel:connect_signal(
 		"mouse:enter",
 		function()
 			s.enable_wibar()
 		end
 	)
+	-- ------------------------------------------------- --
+	-- signals to begin timer when mouse leaves
 	s.panel:connect_signal(
 		"mouse:leave",
 		function()
