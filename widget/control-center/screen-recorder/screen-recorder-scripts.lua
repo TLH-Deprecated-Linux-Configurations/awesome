@@ -12,13 +12,9 @@
 -- |_______||____|__|  |__||   __||____|_____|
 --                         |__|
 -- ------------------------------------------------- --
--- ------------------------------------------------- --
--- ------------------------------------------------- --
 local user_config = require("widget.control-center.screen-recorder.screen-recorder-config")
 local scripts_tbl = {}
 local ffmpeg_pid = nil
--- ------------------------------------------------- --
--- ------------------------------------------------- --
 -- ------------------------------------------------- --
 -- Get user settings
 --
@@ -42,8 +38,6 @@ scripts_tbl.check_settings = function()
     -- })
 end
 -- ------------------------------------------------- --
--- ------------------------------------------------- --
--- ------------------------------------------------- --
 local create_save_directory = function()
     local create_dir_cmd =
         [[
@@ -65,8 +59,6 @@ end
 
 create_save_directory()
 -- ------------------------------------------------- --
--- ------------------------------------------------- --
--- ------------------------------------------------- --
 local kill_existing_recording_ffmpeg = function()
     -- Let's killall ffmpeg instance first after awesome (re)-starts if there's any
     awful.spawn.easy_async_with_shell(
@@ -78,12 +70,8 @@ local kill_existing_recording_ffmpeg = function()
     )
 end
 -- ------------------------------------------------- --
--- ------------------------------------------------- --
--- ------------------------------------------------- --
 
 kill_existing_recording_ffmpeg()
--- ------------------------------------------------- --
--- ------------------------------------------------- --
 -- ------------------------------------------------- --
 local turn_on_the_mic = function()
     awful.spawn.easy_async_with_shell(
@@ -96,8 +84,6 @@ local turn_on_the_mic = function()
     )
 end
 -- ------------------------------------------------- --
--- ------------------------------------------------- --
--- ------------------------------------------------- --
 local ffmpeg_stop_recording = function()
     -- Let's killall ffmpeg instance first after awesome (re)-starts if there's any
     awful.spawn.easy_async_with_shell(
@@ -108,8 +94,6 @@ local ffmpeg_stop_recording = function()
         end
     )
 end
--- ------------------------------------------------- --
--- ------------------------------------------------- --
 -- ------------------------------------------------- --
 local create_notification = function(file_dir)
     local open_video =
@@ -157,8 +141,6 @@ local create_notification = function(file_dir)
     )
 end
 -- ------------------------------------------------- --
--- ------------------------------------------------- --
--- ------------------------------------------------- --
 local ffmpeg_start_recording = function(audio, filename)
     local add_audio_str = " "
 
@@ -204,8 +186,6 @@ local ffmpeg_start_recording = function(audio, filename)
     )
 end
 -- ------------------------------------------------- --
--- ------------------------------------------------- --
--- ------------------------------------------------- --
 local create_unique_filename = function(audio)
     awful.spawn.easy_async_with_shell(
         [[
@@ -224,19 +204,13 @@ local create_unique_filename = function(audio)
     )
 end
 -- ------------------------------------------------- --
--- ------------------------------------------------- --
--- ------------------------------------------------- --
 scripts_tbl.start_recording = function(audio_mode)
     create_save_directory()
     create_unique_filename(audio_mode)
 end
 -- ------------------------------------------------- --
--- ------------------------------------------------- --
--- ------------------------------------------------- --
 scripts_tbl.stop_recording = function()
     ffmpeg_stop_recording()
 end
--- ------------------------------------------------- --
--- ------------------------------------------------- --
 -- ------------------------------------------------- --
 return scripts_tbl

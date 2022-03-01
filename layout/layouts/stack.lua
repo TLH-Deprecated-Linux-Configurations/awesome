@@ -19,14 +19,10 @@
 --  |      |       |
 --  +------+-------+
 -- ------------------------------------------------- --
--- ------------------------------------------------- --
--- ------------------------------------------------- --
 local math = math
 local screen = screen
 
 local stack = {}
--- ------------------------------------------------- --
--- ------------------------------------------------- --
 -- ------------------------------------------------- --
 local function arrange(p, dir)
     local t = p.tag or screen[p.screen].selected_tag
@@ -57,14 +53,13 @@ local function arrange(p, dir)
     -- ------------------------------------------------- --
     -- ------------------------------------------------- --
     -- Places master
-    local c,
-        g = cls[1], {}
+    local c, g = cls[1], {}
 
     g.height = math.max(mstrHeight, 1)
     g.width = math.max(mstrWidth, 1)
 
     g.y = wa.y
-    g.x = (dir == 'right') and (wa.x) or (wa.x + slavesWidth)
+    g.x = (dir == "right") and (wa.x) or (wa.x + slavesWidth)
     -- ------------------------------------------------- --
     -- ------------------------------------------------- --
     -- ------------------------------------------------- --
@@ -80,34 +75,27 @@ local function arrange(p, dir)
 
     -- Places slaves
     for i = 2, #cls do
-        local c,
-            g = cls[i], {}
+        local c, g = cls[i], {}
 
         g.height = math.max(slavesHeight, 1)
         g.width = math.max(slavesWidth, 1)
 
         g.y = wa.y
-        g.x = (dir == 'right') and (wa.x + mstrWidth) or (wa.x)
+        g.x = (dir == "right") and (wa.x + mstrWidth) or (wa.x)
 
         p.geometries[c] = g
     end
 end
 -- ------------------------------------------------- --
--- ------------------------------------------------- --
--- ------------------------------------------------- --
-stack.name = 'stack'
+stack.name = "stack"
 function stack.arrange(p)
-    return arrange(p, 'right')
+    return arrange(p, "right")
 end
--- ------------------------------------------------- --
--- ------------------------------------------------- --
 -- ------------------------------------------------- --
 stack.left = {}
-stack.left.name = 'stackLeft'
+stack.left.name = "stackLeft"
 function stack.left.arrange(p)
-    return arrange(p, 'left')
+    return arrange(p, "left")
 end
--- ------------------------------------------------- --
--- ------------------------------------------------- --
 -- ------------------------------------------------- --
 return stack

@@ -6,8 +6,6 @@
 -- Adapted from the work of lilydjwg <lilydjwg@gmail.com>
 -- https://github.com/lilydjwg/myawesomerc
 -- ------------------------------------------------- --
--- ------------------------------------------------- --
--- ------------------------------------------------- --
 --  variable assignment and library import
 local ipairs = ipairs
 local math = math
@@ -33,7 +31,7 @@ local function do_empathy(p)
         local cls = {}
         local buddylist_swap
         for k, c in ipairs(p.clients) do
-            if c.name ~= '联系人列表' and c.name ~= 'Contact List' and c.name ~= '好友列表' then
+            if c.name ~= "联系人列表" and c.name ~= "Contact List" and c.name ~= "好友列表" then
                 table.insert(cls, c)
             else
                 if k ~= 1 then
@@ -98,10 +96,8 @@ local function do_empathy(p)
 end
 
 local empathy = {}
-empathy.name = 'empathy'
+empathy.name = "empathy"
 
--- ------------------------------------------------- --
--- ------------------------------------------------- --
 -- ------------------------------------------------- --
 -- The screen to arrange.
 --

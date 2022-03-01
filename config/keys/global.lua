@@ -190,7 +190,7 @@ local globalKeys =
 		{modkey},
 		"space",
 		function()
-			awful.layout.inc(1)
+			awesome.emit_signal("layout::changed:next")
 			naughty.notify(
 				{
 					preset = naughty.config.presets.low,
@@ -206,7 +206,7 @@ local globalKeys =
 		{modkey, "Shift"},
 		"space",
 		function()
-			awful.layout.inc(-1)
+			awesome.emit_signal("layout::changed:prev")
 			naughty.notify(
 				{
 					preset = naughty.config.presets.low,
@@ -476,8 +476,6 @@ local globalKeys =
 		{description = "Arandr", group = "Hotkeys"}
 	) --
 )
--- ------------------------------------------------- --
--- ------------------------------------------------- --
 -- ------------------------------------------------- --
 for i = 1, 9 do
 	globalKeys =

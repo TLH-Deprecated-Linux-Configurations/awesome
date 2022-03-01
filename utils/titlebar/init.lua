@@ -7,8 +7,6 @@
 -- my GTK theme, Dhumavati. They are the artifact of making
 -- the theme fit gnome and xfce, so why not also use them here?
 -- ------------------------------------------------- --
--- ------------------------------------------------- --
--- ------------------------------------------------- --
 -- External Library Handling
 local awful = require("awful")
 local gears = require("gears")
@@ -20,16 +18,12 @@ local wibox = require("wibox")
 local beautiful = require("beautiful")
 local dpi = require("beautiful.xresources").apply_dpi
 -- ------------------------------------------------- --
--- ------------------------------------------------- --
--- ------------------------------------------------- --
 local prrect = function(radius, tl, tr, br, bl)
     return function(cr, width, height)
         gears.shape.partially_rounded_rect(cr, width, height, tl, tr, br, bl, radius)
     end
 end
 
--- ------------------------------------------------- --
--- ------------------------------------------------- --
 -- ------------------------------------------------- --
 _G.client.connect_signal(
     "manage",
@@ -38,8 +32,6 @@ _G.client.connect_signal(
     end
 )
 
--- ------------------------------------------------- --
--- ------------------------------------------------- --
 -- ------------------------------------------------- --
 -- Add a titlebar if titlebars_enabled is set to true in the rules.
 --

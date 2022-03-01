@@ -2,8 +2,6 @@ local awful = require("awful")
 local beautiful = require("beautiful")
 
 -- ------------------------------------------------- --
--- ------------------------------------------------- --
--- ------------------------------------------------- --
 local update_client = function(c)
   -- Set client's shape based on its tag's layout and status (floating, maximized, etc.)
   --
@@ -14,8 +12,6 @@ local update_client = function(c)
   end
 end
 
--- ------------------------------------------------- --
--- ------------------------------------------------- --
 -- ------------------------------------------------- --
 client.connect_signal(
   "request::manage",
@@ -65,7 +61,7 @@ client.connect_signal(
     end
   end
 )
-
+-- ------------------------------------------------- --
 client.connect_signal(
   "manage",
   function(c)
@@ -79,22 +75,22 @@ client.connect_signal(
     end
   end
 )
-
--- Enable sloppy focus, so that focus follows mouse.
+-- ------------------------------------------------- --
+-- Enable sloppy focus, so that focus follows mouse. BUT don't raise the window, Lord help me that is annoying when trying to access a popup window within another window
 client.connect_signal(
   "mouse::enter",
   function(c)
     c:emit_signal("request::activate", "mouse_enter", {raise = false})
   end
 )
-
+-- ------------------------------------------------- --
 client.connect_signal(
   "focus",
   function(c)
     c.border_color = beautiful.border_focus
   end
 )
-
+-- ------------------------------------------------- --
 client.connect_signal(
   "unfocus",
   function(c)
@@ -102,8 +98,6 @@ client.connect_signal(
   end
 )
 
--- ------------------------------------------------- --
--- ------------------------------------------------- --
 -- ------------------------------------------------- --
 -- Manipulate client shape on floating
 client.connect_signal(
@@ -118,8 +112,6 @@ client.connect_signal(
   end
 )
 -- ------------------------------------------------- --
--- ------------------------------------------------- --
--- ------------------------------------------------- --
 -- Manipulate client shape on fullscreen/non-fullscreen
 client.connect_signal(
   "property::fullscreen",
@@ -132,19 +124,13 @@ client.connect_signal(
   end
 )
 -- ------------------------------------------------- --
--- ------------------------------------------------- --
--- ------------------------------------------------- --
 -- Manipulate client shape on fullscreen/non-fullscreen
 client.connect_signal(
   "property::maximized",
   function(c)
     if c.maximized then
       c.shape = beautiful.client_shape_rectangle
-
-      awful.screen.focused().padding = {top = "0", bottom = "0", left = "0", right = "0"}
     else
-      awful.screen.focused().padding = {top = "5", bottom = "20", left = "5", right = "5"}
-
       update_client(c)
     end
   end
@@ -152,8 +138,6 @@ client.connect_signal(
 -- ------------------------------------------------- --
 -- Set mouse resize mode (live or after)
 awful.mouse.resize.set_mode("live")
--- ------------------------------------------------- --
--- ------------------------------------------------- --
 -- ------------------------------------------------- --
 -- Restore geometry for floating clients
 -- (for example after swapping from tiling mode to floating mode)

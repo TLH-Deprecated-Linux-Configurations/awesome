@@ -7,13 +7,9 @@
 -- |   |   ||  _  |   _||  ||  _  ||  _  ||  ||  -__|__ --|
 --  \_____/ |___._|__|  |__||___._||_____||__||_____|_____|
 -- ------------------------------------------------- --
--- ------------------------------------------------- --
--- ------------------------------------------------- --
 -- This makes for neater files without boilerplate and improves the
 -- developer experience considerably compared to the standard use of
 -- require statements to call libraries in per file
--- ------------------------------------------------- --
--- ------------------------------------------------- --
 -- ------------------------------------------------- --
 --assignments
 awful = require("awful")
@@ -50,8 +46,6 @@ screen_geometry = require("awful").screen.focused().geometry
 format_item = require("utils.format_item")
 settings = require("settings")
 
--- ------------------------------------------------- --
--- ------------------------------------------------- --
 -- ------------------------------------------------- --
 -- Assignments dependent on above list otherwise it will throw errrors,
 -- this results from trial and error (and lots of blood)

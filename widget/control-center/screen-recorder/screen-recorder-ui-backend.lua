@@ -15,24 +15,16 @@
 -- |   __ <|  _  |  __||    <|  -__|     |  _  |
 -- |______/|___._|____||__|__|_____|__|__|_____|
 -- ------------------------------------------------- --
--- ------------------------------------------------- --
--- ------------------------------------------------- --
 local config_dir = gears.filesystem.get_configuration_dir()
 local widget_icon_dir = config_dir .. "layout/bottom-panel/widget/screen-recorder/icons/"
--- ------------------------------------------------- --
--- ------------------------------------------------- --
 -- ------------------------------------------------- --
 -- The screen-recorders scripts
 --
 local screen_rec_backend = require("widget.control-center.screen-recorder.screen-recorder-scripts")
 -- ------------------------------------------------- --
--- ------------------------------------------------- --
--- ------------------------------------------------- --
 -- The screen-recorder's UI
 --
 local screen_rec_ui = require("widget.control-center.screen-recorder.screen-recorder-ui")
--- ------------------------------------------------- --
--- ------------------------------------------------- --
 -- ------------------------------------------------- --
 -- User Preferences
 --
@@ -40,8 +32,6 @@ local sr_user_resolution = screen_rec_backend.user_resolution
 local sr_user_offset = screen_rec_backend.user_offset
 local sr_user_audio = screen_rec_backend.user_audio
 local sr_user_update = screen_rec_backend.update_user_settings
--- ------------------------------------------------- --
--- ------------------------------------------------- --
 -- ------------------------------------------------- --
 -- Panel UIs
 --
@@ -55,8 +45,6 @@ local sr_audio_button = screen_rec_ui.screen_rec_audio_button
 local sr_settings_button = screen_rec_ui.screen_rec_settings_button
 local sr_close_button = screen_rec_ui.screen_rec_close_button
 -- ------------------------------------------------- --
--- ------------------------------------------------- --
--- ------------------------------------------------- --
 -- Settings UIs
 --
 local sr_back_button = screen_rec_ui.screen_rec_back_button
@@ -65,34 +53,24 @@ local sr_offset_box = screen_rec_ui.screen_rec_offset_txtbox
 local sr_resolution_tbox = sr_resolution_box:get_children_by_id("res_tbox")[1]
 local sr_offset_tbox = sr_offset_box:get_children_by_id("offset_tbox")[1]
 -- ------------------------------------------------- --
--- ------------------------------------------------- --
--- ------------------------------------------------- --
 -- Main Scripts
 --
 local sr_start_recording = screen_rec_backend.start_recording
 local sr_stop_recording = screen_rec_backend.stop_recording
 -- ------------------------------------------------- --
--- ------------------------------------------------- --
--- ------------------------------------------------- --
 -- Active Screen Recorder
 --
 local sr_screen = nil
 -- ------------------------------------------------- --
--- ------------------------------------------------- --
--- ------------------------------------------------- --
 -- Active textbox
 --
 local sr_active_tbox = nil
--- ------------------------------------------------- --
--- ------------------------------------------------- --
 -- ------------------------------------------------- --
 -- Status variables
 --
 local status_countdown = false
 local status_recording = false
 local status_audio = sr_user_audio
--- ------------------------------------------------- --
--- ------------------------------------------------- --
 -- ------------------------------------------------- --
 -- Update UI on startup using the user config
 --
@@ -108,8 +86,6 @@ else
     sr_audio_button.bg = "#00000000"
 end
 -- ------------------------------------------------- --
--- ------------------------------------------------- --
--- ------------------------------------------------- --
 -- Textbox ui manipulators
 --
 local emphasize_inactive_tbox = function()
@@ -123,8 +99,6 @@ local emphasize_inactive_tbox = function()
     sr_active_tbox = nil
 end
 -- ------------------------------------------------- --
--- ------------------------------------------------- --
--- ------------------------------------------------- --
 local emphasize_active_tbox = function()
     if sr_active_tbox == "res_tbox" then
         sr_resolution_box.border_width = dpi(1)
@@ -134,8 +108,6 @@ local emphasize_active_tbox = function()
         sr_offset_box.border_color = "#F2F2F2AA"
     end
 end
--- ------------------------------------------------- --
--- ------------------------------------------------- --
 -- ------------------------------------------------- --
 -- Delete, reset and write to the textbox
 --
@@ -155,8 +127,6 @@ local write_to_textbox = function(char)
     end
 end
 -- ------------------------------------------------- --
--- ------------------------------------------------- --
--- ------------------------------------------------- --
 local reset_textbox = function()
     if sr_active_tbox == "res_tbox" then
         sr_resolution_tbox:set_markup(sr_res_default_markup)
@@ -165,8 +135,6 @@ local reset_textbox = function()
     end
     emphasize_inactive_tbox()
 end
--- ------------------------------------------------- --
--- ------------------------------------------------- --
 -- ------------------------------------------------- --
 -- Set audio mode
 --
@@ -181,8 +149,6 @@ local sr_audio_mode = function()
         end
     end
 end
--- ------------------------------------------------- --
--- ------------------------------------------------- --
 -- ------------------------------------------------- --
 
 local delete_key = function()
@@ -201,8 +167,6 @@ local delete_key = function()
     end
 end
 -- ------------------------------------------------- --
--- ------------------------------------------------- --
--- ------------------------------------------------- --
 
 local apply_new_settings = function()
     -- ------------------------------------------------- --
@@ -217,8 +181,6 @@ local apply_new_settings = function()
     -- Debugger
     screen_rec_backend.check_settings()
 end
--- ------------------------------------------------- --
--- ------------------------------------------------- --
 -- ------------------------------------------------- --
 -- Settings Key grabber
 local settings_updater =
@@ -247,8 +209,6 @@ local settings_updater =
     end
 }
 -- ------------------------------------------------- --
--- ------------------------------------------------- --
--- ------------------------------------------------- --
 -- Textboxes
 sr_resolution_tbox:buttons(
     gears.table.join(
@@ -266,8 +226,6 @@ sr_resolution_tbox:buttons(
     )
 )
 -- ------------------------------------------------- --
--- ------------------------------------------------- --
--- ------------------------------------------------- --
 sr_offset_tbox:buttons(
     gears.table.join(
         awful.button(
@@ -284,8 +242,6 @@ sr_offset_tbox:buttons(
     )
 )
 -- ------------------------------------------------- --
--- ------------------------------------------------- --
--- ------------------------------------------------- --
 -- UI switcher
 local sr_navigation_reset = function()
     if sr_screen then
@@ -295,8 +251,6 @@ local sr_navigation_reset = function()
         recorder_panel.visible = true
     end
 end
--- ------------------------------------------------- --
--- ------------------------------------------------- --
 -- ------------------------------------------------- --
 local sr_navigation = function()
     if sr_screen then
@@ -312,8 +266,6 @@ local sr_navigation = function()
     end
 end
 -- ------------------------------------------------- --
--- ------------------------------------------------- --
--- ------------------------------------------------- --
 sr_settings_button:buttons(
     gears.table.join(
         awful.button(
@@ -328,8 +280,6 @@ sr_settings_button:buttons(
         )
     )
 )
--- ------------------------------------------------- --
--- ------------------------------------------------- --
 -- ------------------------------------------------- --
 sr_back_button:buttons(
     gears.table.join(
@@ -350,8 +300,6 @@ sr_back_button:buttons(
         )
     )
 )
--- ------------------------------------------------- --
--- ------------------------------------------------- --
 -- ------------------------------------------------- --
 -- Close button functions and buttons
 --
@@ -377,8 +325,6 @@ sr_close_button:buttons(
     )
 )
 -- ------------------------------------------------- --
--- ------------------------------------------------- --
--- ------------------------------------------------- --
 -- Right click to exit
 --
 local screen_close_on_rmb = function(widget)
@@ -395,8 +341,6 @@ local screen_close_on_rmb = function(widget)
         )
     )
 end
--- ------------------------------------------------- --
--- ------------------------------------------------- --
 -- ------------------------------------------------- --
 -- Open recorder screen
 --
@@ -417,8 +361,6 @@ sr_toggle_button:buttons(
         )
     )
 )
--- ------------------------------------------------- --
--- ------------------------------------------------- --
 -- ------------------------------------------------- --
 -- Start Recording
 --
@@ -443,8 +385,6 @@ local sr_recording_start = function()
     sr_start_recording(status_audio)
 end
 -- ------------------------------------------------- --
--- ------------------------------------------------- --
--- ------------------------------------------------- --
 -- Stop Recording
 --
 local sr_recording_stop = function()
@@ -466,8 +406,6 @@ awesome.connect_signal(
         sr_recording_stop()
     end
 )
--- ------------------------------------------------- --
--- ------------------------------------------------- --
 -- ------------------------------------------------- --
 -- Countdown timer functions
 --
@@ -498,8 +436,6 @@ local counter_timer = function()
     )
 end
 -- ------------------------------------------------- --
--- ------------------------------------------------- --
--- ------------------------------------------------- --
 -- Stop Countdown timer
 local sr_countdown_stop = function()
     countdown_timer:stop()
@@ -508,8 +444,6 @@ local sr_countdown_stop = function()
     sr_countdown_text.opacity = 0.0
     sr_countdown_text:emit_signal("widget::redraw_needed")
 end
--- ------------------------------------------------- --
--- ------------------------------------------------- --
 -- ------------------------------------------------- --
 sr_audio_button:buttons(
     gears.table.join(
@@ -523,8 +457,6 @@ sr_audio_button:buttons(
         )
     )
 )
--- ------------------------------------------------- --
--- ------------------------------------------------- --
 -- ------------------------------------------------- --
 -- Main button functions and buttons
 --
@@ -547,8 +479,6 @@ local status_checker = function()
     --
     counter_timer()
 end
--- ------------------------------------------------- --
--- ------------------------------------------------- --
 -- ------------------------------------------------- --
 
 sr_main_button:buttons(

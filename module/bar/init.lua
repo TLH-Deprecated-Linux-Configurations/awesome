@@ -3,8 +3,6 @@
 -- |   __ <|  _  |   _|
 -- |______/|___._|__|
 -- ------------------------------------------------- --
--- ------------------------------------------------- --
--- ------------------------------------------------- --
 -- declare widget
 local bar = function(s)
 	s.panel =
@@ -88,6 +86,7 @@ local bar = function(s)
 	-- ------------------------------------------------- --
 	-- ------------------------------------------------- --
 	--  right widget insertions
+	table.insert(rightBar, require("widget.bar.layoutbox")({color = colors[beautiful.bg_button]}))
 	table.insert(rightBar, require("widget.bar.volume")({color = colors[beautiful.bg_button]}, 0, 0))
 
 	table.insert(rightBar, require("widget.bar.network")({color = colors[beautiful.bg_button]}, 0, 0))

@@ -3,16 +3,12 @@
 -- |       ||  _  ||   _|  ||   _|  ||  __|  _  ||   _|  ||  _  |     |__ --|
 -- |__|____||_____||____|__||__| |__||____|___._||____|__||_____|__|__|_____|
 -- ------------------------------------------------- --
--- ------------------------------------------------- --
--- ------------------------------------------------- --
 require("widget.notification-center.notifications")
 -- Apply theme variables
 naughty.config.padding = dpi(8)
 naughty.config.spacing = dpi(8)
 naughty.config.icon_formats = {"svg", "png", "jpg", "gif"}
 
--- ------------------------------------------------- --
--- ------------------------------------------------- --
 -- ------------------------------------------------- --
 --  provide rules for the notifications
 ruled.notification.connect_signal(
@@ -44,8 +40,6 @@ ruled.notification.connect_signal(
 	end
 )
 -- ------------------------------------------------- --
--- ------------------------------------------------- --
--- ------------------------------------------------- --
 --  connect to the error signal
 naughty.connect_signal(
 	"request::display_error",
@@ -60,8 +54,6 @@ naughty.connect_signal(
 	end
 )
 -- ------------------------------------------------- --
--- ------------------------------------------------- --
--- ------------------------------------------------- --
 --  color assignment
 local main_color = {
 	["low"] = colors.colorB,
@@ -74,8 +66,6 @@ local edge_color = {
 	["normal"] = colors.colorB,
 	["critical"] = colors.color4
 }
--- ------------------------------------------------- --
--- ------------------------------------------------- --
 -- ------------------------------------------------- --
 -- template for the notifications in general, with icons
 

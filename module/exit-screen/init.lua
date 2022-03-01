@@ -242,8 +242,6 @@ local exit_screen = function(s)
 end
 
 -- ------------------------------------------------- --
--- ------------------------------------------------- --
--- ------------------------------------------------- --
 awesome.connect_signal(
   "module::exit_screen:show",
   function()
@@ -253,8 +251,6 @@ awesome.connect_signal(
     awful.screen.focused().exit_screen.visible = true
   end
 )
--- ------------------------------------------------- --
--- ------------------------------------------------- --
 -- ------------------------------------------------- --
 awesome.connect_signal(
   "module::exit_screen:hide",

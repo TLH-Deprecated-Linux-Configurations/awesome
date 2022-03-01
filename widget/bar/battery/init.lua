@@ -16,8 +16,6 @@ local battery_text =
 	widget = wibox.widget.textbox
 }
 -- ------------------------------------------------- --
--- ------------------------------------------------- --
--- ------------------------------------------------- --
 -- create the icon portion of the text, which uses a nerd font to display the icon
 local battery_icon =
 	wibox.widget {

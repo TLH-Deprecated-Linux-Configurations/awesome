@@ -8,13 +8,9 @@
 -- |   ---||  _  ||  |  ||  -__|  __||   _|  _  |   _|
 -- |______||_____||__|__||_____|____||____|_____|__|
 -- ------------------------------------------------- --
--- ------------------------------------------------- --
--- ------------------------------------------------- --
 --  this runs the garbage collector globally, so no need for tacking on the
 --  collectgrabage function at the end of every watch function. Currently
 --  set with settings that inhibit my laptop the least.
--- ------------------------------------------------- --
--- ------------------------------------------------- --
 -- ------------------------------------------------- --
 local gears = require("gears")
 -- Run garbage collector regularly to prevent memory leaks

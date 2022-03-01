@@ -11,10 +11,8 @@ require("startup")
 require("config")
 require("layout")
 require("config.client")
-
-require("themes")
-
 _G.root.keys(require("config.keys.global"))
+require("themes")
 
 require("utils")
 require("signal")

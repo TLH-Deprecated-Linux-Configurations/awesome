@@ -8,14 +8,10 @@
 -- |   __ <|  |  ||   _|   _|  _  |     |__ --|
 -- |______/|_____||____|____|_____|__|__|_____|
 -- ------------------------------------------------- --
--- ------------------------------------------------- --
--- ------------------------------------------------- --
 -- In the awesome context, buttons refer primarily to the mouse buttons and
 -- in the root context to what the mouse buttons do if used without a client
 -- beneath the mouse when the button is pressed such as when looking at a
 -- blank screen
--- ------------------------------------------------- --
--- ------------------------------------------------- --
 -- ------------------------------------------------- --
 _G.root.buttons(
     gears.table.join(
@@ -23,9 +19,9 @@ _G.root.buttons(
             {},
             1,
             function()
-                if mymainmenu then
-                    mymainmenu:toggle()
-                end
+                -- if mymainmenu then
+                -- mymainmenu:toggle()
+                -- end
             end
         ),
         awful.button(

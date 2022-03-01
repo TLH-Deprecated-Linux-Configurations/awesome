@@ -7,8 +7,6 @@
 -- |      <|  -__|  __|  _  |   _|  _  ||  -__|   _|
 -- |___|__||_____|____|_____|__| |_____||_____|__|
 -- ------------------------------------------------- --
--- ------------------------------------------------- --
--- ------------------------------------------------- --
 local recorder_table = require("widget.control-center.screen-recorder.screen-recorder-ui")
 require("widget.control-center.screen-recorder.screen-recorder-ui-backend")
 local screen_rec_toggle_button = recorder_table.screen_rec_toggle_button

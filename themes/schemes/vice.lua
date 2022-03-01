@@ -3,8 +3,6 @@
 -- |   |   |  ||  __|  -__|
 --  \_____/|__||____|_____|
 -- ------------------------------------------------- --
--- ------------------------------------------------- --
--- ------------------------------------------------- --
 -- The vice base16 theme for awesomewm, yes I made my own base16 theme
 -- instead of using Nord or Gruvbox or Catppucin or whatever cool kids like
 -- this week. I like what I like and its not any of those color schemes

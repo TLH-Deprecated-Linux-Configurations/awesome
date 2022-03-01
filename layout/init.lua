@@ -4,8 +4,6 @@
 -- |_______|___._|___  |_____|_____||____|
 --               |_____|
 -- ------------------------------------------------- --
--- ------------------------------------------------- --
--- ------------------------------------------------- --
 -- because of the order at which the files are called, I can't rely on the
 -- global_variables to call libraries for this file. I know, lame.
 --
@@ -19,8 +17,6 @@ local thrizen = require("layout.layouts.thrizen")
 local beautiful = require("beautiful")
 local tag = tag
 local dpi = beautiful.xresources.apply_dpi
--- ------------------------------------------------- --
--- ------------------------------------------------- --
 -- ------------------------------------------------- --
 -- define the default layouts, incliding the custom ones called above
 --
@@ -55,8 +51,6 @@ tag.connect_signal(
   end
 )
 
--- ------------------------------------------------- --
--- ------------------------------------------------- --
 -- ------------------------------------------------- --
 awful.screen.connect_for_each_screen(
   function(s)
@@ -95,8 +89,6 @@ awful.screen.connect_for_each_screen(
     return tags
   end
 )
--- ------------------------------------------------- --
--- ------------------------------------------------- --
 -- ------------------------------------------------- --
 -- gaps determined by layout type
 --

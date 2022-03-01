@@ -8,8 +8,6 @@
 -- |       |  ||__ --||   _|
 -- |_______|__||_____||____|
 -- ------------------------------------------------- --
--- ------------------------------------------------- --
--- ------------------------------------------------- --
 local awful = require("awful")
 local wibox = require("wibox")
 local beautiful = require("beautiful")
@@ -44,8 +42,6 @@ tag_preview_box.enable {
 	end
 }
 
--- ------------------------------------------------- --
--- ------------------------------------------------- --
 -- ------------------------------------------------- --
 local get_taglist = function(s)
 	-- Taglist buttons
@@ -111,7 +107,7 @@ local get_taglist = function(s)
 						},
 						nil,
 						strategy = "max",
-						layout = wibox.layout.margin,
+						layout = wibox.container.margin,
 						left = dpi(1),
 						right = dpi(1),
 						top = dpi(1),

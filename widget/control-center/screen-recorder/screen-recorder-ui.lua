@@ -11,13 +11,9 @@
 -- |   |   |_|   |_
 -- |_______|_______|
 -- ------------------------------------------------- --
--- ------------------------------------------------- --
--- ------------------------------------------------- --
 local config_dir = gears.filesystem.get_configuration_dir()
 local widget_icon_dir = config_dir .. "widget/control-center/screen-recorder/icons/"
 local record_tbl = {}
--- ------------------------------------------------- --
--- ------------------------------------------------- --
 -- ------------------------------------------------- --
 -- Panel UI
 --
@@ -28,8 +24,6 @@ record_tbl.screen_rec_toggle_imgbox =
     widget = wibox.widget.imagebox
 }
 -- ------------------------------------------------- --
--- ------------------------------------------------- --
--- ------------------------------------------------- --
 record_tbl.screen_rec_toggle_button =
     wibox.widget {
     {
@@ -39,8 +33,6 @@ record_tbl.screen_rec_toggle_button =
     },
     widget = clickable_container
 }
--- ------------------------------------------------- --
--- ------------------------------------------------- --
 -- ------------------------------------------------- --
 record_tbl.screen_rec_countdown_txt =
     wibox.widget {
@@ -53,16 +45,12 @@ record_tbl.screen_rec_countdown_txt =
     widget = wibox.widget.textbox
 }
 -- ------------------------------------------------- --
--- ------------------------------------------------- --
--- ------------------------------------------------- --
 record_tbl.screen_rec_main_imgbox =
     wibox.widget {
     image = widget_icon_dir .. "recorder-off" .. ".svg",
     resize = true,
     widget = wibox.widget.imagebox
 }
--- ------------------------------------------------- --
--- ------------------------------------------------- --
 -- ------------------------------------------------- --
 record_tbl.screen_rec_main_button =
     wibox.widget {
@@ -86,16 +74,12 @@ record_tbl.screen_rec_main_button =
     widget = wibox.container.margin
 }
 -- ------------------------------------------------- --
--- ------------------------------------------------- --
--- ------------------------------------------------- --
 record_tbl.screen_rec_audio_imgbox =
     wibox.widget {
     image = widget_icon_dir .. "audio" .. ".svg",
     resize = true,
     widget = wibox.widget.imagebox
 }
--- ------------------------------------------------- --
--- ------------------------------------------------- --
 -- ------------------------------------------------- --
 record_tbl.screen_rec_audio_button =
     wibox.widget {
@@ -123,16 +107,12 @@ record_tbl.screen_rec_audio_button =
     widget = wibox.container.background
 }
 -- ------------------------------------------------- --
--- ------------------------------------------------- --
--- ------------------------------------------------- --
 record_tbl.screen_rec_close_imgbox =
     wibox.widget {
     image = widget_icon_dir .. "close-screen" .. ".svg",
     resize = true,
     widget = wibox.widget.imagebox
 }
--- ------------------------------------------------- --
--- ------------------------------------------------- --
 -- ------------------------------------------------- --
 record_tbl.screen_rec_close_button =
     wibox.widget {
@@ -158,16 +138,12 @@ record_tbl.screen_rec_close_button =
     widget = wibox.container.background
 }
 -- ------------------------------------------------- --
--- ------------------------------------------------- --
--- ------------------------------------------------- --
 record_tbl.screen_rec_settings_imgbox =
     wibox.widget {
     image = widget_icon_dir .. "settings" .. ".svg",
     resize = true,
     widget = wibox.widget.imagebox
 }
--- ------------------------------------------------- --
--- ------------------------------------------------- --
 -- ------------------------------------------------- --
 record_tbl.screen_rec_settings_button =
     wibox.widget {
@@ -193,16 +169,12 @@ record_tbl.screen_rec_settings_button =
     widget = wibox.container.background
 }
 -- ------------------------------------------------- --
--- ------------------------------------------------- --
--- ------------------------------------------------- --
 record_tbl.screen_rec_back_imgbox =
     wibox.widget {
     image = widget_icon_dir .. "back" .. ".svg",
     resize = true,
     widget = wibox.widget.imagebox
 }
--- ------------------------------------------------- --
--- ------------------------------------------------- --
 -- ------------------------------------------------- --
 record_tbl.screen_rec_back_button =
     wibox.widget {
@@ -226,8 +198,6 @@ record_tbl.screen_rec_back_button =
     widget = wibox.container.background
 }
 -- ------------------------------------------------- --
--- ------------------------------------------------- --
--- ------------------------------------------------- --
 record_tbl.screen_rec_back_txt =
     wibox.widget {
     {
@@ -241,8 +211,6 @@ record_tbl.screen_rec_back_txt =
     widget = wibox.container.margin
 }
 -- ------------------------------------------------- --
--- ------------------------------------------------- --
--- ------------------------------------------------- --
 record_tbl.screen_rec_res_txt =
     wibox.widget {
     {
@@ -255,8 +223,6 @@ record_tbl.screen_rec_res_txt =
     margins = dpi(5),
     widget = wibox.container.margin
 }
--- ------------------------------------------------- --
--- ------------------------------------------------- --
 -- ------------------------------------------------- --
 record_tbl.screen_rec_res_txtbox =
     wibox.widget {
@@ -281,8 +247,6 @@ record_tbl.screen_rec_res_txtbox =
     widget = wibox.container.background
 }
 -- ------------------------------------------------- --
--- ------------------------------------------------- --
--- ------------------------------------------------- --
 record_tbl.screen_rec_offset_txt =
     wibox.widget {
     {
@@ -295,8 +259,6 @@ record_tbl.screen_rec_offset_txt =
     margins = dpi(5),
     widget = wibox.container.margin
 }
--- ------------------------------------------------- --
--- ------------------------------------------------- --
 -- ------------------------------------------------- --
 record_tbl.screen_rec_offset_txtbox =
     wibox.widget {
@@ -321,8 +283,6 @@ record_tbl.screen_rec_offset_txtbox =
     shape = beautiful.client_shape_rounded,
     widget = wibox.container.background
 }
--- ------------------------------------------------- --
--- ------------------------------------------------- --
 -- ------------------------------------------------- --
 screen.connect_signal(
     "request::desktop_decoration",
@@ -403,7 +363,5 @@ screen.connect_signal(
         }
     end
 )
--- ------------------------------------------------- --
--- ------------------------------------------------- --
 -- ------------------------------------------------- --
 return record_tbl

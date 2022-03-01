@@ -3,8 +3,6 @@
 -- |__     ||  __|   _|  -__|  -__|     |
 -- |_______||____|__| |_____|_____|__|__|
 -- ------------------------------------------------- --
--- ------------------------------------------------- --
--- ------------------------------------------------- --
 -- Called screen because originally this file also handled the
 -- setting of the wallpaper, but feh is doing that as you can
 -- see in the authostart applications portion.
@@ -25,8 +23,6 @@ awful.screen.connect_for_each_screen(
   end
 )
 ]]
--- ------------------------------------------------- --
--- ------------------------------------------------- --
 -- ------------------------------------------------- --
 -- Autostart Applications
 
