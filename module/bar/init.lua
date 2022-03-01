@@ -103,14 +103,14 @@ local bar = function(s)
 		{
 			leftBar,
 			left = dpi(4),
-			top = dpi(3),
-			bottom = dpi(3),
+			top = dpi(6),
+			bottom = dpi(6),
 			widget = wibox.container.margin
 		},
 		{
 			centerBar,
-			top = dpi(4),
-			bottom = dpi(4),
+			top = dpi(7),
+			bottom = dpi(7),
 			widget = wibox.container.margin
 		},
 		{

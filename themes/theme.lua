@@ -173,6 +173,10 @@ theme.layout_thrizen = theme_dir .. "/icons/svg/layouts/thrizen.png"
 theme.layout_fullscreen = theme_dir .. "/icons/svg/layouts/fullscreen.png"
 theme.layout_spiral = theme_dir .. "/icons/svg/layouts/spiral.png"
 
+theme.layoutlist_bg_selected = "#555e70"
+theme.layoutlist_shape_border_width_selected = dpi(4)
+theme.layoutlist_shape_border_color_selected = "#555e70"
+
 -- ------------------------------------------------- --
 -- Section: Client Decorations
 -- ------------------------------------------------- --

@@ -34,8 +34,9 @@ local ll =
             widget = clickable_container
         },
         id = "background_role",
-        forced_width = dpi(84),
-        forced_height = dpi(84),
+        forced_width = dpi(96),
+        forced_height = dpi(96),
+        bg = beautiful.bg_focus,
         shape = gears.shape.rounded_rect,
         widget = wibox.container.background
     }
@@ -51,9 +52,11 @@ local layout_popup =
             widget = wibox.container.margin
         },
         widget = wibox.container.background,
-        bg = beautiful.bg_focus
+        bg = beautiful.bg_normal
     },
     border_width = dpi(3),
+    border_color = colors.black,
+    shape = beautiful.client_shape_rounded_xl,
     screen = mouse.screen,
     placement = awful.placement.centered,
     ontop = true,
@@ -132,7 +135,7 @@ local layout_box = function(s)
                     awful.widget.layoutbox(s),
                     nil
                 },
-                margins = dpi(7),
+                margins = dpi(5),
                 left = dpi(16),
                 right = dpi(16),
                 widget = wibox.container.margin
