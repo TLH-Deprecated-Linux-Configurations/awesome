@@ -22,13 +22,16 @@ local ll =
     widget_template = {
         {
             {
-                id = "icon_role",
-                forced_height = dpi(84),
-                forced_width = dpi(84),
-                widget = wibox.widget.imagebox
+                {
+                    id = "icon_role",
+                    forced_height = dpi(84),
+                    forced_width = dpi(84),
+                    widget = wibox.widget.imagebox
+                },
+                margins = dpi(15),
+                widget = wibox.container.margin
             },
-            margins = dpi(15),
-            widget = wibox.container.margin
+            widget = clickable_container
         },
         id = "background_role",
         forced_width = dpi(84),
@@ -43,11 +46,12 @@ local layout_popup =
     widget = wibox.widget {
         {
             ll,
-            widget = clickable_container
+            margins = dpi(36),
+            screen = mouse.screen,
+            widget = wibox.container.margin
         },
-        margins = dpi(36),
-        screen = mouse.screen,
-        widget = wibox.container.margin
+        widget = wibox.container.background,
+        bg = beautiful.bg_focus
     },
     border_width = dpi(3),
     screen = mouse.screen,
@@ -121,11 +125,25 @@ local layout_box = function(s)
     local layoutbox =
         wibox.widget {
         {
-            awful.widget.layoutbox(s),
-            margins = dpi(7),
-            widget = wibox.container.margin
+            {
+                {
+                    layout = wibox.layout.align.horizontal,
+                    nil,
+                    awful.widget.layoutbox(s),
+                    nil
+                },
+                margins = dpi(7),
+                left = dpi(16),
+                right = dpi(16),
+                widget = wibox.container.margin
+            },
+            widget = clickable_container
         },
-        widget = clickable_container
+        widget = wibox.container.margin,
+        top = dpi(3),
+        bottom = dpi(3)
+        -- left = dpi(12),
+        -- right = dpi(12)
     }
 
     -- ------------------------------------------------- --
@@ -135,18 +153,14 @@ local layout_box = function(s)
                 {},
                 1,
                 function()
-                    awful.layout.inc(1)
-                    layout_popup.timer:start()
-                    layout_popup.visible = true
+                    awesome.emit_signal("layout::changed:next")
                 end
             ),
             awful.button(
                 {},
                 3,
                 function()
-                    awful.layout.inc(-1)
-                    layout_popup.timer:start()
-                    layout_popup.visible = true
+                    awesome.emit_signal("layout::changed:prev")
                 end
             ),
             awful.button(

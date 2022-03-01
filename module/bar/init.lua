@@ -11,7 +11,7 @@ local bar = function(s)
 			ontop = true,
 			screen = s,
 			type = "dock",
-			height = dpi(42),
+			height = dpi(48),
 			position = "bottom",
 			width = s.geometry.width,
 			x = s.geometry.x,
@@ -33,7 +33,7 @@ local bar = function(s)
 				function(s)
 					s.panel.visible = true
 					s.panel:struts {
-						bottom = dpi(42)
+						bottom = dpi(48)
 					}
 				end
 			)
@@ -116,6 +116,8 @@ local bar = function(s)
 		{
 			rightBar,
 			right = dpi(4),
+			top = dpi(3),
+			bottom = dpi(3),
 			widget = wibox.container.margin
 		}
 	}
@@ -124,7 +126,7 @@ local bar = function(s)
 	-- timer to close the bar
 	s.detect =
 		gears.timer {
-		timeout = 1,
+		timeout = 5,
 		callback = function()
 			s.panel.visible = false
 			s.activation_zone.visible = true
@@ -135,7 +137,7 @@ local bar = function(s)
 	-- holds the bar open
 	s.enable_wibar = function()
 		s.panel.visible = true
-		s.activation_zone.visible = false
+		s.activation_zone.visible = true
 		if not s.detect.started then
 			s.detect:start()
 		end
@@ -150,7 +152,7 @@ local bar = function(s)
 			position = "bottom",
 			opacity = 0.0,
 			width = s.geometry.width,
-			height = 1,
+			height = 2,
 			screen = s,
 			input_passthrough = false,
 			visible = true,
@@ -170,6 +172,22 @@ local bar = function(s)
 	-- this keeps the bar open so long is the mouse is within its boundaries so the other can be hidden
 	s.panel:connect_signal(
 		"mouse:enter",
+		function()
+			s.enable_wibar()
+		end
+	)
+	-- ------------------------------------------------- --
+	-- this keeps the bar open so long is the mouse is within its boundaries so the other can be hidden
+	s.panel:connect_signal(
+		"button:press",
+		function()
+			s.enable_wibar()
+		end
+	)
+	-- ------------------------------------------------- --
+	-- this keeps the bar open so long is the mouse is within its boundaries so the other can be hidden
+	s.panel:connect_signal(
+		"button:release",
 		function()
 			s.enable_wibar()
 		end
