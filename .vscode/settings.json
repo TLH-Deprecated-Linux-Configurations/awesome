@@ -1,6 +1,7 @@
 {
   "Lua.diagnostics.globals": [
     "awesome",
+    "root",
     "client",
     "awful",
     "beautiful",

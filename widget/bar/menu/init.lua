@@ -15,9 +15,8 @@ local return_button = function(color, lspace, rspace, tspace, bspace)
 			{
 				{
 					{
-						markup = "<span color='#f4f4f7'>ॐ</span>",
-						widget = wibox.widget.textbox,
-						font = "SFMono Nerd Font Mono 24"
+						markup = "<span font ='SFMono Nerd Font Mono Bold 24' color='#f4f4f7'></span>",
+						widget = wibox.widget.textbox
 					},
 					top = dpi(4),
 					bottom = dpi(4),

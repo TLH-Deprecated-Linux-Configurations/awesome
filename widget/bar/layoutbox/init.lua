@@ -47,7 +47,7 @@ local layout_popup =
     widget = wibox.widget {
         {
             ll,
-            margins = dpi(36),
+            margins = dpi(12),
             screen = mouse.screen,
             widget = wibox.container.margin
         },
@@ -63,7 +63,7 @@ local layout_popup =
     visible = false
 }
 -- ------------------------------------------------- --
-layout_popup.timer = gears.timer {timeout = 2}
+layout_popup.timer = gears.timer {timeout = 3}
 layout_popup.timer:connect_signal(
     "timeout",
     function()
@@ -90,39 +90,6 @@ function gears.table.iterate_value(t, value, step_size, filter, start_at)
     end
     return t[new_key], new_key
 end
--- -- ------------------------------------------------- --
--- awful.keygrabber {
---     start_callback = function()
---         layout_popup.visible = true
---         layout_popup.screen = mouse.screen
---     end,
---     stop_callback = function()
---         layout_popup.timer:start()
---     end,
---     export_keybindings = true,
---     stop_event = "release",
---     stop_key = {"Escape", "Super_L", "Super_R", "Mod4"},
---     keybindings = {
---         {
---             {"Mod4", "Shift"},
---             " ",
---             function()
---                 awful.layout.inc(-1)
---                 layout_popup.timer:start()
---                 layout_popup.visible = true
---             end
---         },
---         {
---             {"Mod4"},
---             " ",
---             function()
---                 awful.layout.inc(1)
---                 layout_popup.timer:start()
---                 layout_popup.visible = true
---             end
---         }
---     }
--- }
 -- ------------------------------------------------- --
 local layout_box = function(s)
     local layoutbox =
@@ -130,23 +97,24 @@ local layout_box = function(s)
         {
             {
                 {
-                    layout = wibox.layout.align.horizontal,
-                    nil,
                     awful.widget.layoutbox(s),
-                    nil
+                    top = dpi(4),
+                    bottom = dpi(4),
+                    left = dpi(12),
+                    right = dpi(12),
+                    widget = wibox.container.margin
                 },
-                margins = dpi(5),
-                left = dpi(16),
-                right = dpi(16),
-                widget = wibox.container.margin
+                shape = beautiful.client_shape_rounded,
+                bg = beautiful.bg_button,
+                widget = wibox.container.background
             },
             widget = clickable_container
         },
-        widget = wibox.container.margin,
+        left = dpi(0),
+        right = dpi(0),
         top = dpi(3),
-        bottom = dpi(3)
-        -- left = dpi(12),
-        -- right = dpi(12)
+        bottom = dpi(2),
+        widget = wibox.container.margin
     }
 
     -- ------------------------------------------------- --

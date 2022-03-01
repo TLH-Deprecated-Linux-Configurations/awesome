@@ -13,7 +13,9 @@ local empathy = require("layout.layouts.empathy")
 local stack = require("layout.layouts.stack")
 local centermaster = require("layout.layouts.centermaster")
 local thrizen = require("layout.layouts.thrizen")
+local machi = require("library.layout-machi")
 
+require("beautiful").layout_machi = machi.get_icon()
 local beautiful = require("beautiful")
 local tag = tag
 local dpi = beautiful.xresources.apply_dpi
