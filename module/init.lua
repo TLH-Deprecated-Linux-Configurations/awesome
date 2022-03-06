@@ -1,11 +1,18 @@
+--  _______           __         __
+-- |   |   |.-----.--|  |.--.--.|  |.-----.-----.
+-- |       ||  _  |  _  ||  |  ||  ||  -__|__ --|
+-- |__|_|__||_____|_____||_____||__||_____|_____|
+-- ------------------------------------------------- --
 local awful = require("awful")
-
-require("module.notifications")
-require("module.menu")
-awful.screen.connect_for_each_screen(require("module.notification-center"))
-awful.screen.connect_for_each_screen(require("module.bluetooth-center"))
-awful.screen.connect_for_each_screen(require("module.network-center"))
-awful.screen.connect_for_each_screen(require("module.volume-center"))
-awful.screen.connect_for_each_screen(require("module.exit-screen"))
-awful.screen.connect_for_each_screen(require("module.control-center"))
-awful.screen.connect_for_each_screen(require("module.bar"))
+-- ------------------------------------------------- --
+require(... .. ".notifications")
+require(... .. ".menu")
+require(... .. ".tutorial")
+-- ------------------------------------------------- --
+awful.screen.connect_for_each_screen(require(... .. ".notification-center"))
+awful.screen.connect_for_each_screen(require(... .. ".bluetooth-center"))
+awful.screen.connect_for_each_screen(require(... .. ".network-center"))
+awful.screen.connect_for_each_screen(require(... .. ".volume-center"))
+awful.screen.connect_for_each_screen(require(... .. ".exit-screen"))
+awful.screen.connect_for_each_screen(require(... .. ".control-center"))
+awful.screen.connect_for_each_screen(require(... .. ".bar"))

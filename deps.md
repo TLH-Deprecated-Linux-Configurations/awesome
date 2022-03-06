@@ -1,5 +1,7 @@
-# Dependencies 
+# Dependencies
+
 ## As I remember them...
+
 - pamixer
 - lm_sensors
 - free
@@ -10,3 +12,10 @@
 - rofi
 - inotify-tools
 - light
+- xautolock
+- kitty
+- luasocket
+
+### Out of Repo
+
+Get these from Github!

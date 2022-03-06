@@ -10,14 +10,14 @@
 local user_content =
 	wibox.widget {
 	text = "Notifications",
-	font = "Nineteen Ninety Seven  Regular  14",
+	font = "SF Pro Rounded Heavy  Regular  14",
 	widget = wibox.widget.textbox
 }
 -- ------------------------------------------------- --
 local host_content =
 	wibox.widget {
 	text = "placeholder",
-	font = "Nineteen Ninety Seven  Regular  14",
+	font = "SF Pro Rounded Heavy  Regular  14",
 	widget = wibox.widget.textbox
 }
 -- ------------------------------------------------- --

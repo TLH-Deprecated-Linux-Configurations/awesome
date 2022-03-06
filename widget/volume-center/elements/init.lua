@@ -137,12 +137,12 @@ elements.create = function(description, sinkNumText, sinkNum, isDefault)
       {
         {
           text = description,
-          font = "Nineteen Ninety Seven  Regular  10",
+          font = "SF Pro Rounded Heavy 10",
           widget = wibox.widget.textbox
         },
         {
           text = sinkNumText,
-          font = "Nineteen Ninety Seven  8",
+          font = "SF Pro Rounded Heavy    8",
           widget = wibox.widget.textbox
         },
         layout = wibox.layout.align.vertical

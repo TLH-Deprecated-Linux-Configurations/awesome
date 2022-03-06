@@ -12,6 +12,9 @@ local awful = require("awful")
 
 local modkey = "Mod4"
 local altkey = "Mod1"
+local snap_edge = require("utils.snap-edge")
+-- numpad key codes 1-9
+-- local numpad_map = {87, 88, 89, 83, 84, 85, 79, 80, 81}
 
 require("awful.autofocus")
 -- ------------------------------------------------- --
@@ -112,7 +115,7 @@ local clientkeys =
     function(c)
       c:relative_move(0, dpi(-10), 0, 0)
     end,
-    {description = "Move Floating Client up by 10px", group = "client"}
+    {description = "Move Floating Client up by 10px", group = "Client"}
   ),
   -- ------------------------------------------------- --
   awful.key(
@@ -121,7 +124,7 @@ local clientkeys =
     function(c)
       c:relative_move(0, dpi(10), 0, 0)
     end,
-    {description = "Move Floating Client down by 10px", group = "client"}
+    {description = "Move Floating Client down by 10px", group = "Client"}
   ),
   -- ------------------------------------------------- --
   awful.key(
@@ -130,7 +133,7 @@ local clientkeys =
     function(c)
       c:relative_move(dpi(-10), 0, 0, 0)
     end,
-    {description = "Move Floating Client to the Left by 10px", group = "client"}
+    {description = "Move Floating Client to the Left by 10px", group = "Client"}
   ),
   -- ------------------------------------------------- --
   awful.key(
@@ -139,7 +142,7 @@ local clientkeys =
     function(c)
       c:relative_move(dpi(10), 0, 0, 0)
     end,
-    {description = "Move Floating Client to the Right by 10px", group = "client"}
+    {description = "Move Floating Client to the Right by 10px", group = "Client"}
   ),
   -- ------------------------------------------------- --
   awful.key(
@@ -148,7 +151,7 @@ local clientkeys =
     function(c)
       c:relative_move(0, dpi(-10), 0, dpi(10))
     end,
-    {description = "Increase Floating Client Size Vertically by 10px up", group = "client"}
+    {description = "Increase Floating Client Size Vertically by 10px up", group = "Client"}
   ),
   -- ------------------------------------------------- --
   awful.key(
@@ -157,7 +160,7 @@ local clientkeys =
     function(c)
       c:relative_move(0, 0, 0, dpi(10))
     end,
-    {description = "Increase Floating Client Size Vertically by 10px down", group = "client"}
+    {description = "Increase Floating Client Size Vertically by 10px down", group = "Client"}
   ),
   -- ------------------------------------------------- --
   awful.key(
@@ -166,7 +169,7 @@ local clientkeys =
     function(c)
       c:relative_move(dpi(-10), 0, dpi(10), 0)
     end,
-    {description = "Increase Floating Client Size Horizontally by 10px Left", group = "client"}
+    {description = "Increase Floating Client Size Horizontally by 10px Left", group = "Client"}
   ),
   -- ------------------------------------------------- --
   awful.key(
@@ -175,7 +178,7 @@ local clientkeys =
     function(c)
       c:relative_move(0, 0, dpi(10), 0)
     end,
-    {description = "Increase Floating Client Size Horizontally by 10px Right", group = "client"}
+    {description = "Increase Floating Client Size Horizontally by 10px Right", group = "Client"}
   ),
   -- ------------------------------------------------- --
   awful.key(
@@ -186,7 +189,7 @@ local clientkeys =
         c:relative_move(0, 0, 0, dpi(-10))
       end
     end,
-    {description = "Decrease Floating Client Size Vertically by 10px up", group = "client"}
+    {description = "Decrease Floating Client Size Vertically by 10px up", group = "Client"}
   ),
   -- ------------------------------------------------- --
   awful.key(
@@ -199,7 +202,7 @@ local clientkeys =
         c:relative_move(0, dpi(10), 0, 0)
       end
     end,
-    {description = "Decrease Floating Client Size Vertically by 10px down", group = "client"}
+    {description = "Decrease Floating Client Size Vertically by 10px down", group = "Client"}
   ),
   -- ------------------------------------------------- --
   awful.key(
@@ -210,7 +213,7 @@ local clientkeys =
         c:relative_move(0, 0, dpi(-10), 0)
       end
     end,
-    {description = "Decrease Floating Client Size Horizontally by 10px Left", group = "client"}
+    {description = "Decrease Floating Client Size Horizontally by 10px Left", group = "Client"}
   ),
   -- ------------------------------------------------- --
   awful.key(
@@ -223,8 +226,90 @@ local clientkeys =
         c:relative_move(dpi(10), 0, 0, 0)
       end
     end,
-    {description = "Decrease Floating Client Size Horizontally by 10px Right", group = "client"}
+    {description = "Decrease Floating Client Size Horizontally by 10px Right", group = "Client"}
+  ),
+  -- ------------------------------------------------- --
+  awful.key(
+    {modkey, altkey},
+    "Down",
+    function(c)
+      snap_edge(c, "bottom")
+    end,
+    {description = "Move Floating Client to the Bottom", group = "Client"}
+  ),
+  -- ------------------------------------------------- --
+  awful.key(
+    {modkey, altkey},
+    "Left",
+    function(c)
+      snap_edge(c, "left")
+    end,
+    {description = "Move Floating Client to the Left", group = "Client"}
+  ),
+  -- ------------------------------------------------- --
+  awful.key(
+    {modkey, altkey},
+    "Right",
+    function(c)
+      snap_edge(c, "right")
+    end,
+    {description = "Move Floating Client to the Right", group = "Client"}
+  ),
+  -- ------------------------------------------------- --
+  awful.key(
+    {modkey, altkey},
+    "Up",
+    function(c)
+      snap_edge(c, "top")
+    end,
+    {description = "Move Floating Client to the Top", group = "Client"}
+  ),
+  -- ------------------------------------------------- --
+  awful.key(
+    {modkey, altkey, "Control"},
+    "Down",
+    function(c)
+      snap_edge(c, "bottomright")
+    end,
+    {description = "Move Floating Client to the Bottom Right Corner", group = "Client"}
+  ),
+  -- ------------------------------------------------- --
+  awful.key(
+    {modkey, altkey, "Control"},
+    "Left",
+    function(c)
+      snap_edge(c, "bottomleft")
+    end,
+    {description = "Move Floating Client to the Bottom Left Corner", group = "Client"}
+  ),
+  -- ------------------------------------------------- --
+  awful.key(
+    {modkey, altkey, "Control"},
+    "Right",
+    function(c)
+      snap_edge(c, "topright")
+    end,
+    {description = "Move Floating Client to the Top Left Corner", group = "Client"}
+  ),
+  -- ------------------------------------------------- --
+  awful.key(
+    {modkey, altkey, "Control"},
+    "Up",
+    function(c)
+      snap_edge(c, "topleft")
+    end,
+    {description = "Move Floating Client to the Top Left", group = "Client"}
   )
 )
+-- -- Snap to edge/corner - Use numpad
+-- awful.key({ modkey, "Shift" }, "#" .. numpad_map[1], function (c) snap_edge(c, 'bottomleft') end),
+-- awful.key({ modkey, "Shift" }, "#" .. numpad_map[2], function (c) snap_edge(c, 'bottom') end),
+-- awful.key({ modkey, "Shift" }, "#" .. numpad_map[3], function (c) snap_edge(c, 'bottomright') end),
+-- awful.key({ modkey, "Shift" }, "#" .. numpad_map[4], function (c) snap_edge(c, 'left') end),
+-- awful.key({ modkey, "Shift" }, "#" .. numpad_map[5], function (c) snap_edge(c, 'center') end),
+-- awful.key({ modkey, "Shift" }, "#" .. numpad_map[6], function (c) snap_edge(c, 'right') end),
+-- awful.key({ modkey, "Shift" }, "#" .. numpad_map[7], function (c) snap_edge(c, 'topleft') end),
+-- awful.key({ modkey, "Shift" }, "#" .. numpad_map[8], function (c) snap_edge(c, 'top') end),
+-- awful.key({ modkey, "Shift" }, "#" .. numpad_map[9], function (c) snap_edge(c, 'topright') end),
 -- ------------------------------------------------- --
 return clientkeys

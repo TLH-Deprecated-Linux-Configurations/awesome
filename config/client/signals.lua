@@ -1,5 +1,14 @@
-local awful = require("awful")
-local beautiful = require("beautiful")
+--  ______ __ __               __
+-- |      |  |__|.-----.-----.|  |_
+-- |   ---|  |  ||  -__|     ||   _|
+-- |______|__|__||_____|__|__||____|
+
+--  _______ __                     __
+-- |     __|__|.-----.-----.---.-.|  |
+-- |__     |  ||  _  |     |  _  ||  |
+-- |_______|__||___  |__|__|___._||__|
+--             |_____|
+-- ------------------------------------------------- --
 
 -- ------------------------------------------------- --
 local update_client = function(c)
@@ -35,11 +44,11 @@ client.connect_signal(
       fade_in:subscribe(
       function(o)
         if c and c.valid then
-          c.opacity = o / 50
+          c.opacity = o / 20
         end
       end
     )
-    fade_in:set(50)
+    fade_in:set(20)
     fade_in.ended:subscribe(
       function()
         unsub()

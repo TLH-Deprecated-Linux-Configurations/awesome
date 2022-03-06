@@ -10,8 +10,8 @@ return {
   background = "7.png",
   default_programs = {
     terminal = "kitty",
-    terminal_editor = "nvim",
-    editor = "code-oss",
+    terminal_editor = "code-oss",
+    editor = "nvim",
     browser = "firefox",
     file_manager = "caja",
     terminal_file_manager = "ranger",

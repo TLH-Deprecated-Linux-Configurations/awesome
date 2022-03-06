@@ -12,6 +12,7 @@
 -- require statements to call libraries in per file
 -- ------------------------------------------------- --
 --assignments
+
 awful = require("awful")
 beautiful = require("beautiful")
 gears = require("gears")
@@ -45,6 +46,10 @@ colors = require("themes").colors
 screen_geometry = require("awful").screen.focused().geometry
 format_item = require("utils.format_item")
 settings = require("settings")
+hotkeys_popup = require("utils.hotkeys-popup")
+
+xresources = require("beautiful.xresources")
+gears = require("gears")
 
 -- ------------------------------------------------- --
 -- Assignments dependent on above list otherwise it will throw errrors,
@@ -54,3 +59,12 @@ awful.util.shell = "zsh"
 dpi = beautiful.xresources.apply_dpi
 config_dir = filesystem.get_configuration_dir()
 utils_dir = config_dir .. "bin/"
+
+filesystem = gears.filesystem
+
+gtk_variable = beautiful.gtk.get_theme_variables
+
+theme_dir = filesystem.get_configuration_dir() .. "/themes"
+titlebar_theme = "dhumavati"
+titlebar_icon_path = theme_dir .. "/icons/titlebar/" .. titlebar_theme .. "/"
+tip = titlebar_icon_path

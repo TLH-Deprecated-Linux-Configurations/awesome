@@ -1,3 +1,14 @@
+--  _______ __         __           __
+-- |     __|  |.-----.|  |--.---.-.|  |
+-- |    |  |  ||  _  ||  _  |  _  ||  |
+-- |_______|__||_____||_____|___._||__|
+--  __  __
+-- |  |/  |.-----.--.--.-----.
+-- |     < |  -__|  |  |__ --|
+-- |__|\__||_____|___  |_____|
+--               |_____|
+-- ------------------------------------------------- --
+-- setup
 local awful = require("awful")
 local naughty = require("naughty")
 
@@ -7,7 +18,7 @@ local drop = require("utils.dropdown")
 local apps = require("config.root.apps")
 local hotkeys_popup = require("awful.hotkeys_popup").widget
 local hotkeys_popup_custom = require("utils.hotkeys-popup")
-_G.switcher = require("library.application-switcher")
+_G.switcher = require("module.application-switcher")
 require("awful.autofocus")
 
 local globalKeys =
@@ -408,6 +419,25 @@ local globalKeys =
 		"XF86MonBrightnessUp",
 		function()
 			awful.spawn("light -A 10%", false)
+			awful.spawn.with_line_callback(
+				"light -G",
+				{
+					stdout = function(value)
+						awful.spawn.with_line_callback(
+							"light -M ",
+							{
+								stdout = function(max)
+									percentage = value / max * 100
+									-- if percentage ~= percentage_old then
+									awesome.emit_signal("signal::brightness", percentage)
+									-- percentage_old = percentage
+									-- end
+								end
+							}
+						)
+					end
+				}
+			)
 		end,
 		{description = "increase brightness by 10%", group = "Hotkeys"}
 	),
@@ -417,6 +447,25 @@ local globalKeys =
 		"XF86MonBrightnessDown",
 		function()
 			awful.spawn("light -U 10%", false)
+			awful.spawn.with_line_callback(
+				"light -G",
+				{
+					stdout = function(value)
+						awful.spawn.with_line_callback(
+							"light -M ",
+							{
+								stdout = function(max)
+									percentage = value / max * 100
+									-- if percentage ~= percentage_old then
+									awesome.emit_signal("signal::brightness", percentage)
+									-- percentage_old = percentage
+									-- end
+								end
+							}
+						)
+					end
+				}
+			)
 		end,
 		{description = "decrease brightness by 10%", group = "Hotkeys"}
 	),

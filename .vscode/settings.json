@@ -42,7 +42,16 @@
     "screen",
     "scan",
     "mouse",
-    "tag"
+    "tag",
+    "filehandle",
+    "logger",
+    "xresources",
+    "gtk_variable",
+    "theme_dir",
+    "titlebar_theme",
+    "titlebar_icon_path",
+    "tip"
   ],
-  "lua.targetVersion": "5.3"
+  "lua.targetVersion": "5.3",
+  "restructuredtext.languageServer.disabled": true
 }

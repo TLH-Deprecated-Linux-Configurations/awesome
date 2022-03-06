@@ -1,14 +1,14 @@
 local left_content =
 	wibox.widget {
 	text = "status",
-	font = "Nineteen Ninety Seven  Regular  14",
+	font = "SF Pro Rounded Heavy 14",
 	widget = wibox.widget.textbox
 }
 
 local right_content =
 	wibox.widget {
 	text = "placeholder",
-	font = "Nineteen Ninety Seven  Regular 14",
+	font = "SF Pro Rounded Heavy 14",
 	widget = wibox.widget.textbox
 }
 

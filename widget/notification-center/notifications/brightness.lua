@@ -21,7 +21,7 @@ local bright_icon =
     markup = "<span foreground='#f4f4f7'><b></b></span>",
     align = "center",
     valign = "center",
-    font = "Nineteen Ninety Seven 82",
+    font = "SFMono Nerd Font Mono Bold  64",
     widget = wibox.widget.textbox
 }
 
@@ -29,7 +29,7 @@ local bright_icon =
 local bright_adjust =
     wibox(
     {
-        screen = screen.primary,
+        -- screen = screen.focused,
         type = "notification",
         x = screen.geometry.width / 2 - width / 2,
         y = screen.geometry.height / 2 - height / 2 + 300,
@@ -46,10 +46,10 @@ local bright_bar =
     widget = wibox.widget.progressbar,
     shape = gears.shape.rounded_bar,
     bar_shape = gears.shape.rounded_bar,
-    color = active_color_1,
+    color = "#f4f4f7",
     background_color = "#3c3f4c88",
     max_value = 100,
-    value = 0
+    value = 100
 }
 
 bright_adjust:setup {
@@ -89,15 +89,25 @@ local hide_bright_adjust =
     end
 }
 
+-- ------------------------------------------------- --
+local update_slider = function(percentage)
+    local brightness = percentage
+    if bright_adjust.visible == false then
+        bright_adjust.visible = true
+        hide_bright_adjust:start()
+    else
+        hide_bright_adjust:again()
+    end
+
+    bright_bar:set_value(brightness)
+end
+update_slider()
+
 awesome.connect_signal(
     "signal::brightness",
-    function(value)
-        bright_bar.value = value
-        if bright_adjust.visible then
-            hide_bright_adjust:again()
-        else
-            bright_adjust.visible = true
-            hide_bright_adjust:start()
+    function(percentage)
+        if percentage ~= nil then
+            update_slider(percentage)
         end
     end
 )

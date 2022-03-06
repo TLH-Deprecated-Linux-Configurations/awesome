@@ -31,7 +31,7 @@ local content =
 	{
 		{
 			text = "You have no new notifications",
-			font = "Nineteen Ninety Seven  12",
+			font = "SF Pro Rounded Heavy  12",
 			widget = wibox.widget.textbox
 		},
 		margins = dpi(10),

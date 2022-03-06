@@ -1,7 +1,7 @@
 local host_content =
 	wibox.widget {
 	text = "Control Center",
-	font = "Nineteen Ninety Seven Regular  18",
+	font = "SF Pro Rounded Heavy    18",
 	widget = wibox.widget.textbox
 }
 
@@ -9,6 +9,9 @@ local widget_host =
 	wibox.widget {
 	layout = wibox.layout.align.vertical,
 	expand = "none",
+	shape = gears.shape.rounded_rect,
+	bg = colors.colorA,
+	fg = colors.white,
 	nil,
 	{
 		host_content,

@@ -36,7 +36,7 @@ local ll =
         id = "background_role",
         forced_width = dpi(96),
         forced_height = dpi(96),
-        bg = beautiful.bg_focus,
+        bg = beautiful.bg_button,
         shape = gears.shape.rounded_rect,
         widget = wibox.container.background
     }
@@ -51,11 +51,11 @@ local layout_popup =
             screen = mouse.screen,
             widget = wibox.container.margin
         },
-        widget = wibox.container.background,
-        bg = beautiful.bg_normal
+        widget = wibox.container.background
     },
     border_width = dpi(3),
-    border_color = colors.black,
+    border_color = colors.alpha(colors.black, "aa"),
+    bg = colors.alpha(colors.colorA, "aa"),
     shape = beautiful.client_shape_rounded_xl,
     screen = mouse.screen,
     placement = awful.placement.centered,
@@ -105,7 +105,6 @@ local layout_box = function(s)
                     widget = wibox.container.margin
                 },
                 shape = beautiful.client_shape_rounded,
-                bg = beautiful.bg_button,
                 widget = wibox.container.background
             },
             widget = clickable_container

@@ -3,11 +3,11 @@
 -- |       ||  -__|     |  |  |
 -- |__|_|__||_____|__|__|_____|
 -- ------------------------------------------------- --
--- Entirely the work of the copyright holders
+-- Mostly the work of the copyright holders
 -- (c) 2016, Luke Bonham
 -- (c) 2014, Harvey Mittens
 -- ------------------------------------------------- --
-
+local apps = require("settings")
 local io, pairs, string, table, os = io, pairs, string, table, os
 
 -- Expecting a wm_name of awesome omits too many applications and tools
@@ -141,47 +141,47 @@ awesome_menu = {
         function()
             hotkeys_popup.show_help(nil, awful.screen.focused())
         end,
-        menubar.utils.lookup_icon("keyboard")
+        icons.control_center
     },
     {
         "Edit config",
         "nvim " .. awesome.conffile,
-        menubar.utils.lookup_icon("accessories-text-editor")
+        icons.text_editor
     },
     {
         "Restart",
         awesome.restart,
-        menubar.utils.lookup_icon("system-restart")
+        icons.restart
     },
     {
         "Quit",
         function()
             awesome.quit()
         end,
-        menubar.utils.lookup_icon("system-log-out")
+        icons.power
     }
 }
 
 local default_app_menu = {
     {
         "File Manager",
-        file_manager,
-        menubar.utils.lookup_icon("system-file-manager")
+        apps.default_programs.file_manager,
+        icons.file_manager
     },
     {
         "Web browser",
-        web_browser,
-        menubar.utils.lookup_icon("webbrowser-app")
+        apps.default_programs.browser,
+        icons.web_browser
     },
     {
         "Terminal",
-        terminal,
-        menubar.utils.lookup_icon("utilities-terminal")
+        apps.default_programs.terminal,
+        icons.terminal
     },
     {
         "Text Editor",
-        text_editor,
-        menubar.utils.lookup_icon("accessories-text-editor")
+        apps.default_programs.editor,
+        icons.text_editor
     }
 }
 
@@ -238,7 +238,7 @@ mymainmenu =
     freedesktop.menu.build(
     {
         -- Not actually the size, but the quality of the icon
-        icon_size = 96,
+        icon_size = dpi(96),
         before = default_app_menu,
         after = tools_menu
     }

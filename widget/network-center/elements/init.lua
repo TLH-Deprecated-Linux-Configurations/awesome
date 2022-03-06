@@ -203,12 +203,12 @@ elements.create = function(SSID, BSSID, connectStatus, signal, secure, speed)
       {
         {
           text = SSID,
-          font = "Nineteen Ninety Seven  Regular  10",
+          font = "SF Pro Rounded Heavy    Bold  10",
           widget = wibox.widget.textbox
         },
         {
           text = BSSID,
-          font = "Nineteen Ninety Seven  8",
+          font = "SF Pro Rounded Heavy    8",
           widget = wibox.widget.textbox
         },
         layout = wibox.layout.align.vertical

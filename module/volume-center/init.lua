@@ -19,19 +19,18 @@ local title =
       layout = wibox.layout.flex.vertical,
       format_item(
         {
-          layout = wibox.layout.fixed.horizontal,
+          layout = wibox.layout.align.horizontal,
           spacing = dpi(16),
           require("widget.user-icon"),
-          require("widget.volume-center.title-text")
+          require("widget.volume-center.title-text"),
+          require("widget.user-icon")
         }
       )
     },
     margins = dpi(5),
     widget = wibox.container.margin
   },
-  shape = function(cr, width, height)
-    gears.shape.rounded_rect(cr, width, height, beautiful.groups_radius)
-  end,
+  shape = beautiful.client_shape_rounded_xl,
   bg = beautiful.bg_normal,
   forced_width = width,
   forced_height = 70,
@@ -59,9 +58,7 @@ local sliders =
     margins = dpi(5),
     widget = wibox.container.margin
   },
-  shape = function(cr, width, height)
-    gears.shape.rounded_rect(cr, width, height, beautiful.groups_radius)
-  end,
+  shape = beautiful.client_shape_rounded_xl,
   bg = beautiful.bg_normal,
   forced_width = 400,
   forced_height = 75,
@@ -116,9 +113,7 @@ local devices_panel =
     margins = dpi(5),
     widget = wibox.container.margin
   },
-  shape = function(cr, width, height)
-    gears.shape.rounded_rect(cr, width, height, beautiful.groups_radius)
-  end,
+  shape = beautiful.client_shape_rounded_xl,
   bg = beautiful.bg_normal,
   forced_width = width,
   ontop = true,
@@ -146,7 +141,7 @@ local volumeCenter = function(s)
       visible = false,
       screen = s,
       ontop = true,
-      type = "splash",
+      type = "popup",
       height = s.geometry.height,
       width = s.geometry.width,
       bg = colors.alpha(colors.blacker, "aa"),
@@ -163,7 +158,7 @@ local volumeCenter = function(s)
       visible = false,
       ontop = true,
       screen = s,
-      type = "popup",
+      type = "splash",
       height = screen_geometry.height - dpi(48),
       width = width,
       bg = "transparent",

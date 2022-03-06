@@ -1,6 +1,15 @@
---DEPENDENCIES
---i3lock-fancy
+--  _______         __ __
+-- |    ___|.--.--.|__|  |_
+-- |    ___||_   _||  |   _|
+-- |_______||__.__||__|____|
 
+--  _______
+-- |     __|.----.----.-----.-----.-----.
+-- |__     ||  __|   _|  -__|  -__|     |
+-- |_______||____|__| |_____|_____|__|__|
+-- ########################################################################
+-- ########################################################################
+-- ########################################################################
 local awful = require("awful")
 local gears = require("gears")
 local wibox = require("wibox")
@@ -117,7 +126,7 @@ local exit_screen = function(s)
       visible = false,
       screen = s,
       ontop = true,
-      type = "splash",
+      type = "popup",
       height = s.geometry.height,
       width = s.geometry.width,
       bg = colors.alpha(colors.black, "aa"),

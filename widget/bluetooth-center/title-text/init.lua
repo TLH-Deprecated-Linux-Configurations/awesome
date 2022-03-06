@@ -10,7 +10,7 @@ local watch = require("awful.widget.watch")
 local user_content =
 	wibox.widget {
 	text = " Bluetooth Center ",
-	font = "Nineteen Ninety Seven  Regular  14",
+	font = "SF Pro Rounded Heavy 14",
 	widget = wibox.widget.textbox
 }
 

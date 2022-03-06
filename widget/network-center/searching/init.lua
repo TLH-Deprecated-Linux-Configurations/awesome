@@ -46,7 +46,7 @@ local content =
 		{
 			{
 				text = "Searching...",
-				font = "Nineteen Ninety Seven  Regular  10",
+				font = "SF Pro Rounded Heavy  Regular  10",
 				widget = wibox.widget.textbox
 			},
 			layout = wibox.layout.align.vertical

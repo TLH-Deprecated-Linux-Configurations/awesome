@@ -1,3 +1,8 @@
+--  _______
+-- |_     _|.-----.--------.-----.
+--   |   |  |  -__|        |  _  |
+--   |___|  |_____|__|__|__|   __|
+--                         |__|
 -- Provides:
 -- signal::temperature
 --      temperature (integer - in Celcius)

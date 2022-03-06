@@ -56,8 +56,8 @@ naughty.connect_signal(
 -- ------------------------------------------------- --
 --  color assignment
 local main_color = {
-	["low"] = colors.colorB,
-	["normal"] = colors.colorB,
+	["low"] = colors.colorI,
+	["normal"] = colors.colorI,
 	["critical"] = colors.colorA
 }
 -- ------------------------------------------------- --
@@ -74,7 +74,7 @@ naughty.connect_signal(
 	function(n)
 		local custom_notification_icon =
 			wibox.widget {
-			font = "Nineteen Ninety Seven Regular 18",
+			font = "SF Pro Rounded Heavy   18",
 			align = "center",
 			valign = "center",
 			widget = wibox.widget.textbox
@@ -102,7 +102,7 @@ naughty.connect_signal(
 					},
 					widget = clickable_container
 				},
-				forced_height = dpi(25),
+				forced_height = dpi(35),
 				forced_width = dpi(180),
 				widget = wibox.container.background
 			},
@@ -110,7 +110,8 @@ naughty.connect_signal(
 				underline_normal = false,
 				underline_selected = true
 			},
-			widget = naughty.list.actions
+			widget = naughty.list.actions,
+			bg = beautiful.bg_focus
 		}
 		-- ------------------------------------------------- --
 		-- icon template
@@ -125,7 +126,7 @@ naughty.connect_signal(
 					margins = dpi(5),
 					widget = wibox.container.margin
 				},
-				shape = gears.shape.rect,
+				shape = beautiful.client_shape_rounded_lg,
 				bg = edge_color,
 				widget = wibox.container.background
 			},
@@ -149,11 +150,11 @@ naughty.connect_signal(
 							{
 								{
 									align = "center",
-									visible = title_visible,
-									font = "Nineteen Ninety Seven  Regular 9",
+									visible = true,
+									font = "SF Pro Rounded Bold 8",
 									markup = "<b>" .. n.title .. "</b>",
-									widget = wibox.widget.textbox
-									-- widget = naughty.widget.title,
+									-- widget = wibox.widget.textbox
+									widget = naughty.widget.title
 								},
 								{
 									align = "center",

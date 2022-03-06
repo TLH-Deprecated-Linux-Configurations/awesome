@@ -56,7 +56,7 @@ ruled.client.connect_signal(
       properties = {
         titlebars_enabled = true,
         round_corners = true,
-        shape = beautiful.client_shape_rounded
+        shape = beautiful.client_shape_rounded_lg
       }
     }
     -- ------------------------------------------------- --

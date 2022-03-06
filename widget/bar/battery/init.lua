@@ -10,7 +10,7 @@ local icons = require("themes.icons")
 
 local battery_text =
 	wibox.widget {
-	font = "Nineteen Ninety Seven 12",
+	font = "SF Pro Rounded Heavy   15",
 	align = "center",
 	valign = "center",
 	widget = wibox.widget.textbox
@@ -19,7 +19,7 @@ local battery_text =
 -- create the icon portion of the text, which uses a nerd font to display the icon
 local battery_icon =
 	wibox.widget {
-	font = "SFMono Nerd Font Mono 18",
+	font = "SF Pro Rounded Heavy   18",
 	align = "center",
 	valign = "center",
 	widget = wibox.widget.textbox

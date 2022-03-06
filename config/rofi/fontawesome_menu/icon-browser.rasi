@@ -2,7 +2,7 @@ configuration {
     show-icons:                     true;
     icon-theme:                     "chhinamasta";
     display-drun:                   "";
-    font:                           "Nineteen Ninety Seven Regular 18";
+    font:                           "SF Pro Rounded Heavy   18";
     drun-display-format:            "{name}";
     threads:                        0;
     scroll-method:                  0;

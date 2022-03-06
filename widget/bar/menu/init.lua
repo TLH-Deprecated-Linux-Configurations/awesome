@@ -1,13 +1,3 @@
---DEPENDENCIES
---rofi
-
-local awful = require("awful")
-local wibox = require("wibox")
-local gears = require("gears")
-local clickable_container = require("widget.clickable-container")
-local dpi = require("beautiful").xresources.apply_dpi
-local icons = require("themes.icons")
-
 local return_button = function(color, lspace, rspace, tspace, bspace)
 	local widget_button =
 		wibox.widget {
@@ -15,8 +5,8 @@ local return_button = function(color, lspace, rspace, tspace, bspace)
 			{
 				{
 					{
-						markup = "<span font ='SFMono Nerd Font Mono Bold 24' color='#f4f4f7'></span>",
-						widget = wibox.widget.textbox
+						image = icons.menu,
+						widget = wibox.widget.imagebox
 					},
 					top = dpi(4),
 					bottom = dpi(4),

@@ -1,7 +1,16 @@
+local awful = require("awful")
+local wibox = require("wibox")
+local gears = require("gears")
+local clickable_container = require("widget.clickable-container")
+local dpi = require("beautiful").xresources.apply_dpi
+local icons = require("themes.icons")
+local colors = require("themes").colors
+local watch = require("awful.widget.watch")
+
 local user_content =
 	wibox.widget {
 	text = " Volume Center ",
-	font = "Nineteen Ninety Seven  Regular  14",
+	font = "SF Pro Rounded Heavy 14",
 	widget = wibox.widget.textbox
 }
 
@@ -38,7 +47,7 @@ local widget =
 		spacer_bar,
 		layout = wibox.layout.fixed.horizontal
 	},
-	fg = beautiful.g,
+	fg = colors.white,
 	widget = wibox.container.background
 }
 

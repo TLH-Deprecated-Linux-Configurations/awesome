@@ -1,3 +1,8 @@
+--  _______ __                     __
+-- |     __|__|.-----.-----.---.-.|  |
+-- |__     |  ||  _  |     |  _  ||  |
+-- |_______|__||___  |__|__|___._||__|
+--             |_____|
 -- These daemons are props to elenapan.
 -- https://github.com/elenapan/dotfiles
 require("signal.battery")

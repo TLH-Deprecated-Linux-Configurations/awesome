@@ -12,12 +12,12 @@ local dials =
   wibox.widget {
   {
     {
-      spacing = dpi(30),
+      spacing = dpi(5),
       layout = wibox.layout.flex.horizontal,
       format_item(
         {
           layout = wibox.layout.fixed.vertical,
-          spacing = dpi(15),
+          spacing = dpi(5),
           require("widget.control-center.ram-meter"),
           require("widget.control-center.cpu-meter")
         }
@@ -25,7 +25,7 @@ local dials =
       format_item(
         {
           layout = wibox.layout.fixed.vertical,
-          spacing = dpi(15),
+          spacing = dpi(5),
           require("widget.control-center.hdd-meter"),
           require("widget.control-center.temp-meter")
         }
@@ -36,8 +36,8 @@ local dials =
   },
   shape = beautiful.client_shape_rounded_xl,
   bg = beautiful.bg_normal,
-  forced_width = 475,
-  forced_height = 450,
+  forced_width = dpi(475),
+  forced_height = dpi(450),
   border_width = dpi(2),
   border_color = colors.colorA,
   widget = wibox.container.background
@@ -48,24 +48,24 @@ local sliders =
   wibox.widget {
   {
     {
-      spacing = dpi(0),
+      spacing = dpi(5),
       layout = wibox.layout.flex.horizontal,
       format_item(
         {
-          layout = wibox.layout.fixed.vertical,
-          spacing = dpi(10),
+          layout = wibox.layout.flex.vertical,
+          spacing = dpi(5),
           require("widget.control-center.volume-slider"),
           require("widget.control-center.brightness-slider")
         }
       )
     },
-    margins = dpi(5),
+    margins = dpi(2),
     widget = wibox.container.margin
   },
   shape = beautiful.client_shape_rounded_xl,
   bg = beautiful.bg_normal,
-  forced_width = 475,
-  forced_height = 190,
+  forced_width = dpi(475),
+  forced_height = dpi(230),
   border_width = dpi(2),
   border_color = colors.colorA,
   widget = wibox.container.background
@@ -81,7 +81,7 @@ local buttons =
       {
         format_item(
           {
-            layout = wibox.layout.fixed.horizontal,
+            layout = wibox.layout.flex.horizontal,
             spacing = dpi(16),
             require("widget.control-center.bar-button"),
             require("widget.control-center.dropbox-toggle"),
@@ -113,13 +113,18 @@ local title =
   {
     {
       spacing = dpi(0),
-      layout = wibox.layout.flex.vertical,
+      layout = wibox.layout.fixed.vertical,
       format_item(
         {
-          layout = wibox.layout.fixed.horizontal,
+          layout = wibox.layout.align.horizontal,
           spacing = dpi(30),
           require("widget.user-icon"),
-          require("widget.control-center.title-text"),
+          {
+            layout = wibox.container.place,
+            halign = "center",
+            valign = "center",
+            require("widget.control-center.title-text")
+          },
           require("widget.user-icon")
         }
       )
@@ -129,8 +134,8 @@ local title =
   },
   shape = beautiful.client_shape_rounded_xl,
   bg = beautiful.bg_normal,
-  forced_width = 475,
-  forced_height = 70,
+  forced_width = dpi(475),
+  forced_height = dpi(70),
   border_width = dpi(2),
   border_color = colors.colorA,
   widget = wibox.container.background
@@ -175,14 +180,15 @@ local controlCenter = function(s)
   s.controlCenter =
     wibox(
     {
-      x = s.geometry.x + dpi(770),
+      position = "center",
       y = s.geometry.y,
+      x = s.geometry.x + dpi(650),
       screen = s,
       visible = false,
       ontop = true,
       type = "popup",
       height = s.geometry.height - dpi(48),
-      width = dpi(475),
+      width = dpi(450),
       bg = "transparent",
       fg = colors.white
     }

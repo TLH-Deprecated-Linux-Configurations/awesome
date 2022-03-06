@@ -13,9 +13,7 @@ local empathy = require("layout.layouts.empathy")
 local stack = require("layout.layouts.stack")
 local centermaster = require("layout.layouts.centermaster")
 local thrizen = require("layout.layouts.thrizen")
-local machi = require("library.layout-machi")
 
-require("beautiful").layout_machi = machi.get_icon()
 local beautiful = require("beautiful")
 local tag = tag
 local dpi = beautiful.xresources.apply_dpi
@@ -33,8 +31,8 @@ tag.connect_signal(
         thrizen,
         awful.layout.suit.max,
         awful.layout.suit.spiral.dwindle,
-        -- awful.layout.suit.corner.ne,
-        -- awful.layout.suit.fair
+        awful.layout.suit.corner.ne,
+        awful.layout.suit.fair,
         awful.layout.suit.floating
         --awful.layout.suit.tile,
         --awful.layout.suit.magnifier,

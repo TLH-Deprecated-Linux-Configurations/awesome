@@ -28,7 +28,7 @@ local dropbox_status_x = widget_icon_dir .. "dropbox-x.svg"
 local action_name =
     wibox.widget {
     text = "Dropbox",
-    font = "Nineteen Ninety Seven Regular  10",
+    font = "SF Pro Rounded Heavy    10",
     align = "left",
     widget = wibox.widget.textbox
 }
@@ -38,7 +38,7 @@ local action_name =
 local action_status =
     wibox.widget {
     text = "Off",
-    font = "Nineteen Ninety Seven Regular  10",
+    font = "SF Pro Rounded Heavy    10",
     align = "left",
     widget = wibox.widget.textbox
 }
@@ -58,7 +58,7 @@ local button_widget =
     nil,
     {
         id = "icon",
-        image = dropbox_status_blank,
+        image = icons.dropboxstatus_logo,
         widget = wibox.widget.imagebox,
         resize = true
     },
@@ -91,38 +91,34 @@ local widget_button =
 -- ------------------------------------------------- --
 -- update the widget
 --
-local update_widget = function()
-    if device_state then
+local update_widget = function(device_state)
+    if device_state == true then
         action_status:set_text("On")
 
-        button_widget.icon:set_image(dropbox_status_logo)
-    else
+        button_widget.icon:set_image(icons.dropboxstatus_logo)
+    elseif device_state == false then
         action_status:set_text("Off")
 
-        button_widget.icon:set_image(dropbox_status_x)
+        button_widget.icon:set_image(icons.dropboxstatus_x)
     end
 end
 
 -- ------------------------------------------------- --
 -- checks state of the widget
 --
-local check_device_state = function()
-    awful.spawn.easy_async_with_shell(
-        "dropbox running",
-        function(stdout)
-            if stdout:match("*") then
-                device_state = false
-            else
-                device_state = true
-            end
+local check_device_state = function(stdout)
+    if stdout:match("Dropbox isn't running!") then
+        device_state = false
+    else
+        device_state = true
+    end
 
-            update_widget()
-        end
-    )
+    update_widget(device_state)
 end
+
 -- ------------------------------------------------- --
 -- provides on command
-check_device_state()
+
 local power_on_cmd =
     [[
 dropbox start &
@@ -166,7 +162,7 @@ local toggle_action = function()
             power_off_cmd,
             function(stdout)
                 device_state = false
-                update_widget()
+                update_widget(device_state)
             end
         )
     else
@@ -174,7 +170,7 @@ local toggle_action = function()
             power_on_cmd,
             function(stdout)
                 device_state = true
-                update_widget()
+                update_widget(device_state)
             end
         )
     end
@@ -210,11 +206,10 @@ action_info:buttons(
 -- ------------------------------------------------- --
 -- determine state by watching command
 --
-watch(
+awful.spawn.easy_async_with_shell(
     "dropbox status &",
-    15,
-    function(_, stdout)
-        check_device_state()
+    function(stdout)
+        check_device_state(stdout)
     end
 )
 -- ------------------------------------------------- --

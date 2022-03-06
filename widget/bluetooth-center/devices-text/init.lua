@@ -10,7 +10,7 @@ local watch = require("awful.widget.watch")
 local devices_text =
   wibox.widget {
   text = "devices",
-  font = "Nineteen Ninety Seven  Bold 14",
+  font = "SF Pro Rounded Heavy    Bold 14",
   widget = wibox.widget.textbox
 }
 

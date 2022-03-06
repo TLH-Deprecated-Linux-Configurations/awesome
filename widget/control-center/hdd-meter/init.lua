@@ -12,7 +12,7 @@ local active_color = {
 }
 local widget_text =
   wibox.widget {
-  font = "Nineteen Ninety Seven  Regular  12",
+  font = "SF Pro Rounded Heavy  Regular  12",
   text = "HDD",
   valign = "center",
   align = "center",
