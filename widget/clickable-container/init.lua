@@ -1,7 +1,15 @@
+--  ______ __ __        __           __     __
+-- |      |  |__|.----.|  |--.---.-.|  |--.|  |.-----.
+-- |   ---|  |  ||  __||    <|  _  ||  _  ||  ||  -__|
+-- |______|__|__||____||__|__|___._||_____||__||_____|
+--  ______               __          __
+-- |      |.-----.-----.|  |_.---.-.|__|.-----.-----.----.
+-- |   ---||  _  |     ||   _|  _  ||  ||     |  -__|   _|
+-- |______||_____|__|__||____|___._||__||__|__|_____|__|
+-- ------------------------------------------------- --
 local wibox = require("wibox")
 local beautiful = require("beautiful")
 local dpi = beautiful.xresources.apply_dpi
--- Helper function that creates a clickable container
 
 local create_click_events = function(widget)
 	local container =

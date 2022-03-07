@@ -15,6 +15,9 @@
 - xautolock
 - kitty
 - luasocket
+- speedtest-cli
+- blueman
+-
 
 ### Out of Repo
 

@@ -1,15 +1,10 @@
-local awful = require('awful')
-local wibox = require('wibox')
-local gears = require('gears')
-local clickable_container = require('widget.clickable-container')
-local dpi = require('beautiful').xresources.apply_dpi
-local icons = require('themes.icons')
-local colors = require('themes').colors
-local watch = require('awful.widget.watch')
-local beautiful = require('beautiful')
-local naughty = require('naughty')
+--  ______                     __
+-- |   __ \.---.-.-----.-----.|  |
+-- |    __/|  _  |     |  -__||  |
+-- |___|   |___._|__|__|_____||__|
+-- ------------------------------------------------- --
 
-local searching = require('widget.network-center.searching')
+local searching = require("widget.network-center.searching")
 local width = dpi(410)
 
 local panelLayout = wibox.layout.fixed.vertical()
@@ -23,7 +18,10 @@ end
 
 local networksAdd = function(n)
   local box = require("widget.network-center.elements")
-  panelLayout:insert(#panelLayout.children+1, box.create(n.SSID, n.BSSID, n.connectStatus, n.signal, n.secure, n.speed))
+  panelLayout:insert(
+    #panelLayout.children + 1,
+    box.create(n.SSID, n.BSSID, n.connectStatus, n.signal, n.secure, n.speed)
+  )
 end
 
 local networksRemove = function(box)
@@ -41,14 +39,14 @@ awesome.connect_signal(
       {
         stdout = function(line)
           local results = {}
-          line = line:gsub("\\;",":")
-          for match in (line..";"):gmatch("(.-)"..";") do
+          line = line:gsub("\\;", ":")
+          for match in (line .. ";"):gmatch("(.-)" .. ";") do
             table.insert(results, match)
           end
           if #panelLayout.children == 1 and searchStatus then
             resetDevicePanelLayout()
           end
-          if (#panelLayout.children<14) and results[6] ~= "" then
+          if (#panelLayout.children < 14) and results[6] ~= "" then
             searchStatus = false
             networksAdd(
               {
@@ -57,7 +55,7 @@ awesome.connect_signal(
                 secure = results[3],
                 speed = results[4],
                 BSSID = results[5],
-                SSID = results[6],
+                SSID = results[6]
               }
             )
           end

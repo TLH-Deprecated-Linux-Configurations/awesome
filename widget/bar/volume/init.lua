@@ -1,10 +1,8 @@
-local awful = require("awful")
-local wibox = require("wibox")
-local gears = require("gears")
-local clickable_container = require("widget.clickable-container")
-local dpi = require("beautiful").xresources.apply_dpi
-local icons = require("themes.icons")
-
+--  ___ ___         __
+-- |   |   |.-----.|  |.--.--.--------.-----.
+-- |   |   ||  _  ||  ||  |  |        |  -__|
+--  \_____/ |_____||__||_____|__|__|__|_____|
+-- ------------------------------------------------- --
 local return_button = function(color, lspace, rspace)
 	local widget_button =
 		wibox.widget {

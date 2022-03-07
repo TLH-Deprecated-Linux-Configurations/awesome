@@ -1,19 +1,8 @@
---DEPENDENCIES
---whatever is used here idk lol
-
-local awful = require("awful")
-local wibox = require("wibox")
-local gears = require("gears")
-local clickable_container = require("widget.clickable-container")
-local dpi = require("beautiful").xresources.apply_dpi
-local icons = require("themes.icons")
-local colors = require("themes").colors
-local watch = require("awful.widget.watch")
-
-local awful = require("awful")
-local beautiful = require("beautiful")
-local naughty = require("naughty")
-
+--  _____               __
+-- |     \.-----.--.--.|__|.----.-----.-----.
+-- |  --  |  -__|  |  ||  ||  __|  -__|__ --|
+-- |_____/|_____|\___/ |__||____|_____|_____|
+-- ------------------------------------------------- --
 local widget_icon =
   wibox.widget {
   layout = wibox.layout.align.vertical,

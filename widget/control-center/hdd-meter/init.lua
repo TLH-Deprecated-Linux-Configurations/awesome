@@ -1,8 +1,12 @@
-local wibox = require("wibox")
-local gears = require("gears")
-local dpi = require("beautiful").xresources.apply_dpi
-local colors = require("themes").colors
-local watch = require("awful.widget.watch")
+--  _______ _____  _____
+-- |   |   |     \|     \
+-- |       |  --  |  --  |
+-- |___|___|_____/|_____/
+
+--  _______         __
+-- |   |   |.-----.|  |_.-----.----.
+-- |       ||  -__||   _|  -__|   _|
+-- |__|_|__||_____||____|_____|__|
 
 local active_color = {
   type = "linear",

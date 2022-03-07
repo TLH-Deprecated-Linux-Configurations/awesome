@@ -1,12 +1,8 @@
-local awful = require("awful")
-local wibox = require("wibox")
-local gears = require("gears")
-local clickable_container = require("widget.clickable-container")
-local dpi = require("beautiful").xresources.apply_dpi
-local icons = require("themes.icons")
-local colors = require("themes").colors
-local watch = require("awful.widget.watch")
-
+--         __                              __
+-- .-----.|  |.-----.--------.-----.-----.|  |_.-----.
+-- |  -__||  ||  -__|        |  -__|     ||   _|__ --|
+-- |_____||__||_____|__|__|__|_____|__|__||____|_____|
+-- ------------------------------------------------- --
 local elements = {}
 
 elements.create = function(description, sinkNumText, sinkNum, isDefault)

@@ -1,14 +1,13 @@
---DEPENDENCIES
---Blueman
---Bluetoothctl
-
-local awful = require("awful")
-local wibox = require("wibox")
-local gears = require("gears")
-local clickable_container = require("widget.clickable-container")
-local dpi = require("beautiful").xresources.apply_dpi
-local icons = require("themes.icons")
-
+--  __     __               __                __   __
+-- |  |--.|  |.--.--.-----.|  |_.-----.-----.|  |_|  |--.
+-- |  _  ||  ||  |  |  -__||   _|  _  |  _  ||   _|     |
+-- |_____||__||_____|_____||____|_____|_____||____|__|__|
+--  ________ __     __               __
+-- |  |  |  |__|.--|  |.-----.-----.|  |_
+-- |  |  |  |  ||  _  ||  _  |  -__||   _|
+-- |________|__||_____||___  |_____||____|
+--                     |_____|
+-- ------------------------------------------------- --
 local return_button = function(color, lspace, rspace)
 	local widget_button =
 		wibox.widget {

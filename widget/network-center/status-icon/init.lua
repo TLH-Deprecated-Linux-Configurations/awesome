@@ -1,10 +1,12 @@
-local wibox = require("wibox")
-local gears = require("gears")
-local clickable_container = require("widget.clickable-container")
-local dpi = require("beautiful").xresources.apply_dpi
-local icons = require("themes.icons")
-
---- Widget for dracula icon used in all title bars
+--  _______ __          __
+-- |     __|  |_.---.-.|  |_.--.--.-----.
+-- |__     |   _|  _  ||   _|  |  |__ --|
+-- |_______|____|___._||____|_____|_____|
+--  _______
+-- |_     _|.----.-----.-----.
+--  _|   |_ |  __|  _  |     |
+-- |_______||____|_____|__|__|
+-- ------------------------------------------------- --
 
 -- Icon widget
 local widget_icon =

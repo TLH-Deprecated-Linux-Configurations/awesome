@@ -1,12 +1,12 @@
-local awful = require("awful")
-local wibox = require("wibox")
-local gears = require("gears")
-local clickable_container = require("widget.clickable-container")
-local dpi = require("beautiful").xresources.apply_dpi
-local icons = require("themes.icons")
-local colors = require("themes").colors
-local watch = require("awful.widget.watch")
-
+--  ___ ___         __
+-- |   |   |.-----.|  |.--.--.--------.-----.
+-- |   |   ||  _  ||  ||  |  |        |  -__|
+--  \_____/ |_____||__||_____|__|__|__|_____|
+--  _______ __ __     __
+-- |     __|  |__|.--|  |.-----.----.
+-- |__     |  |  ||  _  ||  -__|   _|
+-- |_______|__|__||_____||_____|__|
+-- ------------------------------------------------- --
 local box = {}
 
 local muteIcon =

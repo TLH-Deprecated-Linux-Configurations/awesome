@@ -1,13 +1,16 @@
-local wibox = require("wibox")
-local gears = require("gears")
-local clickable_container = require("widget.clickable-container")
-local dpi = require("beautiful").xresources.apply_dpi
-local icons = require("themes.icons")
+-- .--.--.-----.-----.----.
+-- |  |  |__ --|  -__|   _|
+-- |_____|_____|_____|__|
+
+--  __
+-- |__|.----.-----.-----.
+-- |  ||  __|  _  |     |
+-- |__||____|_____|__|__|
+
 local settings = require("settings")
 local dir = os.getenv("HOME") .. "/.config/awesome/themes/profile_pictures/"
 
---- Widget for dracula icon used in all title bars
-
+-- ------------------------------------------------- --
 -- Icon widget
 local widget_icon =
 	wibox.widget {

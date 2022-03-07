@@ -1,13 +1,19 @@
---DEPENDENCIES
---i3lock-fancy
+--  _______           __
+-- |    ___|.-----.--|  |
+-- |    ___||     |  _  |
+-- |_______||__|__|_____|
 
-local awful = require("awful")
-local wibox = require("wibox")
-local gears = require("gears")
-local clickable_container = require("widget.clickable-container")
-local dpi = require("beautiful").xresources.apply_dpi
-local icons = require("themes.icons")
+--  _______                     __
+-- |     __|.-----.-----.-----.|__|.-----.-----.
+-- |__     ||  -__|__ --|__ --||  ||  _  |     |
+-- |_______||_____|_____|_____||__||_____|__|__|
 
+--  ________ __     __               __
+-- |  |  |  |__|.--|  |.-----.-----.|  |_
+-- |  |  |  |  ||  _  ||  _  |  -__||   _|
+-- |________|__||_____||___  |_____||____|
+--                     |_____|
+-- ------------------------------------------------- --
 local return_button = function(color, lspace, rspace)
 	local widget_button =
 		wibox.widget {

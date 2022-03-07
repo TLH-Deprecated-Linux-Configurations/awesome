@@ -1,13 +1,11 @@
-local awful = require("awful")
-local wibox = require("wibox")
-local gears = require("gears")
-local clickable_container = require("widget.clickable-container")
-local dpi = require("beautiful").xresources.apply_dpi
-local icons = require("themes.icons")
-
+--  ______ __              __
+-- |      |  |.-----.----.|  |--.
+-- |   ---|  ||  _  |  __||    <
+-- |______|__||_____|____||__|__|
+-- ------------------------------------------------- --
 local time = "%H:%M"
 local date = "%d.%b.%Y"
-
+-- ------------------------------------------------- --
 local return_button = function(color, lspace, rspace)
 	local widget_button_clock =
 		wibox.widget {
@@ -16,7 +14,7 @@ local return_button = function(color, lspace, rspace)
 		widget = wibox.widget.textclock,
 		font = beautiful.font
 	}
-
+	-- ------------------------------------------------- --
 	local widget_button =
 		wibox.widget {
 		{
@@ -47,7 +45,7 @@ local return_button = function(color, lspace, rspace)
 		right = dpi(rspace),
 		widget = wibox.container.margin
 	}
-
+	-- ------------------------------------------------- --
 	widget_button:buttons(
 		gears.table.join(
 			awful.button(
@@ -76,5 +74,5 @@ local return_button = function(color, lspace, rspace)
 
 	return widget_button
 end
-
+-- ------------------------------------------------- --
 return return_button

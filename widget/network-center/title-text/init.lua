@@ -1,12 +1,12 @@
-local awful = require("awful")
-local wibox = require("wibox")
-local gears = require("gears")
-local clickable_container = require("widget.clickable-container")
-local dpi = require("beautiful").xresources.apply_dpi
-local icons = require("themes.icons")
-local colors = require("themes").colors
-local watch = require("awful.widget.watch")
-
+--  _______ __ __   __
+-- |_     _|__|  |_|  |.-----.
+--   |   | |  |   _|  ||  -__|
+--   |___| |__|____|__||_____|
+--  _______               __
+-- |_     _|.-----.--.--.|  |_
+--   |   |  |  -__|_   _||   _|
+--   |___|  |_____|__.__||____|
+-- ------------------------------------------------- --
 local user_content =
 	wibox.widget {
 	text = " Network Center ",

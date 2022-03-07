@@ -17,7 +17,7 @@ local altkey = require("config.keys.mod").altKey
 local drop = require("utils.dropdown")
 local apps = require("config.root.apps")
 local hotkeys_popup = require("awful.hotkeys_popup").widget
-local hotkeys_popup_custom = require("utils.hotkeys-popup")
+local hotkeys_popup_custom = require("module.hotkeys-popup")
 _G.switcher = require("module.application-switcher")
 require("awful.autofocus")
 

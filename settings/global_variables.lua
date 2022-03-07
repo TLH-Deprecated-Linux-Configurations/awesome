@@ -46,7 +46,7 @@ colors = require("themes").colors
 screen_geometry = require("awful").screen.focused().geometry
 format_item = require("utils.format_item")
 settings = require("settings")
-hotkeys_popup = require("utils.hotkeys-popup")
+hotkeys_popup = require("module.hotkeys-popup")
 
 xresources = require("beautiful.xresources")
 gears = require("gears")

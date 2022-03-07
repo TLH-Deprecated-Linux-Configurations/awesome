@@ -1,14 +1,19 @@
-local gears = require('gears')
-local wibox = require('wibox')
-local beautiful = require('beautiful')
-local dpi = require('beautiful').xresources.apply_dpi
+--  _______                             __
+-- |    ___|.-----.----.--------.---.-.|  |_
+-- |    ___||  _  |   _|        |  _  ||   _|
+-- |___|    |_____|__| |__|__|__|___._||____|
+--  _______ __
+-- |_     _|  |_.-----.--------.
+--  _|   |_|   _|  -__|        |
+-- |_______|____|_____|__|__|__|
+-- ------------------------------------------------- --
 
 local format_item = function(widget)
-  return wibox.widget {
+	return wibox.widget {
 		{
 			{
 				layout = wibox.layout.align.vertical,
-				expand = 'none',
+				expand = "none",
 				nil,
 				widget,
 				nil
@@ -16,10 +21,8 @@ local format_item = function(widget)
 			margins = dpi(5),
 			widget = wibox.container.margin
 		},
-		shape =beautiful.client_shape_rounded_xl,
-
-
-    bg = 'transparent',
+		shape = beautiful.client_shape_rounded_xl,
+		bg = "transparent",
 		widget = wibox.container.background
 	}
 end

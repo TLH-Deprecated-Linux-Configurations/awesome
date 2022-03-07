@@ -1,14 +1,12 @@
-local awful = require('awful')
-local wibox = require('wibox')
-local gears = require('gears')
-local clickable_container = require('widget.clickable-container')
-local dpi = require('beautiful').xresources.apply_dpi
-local icons = require('themes.icons')
-local colors = require('themes').colors
-local watch = require('awful.widget.watch')
-local beautiful = require('beautiful')
-local naughty = require('naughty')
-
+--  _____               __
+-- |     \.-----.--.--.|__|.----.-----.-----.
+-- |  --  |  -__|  |  ||  ||  __|  -__|__ --|
+-- |_____/|_____|\___/ |__||____|_____|_____|
+--  ______                     __
+-- |   __ \.---.-.-----.-----.|  |
+-- |    __/|  _  |     |  -__||  |
+-- |___|   |___._|__|__|_____||__|
+-- ------------------------------------------------- --
 local width = dpi(410)
 
 local panelLayout = wibox.layout.fixed.vertical()
@@ -22,9 +20,8 @@ end
 
 local bluetoothDeviceAdd = function(n)
   local box = require("widget.bluetooth-center.elements")
-  panelLayout:insert(#panelLayout.children+1, box.create(n.title, n.macAdress, n.pairStatus, n.connectStatus))
+  panelLayout:insert(#panelLayout.children + 1, box.create(n.title, n.macAdress, n.pairStatus, n.connectStatus))
 end
-
 
 awesome.connect_signal(
   "bluetooth::devices:refreshPanel",
@@ -35,14 +32,15 @@ awesome.connect_signal(
       {
         stdout = function(line)
           awful.spawn.easy_async_with_shell(
-            "bluetoothctl info "..line:match("[%w:]+",8).. " | grep 'Connected' | sed 's/Connected: //' | sed 's/\t//g'",
+            "bluetoothctl info " ..
+              line:match("[%w:]+", 8) .. " | grep 'Connected' | sed 's/Connected: //' | sed 's/\t//g'",
             function(stdout)
               bluetoothDeviceAdd(
                 {
-                  title = line:gsub("Device "..line:match("[%w:]+",8).." ", ""), 
-                  macAdress = line:match("[%w:]+",8), 
-                  pairStatus = true, 
-                  connectStatus = stdout:gsub("\n","")
+                  title = line:gsub("Device " .. line:match("[%w:]+", 8) .. " ", ""),
+                  macAdress = line:match("[%w:]+", 8),
+                  pairStatus = true,
+                  connectStatus = stdout:gsub("\n", "")
                 }
               )
             end

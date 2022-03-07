@@ -1,15 +1,13 @@
-local awful = require('awful')
-local wibox = require('wibox')
-local gears = require('gears')
-local clickable_container = require('widget.clickable-container')
-local dpi = require('beautiful').xresources.apply_dpi
-local icons = require('themes.icons')
-local colors = require('themes').colors
-local watch = require('awful.widget.watch')
-local beautiful = require('beautiful')
-local naughty = require('naughty')
-
-local emptyCenter = require('widget.notification-center.empty')
+--  _____               __
+-- |     \.-----.--.--.|__|.----.-----.-----.
+-- |  --  |  -__|  |  ||  ||  __|  -__|__ --|
+-- |_____/|_____|\___/ |__||____|_____|_____|
+--  ______                     __
+-- |   __ \.---.-.-----.-----.|  |
+-- |    __/|  _  |     |  -__||  |
+-- |___|   |___._|__|__|_____||__|
+-- ------------------------------------------------- --
+local emptyCenter = require("widget.notification-center.empty")
 local width = dpi(410)
 
 local panelLayout = wibox.layout.fixed.vertical()
@@ -35,27 +33,28 @@ awesome.connect_signal(
       {
         stdout = function(line)
           awful.spawn.easy_async_with_shell(
-            "pactl list sinks | grep -E 'Sink|Name' | sed 's/Description: //g; N; s/\\n//; s/\\t//g; s/Name://' | grep 'Sink #"..line:sub(1,1).."' | sed 's/Sink #"..line:sub(1,1).." //'",
+            "pactl list sinks | grep -E 'Sink|Name' | sed 's/Description: //g; N; s/\\n//; s/\\t//g; s/Name://' | grep 'Sink #" ..
+              line:sub(1, 1) .. "' | sed 's/Sink #" .. line:sub(1, 1) .. " //'",
             function(stdout)
-              local name = stdout:gsub("\n","")
+              local name = stdout:gsub("\n", "")
               awful.spawn.easy_async_with_shell(
                 [[bash -c "pactl get-default-sink"]],
                 function(stdout)
-                  if name == stdout:gsub('\n','') then
+                  if name == stdout:gsub("\n", "") then
                     volumeDevicesAdded(
                       {
-                        title = line:sub(3), 
-                        sinkNumText = "Sink "..line:sub(1,1), 
-                        sinkNum = line:sub(1,1), 
+                        title = line:sub(3),
+                        sinkNumText = "Sink " .. line:sub(1, 1),
+                        sinkNum = line:sub(1, 1),
                         isDefault = true
                       }
                     )
                   else
                     volumeDevicesAdded(
                       {
-                        title = line:sub(3), 
-                        sinkNumText = "Sink "..line:sub(1,1), 
-                        sinkNum = line:sub(1,1), 
+                        title = line:sub(3),
+                        sinkNumText = "Sink " .. line:sub(1, 1),
+                        sinkNum = line:sub(1, 1),
                         isDefault = false
                       }
                     )
