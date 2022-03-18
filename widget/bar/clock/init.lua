@@ -32,7 +32,7 @@ local return_button = function(color, lspace, rspace)
 				},
 				shape = gears.shape.rounded_bar,
 				bg = color.color,
-				fg = "#FFFFFF",
+				fg = colors.white,
 				widget = wibox.container.background
 			},
 			forced_width = icon_size,

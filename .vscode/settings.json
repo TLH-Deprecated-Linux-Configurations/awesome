@@ -54,5 +54,9 @@
   ],
   "lua.targetVersion": "5.3",
   "restructuredtext.languageServer.disabled": true,
-  "esbonio.server.enabled": false
+  "esbonio.server.enabled": false,
+  "Lua.diagnostics.disable": [
+    "undefined-field"
+  ],
+  "restructuredtext.confPath": ""
 }

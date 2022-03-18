@@ -1,13 +1,13 @@
---  __           __   __
--- |  |--.---.-.|  |_|  |_.-----.----.--.--.
--- |  _  |  _  ||   _|   _|  -__|   _|  |  |
--- |_____|___._||____|____|_____|__| |___  |
---                                   |_____|
+--  ___ ___         __
+-- |   |   |.-----.|  |.--.--.--------.-----.
+-- |   |   ||  _  ||  ||  |  |        |  -__|
+--  \_____/ |_____||__||_____|__|__|__|_____|
+
 --               __   __   ___ __              __   __
 -- .-----.-----.|  |_|__|.'  _|__|.----.---.-.|  |_|__|.-----.-----.-----.
 -- |     |  _  ||   _|  ||   _|  ||  __|  _  ||   _|  ||  _  |     |__ --|
 -- |__|__|_____||____|__||__| |__||____|___._||____|__||_____|__|__|_____|
--- ------------------------------------------------- --
+
 local dpi = beautiful.xresources.apply_dpi
 
 local width = dpi(200)
@@ -18,20 +18,20 @@ local active_color_1 = {
     type = "linear",
     from = {0, 0},
     to = {200, 50}, -- replace with w,h later
-    stops = {{0, "#e9efff"}, {0.50, "#f4f4f7"}}
+    stops = {{0, colors.lesswhite}, {0.50, colors.white}}
 }
 
-local bright_icon =
+local volume_icon =
     wibox.widget {
-    markup = "<span foreground='#f4f4f7'><b></b></span>",
+    markup = "<span foreground='" .. colors.white .. "'><b></b></span>",
     align = "center",
     valign = "center",
     font = "SFMono Nerd Font Mono Bold  64",
     widget = wibox.widget.textbox
 }
 
--- create the bright_adjust component
-local bright_adjust =
+-- create the volume_adjust component
+local volume_adjust =
     wibox(
     {
         -- screen = screen.focused,
@@ -46,22 +46,25 @@ local bright_adjust =
     }
 )
 
-local bright_bar =
+local volume_bar =
     wibox.widget {
     widget = wibox.widget.progressbar,
     shape = gears.shape.rounded_bar,
     bar_shape = gears.shape.rounded_bar,
     color = colors.white,
-    background_color = colors.alpha(colors.colorH, "88"),
+    background_color = colors.alpha(colors.color1, "88"),
     max_value = 100,
-    value = 100
+    value = 100,
+    forced_height = dpi(25),
+    height = dpi(25),
+    forced_width = dpi(200)
 }
 
-bright_adjust:setup {
+volume_adjust:setup {
     {
         layout = wibox.layout.align.vertical,
         {
-            bright_icon,
+            volume_icon,
             top = dpi(15),
             left = dpi(50),
             right = dpi(50),
@@ -69,7 +72,7 @@ bright_adjust:setup {
             widget = wibox.container.margin
         },
         {
-            bright_bar,
+            volume_bar,
             left = dpi(25),
             right = dpi(25),
             bottom = dpi(30),
@@ -77,7 +80,7 @@ bright_adjust:setup {
         }
     },
     shape = beautiful.client_shape_rounded_xl,
-    bg = colors.alpha(colors.black, "88"),
+    bg = colors.alpha(colors.black, "aa"),
     border_width = dpi(2),
     border_color = "#2f303daa",
     widget = wibox.container.background
@@ -85,34 +88,45 @@ bright_adjust:setup {
 
 -- create a 3 second timer to hide the volume adjust
 -- component whenever the timer is started
-local hide_bright_adjust =
+local hide_volume_adjust =
     gears.timer {
     timeout = 3,
     autostart = true,
     callback = function()
-        bright_adjust.visible = false
+        volume_adjust.visible = false
     end
 }
 
--- ------------------------------------------------- --
-local update_slider = function(percentage)
-    local brightness = percentage
-    if bright_adjust.visible == false then
-        bright_adjust.visible = true
-        hide_bright_adjust:start()
-    else
-        hide_bright_adjust:again()
-    end
-
-    bright_bar:set_value(brightness)
+local update_slider = function()
+    awful.spawn.with_line_callback(
+        "pamixer --get-volume",
+        -- ------------------------------------------------- --
+        {
+            stdout = function(value)
+                local volume = tonumber(value)
+                if volume_adjust.visible == false then
+                    volume_adjust.visible = true
+                    hide_volume_adjust:start()
+                else
+                    hide_volume_adjust:again()
+                end
+                if volume >= 0 and volume <= 100 and volume ~= nil then
+                    volume_bar:set_value(volume)
+                end
+            end
+        }
+    )
 end
 update_slider()
 
 awesome.connect_signal(
-    "signal::brightness",
-    function(percentage)
-        if percentage ~= nil then
-            update_slider(percentage)
+    "signal::volume",
+    function(percentage, muted)
+        update_slider()
+        if muted == 1 then
+            volume_icon.text = ""
+        elseif muted == 0 then
+            volume_icon.txt = ""
         end
     end
 )

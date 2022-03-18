@@ -159,7 +159,7 @@ _G.client.connect_signal(
                     -- Title
                     align = "center",
                     widget = awful.titlebar.widget.titlewidget(c),
-                    fg = "#f4f4f7"
+                    fg = colors.white
                 },
                 buttons = buttons,
                 layout = wibox.layout.flex.horizontal

@@ -11,5 +11,6 @@
 -- ------------------------------------------------- --
 return {
     require(... .. ".brightness"),
-    require(... .. ".battery")
+    require(... .. ".battery"),
+    require(... .. ".volume")
 }

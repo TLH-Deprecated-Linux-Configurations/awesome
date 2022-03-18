@@ -18,7 +18,7 @@ local bar = function(s)
 			y = s.geometry.y,
 			stretch = true,
 			visible = false,
-			bg = beautiful.bg_normal,
+			bg = beautiful.bg_focus,
 			fg = colors.white
 		}
 	)

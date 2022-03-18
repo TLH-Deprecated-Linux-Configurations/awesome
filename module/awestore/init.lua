@@ -1,3 +1,9 @@
+--  _______                        __                    
+-- |   _   |.--.--.--.-----.-----.|  |_.-----.----.-----.
+-- |       ||  |  |  |  -__|__ --||   _|  _  |   _|  -__|
+-- |___|___||________|_____|_____||____|_____|__| |_____|
+-- ------------------------------------------------- --
+-- easing function 
 package.preload["awestore.easing"] = function()
     local a
     local b, c, d
@@ -178,6 +184,8 @@ package.preload["awestore.easing"] = function()
         sine_out = E
     }
 end
+-- ------------------------------------------------- --
+-- core
 package.preload["awestore.core"] = function()
     local Q = require "awestore.utils"
     local R, S, T, U, V, W, X
@@ -187,7 +195,6 @@ package.preload["awestore.core"] = function()
         {__name = "store", __tostring = function(self)
                 return "store"
             end, __newindex = function(self, Y, Z)
-                return
             end}
     )
     function X(Z, _)
@@ -415,6 +422,9 @@ package.preload["awestore.core"] = function()
     end
     return {derived = R, filtered = S, monitored = T, readable = U, signal = V, store = W, writable = X}
 end
+-- ------------------------------------------------- --
+ 
+-- utils
 package.preload["awestore.utils"] = function()
     local ac, ad
     ac = function(Z)
@@ -434,6 +444,8 @@ package.preload["awestore.utils"] = function()
     end
     return {is_sequence = ac, noop = ad}
 end
+-- ------------------------------------------------- --
+-- tweened (whatever that means)
 package.preload["awestore.tweened"] = function()
     local ae = require("gears")
     local af = require("posix")

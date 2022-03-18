@@ -19,7 +19,7 @@ local create_click_events = function(widget)
 		shape = beautiful.client_shape_rounded,
 		bg = beautiful.bg_button,
 		border_width = dpi(3),
-		border_color = "#1b1d2466"
+		border_color = colors.alpha(colors.black, "bb")
 	}
 
 	-- Old and new widget
@@ -30,7 +30,7 @@ local create_click_events = function(widget)
 		"mouse::enter",
 		function()
 			container.bg = beautiful.accent
-			container.border_color = "#8b9cbe55"
+			container.border_color = colors.alpha(colors.color1, "55")
 			container.border_width = dpi(1)
 			-- Hm, no idea how to get the wibox from this signal's arguments...
 			local w = mouse.current_wibox
@@ -47,7 +47,7 @@ local create_click_events = function(widget)
 		function()
 			container.bg = beautiful.bg_button
 			container.border_width = dpi(3)
-			container.border_color = "#1b1d2466"
+			container.border_color = colors.alpha(colors.black, "bb")
 
 			if old_wibox then
 				old_wibox.cursor = old_cursor
@@ -61,7 +61,7 @@ local create_click_events = function(widget)
 		"button::press",
 		function()
 			container.bg = beautiful.accent
-			container.border_color = "#8b9cbe55"
+			container.border_color = colors.alpha(colors.color1, "55")
 			container.border_width = dpi(1)
 		end
 	)
@@ -71,7 +71,7 @@ local create_click_events = function(widget)
 		"button::release",
 		function()
 			container.bg = beautiful.bg_button
-			container.border_color = "#1b1d2466"
+			container.border_color = colors.alpha(colors.black, "bb")
 			container.border_width = dpi(3)
 		end
 	)

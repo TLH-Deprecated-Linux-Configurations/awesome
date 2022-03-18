@@ -43,8 +43,8 @@ local _M = {}
 
 _M.settings = {
     preview_box = true,
-    preview_box_bg = "#1b1d24aa",
-    preview_box_border = "#555e70cc",
+    preview_box_bg = colors.alpha(colors.black, "aa"),
+    preview_box_border = colors.alpha(colors.colorB, "cc"),
     preview_box_fps = 30,
     preview_box_delay = 150,
     preview_box_title_font = {"sans", "italic", "normal"},

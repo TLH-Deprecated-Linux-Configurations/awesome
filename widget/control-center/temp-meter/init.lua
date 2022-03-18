@@ -14,6 +14,7 @@ local active_color = {
   to = {200, 50}, -- replace with w,h later
   stops = {{0, colors.color6}, {0.75, colors.color4}}
 }
+-- ------------------------------------------------- --
 local widget_text =
   wibox.widget {
   font = "SF Pro Rounded Heavy 12",
@@ -22,6 +23,7 @@ local widget_text =
   align = "center",
   widget = wibox.widget.textbox
 }
+-- ------------------------------------------------- --
 local temp_bar =
   wibox.widget {
   max_value = 100,
@@ -30,6 +32,7 @@ local temp_bar =
   shape = gears.shape.squircle,
   widget = wibox.widget.progressbar
 }
+-- ------------------------------------------------- --
 awesome.connect_signal(
   "signal::temp",
   function(temp)
@@ -38,7 +41,7 @@ awesome.connect_signal(
   end
 )
 local max_temp = 80
-
+-- ------------------------------------------------- --
 local temp_meter =
   wibox.widget {
   {
@@ -63,5 +66,5 @@ local temp_meter =
   forced_height = dpi(185),
   widget = wibox.container.margin
 }
-
+-- ------------------------------------------------- --
 return temp_meter

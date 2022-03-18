@@ -77,7 +77,7 @@ I am also a web developer with a fixation on interfaces that are attractive and
 easy to use, so I throw in a bit about the standards I am trying to make this
 configuration conform to.
 
-- **Keyboard & Mouse Driven** - adaptive to different workflows
+- **Keyboard & Mouse Driven** - adaptive to different workflows, not 100% but should be sooner or later 
 - **Prefer Internal Components to External Programs** - exceptions apply
 - **Custom base16 Color Scheme, GTK Theme, Icon Theme** - a fully curated UI
 

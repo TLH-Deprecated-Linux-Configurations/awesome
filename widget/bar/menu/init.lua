@@ -24,7 +24,6 @@ local return_button = function(color, lspace, rspace, tspace, bspace)
 					widget = wibox.container.margin
 				},
 				shape = beautiful.client_shape_rounded,
-				bg = color.color,
 				widget = wibox.container.background
 			},
 			widget = clickable_container

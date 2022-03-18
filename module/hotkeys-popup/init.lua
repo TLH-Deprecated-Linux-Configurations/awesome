@@ -112,17 +112,17 @@ function widget.new(args)
                 Tab = "Tab",
                 space = "Space",
                 Return = "Enter",
-                -- Dead keys aren't distinct from non-dead keys because no sane
-                -- layout should have both of the same kind:
+                -- Dead keys aren't distinct from non-dead keys
                 dead_acute = "´",
                 dead_circumflex = "^",
                 dead_grave = "`",
                 -- Basic multimedia keys:
                 XF86MonBrightnessUp = "🔆+",
                 XF86MonBrightnessDown = "🔅-",
-                XF86AudioRaiseVolume = "Vol+",
-                XF86AudioLowerVolume = "Vol-",
-                XF86AudioMute = "Mute",
+                XF86AudioRaiseVolume = "",
+                XF86AudioLowerVolume = "",
+                XF86Display = "",
+                XF86AudioMute = "",
                 XF86AudioPlay = "⏯",
                 XF86AudioPrev = "⏮",
                 XF86AudioNext = "⏭"
@@ -297,7 +297,7 @@ function widget.new(args)
                     right = dpi(8),
                     widget = wibox.container.margin
                 },
-                shape = gears.shape.rounded_rect,
+                shape = beautiful.client_shape_rounded_small,
                 bg = "transparent",
                 border_width = dpi(2),
                 border_color = colors.color2,
@@ -392,25 +392,6 @@ function widget.new(args)
                 (current_column.height_px or 0) + gstring.linecount(joined_labels) * line_height + group_label_height
             if _add_new_column then
                 table.insert(column_layouts, current_column)
-            --[[
-                table.insert(column_layouts, 
-                    {
-                        {
-                            current_column,
-                            widget = wibox.container.background,
-                            bg = colors.color6,
-                            shape = function(cr, width, height)
-                                gears.shape.rounded_rect(cr, width, height, beautiful.groups_radius)
-                            end,
-                            height_px = (current_column.height_px or 0) + gstring.linecount(joined_labels)*line_height + group_label_height,
-                        },
-                        height_px = (current_column.height_px or 0) + gstring.linecount(joined_labels)*line_height + group_label_height,
-                        margins = dpi(10),
-                        widget = wibox.container.margin,
-                        layout=wibox.layout.fixed.vertical()
-                    }
-                )
-                ]]
             end
         end
         -- ------------------------------------------------- --
@@ -458,11 +439,11 @@ function widget.new(args)
                             columns,
                             widget = wibox.container.background,
                             bg = beautiful.bg_focus,
-                            shape = function(cr, width, height)
-                                gears.shape.rounded_rect(cr, width, height, beautiful.groups_radius)
-                            end
+                            shape = beautiful.client_shape_rounded_xl
                         },
-                        margins = dpi(10),
+                        margins = dpi(30),
+                        border_color = colors.black,
+                        border_width = dpi(3),
                         widget = wibox.container.margin
                     }
                 )
@@ -490,11 +471,11 @@ function widget.new(args)
                     columns,
                     widget = wibox.container.background,
                     bg = beautiful.bg_focus,
-                    shape = function(cr, width, height)
-                        gears.shape.rounded_rect(cr, width, height, beautiful.groups_radius)
-                    end
+                    border_color = colors.alpha(colors.black, "bb"),
+                    border_width = dpi(3),
+                    shape = beautiful.client_shape_rounded_xl
                 },
-                margins = dpi(10),
+                margins = dpi(15),
                 widget = wibox.container.margin
             }
         )
@@ -511,10 +492,9 @@ function widget.new(args)
             awful.popup {
             widget = pages[1],
             ontop = true,
-            --            bg=colors.alpha(colors.colorB, 'F2'),
             bg = colors.alpha(colors.colorB, "aa"),
             border_width = dpi(2),
-            border_color = colors.colorA,
+            border_color = colors.black,
             fg = self.fg,
             shape = beautiful.client_shape_rounded_xl,
             placement = place_func,
@@ -534,6 +514,13 @@ function widget.new(args)
             awful.button(
                 {},
                 1,
+                function()
+                    widget_obj:hide()
+                end
+            ),
+            awful.button(
+                {},
+                2,
                 function()
                     widget_obj:hide()
                 end

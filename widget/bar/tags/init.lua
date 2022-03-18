@@ -8,14 +8,11 @@
 -- |       |  ||__ --||   _|
 -- |_______|__||_____||____|
 -- ------------------------------------------------- --
-local awful = require("awful")
-local wibox = require("wibox")
-local beautiful = require("beautiful")
-local gears = require("gears")
-local clickable_container = require("widget.clickable-container")
+
 local dpi = require("beautiful").xresources.apply_dpi
 local modkey = require("config.keys.mod").modKey
-
+-- ------------------------------------------------- --
+-- Setup for tag preview
 local tag_preview_box = require("widget.bar.tags.tag-preview")
 tag_preview_box.enable {
 	show_client_content = true,
@@ -38,7 +35,7 @@ tag_preview_box.enable {
 	-- Place the widget using awful.placement (this overrides x & y)
 	--
 	placement_fn = function(c)
-		awful.placement.bottom_left(c, {margins = {bottom = 40, left = 30}})
+		awful.placement.bottom_left(c, {margins = {bottom = 54, left = 30}})
 	end
 }
 
@@ -138,9 +135,7 @@ local get_taglist = function(s)
 					"mouse::leave",
 					function()
 						awesome.emit_signal("tag_preview::visibility", s, false)
-						if self.has_backup then
-							self.bg = beautiful.bg_focus
-						end
+						collectgarbage()
 					end
 				)
 			end

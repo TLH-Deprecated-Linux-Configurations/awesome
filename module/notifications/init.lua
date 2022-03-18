@@ -18,7 +18,7 @@ ruled.notification.connect_signal(
 		ruled.notification.append_rule {
 			rule = {urgency = "critical"},
 			properties = {
-				implicit_timeout = 0
+				implicit_timeout = 8
 			}
 		}
 

@@ -22,7 +22,6 @@ local _M = function()
             collectgarbage()
             collectgarbage("collect")
             collectgarbage("setstepmul", 400)
-
             collectgarbage("setpause", 160)
         end
     }

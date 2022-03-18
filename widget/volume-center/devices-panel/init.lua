@@ -7,7 +7,7 @@
 -- |    __/|  _  |     |  -__||  |
 -- |___|   |___._|__|__|_____||__|
 -- ------------------------------------------------- --
-local emptyCenter = require("widget.notification-center.empty")
+
 local width = dpi(410)
 
 local panelLayout = wibox.layout.fixed.vertical()

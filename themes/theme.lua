@@ -64,9 +64,8 @@ theme.fg_focus = colors.lesswhite
 theme.fg_urgent = colors.alpha(colors.color15, "cc")
 -- ------------------------------------------------- --
 -- Backgrounds
-theme.bg_normal =
-    "linear:0,0:0,-21:0," .. colors.alpha(colors.colorK, "dd") .. ":1," .. colors.alpha(colors.black, "dd")
-theme.bg_focus = "linear:0,0:0,21:0," .. colors.alpha(colors.colorK, "dd") .. ":1," .. colors.alpha(colors.colorL, "dd")
+theme.bg_normal = "linear:0,0:0,21:0," .. colors.colorM .. ":1," .. colors.black
+theme.bg_focus = "linear:0,0:0,21:0," .. colors.colorV .. ":1," .. colors.colorM
 theme.bg_urgent = "linear:0,0:0,21:0," .. colors.alpha(colors.colorM, "dd") .. ":1," .. colors.alpha(colors.black, "dd")
 theme.bg_menu = "linear:0,0:0,21:0," .. colors.alpha(colors.colorK, "dd") .. ":1," .. colors.alpha(colors.black, "dd")
 -- ------------------------------------------------- --
@@ -96,7 +95,7 @@ theme.hotkeys_group_margin = dpi(10)
 
 -- ------------------------------------------------- --
 -- button
-theme.bg_button = "linear:0,0:0,51:0," .. colors.colorO .. ":1," .. colors.colorZ
+theme.bg_button = "linear:0,0:0,21:0," .. colors.colorN .. ":1," .. colors.colorB
 -- ------------------------------------------------- --
 -- System tray
 --
@@ -170,7 +169,7 @@ theme.taglist_spacing = dpi(6)
 -- Tasklist
 theme.tasklist_font = "SF Intermosaic B 12"
 theme.tasklist_bg_normal = "linear:0,0:0,21:0," .. colors.colorM .. ":1," .. colors.black
-theme.tasklist_bg_focus = "linear:0,0:0,21:0," .. colors.colorW .. ":1," .. colors.colorM
+theme.tasklist_bg_focus = "linear:0,0:0,21:0," .. colors.colorM .. ":1," .. colors.black
 theme.tasklist_bg_urgent = colors.alpha(colors.color15, "aa")
 theme.tasklist_fg_focus = colors.white
 theme.tasklist_fg_urgent = colors.white

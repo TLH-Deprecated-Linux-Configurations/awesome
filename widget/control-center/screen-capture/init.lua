@@ -8,14 +8,6 @@
 -- |______||___._|   __||____|_____|__| |_____|
 --               |__|
 -- ------------------------------------------------- --
-local awful = require("awful")
-local wibox = require("wibox")
-local gears = require("gears")
-local clickable_container = require("widget.clickable-container")
-local dpi = require("beautiful").xresources.apply_dpi
-local icons = require("themes.icons")
-local colors = require("themes").colors
-local watch = require("awful.widget.watch")
 
 local widget_icon =
 	wibox.widget {

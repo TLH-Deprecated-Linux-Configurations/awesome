@@ -26,10 +26,12 @@ local ll =
                     id = "icon_role",
                     forced_height = dpi(84),
                     forced_width = dpi(84),
-                    widget = wibox.widget.imagebox
+                    widget = wibox.widget.imagebox,
+                    shape = beautiful.client_shape_rounded_xl
                 },
                 margins = dpi(15),
-                widget = wibox.container.margin
+                widget = wibox.container.margin,
+                shape = beautiful.client_shape_rounded_xl
             },
             widget = clickable_container
         },
@@ -37,7 +39,7 @@ local ll =
         forced_width = dpi(96),
         forced_height = dpi(96),
         bg = beautiful.bg_button,
-        shape = gears.shape.rounded_rect,
+        shape = beautiful.client_shape_rounded_xl,
         widget = wibox.container.background
     }
 }
@@ -104,7 +106,7 @@ local layout_box = function(s)
                     right = dpi(12),
                     widget = wibox.container.margin
                 },
-                shape = beautiful.client_shape_rounded,
+                shape = beautiful.client_shape_rounded_xl,
                 widget = wibox.container.background
             },
             widget = clickable_container
@@ -157,17 +159,17 @@ awesome.connect_signal(
     "layout::changed:next",
     function()
         awful.layout.inc(1)
-        layout_popup.timer:start()
         layout_popup.visible = true
+        layout_popup.timer:start()
     end
 )
 awesome.connect_signal(
     "layout::changed:prev",
     function()
         awful.layout.inc(-1)
-        layout_popup.timer:start()
         layout_popup.visible = true
+        layout_popup.timer:start()
     end
 )
--- ------------------------------------------------- --
+-- ----------------------------------------------f--- --
 return layout_box

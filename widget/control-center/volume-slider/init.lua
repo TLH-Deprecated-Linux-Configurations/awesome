@@ -11,7 +11,7 @@
 local widget_name =
 	wibox.widget {
 	text = "Volume",
-	font = "SF Pro Rounded Heavy  0",
+	font = "SF Pro Rounded Heavy  10",
 	align = "left",
 	widget = wibox.widget.textbox
 }
@@ -76,10 +76,12 @@ volume_slider:connect_signal(
 		if volume_level ~= nil then
 			spawn("pamixer --set-volume " .. volume_level, false)
 			awesome.emit_signal("signal::volume:update", tonumber(volume_level))
-			awesome.emit_signal("signal::volume", tonumber(volume_level))
+			awesome.emit_signal("signal::volume", tonumber(volume_level), 0)
+			widget_icon.icon:set_image(icons.volume)
 		else
 			volume_slider:set_value(0)
-			spawn("amixer set Master mute", false)
+			spawn("pamixer --mute", false)
+			widget_icon.icon:set_image(icons.mute)
 		end
 	end
 )
@@ -97,7 +99,6 @@ volume_slider:buttons(
 				end
 				volume_slider:set_value(volume_slider:get_value() + 5)
 				awesome.emit_signal("signal::volume:update", volume_slider:get_value())
-				collectgarbage("collect")
 			end
 		),
 		awful.button(
@@ -112,7 +113,6 @@ volume_slider:buttons(
 				volume_slider:set_value(volume_slider:get_value() - 5)
 
 				awesome.emit_signal("signal::volume:update", volume_slider:get_value())
-				collectgarbage("collect")
 			end
 		)
 	)
@@ -127,12 +127,11 @@ local update_slider_mute = function()
 				if stdout == "true" then
 					widget_icon.icon:set_image(icons.mute)
 					awesome.emit_signal("signal::volume:update", 0)
-					collectgarbage("collect")
 				elseif status == "false" then
 					widget_icon.icon:set_image(icons.volume)
-					awesome.emit_signal("signal::volume:update")
-					collectgarbage("collect")
 				end
+			else
+				return
 			end
 		end
 	)
@@ -140,14 +139,17 @@ end
 -- ------------------------------------------------- --
 local update_slider = function()
 	awful.spawn.easy_async_with_shell(
-		[["awk -F"[][]" '/Left:/ { print $2 }' <(amixer sget Master)"]],
+		"pamixer --get-volume",
 		function(stdout)
 			if stdout ~= nil then
 				local volume = tonumber(stdout)
 				volume_slider:set_value(volume)
 				awesome.emit_signal("signal::volume:update", volume)
 				update_slider_mute()
-				collectgarbage("collect")
+			else
+				volume_slider:get_value()
+				awesome.emit_signal("signal::volume:update", volume_slider:get_value())
+				update_slider_mute()
 			end
 		end
 	)
@@ -158,7 +160,7 @@ update_slider()
 -- ------------------------------------------------- --
 local mute_toggle = function()
 	awful.spawn.easy_async_with_shell(
-		[[ amixer set Master toggle]],
+		[[ pamixer --mute]],
 		function()
 			if volume_slider:get_value() ~= 0 then
 				widget_icon.icon:set_image(icons.mute)
@@ -199,14 +201,18 @@ local volume_tooltip =
 -- The emit will come from the global keybind
 awesome.connect_signal(
 	"signal::volume",
-	function(value, muted)
-		update_slider()
-		volume_slider:set_value(tonumber(value))
-		if muted == 1 then
-			update_slider_mute()
-		end
+	function(value, mute)
+		local muted = tonumber(mute)
+		local percentage = tonumber(value)
+		if percentage ~= nil then
+			update_slider()
 
-		volume_tooltip:set_text("Volume Level is Currently: " .. value .. "%")
+			if muted == 1 then
+				update_slider_mute()
+			end
+
+			volume_tooltip:set_text("Volume Level is Currently: " .. percentage .. "%")
+		end
 	end
 )
 -- ------------------------------------------------- --

@@ -28,7 +28,7 @@ client.connect_signal(
     -- Fade in animation (fade out is in keys)
 
     if not c.icon then
-      local i = gears.surface(gfs.get_configuration_dir() .. "icons/ghosts/awesome.png")
+      local i = gears.surface(gfs.get_configuration_dir() .. "themes/icons/awesome.png")
       c.icon = i._native
     end
 
@@ -60,13 +60,9 @@ client.connect_signal(
     -- if not awesome.startup then awful.client.setslave(c) end
     if awesome.startup and not c.size_hints.user_position and not c.size_hints.program_position then
       -- Prevent clients from being unreachable after screen count changes.
-      if awesome.startup and not c.size_hints.user_position and not c.size_hints.program_position then
-        -- Prevent clients from being unreachable after screen count changes.
-        awful.placement.no_offscreen(c)
-        awful.placement.no_overlap(c)
-
-        awful.placement.centered(c)
-      end
+      awful.placement.no_offscreen(c)
+      awful.placement.no_overlap(c)
+      awful.placement.centered(c)
     end
   end
 )
@@ -76,8 +72,9 @@ client.connect_signal(
   function(c)
     -- Set the windows at the slave,
     -- i.e. put it at the end of others instead of setting it master.
-    -- if not awesome.startup then awful.client.setslave(c) end
-
+    if not awesome.startup then
+      awful.client.setslave(c)
+    end
     if awesome.startup and not c.size_hints.user_position and not c.size_hints.program_position then
       -- Prevent clients from being unreachable after screen count changes.
       awful.placement.no_offscreen(c)
@@ -116,7 +113,7 @@ client.connect_signal(
       c.shape = beautiful.client_shape_rounded
       awful.placement.no_offscreen(c)
       awful.placement.centered(c)
-      c.screen = awful.screen.focused()
+      c.screen = awful.screen.focused(c)
     end
   end
 )

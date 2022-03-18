@@ -16,7 +16,7 @@
 awful = require("awful")
 beautiful = require("beautiful")
 gears = require("gears")
-clickable_container = require("widget.clickable-container")
+clickable_container = require("utils.clickable-container")
 filesystem = require("gears.filesystem")
 gears = require("gears")
 HOME = os.getenv "HOME"
@@ -31,7 +31,7 @@ modkey = require("config.keys.mod").mod_key
 altkey = require("config.keys.mod").alt_key
 math = require("math")
 ruled = require("ruled")
-awestore = require("library.awestore")
+awestore = require("module.awestore")
 client_keys = require("config.client.keys")
 client_buttons = require("config.client.buttons")
 gfs = gears.filesystem
@@ -41,7 +41,7 @@ menu_gen = menubar.menu_gen
 menu_utils = menubar.utils
 icon_theme = require("menubar.icon_theme")
 hotkeys_popup = require("awful.hotkeys_popup").widget
-freedesktop = require("library.freedesktop")
+freedesktop = require("module.freedesktop")
 colors = require("themes").colors
 screen_geometry = require("awful").screen.focused().geometry
 format_item = require("utils.format_item")
@@ -50,6 +50,11 @@ hotkeys_popup = require("module.hotkeys-popup")
 
 xresources = require("beautiful.xresources")
 gears = require("gears")
+
+Gio = require("lgi").Gio
+awful_menu = require("awful.menu")
+menu_gen = require("menubar.menu_gen")
+menu_utils = require("menubar.utils")
 
 -- ------------------------------------------------- --
 -- Assignments dependent on above list otherwise it will throw errrors,

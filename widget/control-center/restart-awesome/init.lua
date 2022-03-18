@@ -9,18 +9,6 @@
 -- |___|___||________|_____|_____|_____|__|__|__|_____|
 
 -- ------------------------------------------------- --
-local awful = require("awful")
-local wibox = require("wibox")
-local gears = require("gears")
-local clickable_container = require("widget.clickable-container")
-local dpi = require("beautiful").xresources.apply_dpi
-local icons = require("themes.icons")
-local colors = require("themes").colors
-local watch = require("awful.widget.watch")
-
-local awful = require("awful")
-local beautiful = require("beautiful")
-local naughty = require("naughty")
 
 local widget_icon =
 	wibox.widget {
@@ -35,7 +23,7 @@ local widget_icon =
 	},
 	nil
 }
-
+-- ------------------------------------------------- --
 local widget =
 	wibox.widget {
 	{
@@ -54,21 +42,21 @@ local widget =
 	bg = colors.colorA,
 	widget = wibox.container.background
 }
-
+-- ------------------------------------------------- --
 widget:connect_signal(
 	"mouse::enter",
 	function()
 		widget.bg = beautiful.accent
 	end
 )
-
+-- ------------------------------------------------- --
 widget:connect_signal(
 	"mouse::leave",
 	function()
 		widget.bg = colors.colorA
 	end
 )
-
+-- ------------------------------------------------- --
 widget:buttons(gears.table.join(awful.button({}, 1, nil, awesome.restart)))
 
 return widget

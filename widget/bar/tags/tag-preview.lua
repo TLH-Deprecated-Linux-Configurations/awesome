@@ -34,8 +34,8 @@ local function draw_widget(
                 {
                     image = gears.surface.load(c.icon),
                     resize = true,
-                    forced_height = 100 * scale,
-                    forced_width = 100 * scale,
+                    forced_height = 200 * scale,
+                    forced_width = 200 * scale,
                     widget = wibox.widget.imagebox
                 }
             )
@@ -96,7 +96,7 @@ local function draw_widget(
                     shape_border_color = client_border_color,
                     shape_border_width = client_border_width,
                     shape = function(cr, width, height)
-                        gears.shape.rounded_rect(cr, width, height, 12)
+                        gears.shape.rounded_rect(cr, width, height, 6)
                     end,
                     widget = wibox.container.background
                 }
@@ -134,7 +134,7 @@ local function draw_widget(
         shape_border_width = widget_border_width,
         shape_border_color = widget_border_color,
         shape = function(cr, width, height)
-            gears.shape.rounded_rect(cr, width, height, 12)
+            gears.shape.rounded_rect(cr, width, height, 6)
         end,
         widget = wibox.container.background
     }
@@ -144,8 +144,8 @@ local enable = function(opts)
     local opts = opts or {}
 
     local tag_preview_image = true
-    local widget_x = dpi(200)
-    local widget_y = dpi(200)
+    local widget_x = dpi(300)
+    local widget_y = dpi(300)
     local scale = 0.25
     local work_area = true
     local padding = true
@@ -156,15 +156,10 @@ local enable = function(opts)
     local client_radius = dpi(3)
     local client_opacity = 0.75
     local client_bg = beautiful.bg_focus
-    local client_border_color = "#555e7099"
+    local client_border_color = colors.alpha(colors.colorB, "99")
     local client_border_width = dpi(1)
-    local widget_bg = {
-        type = "linear",
-        from = {0, 0},
-        to = {15, 12},
-        stops = {{0, "#17191ecc"}, {6, "#3c3f4ccc"}, {12, "#22262dcc"}}
-    }
-    local widget_border_color = "#555e7099"
+    local widget_bg = colors.black
+    local widget_border_color = colors.alpha(colors.colorB, "99")
     local widget_border_width = dpi(1)
 
     local tag_preview_box =
@@ -176,7 +171,7 @@ local enable = function(opts)
             placement = placement_fn,
             widget = wibox.container.background,
             input_passthrough = true,
-            bg = "#00000000"
+            bg = colors.alpha(colors.blacker, "00")
         }
     )
     -- ------------------------------------------------- --

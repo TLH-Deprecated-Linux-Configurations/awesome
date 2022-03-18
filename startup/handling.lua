@@ -41,6 +41,7 @@ do
 
             naughty.notify(
                 {
+                    timeout = 8,
                     preset = naughty.config.presets.critical,
                     title = "Oops, an error happened!",
                     text = tostring(err)

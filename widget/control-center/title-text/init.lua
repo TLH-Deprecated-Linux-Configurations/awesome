@@ -10,10 +10,10 @@
 local host_content =
 	wibox.widget {
 	text = "Control Center",
-	font = "SF Pro Rounded Heavy    18",
+	font = "SF Pro Rounded Heavy  18",
 	widget = wibox.widget.textbox
 }
-
+-- ------------------------------------------------- --
 local widget_host =
 	wibox.widget {
 	layout = wibox.layout.align.vertical,
@@ -30,7 +30,7 @@ local widget_host =
 	},
 	nil
 }
-
+-- ------------------------------------------------- --
 local spacer_bar =
 	wibox.widget {
 	{
@@ -43,7 +43,7 @@ local spacer_bar =
 	margins = dpi(10),
 	widget = wibox.container.margin
 }
-
+-- ------------------------------------------------- --
 local widget =
 	wibox.widget {
 	{

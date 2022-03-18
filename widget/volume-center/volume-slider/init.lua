@@ -126,7 +126,7 @@ volume_slider:connect_signal(
   function()
     local volume_level = volume_slider:get_value()
 
-    awful.spawn.with_shell("pamixer --set-volume " .. volume_level, false)
+    awful.spawn("pamixer --set-volume " .. volume_level, false)
   end
 )
 
@@ -158,17 +158,6 @@ volume_slider:buttons(
     )
   )
 )
-
-local update_slider = function()
-  awful.spawn.easy_async_with_shell(
-    [[bash -c "pamixer --get-volume"]],
-    function(stdout)
-      local volume = stdout
-      volume_slider:set_value(tonumber(volume))
-    end
-  )
-end
-
 local update_slider_mute = function()
   awful.spawn.easy_async_with_shell(
     [[bash -c "pamixer --get-mute"]],
@@ -183,8 +172,43 @@ local update_slider_mute = function()
   )
 end
 
-update_slider()
+local update_slider = function()
+  awful.spawn.easy_async_with_shell(
+    [[bash -c "pamixer --get-volume"]],
+    function(stdout)
+      if stdout ~= nil then
+        local volume = tonumber(stdout)
+        volume_slider:set_value(volume)
+        awesome.emit_signal("signal::volume:update", volume)
+        update_slider_mute()
+      else
+        volume_slider:get_value()
+        awesome.emit_signal("signal::volume:update", volume_slider:get_value())
+        update_slider_mute()
+      end
+    end
+  )
+end
 
+update_slider()
+-- ------------------------------------------------- --
+-- The emit will come from the global keybind
+awesome.connect_signal(
+  "signal::volume",
+  function(value, mute)
+    local muted = tonumber(mute)
+    local percentage = tonumber(value)
+    if percentage ~= nil then
+      update_slider()
+
+      if muted == 1 then
+        update_slider_mute()
+      end
+    end
+  end
+)
+
+-- ------------------------------------------------- --
 local buttons = {
   layout = wibox.layout.align.horizontal,
   spacing = dpi(15),

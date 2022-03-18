@@ -14,13 +14,13 @@ local awful = require("awful")
 local gears = require("gears")
 local wibox = require("wibox")
 local icons = require("themes.icons")
-local clickable_container = require("widget.clickable-container")
+local clickable_container = require("utils.clickable-container")
 local colors = require("themes").colors
 local apps = require("config.root.apps")
 local dpi = require("beautiful").xresources.apply_dpi
 
 -- Appearance
-local icon_size = dpi(140)
+local icon_size = dpi(240)
 local screen_geometry = awful.screen.focused().geometry
 
 local buildButton = function(icon)

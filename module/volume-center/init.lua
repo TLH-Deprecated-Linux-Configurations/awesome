@@ -16,13 +16,18 @@ local title =
   {
     {
       spacing = dpi(0),
-      layout = wibox.layout.flex.vertical,
+      layout = wibox.layout.fixed.vertical,
       format_item(
         {
           layout = wibox.layout.align.horizontal,
           spacing = dpi(16),
           require("widget.user-icon"),
-          require("widget.volume-center.title-text"),
+          {
+            layout = wibox.container.place,
+            halign = "center",
+            valign = "center",
+            require("widget.volume-center.title-text")
+          },
           require("widget.user-icon")
         }
       )
@@ -33,7 +38,7 @@ local title =
   shape = beautiful.client_shape_rounded_xl,
   bg = beautiful.bg_normal,
   forced_width = width,
-  forced_height = 70,
+  forced_height = dpi(70),
   ontop = true,
   border_width = dpi(2),
   border_color = colors.colorA,

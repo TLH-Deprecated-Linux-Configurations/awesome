@@ -249,7 +249,7 @@ local globalKeys =
 		function()
 			awful.spawn.with_shell("rofi -no-lazy-grab -show drun -theme ~/.config/awesome/config/rofi/centered.rasi")
 		end,
-		{description = "run rofi prompt", group = "Launchers"}
+		{description = "run rofi prompt", group = "Launcher"}
 	),
 	-- ------------------------------------------------- --
 	--Window Menu
@@ -390,7 +390,6 @@ local globalKeys =
 		{description = "Settings Window", group = "Awesome"}
 	),
 	-- ------------------------------------------------- --
-	-- ------------------------------------------------- --
 	--Screenshot
 	awful.key(
 		{},
@@ -400,8 +399,6 @@ local globalKeys =
 		end,
 		{description = "Screenshot Tool", group = "Launcher"}
 	),
-	-- ------------------------------------------------- --
-	-- ------------------------------------------------- --
 	-- ------------------------------------------------- --
 	--Screenshot
 	awful.key(
@@ -413,7 +410,7 @@ local globalKeys =
 		{description = "Screenshot Tool", group = "Launcher"}
 	),
 	-- ------------------------------------------------- --
-	-- Brightness
+	-- Raise Brightness
 	awful.key(
 		{},
 		"XF86MonBrightnessUp",
@@ -442,6 +439,7 @@ local globalKeys =
 		{description = "increase brightness by 10%", group = "Hotkeys"}
 	),
 	-- ------------------------------------------------- --
+	-- Decrease Brightness
 	awful.key(
 		{},
 		"XF86MonBrightnessDown",
@@ -470,29 +468,68 @@ local globalKeys =
 		{description = "decrease brightness by 10%", group = "Hotkeys"}
 	),
 	-- ------------------------------------------------- --
+	-- Raise Volume Key
 	awful.key(
 		{},
 		"XF86AudioRaiseVolume",
 		function()
 			awful.spawn("pamixer -i 5")
+			awful.spawn.with_line_callback(
+				"pamixer --get-volume",
+				{
+					stdout = function(value)
+						if value ~= nil and value >= 0 and value <= 100 then
+							local percentage = tonumber(value)
+							awesome.emit_signal("signal::volume:update", percentage)
+						else
+							return
+						end
+					end
+				}
+			)
 		end,
 		{description = "Increase Volume", group = "Awesome"}
 	),
 	-- ------------------------------------------------- --
+	-- Lower Volume Key
 	awful.key(
 		{},
 		"XF86AudioLowerVolume",
 		function()
 			awful.spawn("pamixer -d 5")
+			awful.spawn.with_line_callback(
+				"pamixer --get-volume",
+				{
+					stdout = function(value)
+						if value ~= nil and value >= 0 and value <= 100 then
+							local percentage = tonumber(value)
+							awesome.emit_signal("signal::volume:update", percentage)
+						else
+							return
+						end
+					end
+				}
+			)
 		end,
 		{description = "Decrease Volume", group = "Awesome"}
 	),
 	-- ------------------------------------------------- --
+	-- Mute Key
 	awful.key(
 		{},
 		"XF86AudioMute",
 		function()
 			awful.spawn("pamixer -t")
+			awful.spawn(
+				"pamixer --get-mute",
+				function(value)
+					if value == true then
+						awesome.emit_signal("signal::volume", nil, 1)
+					else
+						awesome.emit_signal("signal::volume", nil, 0)
+					end
+				end
+			)
 		end,
 		{description = "Mute Volume", group = "Awesome"}
 	),
@@ -543,6 +580,7 @@ for i = 1, 9 do
 			end,
 			{description = "view tag #" .. i, group = "Tag"}
 		),
+		-- ------------------------------------------------- --
 		-- Toggle tag display.
 		awful.key(
 			{modkey, "Control"},
@@ -556,6 +594,7 @@ for i = 1, 9 do
 			end,
 			{description = "toggle tag #" .. i, group = "Tag"}
 		),
+		-- ------------------------------------------------- --
 		-- Move client to tag.
 		awful.key(
 			{modkey, "Shift"},
@@ -570,6 +609,7 @@ for i = 1, 9 do
 			end,
 			{description = "move focused client to tag #" .. i, group = "Tag"}
 		),
+		-- ------------------------------------------------- --
 		-- Toggle tag on focused client.
 		awful.key(
 			{modkey, "Control", "Shift"},
