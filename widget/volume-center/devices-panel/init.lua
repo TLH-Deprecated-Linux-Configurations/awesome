@@ -29,7 +29,7 @@ awesome.connect_signal(
   function()
     resetDevicePanelLayout()
     awful.spawn.with_line_callback(
-      [[bash -c "pactl list sinks | grep -E 'Description|Sink' | sed 's/Description: //g; N; s/\n//; s/\t//; s/Sink #//; s/Description://'"]],
+      [[pactl list sinks | grep -E 'Description|Sink' | sed 's/Description: //g; N; s/\n//; s/\t//; s/Sink #//; s/Description://']],
       {
         stdout = function(line)
           awful.spawn.easy_async_with_shell(
@@ -38,7 +38,7 @@ awesome.connect_signal(
             function(stdout)
               local name = stdout:gsub("\n", "")
               awful.spawn.easy_async_with_shell(
-                [[bash -c "pactl get-default-sink"]],
+                [[pactl get-default-sink]],
                 function(stdout)
                   if name == stdout:gsub("\n", "") then
                     volumeDevicesAdded(

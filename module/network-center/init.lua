@@ -8,19 +8,25 @@
 -- |______||_____|__|__||____|_____|__|
 -- ------------------------------------------------- --
 local width = dpi(410)
-
+-- title text
 local title =
   wibox.widget {
   {
     {
       spacing = dpi(0),
-      layout = wibox.layout.flex.vertical,
+      layout = wibox.layout.fixed.vertical,
       format_item(
         {
-          layout = wibox.layout.fixed.horizontal,
+          layout = wibox.layout.align.horizontal,
           spacing = dpi(16),
           require("widget.user-icon"),
-          require("widget.network-center.title-text")
+          {
+            layout = wibox.container.place,
+            halign = "center",
+            valign = "center",
+            require("widget.network-center.title-text")
+          },
+          require("widget.user-icon")
         }
       )
     },
@@ -30,13 +36,13 @@ local title =
   shape = beautiful.client_shape_rounded_xl,
   bg = beautiful.bg_normal,
   forced_width = width,
-  forced_height = 70,
+  forced_height = dpi(70),
   ontop = true,
   border_width = dpi(2),
   border_color = colors.colorA,
   widget = wibox.container.background
 }
-
+-- ------------------------------------------------- --
 local status =
   wibox.widget {
   {
@@ -117,7 +123,7 @@ local networkCenter = function(s)
       visible = false,
       screen = s,
       ontop = true,
-      type = "popup",
+      type = "splash",
       height = s.geometry.height,
       width = s.geometry.width,
       bg = colors.alpha(colors.blacker, "aa"),
@@ -128,8 +134,8 @@ local networkCenter = function(s)
   s.networkCenter =
     wibox(
     {
-      x = s.geometry.width + dpi(8),
       y = s.geometry.y,
+      x = s.geometry.x + dpi(1250),
       visible = false,
       ontop = true,
       screen = s,

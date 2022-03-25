@@ -171,7 +171,7 @@ local controlCenter = function(s)
       type = "splash",
       height = s.geometry.height,
       width = s.geometry.width,
-      bg = colors.alpha(colors.blacker, "aa"),
+      bg = colors.alpha(colors.blacker, "88"),
       fg = colors.white
     }
   )
@@ -182,7 +182,7 @@ local controlCenter = function(s)
     {
       position = "center",
       y = s.geometry.y,
-      x = s.geometry.x + dpi(650),
+      x = s.geometry.x + dpi(750),
       screen = s,
       visible = false,
       ontop = true,
@@ -227,7 +227,6 @@ local controlCenter = function(s)
   s.controlCenter:setup {
     {
       spacing = dpi(15),
-      title,
       buttons,
       dials,
       sliders,
@@ -277,6 +276,9 @@ local controlCenter = function(s)
     function()
       s.cc_unfocused.visible = false
       mouse.screen.controlCenter.visible = false
+      awesome.emit_signal("notifications::center:toggle:off")
+      awesome.emit_signal("bluetooth::center:toggle:off")
+      awesome.emit_signal("date:toggle:off")
     end
   )
 end

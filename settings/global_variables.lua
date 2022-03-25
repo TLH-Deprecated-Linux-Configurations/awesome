@@ -47,7 +47,7 @@ screen_geometry = require("awful").screen.focused().geometry
 format_item = require("utils.format_item")
 settings = require("settings")
 hotkeys_popup = require("module.hotkeys-popup")
-
+overflow = require("utils.overflow")
 xresources = require("beautiful.xresources")
 gears = require("gears")
 

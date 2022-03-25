@@ -16,7 +16,7 @@ local widget_icon =
   nil,
   {
     id = "icon",
-    image = icons.bluetooth_off,
+    image = icons.bluetooth,
     resize = true,
     widget = wibox.widget.imagebox
   },
@@ -28,21 +28,28 @@ local widget =
   {
     {
       {
-        widget_icon,
-        layout = wibox.layout.fixed.horizontal
+        layout = wibox.layout.align.vertical,
+        expand = "none",
+        nil,
+        {
+          image = icons.bluetooth_on,
+          widget = wibox.widget.imagebox
+        },
+        nil
       },
-      margins = dpi(15),
+      margins = dpi(7),
       widget = wibox.container.margin
     },
-    forced_height = dpi(50),
-    widget = clickable_container
+    shape = gears.shape.rect,
+    bg = colors.color8,
+    widget = wibox.container.background
   },
-  shape = beautiful.client_shape_rounded_small,
-  bg = colors.colorA,
-  widget = wibox.container.background
+  forced_width = 40,
+  forced_height = 40,
+  widget = clickable_container
 }
 
-local power_status = false
+local power_status = true
 
 widget:connect_signal(
   "mouse::enter",
@@ -91,7 +98,7 @@ awesome.connect_signal(
   "bluetooth::power:refresh",
   function()
     awful.spawn.easy_async_with_shell(
-      [[bash -c "bluetoothctl show | sed -n '5p'"]],
+      [[bluetoothctl show | sed -n '5p']],
       function(stdout)
         stdout = stdout:match("[%w:]+", 10)
         if stdout == "yes" then

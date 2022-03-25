@@ -36,7 +36,7 @@ local widget =
 		},
 		widget = clickable_container
 	},
-	shape = beautiful.client_shape_rounded,
+	shape = beautiful.client_shape_rounded_xl,
 	bg = beautiful.bg_button,
 	widget = wibox.container.background
 }

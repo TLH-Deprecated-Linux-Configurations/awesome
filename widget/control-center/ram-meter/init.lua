@@ -37,7 +37,7 @@ awesome.connect_signal(
   function(used, total)
     local used_ram_percentage = (used / total) * 100
     ram_bar.value = used_ram_percentage
-    widget_text:set_text("RAM \n" .. math.floor((used / total) * 100) .. "%")
+    widget_text:set_text("RAM \n" .. used_ram_percentage .. "%")
   end
 )
 

@@ -50,7 +50,12 @@
     "theme_dir",
     "titlebar_theme",
     "titlebar_icon_path",
-    "tip"
+    "tip",
+    "overflow",
+    "arrange",
+    "percentage",
+    "date",
+    "colorize_text"
   ],
   "lua.targetVersion": "5.3",
   "restructuredtext.languageServer.disabled": true,

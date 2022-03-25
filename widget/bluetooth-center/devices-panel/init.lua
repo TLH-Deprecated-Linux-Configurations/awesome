@@ -9,7 +9,7 @@
 -- ------------------------------------------------- --
 local width = dpi(410)
 
-local panelLayout = wibox.layout.fixed.vertical()
+local panelLayout = overflow.vertical()
 
 panelLayout.spacing = dpi(7)
 panelLayout.forced_width = width
@@ -28,7 +28,7 @@ awesome.connect_signal(
   function()
     resetDevicePanelLayout()
     awful.spawn.with_line_callback(
-      [[bash -c "bluetoothctl devices"]],
+      [[bluetoothctl devices]],
       {
         stdout = function(line)
           awful.spawn.easy_async_with_shell(

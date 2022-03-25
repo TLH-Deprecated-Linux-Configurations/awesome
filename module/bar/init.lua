@@ -91,7 +91,8 @@ local bar = function(s)
 
 	table.insert(rightBar, require("widget.bar.network")({color = colors[beautiful.bg_button]}, 0, 0))
 	table.insert(rightBar, require("widget.bar.notifications-bar")({color = colors[beautiful.bg_button]}, 0, 0))
-	table.insert(rightBar, require("widget.bar.bluetooth")({color = colors[beautiful.bg_button]}, 0, 0))
+
+	-- table.insert(rightBar, require("widget.bar.bluetooth")({color = colors[beautiful.bg_button]}, 0, 0))
 	table.insert(rightBar, require("widget.bar.battery")({color = colors[beautiful.bg_button]}, 0, 0))
 	table.insert(rightBar, require("widget.bar.clock")({color = colors[beautiful.bg_button]}, 0, 0))
 	table.insert(rightBar, require("widget.bar.end-session")({color = colors[beautiful.bg_button]}, 0, 0))
@@ -220,6 +221,7 @@ awesome.connect_signal(
 		awesome.emit_signal("notifications::center:toggle:off")
 		awesome.emit_signal("bluetooth::center:toggle:off")
 		awesome.emit_signal("cal::center:toggle:off")
+		awesome.emit_signal("date:toggle:off")
 	end
 )
 -- ------------------------------------------------- --

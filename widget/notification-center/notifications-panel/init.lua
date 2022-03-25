@@ -9,7 +9,7 @@
 -- ------------------------------------------------- --
 --  variable assignment
 local emptyCenter = require("widget.notification-center.empty")
-local width = dpi(410)
+local width = dpi(610)
 
 local notificationsEmpty = true
 -- ------------------------------------------------- --
@@ -17,7 +17,7 @@ local notificationsEmpty = true
 awesome.emit_signal("notificationsEmpty:true")
 -- ------------------------------------------------- --
 -- panel variables
-local panelLayout = wibox.layout.fixed.vertical()
+local panelLayout = overflow.vertical()
 
 panelLayout.spacing = dpi(7)
 panelLayout.forced_width = width

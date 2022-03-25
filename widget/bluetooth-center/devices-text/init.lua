@@ -10,7 +10,7 @@
 local devices_text =
   wibox.widget {
   text = "devices",
-  font = "SF Pro Rounded Heavy    Bold 14",
+  font = "SF Pro Rounded Heavy  14",
   widget = wibox.widget.textbox
 }
 

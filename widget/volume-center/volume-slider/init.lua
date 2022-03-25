@@ -160,7 +160,7 @@ volume_slider:buttons(
 )
 local update_slider_mute = function()
   awful.spawn.easy_async_with_shell(
-    [[bash -c "pamixer --get-mute"]],
+    [[pamixer --get-mute]],
     function(stdout)
       local status = string.match(stdout, "%a+")
       if status == "true" then
@@ -174,7 +174,7 @@ end
 
 local update_slider = function()
   awful.spawn.easy_async_with_shell(
-    [[bash -c "pamixer --get-volume"]],
+    [[pamixer --get-volume]],
     function(stdout)
       if stdout ~= nil then
         local volume = tonumber(stdout)

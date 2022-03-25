@@ -19,123 +19,75 @@ local screen = screen
 
 local centermaster = {}
 -- ------------------------------------------------- --
-local function arrange(p)
+
+function arrange(p)
+    local area = p.workarea
     local t = p.tag or screen[p.screen].selected_tag
-    local wa = p.workarea
-    local cls = p.clients
-    -- ------------------------------------------------- --
-    -- ------------------------------------------------- --
-    -- ------------------------------------------------- --
-    if #cls == 0 then
+    local mwfact = t.master_width_factor
+    local nmaster = math.min(t.master_count, #p.clients)
+    local nslaves = #p.clients - nmaster
+
+    local master_area_width = area.width * mwfact
+    local slave_area_width = area.width - master_area_width
+    local master_area_x = area.x + 0.5 * slave_area_width
+
+    local number_of_left_sided_slaves = math.floor(nslaves / 2)
+    local number_of_right_sided_slaves = nslaves - number_of_left_sided_slaves
+    local left_iterator = 0
+    local right_iterator = 0
+
+    -- Special case: no maters -> rrelapse into awesomes fair layout
+    if t.master_count == 0 then
+        awful.layout.suit.fair.arrange(p)
         return
     end
-    -- ------------------------------------------------- --
-    -- ------------------------------------------------- --
-    -- ------------------------------------------------- --
-    local mstrWidthFact = t.master_width_factor
-    local mstrNumber = math.min(math.max(t.master_count, 1), #cls)
-    local mstrFillPolicy = t.master_fill_policy
 
-    local mstrWidth = math.floor(wa.width * mstrWidthFact)
-    local mstrHeight = math.floor(wa.height / mstrNumber)
-
-    local leftSlavesNumber = math.floor((#cls - mstrNumber) / 2)
-    local rightSlavesNumber = #cls - mstrNumber - leftSlavesNumber
-    -- local rightSlavesNumber = math.floor(#cls / 2)
-    -- local leftSlavesNumber  = #cls - rightSlavesNumber - 1
-    -- ------------------------------------------------- --
-    -- ------------------------------------------------- --
-    -- ------------------------------------------------- --
-    local slavesWidth = math.floor((wa.width - mstrWidth) / 2)
-    local leftSlavesHeight = math.floor(wa.height / leftSlavesNumber)
-    local rightSlavesHeight = math.floor(wa.height / rightSlavesNumber)
-    -- ------------------------------------------------- --
-    -- ------------------------------------------------- --
-    -- ------------------------------------------------- --
-    for i = 1, mstrNumber do
-        local rowIndex = i - 1
-
-        local c = cls[i]
-        local g = {}
-
-        g.height = math.max(mstrHeight, 1)
-        g.y = wa.y + mstrHeight * rowIndex
-        -- ------------------------------------------------- --
-        -- ------------------------------------------------- --
-        -- ------------------------------------------------- --
-        if mstrFillPolicy == "expand" and mstrNumber == #cls then
-            -- There are only master's
-            g.width = math.max(wa.width, 1)
-            g.x = wa.x
-        elseif rightSlavesNumber >= 1 and leftSlavesNumber == 0 then
-            -- There are masters and right slaves
-            g.width = math.max(mstrWidthFact * wa.width, 1)
-            g.x = wa.x
-        else
-            -- Other cases
-            g.width = math.max(mstrWidthFact * wa.width, 1)
-            g.x = wa.x + slavesWidth
-        end
-        -- ------------------------------------------------- --
-        -- ------------------------------------------------- --
-        -- ------------------------------------------------- --
-        g.width = math.max(g.width, 1)
-        g.height = math.max(g.height, 1)
-
-        p.geometries[c] = g
+    -- Special case: one slave -> relapse into awesomes masterstack tile layout
+    if nslaves == 1 then
+        awful.layout.suit.tile.right.arrange(p)
+        return
     end
-    -- ------------------------------------------------- --
-    -- ------------------------------------------------- --
-    -- ------------------------------------------------- --
-    -- for i = 2, (1 + leftSlavesNumber) do
-    --     rowIndex = i - 2
-    for i = (1 + mstrNumber + rightSlavesNumber), #cls do
-        local rowIndex = i - (1 + mstrNumber + rightSlavesNumber)
 
-        local c = cls[i]
-        local g = {}
+    -- Special case: no slaves -> fullscreen master area
+    if nslaves < 1 then
+        master_area_width = area.width
+        master_area_x = area.x
+    end
 
-        g.width = slavesWidth
-        g.height = math.floor(wa.height / leftSlavesNumber)
-
-        g.x = wa.x
-        g.y = wa.y + leftSlavesHeight * rowIndex
-
-        g.width = math.max(g.width, 1)
-        g.height = math.max(g.height, 1)
-        -- ------------------------------------------------- --
-        -- ------------------------------------------------- --
-        -- ------------------------------------------------- --
+    -- iterate through masters
+    for idx = 1, nmaster do
+        local c = p.clients[idx]
+        local g
+        g = {
+            x = master_area_x,
+            y = area.y + (nmaster - idx) * (area.height / nmaster),
+            width = master_area_width,
+            height = area.height / nmaster
+        }
         p.geometries[c] = g
     end
 
-    -- for i = (2 + leftSlavesNumber), #cls do
-    --     rowIndex = i - (2 + leftSlavesNumber)
-    for i = mstrNumber + 1, (mstrNumber + rightSlavesNumber) do
-        local rowIndex = i - mstrNumber - 1
-
-        local c = cls[i]
-        local g = {}
-
-        g.height = math.floor(wa.height / rightSlavesNumber)
-        -- ------------------------------------------------- --
-        -- ------------------------------------------------- --
-        -- ------------------------------------------------- --
-        if leftSlavesNumber == 0 then
-            g.width = (1 - mstrWidthFact) * wa.width
-            g.x = wa.x + mstrWidth
+    -- iterate through slaves
+    for idx = 1, nslaves do -- idx=nmaster+1,#p.clients do
+        local c = p.clients[idx + nmaster]
+        local g
+        if idx % 2 == 0 then
+            g = {
+                x = area.x,
+                y = area.y + left_iterator * (area.height / number_of_left_sided_slaves),
+                width = slave_area_width / 2,
+                height = area.height / number_of_left_sided_slaves
+            }
+            left_iterator = left_iterator + 1
         else
-            g.width = slavesWidth
-            g.x = wa.x + slavesWidth + mstrWidth
+            g = {
+                x = area.x + master_area_width + slave_area_width / 2,
+                y = area.y + right_iterator * (area.height / number_of_right_sided_slaves),
+                width = slave_area_width / 2,
+                height = area.height / number_of_right_sided_slaves
+            }
+            right_iterator = right_iterator + 1
         end
-        -- ------------------------------------------------- --
-        -- ------------------------------------------------- --
-        -- ------------------------------------------------- --
-        g.y = wa.y + rightSlavesHeight * rowIndex
-
-        g.width = math.max(g.width, 1)
-        g.height = math.max(g.height, 1)
-
         p.geometries[c] = g
     end
 end

@@ -57,18 +57,7 @@ local spacer_bar =
 	margins = dpi(10),
 	widget = wibox.container.margin
 }
--- ------------------------------------------------- --
-local update_host = function()
-	awful.spawn.easy_async_with_shell(
-		[[bash -c "uname -n"]],
-		function(stdout)
-			local hostname = tostring(stdout:gsub("\n", ""))
-			host_content:set_text(hostname)
-		end
-	)
-end
-update_host()
--- ------------------------------------------------- --
+------------------------------------ --
 
 local widget =
 	wibox.widget {

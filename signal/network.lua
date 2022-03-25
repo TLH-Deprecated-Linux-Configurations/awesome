@@ -159,7 +159,7 @@ local emit_wired_status = function()
     awful.spawn.easy_async_with_shell(
         healthcheck_script,
         function(stdout)
-            local interface = "enp1s0"
+            local interface = "eth0"
             local healthy = not stdout:match("Connected but no internet")
 
             awesome.emit_signal("network::status::wired", interface, healthy)
@@ -183,7 +183,7 @@ end
 
 -- Emit wired connected
 local emit_wired_connected = function()
-    local interface = "enp1s0"
+    local interface = "eth0l"
 
     awesome.emit_signal("network::connected::wired", interface)
 end

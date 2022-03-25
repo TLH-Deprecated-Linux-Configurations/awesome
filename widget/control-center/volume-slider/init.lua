@@ -126,8 +126,11 @@ local update_slider_mute = function()
 				local status = string.match(stdout, "%a+")
 				if stdout == "true" then
 					widget_icon.icon:set_image(icons.mute)
-					awesome.emit_signal("signal::volume:update", 0)
+					awful.spawn.easy_async_with_shell([["pamixer --mute "]], false)
+					awesome.emit_signal("signal:volume:mute")
 				elseif status == "false" then
+					awful.spawn.easy_async_with_shell([["pamixer --unmute "]], false)
+					awesome.emit_signal("signal:volume:unmute")
 					widget_icon.icon:set_image(icons.volume)
 				end
 			else
@@ -143,12 +146,12 @@ local update_slider = function()
 		function(stdout)
 			if stdout ~= nil then
 				local volume = tonumber(stdout)
-				volume_slider:set_value(volume)
-				awesome.emit_signal("signal::volume:update", volume)
+				if volume ~= nil then
+					volume_slider:set_value(volume)
+				end
 				update_slider_mute()
 			else
-				volume_slider:get_value()
-				awesome.emit_signal("signal::volume:update", volume_slider:get_value())
+				local vol = volume_slider:get_value()
 				update_slider_mute()
 			end
 		end
@@ -164,9 +167,9 @@ local mute_toggle = function()
 		function()
 			if volume_slider:get_value() ~= 0 then
 				widget_icon.icon:set_image(icons.mute)
-				volume_slider:set_value(0)
+				awesome.emit_signal("signal::volume:mute")
 			else
-				volume_slider:set_value(100)
+				awesome.emit_signal("signal::volume:unmute")
 				widget_icon.icon:set_image(icons.volume)
 			end
 		end
@@ -200,17 +203,12 @@ local volume_tooltip =
 -- ------------------------------------------------- --
 -- The emit will come from the global keybind
 awesome.connect_signal(
-	"signal::volume",
-	function(value, mute)
-		local muted = tonumber(mute)
+	"signal::volume:update",
+	function(value)
 		local percentage = tonumber(value)
 		if percentage ~= nil then
 			update_slider()
-
-			if muted == 1 then
-				update_slider_mute()
-			end
-
+			update_slider_mute()
 			volume_tooltip:set_text("Volume Level is Currently: " .. percentage .. "%")
 		end
 	end

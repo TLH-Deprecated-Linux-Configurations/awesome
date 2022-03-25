@@ -3,7 +3,7 @@
 -- |       ||  _  ||   _|  ||   _|  ||  __|  _  ||   _|  ||  _  |     |__ --|
 -- |__|____||_____||____|__||__| |__||____|___._||____|__||_____|__|__|_____|
 -- ------------------------------------------------- --
-require("widget.notification-center.notifications")
+require("widget.notifications")
 -- Apply theme variables
 naughty.config.padding = dpi(8)
 naughty.config.spacing = dpi(8)

@@ -131,6 +131,7 @@ awesome.connect_signal(
   "volume::center:toggle",
   function()
     vc_toggle()
+    awesome.emit_signal("bluetooth::center:toggle")
   end
 )
 
@@ -146,7 +147,7 @@ local volumeCenter = function(s)
       visible = false,
       screen = s,
       ontop = true,
-      type = "popup",
+      type = "splash",
       height = s.geometry.height,
       width = s.geometry.width,
       bg = colors.alpha(colors.blacker, "aa"),
@@ -158,7 +159,7 @@ local volumeCenter = function(s)
   s.volumeCenter =
     wibox(
     {
-      x = screen_geometry.width - width - dpi(8),
+      x = screen_geometry.width + dpi(210),
       y = screen_geometry.y,
       visible = false,
       ontop = true,
@@ -229,6 +230,7 @@ local volumeCenter = function(s)
         nil,
         function()
           awesome.emit_signal("volume::center:toggle:off")
+          awesome.emit_signal("bluetooth::center:toggle:off")
         end
       ),
       awful.button(
@@ -237,6 +239,7 @@ local volumeCenter = function(s)
         nil,
         function()
           awesome.emit_signal("volume::center:toggle:off")
+          awesome.emit_signal("bluetooth::center:toggle:off")
         end
       ),
       awful.button(
@@ -245,6 +248,7 @@ local volumeCenter = function(s)
         nil,
         function()
           awesome.emit_signal("volume::center:toggle:off")
+          awesome.emit_signal("bluetooth::center:toggle:off")
         end
       )
     )

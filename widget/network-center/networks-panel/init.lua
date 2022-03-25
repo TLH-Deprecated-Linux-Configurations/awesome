@@ -35,7 +35,7 @@ awesome.connect_signal(
     panelLayout:insert(1, searching)
     local searchStatus = true
     awful.spawn.with_line_callback(
-      [[bash -c "nmcli -g in-use,signal,security,rate,BSSID,SSID d wifi list | sed -e 's/^ /no/g; s/\*/yes/g; s/::/:no:/g; s/:/;/g'"]],
+      [[nmcli -g in-use,signal,security,rate,BSSID,SSID d wifi list | sed -e 's/^ /no/g; s/\*/yes/g; s/::/:no:/g; s/:/;/g']],
       {
         stdout = function(line)
           local results = {}

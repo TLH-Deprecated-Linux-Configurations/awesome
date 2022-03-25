@@ -8,7 +8,7 @@
 -- |______||_____|__|__||____|_____|__|
 -- ------------------------------------------------- --s
 --  variable definition
-local width = dpi(410)
+local width = dpi(375)
 -- ------------------------------------------------- --
 -- title text
 local title =
@@ -19,10 +19,15 @@ local title =
       layout = wibox.layout.flex.vertical,
       format_item(
         {
-          layout = wibox.layout.fixed.horizontal,
+          layout = wibox.layout.align.horizontal,
           spacing = dpi(16),
           require("widget.user-icon"),
-          require("widget.notification-center.title-text"),
+          {
+            layout = wibox.container.place,
+            halign = "center",
+            valign = "center",
+            require("widget.notification-center.title-text")
+          },
           require("widget.notification-center.clear-all")
         }
       )
@@ -31,12 +36,9 @@ local title =
     widget = wibox.container.margin
   },
   shape = beautiful.client_shape_rounded_xl,
-  bg = beautiful.bg_normal,
   forced_width = width,
-  forced_height = 70,
+  forced_height = dpi(70),
   ontop = true,
-  border_width = dpi(2),
-  border_color = colors.colorA,
   widget = wibox.container.background
 }
 -- ------------------------------------------------- --
@@ -59,11 +61,8 @@ local notification_panel =
     widget = wibox.container.margin
   },
   shape = beautiful.client_shape_rounded_xl,
-  bg = beautiful.bg_normal,
   forced_width = width,
   ontop = true,
-  border_width = dpi(2),
-  border_color = colors.colorA,
   widget = wibox.container.background
 }
 -- ------------------------------------------------- -- -- ------------------------------------------------- --
@@ -97,7 +96,7 @@ notificationCenter = function(s)
       visible = false,
       screen = s,
       ontop = true,
-      type = "popup",
+      type = "splash",
       height = s.geometry.height,
       width = s.geometry.width,
       bg = colors.alpha(colors.blacker, "aa"),
@@ -107,15 +106,16 @@ notificationCenter = function(s)
   s.notificationCenter =
     wibox(
     {
-      x = s.geometry.x + dpi(770),
-      y = s.geometry.y,
+      x = s.geometry.x + dpi(36),
+      y = s.geometry.y + dpi(36),
       visible = false,
       ontop = true,
       screen = s,
       type = "splash",
-      height = s.geometry.height - dpi(48),
+      height = dpi(300),
       width = width,
-      bg = "transparent",
+      bg = beautiful.bg_normal,
+      shape = beautiful.client_shape_rounded_xl,
       fg = colors.white
     }
   )
@@ -133,18 +133,8 @@ notificationCenter = function(s)
   --
   function noc_toggle()
     if mouse.screen.notificationCenter.visible == false then
-      awful.screen.connect_for_each_screen(
-        function(s)
-          s.noc_unfocused.visible = true
-        end
-      )
       mouse.screen.notificationCenter.visible = true
     elseif mouse.screen.notificationCenter.visible == true then
-      awful.screen.connect_for_each_screen(
-        function(s)
-          s.noc_unfocused.visible = false
-        end
-      )
       mouse.screen.notificationCenter.visible = false
     end
   end

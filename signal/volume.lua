@@ -10,16 +10,16 @@
 local awful = require("awful")
 
 -- ------------------------------------------------- --
-local update_mute = function(volume)
+local update_mute = function()
     awful.spawn.easy_async_with_shell(
-        [["pamixer --get-mute"]],
+        "pamixer --get-mute",
         function(stdout)
             if stdout ~= nil then
                 local status = string.match(stdout, "%a+")
                 if stdout == "true" then
-                    awesome.emit_signal("signal::volume", volume, 1)
+                    awesome.emit_signal("signal::volume:mute")
                 elseif status == "false" then
-                    awesome.emit_signal("signal::volume", volume, 0)
+                    awesome.emit_signal("signal::volume:unmute")
                 end
             end
         end
@@ -32,46 +32,21 @@ local update_volume = function()
         function(stdout)
             if stdout ~= nil then
                 local volume = tonumber(stdout)
-                awesome.emit_signal("signal::volume:update", volume)
-                update_mute(volume)
+                awesome.emit_signal("signal::volume", volume)
+
+                update_mute()
             end
         end
     )
 end
 update_volume()
 
--- ------------------------------------------------- --
-local volume_script =
-    [[
-    bash -c "
-    LANG=C pactl subscribe 2> /dev/null | grep --line-buffered \"Event 'change' on sink #\"
-    "]]
-
--- Kill old pactl subscribe processes
-awful.spawn.easy_async(
-    {
-        "pkill",
-        "--full",
-        "--uid",
-        os.getenv("USER"),
-        "^pactl subscribe"
-    },
-    function()
-        awful.spawn.with_line_callback(
-            volume_script,
-            {
-                stdout = function(line)
-                    update_volume()
-                end
-            }
-        )
-    end
-)
-
 awesome.connect_signal(
     "signal::volume:update",
     function(percentage)
-        local volume = tonumber(percentage)
-        awesome.emit_signal("signal::volume", volume, 0)
+        if percentage ~= nil then
+            update_volume()
+            collectgarbage("collect")
+        end
     end
 )

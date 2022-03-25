@@ -23,6 +23,8 @@ local format_item = function(widget)
 		},
 		shape = beautiful.client_shape_rounded_xl,
 		bg = "transparent",
+		border_width = dpi(0),
+		border_color = colors.black,
 		widget = wibox.container.background
 	}
 end

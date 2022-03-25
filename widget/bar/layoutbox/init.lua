@@ -11,10 +11,10 @@
 
 local ll =
     awful.widget.layoutlist {
-    spacing = dpi(84),
+    spacing = dpi(64),
     base_layout = wibox.widget {
-        spacing = dpi(72),
-        forced_num_cols = 3,
+        spacing = dpi(64),
+        forced_num_cols = 4,
         layout = wibox.layout.grid.vertical
     },
     -- ------------------------------------------------- --
@@ -24,10 +24,10 @@ local ll =
             {
                 {
                     id = "icon_role",
-                    forced_height = dpi(84),
-                    forced_width = dpi(84),
+                    forced_height = dpi(72),
+                    forced_width = dpi(72),
                     widget = wibox.widget.imagebox,
-                    shape = beautiful.client_shape_rounded_xl
+                    shape = beautiful.client_shape_rounded_lg
                 },
                 margins = dpi(15),
                 widget = wibox.container.margin,
@@ -36,10 +36,10 @@ local ll =
             widget = clickable_container
         },
         id = "background_role",
-        forced_width = dpi(96),
-        forced_height = dpi(96),
+        forced_width = dpi(76),
+        forced_height = dpi(76),
         bg = beautiful.bg_button,
-        shape = beautiful.client_shape_rounded_xl,
+        shape = beautiful.client_shape_rounded_lg,
         widget = wibox.container.background
     }
 }
@@ -56,8 +56,8 @@ local layout_popup =
         widget = wibox.container.background
     },
     border_width = dpi(3),
-    border_color = colors.alpha(colors.black, "aa"),
-    bg = colors.alpha(colors.colorA, "aa"),
+    border_color = colors.alpha(colors.black, "99"),
+    bg = colors.alpha(colors.colorA, "99"),
     shape = beautiful.client_shape_rounded_xl,
     screen = mouse.screen,
     placement = awful.placement.centered,
@@ -100,8 +100,8 @@ local layout_box = function(s)
             {
                 {
                     awful.widget.layoutbox(s),
-                    top = dpi(4),
-                    bottom = dpi(4),
+                    top = dpi(6),
+                    bottom = dpi(6),
                     left = dpi(12),
                     right = dpi(12),
                     widget = wibox.container.margin

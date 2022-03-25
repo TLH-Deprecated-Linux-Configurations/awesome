@@ -9,5 +9,6 @@ return {
     require(... .. ".format_item"),
     require(... .. ".json"),
     require(... .. ".svg-color"),
-    require(... .. ".titlebar")
+    require(... .. ".titlebar"),
+    require(... .. ".overflow")
 }

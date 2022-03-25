@@ -289,8 +289,10 @@ theme.layout_magnifier = theme_dir .. "/icons/svg/layouts/magnifier.png"
 theme.layout_fairv = theme_dir .. "/icons/svg/layouts/fairv.png"
 theme.layout_fairh = theme_dir .. "/icons/svg/layouts/fairh.png"
 theme.layout_thrizen = theme_dir .. "/icons/svg/layouts/thrizen.png"
+theme.layout_horizon = theme_dir .. "/icons/svg/layouts/horizon.png"
 theme.layout_fullscreen = theme_dir .. "/icons/svg/layouts/fullscreen.png"
 theme.layout_spiral = theme_dir .. "/icons/svg/layouts/spiral.png"
-
+theme.layout_equalarea = theme_dir .. "/icons/svg/layouts/equalarea.png"
+theme.layout_deck = theme_dir .. "/icons/svg/layouts/deck.png"
 -- ------------------------------------------------- --
 return theme

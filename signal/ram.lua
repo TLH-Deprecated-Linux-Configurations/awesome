@@ -11,23 +11,17 @@ local awful = require("awful")
 
 local update_interval = 20
 -- Returns the used amount of ram in percentage
--- TODO output of free is affected by system language. The following command
--- works for any language:
---
-local ram_script = [[
-  sh -c "
-  free -m | sed -n '2p' | awk '{printf "%d available out of %d\n", $7, $2}'2 
-  "]]
 
--- Periodically get ram info
+local ram_script = [[free | sed -n '2p' | awk '{printf " %d %d %d\n", $7, $2, $3}']]
+-- Periodically get ram info free | sed -n '2p'
 awful.widget.watch(
   ram_script,
   update_interval,
-  function(widget, stdout)
-    local available = stdout:match("(.*)@@")
+  function(stdout)
+    local available, total, used = string.match(stdout, "(%d+)")
     local total = stdout:match("@@(.*)@")
     local used = tonumber(total) - tonumber(available)
-    awesome.emit_signal("signal::ram", used, total)
+    awesome.emit_signal("signal::ram", tonumber(used), tonumber(total))
     collectgarbage("collect")
   end
 )

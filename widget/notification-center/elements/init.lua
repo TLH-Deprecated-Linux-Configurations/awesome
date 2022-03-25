@@ -13,19 +13,6 @@ elements.create = function(title, message)
   -- box element
   local box = {}
 
-  local clearIcon =
-    wibox.widget {
-    layout = wibox.layout.align.vertical,
-    expand = "none",
-    nil,
-    {
-      id = "icon",
-      image = icons.clearNotificationIndividual,
-      resize = true,
-      widget = wibox.widget.imagebox
-    },
-    nil
-  }
   -- ------------------------------------------------- --
   -- clear element
   local clear =
@@ -33,19 +20,27 @@ elements.create = function(title, message)
     {
       {
         {
-          clearIcon,
-          layout = wibox.layout.fixed.horizontal
+          layout = wibox.layout.align.vertical,
+          expand = "none",
+          nil,
+          {
+            image = icons.clearNotificationIndividual,
+            widget = wibox.widget.imagebox,
+            id = "icon",
+            resize = true
+          },
+          nil
         },
-        margins = dpi(9),
+        margins = dpi(5),
         widget = wibox.container.margin
       },
-      forced_height = dpi(50),
-      forced_width = dpi(50),
-      widget = clickable_container
+      shape = beautiful.client_shape_rounded,
+      widget = wibox.container.background,
+      bg = beautiful.bg_button
     },
-    shape = beautiful.client_shape_rounded_small,
-    bg = beautiful.bg_normal,
-    widget = wibox.container.background
+    forced_width = dpi(30),
+    forced_height = dpi(30),
+    widget = clickable_container
   }
   -- ------------------------------------------------- --
   -- clear connect signal for mouse entry
@@ -60,7 +55,7 @@ elements.create = function(title, message)
   clear:connect_signal(
     "mouse::leave",
     function()
-      clear.bg = beautiful.bg_normal
+      clear.bg = beautiful.bg_button
     end
   )
   -- ------------------------------------------------- --
@@ -89,19 +84,21 @@ elements.create = function(title, message)
           nil,
           {
             image = icons.notifications,
-            widget = wibox.widget.imagebox
+            widget = wibox.widget.imagebox,
+            id = "icon",
+            resize = true
           },
           nil
         },
         margins = dpi(5),
         widget = wibox.container.margin
       },
-      shape = gears.shape.rect,
-      bg = beautiful.bg_normal,
-      widget = wibox.container.background
+      shape = beautiful.client_shape_rounded,
+      widget = wibox.container.background,
+      bg = beautiful.bg_button
     },
-    forced_width = dpi(90),
-    forced_height = dpi(90),
+    forced_width = dpi(30),
+    forced_height = dpi(30),
     widget = clickable_container
   }
   -- ------------------------------------------------- --
@@ -112,7 +109,7 @@ elements.create = function(title, message)
       {
         {
           text = title,
-          font = "SF Pro Rounded Heavy  Regular  10",
+          font = "SF Pro Rounded Heavy 10",
           widget = wibox.widget.textbox
         },
         {
@@ -125,8 +122,8 @@ elements.create = function(title, message)
       margins = dpi(10),
       widget = wibox.container.margin
     },
-    shape = gears.shape.rect,
-    bg = beautiful.bg_normal,
+    shape = beautiful.client_shape_rounded,
+    bg = beautiful.bg_focus,
     widget = wibox.container.background
   }
   -- ------------------------------------------------- --
@@ -134,24 +131,43 @@ elements.create = function(title, message)
   box =
     wibox.widget {
     {
-      notifIcon,
+      {
+        nil,
+        {
+          image = icons.new_notif,
+          widget = wibox.widget.imagebox,
+          forced_height = dpi(25),
+          id = "icon",
+          resize = true
+        },
+        nil,
+        halign = "center",
+        valign = "center",
+        forced_height = dpi(30),
+        layout = wibox.layout.align.vertical
+      },
       content,
       {
         {
+          nil,
           clear,
-          align = "center",
-          forced_height = 30,
+          nil,
+          halign = "center",
+          valign = "center",
+          forced_height = dpi(30),
           layout = wibox.layout.align.vertical
         },
         margins = dpi(5),
         widget = wibox.container.margin
       },
+      expand = "none",
       layout = wibox.layout.align.horizontal
     },
     shape = beautiful.client_shape_rounded,
     fg = colors.white,
+    bg = beautiful.bg_focus,
     border_width = dpi(1),
-    border_color = beautiful.bg_normal,
+    border_color = colors.black,
     widget = wibox.container.background
   }
 

@@ -473,19 +473,18 @@ local globalKeys =
 		{},
 		"XF86AudioRaiseVolume",
 		function()
-			awful.spawn("pamixer -i 5")
-			awful.spawn.with_line_callback(
-				"pamixer --get-volume",
-				{
-					stdout = function(value)
-						if value ~= nil and value >= 0 and value <= 100 then
-							local percentage = tonumber(value)
-							awesome.emit_signal("signal::volume:update", percentage)
-						else
-							return
-						end
-					end
-				}
+			awful.spawn.easy_async_with_shell(
+				"pamixer -i 5",
+				function()
+					awful.spawn.with_line_callback(
+						"pamixer --get-volume",
+						{
+							stdout = function(value)
+								awesome.emit_signal("signal::volume:update", value)
+							end
+						}
+					)
+				end
 			)
 		end,
 		{description = "Increase Volume", group = "Awesome"}
@@ -496,19 +495,18 @@ local globalKeys =
 		{},
 		"XF86AudioLowerVolume",
 		function()
-			awful.spawn("pamixer -d 5")
-			awful.spawn.with_line_callback(
-				"pamixer --get-volume",
-				{
-					stdout = function(value)
-						if value ~= nil and value >= 0 and value <= 100 then
-							local percentage = tonumber(value)
-							awesome.emit_signal("signal::volume:update", percentage)
-						else
-							return
-						end
-					end
-				}
+			awful.spawn.easy_async_with_shell(
+				"pamixer -d 5",
+				function()
+					awful.spawn.with_line_callback(
+						"pamixer --get-volume",
+						{
+							stdout = function(value)
+								awesome.emit_signal("signal::volume:update", value)
+							end
+						}
+					)
+				end
 			)
 		end,
 		{description = "Decrease Volume", group = "Awesome"}
@@ -524,9 +522,9 @@ local globalKeys =
 				"pamixer --get-mute",
 				function(value)
 					if value == true then
-						awesome.emit_signal("signal::volume", nil, 1)
+						awesome.emit_signal("signal::volume:mute")
 					else
-						awesome.emit_signal("signal::volume", nil, 0)
+						awesome.emit_signal("signal::volume:umute")
 					end
 				end
 			)

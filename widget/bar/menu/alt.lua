@@ -35,7 +35,7 @@ local return_button = function(color, lspace, rspace, tspace, bspace)
 	-- create a table that contains the .desktop information for every program
 	local programs_list = {}
 	awful.spawn.with_line_callback(
-		[[bash -c 'find /usr/share/applications -type f -name "*.desktop"']],
+		[[ 'find /usr/share/applications -type f -name "*.desktop"']],
 		{
 			stdout = function(line)
 				table.insert(programs_list, menubar.utils.parse_desktop_file(line))

@@ -51,7 +51,7 @@ local widget =
 
 local mute_toggle = function()
 	awful.spawn.easy_async_with_shell(
-		[[bash -c "pamixer --get-mute"]],
+		[[pamixer --get-mute]],
 		function(stdout)
 			local status = string.match(stdout, "%a+")
 			if status == "true" then

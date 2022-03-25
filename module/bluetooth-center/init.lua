@@ -8,53 +8,26 @@
 -- |______||_____|__|__||____|_____|__|
 -- ------------------------------------------------- --
 -- Variable assignment
-local width = dpi(410)
+local width = dpi(375)
 -- ------------------------------------------------- --
--- title section
+-- title text
 local title =
   wibox.widget {
   {
     {
       spacing = dpi(0),
-      layout = wibox.layout.flex.vertical,
+      layout = wibox.layout.fixed.vertical,
       format_item(
         {
-          layout = wibox.layout.fixed.horizontal,
+          layout = wibox.layout.align.horizontal,
           spacing = dpi(16),
-          require("widget.user-icon"),
-          require("widget.bluetooth-center.title-text")
-        }
-      )
-    },
-    margins = dpi(5),
-    widget = wibox.container.margin
-  },
-  shape = function(cr, width, height)
-    gears.shape.rounded_rect(cr, width, height, beautiful.groups_radius)
-  end,
-  bg = beautiful.bg_normal,
-  forced_width = width,
-  forced_height = 70,
-  ontop = true,
-  border_width = dpi(2),
-  border_color = colors.colorA,
-  widget = wibox.container.background
-}
--- ------------------------------------------------- --
--- button section
-local buttons =
-  wibox.widget {
-  {
-    {
-      spacing = dpi(0),
-      layout = wibox.layout.flex.vertical,
-      format_item(
-        {
-          layout = wibox.layout.flex.horizontal,
-          max_widget_size = dpi(55),
-          spacing = dpi(115),
           require("widget.bluetooth-center.power-button"),
-          require("widget.bluetooth-center.devices-button"),
+          {
+            layout = wibox.container.place,
+            halign = "center",
+            valign = "center",
+            require("widget.bluetooth-center.title-text")
+          },
           require("widget.bluetooth-center.search-button")
         }
       )
@@ -62,44 +35,14 @@ local buttons =
     margins = dpi(5),
     widget = wibox.container.margin
   },
-  shape = function(cr, width, height)
-    gears.shape.rounded_rect(cr, width, height, beautiful.groups_radius)
-  end,
-  bg = beautiful.bg_normal,
-  forced_width = 400,
-  forced_height = 70,
-  border_width = dpi(2),
-  border_color = colors.colorA,
-  widget = wibox.container.background
-}
--- ------------------------------------------------- --
--- devices section
-local devices_text =
-  wibox.widget {
-  {
-    {
-      spacing = dpi(0),
-      layout = wibox.layout.flex.vertical,
-      format_item(
-        {
-          layout = wibox.layout.fixed.horizontal,
-          spacing = dpi(16),
-          require("widget.bluetooth-center.devices-text")
-        }
-      )
-    },
-    margins = dpi(5),
-    widget = wibox.container.margin
-  },
-  shape = beautiful.client_shape_rounded_xl,
-  bg = beautiful.bg_normal,
+  shape = beautiful.client_shape_rounded_medium,
   forced_width = width,
-  forced_height = 70,
   ontop = true,
-  border_width = dpi(2),
-  border_color = colors.colorA,
+  border_width = dpi(0),
+  border_color = colors.black,
   widget = wibox.container.background
 }
+
 -- ------------------------------------------------- --
 -- panel for interacting with devices
 local devices_panel =
@@ -111,7 +54,7 @@ local devices_panel =
       format_item(
         {
           layout = wibox.layout.fixed.horizontal,
-          spacing = dpi(16),
+          spacing = dpi(6),
           require("widget.bluetooth-center.devices-panel")
         }
       )
@@ -119,12 +62,12 @@ local devices_panel =
     margins = dpi(5),
     widget = wibox.container.margin
   },
-  shape = beautiful.client_shape_rounded_xl,
-  bg = beautiful.bg_normal,
+  shape = beautiful.client_shape_rounded_medium,
+  bg = beautiful.bg_focus,
   forced_width = width,
   ontop = true,
   border_width = dpi(2),
-  border_color = colors.colorA,
+  border_color = colors.black,
   widget = wibox.container.background
 }
 -- ------------------------------------------------- --
@@ -133,6 +76,8 @@ awesome.connect_signal(
   "bluetooth::center:toggle",
   function()
     bc_toggle()
+    awesome.emit_signal("bluetooth::power:refresh")
+    awesome.emit_signal("bluetooth::devices:refreshPanel")
   end
 )
 -- ------------------------------------------------- --
@@ -147,7 +92,7 @@ bluetoothCenter = function(s)
       visible = false,
       screen = s,
       ontop = true,
-      type = "popup",
+      type = "splash",
       height = s.geometry.height,
       width = s.geometry.width,
       bg = colors.alpha(colors.blacker, "aa"),
@@ -158,43 +103,25 @@ bluetoothCenter = function(s)
   s.bluetoothCenter =
     wibox(
     {
-      x = screen_geometry.width - width - dpi(8),
-      y = screen_geometry.y,
+      y = s.geometry.y + dpi(500),
+      x = s.geometry.x + dpi(36),
       visible = false,
       ontop = true,
       screen = mouse.screen,
       type = "splash",
-      height = screen_geometry.height - dpi(48),
+      height = dpi(400),
       width = width,
-      bg = "transparent",
+      bg = beautiful.bg_normal,
+      shape = beautiful.client_shape_rounded_lg,
       fg = colors.white
     }
   )
-  -- ------------------------------------------------- --
-  -- resize function
-  function bc_resize()
-    bc_height = s.geometry.height
-    if s.bluetoothCenter.height == s.geometry.height - dpi(48) then
-      s.bluetoothCenter:geometry {height = s.geometry.height, y = s.geometry.y}
-    elseif s.bluetoothCenter.height == s.geometry.height then
-      s.bluetoothCenter:geometry {height = s.geometry.height - dpi(48), y = s.geometry.y}
-    end
-  end
+
   -- ------------------------------------------------- --
   function bc_toggle()
     if mouse.screen.bluetoothCenter.visible == false then
-      awful.screen.connect_for_each_screen(
-        function(s)
-          s.bc_unfocused.visible = true
-        end
-      )
       mouse.screen.bluetoothCenter.visible = true
     elseif mouse.screen.bluetoothCenter.visible == true then
-      awful.screen.connect_for_each_screen(
-        function(s)
-          s.bc_unfocused.visible = false
-        end
-      )
       mouse.screen.bluetoothCenter.visible = false
     end
   end
@@ -214,8 +141,6 @@ bluetoothCenter = function(s)
     wibox.widget {
       spacing = dpi(15),
       title,
-      buttons,
-      devices_text,
       devices_panel,
       layout = wibox.layout.fixed.vertical
     },

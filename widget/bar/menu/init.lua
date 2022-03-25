@@ -51,6 +51,9 @@ local return_button = function(color, lspace, rspace, tspace, bspace)
 				nil,
 				function()
 					awesome.emit_signal("cc:toggle")
+					awesome.emit_signal("notifications::center:toggle")
+					awesome.emit_signal("bluetooth::center:toggle")
+					awesome.emit_signal("date:toggle")
 				end
 			)
 		)

@@ -38,7 +38,7 @@ elements.create = function(name, macAddress, pairStatus, connectStatus)
       widget = clickable_container
     },
     shape = beautiful.client_shape_rounded_small,
-    bg = colors.colorA,
+    bg = colors.black,
     widget = wibox.container.background
   }
 
@@ -52,7 +52,7 @@ elements.create = function(name, macAddress, pairStatus, connectStatus)
   pair:connect_signal(
     "mouse::leave",
     function()
-      pair.bg = colors.colorA
+      pair.bg = colors.black
     end
   )
 
@@ -93,7 +93,7 @@ elements.create = function(name, macAddress, pairStatus, connectStatus)
   unpair:connect_signal(
     "mouse::enter",
     function()
-      unpair.bg = colors.color1
+      unpair.bg = colors.white
     end
   )
 

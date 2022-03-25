@@ -16,12 +16,11 @@ local notifIcon =
 			margins = dpi(5),
 			widget = wibox.container.margin
 		},
-		shape = gears.shape.rect,
-		bg = beautiful.bg_normal,
+		shape = beautiful.client_shape_rounded,
 		widget = wibox.container.background
 	},
-	forced_width = dpi(90),
-	forced_height = dpi(90),
+	forced_width = dpi(70),
+	forced_height = dpi(70),
 	widget = clickable_container
 }
 -- ------------------------------------------------- --
@@ -50,10 +49,8 @@ local box =
 		content,
 		layout = wibox.layout.align.horizontal
 	},
-	shape = beautiful.client_shape_rounded,
+	shape = beautiful.client_shape_rounded_xl,
 	fg = colors.white,
-	border_width = dpi(1),
-	border_color = beautiful.bg_normal,
 	widget = wibox.container.background
 }
 
