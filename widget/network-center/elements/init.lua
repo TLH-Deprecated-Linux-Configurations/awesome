@@ -38,21 +38,21 @@ elements.create = function(SSID, BSSID, connectStatus, signal, secure, speed)
       widget = clickable_container
     },
     shape = beautiful.client_shape_rounded_small,
-    bg = colors.colorA,
+    bg = beautiful.bg_focus,
     widget = wibox.container.background
   }
 
   connect:connect_signal(
     "mouse::enter",
     function()
-      connect.bg = colors.color1
+      connect.bg = beautiful.bg_normal
     end
   )
 
   connect:connect_signal(
     "mouse::leave",
     function()
-      connect.bg = colors.colorA
+      connect.bg = beautiful.bg_focus
     end
   )
 
@@ -86,21 +86,21 @@ elements.create = function(SSID, BSSID, connectStatus, signal, secure, speed)
       widget = clickable_container
     },
     shape = beautiful.client_shape_rounded_small,
-    bg = colors.colorA,
+    bg = beautiful.bg_button,
     widget = wibox.container.background
   }
 
   disconnect:connect_signal(
     "mouse::enter",
     function()
-      disconnect.bg = colors.color1
+      disconnect.bg = beautiful.accent
     end
   )
 
   disconnect:connect_signal(
     "mouse::leave",
     function()
-      disconnect.bg = colors.colorA
+      disconnect.bg = beautiful.bg_button
     end
   )
 
@@ -251,12 +251,8 @@ elements.create = function(SSID, BSSID, connectStatus, signal, secure, speed)
       buttons,
       layout = wibox.layout.align.horizontal
     },
-    shape = function(cr, width, height)
-      gears.shape.rounded_rect(cr, width, height, dpi(4))
-    end,
+    shape = beautiful.client_shape_rounded_small,
     fg = colors.white,
-    border_width = dpi(1),
-    border_color = colors.colorA,
     widget = wibox.container.background
   }
 

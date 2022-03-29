@@ -9,7 +9,7 @@
 -- throws error without these despite global-settings file
 local xresources = require("beautiful.xresources")
 local dpi = xresources.apply_dpi
-local colors = require("themes").colors
+local colors = require("themes.schemes.vice")
 local settings = require("settings")
 local gears = require("gears")
 local beautiful = require("beautiful")

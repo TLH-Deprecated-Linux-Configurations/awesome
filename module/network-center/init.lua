@@ -34,7 +34,7 @@ local title =
     widget = wibox.container.margin
   },
   shape = beautiful.client_shape_rounded_xl,
-  bg = beautiful.bg_normal,
+  bg = beautiful.bg_focus,
   forced_width = width,
   forced_height = dpi(70),
   ontop = true,
@@ -62,12 +62,10 @@ local status =
     widget = wibox.container.margin
   },
   shape = beautiful.client_shape_rounded_xl,
-  bg = beautiful.bg_normal,
+  bg = beautiful.bg_focus,
   forced_width = width,
-  forced_height = 70,
+  forced_height = dpi(110),
   ontop = true,
-  border_width = dpi(2),
-  border_color = colors.colorA,
   widget = wibox.container.background
 }
 -- ------------------------------------------------- --
@@ -89,7 +87,7 @@ local networks_panel =
     widget = wibox.container.margin
   },
   shape = beautiful.client_shape_rounded_xl,
-  bg = beautiful.bg_normal,
+  bg = beautiful.bg_focus,
   forced_width = width,
   ontop = true,
   border_width = dpi(2),
@@ -97,14 +95,6 @@ local networks_panel =
   widget = wibox.container.background
 }
 
--- ------------------------------------------------- --
--- connect signal for resize
-awesome.connect_signal(
-  "nc:resize",
-  function()
-    nc_resize()
-  end
-)
 -- ------------------------------------------------- --
 awesome.connect_signal(
   "network::center:toggle",
@@ -134,43 +124,25 @@ local networkCenter = function(s)
   s.networkCenter =
     wibox(
     {
-      y = s.geometry.y,
-      x = s.geometry.x + dpi(1250),
+      y = s.geometry.y + dpi(36),
+      x = s.geometry.x + dpi(1275),
       visible = false,
       ontop = true,
       screen = s,
       type = "splash",
-      height = s.geometry.height - dpi(48),
+      height = dpi(600),
       width = width,
-      bg = "transparent",
+      bg = beautiful.bg_normal,
       fg = colors.white
     }
   )
-  -- ------------------------------------------------- --
-  -- resize function
-  function nc_resize()
-    nc_height = s.geometry.height
-    if s.networkCenter.height == s.geometry.height - dpi(48) then
-      s.networkCenter:geometry {height = s.geometry.height, y = s.geometry.y}
-    elseif s.networkCenter.height == s.geometry.height then
-      s.networkCenter:geometry {height = s.geometry.height - dpi(48), y = s.geometry.y}
-    end
-  end
+
   -- ------------------------------------------------- --
   function nc_toggle()
+    awesome.emit_signal("network::networks:refreshPanel")
     if mouse.screen.networkCenter.visible == false then
-      awful.screen.connect_for_each_screen(
-        function(s)
-          s.nc_unfocused.visible = true
-        end
-      )
       mouse.screen.networkCenter.visible = true
     elseif mouse.screen.networkCenter.visible == true then
-      awful.screen.connect_for_each_screen(
-        function(s)
-          s.nc_unfocused.visible = false
-        end
-      )
       mouse.screen.networkCenter.visible = false
     end
   end
@@ -179,7 +151,6 @@ local networkCenter = function(s)
   s.networkCenter:setup {
     {
       spacing = dpi(15),
-      title,
       status,
       networks_panel,
       layout = wibox.layout.fixed.vertical

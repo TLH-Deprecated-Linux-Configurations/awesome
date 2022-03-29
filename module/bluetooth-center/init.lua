@@ -70,101 +70,44 @@ local devices_panel =
   border_color = colors.black,
   widget = wibox.container.background
 }
--- ------------------------------------------------- --
--- toggle signal
-awesome.connect_signal(
-  "bluetooth::center:toggle",
-  function()
-    bc_toggle()
-    awesome.emit_signal("bluetooth::power:refresh")
-    awesome.emit_signal("bluetooth::devices:refreshPanel")
-  end
-)
+
 -- ------------------------------------------------- --
 -- Bluetooth Center template widget
-bluetoothCenter = function(s)
-  -- backdrop
-  s.bc_unfocused =
-    wibox(
-    {
-      x = s.geometry.x,
-      y = s.geometry.y,
-      visible = false,
-      screen = s,
-      ontop = true,
-      type = "splash",
-      height = s.geometry.height,
-      width = s.geometry.width,
-      bg = colors.alpha(colors.blacker, "aa"),
-      fg = colors.white
-    }
-  )
-  -- ------------------------------------------------- --
-  s.bluetoothCenter =
-    wibox(
-    {
-      y = s.geometry.y + dpi(500),
-      x = s.geometry.x + dpi(36),
-      visible = false,
-      ontop = true,
-      screen = mouse.screen,
-      type = "splash",
-      height = dpi(400),
-      width = width,
-      bg = beautiful.bg_normal,
-      shape = beautiful.client_shape_rounded_lg,
-      fg = colors.white
-    }
-  )
 
-  -- ------------------------------------------------- --
-  function bc_toggle()
-    if mouse.screen.bluetoothCenter.visible == false then
-      mouse.screen.bluetoothCenter.visible = true
-    elseif mouse.screen.bluetoothCenter.visible == true then
-      mouse.screen.bluetoothCenter.visible = false
-    end
+-- ------------------------------------------------- --
+local bluetoothCenter =
+  wibox(
+  {
+    visible = false,
+    ontop = true,
+    type = "splash",
+    bg = beautiful.bg_normal,
+    shape = beautiful.client_shape_rounded_lg,
+    fg = colors.white
+  }
+)
+
+-- ------------------------------------------------- --
+function bc_toggle()
+  awesome.emit_signal("bluetooth::power:refresh")
+  awesome.emit_signal("bluetooth::devices:refreshPanel")
+  if mouse.screen.bluetoothCenter.visible == false then
+    mouse.screen.bluetoothCenter.visible = true
+  elseif mouse.screen.bluetoothCenter.visible == true then
+    mouse.screen.bluetoothCenter.visible = false
   end
-
-  -- ------------------------------------------------- --
-  -- off signal
-  awesome.connect_signal(
-    "bluetooth::center:toggle:off",
-    function()
-      s.bc_unfocused.visible = false
-      mouse.screen.bluetoothCenter.visible = false
-    end
-  )
-  -- ------------------------------------------------- --
-  -- putting it all together
-  s.bluetoothCenter:setup {
-    wibox.widget {
-      spacing = dpi(15),
-      title,
-      devices_panel,
-      layout = wibox.layout.fixed.vertical
-    },
-    layout = wibox.layout.fixed.horizontal
-  }
-  -- ------------------------------------------------- --
-  s.bc_unfocused:setup {
-    nil,
-    layout = wibox.layout.align.horizontal
-  }
-
-  -- ------------------------------------------------- --
-  -- provide button binding to kill bluetooth center if backdrop is pressed
-  s.bc_unfocused:buttons(
-    awful.util.table.join(
-      awful.button(
-        {},
-        1,
-        nil,
-        function()
-          awesome.emit_signal("bluetooth::center:toggle:off")
-        end
-      )
-    )
-  )
 end
+
+-- ------------------------------------------------- --
+-- putting it all together
+bluetoothCenter:setup {
+  wibox.widget {
+    spacing = dpi(15),
+    title,
+    devices_panel,
+    layout = wibox.layout.fixed.vertical
+  },
+  layout = wibox.layout.fixed.horizontal
+}
+
 return bluetoothCenter

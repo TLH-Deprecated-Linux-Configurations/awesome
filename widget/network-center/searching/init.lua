@@ -61,12 +61,10 @@ box =
 	{
 		wifiIcon,
 		content,
-		buttons,
+		-- buttons,
 		layout = wibox.layout.align.horizontal
 	},
-	shape = function(cr, width, height)
-		gears.shape.rounded_rect(cr, width, height, dpi(4))
-	end,
+	shape = beautiful.client_shape_rounded_xl,
 	fg = colors.white,
 	border_width = dpi(1),
 	border_color = colors.colorA,

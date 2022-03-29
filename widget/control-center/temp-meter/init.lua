@@ -17,7 +17,7 @@ local active_color = {
 -- ------------------------------------------------- --
 local widget_text =
   wibox.widget {
-  font = "SF Pro Rounded Heavy 12",
+  font = "Nineteen Ninety Seven Bold  12",
   text = "TEMP",
   valign = "center",
   align = "center",
@@ -27,10 +27,12 @@ local widget_text =
 local temp_bar =
   wibox.widget {
   max_value = 100,
-  background_color = beautiful.bg_normal,
-  color = active_color,
-  shape = gears.shape.squircle,
-  widget = wibox.widget.progressbar
+  bg = colors.black,
+  thickness = dpi(12),
+  start_angle = 4.3,
+  rounded_edge = true,
+  colors = {active_color},
+  widget = wibox.container.arcchart
 }
 -- ------------------------------------------------- --
 awesome.connect_signal(
@@ -47,24 +49,21 @@ local temp_meter =
   {
     {
       {
-        {
-          direction = "east",
-          widget = wibox.container.rotate,
-          temp_bar
-        },
-        widget_text,
-        layout = wibox.layout.stack
+        temp_bar,
+        direction = "east",
+        widget = wibox.container.rotate
       },
-      margins = dpi(30),
-      widget = wibox.container.margin
+      widget_text,
+      layout = wibox.layout.stack
     },
-    shape = gears.shape.rounded_rect,
-    bg = colors.colorA,
-    fg = colors.white,
-    widget = wibox.container.background
+    margins = dpi(15),
+    widget = wibox.container.margin
   },
-  forced_height = dpi(185),
-  widget = wibox.container.margin
+  shape = beautiful.client_shape_rounded_xl,
+  bg = beautiful.bg_focus,
+  fg = colors.white,
+  forced_height = dpi(225),
+  widget = wibox.container.background
 }
 -- ------------------------------------------------- --
 return temp_meter

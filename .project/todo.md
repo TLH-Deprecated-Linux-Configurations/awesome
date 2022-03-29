@@ -23,4 +23,7 @@ tags: ["#list/"]
 - [ ] **011** reconsider the arrangement and placement of the centers, all of them, condense what can be condensed, rearrange, etc.
 - [ ] **012** sudden onset of lagging-ness (maybe due to some suboptimal signals adaptations, possible need to rewrite the whole volume everything )
 - [x] **013** fix bluetooth, it interferes with the use of the bluetooth on the system by reseting to off constantly 
-- [ ] **014**fix ram bar
+- [x] **014**fix ram bar
+  - required immense testing of scripts and considerations abound, stole the functional variant of the signals from Chocolate Bread's psuedo-neumorphic configuration, which was useful for other reasons as well.....  
+- [ ] **015** fix the disk free read out 
+- [ ] **016** remove volume center 

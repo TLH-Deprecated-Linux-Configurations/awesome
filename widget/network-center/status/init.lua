@@ -6,15 +6,15 @@
 -- ------------------------------------------------- --
 local left_content =
 	wibox.widget {
-	text = "status",
-	font = "SF Pro Rounded Heavy 14",
+	text = "Network Connected:",
+	font = "Nineteen Ninety Seven Bold 11",
 	widget = wibox.widget.textbox
 }
 
 local right_content =
 	wibox.widget {
-	text = "placeholder",
-	font = "SF Pro Rounded Heavy 14",
+	text = "None",
+	font = "Nineteen Ninety Seven Bold 11",
 	widget = wibox.widget.textbox
 }
 
@@ -61,14 +61,31 @@ awesome.connect_signal(
 		right_content:set_text(essid)
 	end
 )
-
+awesome.connect_signal(
+	"network::connected::wired",
+	function(interface)
+		right_content:set_text(interface)
+	end
+)
+awesome.connect_signal(
+	"network::disconnected::wireless",
+	function(interface, essid)
+		right_content:set_text("Disconnected")
+	end
+)
+awesome.connect_signal(
+	"network::disconnected::wired",
+	function(interface)
+		right_content:set_text("Disconnected")
+	end
+)
 local widget =
 	wibox.widget {
 	{
 		widget_user,
 		spacer_bar,
 		widget_host,
-		layout = wibox.layout.fixed.horizontal
+		layout = wibox.layout.fixed.vertical
 	},
 	fg = beautiful.white,
 	widget = wibox.container.background

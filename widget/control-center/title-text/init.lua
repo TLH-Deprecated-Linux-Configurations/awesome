@@ -10,7 +10,7 @@
 local host_content =
 	wibox.widget {
 	text = "Control Center",
-	font = "SF Pro Rounded Heavy  18",
+	font = "Nineteen Ninety Seven Bold 16",
 	widget = wibox.widget.textbox
 }
 -- ------------------------------------------------- --
@@ -43,17 +43,45 @@ local spacer_bar =
 	margins = dpi(10),
 	widget = wibox.container.margin
 }
+
 -- ------------------------------------------------- --
-local widget =
+-- title of the center
+local title =
 	wibox.widget {
 	{
-		spacer_bar,
-		widget_host,
-		spacer_bar,
-		layout = wibox.layout.fixed.horizontal
+		{
+			spacing = dpi(0),
+			layout = wibox.layout.fixed.vertical,
+			format_item(
+				{
+					layout = wibox.layout.align.horizontal,
+					spacing = dpi(30),
+					require("widget.user-icon"),
+					{
+						layout = wibox.container.place,
+						halign = "center",
+						valign = "center",
+						{
+							spacer_bar,
+							widget_host,
+							spacer_bar,
+							layout = wibox.layout.fixed.horizontal,
+							fg = colors.white
+						}
+					},
+					require("widget.user-icon")
+				}
+			)
+		},
+		margins = dpi(5),
+		widget = wibox.container.margin
 	},
-	fg = colors.white,
+	shape = beautiful.client_shape_rounded_xl,
+	bg = beautiful.bg_normal,
+	forced_width = dpi(475),
+	forced_height = dpi(70),
+	border_width = dpi(2),
+	border_color = colors.colorA,
 	widget = wibox.container.background
 }
-
-return widget
+return title

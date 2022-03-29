@@ -103,10 +103,10 @@ local update_slider = function(percentage)
     else
         hide_bright_adjust:again()
     end
-
-    bright_bar:set_value(brightness)
+    if brightness ~= nil then
+        bright_bar:set_value(brightness)
+    end
 end
-update_slider()
 
 awesome.connect_signal(
     "signal::brightness",

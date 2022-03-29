@@ -56,7 +56,6 @@ local volume_bar =
     max_value = 100,
     value = 100,
     forced_height = dpi(25),
-    height = dpi(25),
     forced_width = dpi(200)
 }
 
@@ -146,7 +145,6 @@ local update_slider = function()
         }
     )
 end
-update_slider()
 
 awesome.connect_signal(
     "signal::volume:update",

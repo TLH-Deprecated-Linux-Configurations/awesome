@@ -10,7 +10,7 @@
 local user_content =
 	wibox.widget {
 	text = " Bluetooth ",
-	font = "Nineteen Ninety Seven Bold 18",
+	font = "Nineteen Ninety Seven Bold 14",
 	widget = wibox.widget.textbox
 }
 

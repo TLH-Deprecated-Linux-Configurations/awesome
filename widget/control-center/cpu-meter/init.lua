@@ -13,12 +13,12 @@ local active_color = {
   type = "linear",
   from = {0, 0},
   to = {200, 50}, -- replace with w,h later
-  stops = {{0, colors.color7}, {0.75, colors.color4}}
+  stops = {{0, colors.color3}, {0.75, colors.color4}}
 }
 
 local widget_text =
   wibox.widget {
-  font = "SF Pro Rounded Heavy    12",
+  font = "Nineteen Ninety Seven Bold  12",
   text = "CPU",
   valign = "center",
   align = "center",
@@ -28,10 +28,13 @@ local widget_text =
 local cpu_bar =
   wibox.widget {
   max_value = 100,
-  background_color = beautiful.bg_normal,
+  bg = colors.black,
   color = active_color,
-  shape = gears.shape.squircle,
-  widget = wibox.widget.progressbar
+  thickness = dpi(12),
+  start_angle = 4.3,
+  rounded_edge = true,
+  colors = {active_color},
+  widget = wibox.container.arcchart
 }
 
 awesome.connect_signal(
@@ -54,14 +57,14 @@ local cpu_meter =
       widget_text,
       layout = wibox.layout.stack
     },
-    margins = dpi(30),
+    margins = dpi(15),
     widget = wibox.container.margin
   },
   shape = beautiful.client_shape_rounded_xl,
-  bg = colors.colorA,
+  bg = beautiful.bg_focus,
   fg = colors.white,
   widget = wibox.container.background,
-  forced_height = dpi(185)
+  forced_height = dpi(225)
 }
 
 return cpu_meter

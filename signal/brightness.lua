@@ -33,8 +33,8 @@ local emit_brightness_info = function()
                 awful.spawn.with_line_callback(
                     brightness_max,
                     {
-                        stdout = function(max)
-                            percentage = value / max * 100
+                        function(max)
+                            local percentage = tonumber(value) / tonumber(max) * 100
                             -- if percentage ~= percentage_old then
                             awesome.emit_signal("signal::brightness", percentage)
                             -- percentage_old = percentage

@@ -44,10 +44,57 @@ local widget =
 }
 
 awesome.connect_signal(
-	"network::status:updateIcon",
-	function(signalIcon)
-		widget_icon.icon:set_image(signalIcon)
+	"network::status::wireless",
+	function(interface, healthy, essid, bitrate, strength)
+		if healthy == true then
+			if strength <= 100 then
+				widget_icon.icon:set_image(icons.wifi_3)
+			elseif strength <= 75 then
+				widget_icon.icon:set_image(icons.wifi_2)
+			elseif strength <= 50 then
+				widget_icon.icon:set_image(icons.wifi_1)
+			elseif strength <= 25 then
+				widget_icon.icon:set_image(icons.wifi_0)
+			end
+		else
+			widget_icon.icon:set_image(icons.wifi_problem)
+		end
+	end
+)
+awesome.connect_signal(
+	"network::status::wired",
+	function(interface, healthy)
+		if healthy == true then
+			widget_icon.icon:set_image(icons.wired)
+		else
+			widget_icon.icon:set_image(icons.wired_alert)
+		end
 	end
 )
 
+awesome.connect_signal(
+	"network::disconnected::wireless",
+	function()
+		widget_icon.icon:set_image(icons.wifi_off)
+	end
+)
+awesome.connect_signal(
+	"network::disconnected::wired",
+	function()
+		widget_icon.icon:set_image(icons.wired_off)
+	end
+)
+
+widget_icon:buttons(
+	awful.util.table.join(
+		awful.button(
+			{},
+			1,
+			nil,
+			function()
+				awesome.emit_signal("networks::network:refreshPanel")
+			end
+		)
+	)
+)
 return widget

@@ -7,7 +7,7 @@
 local searching = require("widget.network-center.searching")
 local width = dpi(410)
 
-local panelLayout = wibox.layout.fixed.vertical()
+local panelLayout = overflow.vertical()
 
 panelLayout.spacing = dpi(7)
 panelLayout.forced_width = width
@@ -35,7 +35,7 @@ awesome.connect_signal(
     panelLayout:insert(1, searching)
     local searchStatus = true
     awful.spawn.with_line_callback(
-      [[nmcli -g in-use,signal,security,rate,BSSID,SSID d wifi list | sed -e 's/^ /no/g; s/\*/yes/g; s/::/:no:/g; s/:/;/g']],
+      [[bash -c "nmcli -g in-use,signal,security,rate,BSSID,SSID d wifi list | sed -e 's/^ /no/g; s/\*/yes/g; s/::/:no:/g; s/:/;/g'"]],
       {
         stdout = function(line)
           local results = {}

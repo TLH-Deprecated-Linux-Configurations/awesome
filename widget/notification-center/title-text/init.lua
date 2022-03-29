@@ -10,16 +10,11 @@
 local user_content =
 	wibox.widget {
 	text = "Notifications",
-	font = "SF Pro Rounded Heavy  Regular  14",
+	font = "Nineteen Ninety Seven Bold 14",
 	widget = wibox.widget.textbox
 }
 -- ------------------------------------------------- --
-local host_content =
-	wibox.widget {
-	text = "placeholder",
-	font = "SF Pro Rounded Heavy  Regular  14",
-	widget = wibox.widget.textbox
-}
+
 -- ------------------------------------------------- --
 local widget_user =
 	wibox.widget {
@@ -28,18 +23,6 @@ local widget_user =
 	nil,
 	{
 		user_content,
-		layout = wibox.layout.align.horizontal
-	},
-	nil
-}
--- ------------------------------------------------- --
-local widget_host =
-	wibox.widget {
-	layout = wibox.layout.align.vertical,
-	expand = "none",
-	nil,
-	{
-		host_content,
 		layout = wibox.layout.align.horizontal
 	},
 	nil
@@ -62,6 +45,7 @@ local spacer_bar =
 local widget =
 	wibox.widget {
 	{
+		spacer_bar,
 		widget_user,
 		spacer_bar,
 		layout = wibox.layout.fixed.horizontal
