@@ -21,7 +21,7 @@ local format_item = function(widget)
 			margins = dpi(5),
 			widget = wibox.container.margin
 		},
-		shape = beautiful.client_shape_rounded_xl,
+		shape = beautiful.client_shape_rounded_medium,
 		bg = "transparent",
 		border_width = dpi(0),
 		border_color = colors.black,

@@ -10,5 +10,10 @@ return {
     require(... .. ".json"),
     require(... .. ".svg-color"),
     require(... .. ".titlebar"),
-    require(... .. ".overflow")
+    require(... .. ".overflow"),
+    require(... .. ".snap-edge"),
+    require(... .. ".clickable-container"),
+    require(... .. ".file"),
+    require(... .. ".rubato"),
+    require(... .. ".user-icon")
 }

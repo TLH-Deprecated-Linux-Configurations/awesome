@@ -21,14 +21,14 @@ local title =
         {
           layout = wibox.layout.align.horizontal,
           spacing = dpi(16),
-          require("widget.user-icon"),
+          require("utils.user-icon"),
           {
             layout = wibox.container.place,
             halign = "center",
             valign = "center",
             require("widget.volume-center.title-text")
           },
-          require("widget.user-icon")
+          require("utils.user-icon")
         }
       )
     },

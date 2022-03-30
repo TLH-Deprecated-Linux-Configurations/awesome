@@ -76,12 +76,14 @@ local widget_button =
         {
             {
                 button_widget,
-                widget = wibox.container.margin
+                widget = wibox.container.place,
+                halign = "center",
+                valign = "center"
             },
-            margins = dpi(12),
+            margins = dpi(10),
             widget = wibox.container.margin
         },
-        forced_height = dpi(60),
+        forced_height = dpi(50),
         widget = clickable_container
     },
     bg = colors.colorA,

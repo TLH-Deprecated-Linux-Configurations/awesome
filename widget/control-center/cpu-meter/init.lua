@@ -13,7 +13,7 @@ local active_color = {
   type = "linear",
   from = {0, 0},
   to = {200, 50}, -- replace with w,h later
-  stops = {{0, colors.color3}, {0.75, colors.color4}}
+  stops = {{0, colors.color3}, {0.75, colors.color15}}
 }
 
 local widget_text =
@@ -61,7 +61,6 @@ local cpu_meter =
     widget = wibox.container.margin
   },
   shape = beautiful.client_shape_rounded_xl,
-  bg = beautiful.bg_focus,
   fg = colors.white,
   widget = wibox.container.background,
   forced_height = dpi(225)

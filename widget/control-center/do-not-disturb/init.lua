@@ -10,7 +10,7 @@ local widget_icon =
 	nil,
 	{
 		id = "icon",
-		image = icons.moon,
+		image = icons.airplane_mode,
 		resize = true,
 		widget = wibox.widget.imagebox
 	},
@@ -25,7 +25,7 @@ local widget =
 				widget_icon,
 				layout = wibox.layout.fixed.horizontal
 			},
-			margins = dpi(15),
+			margins = dpi(10),
 			widget = wibox.container.margin
 		},
 		forced_height = dpi(50),

@@ -32,11 +32,25 @@ local date_month =
 
 local date =
     wibox.widget {
-    date_day,
-    nil,
-    date_month,
-    expand = "none",
-    widget = wibox.layout.align.vertical
+    {
+        {
+            {
+                date_day,
+                nil,
+                date_month,
+                expand = "none",
+                widget = wibox.layout.align.vertical
+            },
+            widget = wibox.container.place,
+            valign = "center",
+            halign = "center"
+        },
+        widget = wibox.container.margin,
+        forced_width = dpi(240),
+        forced_height = dpi(100)
+    },
+    widget = wibox.container.background,
+    bg = beautiful.bg_focus
 }
 
 return date

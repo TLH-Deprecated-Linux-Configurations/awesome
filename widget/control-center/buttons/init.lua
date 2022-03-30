@@ -8,7 +8,7 @@ local buttons =
                 format_item(
                     {
                         layout = wibox.layout.flex.horizontal,
-                        spacing = dpi(16),
+                        spacing = dpi(6),
                         require("widget.control-center.bar-button"),
                         require("widget.control-center.dropbox-toggle"),
                         require("widget.control-center.do-not-disturb"),
@@ -22,10 +22,10 @@ local buttons =
                 widget = wibox.container.background
             }
         },
-        margins = dpi(8),
+        margins = dpi(2),
         widget = wibox.container.margin
     },
-    shape = beautiful.client_shape_rounded_xl,
+    shape = beautiful.client_shape_rounded_medium,
     widget = wibox.container.background
 }
 

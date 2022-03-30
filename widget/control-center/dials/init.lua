@@ -25,7 +25,8 @@ local dials =
         widget = wibox.container.margin
     },
     shape = beautiful.client_shape_rounded_xl,
-    widget = wibox.container.background
+    widget = wibox.container.background,
+    bg = beautiful.bg_focus
 }
 
 return dials

@@ -10,7 +10,6 @@ local dpi = beautiful.xresources.apply_dpi
 local wibox = require("wibox")
 
 -- rubato
-local rubato = require("module.rubato")
 
 -- Get screen geometry
 local screen_width = awful.screen.focused().geometry.width
@@ -75,30 +74,43 @@ local date = require("widget.control-center.date")
 
 local stats = require("widget.control-center.dials")
 local notifs = require("widget.control-center.notifs")
-
+local battery = require("widget.control-center.battery")
 local sliders = require("widget.control-center.sliders")
 local buttons = require("widget.control-center.buttons")
+local bluetooth = require("widget.control-center.bluetooth")
 
-local buttons_boxed = create_boxed_widget(buttons, dpi(425), dpi(125), beautiful.bg_normal)
-local sliders_boxed = create_boxed_widget(sliders, dpi(375), dpi(250), beautiful.bg_normal)
-
-local time_boxed = create_boxed_widget(centered_widget(time), dpi(260), dpi(120), beautiful.bg_normal)
-local date_boxed = create_boxed_widget(centered_widget(date), dpi(120), dpi(120), beautiful.bg_normal)
-
-local stats_boxed = create_boxed_widget(stats, dpi(400), dpi(490), beautiful.bg_normal)
-local notifs_boxed = create_boxed_widget(notifs, dpi(380), dpi(355), beautiful.bg_normal)
+local buttons_boxed = create_boxed_widget(buttons, dpi(450), dpi(125), beautiful.bg_normal)
+local sliders_boxed = create_boxed_widget(sliders, dpi(450), dpi(250), beautiful.bg_normal)
+local bluetooth_boxed = create_boxed_widget(bluetooth, dpi(450), dpi(350), beautiful.bg_normal)
+local time_boxed = create_boxed_widget(centered_widget(time), dpi(250), dpi(120), beautiful.bg_normal)
+local date_boxed = create_boxed_widget(centered_widget(date), dpi(200), dpi(120), beautiful.bg_normal)
+local battery_boxed = create_boxed_widget(battery, dpi(250), dpi(120), beautiful.bg_normal)
+local stats_boxed = create_boxed_widget(stats, dpi(450), dpi(490), beautiful.bg_normal)
+local notifs_boxed = create_boxed_widget(notifs, dpi(450), dpi(400), beautiful.bg_normal)
 
 -- Dashboard
 control_center =
   wibox(
   {
     type = "splash",
-    --[[ screen = mouse.screen, ]]
+    screen = mouse.screen,
     height = screen_height,
     width = screen_width,
     ontop = true,
     visible = false,
-    bg = "#1b1d2488"
+    bg = colors.alpha(colors.blacker, "88")
+  }
+)
+backdrop =
+  wibox(
+  {
+    type = "splash",
+    screen = mouse.screen,
+    height = screen_height,
+    width = screen_width,
+    ontop = true,
+    visible = false,
+    bg = colors.alpha(colors.blacker, "88")
   }
 )
 
@@ -116,14 +128,39 @@ control_center:buttons(
     )
   )
 )
-
+backdrop:buttons(
+  gears.table.join(
+    -- Middle click - Hide control_center
+    awful.button(
+      {},
+      1,
+      function()
+        control_center_hide()
+      end
+    ),
+    awful.button(
+      {},
+      2,
+      function()
+        control_center_hide()
+      end
+    ),
+    awful.button(
+      {},
+      3,
+      function()
+        control_center_hide()
+      end
+    )
+  )
+)
 local slide =
   rubato.timed {
   pos = dpi(-1200),
   rate = 60,
-  intro = 0.3,
-  duration = 0.8,
-  easing = rubato.quadratic,
+  intro = 0.15,
+  duration = 0.4,
+  easing = rubato.bouncy,
   awestore_compat = true,
   subscribed = function(pos)
     control_center.x = pos
@@ -134,8 +171,8 @@ local slide_strut =
   rubato.timed {
   pos = dpi(0),
   rate = 60,
-  intro = 0.3,
-  duration = 0.8,
+  intro = 0.1,
+  duration = 0.3,
   easing = rubato.quadratic,
   awestore_compat = true,
   subscribed = function(width)
@@ -154,6 +191,10 @@ slide.ended:subscribe(
 )
 
 control_center_show = function()
+  backdrop.visible = true
+  awesome.emit_signal("bluetooth::power:refresh")
+  awesome.emit_signal("bluetooth::devices:refreshPanel")
+
   control_center.visible = true
   slide:set(0)
   slide_strut:set(1200)
@@ -164,6 +205,9 @@ control_center_hide = function()
   slide:set(-1200)
   slide_strut:set(0)
   control_center_status = true
+  for s in screen do
+    backdrop.visible = false
+  end
 end
 
 control_center_toggle = function()
@@ -176,7 +220,15 @@ end
 
 control_center:setup {
   {
-    nil,
+    {
+      widget = wibox.container.margin,
+      layout = wibox.layout.fixed.vertical,
+      {
+        layout = wibox.layout.fixed.horizontal
+        -- bluetooth_boxed
+      }
+    },
+    -- ------------------------------------------------- --
     {
       {
         {
@@ -187,22 +239,25 @@ control_center:setup {
           },
           {
             layout = wibox.layout.fixed.horizontal,
-            notifs_boxed
+            sliders_boxed
           },
+          notifs_boxed,
+          battery_boxed,
           layout = wibox.layout.fixed.vertical
         },
         {
-          buttons_boxed,
           stats_boxed,
+          buttons_boxed,
+          bluetooth_boxed,
           layout = wibox.layout.fixed.vertical
         },
-        {
-          layout = wibox.layout.fixed.vertical
-        },
+        -- {
+        --   layout = wibox.layout.fixed.vertical
+        -- },
         layout = wibox.layout.fixed.horizontal
       },
       {
-        sliders_boxed,
+        -- notifs_boxed,
         layout = wibox.layout.fixed.horizontal
       },
       layout = wibox.layout.fixed.vertical

@@ -62,7 +62,6 @@ local hdd_meter =
     widget = wibox.container.margin
   },
   shape = beautiful.client_shape_rounded_xl,
-  bg = colors.colorA,
   fg = colors.white,
   widget = wibox.container.background,
   forced_height = dpi(225)

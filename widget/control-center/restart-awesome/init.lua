@@ -32,7 +32,7 @@ local widget =
 				widget_icon,
 				layout = wibox.layout.fixed.horizontal
 			},
-			margins = dpi(12),
+			margins = dpi(10),
 			widget = wibox.container.margin
 		},
 		forced_height = dpi(50),

@@ -14,7 +14,7 @@ local widget_icon =
 	nil,
 	{
 		id = "icon",
-		image = icons.magnify,
+		image = icons.awesome,
 		resize = true,
 		widget = wibox.widget.imagebox
 	},
@@ -29,7 +29,7 @@ local widget =
 				widget_icon,
 				layout = wibox.layout.fixed.horizontal
 			},
-			margins = dpi(15),
+			margins = dpi(10),
 			widget = wibox.container.margin
 		},
 		forced_height = dpi(50),
@@ -62,7 +62,7 @@ widget:buttons(
 			nil,
 			function()
 				awesome.emit_signal("bar:toggle")
-				cc_resize()
+
 				widget.bg = colors.colorA
 			end
 		)

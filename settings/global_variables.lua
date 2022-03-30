@@ -50,7 +50,7 @@ hotkeys_popup = require("module.hotkeys-popup")
 overflow = require("utils.overflow")
 xresources = require("beautiful.xresources")
 gears = require("gears")
-
+rubato = require("utils.rubato")
 Gio = require("lgi").Gio
 awful_menu = require("awful.menu")
 menu_gen = require("menubar.menu_gen")

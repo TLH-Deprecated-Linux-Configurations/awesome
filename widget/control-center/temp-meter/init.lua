@@ -60,7 +60,6 @@ local temp_meter =
     widget = wibox.container.margin
   },
   shape = beautiful.client_shape_rounded_xl,
-  bg = beautiful.bg_focus,
   fg = colors.white,
   forced_height = dpi(225),
   widget = wibox.container.background

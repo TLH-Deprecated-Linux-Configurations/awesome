@@ -21,14 +21,14 @@ local title =
         {
           layout = wibox.layout.align.horizontal,
           spacing = dpi(16),
-          require("widget.bluetooth-center.power-button"),
+          require("widget.control-center.bluetoothpower-button"),
           {
             layout = wibox.container.place,
             halign = "center",
             valign = "center",
-            require("widget.bluetooth-center.title-text")
+            require("widget.control-center.bluetoothtitle-text")
           },
-          require("widget.bluetooth-center.search-button")
+          require("widget.control-center.bluetoothsearch-button")
         }
       )
     },
@@ -55,7 +55,7 @@ local devices_panel =
         {
           layout = wibox.layout.fixed.horizontal,
           spacing = dpi(6),
-          require("widget.bluetooth-center.devices-panel")
+          require("widget.control-center.bluetoothdevices-panel")
         }
       )
     },
