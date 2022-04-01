@@ -8,16 +8,16 @@ local dials =
                 {
                     layout = wibox.layout.fixed.vertical,
                     spacing = dpi(5),
-                    require("widget.control-center.ram-meter"),
-                    require("widget.control-center.cpu-meter")
+                    require("widget.control-center.dials.ram-meter"),
+                    require("widget.control-center.dials.cpu-meter")
                 }
             ),
             format_item(
                 {
                     layout = wibox.layout.fixed.vertical,
                     spacing = dpi(5),
-                    require("widget.control-center.hdd-meter"),
-                    require("widget.control-center.temp-meter")
+                    require("widget.control-center.dials.hdd-meter"),
+                    require("widget.control-center.dials.temp-meter")
                 }
             )
         },

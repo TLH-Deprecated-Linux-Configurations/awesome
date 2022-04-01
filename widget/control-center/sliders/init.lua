@@ -9,8 +9,8 @@ local sliders =
                 {
                     layout = wibox.layout.flex.vertical,
                     spacing = dpi(5),
-                    require("widget.control-center.volume-slider"),
-                    require("widget.control-center.brightness-slider")
+                    require("widget.control-center.sliders.volume-slider"),
+                    require("widget.control-center.sliders.brightness-slider")
                 }
             )
         },
@@ -18,7 +18,8 @@ local sliders =
         widget = wibox.container.margin
     },
     shape = beautiful.client_shape_rounded_xl,
-    widget = wibox.container.background
+    widget = wibox.container.background,
+    bg = beautiful.bg_focus
 }
 
 return sliders

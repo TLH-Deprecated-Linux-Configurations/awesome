@@ -19,7 +19,7 @@ local resetDevicePanelLayout = function()
 end
 
 local bluetoothDeviceAdd = function(n)
-  local box = require("widget.control-center.bluetoothelements")
+  local box = require("widget.control-center.bluetooth.elements")
   panelLayout:insert(#panelLayout.children + 1, box.create(n.title, n.macAdress, n.pairStatus, n.connectStatus))
 end
 

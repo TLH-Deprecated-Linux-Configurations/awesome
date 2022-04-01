@@ -27,7 +27,7 @@ local battery_text =
 -- create the icon portion of the text, which uses a nerd font to display the icon
 local battery_icon =
 	wibox.widget {
-	font = "SFMono Nerd Font Mono  22",
+	font = "SFMono Nerd Font Mono 42",
 	align = "center",
 	valign = "center",
 	widget = wibox.widget.textbox
@@ -38,9 +38,18 @@ local widget_button =
 	{
 		{
 			{
-				spacing = dpi(2),
-				{battery_icon, margins = dpi(1), widget = wibox.container.place, valign = "center", halign = "center"},
-				{battery_text, margins = dpi(1), widget = wibox.container.place, valign = "center", halign = "center"},
+				{
+					battery_icon,
+					widget = wibox.container.place,
+					valign = "center",
+					halign = "center"
+				},
+				{
+					battery_text,
+					widget = wibox.container.place,
+					valign = "center",
+					halign = "center"
+				},
 				layout = wibox.layout.flex.horizontal
 			},
 			widget = wibox.container.margin

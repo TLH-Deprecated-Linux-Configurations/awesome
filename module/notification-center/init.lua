@@ -26,9 +26,9 @@ local title =
             layout = wibox.container.place,
             halign = "center",
             valign = "center",
-            require("widget.notification-center.title-text")
+            require("widget.control-center.notifs.title-text")
           },
-          require("widget.notification-center.clear-all")
+          require("widget.control-center.notifs.clear-all")
         }
       )
     },
@@ -53,7 +53,7 @@ local notification_panel =
         {
           layout = wibox.layout.fixed.horizontal,
           spacing = dpi(16),
-          require("widget.notification-center.notifications-panel")
+          require("widget.control-center.notifs.notifications-panel")
         }
       )
     },

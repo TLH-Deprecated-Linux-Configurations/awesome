@@ -24,7 +24,10 @@ local title =
             layout = wibox.container.place,
             halign = "center",
             valign = "center",
-            require("widget.network-center.title-text")
+            {
+              text = "Networks",
+              widget = wibox.widget.textbox
+            }
           },
           require("utils.user-icon")
         }

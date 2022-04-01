@@ -1,5 +1,5 @@
 -- Icons directory
-local dir = os.getenv("HOME") .. "/.config/awesome/theme/icons/"
+local dir = os.getenv("HOME") .. "/.config/awesome/themes/icons/svg/"
 
 return {
     -- ########################################################################
@@ -123,5 +123,12 @@ return {
     wifi = dir .. "wifi.svg",
     wired_alert = dir .. "wired-alert.svg",
     wired_off = dir .. "wired-off.svg",
-    wired = dir .. "wired.svg"
+    wired = dir .. "wired.svg",
+    github = dir .. "github.svg",
+    spotify = dir .. "spotify.svg",
+    instagram = dir .. "instagram.svg",
+    reddit = dir .. "reddit.svg",
+    email = dir .. "mail.svg",
+    dribbble = dir .. "dribbble.svg",
+    apps = dir .. "apps.svg"
 }

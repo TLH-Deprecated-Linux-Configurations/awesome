@@ -28,5 +28,11 @@ return {
     },
     profile_picture = "user.png",
     window_gaps = 4,
-    window_border_size = 2
+    window_border_size = 2,
+    dirs = {
+        downloads = "$HOME/Downloads",
+        pictures = "$HOME/256/Dropbox/Pictures",
+        music = "$HOME/256/Dropbox/Music",
+        wallpapers = "$HOME/.config/awesome/themes/wallpapers"
+    }
 }

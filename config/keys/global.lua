@@ -366,8 +366,7 @@ local globalKeys =
 		{modkey},
 		"F7",
 		function()
-			awesome.emit_signal("cc:resize")
-			awesome.emit_signal("cc:toggle")
+			control_center_toggle()
 		end,
 		{description = "toggle control center", group = "Awesome"}
 	),
@@ -376,18 +375,9 @@ local globalKeys =
 		{modkey, "Shift"},
 		"F7",
 		function()
-			awesome.emit_signal("notifications::center:toggle")
+			control_center_toggle()
 		end,
 		{description = "toggle notification center", group = "Awesome"}
-	),
-	-- ------------------------------------------------- --
-	awful.key(
-		{modkey},
-		"F12",
-		function()
-			awesome.emit_signal("settings::window:toggle")
-		end,
-		{description = "Settings Window", group = "Awesome"}
 	),
 	-- ------------------------------------------------- --
 	--Screenshot
@@ -397,7 +387,7 @@ local globalKeys =
 		function()
 			awful.spawn.easy_async_with_shell("$HOME/.config/awesome/bin/snapshot.sh full")
 		end,
-		{description = "Screenshot Tool", group = "Launcher"}
+		{description = "Screenshot Tool in Full Screen Mode", group = "Launcher"}
 	),
 	-- ------------------------------------------------- --
 	--Screenshot
@@ -407,7 +397,7 @@ local globalKeys =
 		function()
 			awful.spawn.easy_async_with_shell("$HOME/.config/awesome/bin/snapshot.sh area")
 		end,
-		{description = "Screenshot Tool", group = "Launcher"}
+		{description = "Screenshot Tool in Area Mode", group = "Launcher"}
 	),
 	-- ------------------------------------------------- --
 	-- Raise Brightness

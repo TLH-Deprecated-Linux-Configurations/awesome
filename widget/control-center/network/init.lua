@@ -1,4 +1,4 @@
-local bluetooth =
+local network =
     wibox.widget {
     {
         {
@@ -9,14 +9,13 @@ local bluetooth =
                     {
                         layout = wibox.layout.align.horizontal,
                         spacing = dpi(16),
-                        require("widget.control-center.bluetooth.power-button"),
+                        require("widget.control-center.network.status-icon"),
                         {
                             layout = wibox.container.place,
                             halign = "center",
                             valign = "center",
-                            require("widget.control-center.bluetooth.title-text")
-                        },
-                        require("widget.control-center.bluetooth.search-button")
+                            require("widget.control-center.network.status")
+                        }
                     }
                 ),
                 {
@@ -27,7 +26,7 @@ local bluetooth =
                             {
                                 layout = wibox.layout.fixed.horizontal,
                                 spacing = dpi(6),
-                                require("widget.control-center.bluetooth.devices-panel")
+                                require("widget.control-center.network.networks-panel")
                             }
                         )
                     },
@@ -48,4 +47,4 @@ local bluetooth =
     bg = beautiful.bg_normal,
     widget = wibox.container.background
 }
-return bluetooth
+return network

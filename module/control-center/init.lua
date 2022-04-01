@@ -76,11 +76,33 @@ local stats = require("widget.control-center.dials")
 local notifs = require("widget.control-center.notifs")
 local battery = require("widget.control-center.battery")
 local sliders = require("widget.control-center.sliders")
-local buttons = require("widget.control-center.buttons")
-local bluetooth = require("widget.control-center.bluetooth")
+-- local buttons = require("widget.control-center.buttons")
+local bluetooth = require("widget.control-center.bluetooth.")
+local end_session = require("widget.control-center.end-session")
+local network = require("widget.control-center.network")
+local fortune = require("widget.control-center.fortune")
+local bar_button = require("widget.control-center.buttons.bar-button")
+local do_not_disturb = require("widget.control-center.buttons.do-not-disturb")
+local dropbox = require("widget.control-center.buttons.dropbox-toggle")
+local bookmarks = require("widget.control-center.bookmarks")
+local mute = require("widget.control-center.buttons.mute-button")
+local restart = require("widget.control-center.buttons.restart-awesome")
+local screen_capture = require("widget.control-center.buttons.screen-capture")
+local urls = require("widget.control-center.urls")
 
-local buttons_boxed = create_boxed_widget(buttons, dpi(450), dpi(125), beautiful.bg_normal)
-local sliders_boxed = create_boxed_widget(sliders, dpi(450), dpi(250), beautiful.bg_normal)
+local url_boxed = create_boxed_widget(urls, dpi(400), dpi(300), "#00000000")
+local screen_capture_boxed = create_boxed_widget(screen_capture, dpi(120), dpi(120), beautiful.bg_normal)
+local restart_boxed = create_boxed_widget(restart, dpi(120), dpi(120), beautiful.bg_normal)
+local mute_button_boxed = create_boxed_widget(mute, dpi(120), dpi(120), beautiful.bg_normal)
+local bar_button_boxed = create_boxed_widget(bar_button, dpi(120), dpi(120), beautiful.bg_normal)
+local do_not_disturb_boxed = create_boxed_widget(do_not_disturb, dpi(120), dpi(120), beautiful.bg_normal)
+local dropbox_boxed = create_boxed_widget(dropbox, dpi(120), dpi(120), beautiful.bg_normal)
+local bookmarks_boxed = create_boxed_widget(bookmarks, dpi(400), dpi(200), beautiful.bg_normal)
+local fortune_boxed = create_boxed_widget(fortune, dpi(450), dpi(300), beautiful.bg_normal)
+local network_boxed = create_boxed_widget(network, dpi(450), dpi(650), beautiful.bg_normal)
+local end_session_boxed = create_boxed_widget(end_session, dpi(200), dpi(120), beautiful.bg_normal)
+-- local buttons_boxed = create_boxed_widget(buttons, dpi(450), dpi(120), beautiful.bg_normal)
+local sliders_boxed = create_boxed_widget(sliders, dpi(450), dpi(275), beautiful.bg_normal)
 local bluetooth_boxed = create_boxed_widget(bluetooth, dpi(450), dpi(350), beautiful.bg_normal)
 local time_boxed = create_boxed_widget(centered_widget(time), dpi(250), dpi(120), beautiful.bg_normal)
 local date_boxed = create_boxed_widget(centered_widget(date), dpi(200), dpi(120), beautiful.bg_normal)
@@ -105,7 +127,6 @@ backdrop =
   wibox(
   {
     type = "splash",
-    screen = mouse.screen,
     height = screen_height,
     width = screen_width,
     ontop = true,
@@ -191,10 +212,14 @@ slide.ended:subscribe(
 )
 
 control_center_show = function()
-  backdrop.visible = true
+  awful.screen.connect_for_each_screen(
+    function(s)
+      backdrop.visible = true
+    end
+  )
   awesome.emit_signal("bluetooth::power:refresh")
   awesome.emit_signal("bluetooth::devices:refreshPanel")
-
+  awesome.emit_signal("network::networks:refreshPanel")
   control_center.visible = true
   slide:set(0)
   slide_strut:set(1200)
@@ -205,9 +230,11 @@ control_center_hide = function()
   slide:set(-1200)
   slide_strut:set(0)
   control_center_status = true
-  for s in screen do
-    backdrop.visible = false
-  end
+  awful.screen.connect_for_each_screen(
+    function(s)
+      backdrop.visible = false
+    end
+  )
 end
 
 control_center_toggle = function()
@@ -223,10 +250,8 @@ control_center:setup {
     {
       widget = wibox.container.margin,
       layout = wibox.layout.fixed.vertical,
-      {
-        layout = wibox.layout.fixed.horizontal
-        -- bluetooth_boxed
-      }
+      network_boxed,
+      fortune_boxed
     },
     -- ------------------------------------------------- --
     {
@@ -237,33 +262,49 @@ control_center:setup {
             date_boxed,
             layout = wibox.layout.fixed.horizontal
           },
-          {
-            layout = wibox.layout.fixed.horizontal,
-            sliders_boxed
-          },
+          sliders_boxed,
           notifs_boxed,
-          battery_boxed,
+          {
+            battery_boxed,
+            end_session_boxed,
+            layout = wibox.layout.fixed.horizontal
+          },
           layout = wibox.layout.fixed.vertical
         },
         {
           stats_boxed,
-          buttons_boxed,
-          bluetooth_boxed,
+          -- buttons_boxed,
+          {
+            layout = wibox.layout.fixed.horizontal,
+            spacing = dpi(20),
+            bar_button_boxed,
+            do_not_disturb_boxed,
+            dropbox_boxed
+          },
+          {
+            layout = wibox.layout.fixed.horizontal,
+            mute_button_boxed,
+            restart_boxed,
+            spacing = dpi(20),
+            screen_capture_boxed
+          },
+          bookmarks_boxed,
           layout = wibox.layout.fixed.vertical
         },
-        -- {
-        --   layout = wibox.layout.fixed.vertical
-        -- },
+        {
+          layout = wibox.layout.fixed.vertical,
+          url_boxed,
+          bluetooth_boxed
+        },
         layout = wibox.layout.fixed.horizontal
       },
       {
-        -- notifs_boxed,
-        layout = wibox.layout.fixed.horizontal
+        layout = wibox.layout.fixed.vertical
       },
       layout = wibox.layout.fixed.vertical
     },
     expand = "none",
-    layout = wibox.layout.align.horizontal
+    layout = wibox.layout.fixed.horizontal
   },
   margins = dpi(10),
   widget = wibox.container.margin

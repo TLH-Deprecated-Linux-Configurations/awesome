@@ -3,26 +3,22 @@
 -- |__     ||  __|   _|  -__|  -__|     |
 -- |_______||____|__| |_____|_____|__|__|
 -- ------------------------------------------------- --
--- Called screen because originally this file also handled the
--- setting of the wallpaper, but feh is doing that as you can
--- see in the authostart applications portion.
-
--- left here in case dependency minimalization later requires it
---[[
+-- wallpaper is configured here and then the startup apps are run from commands issued below
+-- ------------------------------------------------- --
+-- wallpaper
 local function set_wallpaper(s)
-  local wallpaper = backgrounds.archkraken
+  local wallpaper = filesystem.get_configuration_dir() .. "/themes/backgrounds/" .. settings.background
   gears.wallpaper.maximized(wallpaper, s, true)
 end
 
 screen.connect_signal("property::geometry", set_wallpaper)
-
 
 awful.screen.connect_for_each_screen(
   function(s)
     set_wallpaper(s)
   end
 )
-]]
+
 -- ------------------------------------------------- --
 -- Autostart Applications
 
@@ -35,7 +31,7 @@ local function run_once(cmd)
   awful.spawn.easy_async_with_shell(string.format("pgrep -u $USER -x %s > /dev/null || (%s)", findme, cmd))
 end
 -- ------------------------------------------------- --
--- LuaFormatter off
+
 -- Add apps to autostart here
 autostart_apps = {
   -- Disable Bell
@@ -55,10 +51,10 @@ autostart_apps = {
   "xautolock -time 5 -locker /home/tlh/.config/awesome/bin/blur.sh & ",
   "dbus-daemon --session --address=unix:path=$XDG_RUNTIME_DIR/bus &",
   "xfce4-power-manager &",
-  " gpg-agent --daemon",
-  "feh --bg-fill ~/.config/awesome/themes/backgrounds/" .. settings.background
+  " gpg-agent --daemon"
+  --"feh --bg-fill ~/.config/awesome/themes/backgrounds/" .. settings.background
 }
--- LuaFormatter on
+
 -- ------------------------------------------------- --
 for app = 1, #autostart_apps do
   run_once(autostart_apps[app])
