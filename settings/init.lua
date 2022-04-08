@@ -5,15 +5,9 @@
 --                                     |_____|
 -- ------------------------------------------------- --
 
--- require(... .. ".better_resize")
--- require(... .. ".defaults")
--- require(... .. ".garbage_collection")
--- require(... .. ".global_variables")
--- require(... .. ".save_floats")
-
 return {
     theme = "vice",
-    background = "9.jpg",
+    background = "7.png",
     default_programs = {
         terminal = "kitty",
         terminal_editor = "code-oss",

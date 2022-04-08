@@ -56,7 +56,8 @@
     "percentage",
     "date",
     "colorize_text",
-    "rubato"
+    "rubato",
+    "mousegrabber"
   ],
   "lua.targetVersion": "5.3",
   "restructuredtext.languageServer.disabled": true,

@@ -68,7 +68,10 @@ ruled.client.connect_signal(
       id = "dialog",
       rule_any = {
         type = {"dialog"},
-        class = {"Wicd-client.py", "calendar.google.com"}
+        class = {
+          "Wicd-client.py",
+          "calendar.google.com"
+        }
       },
       properties = {
         titlebars_enabled = true,
@@ -144,7 +147,7 @@ ruled.client.connect_signal(
         }
       },
       properties = {
-        size_hints_honor = false,
+        size_hints_honor = true,
         titlebars_enabled = true
       }
     }
@@ -220,7 +223,29 @@ ruled.client.connect_signal(
         titlebars_enabled = true,
         ontop = true,
         floating = true,
-        raise = true
+        raise = true,
+        screen = screen.focused
+      }
+    }
+    -- ------------------------------------------------- --
+    ruled.client.append_rule {
+      id = "floating_not_top",
+      rule_any = {
+        class = {
+          "virt-manager",
+          "Virt-manager",
+          "VirtualBox Manager",
+          "VirtualBox Manager",
+          "mate-color-select",
+          "Mate-color-select"
+        }
+      },
+      properties = {
+        titlebars_enabled = true,
+        ontop = false,
+        floating = true,
+        raise = true,
+        screen = screen.focused
       }
     }
   end

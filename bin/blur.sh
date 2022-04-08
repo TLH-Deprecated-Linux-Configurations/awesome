@@ -12,7 +12,7 @@ file=/tmp/lock.jpg
 
 function datamosh() {
 	fileSize=$(wc -c <"$file")
-	headerSize=1000
+	headerSize=100
 	skip=$(shuf -i "$headerSize"-"$fileSize" -n 1)
 	count=$(shuf -i 1-10 -n 1)
 	for i in $(seq 1 $count); do byteStr=$byteStr'\x'$(shuf -i 0-255 -n 1); done
@@ -23,7 +23,12 @@ steps=$(shuf -i 40-70 -n 1)
 for i in $(seq 1 $steps); do datamosh "$file"; done
 
 GLITCHICON=${GLITCHICON:=""}
-PARAM=(--bar-indicator --bar-orientation horizontal --bar-direction 1 --bar-step 50 --bar-total-width 250 --bar-base-width 50 --bar-max-height 100 --bar-periodic-step 50 --bar-color 3c3f4cff --keyhl-color 00ffccff --ringver-color 8b9cbeff --wrong-color ff3d81ff --verif-text="" --wrong-text="" --noinput-text="")
+
+PARAM=(--bar-indicator --bar-orientation horizontal --bar-direction 1 --redraw-thread -t "" \
+	--bar-step 50 --bar-total-width 250 --bar-base-width 50 --bar-max-height 100 --bar-periodic-step 50 \
+	--bar-color 00000077 --keyhl-color 00666666 --ringver-color cc87875f --wrong-color ffff0000 \
+	--verif-text="" --wrong-text="" --noinput-text="" )
+
 
 LOCK=()
 while read LINE; do

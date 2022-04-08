@@ -40,6 +40,7 @@ autostart_apps = {
   "xsettingsd &",
   'xrdb "$HOME"/.Xresources &',
   "pnmixer &",
+  "xrandr --output eDP --primary --mode 1920x1080 --pos 0x0 --rotate normal --output HDMI-A-0 --mode 1920x1080 --pos 1920x0 --rotate normal --output &",
   --"dropbox start &",
   "sudo pkill /usr/libexec/xfce-polkit && /usr/libexec/xfce-polkit &",
   -- 	'xinput set-prop "ELAN1301:00 04F3:30C6 Touchpad" "libinput Tapping Enabled" 1 &',

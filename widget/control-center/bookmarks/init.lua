@@ -1,9 +1,8 @@
--- local title = wibox.widget.textbox()
--- title.font = "Nineteen Ninety Seven Bold 12"
--- title.text = "Bookmarks"
--- title.align = "center"
--- title.valign = "center"
-
+--  ______               __                         __
+-- |   __ \.-----.-----.|  |--.--------.---.-.----.|  |--.-----.
+-- |   __ <|  _  |  _  ||    <|        |  _  |   _||    <|__ --|
+-- |______/|_____|_____||__|__|__|__|__|___._|__|  |__|__|_____|
+-- ------------------------------------------------- --
 -- File system bookmarks
 local function create_bookmark(name, path)
     local original_color = colors.white

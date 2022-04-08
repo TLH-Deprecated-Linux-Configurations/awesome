@@ -9,12 +9,6 @@
 -- |________|__||_____||___  |_____||____|
 --                     |_____|
 -- ------------------------------------------------- --
-local awful = require("awful")
-local wibox = require("wibox")
-local gears = require("gears")
-local clickable_container = require("utils.clickable-container")
-local dpi = require("beautiful").xresources.apply_dpi
-local icons = require("themes.icons")
 
 local battery_text =
 	wibox.widget {

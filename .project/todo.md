@@ -22,7 +22,7 @@ tags: ["#list/"]
   
 - [x] **011** reconsider the arrangement and placement of the centers, all of them, condense what can be condensed, rearrange, etc.
   - complete rewrite of this section , see [log](011-log.md)
-- [ ] **012** sudden onset of lagging-ness (maybe due to some suboptimal signals adaptations, possible need to rewrite the whole volume everything )
+- [x] **012** sudden onset of lagging-ness (maybe due to some suboptimal signals adaptations, possible need to rewrite the whole volume everything )
   - functional now but lag persists 
 - [x] **013** fix bluetooth, it interferes with the use of the bluetooth on the system by reseting to off constantly 
 - [x] **014**fix ram bar
@@ -30,5 +30,5 @@ tags: ["#list/"]
 - [x] **015** fix the disk free read out 
 - [x] **016** remove volume center 
 - [x] **017** move to awesome-git compiled using luajit
-- [ ] **018** move some of the skeudomorphic elements to my true neumorphic form 
-- [ ] **019** fix dropbox button on control panel, image rendering off center.
+- [x] **018** move some of the skeudomorphic elements to my true neumorphic form 
+- [x] **019** fix dropbox button on control panel, image rendering off center.
