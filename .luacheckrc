@@ -26,6 +26,7 @@ exclude_files = {
 -- Global objects defined by the C code
 read_globals = {
     "base",
+    "colors",
     "math",
     "string",
     "fixed",
@@ -56,20 +57,29 @@ read_globals = {
     "clear_desktop_selection",
     "wibox",
     "rawlen",
+    "gfs",
+    "settings",
     "queue",
     "menubar",
+    "string",
     "progressbar",
     "wibox",
     "sound",
     "common",
-    "gtable"
+    "gtable",
+    "HOME"
 }
 
 globals = {
     "awesome",
     "math",
+    "HOME",
+    "string",
     "root",
     "string",
+    "settings",
+    "colors",
+    "gfs",
     "screen",
     "mouse",
     "client",

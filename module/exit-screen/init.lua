@@ -18,7 +18,16 @@ local clickable_container = require("utils.clickable-container")
 local colors = require("themes").colors
 local apps = require("config.root.apps")
 local dpi = require("beautiful").xresources.apply_dpi
+--  _______         __ __
+-- |    ___|.--.--.|__|  |_
+-- |    ___||_   _||  |   _|
+-- |_______||__.__||__|____|
 
+--  _______
+-- |     __|.----.----.-----.-----.-----.
+-- |__     ||  __|   _|  -__|  -__|     |
+-- |_______||____|__| |_____|_____|__|__|
+-- ------------------------------------------------- --
 -- Appearance
 local icon_size = dpi(240)
 local screen_geometry = awful.screen.focused().geometry
@@ -111,6 +120,7 @@ lock:connect_signal(
     lock_command()
   end
 )
+ -- ------------------------------------------------- --
 
 -- Get screen geometry
 --local screen_geometry = awful.screen.focused().geometry

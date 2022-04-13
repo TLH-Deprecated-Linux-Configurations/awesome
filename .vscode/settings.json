@@ -2,8 +2,12 @@
   "Lua.diagnostics.globals": [
     "awesome",
     "root",
+    "colors",
+    "gfs",
+    "settings",
     "client",
     "awful",
+    "HOME",
     "beautiful",
     "gears",
     "clickable_container",
@@ -16,6 +20,7 @@
     "wibox",
     "cairo",
     "modkey",
+    "string",
     "altkey",
     "ruled",
     "awestore",
@@ -57,7 +62,10 @@
     "date",
     "colorize_text",
     "rubato",
-    "mousegrabber"
+    "mousegrabber",
+    "backdrop",
+    "control_center",
+    "cache"
   ],
   "lua.targetVersion": "5.3",
   "restructuredtext.languageServer.disabled": true,

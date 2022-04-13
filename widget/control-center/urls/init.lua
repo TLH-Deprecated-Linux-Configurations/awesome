@@ -1,8 +1,7 @@
 -- URLs
-local function create_url(name, path)
-    local original_color = colors.white
-    local hover_color = colors.color1
+local apps = require("config.root.apps")
 
+local function create_url(name, path)
     local url =
         wibox.widget {
         {
@@ -36,7 +35,7 @@ local function create_url(name, path)
                 {},
                 1,
                 function()
-                    awful.spawn(settings.browser .. path)
+                    awful.spawn(settings.default_programs.browser .. path)
                     control_center_hide()
                 end
             ),

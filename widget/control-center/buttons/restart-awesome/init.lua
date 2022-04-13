@@ -19,7 +19,11 @@ local widget_icon =
 		id = "icon",
 		image = icons.restart,
 		resize = true,
-		widget = wibox.widget.imagebox
+		widget = wibox.widget.imagebox,
+		valign = "center",
+		align = "center",
+		forced_height = dpi(80),
+		forced_width = dpi(80)
 	},
 	nil
 }
@@ -29,17 +33,20 @@ local widget =
 	{
 		{
 			{
-				widget_icon,
-				layout = wibox.layout.fixed.horizontal
+				{
+					widget_icon,
+					layout = wibox.layout.fixed.horizontal
+				},
+				margins = dpi(10),
+				widget = wibox.container.margin
 			},
-			margins = dpi(10),
-			widget = wibox.container.margin
+			widget = clickable_container
 		},
-		forced_height = dpi(50),
-		widget = clickable_container
+		margins = dpi(5),
+		widget = wibox.container.margin
 	},
-	shape = beautiful.client_shape_rounded_small,
-	bg = colors.colorA,
+	shape = beautiful.client_shape_rounded_xl,
+	bg = beautiful.bg_focus,
 	widget = wibox.container.background
 }
 -- ------------------------------------------------- --
@@ -53,7 +60,7 @@ widget:connect_signal(
 widget:connect_signal(
 	"mouse::leave",
 	function()
-		widget.bg = colors.colorA
+		widget.bg = beautiful.bg_focus
 	end
 )
 -- ------------------------------------------------- --

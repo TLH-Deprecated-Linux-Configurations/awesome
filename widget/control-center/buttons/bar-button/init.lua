@@ -16,7 +16,11 @@ local widget_icon =
 		id = "icon",
 		image = icons.awesome,
 		resize = true,
-		widget = wibox.widget.imagebox
+		widget = wibox.widget.imagebox,
+		forced_width = dpi(80),
+		forced_height = dpi(80),
+		valign = "center",
+		align = "center"
 	},
 	nil
 }
@@ -26,17 +30,20 @@ local widget =
 	{
 		{
 			{
-				widget_icon,
-				layout = wibox.layout.fixed.horizontal
+				{
+					widget_icon,
+					layout = wibox.layout.fixed.horizontal
+				},
+				margins = dpi(10),
+				widget = wibox.container.margin
 			},
-			margins = dpi(10),
-			widget = wibox.container.margin
+			widget = clickable_container
 		},
-		forced_height = dpi(50),
-		widget = clickable_container
+		margins = dpi(5),
+		widget = wibox.container.margin
 	},
-	shape = beautiful.client_shape_rounded_small,
-	bg = colors.colorA,
+	shape = beautiful.client_shape_rounded_xl,
+	bg = beautiful.bg_focus,
 	widget = wibox.container.background
 }
 
@@ -50,7 +57,7 @@ awesome.connect_signal(
 awesome.connect_signal(
 	"bar:true",
 	function()
-		widget.bg = colors.colorA
+		widget.bg = beautiful.bg_focus
 	end
 )
 
@@ -63,7 +70,7 @@ widget:buttons(
 			function()
 				awesome.emit_signal("bar:toggle")
 
-				widget.bg = colors.colorA
+				widget.bg = beautiful.bg_focus
 			end
 		)
 	)

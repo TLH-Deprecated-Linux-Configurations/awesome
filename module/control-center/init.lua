@@ -1,3 +1,13 @@
+--  ______               __               __
+-- |      |.-----.-----.|  |_.----.-----.|  |
+-- |   ---||  _  |     ||   _|   _|  _  ||  |
+-- |______||_____|__|__||____|__| |_____||__|
+--  ______               __
+-- |      |.-----.-----.|  |_.-----.----.
+-- |   ---||  -__|     ||   _|  -__|   _|
+-- |______||_____|__|__||____|_____|__|
+
+-- ------------------------------------------------- --
 -- Standard awesome library
 local gears = require("gears")
 local awful = require("awful")
@@ -76,32 +86,21 @@ local stats = require("widget.control-center.dials")
 local notifs = require("widget.control-center.notifs")
 local battery = require("widget.control-center.battery")
 local sliders = require("widget.control-center.sliders")
--- local buttons = require("widget.control-center.buttons")
+local buttons = require("widget.control-center.buttons")
 local bluetooth = require("widget.control-center.bluetooth.")
 local end_session = require("widget.control-center.end-session")
 local network = require("widget.control-center.network")
 local fortune = require("widget.control-center.fortune")
-local bar_button = require("widget.control-center.buttons.bar-button")
-local do_not_disturb = require("widget.control-center.buttons.do-not-disturb")
-local dropbox = require("widget.control-center.buttons.dropbox-toggle")
-local bookmarks = require("widget.control-center.bookmarks")
-local mute = require("widget.control-center.buttons.mute-button")
-local restart = require("widget.control-center.buttons.restart-awesome")
-local screen_capture = require("widget.control-center.buttons.screen-capture")
+
 local urls = require("widget.control-center.urls")
 
-local url_boxed = create_boxed_widget(urls, dpi(400), dpi(300), "#00000000")
-local screen_capture_boxed = create_boxed_widget(screen_capture, dpi(120), dpi(120), beautiful.bg_normal)
-local restart_boxed = create_boxed_widget(restart, dpi(120), dpi(120), beautiful.bg_normal)
-local mute_button_boxed = create_boxed_widget(mute, dpi(120), dpi(120), beautiful.bg_normal)
-local bar_button_boxed = create_boxed_widget(bar_button, dpi(120), dpi(120), beautiful.bg_normal)
-local do_not_disturb_boxed = create_boxed_widget(do_not_disturb, dpi(120), dpi(120), beautiful.bg_normal)
-local dropbox_boxed = create_boxed_widget(dropbox, dpi(120), dpi(120), beautiful.bg_normal)
-local bookmarks_boxed = create_boxed_widget(bookmarks, dpi(400), dpi(200), beautiful.bg_normal)
+local url_boxed = create_boxed_widget(urls, dpi(500), dpi(300), "#00000000")
+
 local fortune_boxed = create_boxed_widget(fortune, dpi(450), dpi(300), beautiful.bg_normal)
 local network_boxed = create_boxed_widget(network, dpi(450), dpi(650), beautiful.bg_normal)
 local end_session_boxed = create_boxed_widget(end_session, dpi(200), dpi(120), beautiful.bg_normal)
--- local buttons_boxed = create_boxed_widget(buttons, dpi(450), dpi(120), beautiful.bg_normal)
+local buttons_boxed = create_boxed_widget(buttons, dpi(450), dpi(300), "#00000000")
+
 local sliders_boxed = create_boxed_widget(sliders, dpi(450), dpi(275), beautiful.bg_normal)
 local bluetooth_boxed = create_boxed_widget(bluetooth, dpi(450), dpi(350), beautiful.bg_normal)
 local time_boxed = create_boxed_widget(centered_widget(time), dpi(250), dpi(120), beautiful.bg_normal)
@@ -177,7 +176,7 @@ backdrop:buttons(
 )
 local slide =
   rubato.timed {
-  pos = dpi(-1200),
+  pos = dpi(-1920),
   rate = 60,
   intro = 0.15,
   duration = 0.4,
@@ -222,12 +221,12 @@ control_center_show = function()
   awesome.emit_signal("network::networks:refreshPanel")
   control_center.visible = true
   slide:set(0)
-  slide_strut:set(1200)
+  slide_strut:set(1920)
   control_center_status = false
 end
 
 control_center_hide = function()
-  slide:set(-1200)
+  slide:set(-1920)
   slide_strut:set(0)
   control_center_status = true
   awful.screen.connect_for_each_screen(
@@ -263,32 +262,17 @@ control_center:setup {
             layout = wibox.layout.fixed.horizontal
           },
           sliders_boxed,
-          notifs_boxed,
           {
             battery_boxed,
             end_session_boxed,
             layout = wibox.layout.fixed.horizontal
           },
+          notifs_boxed,
           layout = wibox.layout.fixed.vertical
         },
         {
           stats_boxed,
-          -- buttons_boxed,
-          {
-            layout = wibox.layout.fixed.horizontal,
-            spacing = dpi(20),
-            bar_button_boxed,
-            do_not_disturb_boxed,
-            dropbox_boxed
-          },
-          {
-            layout = wibox.layout.fixed.horizontal,
-            mute_button_boxed,
-            restart_boxed,
-            spacing = dpi(20),
-            screen_capture_boxed
-          },
-          bookmarks_boxed,
+          buttons_boxed,
           layout = wibox.layout.fixed.vertical
         },
         {
