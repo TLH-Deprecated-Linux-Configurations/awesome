@@ -224,7 +224,7 @@ ruled.client.connect_signal(
         ontop = true,
         floating = true,
         raise = true,
-        screen = screen.focused
+        screen = awful.screen.focused
       }
     }
     -- ------------------------------------------------- --
@@ -245,7 +245,7 @@ ruled.client.connect_signal(
         ontop = false,
         floating = true,
         raise = true,
-        screen = screen.focused
+        screen = awful.screen.focused
       }
     }
   end

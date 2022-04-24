@@ -168,12 +168,13 @@ theme.taglist_spacing = dpi(6)
 -- ------------------------------------------------- --
 -- Tasklist
 theme.tasklist_font = "SF Intermosaic B 12"
-theme.tasklist_bg_normal = "linear:0,0:0,21:0," .. colors.colorM .. ":1," .. colors.black
-theme.tasklist_bg_focus = "linear:0,0:0,21:0," .. colors.colorM .. ":1," .. colors.black
+theme.tasklist_bg_normal = theme.bg_button
+theme.tasklist_bg_focus = theme.bg_focus
 theme.tasklist_bg_urgent = colors.alpha(colors.color15, "aa")
 theme.tasklist_fg_focus = colors.white
 theme.tasklist_fg_urgent = colors.white
 theme.tasklist_fg_normal = colors.colorY
+theme.tasklist_plain_task_name = true
 -- ------------------------------------------------- --
 -- Notification
 theme.notification_position = "bottom_right"

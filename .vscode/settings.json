@@ -65,7 +65,8 @@
     "mousegrabber",
     "backdrop",
     "control_center",
-    "cache"
+    "cache",
+    "s"
   ],
   "lua.targetVersion": "5.3",
   "restructuredtext.languageServer.disabled": true,

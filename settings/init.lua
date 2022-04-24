@@ -7,18 +7,18 @@
 
 return {
 	theme = "vice",
-	background = "9.jpg",
+	background = "0.png",
 	default_programs = {
 		terminal = "kitty",
-		terminal_editor = "nvim",
-		editor = "code-oss",
+		terminal_editor = "code-oss",
+		editor = "nvim",
 		browser = "firefox",
 		file_manager = "thunar",
 		terminal_file_manager = "ranger",
 		lock = config_dir .. "bin/blur.sh",
 		email = "neomutt",
 		chat = "discord",
-		screenshot = config_dir .. "bin/snapshot.sh area",
+		screenshot = config_dir .. "bin/snapshot.sh area"
 	},
 	profile_picture = "user.png",
 	window_gaps = 4,
@@ -27,6 +27,6 @@ return {
 		downloads = "$HOME/Downloads",
 		pictures = "$HOME/256/Dropbox/Pictures",
 		music = "$HOME/256/Dropbox/Music",
-		wallpapers = "$HOME/.config/awesome/themes/wallpapers",
-	},
+		wallpapers = "$HOME/.config/awesome/themes/wallpapers"
+	}
 }

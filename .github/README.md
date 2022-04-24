@@ -241,7 +241,7 @@ me to achieve this level of functionality.
 - [Jeremie1001's awesome-dotfiles](https://github.com/Jeremie1001/awesome-dotfiles)
 
   - Personally I dislike the dracula theme, the nord theme, the catpu-whatever
-    theme, they all suck in my view. However this config is top knotch (even if
+    theme, they all cause me unpleasant ocular sensations thus I tend to avoid them and implementations thereof (hence making my own, less painful color scheme ;]). However this config is top knotch (even if
     winning no awards for its name) and many of the features are implemented in
     a sane way, with scaffolding already in place for a more extensive future
     that certainly is looking bright. Great quality work, many snippets stolen

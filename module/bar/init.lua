@@ -52,20 +52,21 @@ local bar = function(s)
 	--  left portion of the panel
 	local leftBar = {
 		layout = wibox.layout.fixed.horizontal,
-		spacing = dpi(8)
+		spacing = dpi(4)
 	}
 	-- ------------------------------------------------- --
 	--  center portion of the panel, used for spacing purposes
 	local centerBar = {
-		layout = wibox.layout.align.horizontal,
-		spacing = dpi(8),
+		layout = wibox.layout.fixed.horizontal,
+		spacing = dpi(2),
 		{
 			layout = wibox.layout.fixed.horizontal,
 			nil
 		},
 		{
 			require("widget.bar.task")(s),
-			layout = wibox.layout.fixed.horizontal
+			layout = wibox.container.constraint,
+			strategy = "min"
 		},
 		{
 			nil,
@@ -76,14 +77,15 @@ local bar = function(s)
 	--  right portion of the panel, used for widgets
 	local rightBar = {
 		layout = wibox.layout.fixed.horizontal,
-		spacing = dpi(8)
+		spacing = dpi(4)
 	}
 	-- ------------------------------------------------- --
 	--  inserting widgets as tables on the left portion
 	table.insert(leftBar, require("widget.bar.menu")({color = colors[beautiful.bg_button]}, 0, 0, 0, 0))
 	table.insert(leftBar, require("widget.bar.tags")(s))
-	-- table.insert(leftBar, require("widget.bar.task")(s))
+
 	-- ------------------------------------------------- --
+	-- There needs to be NO center insertions as that was (confusingly) handled above, but nice thought
 	-- ------------------------------------------------- --
 	--  right widget insertions
 	table.insert(rightBar, require("widget.bar.layoutbox")({color = colors[beautiful.bg_button]}))
