@@ -12,7 +12,7 @@ return {
 		terminal = "kitty",
 		terminal_editor = "code-oss",
 		editor = "nvim",
-		browser = "firefox",
+		browser = "firefox-developer-edition",
 		file_manager = "thunar",
 		terminal_file_manager = "ranger",
 		lock = config_dir .. "bin/blur.sh",
