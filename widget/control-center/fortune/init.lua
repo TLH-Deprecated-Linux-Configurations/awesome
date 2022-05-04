@@ -1,24 +1,30 @@
--- Fortune
-local fortune_command = "fortune -n 140 -s"
+--  _______              __
+-- |    ___|.-----.----.|  |_.--.--.-----.-----.
+-- |    ___||  _  |   _||   _|  |  |     |  -__|
+-- |___|    |_____|__|  |____|_____|__|__|_____|
+
+-- ------------------------------------------------- --
+local fortune_command = 'fortune -n 140 -s'
 -- local fortune_command = "fortune -n 140 -s computers"
+-- ------------------------------------------------- --
 local fortune =
     wibox.widget {
-    font = "SFP Pro Rounded Heavy 16",
-    text = "Loading your cookie...",
+    font = 'SFP Pro Rounded Heavy 16',
+    text = 'Loading your cookie...',
     widget = wibox.widget.textbox
 }
-
+-- ------------------------------------------------- --
 local fortune_update_interval = 3600
 awful.widget.watch(
     fortune_command,
     fortune_update_interval,
     function(widget, stdout)
         -- Remove trailing whitespaces
-        stdout = stdout:gsub("^%s*(.-)%s*$", "%1")
+        stdout = stdout:gsub('^%s*(.-)%s*$', '%1')
         fortune.text = stdout
     end
 )
-
+-- ------------------------------------------------- --
 local fortune_widget =
     wibox.widget {
     {
@@ -37,5 +43,5 @@ local fortune_widget =
     margins = dpi(4),
     widget = wibox.container.margin
 }
-
+-- ------------------------------------------------- --
 return fortune_widget

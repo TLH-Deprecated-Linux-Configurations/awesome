@@ -4,38 +4,39 @@
 -- |___|___||________|_____|_____|__|__|__|_____||________|__|_|__|
 -- ------------------------------------------------- --
 -- load luarocks modules, or not
-pcall(require, "luarocks.loader")
+pcall(require, 'luarocks.loader')
 -- ------------------------------------------------- --
 -- define vital global variables, first here, then
 -- in their own file
-filesystem = require("gears.filesystem")
+filesystem = require('gears.filesystem')
+require('lgi')
 config_dir = filesystem.get_configuration_dir()
-require("settings.global_variables")
+require('settings.global_variables')
 -- ------------------------------------------------- --
 -- set up Lua's internal garbage collector to
 -- keep memory footprint under control
-require("settings")
+require('settings')
 -- ------------------------------------------------- --
 -- startup configuration
-require("startup")
+require('startup')
 -- ------------------------------------------------- --
 -- Relating to clients and their control, tiling layouts, etc
-require("config")
-require("settings.better_resize")
-require("settings.save_floats")
-require("layout")
-require("config.client")
-_G.root.keys(gears.table.join(_G.root.keys(), require("config.keys.global")))
+require('config')
+require('settings.better_resize')
+require('settings.save_floats')
+require('layout')
+require('config.client')
+_G.root.keys(gears.table.join(_G.root.keys(), require('config.keys.global')))
 -- ------------------------------------------------- --
 -- the appearance variables and styling
-require("themes")
+require('themes')
 -- ------------------------------------------------- --
 -- various utilities reused throughout
-require("utils")
+require('utils')
 -- ------------------------------------------------- --
 -- daemons, aka scripts running in the background
-require("signal")
+require('signal')
 -- ------------------------------------------------- --
 -- UI menus and bar
-require("module")
+require('module')
 -- ------------------------------------------------- --

@@ -1,5 +1,5 @@
 -- URLs
-local apps = require("config.root.apps")
+local apps = require('config.root.apps')
 
 local function create_url(name, path)
     local url =
@@ -8,12 +8,12 @@ local function create_url(name, path)
             {
                 {
                     {
-                        image = os.getenv("HOME") .. "/.config/awesome/themes/icons/svg/" .. name .. ".svg",
+                        image = os.getenv('HOME') .. '/.config/awesome/themes/icons/svg/' .. name .. '.svg',
                         widget = wibox.widget.imagebox,
-                        align = "center",
-                        forced_width = dpi(80),
-                        forced_height = dpi(80),
-                        valign = "center"
+                        align = 'center',
+                        forced_width = dpi(110),
+                        forced_height = dpi(110),
+                        valign = 'center'
                     },
                     widget = wibox.container.margin,
                     margins = dpi(7)
@@ -43,7 +43,7 @@ local function create_url(name, path)
                 {},
                 3,
                 function()
-                    awful.spawn("luakit " .. path)
+                    awful.spawn('luakit ' .. path)
                     control_center_hide()
                 end
             )
@@ -56,17 +56,17 @@ end
 local urls =
     wibox.widget {
     {
-        create_url("spotify", "https://open.spotify.com"),
-        create_url("instagram", "https://instagram.com"),
-        create_url("reddit", "https://reddit.com"),
+        create_url('spotify', 'https://open.spotify.com'),
+        create_url('instagram', 'https://instagram.com'),
+        create_url('reddit', 'https://reddit.com'),
         spacing = dpi(45),
         layout = wibox.layout.fixed.horizontal
     },
     {
         layout = wibox.layout.fixed.horizontal,
-        create_url("github", "https://github.com/Thomashighbaugh"),
-        create_url("mail", "https://mail.zoho.com"),
-        create_url("dribbble", "https://instagram.com"),
+        create_url('github', 'https://github.com/Thomashighbaugh'),
+        create_url('mail', 'https://mail.zoho.com'),
+        create_url('dribbble', 'https://instagram.com'),
         spacing = dpi(45)
     },
     spacing = dpi(45),
