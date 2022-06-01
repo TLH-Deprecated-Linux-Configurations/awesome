@@ -7,10 +7,8 @@ local awful = require('awful')
 -- ------------------------------------------------- --
 require(... .. '.notifications')
 require(... .. '.menu')
-require(... .. '.control-center')
+require(... .. '.dashboard')
 -- ------------------------------------------------- --
-awful.screen.connect_for_each_screen(require(... .. '.notification-center'))
---awful.screen.connect_for_each_screen(require(... .. ".bluetooth-center"))
 
 awful.screen.connect_for_each_screen(require(... .. '.exit-screen'))
 awful.screen.connect_for_each_screen(require(... .. '.bar'))

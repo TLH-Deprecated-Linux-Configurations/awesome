@@ -22,8 +22,6 @@ require('startup')
 -- ------------------------------------------------- --
 -- Relating to clients and their control, tiling layouts, etc
 require('config')
-require('settings.better_resize')
-require('settings.save_floats')
 require('layout')
 require('config.client')
 _G.root.keys(gears.table.join(_G.root.keys(), require('config.keys.global')))

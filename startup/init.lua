@@ -4,6 +4,5 @@
 -- |_______|____|___._|__|  |____|_____|   __|
 --                                     |__|
 -- ------------------------------------------------- --
-require("awful.autofocus")
-require("startup.handling")
-require("startup.screen")
+require('awful.autofocus')
+require('startup.screen')
