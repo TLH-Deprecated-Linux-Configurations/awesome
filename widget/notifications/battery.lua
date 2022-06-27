@@ -9,15 +9,15 @@
 -- |__|____||_____||____|__||__| |__||____|___._||____|__||_____|__|__|_____|
 -- ------------------------------------------------- --
 --
-local gfs = require("gears.filesystem")
-local naughty = require("naughty")
+local gfs = require('gears.filesystem')
+local naughty = require('naughty')
 
 local display_high = true
 local display_low = true
 local display_charge = true
 
 awesome.connect_signal(
-    "signal::battery",
+    'signal::battery',
     function(percentage, state)
         local value = percentage
         -- ------------------------------------------------- --
@@ -25,9 +25,9 @@ awesome.connect_signal(
         if value < 16 and display_low and state == 2 then
             naughty.notification(
                 {
-                    title = "Battery Status",
-                    text = "Running low at " .. value .. "%",
-                    image = gfs.get_configuration_dir() .. "icons/svg/battery.svg"
+                    title = 'Battery Status',
+                    text = 'Running low at ' .. value .. '%',
+                    image = gfs.get_configuration_dir() .. 'icons/svg/battery.svg'
                 }
             )
             display_low = false
@@ -37,9 +37,9 @@ awesome.connect_signal(
         if display_high and state == 4 and value > 90 then
             naughty.notification(
                 {
-                    title = "Battery Status",
-                    text = "Fully charged!",
-                    image = gfs.get_configuration_dir() .. "icons/svg/battery.svg"
+                    title = 'Battery Status',
+                    text = 'Fully charged!',
+                    image = gfs.get_configuration_dir() .. 'icons/svg/battery.svg'
                 }
             )
             display_high = false
@@ -49,9 +49,9 @@ awesome.connect_signal(
         if display_charge and state == 1 then
             naughty.notification(
                 {
-                    title = "Battery Status",
-                    text = "Charging",
-                    image = gfs.get_configuration_dir() .. "icons/svg/battery_charging.svg"
+                    title = 'Battery Status',
+                    text = 'Charging',
+                    image = gfs.get_configuration_dir() .. 'icons/svg/battery_charging.svg'
                 }
             )
             display_charge = false

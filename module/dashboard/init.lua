@@ -1,47 +1,27 @@
---  ______               __               __
--- |      |.-----.-----.|  |_.----.-----.|  |
--- |   ---||  _  |     ||   _|   _|  _  ||  |
--- |______||_____|__|__||____|__| |_____||__|
---  ______               __
--- |      |.-----.-----.|  |_.-----.----.
--- |   ---||  -__|     ||   _|  -__|   _|
--- |______||_____|__|__||____|_____|__|
-
+--  _____               __     __                        __
+-- |     \.---.-.-----.|  |--.|  |--.-----.---.-.----.--|  |
+-- |  --  |  _  |__ --||     ||  _  |  _  |  _  |   _|  _  |
+-- |_____/|___._|_____||__|__||_____|_____|___._|__| |_____|
 -- ------------------------------------------------- --
--- Standard awesome library
-local gears = require('gears')
-local awful = require('awful')
 
--- Theme handling library
-local beautiful = require('beautiful')
-local dpi = beautiful.xresources.apply_dpi
+-- Aesthetic Dashboard
+-------------------------
 
--- Widget library
-local wibox = require('wibox')
-
--- rubato
-
--- Get screen geometry
-local screen_width = awful.screen.focused().geometry.width
-local screen_height = awful.screen.focused().geometry.height
-
--- control_center
-------------
-
--- Helpers
 local function centered_widget(widget)
     local w =
-        wibox.widget {
-        nil,
+        wibox.widget(
         {
             nil,
-            widget,
+            {
+                nil,
+                widget,
+                expand = 'none',
+                layout = wibox.layout.align.vertical
+            },
             expand = 'none',
-            layout = wibox.layout.align.vertical
-        },
-        expand = 'none',
-        layout = wibox.layout.align.horizontal
-    }
+            layout = wibox.layout.align.horizontal
+        }
+    )
 
     return w
 end
@@ -51,203 +31,202 @@ local function create_boxed_widget(widget_to_be_boxed, width, height, bg_color)
     box_container.bg = bg_color
     box_container.forced_height = height
     box_container.forced_width = width
-    box_container.shape = beautiful.client_shape_rounded
+    box_container.shape = beautiful.client_shape_rounded_large
 
     local boxed_widget =
-        wibox.widget {
-        -- Add margins
+        wibox.widget(
         {
-            -- Add background color
             {
-                -- The actual widget goes here
-                widget_to_be_boxed,
-                top = dpi(9),
-                bottom = dpi(9),
-                left = dpi(10),
-                right = dpi(10),
+                -- Add margins
+                {
+                    -- Add background color
+                    {
+                        -- The actual widget goes here
+                        widget_to_be_boxed,
+                        top = dpi(12),
+                        bottom = dpi(12),
+                        left = dpi(10),
+                        right = dpi(10),
+                        widget = wibox.container.margin,
+                        shape = beautiful.client_shape_rounded_xl
+                    },
+                    widget = box_container
+                },
+                margins = dpi(8),
+                color = beautiful.bg_menu,
                 widget = wibox.container.margin
             },
-            widget = box_container
-        },
-        margins = dpi(10),
-        color = '#00000000',
-        widget = wibox.container.margin
-    }
+            widget = wibox.container.background,
+            bg = beautiful.bg_button,
+            shape = beautiful.client_shape_rounded_xl
+        }
+    )
 
     return boxed_widget
 end
 
--- Widget
-
 local time = require('widget.dashboard.time')
+
 local date = require('widget.dashboard.date')
-local uptime = require('widget.dashboard.uptime')
-local stats = require('widget.dashboard.dials')
-local notifs = require('widget.dashboard.notifs')
-local battery = require('widget.dashboard.battery')
-local sliders = require('widget.dashboard.sliders')
-local buttons = require('widget.dashboard.buttons')
-local bluetooth = require('widget.dashboard.bluetooth.')
-local end_session = require('widget.dashboard.end-session')
-local network = require('widget.dashboard.network')
-local fortune = require('widget.dashboard.fortune')
-local calendar = require('widget.dashboard.calendar')
-
-local urls = require('widget.dashboard.urls')
-
-local url_boxed = create_boxed_widget(urls, dpi(500), dpi(300), '#00000000')
-
-local fortune_boxed = create_boxed_widget(fortune, dpi(450), dpi(300), beautiful.bg_normal)
-local network_boxed = create_boxed_widget(network, dpi(450), dpi(650), beautiful.bg_normal)
-local end_session_boxed = create_boxed_widget(end_session, dpi(200), dpi(120), beautiful.bg_normal)
-local buttons_boxed = create_boxed_widget(buttons, dpi(450), dpi(300), '#00000000')
-
-local sliders_boxed = create_boxed_widget(sliders, dpi(450), dpi(275), beautiful.bg_normal)
-local bluetooth_boxed = create_boxed_widget(bluetooth, dpi(450), dpi(350), beautiful.bg_normal)
-local time_boxed = create_boxed_widget(centered_widget(time), dpi(250), dpi(120), beautiful.bg_normal)
-local date_boxed = create_boxed_widget(centered_widget(date), dpi(200), dpi(120), beautiful.bg_normal)
-local battery_boxed = create_boxed_widget(battery, dpi(250), dpi(120), beautiful.bg_normal)
-local stats_boxed = create_boxed_widget(stats, dpi(450), dpi(350), beautiful.bg_normal)
-local notifs_boxed = create_boxed_widget(notifs, dpi(450), dpi(400), beautiful.bg_normal)
-local uptime_boxed = create_boxed_widget(centered_widget(uptime), dpi(250), dpi(145), beautiful.bg_normal)
-local calendar_boxed = create_boxed_widget(calendar, dpi(450), dpi(430), beautiful.bg_normal)
--- Dashboard
-control_center =
-    wibox(
+-- pfp
+local profile_pic_img = {
     {
-        type = 'splash',
-        screen = mouse.screen,
-        height = screen_height,
-        width = screen_width,
-        ontop = true,
-        visible = false,
-        bg = colors.alpha(colors.blacker, 'aa')
+        image = icons.logo,
+        halign = 'center',
+        valign = 'center',
+        widget = wibox.widget.imagebox
+    },
+    widget = wibox.container.background,
+    bg = beautiful.bg_button
+}
+
+local profile_pic_container =
+    wibox.widget(
+    {
+        forced_height = dpi(90),
+        forced_width = dpi(90),
+        widget = wibox.container.background,
+        bg = beautiful.bg_focus,
+        shape = beautiful.client_shape_rounded_xl
     }
 )
 
-awful.placement.centered(control_center)
+local profile = {
+    {
+        {
+            profile_pic_img,
+            widget = profile_pic_container
+        },
+        margins = dpi(1),
+        widget = wibox.container.margin
+    },
+    widget = wibox.container.background,
+    bg = beautiful.bg_focus,
+    shape = beautiful.client_shape_rounded_large
+}
 
-control_center:buttons(
-    gears.table.join(
-        -- Middle click - Hide control_center
-        awful.button(
-            {},
-            2,
-            function()
-                control_center_hide()
-            end
+awful.screen.connect_for_each_screen(
+    function(s)
+        local dashboard_width = dpi(860)
+        local dashboard_height = dpi(640)
+
+        -- widgets
+        local notifs = require('widget.dashboard.notifs')
+
+        s.stats = require('widget.dashboard.dials')
+
+        s.time_boxed = create_boxed_widget(centered_widget(time), dpi(260), dpi(90), beautiful.transparent)
+        s.date_boxed = create_boxed_widget(date, dpi(260), dpi(110), beautiful.transparent)
+        s.notifs = create_boxed_widget(notifs, dpi(420), dpi(640), beautiful.transparent)
+        s.stats_boxed = create_boxed_widget(s.stats, dpi(260), dpi(360), beautiful.transparent)
+
+        local dashboard_items =
+            wibox.widget(
+            {
+                nil,
+                {
+                    s.time_boxed,
+                    {
+                        {
+                            profile,
+                            layout = wibox.layout.fixed.vertical
+                        },
+                        {
+                            s.date_boxed,
+                            layout = wibox.layout.fixed.vertical
+                        },
+                        layout = wibox.layout.fixed.horizontal
+                    },
+                    s.stats_boxed,
+                    layout = wibox.layout.fixed.vertical
+                },
+                expand = 'none',
+                layout = wibox.layout.align.horizontal
+            }
         )
-    )
-)
 
-local slide =
-    rubato.timed {
-    pos = dpi(-1080),
-    rate = 60,
-    intro = 0.215,
-    duration = 0.84,
-    easing = rubato.bouncy,
-    awestore_compat = true,
-    subscribed = function(pos)
-        control_center.y = pos
-    end
-}
+        -- Dashboard and animations init
+        dashboard =
+            awful.popup(
+            {
+                type = 'dock',
+                screen = s,
+                maximum_height = dashboard_height,
+                minimum_width = dashboard_width,
+                maximum_width = dashboard_width,
+                -- center it on the screen assuming 1920x1080 resolution
+                x = s.geometry.x + s.geometry.width / 2 - dpi(400),
+                bg = beautiful.transparent,
+                ontop = true,
+                visible = false,
+                widget = {
+                    {
+                        layout = wibox.layout.flex.horizontal,
+                        spacing = dpi(10),
+                        spacing_widget = wibox.widget.separator(
+                            {
+                                span_ratio = 0.50,
+                                color = colors.alpha(colors.color1, '88')
+                            }
+                        ),
+                        dashboard_items,
+                        s.notifs
+                    },
+                    bg = beautiful.bg_menu,
+                    shape = beautiful.client_shape_rounded_xl,
+                    widget = wibox.container.background
+                }
+            }
+        )
 
-local slide_strut =
-    rubato.timed {
-    pos = dpi(0),
-    rate = 60,
-    intro = 0.21,
-    duration = 0.63,
-    easing = rubato.quadratic,
-    awestore_compat = true,
-    subscribed = function(height)
-        control_center:struts {left = 0, right = 0, top = height, bottom = 0}
-    end
-}
+        local anim_length = 0.7
+        -- Gears Timer so awestore_compat can go
+        local slide_end =
+            gears.timer(
+            {
+                single_shot = true,
+                timeout = anim_length + 0.1, --so the panel doesnt disappear in the last bit
+                callback = function()
+                    dashboard.visible = not dashboard.opened
+                end
+            }
+        )
 
-local control_center_status = false
+        -- Rubato
+        local slide =
+            rubato.timed(
+            {
+                pos = -dashboard.height,
+                rate = 60,
+                duration = anim_length,
+                intro = anim_length / 2,
+                easing = rubato.linear,
+                subscribed = function(pos)
+                    dashboard.y = pos
+                end
+            }
+        )
 
-slide.ended:subscribe(
-    function()
-        if control_center_status then
-            control_center.visible = false
+        -- Make toogle button
+        local dashboard_show = function()
+            dashboard.visible = true
+            slide.target = dpi(60)
+            dashboard:emit_signal('opened')
+        end
+
+        local dashboard_hide = function()
+            slide_end:again()
+            slide.target = -dashboard.height
+            dashboard:emit_signal('closed')
+        end
+
+        function dashboard:toggle()
+            self.opened = not self.opened
+            if self.opened then
+                dashboard_hide()
+            else
+                dashboard_show()
+            end
         end
     end
 )
-
-control_center_show = function()
-    awesome.emit_signal('bluetooth::power:refresh')
-    awesome.emit_signal('bluetooth::devices:refreshPanel')
-    awesome.emit_signal('network::networks:refreshPanel')
-    control_center.visible = true
-    slide:set(0)
-    slide_strut:set(1080)
-    control_center_status = false
-end
-
-control_center_hide = function()
-    slide:set(-1080)
-    slide_strut:set(0)
-    control_center_status = true
-end
-
-control_center_toggle = function()
-    if control_center.visible then
-        control_center_hide()
-    else
-        control_center_show()
-    end
-end
-
-control_center:setup {
-    {
-        {
-            widget = wibox.container.margin,
-            layout = wibox.layout.fixed.vertical,
-            network_boxed,
-            fortune_boxed
-        },
-        -- ------------------------------------------------- --
-        {
-            {
-                {
-                    sliders_boxed,
-                    bluetooth_boxed,
-                    notifs_boxed,
-                    layout = wibox.layout.fixed.vertical
-                },
-                {
-                    url_boxed,
-                    stats_boxed,
-                    buttons_boxed,
-                    layout = wibox.layout.fixed.vertical
-                },
-                {
-                    layout = wibox.layout.fixed.vertical,
-                    {
-                        battery_boxed,
-                        end_session_boxed,
-                        layout = wibox.layout.fixed.horizontal
-                    },
-                    uptime_boxed,
-                    {
-                        time_boxed,
-                        date_boxed,
-                        layout = wibox.layout.fixed.horizontal
-                    },
-                    calendar_boxed
-                },
-                layout = wibox.layout.fixed.horizontal
-            },
-            {
-                layout = wibox.layout.fixed.vertical
-            },
-            layout = wibox.layout.fixed.vertical
-        },
-        expand = 'none',
-        layout = wibox.layout.fixed.horizontal
-    },
-    margins = dpi(10),
-    widget = wibox.container.margin
-}

@@ -23,11 +23,11 @@ local ll =
         {
             {
                 {
-                    id = "icon_role",
-                    forced_height = dpi(72),
-                    forced_width = dpi(72),
+                    id = 'icon_role',
+                    forced_height = dpi(84),
+                    forced_width = dpi(84),
                     widget = wibox.widget.imagebox,
-                    shape = beautiful.client_shape_rounded_lg
+                    shape = beautiful.client_shape_rounded_xl
                 },
                 margins = dpi(15),
                 widget = wibox.container.margin,
@@ -35,11 +35,11 @@ local ll =
             },
             widget = clickable_container
         },
-        id = "background_role",
-        forced_width = dpi(76),
-        forced_height = dpi(76),
+        id = 'background_role',
+        forced_width = dpi(96),
+        forced_height = dpi(96),
         bg = beautiful.bg_button,
-        shape = beautiful.client_shape_rounded_lg,
+        shape = beautiful.client_shape_rounded_xl,
         widget = wibox.container.background
     }
 }
@@ -49,15 +49,15 @@ local layout_popup =
     widget = wibox.widget {
         {
             ll,
-            margins = dpi(12),
+            margins = dpi(24),
             screen = mouse.screen,
             widget = wibox.container.margin
         },
         widget = wibox.container.background
     },
     border_width = dpi(3),
-    border_color = colors.alpha(colors.black, "99"),
-    bg = colors.alpha(colors.colorA, "99"),
+    border_color = colors.alpha(colors.black, '88'),
+    bg = colors.alpha(colors.colorA, '88'),
     shape = beautiful.client_shape_rounded_xl,
     screen = mouse.screen,
     placement = awful.placement.centered,
@@ -67,7 +67,7 @@ local layout_popup =
 -- ------------------------------------------------- --
 layout_popup.timer = gears.timer {timeout = 3}
 layout_popup.timer:connect_signal(
-    "timeout",
+    'timeout',
     function()
         layout_popup.visible = false
         layout_popup.screen = mouse.screen
@@ -102,8 +102,8 @@ local layout_box = function(s)
                     awful.widget.layoutbox(s),
                     top = dpi(6),
                     bottom = dpi(6),
-                    left = dpi(12),
-                    right = dpi(12),
+                    left = dpi(16),
+                    right = dpi(16),
                     widget = wibox.container.margin
                 },
                 shape = beautiful.client_shape_rounded_xl,
@@ -125,28 +125,28 @@ local layout_box = function(s)
                 {},
                 1,
                 function()
-                    awesome.emit_signal("layout::changed:next")
+                    awesome.emit_signal('layout::changed:next')
                 end
             ),
             awful.button(
                 {},
                 3,
                 function()
-                    awesome.emit_signal("layout::changed:prev")
+                    awesome.emit_signal('layout::changed:prev')
                 end
             ),
             awful.button(
                 {},
                 8,
                 function()
-                    awful.layout.inc(1)
+                    awesome.emit_signal('layout::changed:next')
                 end
             ),
             awful.button(
                 {},
                 9,
                 function()
-                    awful.layout.inc(-1)
+                    awesome.emit_signal('layout::changed:prev')
                 end
             )
         )
@@ -156,7 +156,7 @@ local layout_box = function(s)
     return layoutbox
 end
 awesome.connect_signal(
-    "layout::changed:next",
+    'layout::changed:next',
     function()
         awful.layout.inc(1)
         layout_popup.visible = true
@@ -164,7 +164,7 @@ awesome.connect_signal(
     end
 )
 awesome.connect_signal(
-    "layout::changed:prev",
+    'layout::changed:prev',
     function()
         awful.layout.inc(-1)
         layout_popup.visible = true

@@ -7,11 +7,17 @@
 -- |   |   ||  _  |   _||  ||  _  ||  _  ||  ||  -__|__ --|
 --  \_____/ |___._|__|  |__||___._||_____||__||_____|_____|
 -- ------------------------------------------------- --
--- This makes for neater files without boilerplate and improves the
--- developer experience considerably compared to the standard use of
--- require statements to call libraries in per file
+-- To prevent needing to call these at the beginning of *most*
+-- files this instead calls them once and they are globally scoped
+-- thereafter.
+
 -- ------------------------------------------------- --
---assignments
+-- ------------ Necessary Preliminaries ------------ --
+filesystem = require('gears.filesystem')
+require('lgi')
+config_dir = filesystem.get_configuration_dir()
+-- ------------------------------------------------- --
+-- ------------------ assignments ------------------ --
 
 awful = require('awful')
 beautiful = require('beautiful')
@@ -31,7 +37,7 @@ modkey = require('config.keys.mod').mod_key
 altkey = require('config.keys.mod').alt_key
 math = require('math')
 ruled = require('ruled')
-awestore = require('module.awestore')
+awestore = require('utils.awestore')
 client_keys = require('config.client.keys')
 client_buttons = require('config.client.buttons')
 gfs = filesystem
@@ -55,6 +61,12 @@ Gio = require('lgi').Gio
 awful_menu = require('awful.menu')
 menu_gen = require('menubar.menu_gen')
 menu_utils = require('menubar.utils')
+
+gobject = require('gears.object')
+gtable = require('gears.table')
+gtimer = require('gears.timer')
+gstring = require('gears.string')
+colorize_text = require('utils.colorize_text')
 
 -- ------------------------------------------------- --
 -- Assignments dependent on above list otherwise it will throw errrors,

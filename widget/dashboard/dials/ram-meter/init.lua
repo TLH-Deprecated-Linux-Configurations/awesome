@@ -16,7 +16,7 @@ local active_color = {
 
 local widget_text =
     wibox.widget {
-    font = 'Nineteen Ninety Seven Bold  12',
+    font = beautiful.font .. ' 12',
     text = 'RAM',
     valign = 'center',
     align = 'center',
@@ -27,7 +27,7 @@ local ram_bar =
     wibox.widget {
     max_value = 100,
     bg = colors.black,
-    thickness = dpi(12),
+    thickness = dpi(10),
     start_angle = 4.3,
     rounded_edge = true,
     colors = {active_color},
@@ -42,7 +42,7 @@ awesome.connect_signal(
         -- local r_used = string.format("%.1f", used / 1000) .. "G"
 
         ram_bar.value = r_average
-        widget_text.markup = 'RAM \n' .. tostring(r_average) .. '%'
+        widget_text.markup = ' \n' .. tostring(r_average) .. '%'
     end
 )
 
@@ -51,19 +51,26 @@ local ram_meter =
     {
         {
             {
-                ram_bar,
-                direction = 'east',
-                widget = wibox.container.rotate
+                {
+                    {
+                        ram_bar,
+                        direction = 'east',
+                        widget = wibox.container.rotate
+                    },
+                    widget_text,
+                    layout = wibox.layout.stack
+                },
+                margins = dpi(5),
+                widget = wibox.container.margin
             },
-            widget_text,
-            layout = wibox.layout.stack
+            shape = beautiful.client_shape_rounded_xl,
+            fg = colors.white,
+            forced_height = dpi(130),
+            widget = wibox.container.background
         },
-        margins = dpi(15),
-        widget = wibox.container.margin
+        widget = wibox.container.margin,
+        margins = dpi(5)
     },
-    shape = beautiful.client_shape_rounded_xl,
-    fg = colors.white,
-    forced_height = dpi(150),
     widget = wibox.container.background
 }
 

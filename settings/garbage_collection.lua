@@ -12,17 +12,17 @@
 --  collectgrabage function at the end of every watch function. Currently
 --  set with settings that inhibit my laptop the least.
 -- ------------------------------------------------- --
-local gears = require("gears")
+local gears = require('gears')
 -- Run garbage collector regularly to prevent memory leaks
 local _M = function()
     gears.timer {
-        timeout = 30,
+        timeout = 60,
         autostart = true,
         callback = function()
             collectgarbage()
-            collectgarbage("collect")
-            collectgarbage("setstepmul", 400)
-            collectgarbage("setpause", 160)
+            collectgarbage('collect')
+            collectgarbage('setstepmul', 400)
+            collectgarbage('setpause', 160)
         end
     }
 end

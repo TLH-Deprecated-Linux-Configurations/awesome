@@ -4,20 +4,21 @@
 -- |_______|____|__|__||_____|
 -- ------------------------------------------------- --
 return {
-    require(... .. '.double-border'),
-    require(... .. '.dropdown'),
-    require(... .. '.format_item'),
-    require(... .. '.json'),
-    require(... .. '.svg-color'),
-    require(... .. '.titlebar'),
-    require(... .. '.overflow'),
-    require(... .. '.snap-edge'),
-    require(... .. '.clickable-container'),
-    require(... .. '.file'),
-    require(... .. '.rubato'),
-    require(... .. '.user-icon'),
+    require(... .. '.awestore'),
     require(... .. '.beckham'),
-    require(... .. '.mouser'),
     require(... .. '.better_resize'),
-    require(... .. '.save_floats')
+    require(... .. '.clickable-container'),
+    require(... .. '.colorize_text'),
+    require(... .. '.dropdown'),
+    require(... .. '.file'),
+    require(... .. '.filesystem'),
+    require(... .. '.format_item'),
+    require(... .. '.hover_signal'),
+    require(... .. '.icon_handler'),
+    require(... .. '.mouser'),
+    require(... .. '.overflow'),
+    require(... .. '.rubato'),
+    require(... .. '.save_floats'),
+    require(... .. '.snap-edge'),
+    require(... .. '.titlebar')
 }

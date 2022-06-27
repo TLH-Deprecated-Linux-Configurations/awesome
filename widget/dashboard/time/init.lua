@@ -1,12 +1,12 @@
 -- Standard awesome library
-local awful = require("awful")
+local awful = require('awful')
 
 -- Theme handling library
-local beautiful = require("beautiful")
+local beautiful = require('beautiful')
 local dpi = beautiful.xresources.apply_dpi
 
 -- Widget library
-local wibox = require("wibox")
+local wibox = require('wibox')
 
 -- Helpers
 
@@ -15,20 +15,20 @@ local wibox = require("wibox")
 
 local time_hour =
     wibox.widget {
-    font = "Nineteen Ninety Seven Bold 24",
+    font = beautiful.font .. 'bold 64',
     fg = colors.colorA,
-    format = "%H",
-    align = "center",
-    valign = "center",
+    format = '%H',
+    align = 'center',
+    valign = 'center',
     widget = wibox.widget.textclock
 }
 
 local time_min =
     wibox.widget {
-    font = "Nineteen Ninety Seven Bold 24",
-    format = "%M",
-    align = "center",
-    valign = "center",
+    font = beautiful.font .. 'bold 64',
+    format = '%M',
+    align = 'center',
+    valign = 'center',
     widget = wibox.widget.textclock
 }
 
@@ -44,15 +44,12 @@ local time =
                     layout = wibox.layout.fixed.horizontal
                 },
                 widget = wibox.container.place,
-                valign = "center",
-                halign = "center"
+                valign = 'center',
+                halign = 'center'
             },
-            widget = wibox.container.margin,
-            forced_width = dpi(240),
-            forced_height = dpi(100)
+            widget = wibox.container.margin
         },
-        widget = wibox.container.background,
-        bg = beautiful.bg_focus
+        widget = wibox.container.background
     },
     spacing = dpi(25),
     widget = wibox.layout.fixed.horizontal

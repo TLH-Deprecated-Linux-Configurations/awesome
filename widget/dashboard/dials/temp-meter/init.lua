@@ -17,8 +17,8 @@ local active_color = {
 -- ------------------------------------------------- --
 local widget_text =
     wibox.widget {
-    font = 'Nineteen Ninety Seven Bold  12',
-    text = 'TEMP',
+    font = beautiful.font .. '  12',
+    text = '',
     valign = 'center',
     align = 'center',
     widget = wibox.widget.textbox
@@ -28,7 +28,7 @@ local temp_bar =
     wibox.widget {
     max_value = 100,
     bg = colors.black,
-    thickness = dpi(12),
+    thickness = dpi(10),
     start_angle = 4.3,
     rounded_edge = true,
     colors = {active_color},
@@ -40,7 +40,7 @@ awesome.connect_signal(
     function(temp)
         if temp ~= nil then
             temp_bar.value = temp
-            widget_text:set_text('Temp \n' .. math.floor(temp) .. '°')
+            widget_text:set_text(' \n' .. math.floor(temp) .. '°')
         end
     end
 )
@@ -51,19 +51,26 @@ local temp_meter =
     {
         {
             {
-                temp_bar,
-                direction = 'east',
-                widget = wibox.container.rotate
+                {
+                    {
+                        temp_bar,
+                        direction = 'east',
+                        widget = wibox.container.rotate
+                    },
+                    widget_text,
+                    layout = wibox.layout.stack
+                },
+                margins = dpi(5),
+                widget = wibox.container.margin
             },
-            widget_text,
-            layout = wibox.layout.stack
+            shape = beautiful.client_shape_rounded_xl,
+            fg = colors.white,
+            forced_height = dpi(130),
+            widget = wibox.container.background
         },
-        margins = dpi(15),
-        widget = wibox.container.margin
+        widget = wibox.container.margin,
+        margins = dpi(5)
     },
-    shape = beautiful.client_shape_rounded_xl,
-    fg = colors.white,
-    forced_height = dpi(150),
     widget = wibox.container.background
 }
 -- ------------------------------------------------- --

@@ -15,18 +15,18 @@ local height = dpi(200)
 local screen = awful.screen.focused()
 
 local active_color_1 = {
-    type = "linear",
+    type = 'linear',
     from = {0, 0},
     to = {200, 50}, -- replace with w,h later
-    stops = {{0, "#e9efff"}, {0.50, "#f4f4f7"}}
+    stops = {{0, '#e9efff'}, {0.50, '#f4f4f7'}}
 }
 
 local bright_icon =
     wibox.widget {
     markup = "<span foreground='#f4f4f7'><b></b></span>",
-    align = "center",
-    valign = "center",
-    font = "SFMono Nerd Font Mono Bold  64",
+    align = 'center',
+    valign = 'center',
+    font = 'SFMono Nerd Font Mono Bold  64',
     widget = wibox.widget.textbox
 }
 
@@ -35,14 +35,14 @@ local bright_adjust =
     wibox(
     {
         -- screen = screen.focused,
-        type = "notification",
+        type = 'notification',
         x = screen.geometry.width / 2 - width / 2,
         y = screen.geometry.height / 2 - height / 2 + 300,
         width = width,
         height = height,
         visible = false,
         ontop = true,
-        bg = colors.alpha(colors.black, "88")
+        bg = colors.alpha(colors.black, '88')
     }
 )
 
@@ -52,7 +52,7 @@ local bright_bar =
     shape = gears.shape.rounded_bar,
     bar_shape = gears.shape.rounded_bar,
     color = colors.white,
-    background_color = colors.alpha(colors.colorH, "88"),
+    background_color = colors.alpha(colors.colorH, '88'),
     max_value = 100,
     value = 100
 }
@@ -77,9 +77,9 @@ bright_adjust:setup {
         }
     },
     shape = beautiful.client_shape_rounded_xl,
-    bg = colors.alpha(colors.black, "88"),
+    bg = colors.alpha(colors.black, '88'),
     border_width = dpi(2),
-    border_color = colors.alpha(colors.colorA, "aa"),
+    border_color = colors.alpha(colors.colorA, 'aa'),
     widget = wibox.container.background
 }
 
@@ -109,7 +109,7 @@ local update_slider = function(percentage)
 end
 
 awesome.connect_signal(
-    "signal::brightness",
+    'signal::brightness',
     function(percentage)
         if percentage ~= nil then
             update_slider(percentage)

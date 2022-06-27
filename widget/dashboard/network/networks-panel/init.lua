@@ -5,7 +5,7 @@
 -- ------------------------------------------------- --
 
 local searching = require('widget.dashboard.network.searching')
-local width = dpi(410)
+local width = dpi(450)
 
 local panelLayout = overflow.vertical()
 
@@ -18,7 +18,10 @@ end
 
 local networksAdd = function(n)
     local box = require('widget.dashboard.network.elements')
-    panelLayout:insert(#panelLayout.children + 1, box.create(n.SSID, n.BSSID, n.connectStatus, n.signal, n.secure, n.speed))
+    panelLayout:insert(
+        #panelLayout.children + 1,
+        box.create(n.SSID, n.BSSID, n.connectStatus, n.signal, n.secure, n.speed)
+    )
 end
 
 local networksRemove = function(box)

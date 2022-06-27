@@ -5,7 +5,7 @@
 --                                       |__|
 -- ------------------------------------------------- --
 
-local utils = require("menubar.utils")
+local utils = require('menubar.utils')
 -- ------------------------------------------------- --
 local io = io
 local ipairs = ipairs
@@ -21,19 +21,19 @@ local desktop = {
     -- Default desktop basic icons
     baseicons = {
         [1] = {
-            label = "This PC",
-            icon = "computer",
-            onclick = "computer://"
+            label = 'This PC',
+            icon = 'computer',
+            onclick = 'computer://'
         },
         [2] = {
-            label = "Home",
-            icon = "user-home",
-            onclick = os.getenv("HOME")
+            label = 'Home',
+            icon = 'user-home',
+            onclick = os.getenv('HOME')
         },
         [3] = {
-            label = "Trash",
-            icon = "user-trash",
-            onclick = "trash://"
+            label = 'Trash',
+            icon = 'user-trash',
+            onclick = 'trash://'
         }
     },
     -- Default parameters
@@ -83,7 +83,7 @@ function desktop.add_single_icon(args, label, icon, onclick)
         dcp[s].y = 20 + args.margin.y
     end
 
-    local common = {screen = s, bg = "#00000000", visible = true, type = "desktop"}
+    local common = {screen = s, bg = '#00000000', visible = true, type = 'desktop'}
     -- ------------------------------------------------- --
     -- create icon container
     if icon then
@@ -117,10 +117,10 @@ function desktop.add_single_icon(args, label, icon, onclick)
         caption =
             wibox.widget {
             text = label,
-            align = "center",
+            align = 'center',
             forced_width = common.width,
             forced_height = common.height,
-            ellipsize = "middle",
+            ellipsize = 'middle',
             widget = wibox.widget.textbox
         }
 
@@ -157,15 +157,15 @@ end
 function desktop.lookup_file_icon(filename)
     -- load system MIME types
     if #mime_types == 0 then
-        for line in io.lines("/etc/mime.types") do
-            if not line:find("^#") then
+        for line in io.lines('/etc/mime.types') do
+            if not line:find('^#') then
                 local parsed = {}
-                for w in line:gmatch("[^%s]+") do
+                for w in line:gmatch('[^%s]+') do
                     table.insert(parsed, w)
                 end
                 if #parsed > 1 then
                     for i = 2, #parsed do
-                        mime_types[parsed[i]] = parsed[1]:gsub("/", "-")
+                        mime_types[parsed[i]] = parsed[1]:gsub('/', '-')
                     end
                 end
             end
@@ -173,15 +173,15 @@ function desktop.lookup_file_icon(filename)
     end
     -- ------------------------------------------------- --
     -- try to search a possible icon among standards
-    local extension = filename:match("%a+$")
-    local mime = mime_types[extension] or ""
-    local mime_family = mime:match("^%a+") or ""
+    local extension = filename:match('%a+$')
+    local mime = mime_types[extension] or ''
+    local mime_family = mime:match('^%a+') or ''
 
     local possible_filenames = {
         mime,
-        "gnome-mime-" .. mime,
+        'gnome-mime-' .. mime,
         mime_family,
-        "gnome-mime-" .. mime_family,
+        'gnome-mime-' .. mime_family,
         extension
     }
 
@@ -193,29 +193,29 @@ function desktop.lookup_file_icon(filename)
     end
     -- ------------------------------------------------- --
     -- if we don"t find ad icon, then pretend is a plain text file
-    return utils.lookup_icon("text-x-generic")
+    return utils.lookup_icon('text-x-generic')
 end
 
 -- ------------------------------------------------- --
 -- Parse subdirectories and files list from input directory
 function desktop.parse_dirs_and_files(dir)
     local files = {}
-    local paths = pipelines("find " .. dir .. " -maxdepth 1 -type d |sort|tail -n +1")
+    local paths = pipelines('find ' .. dir .. ' -maxdepth 1 -type d |sort|tail -n +1')
     for path in paths do
-        if path:match("[^/]+$") then
+        if path:match('[^/]+$') then
             local file = {}
-            file.filename = path:match("[^/]+$")
+            file.filename = path:match('[^/]+$')
             file.path = path
             file.show = true
-            file.icon = utils.lookup_icon("folder")
+            file.icon = utils.lookup_icon('folder')
             table.insert(files, file)
         end
     end
-    local paths = pipelines("find " .. dir .. " -maxdepth 1 -type f")
+    local paths = pipelines('find ' .. dir .. ' -maxdepth 1 -type f')
     for path in paths do
-        if not path:find("%.desktop$") then
+        if not path:find('%.desktop$') then
             local file = {}
-            file.filename = path:match("[^/]+$")
+            file.filename = path:match('[^/]+$')
             file.path = path
             file.show = true
             file.icon = desktop.lookup_file_icon(file.filename)
@@ -244,18 +244,18 @@ end
 function desktop.add_icons(args)
     args = args or {}
     args.screen = args.screen or mouse.screen
-    args.dir = args.dir or os.getenv("HOME") .. "/Desktop"
+    args.dir = args.dir or os.getenv('HOME') .. '/Desktop'
     args.showlabels = args.showlabel or true
-    args.open_with = args.open_with or "xdg_open"
+    args.open_with = args.open_with or 'xdg_open'
     args.baseicons = args.baseicons or desktop.baseicons
     args.iconsize = args.iconsize or desktop.iconsize
     args.labelsize = args.labelsize or desktop.labelsize
     args.margin = args.margin or desktop.margin
 
     -- ------------------------------------------------- --
-    -- trying to fallback on Adwaita if theme.icon_theme is not defined
+    -- trying to fallback on chhinamasta if theme.icon_theme is not defined
     if not beautiful.icon_theme then
-        beautiful.icon_theme = args.icon_theme or "Adwaita"
+        beautiful.icon_theme = args.icon_theme or 'chhinamasta'
     end
 
     desktop.add_base_icons(args)

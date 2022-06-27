@@ -9,7 +9,6 @@ local title =
                 {
                     layout = wibox.layout.align.horizontal,
                     spacing = dpi(16),
-                    require('utils.user-icon'),
                     {
                         layout = wibox.container.place,
                         halign = 'center',
@@ -25,7 +24,8 @@ local title =
     },
     shape = beautiful.client_shape_rounded_medium,
     forced_height = dpi(70),
-    widget = wibox.container.background
+    widget = wibox.container.background,
+    bg = beautiful.bg_button
 }
 
 -- ------------------------------------------------- --

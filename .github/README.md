@@ -1,5 +1,11 @@
-# WIP
+# the Electric Tantra Desktop Environment
 
-No I have not rage quit, just saving up my latest ideas for release time so they don't end up in other repos without attribution ;] 
+<img src="assets/awesome-logo.svg" width="40%;" alt="stylized awesome logo">
 
-PS those who attribute not should expect the same... ;D
+<p width="60%">This is the AwesomeWM configuration that composes the vast majority of the features and functionality of the Electric Tantra Linux, the live iso demonstration of my working environment locally that demonstrates said environment in a way that enables interested third parties to test how it works without having to build a special vm or turn their own configuration into Frankenstein's monster to test. </p>
+
+<h2>Why Awesome</h2>
+<p>With lua and the Awesome API, one can craft a complete desktop environment suited to their tastes. The only imposed limits are derived from one's battle with their persistence and ability to find examples of similar implementations on Github. Few window managers open up the possiblity of extending the window manager into a complete Desktop Environment as easily as AwesomeWM and of those that do I am unaware of any other that also includes as many functions available through API calls that reflect as wide of a set of potential programming and organization styles as is presently part of AwesomeWM by default.  </p>
+
+
+<hr/>

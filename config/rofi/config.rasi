@@ -1,8 +1,0 @@
-configuration {
-  modi: "window,run,drun,ssh,keys";
-  show-icons:         true;
-  icon-theme:         "chhinamasta";
-  location: 5;
-  yoffset: -50;
-  xoffset: -20;
-}

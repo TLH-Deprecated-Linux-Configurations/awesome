@@ -19,16 +19,13 @@
 -- ------------------------------------------------- --
 -- Grab environment
 local pairs = pairs
-local awful = require("awful")
+local awful = require('awful')
 local setmetatable = setmetatable
 local capi = {
     mouse = mouse,
     client = client,
     screen = screen
 }
--- ------------------------------------------------- --
--- Scratchdrop: drop-down applications manager for the awesome window manager
-local dropdown = {} -- module scratch.drop
 
 local dropdown = {}
 -- ------------------------------------------------- --
@@ -47,8 +44,8 @@ end
 -- Create a new window for the drop-down application when it doesn't
 -- exist, or toggle between hidden and visible states when it does
 function dropdown.toggle(prog, vert, horiz, width, height, sticky, screen)
-    vert = vert or "top"
-    horiz = horiz or "center"
+    vert = vert or 'top'
+    horiz = horiz or 'center'
     width = width or 1
     height = height or 0.25
     sticky = sticky or false
@@ -66,7 +63,7 @@ function dropdown.toggle(prog, vert, horiz, width, height, sticky, screen)
         -- Add unmanage signal for scratchdrop programs
         --
         attach_signal(
-            "unmanage",
+            'unmanage',
             function(c)
                 for scr, cl in pairs(dropdown[prog]) do
                     if cl == c then
@@ -100,17 +97,17 @@ function dropdown.toggle(prog, vert, horiz, width, height, sticky, screen)
                 height = math.ceil(screengeom.height * height)
             end
 
-            if horiz == "left" then
+            if horiz == 'left' then
                 x = screengeom.x
-            elseif horiz == "right" then
+            elseif horiz == 'right' then
                 x = screengeom.width - width
             else
                 x = screengeom.x + math.ceil((screengeom.width - width) / 2) - 1
             end
 
-            if vert == "bottom" then
+            if vert == 'bottom' then
                 y = screengeom.height + screengeom.y - height
-            elseif vert == "center" then
+            elseif vert == 'center' then
                 y = screengeom.y + math.ceil((screengeom.height - height) / 2)
             else
                 y = screengeom.y
@@ -126,21 +123,22 @@ function dropdown.toggle(prog, vert, horiz, width, height, sticky, screen)
 
             c:raise()
             capi.client.focus = c
-            detach_signal("manage", spawnw)
+            detach_signal('manage', spawnw)
         end
         -- ------------------------------------------------- --
         -- ------------------------------------------------- --
         -- ------------------------------------------------- --
         -- Add manage signal and spawn the program
         --
-        attach_signal("manage", spawnw)
+        attach_signal('manage', spawnw)
         awful.util.spawn_with_shell(prog, false) -- original without '_with_shell'
     else
         -- Get a running client
         --
         c = dropdown[prog][screen]
 
-        status, err = pcall(awful.client.movetotag, awful.tag.selected(screen), c)
+        status,
+            err = pcall(awful.client.movetotag, awful.tag.selected(screen), c)
         if err then
             dropdown[prog][screen] = false
             return
@@ -162,10 +160,10 @@ function dropdown.toggle(prog, vert, horiz, width, height, sticky, screen)
         if c.hidden then
             -- Make sure it is centered
             --
-            if vert == "center" then
+            if vert == 'center' then
                 awful.placement.center_vertical(c)
             end
-            if horiz == "center" then
+            if horiz == 'center' then
                 awful.placement.center_horizontal(c)
             end
             c.hidden = false

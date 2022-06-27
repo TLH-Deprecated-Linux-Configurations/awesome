@@ -20,3 +20,4 @@ page to error out.
 | 7   | Mine                  |
 | 8   | Mine                  |
 | 9   | NASA/Hubble Telescope |
+https://github.com/axyl-os/axyl-bspwm/blob/master/etc/skel/.config/bspwm/wallpaper.jpg

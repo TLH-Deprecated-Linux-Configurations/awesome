@@ -1,40 +1,41 @@
 --  _______                                       ________ _______
 -- |   _   |.--.--.--.-----.-----.--------.-----.|  |  |  |   |   |
 -- |       ||  |  |  |  -__|  _  |        |  -__||  |  |  |       |
--- |___|___||________|_____|_____|__|__|__|_____||________|__|_|__|
+-- |___|___||________|_____|_____|__|bh__|__|_____||________|__|_|__|
 -- ------------------------------------------------- --
--- load luarocks modules, or not
+-- --------------- Luarocks Libraries -------------- --
 pcall(require, 'luarocks.loader')
+
 -- ------------------------------------------------- --
--- define vital global variables, first here, then
--- in their own file
-filesystem = require('gears.filesystem')
-require('lgi')
-config_dir = filesystem.get_configuration_dir()
+-- ---------- Global Variable Declaration ---------- --
 require('settings.global_variables')
 -- ------------------------------------------------- --
--- set up Lua's internal garbage collector to
--- keep memory footprint under control
-require('settings')
--- ------------------------------------------------- --
--- startup configuration
-require('startup')
--- ------------------------------------------------- --
--- Relating to clients and their control, tiling layouts, etc
-require('config')
-require('layout')
-require('config.client')
-_G.root.keys(gears.table.join(_G.root.keys(), require('config.keys.global')))
--- ------------------------------------------------- --
--- the appearance variables and styling
+-- ---------------- Colors and Icons --------------- --
 require('themes')
 -- ------------------------------------------------- --
--- various utilities reused throughout
+-- ---------------- Root Key Mappings --------------- --
+require('config.keys')
+-- ------------------------------------------------- --
+-- ---------------- System Settings ---------------- --
+require('settings')
+-- ------------------------------------------------- --
+-- --------------- Startup Functions --------------- --
+require('startup')
+-- ------------------------------------------------- --
+-- -------------------- Clients -------------------- --
+require('config.client')
+-- ------------------------------------------------- --
+-- ----------------- Configuration ----------------- --
+require('config')
+-- ------------------------------------------------- --
+-- ----------------- Tags & Layouts ---------------- --
+require('layout')
+-- ------------------------------------------------- --
+-- ------------------- Utilities ------------------- --
 require('utils')
 -- ------------------------------------------------- --
--- daemons, aka scripts running in the background
+-- -------------------- Daemons -------------------- --
 require('signal')
 -- ------------------------------------------------- --
--- UI menus and bar
+-- ------------------ UI Elements ------------------ --
 require('module')
--- ------------------------------------------------- --

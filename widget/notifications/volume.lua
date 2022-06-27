@@ -8,149 +8,140 @@
 -- |     |  _  ||   _|  ||   _|  ||  __|  _  ||   _|  ||  _  |     |__ --|
 -- |__|__|_____||____|__||__| |__||____|___._||____|__||_____|__|__|_____|
 
-local dpi = beautiful.xresources.apply_dpi
-
-local width = dpi(200)
-local height = dpi(200)
-local screen = awful.screen.focused()
-
-local active_color_1 = {
-    type = "linear",
-    from = {0, 0},
-    to = {200, 50}, -- replace with w,h later
-    stops = {{0, colors.lesswhite}, {0.50, colors.white}}
-}
-
-local volume_icon =
-    wibox.widget {
-    markup = "<span foreground='" .. colors.white .. "'><b></b></span>",
-    align = "center",
-    valign = "center",
-    font = "SFMono Nerd Font Mono Bold  64",
-    widget = wibox.widget.textbox
-}
-
--- create the volume_adjust component
-local volume_adjust =
-    wibox(
+local volume_osd_icon =
+    wibox.widget(
     {
-        -- screen = screen.focused,
-        type = "notification",
-        x = screen.geometry.width / 2 - width / 2,
-        y = screen.geometry.height / 2 - height / 2 + 300,
-        width = width,
-        height = height,
-        visible = false,
-        ontop = true,
-        bg = colors.alpha(colors.black, "88")
+        {
+            id = 'popup_icon',
+            image = icons.volume,
+            align = 'center',
+            forced_height = dpi(96),
+            forced_width = dpi(96),
+            valign = 'center',
+            widget = wibox.widget.imagebox()
+        },
+        top = dpi(15),
+        left = dpi(50),
+        right = dpi(50),
+        bottom = dpi(15),
+        widget = wibox.container.margin
     }
 )
 
-local volume_bar =
-    wibox.widget {
-    widget = wibox.widget.progressbar,
-    shape = gears.shape.rounded_bar,
-    bar_shape = gears.shape.rounded_bar,
-    color = colors.white,
-    background_color = colors.alpha(colors.color1, "88"),
-    max_value = 100,
-    value = 100,
-    forced_height = dpi(25),
-    forced_width = dpi(200)
-}
-
-volume_adjust:setup {
+local volume_osd_bar =
+    wibox.widget(
     {
-        layout = wibox.layout.align.vertical,
+        nil,
         {
-            volume_icon,
-            top = dpi(15),
-            left = dpi(50),
-            right = dpi(50),
-            bottom = dpi(15),
-            widget = wibox.container.margin
+            id = 'volume_osd_progressbar',
+            max_value = 100,
+            value = 0,
+            background_color = colors.alpha(colors.colorH, '88'),
+            color = colors.white,
+            shape = gears.shape.rounded_rect,
+            bar_shape = gears.shape.rounded_rect,
+            forced_height = dpi(24),
+            widget = wibox.widget.progressbar
         },
-        {
-            volume_bar,
-            left = dpi(25),
-            right = dpi(25),
-            bottom = dpi(30),
-            widget = wibox.container.margin
-        }
-    },
-    shape = beautiful.client_shape_rounded_xl,
-    bg = colors.alpha(colors.black, "aa"),
-    border_width = dpi(2),
-    border_color = colors.alpha(colors.colorA, "aa"),
-    widget = wibox.container.background
-}
+        nil,
+        expand = 'none',
+        layout = wibox.layout.align.vertical
+    }
+)
 
--- create a 3 second timer to hide the volume adjust
--- component whenever the timer is started
-local hide_volume_adjust =
-    gears.timer {
-    timeout = 3,
-    autostart = true,
-    callback = function()
-        volume_adjust.visible = false
-    end
-}
-local update_mute = function()
-    awful.spawn.easy_async_with_shell(
-        [["pamixer --get-mute"]],
-        function(stdout)
-            if stdout ~= nil then
-                local status = string.match(stdout, "%a+")
-                if stdout == "true" then
-                    volume_icon.txt = ""
-                elseif status == "false" then
-                    volume_icon.txt = ""
+local volume_osd_height = dpi(200)
+local volume_osd_width = dpi(200)
+
+screen.connect_signal(
+    'request::desktop_decoration',
+    function(s)
+        s.volume_osd =
+            awful.popup(
+            {
+                type = 'notification',
+                screen = s,
+                height = volume_osd_height,
+                width = volume_osd_width,
+                maximum_height = volume_osd_height,
+                maximum_width = volume_osd_width,
+                bg = beautiful.transparent,
+                ontop = true,
+                visible = false,
+                widget = {
+                    {
+                        {
+                            layout = wibox.layout.fixed.vertical,
+                            {
+                                {
+                                    layout = wibox.layout.align.horizontal,
+                                    expand = 'none',
+                                    nil,
+                                    volume_osd_icon,
+                                    nil
+                                },
+                                volume_osd_bar,
+                                spacing = dpi(10),
+                                layout = wibox.layout.fixed.vertical
+                            }
+                        },
+                        left = dpi(25),
+                        right = dpi(25),
+                        bottom = dpi(30),
+                        widget = wibox.container.margin
+                    },
+                    bg = colors.alpha(colors.black, '88'),
+                    border_width = dpi(2),
+                    border_color = colors.alpha(colors.colorA, 'aa'),
+                    shape = beautiful.client_shape_rounded_xl,
+                    widget = wibox.container.background
+                }
+            }
+        )
+
+        awful.placement.centered(
+            s.volume_osd,
+            {
+                offset = {
+                    y = 300
+                }
+            }
+        )
+
+        local volume_osd_timeout =
+            gears.timer(
+            {
+                timeout = 2,
+                autostart = true,
+                callback = function()
+                    s.volume_osd.visible = false
                 end
+            }
+        )
+
+        local function toggle_volume_osd()
+            if s.volume_osd.visible then
+                volume_osd_timeout:again()
+            else
+                s.volume_osd.visible = true
+                volume_osd_timeout:start()
             end
         end
-    )
-end
 
-awesome.connect_signal(
-    "signal::volume:mute",
-    function()
-        update_mute()
-    end
-)
-awesome.connect_signal(
-    "signal::volume:unmute",
-    function()
-        update_mute()
-    end
-)
+        awesome.connect_signal(
+            'signal::volume',
+            function(value, muted)
+                volume_osd_bar.volume_osd_progressbar.value = value
 
-local update_slider = function()
-    awful.spawn.with_line_callback(
-        "pamixer --get-volume",
-        -- ------------------------------------------------- --
-        {
-            stdout = function(value)
-                local volume = tonumber(value)
-                update_mute()
-                if volume_adjust.visible == false then
-                    volume_adjust.visible = true
-                    hide_volume_adjust:start()
+                if muted == 1 or value == 0 then
+                    volume_osd_icon.popup_icon = icons.mute
+                    volume_osd_bar.volume_osd_progressbar.color = colors.white
                 else
-                    hide_volume_adjust:again()
+                    volume_osd_icon.popup_icon = icons.volume
+                    volume_osd_bar.volume_osd_progressbar.color = colors.white
                 end
-                if volume >= 0 and volume <= 100 and volume ~= nil then
-                    volume_bar:set_value(volume)
-                end
-            end
-        }
-    )
-end
 
-awesome.connect_signal(
-    "signal::volume:update",
-    function(percentage)
-        if percentage ~= nil then
-            update_slider()
-        end
+                toggle_volume_osd()
+            end
+        )
     end
 )

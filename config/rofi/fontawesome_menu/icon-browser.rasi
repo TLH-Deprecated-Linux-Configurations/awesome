@@ -24,7 +24,7 @@ configuration {
     /* Red */
     color1:                      #8265FF;
 
-    
+
     selected-normal-foreground:  @color15;
     selected-urgent-background:  @color8;
     selected-active-background:  @color8;
@@ -67,7 +67,7 @@ configuration {
     columns:      5;
     lines:        6;
     spacing:      8px;
-    layout:       vertical; 
+    layout:       vertical;
     padding:      8;
 }
 
@@ -129,7 +129,7 @@ configuration {
   padding:  5px 5px 5px 180px;
   text-color: #00ffcc;
 }
- 
+
 #mainbox {
     children:  [ inputbar,listview ];
     spacing: 10px;

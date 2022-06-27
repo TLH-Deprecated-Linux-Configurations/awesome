@@ -66,11 +66,30 @@
     "backdrop",
     "control_center",
     "cache",
-    "s"
+    "s",
+    "name",
+    "dashboard",
+    "inspect",
+    "gobject",
+    "gtable",
+    "gtimer",
+    "gstring",
+    "files",
+    "horizontal_pad",
+    "vertical_pad"
   ],
-  "lua.targetVersion": "5.3",
+  "lua.targetVersion": "5.1",
   "restructuredtext.languageServer.disabled": true,
   "esbonio.server.enabled": false,
   "Lua.diagnostics.disable": ["undefined-field", 111],
-  "restructuredtext.confPath": ""
+  "restructuredtext.confPath": "",
+  "files.exclude": {
+    "**/.git": false,
+    "**/.svn": false,
+    "**/.hg": false,
+    "**/CVS": false,
+    "**/.DS_Store": false,
+    "**/Thumbs.db": false
+  },
+  "explorerExclude.backup": null
 }

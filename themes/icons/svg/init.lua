@@ -48,7 +48,7 @@ return {
     close_screen = dir .. 'close-screen.svg',
     close_small = dir .. 'close-small.svg',
     close = dir .. 'close.svg',
-    control_center = dir .. 'dashboard.svg',
+    dashboard = dir .. 'dashboard.svg',
     delete = dir .. 'delete.svg',
     development = dir .. 'development.svg',
     dont_disturb = dir .. 'dont-disturb.svg',

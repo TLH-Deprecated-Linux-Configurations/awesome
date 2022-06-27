@@ -7,11 +7,15 @@
 -- (c) 2016, Luke Bonham
 -- (c) 2014, Harvey Mittens
 -- ------------------------------------------------- --
-local apps = require("settings")
-local io, pairs, string, table, os = io, pairs, string, table, os
+local apps = require('settings')
+local io,
+    pairs,
+    string,
+    table,
+    os = io, pairs, string, table, os
 
 -- Expecting a wm_name of awesome omits too many applications and tools
-menu_utils.wm_name = ""
+menu_utils.wm_name = ''
 
 -- Menu table
 local menu = {}
@@ -22,7 +26,7 @@ local menu = {}
 -- @param path the path to check
 menu.is_dir = function(path)
     local f = io.open(path)
-    return f and not f:read(0) and f:seek("end") ~= 0 and f:close()
+    return f and not f:read(0) and f:seek('end') ~= 0 and f:close()
 end
 
 -- Remove non existent paths in order to avoid issues
@@ -137,24 +141,24 @@ end
 -- Create a launcher widget and a main menu
 awesome_menu = {
     {
-        "Hotkeys",
+        'Hotkeys',
         function()
             hotkeys_popup.show_help(nil, awful.screen.focused())
         end,
-        icons.control_center
+        icons.keyboard
     },
     {
-        "Edit config",
-        "nvim " .. awesome.conffile,
+        'Edit config',
+        'nvim ' .. awesome.conffile,
         icons.text_editor
     },
     {
-        "Restart",
+        'Restart',
         awesome.restart,
         icons.restart
     },
     {
-        "Quit",
+        'Quit',
         function()
             awesome.quit()
         end,
@@ -164,22 +168,22 @@ awesome_menu = {
 
 local default_app_menu = {
     {
-        "File Manager",
+        'File Manager',
         apps.default_programs.file_manager,
         icons.file_manager
     },
     {
-        "Web browser",
+        'Web browser',
         apps.default_programs.browser,
         icons.web_browser
     },
     {
-        "Terminal",
+        'Terminal',
         apps.default_programs.terminal,
         icons.terminal
     },
     {
-        "Text Editor",
+        'Text Editor',
         apps.default_programs.editor,
         icons.text_editor
     }
@@ -188,49 +192,49 @@ local default_app_menu = {
 -- Screenshot menu
 local screenshot_menu = {
     {
-        "Full",
+        'Full',
         function()
             gears.timer.start_new(
                 0.1,
                 function()
-                    awful.spawn.easy_async_with_shell(gfs .. "bin/snapshot full")
+                    awful.spawn.easy_async_with_shell(gfs .. 'bin/snapshot full')
                 end
             )
         end,
-        menubar.utils.lookup_icon("accessories-screenshot")
+        menubar.utils.lookup_icon('accessories-screenshot')
     },
     {
-        "Area",
+        'Area',
         function()
             gears.timer.start_new(
                 0.1,
                 function()
-                    awful.spawn.easy_async_with_shell(gfs .. "bin/snapshot area")
+                    awful.spawn.easy_async_with_shell(gfs .. 'bin/snapshot area')
                 end,
-                menubar.utils.lookup_icon("accessories-screenshot")
+                menubar.utils.lookup_icon('accessories-screenshot')
             )
         end,
-        menubar.utils.lookup_icon("accessories-screenshot")
+        menubar.utils.lookup_icon('accessories-screenshot')
     }
 }
 
 local tools_menu = {
     {
-        "Awesome",
+        'Awesome',
         awesome_menu,
         icons.awesome
     },
     {
-        "Take a Screenshot",
+        'Take a Screenshot',
         screenshot_menu,
-        menubar.utils.lookup_icon("accessories-screenshot")
+        menubar.utils.lookup_icon('accessories-screenshot')
     },
     {
-        "End Session",
+        'End Session',
         function()
-            awesome.emit_signal("module::exit_screen:show")
+            awesome.emit_signal('module::exit_screen:show')
         end,
-        menubar.utils.lookup_icon("system-shutdown")
+        menubar.utils.lookup_icon('system-shutdown')
     }
 }
 

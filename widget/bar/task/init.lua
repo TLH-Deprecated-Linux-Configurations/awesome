@@ -29,7 +29,7 @@ local tasklist_buttons =
                 end
                 -- This will also un-minimize
                 -- the client, if needed
-                c:emit_signal("request::activate")
+                c:emit_signal('request::activate')
                 c:raise()
             end
         end
@@ -68,7 +68,7 @@ local task_list = function(s)
         buttons = tasklist_buttons,
         style = {
             shape_border_width = 1,
-            shape_border_color = colors.alpha(colors.black, "88"),
+            shape_border_color = colors.alpha(colors.black, 'cc'),
             shape = beautiful.client_shape_rounded_small
         },
         layout = {
@@ -79,8 +79,8 @@ local task_list = function(s)
                     shape = gears.shape.circle,
                     widget = wibox.widget.separator
                 },
-                valign = "center",
-                halign = "center",
+                valign = 'center',
+                halign = 'center',
                 widget = wibox.container.place
             },
             layout = wibox.layout.flex.horizontal
@@ -92,79 +92,31 @@ local task_list = function(s)
                 {
                     {
                         {
-                            id = "icon_role",
+                            id = 'icon_role',
                             widget = wibox.widget.imagebox
                         },
-                        margins = dpi(2),
+                        margins = dpi(6),
                         widget = wibox.container.margin
                     },
-                    {
-                        id = "text_role",
-                        widget = wibox.widget.textbox
-                    },
+                    -- {
+                    --     id = 'text_role',
+                    --     widget = wibox.widget.textbox
+                    -- },
                     layout = wibox.layout.fixed.horizontal,
                     bg = beautiful.bg_button
                 },
-                left = dpi(5),
-                right = dpi(5),
+                left = dpi(2),
+                right = dpi(2),
                 widget = wibox.container.margin
             },
-            id = "background_role",
-            forced_width = dpi(120),
+            id = 'background_role',
+            -- forced_width = dpi(120),
             widget = clickable_container
-        }
+        },
+        create_callback = function(self, c, index, objects) --luacheck: no unused args
+            self:get_children_by_id('clienticon')[1].client = c
+        end
     }
 end
 
---[[  return awful.widget.tasklist {
-        screen = s,
-        filter = awful.widget.tasklist.filter.currenttags,
-        buttons = tasklist_buttons,
-        layout = {
-            spacing_widget = {
-                {
-                    forced_width = dpi(15),
-                    forced_height = dpi(36),
-                    thickness = dpi(15),
-                    color = colors.alpha(colors.colorA, "88"),
-                    widget = wibox.widget.separator
-                },
-                valign = "center",
-                halign = "center",
-                widget = wibox.container.place
-            },
-            spacing = dpi(8),
-            layout = wibox.layout.fixed.horizontal
-        },
-        -- Notice that there is *NO* wibox.wibox prefix, it is a template,
-        -- not a widget instance.
-        widget_template = {
-            {
-                {
-                    {
-                        {
-                            id = "clienticon",
-                            forced_width = dpi(28),
-                            forced_height = dpi(28),
-                            widget = awful.widget.clienticon
-                        },
-                        margins = dpi(1),
-                        widget = wibox.container.margin
-                    },
-                    valign = "center",
-                    halign = "center",
-                    widget = wibox.container.place
-                },
-                widget = clickable_container,
-                forced_width = dpi(48),
-                forced_height = dpi(48)
-            },
-            create_callback = function(self, c, index, objects) --luacheck: no unused args
-                self:get_children_by_id("clienticon")[1].client = c
-            end,
-            layout = wibox.layout.flex.horizontal
-        }
-    }
-end
- ]]
 return task_list
