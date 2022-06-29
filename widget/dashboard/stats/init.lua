@@ -12,7 +12,7 @@ local wibox = require('wibox')
 local stats_text =
     wibox.widget(
     {
-        font = beautiful.font .. 'Bold 8',
+        font = beautiful.font .. 'Bold 12',
         markup = colorize_text('Stats', beautiful.dashboard_box_fg),
         valign = 'center',
         widget = wibox.widget.textbox
@@ -64,7 +64,7 @@ local function create_tooltip(w)
     local tooltip =
         wibox.widget(
         {
-            font = beautiful.font .. ' 8',
+            font = beautiful.font .. ' 12',
             align = 'right',
             valign = 'center',
             widget = wibox.widget.textbox

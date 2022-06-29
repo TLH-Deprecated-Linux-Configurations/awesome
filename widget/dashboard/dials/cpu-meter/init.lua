@@ -18,7 +18,7 @@ local active_color = {
 
 local widget_text =
     wibox.widget {
-    font = beautiful.font .. '  12',
+    font = beautiful.icon_font .. '  18',
     text = 'CPU',
     valign = 'center',
     align = 'center',

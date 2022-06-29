@@ -21,7 +21,7 @@ local battery_text =
 -- create the icon portion of the text, which uses a nerd font to display the icon
 local battery_icon =
     wibox.widget {
-    font = 'SF Pro Rounded Heavy   22',
+    font = beautiful.icon_font .. ' 22',
     align = 'center',
     valign = 'center',
     widget = wibox.widget.textbox

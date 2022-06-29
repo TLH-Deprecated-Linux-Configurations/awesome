@@ -54,7 +54,7 @@ theme.widget_markup = '<span color=%q><b>%s</b></span>'
 -- Fonts
 theme.font = 'SF Pro Rounded  '
 theme.display_font = 'Nineteen Ninety Seven '
-theme.icon_font = 'Font Awesome 5 Free Regular'
+theme.icon_font = 'Font Awesome 6 Pro Regular'
 theme.icon_theme = 'chhinamasta'
 
 -- ------------------------------------------------- --

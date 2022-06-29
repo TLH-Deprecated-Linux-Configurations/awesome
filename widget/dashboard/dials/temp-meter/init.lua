@@ -12,7 +12,7 @@ local active_color = {
     type = 'linear',
     from = {0, 0},
     to = {200, 50}, -- replace with w,h later
-    stops = {{0, colors.color6}, {0.75, colors.color4}}
+    stops = {{0, colors.color6}, {0.75, colors.color15}}
 }
 -- ------------------------------------------------- --
 local widget_text =

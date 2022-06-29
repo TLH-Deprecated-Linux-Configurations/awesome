@@ -30,7 +30,7 @@ ruled.client.connect_signal(
                 maximized_vertical = false,
                 keys = client_keys,
                 buttons = client_buttons,
-                screen = awful.screen.preferred,
+                -- screen = awful.screen.preferred,
                 placement = awful.placement.no_offscreen
             }
         }
@@ -223,8 +223,7 @@ ruled.client.connect_signal(
                 titlebars_enabled = true,
                 ontop = true,
                 floating = true,
-                raise = true,
-                screen = awful.screen.focused
+                raise = true
             }
         }
         -- ------------------------------------------------- --
@@ -244,8 +243,7 @@ ruled.client.connect_signal(
                 titlebars_enabled = true,
                 ontop = false,
                 floating = true,
-                raise = true,
-                screen = awful.screen.focused
+                raise = true
             }
         }
     end
