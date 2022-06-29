@@ -3,16 +3,20 @@ local screen_geometry = require('awful').screen.focused().geometry
 local width = dpi(410)
 
 local title =
-    wibox.widget {
+wibox.widget {
     {
         {
             spacing = dpi(0),
-            layout = wibox.layout.flex.vertical,
+            layout = wibox.layout.align.vertical,
+
+            expand = "max",
             format_item(
                 {
+                    halign = "center",
+                    valign = "center",
                     layout = wibox.layout.fixed.horizontal,
                     spacing = dpi(16),
-                    require('widget.network-center.title-text')
+                    require('widget.network_center.title-text')
                 }
             )
         },
@@ -22,18 +26,18 @@ local title =
     shape = function(cr, width, height)
         gears.shape.rounded_rect(cr, width, height, beautiful.groups_radius)
     end,
-    bg = colors.alpha(colors.colorB, 'F2'),
+    bg = beautiful.bg_normal,
     forced_width = width,
-    forced_height = 70,
+    forced_height = dpi(40),
     ontop = true,
     border_width = dpi(2),
     border_color = colors.colorA,
     widget = wibox.container.background,
-    layout
+
 }
 
 local status =
-    wibox.widget {
+wibox.widget {
     {
         {
             spacing = dpi(0),
@@ -42,8 +46,8 @@ local status =
                 {
                     layout = wibox.layout.fixed.horizontal,
                     spacing = dpi(16),
-                    require('widget.network-center.status-icon'),
-                    require('widget.network-center.status')
+                    require('widget.network_center.status-icon'),
+                    require('widget.network_center.status')
                 }
             )
         },
@@ -63,7 +67,7 @@ local status =
 }
 
 local networks_panel =
-    wibox.widget {
+wibox.widget {
     {
         {
             spacing = dpi(0),
@@ -72,7 +76,7 @@ local networks_panel =
                 {
                     layout = wibox.layout.fixed.horizontal,
                     spacing = dpi(16),
-                    require('widget.network-center.networks-panel')
+                    require('widget.network_center.networks-panel')
                 }
             )
         },
@@ -82,7 +86,7 @@ local networks_panel =
     shape = function(cr, width, height)
         gears.shape.rounded_rect(cr, width, height, beautiful.groups_radius)
     end,
-    bg = colors.alpha(colors.colorB, 'F2'),
+    bg = beautiful.bg_menu,
     forced_width = width,
     ontop = true,
     border_width = dpi(2),
@@ -90,8 +94,7 @@ local networks_panel =
     widget = wibox.container.background
 }
 
-networkCenter =
-    wibox(
+networkCenter = wibox(
     {
         x = screen_geometry.width - width - dpi(8),
         y = screen_geometry.y + dpi(35),
@@ -102,10 +105,16 @@ networkCenter =
         height = screen_geometry.height - dpi(35),
         width = width,
         bg = 'transparent',
-        fg = '#FEFEFE'
+        fg = colors.white
     }
 )
-
+networkCenter:setup {
+    spacing = dpi(15),
+    title,
+    status,
+    networks_panel,
+    layout = wibox.layout.fixed.vertical
+}
 _G.nc_status = false
 
 awesome.connect_signal(
@@ -113,6 +122,7 @@ awesome.connect_signal(
     function()
         if networkCenter.visible == false then
             networkCenter.visible = true
+            awesome.emit_signal('network::networks:refreshPanel')
         elseif networkCenter.visible == true then
             networkCenter.visible = false
         end
@@ -125,11 +135,4 @@ awesome.connect_signal(
         networkCenter.visible = false
     end
 )
-
-networkCenter:setup {
-    spacing = dpi(15),
-    title,
-    status,
-    networks_panel,
-    layout = wibox.layout.fixed.vertical
-}
+return networkCenter

@@ -36,8 +36,6 @@
 --   interface (string)
 --
 
-local awful = require('awful')
-local gears = require('gears')
 
 -- ========================================
 -- Config
@@ -48,9 +46,9 @@ local update_interval = 30
 
 -- script to determine network mode
 local network_mode_script =
-    [=[
+[=[
 wireless="wlan0"
-wired="enp1s0"
+wired="enp2s0"
 net="/sys/class/net/"
 wired_state="down"
 wireless_state="down"
@@ -91,7 +89,7 @@ print_network_mode
 
 -- script to check whether can connect to internet
 local healthcheck_script =
-    [=[
+[=[
 status_ping=0
 packets="$(ping -q -w2 -c2 example.com | grep -o "100% packet loss")"
 if [ ! -z "${packets}" ];

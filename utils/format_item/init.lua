@@ -24,7 +24,7 @@ local format_item = function(widget)
         shape = beautiful.client_shape_rounded_medium,
         bg = 'transparent',
         border_width = dpi(0),
-        border_color = colors.black,
+        border_color = colors.alpha(colors.black, "aa"),
         widget = wibox.container.background
     }
 end

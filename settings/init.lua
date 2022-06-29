@@ -6,28 +6,28 @@
 -- ------------------------------------------------- --
 
 return {
-    theme = 'vice',
-    background = '10.png',
+    theme = "vice",
+    background = "10.png",
     default_programs = {
-        terminal = 'kitty',
-        terminal_editor = 'code-oss',
-        editor = 'nvim',
-        browser = 'firefox-developer-edition',
-        file_manager = 'thunar',
-        terminal_file_manager = 'ranger',
-        lock = config_dir .. 'bin/blur.sh',
-        email = 'neomutt',
-        chat = 'discord',
-        screenshot = config_dir .. 'bin/snapshot.sh area'
+        terminal = "kitty",
+        terminal_editor = "code-oss",
+        editor = "nvim",
+        browser = "firefox-developer-edition",
+        file_manager = "thunar",
+        terminal_file_manager = "ranger",
+        lock = config_dir .. "bin/blur.sh",
+        email = "neomutt",
+        chat = "discord",
+        screenshot = config_dir .. "bin/snapshot.sh area"
     },
-    profile_picture = 'user.png',
+    profile_picture = "user.png",
     window_gaps = 4,
     window_border_size = 2,
     dirs = {
-        downloads = HOME .. '/Downloads',
-        pictures = HOME .. '/256/Dropbox/Pictures',
-        music = HOME .. '/256/Dropbox/Music',
-        wallpapers = HOME .. '/.config/awesome/themes/wallpapers'
+        downloads = HOME .. "/Downloads",
+        pictures = HOME .. "/Pictures",
+        music = HOME .. "/Music",
+        wallpapers = HOME .. "/.config/awesome/themes/wallpapers"
     },
-    require(... .. '.garbage_collection')
+    require(... .. ".garbage_collection")
 }

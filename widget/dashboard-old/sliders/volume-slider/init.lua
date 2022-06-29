@@ -9,15 +9,15 @@
 -- |_______|__|__||_____||_____|__|
 -- ------------------------------------------------- --
 local widget_name =
-    wibox.widget {
+wibox.widget {
     text = 'Volume',
-    font = 'SF Pro Rounded Heavy  10',
+    font = beautiful.font .. ' Bold 10',
     align = 'left',
     widget = wibox.widget.textbox
 }
 -- ------------------------------------------------- --
 local widget_icon =
-    wibox.widget {
+wibox.widget {
     layout = wibox.layout.align.vertical,
     expand = 'none',
     nil,
@@ -31,7 +31,7 @@ local widget_icon =
 }
 -- ------------------------------------------------- --
 local widget_content =
-    wibox.widget {
+wibox.widget {
     {
         {
             widget_icon,
@@ -46,7 +46,7 @@ local widget_content =
 }
 -- ------------------------------------------------- --
 local slider =
-    wibox.widget {
+wibox.widget {
     nil,
     {
         id = 'volume_slider',
@@ -193,14 +193,14 @@ widget_content:buttons(
 )
 -- ------------------------------------------------- --
 local volume_tooltip =
-    awful.tooltip {
-    objects = {widget_icon},
+awful.tooltip {
+    objects = { widget_icon },
     text = 'None',
     mode = 'outside',
     align = 'right',
     margin_leftright = dpi(8),
     margin_topbottom = dpi(8),
-    preferred_positions = {'right', 'left', 'top', 'bottom'}
+    preferred_positions = { 'right', 'left', 'top', 'bottom' }
 }
 -- ------------------------------------------------- --
 -- The emit will come from the global keybind
@@ -217,7 +217,7 @@ awesome.connect_signal(
 )
 -- ------------------------------------------------- --
 local cc_volume =
-    wibox.widget {
+wibox.widget {
     {
         {
             layout = wibox.layout.fixed.vertical,

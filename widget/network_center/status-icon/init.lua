@@ -10,13 +10,13 @@
 
 -- Icon widget
 local widget_icon =
-	wibox.widget {
+wibox.widget {
 	layout = wibox.layout.align.vertical,
 	expand = "none",
 	nil,
 	{
 		id = "icon",
-		image = icons.wifi_3,
+		image = icons.wifi_problem,
 		resize = true,
 		widget = wibox.widget.imagebox
 	},
@@ -25,7 +25,7 @@ local widget_icon =
 
 -- Icon widget container
 local widget =
-	wibox.widget {
+wibox.widget {
 	{
 		{
 			{

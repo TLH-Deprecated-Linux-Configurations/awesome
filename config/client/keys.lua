@@ -13,6 +13,318 @@ local awful = require("awful")
 local modkey = "Mod4"
 local altkey = "Mod1"
 local snap_edge = require("utils.snap-edge")
+-- _G.client.focus = c
+
+local capi = {
+  screen = screen,
+  client = client
+}
+
+-- ------------------------------------------------- --
+local snapmap = {
+  -- ------------------------------------------------- --
+  {"separator", " "},
+  {"separator", "Snapping by Side"},
+  {"separator", " "},
+  -- ------------------------------------------------- --
+  {
+    "Down",
+    function(c)
+      snap_edge(capi.client.focus, "bottom")
+    end,
+    "Snap to Bottom"
+  },
+  -- ------------------------------------------------- --
+  {
+    "Left",
+    function(c)
+      snap_edge(capi.client.focus, "left")
+    end,
+    "Snap to Left"
+  },
+  -- ------------------------------------------------- --
+  {
+    "Right",
+    function(c)
+      snap_edge(capi.client.focus, "right")
+    end,
+    "Snap to Right"
+  },
+  -- ------------------------------------------------- --
+  {
+    "Up",
+    function(c)
+      snap_edge(capi.client.focus, "top")
+    end,
+    "Snap to Top"
+  },
+  -- ------------------------------------------------- --
+  {"separator", "Corner Snapping"},
+  {"separator", " "},
+  -- ------------------------------------------------- --
+  {
+    "j",
+    function(c)
+      snap_edge(capi.client.focus, "bottomright")
+    end,
+    "Snap to Bottom Right"
+  },
+  -- ------------------------------------------------- --
+  {
+    "k",
+    function(c)
+      snap_edge(capi.client.focus, "bottomleft")
+    end,
+    "Snap to Bottom Left"
+  },
+  -- ------------------------------------------------- --
+  {
+    "l",
+    function(c)
+      snap_edge(capi.client.focus, "topright")
+    end,
+    "Snap to Top Right"
+  },
+  -- ------------------------------------------------- --
+  {
+    "h",
+    function(c)
+      snap_edge(capi.client.focus, "topleft")
+    end,
+    "Snap to Top Left"
+  },
+  {"separator", " "}
+}
+-- ------------------------------------------------- --
+-- ------------------------------------------------- --
+-- ------------------------------------------------- --
+local resizemap = {
+  {"separator", " "},
+  {"separator", "Increase Client Size"},
+  {"separator", " "},
+  {
+    "h",
+    function(c)
+      capi.client.focus:relative_move(0, dpi(10), 0, dpi(0))
+    end,
+    "Increase Size Vertically by 10"
+  },
+  -- ------------------------------------------------- --
+  {
+    "j",
+    function(c)
+      capi.client.focus:relative_move(0, 0, 0, dpi(10))
+    end,
+    "Increase floating size by 10 vertically"
+  },
+  -- ------------------------------------------------- --
+  {
+    "k",
+    function(c)
+      capi.client.focus:relative_move(dpi(10), 0, dpi(), 0)
+    end,
+    "Increase Size Horizontally by 10"
+  },
+  -- ------------------------------------------------- --
+  {
+    "l",
+    function(c)
+      capi.client.focus:relative_move(0, 0, dpi(10), 0)
+    end,
+    "Increase Size Horizontally by 10"
+  },
+  -- ------------------------------------------------- --
+  {"separator", "Decrease Client Size"},
+  {"separator", " "},
+  -- ------------------------------------------------- --
+  {
+    "Up",
+    function(c)
+      if capi.client.focus.height > 10 then
+        capi.client.focus:relative_move(0, 0, 0, dpi(-10))
+      end
+    end,
+    "Decrease floating size by 10"
+  },
+  -- ------------------------------------------------- --
+  {
+    "Down",
+    function(c)
+      capi.client.focus:relative_move(0, 0, 0, dpi(-10))
+      if capi.client.focus.height > 10 then
+        capi.client.focus:relative_move(0, dpi(10), 0, 0)
+      end
+    end,
+    "Decrease Size Vertically by 10"
+  },
+  -- ------------------------------------------------- --
+  {
+    "Left",
+    function(c)
+      if capi.client.focus.width > 10 then
+        capi.client.focus:relative_move(0, 0, dpi(-10), 0)
+      end
+    end,
+    "Decrease Size Horizontally by 10"
+  },
+  -- ------------------------------------------------- --
+  {
+    "Right",
+    function(c)
+      capi.client.focus:relative_move(0, 0, dpi(-10), 0)
+      if capi.client.focus.width > 10 then
+        capi.client.focus:relative_move(dpi(10), 0, 0, 0)
+      end
+    end,
+    "Decrease Size Horizontally 10"
+  },
+  {"separator", " "}
+}
+-- ------------------------------------------------- --
+-- ------------------------------------------------- --
+-- ------------------------------------------------- --
+
+local movemap = {
+  {"separator", " "},
+  -- ------------------------------------------------- --
+  {
+    "Up",
+    function(c)
+      capi.client.focus:relative_move(0, dpi(-10), 0, 0)
+    end,
+    "Move Client Up"
+  },
+  -- ------------------------------------------------- --
+  {
+    "Down",
+    function(c)
+      capi.client.focus:relative_move(0, dpi(10), 0, 0)
+    end,
+    "Move Client Down"
+  },
+  -- ------------------------------------------------- --
+  {
+    "Left",
+    function(c)
+      capi.client.focus:relative_move(dpi(-10), 0, 0, 0)
+    end,
+    "Move Client Left"
+  },
+  -- ------------------------------------------------- --
+  {
+    "Right",
+    function(c)
+      capi.client.focus:relative_move(dpi(10), 0, 0, 0)
+    end,
+    "Move Client Right"
+  },
+  -- ------------------------------------------------- --
+  {"separator", " "}
+}
+-- ------------------------------------------------- --
+-- ------------------------------------------------- --
+-- ------------------------------------------------- --
+local clientmap = {
+  -- ------------------------------------------------- --
+  {"separator", "Client Positioning"},
+  {"separator", " "},
+  -- ------------------------------------------------- --
+  {
+    "b",
+    function(c)
+      capi.client.focus:swap(awful.client.getmaster())
+    end,
+    "Move to Master"
+  },
+  -- ------------------------------------------------- --
+  {
+    "o",
+    function(c)
+      capi.client.focus:move_to_screen()
+    end,
+    "Move to Screen"
+  },
+  -- ------------------------------------------------- --
+  {
+    "t",
+    function()
+      c.ontop = not c.ontop
+    end,
+    "Toggle Client On Top"
+  },
+  -- ------------------------------------------------- --
+  {
+    "n",
+    function()
+      c.minimized = true
+    end,
+    "Minimize Client"
+  },
+  -- ------------------------------------------------- --
+  {
+    "x",
+    function()
+      capi.client.focus:kill()
+    end,
+    "Close Client"
+  },
+  -- ------------------------------------------------- --
+  {
+    "d",
+    function()
+      capi.client.focus.floating = not capi.client.focus.floating
+    end,
+    "Toggle Floating Client"
+  },
+  -- ------------------------------------------------- --
+  {"separator", "Maximize Client"},
+  {"separator", " "},
+  -- ------------------------------------------------- --
+  {
+    "m",
+    function()
+      capi.client.focus.maximized = not capi.client.focus.maximized
+      capi.client.focus:raise()
+    end,
+    "Maximize Client"
+  },
+  -- ------------------------------------------------- --
+  {
+    "h",
+    function()
+      capi.client.focus.maximized_horizontal = not capi.client.focus.maximized
+      capi.client.focus:raise()
+    end,
+    "Maximize Client Horizontally"
+  },
+  -- ------------------------------------------------- --
+  {
+    "v",
+    function()
+      capi.client.focus.maximized_vetical = not capi.client.focus.maximized_vertical
+      capi.client.focus:raise()
+    end,
+    "Maximize Client"
+  },
+  {
+    "f",
+    function(c)
+      c.fullscreen = not c.fullscreen
+      capi.client.focus:raise()
+    end,
+    "Toggle Fullscreen"
+  },
+  -- ------------------------------------------------- --
+  {"separator", " "}
+}
+-- ------------------------------------------------- --
+-- ------------------------------------------------- --
+-- ------------------------------------------------- --
+-- Now we call modalbinding from utils to make the above useful
+local modalbind = require("utils.modalbind")
+modalbind.init()
+modalbind.set_opacity = 0.95
+
 -- numpad key codes 1-9
 -- local numpad_map = {87, 88, 89, 83, 84, 85, 79, 80, 81}
 
@@ -20,285 +332,41 @@ require("awful.autofocus")
 -- ------------------------------------------------- --
 local clientkeys =
   awful.util.table.join(
-  -- ------------------------------------------------- --
-
+  -- modals use alt + key to activate
   awful.key(
-    {modkey, "Shift"},
-    "f",
-    function(c)
-      c.fullscreen = not c.fullscreen
-      c:raise()
+    {"Mod1"},
+    "r",
+    function()
+      modalbind.grab {keymap = resizemap, name = "Window Resizing", stay_in_mode = true}
     end,
-    {description = "toggle fullscreen", group = "Window"}
+    {description = "Enter Window Resizing Mode", group = "Floating Client"}
   ),
   -- ------------------------------------------------- --
   awful.key(
-    {modkey},
-    "x",
-    function(c)
-      c:kill()
+    {"Mod1"},
+    "s",
+    function()
+      modalbind.grab {keymap = snapmap, name = "Window Snapping", stay_in_mode = true}
     end,
-    {description = "close", group = "Window"}
+    {description = "Enter Window Snapping Mode", group = "Floating Client"}
   ),
   -- ------------------------------------------------- --
-  awful.key({modkey}, "f", awful.client.floating.toggle, {description = "toggle floating", group = "Window"}),
-  -- ------------------------------------------------- --
   awful.key(
-    {modkey, "Control", "Shift"},
+    {"Mod1"},
     "m",
-    function(c)
-      c:swap(awful.client.getmaster())
+    function()
+      modalbind.grab {keymap = movemap, name = "Window Movement", stay_in_mode = true}
     end,
-    {description = "move to master", group = "Window"}
+    {description = "Enter Window Movement Mode", group = "Floating Client"}
   ),
   -- ------------------------------------------------- --
   awful.key(
-    {modkey},
-    "o",
-    function(c)
-      c:move_to_screen()
+    {"Mod1"},
+    "c",
+    function()
+      modalbind.grab {keymap = clientmap, name = "Client Control", stay_in_mode = false}
     end,
-    {description = "move to screen", group = "Window"}
-  ),
-  -- ------------------------------------------------- --
-  awful.key(
-    {modkey, "Shift"},
-    "t",
-    function(c)
-      c.ontop = not c.ontop
-    end,
-    {description = "toggle keep on top", group = "Window"}
-  ),
-  -- ------------------------------------------------- --
-  awful.key(
-    {modkey},
-    "n",
-    function(c)
-      c.minimized = true
-    end,
-    {description = "minimize", group = "Window"}
-  ),
-  -- ------------------------------------------------- --
-  awful.key(
-    {modkey},
-    "m",
-    function(c)
-      c.maximized = not c.maximized
-      c:raise()
-    end,
-    {description = "(un)maximize", group = "Window"}
-  ),
-  -- ------------------------------------------------- --
-  awful.key(
-    {modkey, "Control"},
-    "m",
-    function(c)
-      c.maximized_vertical = not c.maximized_vertical
-      c:raise()
-    end,
-    {description = "(un)maximize vertically", group = "Window"}
-  ),
-  -- ------------------------------------------------- --
-  awful.key(
-    {modkey, altkey},
-    "m",
-    function(c)
-      c.maximized_horizontal = not c.maximized_horizontal
-      c:raise()
-    end,
-    {description = "(un)maximize horizontally", group = "Window"}
-  ),
-  -- ------------------------------------------------- --
-  awful.key(
-    {modkey},
-    "Up",
-    function(c)
-      c:relative_move(0, dpi(-10), 0, 0)
-    end,
-    {description = "Move Floating Client up by 10px", group = "Client"}
-  ),
-  -- ------------------------------------------------- --
-  awful.key(
-    {modkey},
-    "Down",
-    function(c)
-      c:relative_move(0, dpi(10), 0, 0)
-    end,
-    {description = "Move Floating Client down by 10px", group = "Client"}
-  ),
-  -- ------------------------------------------------- --
-  awful.key(
-    {modkey},
-    "Left",
-    function(c)
-      c:relative_move(dpi(-10), 0, 0, 0)
-    end,
-    {description = "Move Floating Client to the Left by 10px", group = "Client"}
-  ),
-  -- ------------------------------------------------- --
-  awful.key(
-    {modkey},
-    "Right",
-    function(c)
-      c:relative_move(dpi(10), 0, 0, 0)
-    end,
-    {description = "Move Floating Client to the Right by 10px", group = "Client"}
-  ),
-  -- ------------------------------------------------- --
-  awful.key(
-    {modkey, "Shift"},
-    "Up",
-    function(c)
-      c:relative_move(0, dpi(-10), 0, dpi(10))
-    end,
-    {description = "Increase Floating Client Size Vertically by 10px up", group = "Client"}
-  ),
-  -- ------------------------------------------------- --
-  awful.key(
-    {modkey, "Shift"},
-    "Down",
-    function(c)
-      c:relative_move(0, 0, 0, dpi(10))
-    end,
-    {description = "Increase Floating Client Size Vertically by 10px down", group = "Client"}
-  ),
-  -- ------------------------------------------------- --
-  awful.key(
-    {modkey, "Shift"},
-    "Left",
-    function(c)
-      c:relative_move(dpi(-10), 0, dpi(10), 0)
-    end,
-    {description = "Increase Floating Client Size Horizontally by 10px Left", group = "Client"}
-  ),
-  -- ------------------------------------------------- --
-  awful.key(
-    {modkey, "Shift"},
-    "Right",
-    function(c)
-      c:relative_move(0, 0, dpi(10), 0)
-    end,
-    {description = "Increase Floating Client Size Horizontally by 10px Right", group = "Client"}
-  ),
-  -- ------------------------------------------------- --
-  awful.key(
-    {modkey, "Control"},
-    "Up",
-    function(c)
-      if c.height > 10 then
-        c:relative_move(0, 0, 0, dpi(-10))
-      end
-    end,
-    {description = "Decrease Floating Client Size Vertically by 10px up", group = "Client"}
-  ),
-  -- ------------------------------------------------- --
-  awful.key(
-    {modkey, "Control"},
-    "Down",
-    function(c)
-      local c_height = c.height
-      c:relative_move(0, 0, 0, dpi(-10))
-      if c.height ~= c_height and c.height > 10 then
-        c:relative_move(0, dpi(10), 0, 0)
-      end
-    end,
-    {description = "Decrease Floating Client Size Vertically by 10px down", group = "Client"}
-  ),
-  -- ------------------------------------------------- --
-  awful.key(
-    {modkey, "Control"},
-    "Left",
-    function(c)
-      if c.width > 10 then
-        c:relative_move(0, 0, dpi(-10), 0)
-      end
-    end,
-    {description = "Decrease Floating Client Size Horizontally by 10px Left", group = "Client"}
-  ),
-  -- ------------------------------------------------- --
-  awful.key(
-    {modkey, "Control"},
-    "Right",
-    function(c)
-      local c_width = c.width
-      c:relative_move(0, 0, dpi(-10), 0)
-      if c.width ~= c_width and c.width > 10 then
-        c:relative_move(dpi(10), 0, 0, 0)
-      end
-    end,
-    {description = "Decrease Floating Client Size Horizontally by 10px Right", group = "Client"}
-  ),
-  -- ------------------------------------------------- --
-  awful.key(
-    {modkey, altkey},
-    "Down",
-    function(c)
-      snap_edge(c, "bottom")
-    end,
-    {description = "Move Floating Client to the Bottom", group = "Client"}
-  ),
-  -- ------------------------------------------------- --
-  awful.key(
-    {modkey, altkey},
-    "Left",
-    function(c)
-      snap_edge(c, "left")
-    end,
-    {description = "Move Floating Client to the Left", group = "Client"}
-  ),
-  -- ------------------------------------------------- --
-  awful.key(
-    {modkey, altkey},
-    "Right",
-    function(c)
-      snap_edge(c, "right")
-    end,
-    {description = "Move Floating Client to the Right", group = "Client"}
-  ),
-  -- ------------------------------------------------- --
-  awful.key(
-    {modkey, altkey},
-    "Up",
-    function(c)
-      snap_edge(c, "top")
-    end,
-    {description = "Move Floating Client to the Top", group = "Client"}
-  ),
-  -- ------------------------------------------------- --
-  awful.key(
-    {modkey, altkey, "Control"},
-    "Down",
-    function(c)
-      snap_edge(c, "bottomright")
-    end,
-    {description = "Move Floating Client to the Bottom Right Corner", group = "Client"}
-  ),
-  -- ------------------------------------------------- --
-  awful.key(
-    {modkey, altkey, "Control"},
-    "Left",
-    function(c)
-      snap_edge(c, "bottomleft")
-    end,
-    {description = "Move Floating Client to the Bottom Left Corner", group = "Client"}
-  ),
-  -- ------------------------------------------------- --
-  awful.key(
-    {modkey, altkey, "Control"},
-    "Right",
-    function(c)
-      snap_edge(c, "topright")
-    end,
-    {description = "Move Floating Client to the Top Left Corner", group = "Client"}
-  ),
-  -- ------------------------------------------------- --
-  awful.key(
-    {modkey, altkey, "Control"},
-    "Up",
-    function(c)
-      snap_edge(c, "topleft")
-    end,
-    {description = "Move Floating Client to the Top Left", group = "Client"}
+    {description = "Enter Client Control Mode", group = "Client"}
   )
 )
 -- -- Snap to edge/corner - Use numpad

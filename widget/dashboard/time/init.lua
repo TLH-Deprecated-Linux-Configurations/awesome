@@ -14,8 +14,8 @@ local wibox = require('wibox')
 ---------
 
 local time_hour =
-    wibox.widget {
-    font = beautiful.font .. 'bold 64',
+wibox.widget {
+    font = beautiful.font .. ' Bold 64',
     fg = colors.colorA,
     format = '%H',
     align = 'center',
@@ -24,8 +24,8 @@ local time_hour =
 }
 
 local time_min =
-    wibox.widget {
-    font = beautiful.font .. 'bold 64',
+wibox.widget {
+    font = beautiful.font .. ' Bold 64',
     format = '%M',
     align = 'center',
     valign = 'center',
@@ -33,7 +33,7 @@ local time_min =
 }
 
 local time =
-    wibox.widget {
+wibox.widget {
     {
         {
             {

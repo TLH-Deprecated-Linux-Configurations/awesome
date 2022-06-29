@@ -16,7 +16,7 @@ elements.create = function(title, message)
     -- ------------------------------------------------- --
     -- clear element
     local clear =
-        wibox.widget {
+    wibox.widget {
         {
             {
                 {
@@ -76,17 +76,17 @@ elements.create = function(title, message)
     -- ------------------------------------------------- --
     -- notification content template
     local content =
-        wibox.widget {
+    wibox.widget {
         {
             {
                 {
                     text = title,
-                    font = 'SF Pro Rounded Heavy 10',
+                    font = beautiful.font .. ' Bold10',
                     widget = wibox.widget.textbox
                 },
                 {
                     text = message,
-                    font = 'SF Pro Rounded Heavy  8',
+                    font = beautiful.font .. ' Bold 8',
                     widget = wibox.widget.textbox
                 },
                 layout = wibox.layout.align.vertical
@@ -99,8 +99,7 @@ elements.create = function(title, message)
     }
     -- ------------------------------------------------- --
     -- box element template
-    box =
-        wibox.widget {
+    box = wibox.widget {
         {
             {
                 nil,

@@ -3,10 +3,13 @@
 -- |   __ <|  _  |   _|
 -- |______/|___._|__|
 -- ------------------------------------------------- --
+-- this refers to the top dropdown bar, activated by hovering
+-- the mouse in the center of the screen at the topmost edge.
+-- ------------------------------------------------- --
+
 -- declare widget
 local bar = function(s)
-    s.panel =
-        wibox(
+    s.panel = wibox(
         {
             ontop = true,
             honor_workarea = false,
@@ -21,11 +24,10 @@ local bar = function(s)
             fg = colors.white
         }
     )
-    awful.placement.top(s.panel, {margins = beautiful.useless_gap * 4})
+    awful.placement.top(s.panel, { margins = beautiful.useless_gap * 4 })
 
     -- ------------------------------------------------- --
-    --  provide spacing
-
+    -- ---------------- provide spacing ---------------- --
     -- ------------------------------------------------- --
     --  toggle function to make it disappear
     function bar_toggle()
@@ -66,8 +68,8 @@ local bar = function(s)
     }
     -- ------------------------------------------------- --
     --  inserting widgets as tables on the left portion
-    table.insert(leftBar, require('widget.bar.menu')({color = colors[beautiful.bg_button]}, 0, 0, 0, 0))
-    table.insert(leftBar, require('widget.bar.layoutbox')({color = colors[beautiful.bg_button]}))
+    table.insert(leftBar, require('widget.bar.menu')({ color = colors[beautiful.bg_button] }, 0, 0, 0, 0))
+    table.insert(leftBar, require('widget.bar.layoutbox')({ color = colors[beautiful.bg_button] }))
 
     -- ------------------------------------------------- --
     -- center insertions
@@ -75,11 +77,11 @@ local bar = function(s)
     table.insert(centerBar, require('widget.bar.tags')(s))
     -- ------------------------------------------------- --
     --  right widget insertions
-    table.insert(rightBar, require('widget.bar.battery')({color = colors[beautiful.bg_button]}, 0, 0))
-    table.insert(rightBar, require('widget.bar.network')({color = colors[beautiful.bg_button]}, 0, 0))
-    table.insert(rightBar, require('widget.bar.clock')({color = colors[beautiful.bg_button]}, 0, 0))
+    table.insert(rightBar, require('widget.bar.battery')({ color = colors[beautiful.bg_button] }, 0, 0))
+    table.insert(rightBar, require('widget.bar.network')({ color = colors[beautiful.bg_button] }, 0, 0))
+    table.insert(rightBar, require('widget.bar.clock')({ color = colors[beautiful.bg_button] }, 0, 0))
 
-    table.insert(rightBar, require('widget.bar.end-session')({color = colors[beautiful.bg_button]}, 0, 0))
+    table.insert(rightBar, require('widget.bar.end-session')({ color = colors[beautiful.bg_button] }, 0, 0))
 
     -- ------------------------------------------------- --
     -- panel template
@@ -119,7 +121,7 @@ local bar = function(s)
     -- ------------------------------------------------- --
     -- defining the anotation
     local animation =
-        rubato.timed(
+    rubato.timed(
         {
             intro = 0.1,
             outro = 0.1,
@@ -137,8 +139,7 @@ local bar = function(s)
     -- ------------ auto hide functionality ------------ --
 
     -- timer to close the bar
-    s.detect =
-        gears.timer {
+    s.detect = gears.timer {
         timeout = 5,
         callback = function()
             animation.target = hidden_y
@@ -166,8 +167,7 @@ local bar = function(s)
     end
     -- ------------------------------------------------- --
     -- if the bar is not present, this is
-    s.activation_zone =
-        wibox(
+    s.activation_zone = wibox(
         {
             x = s.geometry.x,
             y = s.geometry.y,
@@ -182,7 +182,7 @@ local bar = function(s)
             type = 'popup'
         }
     )
-    s.activation_zone:struts {left = 0, right = 0, bottom = 0, top = 0}
+    s.activation_zone:struts { left = 0, right = 0, bottom = 0, top = 0 }
 
     -- ------------------------------------------------- --
     --  when mouse moves to this bar, the other opens

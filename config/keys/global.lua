@@ -22,71 +22,71 @@ _G.switcher = require('module.application_switcher')
 require('awful.autofocus')
 
 local globalKeys =
-    awful.util.table.join(
+awful.util.table.join(
+-- ------------------------------------------------- --
+    awful.key({ modkey }, 'j', awful.tag.viewprev, { description = 'view previous', group = 'Tag' }),
     -- ------------------------------------------------- --
-    awful.key({modkey}, 'j', awful.tag.viewprev, {description = 'view previous', group = 'Tag'}),
-    -- ------------------------------------------------- --
-    awful.key({modkey}, 'k', awful.tag.viewnext, {description = 'view next', group = 'Tag'}),
+    awful.key({ modkey }, 'k', awful.tag.viewnext, { description = 'view next', group = 'Tag' }),
     -- ------------------------------------------------- --
     awful.key(
-        {modkey, 'Shift'},
+        { modkey, 'Shift' },
         'Right',
         function()
             awful.client.focus.byidx(1)
         end,
-        {description = 'focus next by index', group = 'Window'}
+        { description = 'focus next by index', group = 'Window' }
     ),
     -- ------------------------------------------------- --
     awful.key(
-        {modkey, 'Shift'},
+        { modkey, 'Shift' },
         'j',
         function()
             awful.client.focus.byidx(-1)
         end,
-        {description = 'focus previous by index', group = 'Window'}
+        { description = 'focus previous by index', group = 'Window' }
     ),
     -- ------------------------------------------------- --
     -- Layout manipulation
     awful.key(
-        {modkey, 'Shift'},
+        { modkey, 'Shift' },
         'j',
         function()
             awful.client.swap.byidx(1)
         end,
-        {description = 'swap with next client by index', group = 'Window'}
+        { description = 'swap with next client by index', group = 'Window' }
     ),
     -- ------------------------------------------------- --
     awful.key(
-        {modkey, 'Shift'},
+        { modkey, 'Shift' },
         'k',
         function()
             awful.client.swap.byidx(-1)
         end,
-        {description = 'swap with previous client by index', group = 'Window'}
+        { description = 'swap with previous client by index', group = 'Window' }
     ),
     -- ------------------------------------------------- --
     awful.key(
-        {modkey, 'Control'},
+        { modkey, 'Control' },
         'j',
         function()
             awful.screen.focus_relative(1)
         end,
-        {description = 'focus the next screen', group = 'Screen'}
+        { description = 'focus the next screen', group = 'Screen' }
     ),
     -- ------------------------------------------------- --
     awful.key(
-        {modkey, 'Control'},
+        { modkey, 'Control' },
         'k',
         function()
             awful.screen.focus_relative(-1)
         end,
-        {description = 'focus the previous screen', group = 'Screen'}
+        { description = 'focus the previous screen', group = 'Screen' }
     ),
     -- ------------------------------------------------- --
-    awful.key({modkey}, 'u', awful.client.urgent.jumpto, {description = 'jump to urgent client', group = 'Window'}),
+    awful.key({ modkey }, 'u', awful.client.urgent.jumpto, { description = 'jump to urgent client', group = 'Window' }),
     -- ------------------------------------------------- --
     awful.key(
-        {modkey},
+        { modkey },
         'Tab',
         function()
             awful.client.focus.history.previous()
@@ -94,21 +94,21 @@ local globalKeys =
                 client.focus:raise()
             end
         end,
-        {description = 'go back', group = 'Window'}
+        { description = 'go back', group = 'Window' }
     ),
     -- ------------------------------------------------- --
     -- Tab Between Applications
     awful.key(
-        {'Mod1'},
+        { 'Mod1' },
         'Tab',
         function()
             _G.switcher.switch(1, 'Mod1', 'Alt_L', 'Shift', 'Tab')
         end,
-        {description = 'Tab Forward Between Applications', group = 'Launcher'}
+        { description = 'Tab Forward Between Applications', group = 'Launcher' }
     ),
     -- ------------------------------------------------- --
     awful.key(
-        {'Mod1', 'Shift'},
+        { 'Mod1', 'Shift' },
         'Tab',
         function()
             _G.switcher.switch(-1, 'Mod1', 'Alt_L', 'Shift', 'Tab')
@@ -121,84 +121,84 @@ local globalKeys =
     -- ------------------------------------------------- --
     -- Terminal
     awful.key(
-        {modkey},
+        { modkey },
         'Return',
         function()
-            drop.toggle(apps.default.terminal, 'left', 'top', 0.9, 0.9)
+            drop.toggle(apps.default.terminal, 'left', 'top', 0.7, 0.7)
         end,
-        {description = 'Open Terminal', group = 'Default programs'}
+        { description = 'Open Terminal', group = 'Default programs' }
     ),
     -- ------------------------------------------------- --
     -- Terminal
     awful.key(
-        {modkey, 'Shift'},
+        { modkey, 'Shift' },
         'Return',
         function()
             awful.spawn(apps.default.terminal)
         end,
-        {description = 'Open Terminal', group = 'Default programs'}
+        { description = 'Open Terminal', group = 'Default programs' }
     ),
     -- ------------------------------------------------- --
-    awful.key({modkey}, 'r', awesome.restart, {description = 'reload awesome', group = 'Awesome'}),
+    awful.key({ modkey }, 'r', awesome.restart, { description = 'reload awesome', group = 'Awesome' }),
     -- ------------------------------------------------- --
-    awful.key({modkey, 'Shift'}, 'q', awesome.quit, {description = 'quit awesome', group = 'Awesome'}),
+    awful.key({ modkey, 'Shift' }, 'q', awesome.quit, { description = 'quit awesome', group = 'Awesome' }),
     -- ------------------------------------------------- --
     awful.key(
-        {modkey},
+        { modkey },
         'h',
         function()
             awful.tag.incmwfact(0.05)
         end,
-        {description = 'increase master width factor', group = 'Layout'}
+        { description = 'increase master width factor', group = 'Layout' }
     ),
     -- ------------------------------------------------- --
     awful.key(
-        {modkey},
+        { modkey },
         'l',
         function()
             awful.tag.incmwfact(-0.05)
         end,
-        {description = 'decrease master width factor', group = 'Layout'}
+        { description = 'decrease master width factor', group = 'Layout' }
     ),
     -- ------------------------------------------------- --
     awful.key(
-        {modkey, 'Shift'},
+        { modkey, 'Shift' },
         'h',
         function()
             awful.tag.incnmaster(1, nil, true)
         end,
-        {description = 'increase the number of master clients', group = 'Layout'}
+        { description = 'increase the number of master clients', group = 'Layout' }
     ),
     -- ------------------------------------------------- --
     awful.key(
-        {modkey, 'Shift'},
+        { modkey, 'Shift' },
         'l',
         function()
             awful.tag.incnmaster(-1, nil, true)
         end,
-        {description = 'decrease the number of master clients', group = 'Layout'}
+        { description = 'decrease the number of master clients', group = 'Layout' }
     ),
     -- ------------------------------------------------- --
     awful.key(
-        {modkey, 'Control'},
+        { modkey, 'Control' },
         'h',
         function()
             awful.tag.incncol(1, nil, true)
         end,
-        {description = 'increase the number of columns', group = 'Layout'}
+        { description = 'increase the number of columns', group = 'Layout' }
     ),
     -- ------------------------------------------------- --
     awful.key(
-        {modkey, 'Control'},
+        { modkey, 'Control' },
         'l',
         function()
             awful.tag.incncol(-1, nil, true)
         end,
-        {description = 'decrease the number of columns', group = 'Layout'}
+        { description = 'decrease the number of columns', group = 'Layout' }
     ),
     -- ------------------------------------------------- --
     awful.key(
-        {modkey},
+        { modkey },
         'space',
         function()
             awesome.emit_signal('layout::changed:next')
@@ -210,11 +210,11 @@ local globalKeys =
                 }
             )
         end,
-        {description = 'select next layout', group = 'Layout'}
+        { description = 'select next layout', group = 'Layout' }
     ),
     -- ------------------------------------------------- --
     awful.key(
-        {modkey, 'Shift'},
+        { modkey, 'Shift' },
         'space',
         function()
             awesome.emit_signal('layout::changed:prev')
@@ -226,114 +226,114 @@ local globalKeys =
                 }
             )
         end,
-        {description = 'select previous layout', group = 'Layout'}
+        { description = 'select previous layout', group = 'Layout' }
     ),
     -- ------------------------------------------------- --
     awful.key(
-        {modkey, 'Control'},
+        { modkey, 'Control' },
         'n',
         function()
             local c = awful.client.restore()
             -- Focus restored client
             if c then
-                c:emit_signal('request::activate', 'key.unminimize', {raise = true})
+                c:emit_signal('request::activate', 'key.unminimize', { raise = true })
             end
         end,
-        {description = 'restore minimized', group = 'Window'}
+        { description = 'restore minimized', group = 'Window' }
     ),
     -- ------------------------------------------------- --
     --Run App Menu
     awful.key(
-        {modkey, 'Control'},
+        { modkey, 'Control' },
         'Escape',
         function()
             awful.spawn.with_shell('rofi -no-lazy-grab -show drun -theme ~/.config/awesome/config/rofi/centered.rasi')
         end,
-        {description = 'run rofi prompt', group = 'Launcher'}
+        { description = 'run rofi prompt', group = 'Launcher' }
     ),
     -- ------------------------------------------------- --
     --Window Menu
     awful.key(
-        {'Mod1'},
+        { 'Mod1' },
         'Escape',
         function()
-            awful.menu.menu_keys.down = {'Down', 'Alt_L'}
-            awful.menu.menu_keys.up = {'Up', 'Alt_R'}
-            awful.menu.clients({theme = {width = 450}}, {keygrabber = true})
+            awful.menu.menu_keys.down = { 'Down', 'Alt_L' }
+            awful.menu.menu_keys.up = { 'Up', 'Alt_R' }
+            awful.menu.clients({ theme = { width = 450 } }, { keygrabber = true })
         end,
-        {description = 'Launch Menu of Open Windows', group = 'Utility'}
+        { description = 'Launch Menu of Open Windows', group = 'Utility' }
     ),
     -- ------------------------------------------------- --
     awful.key(
-        {modkey},
+        { modkey },
         'Escape',
         function()
             exit_screen_show()
         end,
-        {description = 'Toggle Exit Screen', group = 'Awesome'}
+        { description = 'Toggle Exit Screen', group = 'Awesome' }
     ),
     -- ------------------------------------------------- --
     awful.key(
-        {modkey, 'Shift'},
+        { modkey, 'Shift' },
         'm',
         function()
             awesome.emit_signal('bar:toggle')
-            awesome.emit_signal('cc:resize')
+            awesome.emit_signal('network::center:toggle:off')
             awesome.emit_signal('nc:resize')
             awesome.emit_signal('cal:resize')
         end,
-        {description = 'Toggle Bottom Panel', group = 'Awesome'}
+        { description = 'Toggle Bottom Panel', group = 'Awesome' }
     ),
     awful.key(
-        {modkey, 'Shift'},
+        { modkey, 'Shift' },
         'Escape',
         function()
             awesome.emit_signal('bar::centers:toggle:off')
         end,
-        {description = 'Turn Bars Off', group = 'Awesome'}
+        { description = 'Turn Bars Off', group = 'Awesome' }
     ),
     -- ------------------------------------------------- --
-    awful.key({modkey}, 'F1', hotkeys_popup_custom.show_help, {description = 'show help', group = 'Awesome'}),
+    awful.key({ modkey }, 'F1', hotkeys_popup_custom.show_help, { description = 'show help', group = 'Awesome' }),
     -- ------------------------------------------------- --
     awful.key(
-        {modkey},
+        { modkey },
         'F2',
         function()
             awful.spawn(apps.default.browser)
         end,
-        {description = 'Open Firefox', group = 'Default programs'}
+        { description = 'Open Firefox', group = 'Default programs' }
     ),
     -- ------------------------------------------------- --
     awful.key(
-        {modkey},
+        { modkey },
         'F3',
         function()
             awful.spawn(apps.default.file_manager)
         end,
-        {description = 'Open File Manager as a Dropdown', group = 'Default programs'}
+        { description = 'Open File Manager as a Dropdown', group = 'Default programs' }
     ),
     -- ------------------------------------------------- --
     awful.key(
-        {modkey, 'Shift'},
+        { modkey, 'Shift' },
         'F3',
         function()
             drop.toggle(apps.default.file_manager, 'left', 'top', 0.7, 0.7)
         end,
-        {description = 'Open File Manager', group = 'Default programs'}
+        { description = 'Open File Manager', group = 'Default programs' }
     ),
     -- ------------------------------------------------- --
     awful.key(
-        {modkey, 'Control'},
+        { modkey, 'Control' },
         'F3',
         function()
             awful.spawn(apps.default.terminal_file_manager)
         end,
-        {description = 'Open Terminal File Manager', group = 'Default programs'}
+        { description = 'Open Terminal File Manager', group = 'Default programs' }
     ),
     -- ------------------------------------------------- --
 
     awful.key(
-        {modkey},
+        { modkey },
         'F4',
         function()
             awful.spawn.easy_async_with_shell('~/.config/awesome/config/rofi/fontawesome_menu/fontawesome-menu')
@@ -345,39 +345,39 @@ local globalKeys =
     ),
     -- ------------------------------------------------- --
     awful.key(
-        {modkey},
+        { modkey },
         'F5',
         function()
             awful.spawn(apps.default.editor)
         end,
-        {description = 'Open Code Editor', group = 'Default programs'}
+        { description = 'Open Code Editor', group = 'Default programs' }
     ),
     -- ------------------------------------------------- --
     awful.key(
-        {modkey},
+        { modkey },
         'F6',
         function()
             awful.spawn(apps.default.email)
         end,
-        {description = 'Open Email', group = 'Default programs'}
+        { description = 'Open Email', group = 'Default programs' }
     ),
     -- ------------------------------------------------- --
     awful.key(
-        {modkey},
+        { modkey },
         'F7',
         function()
             dashboard:toggle()
         end,
-        {description = 'toggle control center', group = 'Awesome'}
+        { description = 'toggle control center', group = 'Awesome' }
     ),
     -- ------------------------------------------------- --
     awful.key(
-        {modkey, 'Shift'},
+        { modkey, 'Shift' },
         'F7',
         function()
             dashboard:toggle()
         end,
-        {description = 'toggle notification center', group = 'Awesome'}
+        { description = 'toggle notification center', group = 'Awesome' }
     ),
     -- ------------------------------------------------- --
     --Screenshot
@@ -387,17 +387,17 @@ local globalKeys =
         function()
             awful.spawn.easy_async_with_shell('$HOME/.config/awesome/bin/snapshot.sh full')
         end,
-        {description = 'Screenshot Tool in Full Screen Mode', group = 'Launcher'}
+        { description = 'Screenshot Tool in Full Screen Mode', group = 'Launcher' }
     ),
     -- ------------------------------------------------- --
     --Screenshot
     awful.key(
-        {modkey},
+        { modkey },
         'Print',
         function()
             awful.spawn.easy_async_with_shell('$HOME/.config/awesome/bin/snapshot.sh area')
         end,
-        {description = 'Screenshot Tool in Area Mode', group = 'Launcher'}
+        { description = 'Screenshot Tool in Area Mode', group = 'Launcher' }
     ),
     -- ------------------------------------------------- --
     -- Raise Brightness
@@ -426,7 +426,7 @@ local globalKeys =
                 }
             )
         end,
-        {description = 'increase brightness by 10%', group = 'Hotkeys'}
+        { description = 'increase brightness by 10%', group = 'Hotkeys' }
     ),
     -- ------------------------------------------------- --
     -- Decrease Brightness
@@ -455,7 +455,7 @@ local globalKeys =
                 }
             )
         end,
-        {description = 'decrease brightness by 10%', group = 'Hotkeys'}
+        { description = 'decrease brightness by 10%', group = 'Hotkeys' }
     ),
     -- ------------------------------------------------- --
     -- Raise Volume Key
@@ -477,7 +477,7 @@ local globalKeys =
                 end
             )
         end,
-        {description = 'Increase Volume', group = 'Awesome'}
+        { description = 'Increase Volume', group = 'Awesome' }
     ),
     -- ------------------------------------------------- --
     -- Lower Volume Key
@@ -499,7 +499,7 @@ local globalKeys =
                 end
             )
         end,
-        {description = 'Decrease Volume', group = 'Awesome'}
+        { description = 'Decrease Volume', group = 'Awesome' }
     ),
     -- ------------------------------------------------- --
     -- Mute Key
@@ -519,7 +519,7 @@ local globalKeys =
                 end
             )
         end,
-        {description = 'Mute Volume', group = 'Awesome'}
+        { description = 'Mute Volume', group = 'Awesome' }
     ),
     -- ------------------------------------------------- --
     -- Power Button
@@ -529,7 +529,7 @@ local globalKeys =
         function()
             awesome.emit_signal('module::exit_screen:show')
         end,
-        {description = 'Shutdown Skynet', group = 'Hotkeys'}
+        { description = 'Shutdown Skynet', group = 'Hotkeys' }
     ), -- ------------------------------------------------- --
     awful.key(
         {},
@@ -537,7 +537,7 @@ local globalKeys =
         function()
             awesome.emit_signal('module::exit_screen:show')
         end,
-        {description = 'Toggle Exit Screen', group = 'Hotkeys'}
+        { description = 'Toggle Exit Screen', group = 'Hotkeys' }
     ),
     -- ------------------------------------------------- --
     -- Display Button
@@ -547,25 +547,24 @@ local globalKeys =
         function()
             awful.spawn.single_instance('arandr', false)
         end,
-        {description = 'Arandr', group = 'Hotkeys'}
+        { description = 'Arandr', group = 'Hotkeys' }
     ),
     awful.key(
-        {modkey},
+        { modkey },
         '.',
         function()
             awful.spawn.single_instance('arandr', false)
         end,
-        {description = 'Arandr', group = 'Hotkeys'}
-    ) --
+        { description = 'Arandr', group = 'Hotkeys' }
+    )--
 )
 -- ------------------------------------------------- --
 for i = 1, 9 do
-    globalKeys =
-        awful.util.table.join(
+    globalKeys = awful.util.table.join(
         globalKeys,
         -- View tag only.
         awful.key(
-            {modkey},
+            { modkey },
             '#' .. i + 9,
             function()
                 local screen = awful.screen.focused()
@@ -574,12 +573,12 @@ for i = 1, 9 do
                     tag:view_only()
                 end
             end,
-            {description = 'view tag #' .. i, group = 'Tag'}
+            { description = 'view tag #' .. i, group = 'Tag' }
         ),
         -- ------------------------------------------------- --
         -- Toggle tag display.
         awful.key(
-            {modkey, 'Control'},
+            { modkey, 'Control' },
             '#' .. i + 9,
             function()
                 local screen = awful.screen.focused()
@@ -588,12 +587,12 @@ for i = 1, 9 do
                     awful.tag.viewtoggle(tag)
                 end
             end,
-            {description = 'toggle tag #' .. i, group = 'Tag'}
+            { description = 'toggle tag #' .. i, group = 'Tag' }
         ),
         -- ------------------------------------------------- --
         -- Move client to tag.
         awful.key(
-            {modkey, 'Shift'},
+            { modkey, 'Shift' },
             '#' .. i + 9,
             function()
                 if client.focus then
@@ -603,12 +602,12 @@ for i = 1, 9 do
                     end
                 end
             end,
-            {description = 'move focused client to tag #' .. i, group = 'Tag'}
+            { description = 'move focused client to tag #' .. i, group = 'Tag' }
         ),
         -- ------------------------------------------------- --
         -- Toggle tag on focused client.
         awful.key(
-            {modkey, 'Control', 'Shift'},
+            { modkey, 'Control', 'Shift' },
             '#' .. i + 9,
             function()
                 if client.focus then
@@ -618,7 +617,7 @@ for i = 1, 9 do
                     end
                 end
             end,
-            {description = 'toggle focused client on tag #' .. i, group = 'Tag'}
+            { description = 'toggle focused client on tag #' .. i, group = 'Tag' }
         )
     )
 end

@@ -7,7 +7,7 @@ require('widget.notifications')
 -- Apply theme variables
 naughty.config.padding = dpi(8)
 naughty.config.spacing = dpi(8)
-naughty.config.icon_formats = {'svg', 'png', 'jpg', 'gif'}
+naughty.config.icon_formats = { 'svg', 'png', 'jpg', 'gif' }
 
 -- ------------------------------------------------- --
 --  provide rules for the notifications
@@ -16,7 +16,7 @@ ruled.notification.connect_signal(
     function()
         -- Critical notifs
         ruled.notification.append_rule {
-            rule = {urgency = 'critical'},
+            rule = { urgency = 'critical' },
             properties = {
                 implicit_timeout = 8
             }
@@ -24,7 +24,7 @@ ruled.notification.connect_signal(
 
         -- Normal notifs
         ruled.notification.append_rule {
-            rule = {urgency = 'normal'},
+            rule = { urgency = 'normal' },
             properties = {
                 implicit_timeout = 5
             }
@@ -32,7 +32,7 @@ ruled.notification.connect_signal(
 
         -- Low notifs
         ruled.notification.append_rule {
-            rule = {urgency = 'low'},
+            rule = { urgency = 'low' },
             properties = {
                 implicit_timeout = 2
             }
@@ -73,8 +73,8 @@ naughty.connect_signal(
     'request::display',
     function(n)
         local custom_notification_icon =
-            wibox.widget {
-            font = 'SF Pro Rounded Heavy   18',
+        wibox.widget {
+            font = beautiful.font .. ' Bold  18',
             align = 'center',
             valign = 'center',
             widget = wibox.widget.textbox
@@ -86,7 +86,7 @@ naughty.connect_signal(
         -- ------------------------------------------------- --
         -- template for actions on notification
         local actions =
-            wibox.widget {
+        wibox.widget {
             notification = n,
             widget_template = {
                 {
@@ -116,7 +116,7 @@ naughty.connect_signal(
         -- ------------------------------------------------- --
         -- icon template
         local notif_icon =
-            wibox.widget {
+        wibox.widget {
             {
                 {
                     {

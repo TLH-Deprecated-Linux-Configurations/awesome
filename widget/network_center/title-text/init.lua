@@ -10,20 +10,20 @@
 local user_content =
 	wibox.widget {
 	text = " Network Center ",
-	font = "SF Pro Rounded Heavy 14",
+	font = beautiful.font .. " Heavy 22",
+	halign = "center",
+	valign = "center",
+	align = "center",
 	widget = wibox.widget.textbox
 }
 
 local widget_user =
 	wibox.widget {
-	layout = wibox.layout.align.vertical,
-	expand = "max",
-	nil,
+	layout = wibox.layout.flex.vertical,
 	{
 		user_content,
 		layout = wibox.layout.flex.horizontal
-	},
-	nil
+	}
 }
 
 local spacer_bar =
@@ -48,6 +48,7 @@ local widget =
 		layout = wibox.layout.fixed.horizontal
 	},
 	fg = colors.white,
+	bg = beautiful.bg_normal,
 	widget = wibox.container.background
 }
 

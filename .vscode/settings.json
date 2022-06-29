@@ -76,7 +76,11 @@
     "gstring",
     "files",
     "horizontal_pad",
-    "vertical_pad"
+    "vertical_pad",
+    "keygrabber",
+    "networkCenter",
+    "capi",
+    "c"
   ],
   "lua.targetVersion": "5.1",
   "restructuredtext.languageServer.disabled": true,
