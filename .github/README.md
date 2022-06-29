@@ -9,5 +9,5 @@
 <p width="60%" style="width: 60%; padding:0.25rem; " align="right">This is my white whale, like Ahab I have doggedly pursued this configuration's perfection and thrown all caution to the wind in reaching the state it is in at present. </p>
 </div>
 <br clear="right"/>
-
+<br clear="left"/>
 <hr/>
