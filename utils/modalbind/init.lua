@@ -12,7 +12,7 @@
 -- https://github.com/crater2150/awesome-modalbind
 -- ------------------------------------------------- --
 local awesome, client, mouse, screen, tag = awesome, client, mouse, screen, tag
-
+local dpi = beautiful.xresources.apply_dpi
 local modalbind = {}
 local nesting = 0
 local verbose = true
@@ -64,8 +64,8 @@ function modalbind.init()
 			visible = false,
 			x = 0,
 			y = 0,
-			width = 1,
-			height = 1,
+			width = dpi(550),
+			height = dpi(650),
 			opacity = defaults.opacity,
 			bg = beautiful.bg_normal,
 			fg = beautiful.fg_normal,
@@ -83,7 +83,7 @@ function modalbind.init()
 						{
 							id = "text",
 							align = "left",
-							font = "SF Pro Rounded Normal 10",
+							font = "SF Pro Rounded Normal 14",
 							widget = wibox.widget.textbox
 						},
 						id = "margin",
@@ -129,7 +129,7 @@ local function show_box(s, map, name)
 	txt:set_markup(label)
 
 	local x, y = txt:get_preferred_size(s)
-	mbox.width = x + mar.left + mar.right
+	mbox.width = dpi(450) + x + mar.left + mar.right
 	mbox.height = math.max(settings.height, y + mar.top + mar.bottom)
 	awful.placement.align(
 		mbox,
@@ -189,8 +189,7 @@ function modalbind.close_box()
 end
 
 modalbind.default_keys = {
-	{"Escape", modalbind.close_box, "Exit Modal"},
-	{"Return", modalbind.close_box, "Exit Modal"}
+	{"Escape", modalbind.close_box, "Exit Modal"}
 }
 
 local function merge_default_keys(keymap)

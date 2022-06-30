@@ -80,7 +80,9 @@
     "keygrabber",
     "networkCenter",
     "capi",
-    "c"
+    "c",
+    "clientmap",
+    "snap_edge"
   ],
   "lua.targetVersion": "5.1",
   "restructuredtext.languageServer.disabled": true,
