@@ -12,7 +12,7 @@ local awful = require("awful")
 
 local modkey = "Mod4"
 local altkey = "Mod1"
-local snap_edge = require("utils.snap-edge")
+local snap_edge = require("utils.snap_edge")
 -- _G.client.focus = c
 -- ------------------------------------------------- --
 -- Call in the maps for the client keys

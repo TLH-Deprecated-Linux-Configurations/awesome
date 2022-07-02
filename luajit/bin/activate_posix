@@ -1,0 +1,22 @@
+s=$(command -V deactivate_lua 2>&1)
+if [ $? -eq 0 ]; then
+    if [ "${s##*function*}" = '' ]; then
+        deactivate_lua
+    fi;
+fi;
+
+deactivate_lua () {
+    if [ -x '/home/tlh/Samsung/Work/awesome/luajit/bin/lua' ]; then
+        PATH=`'/home/tlh/Samsung/Work/awesome/luajit/bin/lua' '/home/tlh/Samsung/Work/awesome/luajit/bin/get_deactivated_path.lua'`
+        export PATH
+
+        hash -r 2>/dev/null
+    fi
+
+    unset -f deactivate_lua
+}
+
+PATH='/home/tlh/Samsung/Work/awesome/luajit/bin':"$PATH"
+export PATH
+
+hash -r 2>/dev/null

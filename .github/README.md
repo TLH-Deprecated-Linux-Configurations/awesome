@@ -11,3 +11,5 @@
 <br clear="right"/>
 <br clear="left"/>
 <hr/>
+<h2>More Documentation</h2>
+<p>If you would like to read additional information about this configuration, please see the ReadMe files in each of the subdirectories, where there are details about the directories content for the intrepid. </p>

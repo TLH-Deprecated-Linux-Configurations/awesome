@@ -22,8 +22,8 @@ local return_button = function(color, lspace, rspace, tspace, bspace)
         },
         left = dpi(lspace),
         right = dpi(rspace),
-        top = dpi(tspace),
-        bottom = dpi(bspace),
+        top = dpi(3),
+        bottom = dpi(3),
         widget = wibox.container.margin
     }
     local icon_size = dpi(108)
@@ -48,7 +48,7 @@ local return_button = function(color, lspace, rspace, tspace, bspace)
         visible = false,
         shape = beautiful.client_shape_rounded_xl,
         border_width = 0,
-        bg = colors.alpha(colors.black, 'cc'),
+        bg = colors.alpha(colors.black, "cc"),
         layout = overflow.horizontal,
         widget = clickable_container
     }
@@ -70,8 +70,8 @@ local return_button = function(color, lspace, rspace, tspace, bspace)
                             widget = wibox.widget.imagebox
                         },
                         {
-                            text = string.sub(program.Name, 1, 6) .. '...',
-                            font = beautiful.font .. ' 9',
+                            text = string.sub(program.Name, 1, 6) .. "...",
+                            font = beautiful.font .. " 9",
                             widget = wibox.widget.textbox
                         }
                     },
@@ -92,13 +92,13 @@ local return_button = function(color, lspace, rspace, tspace, bspace)
             }
 
             icon_widget:connect_signal(
-                'mouse::enter',
+                "mouse::enter",
                 function(c)
                     c:set_bg(beautiful.accent)
                 end
             )
             icon_widget:connect_signal(
-                'mouse::leave',
+                "mouse::leave",
                 function(c)
                     c:set_bg(beautiful.bg_button)
                 end
@@ -133,7 +133,7 @@ local return_button = function(color, lspace, rspace, tspace, bspace)
     end
     generate_drawer()
     app_drawer:connect_signal(
-        'mouse::leave',
+        "mouse::leave",
         function()
             gears.timer {
                 timeout = 5,
@@ -147,7 +147,7 @@ local return_button = function(color, lspace, rspace, tspace, bspace)
         end
     )
     app_drawer:connect_signal(
-        'button::pressed',
+        "button::pressed",
         function()
             if app_drawer.visible then
                 app_drawer.visible = false
@@ -155,7 +155,7 @@ local return_button = function(color, lspace, rspace, tspace, bspace)
         end
     )
     app_drawer:connect_signal(
-        'mouse::enter',
+        "mouse::enter",
         function()
             app_drawer.visible = true
         end
@@ -182,7 +182,7 @@ local return_button = function(color, lspace, rspace, tspace, bspace)
                 3,
                 nil,
                 function()
-                    awesome.emit_signal('cc:toggle')
+                    awesome.emit_signal("cc:toggle")
                 end
             )
         )

@@ -67,7 +67,7 @@ gtable = require("gears.table")
 gtimer = require("gears.timer")
 gstring = require("gears.string")
 colorize_text = require("utils.colorize_text")
-
+snap_edge = require("utils.snap_edge")
 -- ------------------------------------------------- --
 -- Assignments dependent on above list otherwise it will throw errrors,
 -- this results from trial and error (and lots of blood)

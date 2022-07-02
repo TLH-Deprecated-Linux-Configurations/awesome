@@ -2,13 +2,14 @@ configuration {
     show-icons:                     true;
     icon-theme:                     "chhinamasta";
     display-drun:                   "";
-    font:                           "SFMono Nerd Font Mono Heavy 22";
+    font:                           "SFMono Nerd Font Mono Bold 22";
     drun-display-format:            "{name}";
     threads:                        0;
     scroll-method:                  0;
     disable-history:                false;
     fullscreen:                     false;
     hide-scrollbar:                 true;
+    real-transparency: true;
     sidebar-mode:                   false;
 }
 
@@ -50,7 +51,7 @@ configuration {
 
     border-color:                #1b1d24aa;
     spacing:                     2;
-    separatorcolor:              #555e70aa;
+    separatorcolor:              #555e7000;
     background-color:            @background;
 }
 
@@ -65,10 +66,9 @@ configuration {
 #listview {
     background-color: @background;
     columns:      6;
-    lines:        6;
+    lines:        8;
     spacing:      8px;
     layout:       vertical;
-    padding:      8;
 }
 
 #message {
@@ -100,6 +100,8 @@ configuration {
 #button.selected {
     background-color: @selected-normal-background;
     text-color:       @selected-normal-foreground;
+    border-color: #f4f4f7;
+    border: 3; 
 }
 
 #case-indicator {
@@ -111,12 +113,12 @@ configuration {
 #entry {
     text-color:           @foreground;
     background-color:     @color0;
-    border-radius:        25px 25px 25px 25px;
-    width:                20%;
-    horizontal-align:     0.5;
+    
+    width:                0%;
+    
     expand:               false;
-    padding:              3px 0px 3px 0px;
-    blink:                true;
+    enabled:    false;
+    
 }
 
 #prompt {
@@ -127,27 +129,29 @@ configuration {
 
 #inputbar {
   padding:  5px 5px 5px 180px;
+  enabled:    false;
   text-color: #f4f4f7;
 }
 
 #mainbox {
-    children:  [ inputbar,listview ];
+    children:  [ listview ];
     spacing: 10px;
     padding: 5px 5px 5px 5px;
+horizontal-align: 0.5;
 }
 
 
 #element {
     border-radius:       9px;
     text-color:   @foreground;
-
+horizontal-align: 0.5;  
 
     }
 
 
 #element-text {
-        
-    padding:      10px;
+  width: 100%;
+     horizontal-align: 0.5;
 }
 
 #element.normal.normal {
@@ -168,16 +172,25 @@ configuration {
 #element.selected.normal {
     background-color: @selected-normal-background;
     text-color:       @selected-normal-foreground;
+
+    border-color: #f4f4f777;
+    border: 1px 1px 1px 1px; 
 }
 
 #element.selected.urgent {
     background-color: @selected-urgent-background;
+
+    border-color: #f4f4f777;
+    border: 1px 1px 1px 1px; 
     text-color:       @selected-urgent-foreground;
 }
 
 #element.selected.active {
     background-color: @selected-active-background;
     text-color:       @selected-active-foreground;
+
+    border-color: #f4f4f777;
+    border: 1px 1px 1px 1px; 
 }
 
 #element.alternate.normal {

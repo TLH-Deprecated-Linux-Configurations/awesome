@@ -119,13 +119,13 @@ function widget.new(args)
                 -- Basic multimedia keys:
                 XF86MonBrightnessUp = "🔆+",
                 XF86MonBrightnessDown = "🔅-",
-                XF86AudioRaiseVolume = "",
-                XF86AudioLowerVolume = "",
+                XF86AudioRaiseVolume = "+",
+                XF86AudioLowerVolume = "-",
                 XF86Display = "",
-                XF86AudioMute = "",
-                XF86AudioPlay = "⏯",
-                XF86AudioPrev = "⏮",
-                XF86AudioNext = "⏭"
+                XF86AudioMute = "",
+                XF86AudioPlay = "",
+                XF86AudioPrev = "",
+                XF86AudioNext = ""
             },
         _additional_hotkeys = {},
         _cached_wiboxes = {},

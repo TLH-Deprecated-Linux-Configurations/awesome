@@ -19,7 +19,7 @@ return {
     require(... .. ".overflow"),
     require(... .. ".rubato"),
     require(... .. ".save_floats"),
-    require(... .. ".snap-edge"),
+    require(... .. ".snap_edge"),
     require(... .. ".titlebar"),
     require(... .. ".modalbind")
 }

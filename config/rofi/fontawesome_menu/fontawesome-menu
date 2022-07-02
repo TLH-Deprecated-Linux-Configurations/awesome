@@ -4,8 +4,6 @@ NAME="fontawesome-menu"
 VERSION="0.1"
 AUTHOR="Thomas Highbaugh (forked from wstam88)"
 CONTACT='thighbaugh@zoho.com'
-CREATED="2020-09-21"
-UPDATED="2020-09-21"
 
 main() {
   while getopts :vhf:o:p: option; do
@@ -25,7 +23,7 @@ main() {
 
   echo "$LISTfile"
 
-  LISTfile="${LISTfile:-$HOME/.config/awesome/config/rofi/fontawesome_menu/unicode-list.txt}"
+  LISTfile="${LISTfile:-$HOME/.config/awesome/config/rofi/fontawesome_menu/fa5-icon-list.txt}"
   ROFI_PROMPT="${ROFI_PROMPT:-""}"
 
   [[ ! -f "$LISTfile" ]] &&

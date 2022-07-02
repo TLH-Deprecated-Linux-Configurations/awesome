@@ -14,4 +14,3 @@ a brief explanation of the pattern they arrange the client windows in.
 | horizon      | creates three rows of clients, like thrizen but horizontal                                                               |
 | stack        | splits window in half and stacks additional windows on the right                                                         |
 | thrizen      | three column layout                                                                                                      |
-ryzen_smu-dkms-gitryzen_smu-dkms-gitryzen_smu-dkms-git

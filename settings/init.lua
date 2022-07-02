@@ -7,12 +7,12 @@
 
 return {
     theme = "vice",
-    background = "10.png",
+    background = "9.png",
     default_programs = {
         terminal = "kitty",
         terminal_editor = "code-oss",
         editor = "nvim",
-        browser = "firefox-developer-edition",
+        browser = "firefox",
         file_manager = "thunar",
         terminal_file_manager = "ranger",
         lock = config_dir .. "bin/blur.sh",
