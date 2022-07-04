@@ -18,16 +18,12 @@ local capi = {
 local function mouse_resize_handler(m, c)
     awful.client.incwfact(0, c) -- needed to fix normalization at start
     local start = m(capi.mouse.coords())
-    local x,
-        y = start.x, start.y
+    local x, y = start.x, start.y
     local wa = m(c.screen.workarea)
     local idx = awful.client.idx(c)
-    local c_above,
-        c_below
-    local idx_above,
-        idx_below
-    local wfact_above,
-        wfact_below
+    local c_above, c_below
+    local idx_above, idx_below
+    local wfact_above, wfact_below
     local jump_to = {x = x, y = y}
     local move_mwfact = false
 
@@ -39,14 +35,14 @@ local function mouse_resize_handler(m, c)
         if idx.idx > 1 and y >= g.y and y <= g.y + v_border then
             -- we are near the top edge of the window
             c_above = awful.client.next(-1, c)
-            c_below = c
+            local c_below = c
             jump_to.y = g.y
             idx_above = idx.idx - 1
             idx_below = idx.idx
         elseif idx.idx < (idx.num) and y >= g.y + g.height - v_border then
             -- we are near the bottom edge of the window
             c_above = c
-            c_below = awful.client.next(1, c)
+            local c_below = awful.client.next(1, c)
             idx_above = idx.idx
             idx_below = idx.idx + 1
             jump_to.y = g.y + g.height
@@ -71,11 +67,11 @@ local function mouse_resize_handler(m, c)
     end
 
     if idx_above and move_mwfact then
-        cursor = 'cross'
+        cursor = "cross"
     elseif idx_above then
-        cursor = m({y = 'sb_v_double_arrow', x = 'sb_h_double_arrow'}).y
+        cursor = m({y = "sb_v_double_arrow", x = "sb_h_double_arrow"}).y
     elseif move_mwfact then
-        cursor = m({y = 'sb_v_double_arrow', x = 'sb_h_double_arrow'}).x
+        cursor = m({y = "sb_v_double_arrow", x = "sb_h_double_arrow"}).x
     else
         return false
     end
@@ -100,7 +96,8 @@ local function mouse_resize_handler(m, c)
 
             if pressed then
                 if move_mwfact then
-                    c.screen.selected_tag.master_width_factor = math.min(math.max((_mouse.x - wa.x) / wa.width, 0.01), 0.99)
+                    c.screen.selected_tag.master_width_factor =
+                        math.min(math.max((_mouse.x - wa.x) / wa.width, 0.01), 0.99)
                 end
 
                 if idx_above then

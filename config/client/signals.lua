@@ -23,7 +23,7 @@ end
 
 -- ------------------------------------------------- --
 client.connect_signal(
-    'request::manage',
+    "request::manage",
     function(c)
         -- Fade in animation (fade out is in keys)
 
@@ -57,13 +57,12 @@ client.connect_signal(
             -- Prevent clients from being unreachable after screen count changes.
             awful.placement.no_offscreen(c)
             awful.placement.no_overlap(c)
-            awful.placement.centered(c)
         end
     end
 )
 -- ------------------------------------------------- --
 client.connect_signal(
-    'manage',
+    "manage",
     function(c)
         -- Set the windows at the slave,
         -- i.e. put it at the end of others instead of setting it master.
@@ -84,32 +83,47 @@ client.connect_signal(
 -- ------------------------------------------------- --
 -- Enable sloppy focus, so that focus follows mouse. BUT don't raise the window, Lord help me that is annoying when trying to access a popup window within another window
 client.connect_signal(
-    'mouse::enter',
+    "mouse::enter",
     function(c)
-        c:emit_signal('request::activate', 'mouse_enter', {raise = false})
+        c:emit_signal("request::activate", "mouse_enter", {raise = false})
     end
 )
 -- ------------------------------------------------- --
 client.connect_signal(
-    'focus',
+    "focus",
     function(c)
         c.border_color = beautiful.border_focus
     end
 )
 -- ------------------------------------------------- --
 client.connect_signal(
-    'unfocus',
+    "unfocus",
     function(c)
         c.border_color = beautiful.border_normal
     end
 )
-
+-- --- Hide all windows when a splash is shown
+-- awesome.connect_signal(
+--     "splash::visibility",
+--     function(vis)
+--         local t = screen.primary.selected_tag
+--         if vis then
+--             for idx, c in ipairs(t:clients()) do
+--                 c.hidden = true
+--             end
+--         else
+--             for idx, c in ipairs(t:clients()) do
+--                 c.hidden = false
+--             end
+--         end
+--     end
+-- )
 -- ------------------------------------------------- --
 -- --------------------- Shape --------------------- --
 -- ------------------------------------------------- --
 -- Manipulate client shape on floating
 client.connect_signal(
-    'property::floating',
+    "property::floating",
     function(c)
         if c.floating then
             c.shape = beautiful.client_shape_rounded
@@ -122,7 +136,7 @@ client.connect_signal(
 -- ------------------------------------------------- --
 -- Manipulate client shape on fullscreen/non-fullscreen
 client.connect_signal(
-    'property::fullscreen',
+    "property::fullscreen",
     function(c)
         if c.fullscreen then
             c.shape = beautiful.client_shape_rectangle
@@ -134,7 +148,7 @@ client.connect_signal(
 -- ------------------------------------------------- --
 -- Manipulate client shape on fullscreen/non-fullscreen
 client.connect_signal(
-    'property::maximized',
+    "property::maximized",
     function(c)
         if c.maximized then
             c.shape = beautiful.client_shape_rectangle
@@ -147,7 +161,7 @@ client.connect_signal(
 -- -------------------- Pointer -------------------- --
 -- ------------------------------------------------- --
 -- Set mouse resize mode (live or after)
-awful.mouse.resize.set_mode('live')
+awful.mouse.resize.set_mode("live")
 -- ------------------------------------------------- --
 -- -------------------- Geometry ------------------- --
 -- ------------------------------------------------- --
@@ -155,13 +169,13 @@ awful.mouse.resize.set_mode('live')
 -- (for example after swapping from tiling mode to floating mode)
 
 tag.connect_signal(
-    'property::layout',
+    "property::layout",
     function(t)
         for k, c in ipairs(t:clients()) do
             if awful.layout.get(mouse.screen) == awful.layout.suit.floating then
-                local cgeo = awful.client.property.get(c, 'floating_geometry')
+                local cgeo = awful.client.property.get(c, "floating_geometry")
                 if cgeo then
-                    c:geometry(awful.client.property.get(c, 'floating_geometry'))
+                    c:geometry(awful.client.property.get(c, "floating_geometry"))
                 end
             end
         end
@@ -169,19 +183,20 @@ tag.connect_signal(
 )
 
 client.connect_signal(
-    'manage',
+    "manage",
     function(c)
         if awful.layout.get(mouse.screen) == awful.layout.suit.floating then
-            awful.client.property.set(c, 'floating_geometry', c:geometry())
+            awful.client.property.set(c, "floating_geometry", c:geometry())
         end
     end
 )
 
 client.connect_signal(
-    'property::geometry',
+    "property::geometry",
     function(c)
         if awful.layout.get(mouse.screen) == awful.layout.suit.floating then
-            awful.client.property.set(c, 'floating_geometry', c:geometry())
+            awful.client.property.set(c, "floating_geometry", c:geometry())
         end
     end
 )
+-- ------------------------------------------------- --

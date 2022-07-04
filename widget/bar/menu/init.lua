@@ -48,13 +48,13 @@ local return_button = function(color, lspace, rspace, tspace, bspace)
         visible = false,
         shape = beautiful.client_shape_rounded_xl,
         border_width = 0,
-        bg = colors.alpha(colors.black, "cc"),
-        layout = overflow.horizontal,
+        bg = colors.alpha(colors.black, 'cc'),
+        layout = overflow.vertical(),
         widget = clickable_container
     }
     local function generate_drawer()
-        local row = {layout = wibox.layout.fixed.horizontal}
-        local rows = {layout = wibox.layout.fixed.vertical}
+        local row = {layout = overflow.horizontal()}
+        local rows = {layout = overflow.vertical()}
         local width_count = 0
 
         for _, program in pairs(programs_list) do
@@ -62,7 +62,7 @@ local return_button = function(color, lspace, rspace, tspace, bspace)
                 wibox.widget {
                 {
                     {
-                        layout = wibox.layout.fixed.vertical,
+                        layout = overflow.vertical(),
                         {
                             image = program.icon_path,
                             forced_height = icon_size,
@@ -70,8 +70,8 @@ local return_button = function(color, lspace, rspace, tspace, bspace)
                             widget = wibox.widget.imagebox
                         },
                         {
-                            text = string.sub(program.Name, 1, 6) .. "...",
-                            font = beautiful.font .. " 9",
+                            text = string.sub(program.Name, 1, 6) .. '...',
+                            font = beautiful.font .. ' 9',
                             widget = wibox.widget.textbox
                         }
                     },
@@ -92,13 +92,13 @@ local return_button = function(color, lspace, rspace, tspace, bspace)
             }
 
             icon_widget:connect_signal(
-                "mouse::enter",
+                'mouse::enter',
                 function(c)
                     c:set_bg(beautiful.accent)
                 end
             )
             icon_widget:connect_signal(
-                "mouse::leave",
+                'mouse::leave',
                 function(c)
                     c:set_bg(beautiful.bg_button)
                 end
@@ -123,7 +123,7 @@ local return_button = function(color, lspace, rspace, tspace, bspace)
             if width_count == 10 then
                 width_count = 0
                 table.insert(rows, row)
-                row = {layout = wibox.layout.fixed.horizontal}
+                row = {layout = overflow.horizontal()}
             end
         end
 
@@ -133,7 +133,7 @@ local return_button = function(color, lspace, rspace, tspace, bspace)
     end
     generate_drawer()
     app_drawer:connect_signal(
-        "mouse::leave",
+        'mouse::leave',
         function()
             gears.timer {
                 timeout = 5,
@@ -147,7 +147,7 @@ local return_button = function(color, lspace, rspace, tspace, bspace)
         end
     )
     app_drawer:connect_signal(
-        "button::pressed",
+        'button::pressed',
         function()
             if app_drawer.visible then
                 app_drawer.visible = false
@@ -155,7 +155,7 @@ local return_button = function(color, lspace, rspace, tspace, bspace)
         end
     )
     app_drawer:connect_signal(
-        "mouse::enter",
+        'mouse::enter',
         function()
             app_drawer.visible = true
         end
@@ -182,7 +182,7 @@ local return_button = function(color, lspace, rspace, tspace, bspace)
                 3,
                 nil,
                 function()
-                    awesome.emit_signal("cc:toggle")
+                    awesome.emit_signal('cc:toggle')
                 end
             )
         )

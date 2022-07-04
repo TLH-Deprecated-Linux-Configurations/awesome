@@ -7,6 +7,7 @@ return {
     require(... .. ".awestore"),
     require(... .. ".beckham"),
     require(... .. ".better_resize"),
+    require(... .. ".color"),
     require(... .. ".clickable-container"),
     require(... .. ".colorize_text"),
     require(... .. ".dropdown"),
@@ -15,11 +16,10 @@ return {
     require(... .. ".format_item"),
     require(... .. ".hover_signal"),
     require(... .. ".icon_handler"),
-    require(... .. ".mouser"),
+    require(... .. ".modalbind"),
     require(... .. ".overflow"),
     require(... .. ".rubato"),
     require(... .. ".save_floats"),
     require(... .. ".snap_edge"),
-    require(... .. ".titlebar"),
-    require(... .. ".modalbind")
+    require(... .. ".titlebar")
 }

@@ -5,7 +5,7 @@
 -- ------------------------------------------------- --
 -- ------------------------------------------------- --
 -- ------------------------------------------------- --
-
+local hotkeys_popup_custom = require("module.hotkeys-popup")
 local awesomemap = {
     {
         "r",
@@ -40,19 +40,11 @@ local awesomemap = {
     },
     -- ------------------------------------------------- --
     {
-        "Print",
+        "h",
         function(c)
-            awful.spawn.easy_async_with_shell("$HOME/.config/awesome/bin/snapshot.sh area")
+            hotkeys_popup_custom.show_help()
         end,
-        "Area Screenshot"
-    },
-    -- ------------------------------------------------- --
-    {
-        "p",
-        function(c)
-            awful.spawn.easy_async_with_shell("$HOME/.config/awesome/bin/snapshot.sh full")
-        end,
-        "Full Screenshot"
+        "Hotkeys Popup"
     },
     -- ------------------------------------------------- --
     {
@@ -63,6 +55,14 @@ local awesomemap = {
             awful.menu.clients({theme = {width = 450}}, {keygrabber = true})
         end,
         "Client List"
+    },
+    -- ------------------------------------------------- --
+    {
+        "d",
+        function()
+            awesome.emit_signal("dashboard:toggle")
+        end,
+        "Dashboard"
     },
     -- ------------------------------------------------- --
     {"separator", " "}

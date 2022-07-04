@@ -37,7 +37,7 @@ local globalKeys =
         function()
             modalbind.grab {keymap = focusmap, name = "Focus Conrol", stay_in_mode = true}
         end,
-        {description = "Enter Focus Control Mode", group = "Client"}
+        {description = "Enter Focus Control Mode", group = "Mode"}
     ),
     -- ------------------------------------------------- --
     awful.key(
@@ -46,7 +46,7 @@ local globalKeys =
         function()
             modalbind.grab {keymap = layoutmap, name = "Layout Conrol", stay_in_mode = true}
         end,
-        {description = "Enter Layout Control Mode", group = "Layout"}
+        {description = "Enter Layout Control Mode", group = "Mode"}
     ),
     -- ------------------------------------------------- --
     awful.key(
@@ -55,7 +55,7 @@ local globalKeys =
         function()
             modalbind.grab {keymap = applicationsmap, name = "Applications Launch", stay_in_mode = false}
         end,
-        {description = "Enter Focus Control Mode", group = "Awesome"}
+        {description = "Enter Focus Control Mode", group = "Mode"}
     ),
     -- ------------------------------------------------- --
     awful.key(
@@ -64,10 +64,19 @@ local globalKeys =
         function()
             modalbind.grab {keymap = awesomemap, name = "Awesome Conrol", stay_in_mode = false}
         end,
-        {description = "Enter Awesome Control Mode", group = "Awesome"}
+        {description = "Enter Awesome Control Mode", group = "Mode"}
     ),
     -- ------------------------------------------------- --
-
+    --- Lockscreen
+    awful.key(
+        {modkey},
+        "l",
+        function()
+            lock_screen_show()
+        end,
+        {description = "lock screen", group = "hotkeys"}
+    ),
+    -- ------------------------------------------------- --
     awful.key(
         {modkey},
         "Tab",
@@ -100,16 +109,6 @@ local globalKeys =
             description = "Tab Back Between Applications",
             group = "Launcher"
         }
-    ),
-    -- ------------------------------------------------- --
-    -- Terminal
-    awful.key(
-        {modkey},
-        "Return",
-        function()
-            drop.toggle(apps.default.terminal, "left", "top", 0.7, 0.7)
-        end,
-        {description = "Open Terminal", group = "Awesome"}
     ),
     -- ------------------------------------------------- --
     awful.key(
@@ -180,7 +179,7 @@ local globalKeys =
                 }
             )
         end,
-        {description = "increase brightness by 10%", group = "Hotkeys"}
+        {description = "increase brightness by 10%", group = "Awesome"}
     ),
     -- ------------------------------------------------- --
     -- Decrease Brightness
@@ -209,7 +208,7 @@ local globalKeys =
                 }
             )
         end,
-        {description = "decrease brightness by 10%", group = "Hotkeys"}
+        {description = "decrease brightness by 10%", group = "Awesome"}
     ),
     -- ------------------------------------------------- --
     -- Raise Volume Key
@@ -283,7 +282,7 @@ local globalKeys =
         function()
             awesome.emit_signal("module::exit_screen:show")
         end,
-        {description = "Shutdown Skynet", group = "Hotkeys"}
+        {description = "Shutdown Skynet", group = "Awesome"}
     ), -- ------------------------------------------------- --
     awful.key(
         {},
@@ -291,7 +290,7 @@ local globalKeys =
         function()
             awesome.emit_signal("module::exit_screen:show")
         end,
-        {description = "Toggle Exit Screen", group = "Hotkeys"}
+        {description = "Toggle Exit Screen", group = "Awesome"}
     ),
     -- ------------------------------------------------- --
     -- Display Button
@@ -301,7 +300,7 @@ local globalKeys =
         function()
             awful.spawn.single_instance("arandr", false)
         end,
-        {description = "Arandr", group = "Hotkeys"}
+        {description = "Arandr", group = "Awesome"}
     )
     --
 )

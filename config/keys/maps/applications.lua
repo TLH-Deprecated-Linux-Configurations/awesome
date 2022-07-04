@@ -8,10 +8,11 @@
 -- ------------------------------------------------- --
 local drop = require("utils.dropdown")
 local apps = require("config.root.apps")
-local hotkeys_popup_custom = require("module.hotkeys-popup")
+
 -- ------------------------------------------------- --
 
 local applicationsmap = {
+    {"separator", "Applications"},
     {
         "Return",
         function(c)
@@ -26,14 +27,6 @@ local applicationsmap = {
             awful.spawn(apps.default.terminal)
         end,
         "Terminal"
-    },
-    -- ------------------------------------------------- --
-    {
-        "h",
-        function(c)
-            hotkeys_popup_custom.show_help()
-        end,
-        "Hotkeys Popup"
     },
     -- ------------------------------------------------- --
     {
@@ -75,6 +68,23 @@ local applicationsmap = {
         "Email Client"
     },
     -- ------------------------------------------------- --
+    {"separator", "Screenshots"},
+    -- ------------------------------------------------- --
+    {
+        "Print",
+        function(c)
+            awful.spawn.easy_async_with_shell("$HOME/.config/awesome/bin/snapshot.sh area")
+        end,
+        "Area Screenshot"
+    },
+    -- To be honest, I never want or need the full screenshot but here it is
+    {
+        "Insert",
+        function(c)
+            awful.spawn.easy_async_with_shell("$HOME/.config/awesome/bin/snapshot.sh full")
+        end,
+        "Full Screenshot"
+    },
     {"separator", " "}
 }
 

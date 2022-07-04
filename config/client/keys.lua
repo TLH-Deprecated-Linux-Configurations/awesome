@@ -18,7 +18,8 @@ local snap_edge = require("utils.snap_edge")
 -- Call in the maps for the client keys
 local clientmap = require("config.keys.maps.client")
 local snapmap = require("config.keys.maps.snap")
-local resizemap = require("config.keys.maps.resize")
+local resizemap = require("config.keys.maps.resize-increase")
+local resizemap2 = require("config.keys.maps.resize-decrease")
 local movemap = require("config.keys.maps.move")
 -- ------------------------------------------------- --
 
@@ -39,6 +40,15 @@ local clientkeys =
     "r",
     function()
       modalbind.grab {keymap = resizemap, name = "Window Resizing", stay_in_mode = true}
+    end,
+    {description = "Enter Window Resizing Mode", group = "Floating Client"}
+  ),
+  -- ------------------------------------------------- --
+  awful.key(
+    {"Mod1"},
+    "t",
+    function()
+      modalbind.grab {keymap = resizemap2, name = "Window Resizing", stay_in_mode = true}
     end,
     {description = "Enter Window Resizing Mode", group = "Floating Client"}
   ),

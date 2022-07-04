@@ -9,12 +9,12 @@
 -- @layoutmod wibox.layout.overflow
 ---------------------------------------------------------------------------
 
-local base = require("wibox.widget.base")
-local fixed = require("wibox.layout.fixed")
-local separator = require("wibox.widget.separator")
-local gtable = require("gears.table")
-local gshape = require("gears.shape")
-local gobject = require("gears.object")
+local base = require('wibox.widget.base')
+local fixed = require('wibox.layout.fixed')
+local separator = require('wibox.widget.separator')
+local gtable = require('gears.table')
+local gshape = require('gears.shape')
+local gobject = require('gears.object')
 local mousegrabber = mousegrabber
 
 local overflow = {mt = {}}
@@ -32,7 +32,7 @@ function overflow:fit(context, orig_width, orig_height)
     local scrollbar_width = self._private.scrollbar_width
     local scrollbar_enabled = self._private.scrollbar_enabled
     local used_in_dir, used_max = 0, 0
-    local is_y = self._private.dir == "y"
+    local is_y = self._private.dir == 'y'
     local avail_in_dir = is_y and orig_height or orig_width
 
     -- Set the direction covered by scrolling to the maximum value
@@ -82,7 +82,7 @@ end
 -- Only those widgets that are currently visible will be placed.
 function overflow:layout(context, orig_width, orig_height)
     local result = {}
-    local is_y = self._private.dir == "y"
+    local is_y = self._private.dir == 'y'
     local widgets = self._private.widgets
     local avail_in_dir = is_y and orig_height or orig_width
     local scrollbar_width = self._private.scrollbar_width
@@ -141,9 +141,9 @@ function overflow:layout(context, orig_width, orig_height)
             bar_w, bar_h = base.fit_widget(self, context, scrollbar_widget, scrollbar_width, bar_length)
             bar_y = bar_pos
 
-            if scrollbar_position == "left" then
+            if scrollbar_position == 'left' then
                 widget_x = widget_x + bar_w
-            elseif scrollbar_position == "right" then
+            elseif scrollbar_position == 'right' then
                 bar_x = orig_width - bar_w
             end
 
@@ -154,9 +154,9 @@ function overflow:layout(context, orig_width, orig_height)
             bar_w, bar_h = base.fit_widget(self, context, scrollbar_widget, bar_length, scrollbar_width)
             bar_x = bar_pos
 
-            if scrollbar_position == "top" then
+            if scrollbar_position == 'top' then
                 widget_y = widget_y + bar_h
-            elseif scrollbar_position == "bottom" then
+            elseif scrollbar_position == 'bottom' then
                 bar_y = orig_height - bar_h
             end
 
@@ -325,17 +325,20 @@ end
 function overflow:set_position(pos)
     local current = self._private.position
     local interval = self._private.used_in_dir - self._private.avail_in_dir
-    if current == pos or -- the content takes less space than what is available, i.e. everything
+    if
+        current == pos or -- the content takes less space than what is available, i.e. everything
             -- is already visible
             interval <= 0 or -- the position is out of range
-            (current <= 0 and pos < 0) or (current >= 1 and pos > 1) then
+            (current <= 0 and pos < 0) or
+            (current >= 1 and pos > 1)
+     then
         return
     end
 
     self._private.position = math.min(1, math.max(pos, 0))
 
-    self:emit_signal("widget::layout_changed")
-    self:emit_signal("property::position", pos)
+    self:emit_signal('widget::layout_changed')
+    self:emit_signal('property::position', pos)
 end
 
 --- Get the current scroll position.
@@ -374,8 +377,8 @@ function overflow:set_scrollbar_width(width)
 
     self._private.scrollbar_width = width
 
-    self:emit_signal("widget::layout_changed")
-    self:emit_signal("property::scrollbar_width", width)
+    self:emit_signal('widget::layout_changed')
+    self:emit_signal('property::scrollbar_width', width)
 end
 
 --- The scrollbar position.
@@ -406,8 +409,8 @@ function overflow:set_scrollbar_position(position)
 
     self._private.scrollbar_position = position
 
-    self:emit_signal("widget::layout_changed")
-    self:emit_signal("property::scrollbar_position", position)
+    self:emit_signal('widget::layout_changed')
+    self:emit_signal('property::scrollbar_position', position)
 end
 
 --- The scrollbar visibility.
@@ -436,14 +439,14 @@ function overflow:set_scrollbar_enabled(enabled)
 
     self._private.scrollbar_enabled = enabled
 
-    self:emit_signal("widget::layout_changed")
-    self:emit_signal("property::scrollbar_enabled", enabled)
+    self:emit_signal('widget::layout_changed')
+    self:emit_signal('property::scrollbar_enabled', enabled)
 end
 
 -- Wraps a callback function for `mousegrabber` that is capable of
 -- updating the scroll position.
 local function build_grabber(container)
-    local is_y = container._private.dir == "y"
+    local is_y = container._private.dir == 'y'
     local bar_interval = container._private.avail_in_dir - container._private.bar_length
     local start_pos = container._private.position * bar_interval
     local coords = mouse.coords()
@@ -464,12 +467,12 @@ end
 -- Applies a mouse button signal using `build_grabber` to a scrollbar widget.
 local function apply_scrollbar_mouse_signal(container, w)
     w:connect_signal(
-        "button::press",
+        'button::press',
         function(_, _, _, button_id)
             if button_id ~= 1 then
                 return
             end
-            mousegrabber.run(build_grabber(container), "fleur")
+            mousegrabber.run(build_grabber(container), 'fleur')
         end
     )
 end
@@ -502,8 +505,8 @@ function overflow:set_scrollbar_widget(widget)
 
     self._private.scrollbar_widget = w
 
-    self:emit_signal("widget::layout_changed")
-    self:emit_signal("property::scrollbar_widget", widget)
+    self:emit_signal('widget::layout_changed')
+    self:emit_signal('property::scrollbar_widget', widget)
 end
 
 local function new(dir, ...)
@@ -516,18 +519,18 @@ local function new(dir, ...)
     ret._private.position = 0
 
     -- Apply defaults. Bypass setters to avoid signals.
-    ret._private.step = 10
+    ret._private.step = 50
     ret._private.fill_space = true
     ret._private.scrollbar_width = 5
     ret._private.scrollbar_enabled = true
-    ret._private.scrollbar_position = dir == "vertical" and "right" or "bottom"
+    ret._private.scrollbar_position = dir == 'vertical' and 'right' or 'bottom'
 
     local scrollbar_widget = separator({shape = gshape.rectangle})
     apply_scrollbar_mouse_signal(ret, scrollbar_widget)
     ret._private.scrollbar_widget = scrollbar_widget
 
     ret:connect_signal(
-        "button::press",
+        'button::press',
         function(self, _, _, button)
             if button == 4 then
                 if self.scroll_speed == nil or self.scroll_speed <= 0 then
@@ -556,7 +559,7 @@ end
 -- @tparam widget ... Widgets that should be added to the layout.
 -- @constructorfct wibox.layout.overflow.horizontal
 function overflow.horizontal(...)
-    return new("horizontal", ...)
+    return new('horizontal', ...)
 end
 
 --- Returns a new vertical overflow layout.
@@ -567,7 +570,7 @@ end
 -- @tparam widget ... Widgets that should be added to the layout.
 -- @constructorfct wibox.layout.fixed.horizontal
 function overflow.vertical(...)
-    return new("vertical", ...)
+    return new('vertical', ...)
 end
 
 --- Add spacing between each layout widgets.

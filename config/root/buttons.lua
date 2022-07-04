@@ -74,18 +74,38 @@ _G.root.buttons(
             {"Control"},
             8,
             function()
-                awful.spawn("amixer sset Master 5%+", true)
-                awesome.emit_signal("widget::volume")
-                awesome.emit_signal("module::volume_osd:show", true)
+                awful.spawn.easy_async_with_shell(
+                    "pamixer -i 5",
+                    function()
+                        awful.spawn.with_line_callback(
+                            "pamixer --get-volume",
+                            {
+                                stdout = function(value)
+                                    awesome.emit_signal("signal::volume", value)
+                                end
+                            }
+                        )
+                    end
+                )
             end
         ),
         awful.button(
             {"Control"},
             9,
             function()
-                awful.spawn("amixer sset Master 5%-", true)
-                awesome.emit_signal("widget::volume")
-                awesome.emit_signal("module::volume_osd:show", true)
+                awful.spawn.easy_async_with_shell(
+                    "pamixer -d 5",
+                    function()
+                        awful.spawn.with_line_callback(
+                            "pamixer --get-volume",
+                            {
+                                stdout = function(value)
+                                    awesome.emit_signal("signal::volume", value)
+                                end
+                            }
+                        )
+                    end
+                )
             end
         )
     )

@@ -82,7 +82,11 @@
     "capi",
     "c",
     "clientmap",
-    "snap_edge"
+    "snap_edge",
+    "fontSize",
+    "timer",
+    "c_above",
+    "c_below"
   ],
   "lua.targetVersion": "5.1",
   "restructuredtext.languageServer.disabled": true,

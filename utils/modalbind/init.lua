@@ -64,7 +64,7 @@ function modalbind.init()
 			visible = false,
 			x = 0,
 			y = 0,
-			width = dpi(550),
+			-- width = dpi(550),
 			height = dpi(650),
 			opacity = defaults.opacity,
 			bg = beautiful.bg_normal,
@@ -83,18 +83,18 @@ function modalbind.init()
 						{
 							id = "text",
 							align = "left",
-							font = "SF Pro Rounded Normal 14",
+							font = "SF Pro Rounded Normal 16",
 							widget = wibox.widget.textbox
 						},
 						id = "margin",
-						margins = 6,
+						margins = dpi(6),
 						color = "#1b1d2488",
 						layout = wibox.container.margin
 					},
 					widget = wibox.container.background,
 					bg = "linear:0,0:0,21:0,#282b3688:1,#2f303d88"
 				},
-				margins = 6,
+				margins = dpi(6),
 				color = "#1b1d2488",
 				layout = wibox.container.margin
 			},
@@ -129,7 +129,7 @@ local function show_box(s, map, name)
 	txt:set_markup(label)
 
 	local x, y = txt:get_preferred_size(s)
-	mbox.width = dpi(450) + x + mar.left + mar.right
+	mbox.width = dpi(250) + x + mar.left + mar.right
 	mbox.height = math.max(settings.height, y + mar.top + mar.bottom)
 	awful.placement.align(
 		mbox,

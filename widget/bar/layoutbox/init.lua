@@ -23,7 +23,7 @@ local ll =
         {
             {
                 {
-                    id = 'icon_role',
+                    id = "icon_role",
                     forced_height = dpi(84),
                     forced_width = dpi(84),
                     widget = wibox.widget.imagebox,
@@ -35,7 +35,7 @@ local ll =
             },
             widget = clickable_container
         },
-        id = 'background_role',
+        id = "background_role",
         forced_width = dpi(96),
         forced_height = dpi(96),
         bg = beautiful.bg_button,
@@ -56,8 +56,8 @@ local layout_popup =
         widget = wibox.container.background
     },
     border_width = dpi(3),
-    border_color = colors.alpha(colors.black, '88'),
-    bg = colors.alpha(colors.colorA, '88'),
+    border_color = colors.alpha(colors.black, "88"),
+    bg = colors.alpha(colors.colorA, "88"),
     shape = beautiful.client_shape_rounded_xl,
     screen = mouse.screen,
     placement = awful.placement.centered,
@@ -67,12 +67,13 @@ local layout_popup =
 -- ------------------------------------------------- --
 layout_popup.timer = gears.timer {timeout = 3}
 layout_popup.timer:connect_signal(
-    'timeout',
+    "timeout",
     function()
         layout_popup.visible = false
         layout_popup.screen = mouse.screen
     end
 )
+layout_popup.screen = mouse.current
 -- ------------------------------------------------- --
 function gears.table.iterate_value(t, value, step_size, filter, start_at)
     local k = gears.table.hasitem(t, value, true, start_at)
@@ -125,28 +126,28 @@ local layout_box = function(s)
                 {},
                 1,
                 function()
-                    awesome.emit_signal('layout::changed:next')
+                    awesome.emit_signal("layout::changed:next")
                 end
             ),
             awful.button(
                 {},
                 3,
                 function()
-                    awesome.emit_signal('layout::changed:prev')
+                    awesome.emit_signal("layout::changed:prev")
                 end
             ),
             awful.button(
                 {},
                 8,
                 function()
-                    awesome.emit_signal('layout::changed:next')
+                    awesome.emit_signal("layout::changed:next")
                 end
             ),
             awful.button(
                 {},
                 9,
                 function()
-                    awesome.emit_signal('layout::changed:prev')
+                    awesome.emit_signal("layout::changed:prev")
                 end
             )
         )
@@ -156,7 +157,7 @@ local layout_box = function(s)
     return layoutbox
 end
 awesome.connect_signal(
-    'layout::changed:next',
+    "layout::changed:next",
     function()
         awful.layout.inc(1)
         layout_popup.visible = true
@@ -164,7 +165,7 @@ awesome.connect_signal(
     end
 )
 awesome.connect_signal(
-    'layout::changed:prev',
+    "layout::changed:prev",
     function()
         awful.layout.inc(-1)
         layout_popup.visible = true

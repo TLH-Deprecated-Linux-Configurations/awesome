@@ -15,10 +15,10 @@ local function centered_widget(widget)
             {
                 nil,
                 widget,
-                expand = 'none',
+                expand = "none",
                 layout = wibox.layout.align.vertical
             },
-            expand = 'none',
+            expand = "none",
             layout = wibox.layout.align.horizontal
         }
     )
@@ -65,15 +65,15 @@ local function create_boxed_widget(widget_to_be_boxed, width, height, bg_color)
     return boxed_widget
 end
 
-local time = require('widget.dashboard.time')
+local time = require("widget.dashboard.time")
 
-local date = require('widget.dashboard.date')
+local date = require("widget.dashboard.date")
 -- pfp
 local profile_pic_img = {
     {
         image = icons.logo,
-        halign = 'center',
-        valign = 'center',
+        halign = "center",
+        valign = "center",
         widget = wibox.widget.imagebox
     },
     widget = wibox.container.background,
@@ -111,9 +111,9 @@ awful.screen.connect_for_each_screen(
         local dashboard_height = dpi(640)
 
         -- widgets
-        local notifs = require('widget.dashboard.notifs')
+        local notifs = require("widget.dashboard.notifs")
 
-        s.stats = require('widget.dashboard.dials')
+        s.stats = require("widget.dashboard.dials")
 
         s.time_boxed = create_boxed_widget(centered_widget(time), dpi(260), dpi(90), beautiful.transparent)
         s.date_boxed = create_boxed_widget(date, dpi(260), dpi(110), beautiful.transparent)
@@ -140,7 +140,7 @@ awful.screen.connect_for_each_screen(
                     s.stats_boxed,
                     layout = wibox.layout.fixed.vertical
                 },
-                expand = 'none',
+                expand = "none",
                 layout = wibox.layout.align.horizontal
             }
         )
@@ -149,7 +149,7 @@ awful.screen.connect_for_each_screen(
         dashboard =
             awful.popup(
             {
-                type = 'dock',
+                type = "dock",
                 screen = s,
                 maximum_height = dashboard_height,
                 minimum_width = dashboard_width,
@@ -166,7 +166,7 @@ awful.screen.connect_for_each_screen(
                         spacing_widget = wibox.widget.separator(
                             {
                                 span_ratio = 0.50,
-                                color = colors.alpha(colors.color1, '88')
+                                color = colors.alpha(colors.color1, "88")
                             }
                         ),
                         dashboard_items,
@@ -211,13 +211,13 @@ awful.screen.connect_for_each_screen(
         local dashboard_show = function()
             dashboard.visible = true
             slide.target = dpi(60)
-            dashboard:emit_signal('opened')
+            dashboard:emit_signal("opened")
         end
 
         local dashboard_hide = function()
             slide_end:again()
             slide.target = -dashboard.height
-            dashboard:emit_signal('closed')
+            dashboard:emit_signal("closed")
         end
 
         function dashboard:toggle()

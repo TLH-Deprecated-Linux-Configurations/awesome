@@ -10,18 +10,18 @@
 -- ------------------------------------------------- --
 
 local active_color = {
-    type = 'linear',
+    type = "linear",
     from = {0, 0},
-    to = {200, 50}, -- replace with w,h later
+    to = {200, 200}, -- replace with w,h later
     stops = {{0, colors.color3}, {0.75, colors.color15}}
 }
 
 local widget_text =
     wibox.widget {
-    font = beautiful.icon_font .. '  18',
-    text = 'CPU',
-    valign = 'center',
-    align = 'center',
+    font = beautiful.icon_font .. "  18",
+    text = "CPU",
+    valign = "center",
+    align = "center",
     widget = wibox.widget.textbox
 }
 
@@ -38,10 +38,10 @@ local cpu_bar =
 }
 
 awesome.connect_signal(
-    'signal::cpu',
+    "signal::cpu",
     function(value)
         cpu_bar.value = value
-        widget_text:set_text(' \n' .. value .. '%')
+        widget_text:set_text(" \n" .. value .. "%")
     end
 )
 
@@ -53,7 +53,7 @@ local cpu_meter =
                 {
                     {
                         cpu_bar,
-                        direction = 'east',
+                        direction = "east",
                         widget = wibox.container.rotate
                     },
                     widget_text,
@@ -65,13 +65,15 @@ local cpu_meter =
             shape = beautiful.client_shape_rounded_xl,
             fg = colors.white,
             widget = wibox.container.background,
-            forced_height = dpi(130),
-            forced_width = dpi(120)
+            forced_height = dpi(200),
+            forced_width = dpi(200)
         },
         widget = wibox.container.margin,
         margins = dpi(5)
     },
-    widget = wibox.container.background
+    widget = wibox.container.background,
+    bg = beautiful.bg_menu,
+    shape = beautiful.client_shape_rounded_lg
 }
 
 return cpu_meter

@@ -49,8 +49,10 @@ local app_drawer =
 }
 
 local function generate_drawer()
-    local row = {layout = wibox.layout.fixed.horizontal}
-    local rows = {layout = wibox.layout.fixed.vertical}
+    local row = {layout = overflow.horizontal}
+    local rows = {
+        layout = overflow.vertical
+    }
     local width_count = 0
 
     for _, program in pairs(programs_list) do
@@ -112,7 +114,7 @@ local function generate_drawer()
         if width_count == 5 then
             width_count = 0
             table.insert(rows, row)
-            row = {layout = wibox.layout.fixed.horizontal}
+            row = {layout = overflow.horizontal}
         end
     end
 
