@@ -21,12 +21,12 @@ elements.create = function(title, message)
       {
         {
           layout = wibox.layout.align.vertical,
-          expand = "none",
+          expand = 'none',
           nil,
           {
             image = icons.clearNotificationIndividual,
             widget = wibox.widget.imagebox,
-            id = "icon",
+            id = 'icon',
             resize = true
           },
           nil
@@ -45,7 +45,7 @@ elements.create = function(title, message)
   -- ------------------------------------------------- --
   -- clear connect signal for mouse entry
   clear:connect_signal(
-    "mouse::enter",
+    'mouse::enter',
     function()
       clear.bg = beautiful.bg_focus
     end
@@ -53,7 +53,7 @@ elements.create = function(title, message)
   -- ------------------------------------------------- --
   -- clear mouse signal for departure
   clear:connect_signal(
-    "mouse::leave",
+    'mouse::leave',
     function()
       clear.bg = beautiful.bg_button
     end
@@ -81,12 +81,12 @@ elements.create = function(title, message)
       {
         {
           text = title,
-          font = "SF Pro Rounded Heavy 10",
+          font = 'Hanuman Black 10',
           widget = wibox.widget.textbox
         },
         {
           text = message,
-          font = "SF Pro Rounded Heavy  8",
+          font = 'Hanuman Black  8',
           widget = wibox.widget.textbox
         },
         layout = wibox.layout.align.vertical
@@ -108,12 +108,12 @@ elements.create = function(title, message)
           image = icons.new_notif,
           widget = wibox.widget.imagebox,
           forced_height = dpi(25),
-          id = "icon",
+          id = 'icon',
           resize = true
         },
         nil,
-        halign = "center",
-        valign = "center",
+        halign = 'center',
+        valign = 'center',
         forced_height = dpi(30),
         layout = wibox.layout.align.vertical
       },
@@ -123,15 +123,15 @@ elements.create = function(title, message)
           nil,
           clear,
           nil,
-          halign = "center",
-          valign = "center",
+          halign = 'center',
+          valign = 'center',
           forced_height = dpi(30),
           layout = wibox.layout.align.vertical
         },
         margins = dpi(5),
         widget = wibox.container.margin
       },
-      expand = "none",
+      expand = 'none',
       layout = wibox.layout.align.horizontal
     },
     shape = beautiful.client_shape_rounded,

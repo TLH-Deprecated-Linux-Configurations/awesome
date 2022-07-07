@@ -9,6 +9,7 @@ local dir = os.getenv('HOME') .. '/.config/awesome/themes/icons/svg/'
 
 return {
     add = dir .. 'add.svg',
+    alarm = dir .. 'alarm.svg',
     airplane_mode = dir .. 'airplane-mode.svg',
     airplane_mode_off = dir .. 'airplane-mode-off.svg',
     audio = dir .. 'audio.svg',
@@ -49,6 +50,7 @@ return {
     brave = dir .. 'brave.svg',
     brightness = dir .. 'brightness-7.svg',
     brightness_7 = dir .. 'brightness-7.svg',
+    camera = dir .. 'camera.svg',
     chain = dir .. 'chain.svg',
     chain_broken = dir .. 'chain-broken.svg',
     chart = dir .. 'chart-areaspline.svg',
@@ -59,6 +61,8 @@ return {
     close = dir .. 'close.svg',
     close_screen = dir .. 'close-screen.svg',
     close_small = dir .. 'close-small.svg',
+    cloud = dir .. 'cloud.svg',
+    compress = dir .. 'compress.svg',
     cpu = dir .. 'cpu.svg',
     dashboard = dir .. 'dashboard.svg',
     delete = dir .. 'delete.svg',

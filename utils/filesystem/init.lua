@@ -12,8 +12,7 @@ local _filesystem = {}
 
 function _filesystem.list_directory_files(path, exts, recursive)
     recursive = recursive or false
-    local files,
-        valid_exts = {}, {}
+    local files, valid_exts = {}, {}
 
     -- Transforms { "jpg", ... } into { [jpg] = #, ... }
     if exts then
@@ -45,12 +44,14 @@ function _filesystem.list_directory_files(path, exts, recursive)
 end
 
 function _filesystem.save_image_async_curl(url, filepath, callback)
-    awful.spawn.with_line_callback(
-        string.format('curl -L -s %s -o %s', url, filepath),
-        {
-            exit = callback
-        }
-    )
+    if url ~= nil then
+        awful.spawn.with_line_callback(
+            string.format('curl -L -s %s -o %s', url, filepath),
+            {
+                exit = callback
+            }
+        )
+    end
 end
 
 return _filesystem

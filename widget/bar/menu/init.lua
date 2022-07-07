@@ -120,7 +120,7 @@ local return_button = function(color, lspace, rspace, tspace, bspace)
             table.insert(row, icon_container)
 
             width_count = width_count + 1
-            if width_count == 10 then
+            if width_count == 12 then
                 width_count = 0
                 table.insert(rows, row)
                 row = {layout = overflow.horizontal()}
@@ -136,7 +136,7 @@ local return_button = function(color, lspace, rspace, tspace, bspace)
         'mouse::leave',
         function()
             gears.timer {
-                timeout = 5,
+                timeout = 4,
                 autostart = true,
                 callback = function()
                     if app_drawer.visible then
@@ -182,7 +182,7 @@ local return_button = function(color, lspace, rspace, tspace, bspace)
                 3,
                 nil,
                 function()
-                    awesome.emit_signal('cc:toggle')
+                    awesome.emit_signal('central_panel::toggle')
                 end
             )
         )

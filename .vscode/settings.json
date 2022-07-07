@@ -86,7 +86,11 @@
     "fontSize",
     "timer",
     "c_above",
-    "c_below"
+    "c_below",
+    "bluetoothCenter",
+    "ui",
+    "prompt",
+    "focused"
   ],
   "lua.targetVersion": "5.1",
   "restructuredtext.languageServer.disabled": true,

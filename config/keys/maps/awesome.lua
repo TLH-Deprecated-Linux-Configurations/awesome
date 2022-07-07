@@ -5,67 +5,67 @@
 -- ------------------------------------------------- --
 -- ------------------------------------------------- --
 -- ------------------------------------------------- --
-local hotkeys_popup_custom = require("module.hotkeys-popup")
+local hotkeys_popup_custom = require('module.hotkeys-popup')
 local awesomemap = {
     {
-        "r",
+        'r',
         function(c)
             awesome.restart()
         end,
-        "Restart"
+        'Restart'
     },
     -- ------------------------------------------------- --
     {
-        "q",
+        'q',
         function(c)
             awesome.quit()
         end,
-        "Quit"
+        'Quit'
     },
     -- ------------------------------------------------- --
     {
-        "e",
+        'e',
         function(c)
             _G.exit_screen_show()
         end,
-        "Exit Screen"
+        'Exit Screen'
     },
     -- ------------------------------------------------- --
     {
-        "d",
+        'd',
         function(c)
-            dashboard:toggle()
+            awesome.emit_signal('central_panel::toggle', awful.screen.focused())
         end,
-        "Dashboard"
+        'Dashboard'
     },
     -- ------------------------------------------------- --
     {
-        "h",
+        'h',
         function(c)
             hotkeys_popup_custom.show_help()
         end,
-        "Hotkeys Popup"
+        'Hotkeys Popup'
     },
     -- ------------------------------------------------- --
     {
-        "w",
+        'w',
         function()
-            awful.menu.menu_keys.down = {"Down", "Alt_L"}
-            awful.menu.menu_keys.up = {"Up", "Alt_R"}
+            awful.menu.menu_keys.down = {'Down', 'Alt_L'}
+            awful.menu.menu_keys.up = {'Up', 'Alt_R'}
             awful.menu.clients({theme = {width = 450}}, {keygrabber = true})
         end,
-        "Client List"
+        'Client List'
     },
     -- ------------------------------------------------- --
     {
-        "d",
+        'd',
         function()
-            awesome.emit_signal("dashboard:toggle")
+            dashboard:toggle()
         end,
-        "Dashboard"
+        'Dashboard'
     },
     -- ------------------------------------------------- --
-    {"separator", " "}
+    {'separator', ' '}
 }
 
 return awesomemap

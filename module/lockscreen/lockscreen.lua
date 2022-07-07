@@ -1,11 +1,11 @@
-local gears = require("gears")
-local awful = require("awful")
-local beautiful = require("beautiful")
-local xresources = require("beautiful.xresources")
+local gears = require('gears')
+local awful = require('awful')
+local beautiful = require('beautiful')
+local xresources = require('beautiful.xresources')
 local dpi = xresources.apply_dpi
-local wibox = require("wibox")
+local wibox = require('wibox')
 
-local lock_screen = require("module.lockscreen")
+local lock_screen = require('module.lockscreen')
 
 --- Word Clock Lock Screen
 --- ~~~~~~~~~~~~~~~~~~~~~~
@@ -15,7 +15,7 @@ function screen_mask(s, bg)
         {
             visible = false,
             ontop = true,
-            type = "splash",
+            type = 'splash',
             screen = s
         }
     )
@@ -40,24 +40,24 @@ function horizontal_pad(width)
         }
     )
 end
-local lock_screen_symbol = ""
-local lock_screen_fail_symbol = ""
+local lock_screen_symbol = ''
+local lock_screen_fail_symbol = ''
 local lock_animation_icon =
     wibox.widget(
     {
         --- Set forced size to prevent flickering when the icon rotates
         forced_height = dpi(80),
         forced_width = dpi(80),
-        font = beautiful.icon_font .. "Outlined 40",
-        align = "center",
-        valign = "center",
+        font = beautiful.icon_font .. 'Outlined 40',
+        align = 'center',
+        valign = 'center',
         widget = wibox.widget.textbox(lock_screen_symbol)
     }
 )
 
 local some_textbox = wibox.widget.textbox()
 
-lock_screen_box = wibox({visible = false, ontop = true, type = "splash", screen = screen.primary})
+lock_screen_box = wibox({visible = false, ontop = true, type = 'splash', screen = screen.primary})
 awful.placement.maximize(lock_screen_box)
 
 lock_screen_box.bg = beautiful.transparent
@@ -84,72 +84,72 @@ end
 --- Word Clock
 --- ~~~~~~~~~
 local char =
-    "I T L I S A S A M P M A C Q U A R T E R D C T W E N T Y F I V E X H A L F S T E N F T O P A S T E R U N I N E O N E S I X T H R E E F O U R F I V E T W O E I G H T E L E V E N S E V E N T W E L V E T E N S E O C L O C K"
+    'I T L I S A S A M P M A C Q U A R T E R D C T W E N T Y F I V E X H A L F S T E N F T O P A S T E R U N I N E O N E S I X T H R E E F O U R F I V E T W O E I G H T E L E V E N S E V E N T W E L V E T E N S E O C L O C K'
 
 local pos_map = {
-    ["it"] = {1, 2},
-    ["is"] = {4, 5},
-    ["a"] = {12, 12},
-    ["quarter"] = {14, 20},
-    ["twenty"] = {23, 28},
-    ["five"] = {29, 32},
-    ["half"] = {34, 37},
-    ["ten"] = {39, 41},
-    ["past"] = {45, 48},
-    ["to"] = {43, 44},
-    ["1"] = {56, 58},
-    ["2"] = {75, 77},
-    ["3"] = {62, 66},
-    ["4"] = {67, 70},
-    ["5"] = {71, 74},
-    ["6"] = {59, 61},
-    ["7"] = {89, 93},
-    ["8"] = {78, 82},
-    ["9"] = {52, 55},
-    ["10"] = {100, 102},
-    ["11"] = {83, 88},
-    ["12"] = {94, 99},
-    ["oclock"] = {105, 110}
+    ['it'] = {1, 2},
+    ['is'] = {4, 5},
+    ['a'] = {12, 12},
+    ['quarter'] = {14, 20},
+    ['twenty'] = {23, 28},
+    ['five'] = {29, 32},
+    ['half'] = {34, 37},
+    ['ten'] = {39, 41},
+    ['past'] = {45, 48},
+    ['to'] = {43, 44},
+    ['1'] = {56, 58},
+    ['2'] = {75, 77},
+    ['3'] = {62, 66},
+    ['4'] = {67, 70},
+    ['5'] = {71, 74},
+    ['6'] = {59, 61},
+    ['7'] = {89, 93},
+    ['8'] = {78, 82},
+    ['9'] = {52, 55},
+    ['10'] = {100, 102},
+    ['11'] = {83, 88},
+    ['12'] = {94, 99},
+    ['oclock'] = {105, 110}
 }
 
 local char_map = {
-    ["it"] = {},
-    ["is"] = {},
-    ["a"] = {},
-    ["quarter"] = {},
-    ["twenty"] = {},
-    ["five"] = {},
-    ["half"] = {},
-    ["ten"] = {},
-    ["past"] = {},
-    ["to"] = {},
-    ["1"] = {},
-    ["2"] = {},
-    ["3"] = {},
-    ["4"] = {},
-    ["5"] = {},
-    ["6"] = {},
-    ["7"] = {},
-    ["8"] = {},
-    ["9"] = {},
-    ["10"] = {},
-    ["11"] = {},
-    ["12"] = {},
-    ["oclock"] = {}
+    ['it'] = {},
+    ['is'] = {},
+    ['a'] = {},
+    ['quarter'] = {},
+    ['twenty'] = {},
+    ['five'] = {},
+    ['half'] = {},
+    ['ten'] = {},
+    ['past'] = {},
+    ['to'] = {},
+    ['1'] = {},
+    ['2'] = {},
+    ['3'] = {},
+    ['4'] = {},
+    ['5'] = {},
+    ['6'] = {},
+    ['7'] = {},
+    ['8'] = {},
+    ['9'] = {},
+    ['10'] = {},
+    ['11'] = {},
+    ['12'] = {},
+    ['oclock'] = {}
 }
 
 local reset_map = {4, 12, 14, 23, 29, 34, 39, 43, 45, 52, 56, 59, 62, 67, 71, 75, 78, 83, 89, 94, 100, 105}
 
 function split_str(s, delimiter)
     result = {}
-    for match in (s .. delimiter):gmatch("(.-)" .. delimiter) do
+    for match in (s .. delimiter):gmatch('(.-)' .. delimiter) do
         table.insert(result, match)
     end
 
     return result
 end
 
-local time_char = split_str(char, " ")
+local time_char = split_str(char, ' ')
 
 local time =
     wibox.widget(
@@ -164,11 +164,11 @@ local function create_text_widget(index, w)
     local text_widget =
         wibox.widget(
         {
-            id = "t" .. index,
+            id = 't' .. index,
             markup = w,
-            font = beautiful.font .. "Bold 24",
-            align = "center",
-            valign = "center",
+            font = beautiful.font .. 'Bold 24',
+            align = 'center',
+            valign = 'center',
             forced_width = dpi(36),
             forced_height = dpi(36),
             widget = wibox.widget.textbox
@@ -182,7 +182,7 @@ end
 
 local var_count = 0
 for i, m in pairs(time_char) do
-    local text = colorize_text(m, "#ffffff" .. "10")
+    local text = colorize_text(m, '#ffffff' .. '10')
 
     var_count = var_count + 1
     local create_dummy_text = true
@@ -215,7 +215,7 @@ end
 local function deactivate_word(w)
     for i, m in pairs(char_map[w]) do
         local text = m.text
-        m.markup = colorize_text(text, "#ffffff" .. "10")
+        m.markup = colorize_text(text, '#ffffff' .. '10')
     end
 end
 
@@ -224,8 +224,8 @@ local function reset_time()
         deactivate_word(j)
     end
 
-    activate_word("it")
-    activate_word("is")
+    activate_word('it')
+    activate_word('is')
 end
 
 gears.timer(
@@ -234,35 +234,35 @@ gears.timer(
         call_now = true,
         autostart = true,
         callback = function()
-            local time = os.date("%I" .. ":%M")
-            local h, m = time:match("(%d+):(%d+)")
+            local time = os.date('%I' .. ':%M')
+            local h, m = time:match('(%d+):(%d+)')
             local min = tonumber(m)
             local hour = tonumber(h)
 
             reset_time()
 
             if min >= 0 and min <= 2 or min >= 58 and min <= 59 then
-                activate_word("oclock")
+                activate_word('oclock')
             elseif min >= 3 and min <= 7 or min >= 53 and min <= 57 then
-                activate_word("five")
+                activate_word('five')
             elseif min >= 8 and min <= 12 or min >= 48 and min <= 52 then
-                activate_word("ten")
+                activate_word('ten')
             elseif min >= 13 and min <= 17 or min >= 43 and min <= 47 then
-                activate_word("a")
-                activate_word("quarter")
+                activate_word('a')
+                activate_word('quarter')
             elseif min >= 18 and min <= 22 or min >= 38 and min <= 42 then
-                activate_word("twenty")
+                activate_word('twenty')
             elseif min >= 23 and min <= 27 or min >= 33 and min <= 37 then
-                activate_word("twenty")
-                activate_word("five")
+                activate_word('twenty')
+                activate_word('five')
             elseif min >= 28 and min <= 32 then
-                activate_word("half")
+                activate_word('half')
             end
 
             if min >= 3 and min <= 32 then
-                activate_word("past")
+                activate_word('past')
             elseif min >= 33 and min <= 57 then
-                activate_word("to")
+                activate_word('to')
             end
 
             local hh
@@ -316,14 +316,14 @@ local characters_entered = 0
 local function reset()
     characters_entered = 0
     lock_animation_icon.markup = lock_screen_symbol
-    lock_animation_widget_rotate.direction = "north"
+    lock_animation_widget_rotate.direction = 'north'
     lock_animation_arc.bg = beautiful.bg_normal
 end
 
 local function fail()
     characters_entered = 0
     lock_animation_icon.markup = lock_screen_fail_symbol
-    lock_animation_widget_rotate.direction = "north"
+    lock_animation_widget_rotate.direction = 'north'
     lock_animation_arc.bg = beautiful.bg_normal
 end
 
@@ -337,7 +337,7 @@ local animation_colors = {
     beautiful.xcolor3
 }
 
-local animation_directions = {"north", "west", "south", "east"}
+local animation_directions = {'north', 'west', 'south', 'east'}
 
 --- Function that "animates" every key press
 local function key_animation(char_inserted)
@@ -350,7 +350,7 @@ local function key_animation(char_inserted)
         if characters_entered == 0 then
             reset()
         else
-            color = beautiful.xcolor7 .. "55"
+            color = beautiful.xcolor7 .. '55'
         end
     end
 
@@ -367,7 +367,7 @@ local function grab_password()
                 --- Instead, this will just clear any input received so far.
                 {
                     {},
-                    "Escape",
+                    'Escape',
                     function(_)
                         reset()
                         grab_password()
@@ -375,8 +375,8 @@ local function grab_password()
                 },
                 --- Fix for Control+Delete crashing the keygrabber
                 {
-                    {"Control"},
-                    "Delete",
+                    {'Control'},
+                    'Delete',
                     function()
                         reset()
                         grab_password()
@@ -388,7 +388,7 @@ local function grab_password()
                 if #key == 1 then
                     characters_entered = characters_entered + 1
                     key_animation(true)
-                elseif key == "BackSpace" then
+                elseif key == 'BackSpace' then
                     if characters_entered > 0 then
                         characters_entered = characters_entered - 1
                     end
@@ -413,7 +413,7 @@ local function grab_password()
 end
 
 function lock_screen_show()
-    set_visibility(true)
+    s.mylockscreen.visible = true
     grab_password()
 end
 
@@ -431,10 +431,10 @@ lock_screen_box:setup(
                 spacing = dpi(60),
                 layout = wibox.layout.fixed.vertical
             },
-            expand = "none",
+            expand = 'none',
             layout = wibox.layout.align.vertical
         },
-        expand = "none",
+        expand = 'none',
         layout = wibox.layout.align.horizontal
     }
 )

@@ -14,39 +14,39 @@ local capi = {
     client = client
 }
 -- ------------------------------------------------- --
-local awful = require("awful")
-local gtable = require("gears.table")
-local gears = require("gears")
-local gstring = require("gears.string")
-local wibox = require("wibox")
-local beautiful = require("beautiful")
+local awful = require('awful')
+local gtable = require('gears.table')
+local gears = require('gears')
+local gstring = require('gears.string')
+local wibox = require('wibox')
+local beautiful = require('beautiful')
 local dpi = beautiful.xresources.apply_dpi
-local colors = require("themes").colors
+local colors = require('themes').colors
 
-local matcher = require("gears.matcher")()
+local matcher = require('gears.matcher')()
 -- ------------------------------------------------- --
 -- Stripped copy of this module https://github.com/copycat-killer/lain/blob/master/util/markup.lua:
 local markup = {}
 -- Set the font.
 function markup.font(font, text)
-    return '<span font="' .. tostring(font) .. '">' .. tostring(text) .. "</span>"
+    return '<span font="' .. tostring(font) .. '">' .. tostring(text) .. '</span>'
 end
 -- Set the foreground.
 function markup.fg(color, text)
-    return '<span foreground="' .. tostring(color) .. '">' .. tostring(text) .. "</span>"
+    return '<span foreground="' .. tostring(color) .. '">' .. tostring(text) .. '</span>'
 end
 -- Set the background.
 function markup.bg(color, text)
-    return '<span background="' .. tostring(color) .. '">' .. tostring(text) .. "</span>"
+    return '<span background="' .. tostring(color) .. '">' .. tostring(text) .. '</span>'
 end
 -- ------------------------------------------------- --
 
 local function join_plus_sort(modifiers)
     if #modifiers < 1 then
-        return "none"
+        return 'none'
     end
     table.sort(modifiers)
-    return table.concat(modifiers, "+")
+    return table.concat(modifiers, '+')
 end
 -- ------------------------------------------------- --
 local function get_screen(s)
@@ -77,55 +77,55 @@ function widget.new(args)
         -- external programs.)
         labels = args.labels or
             {
-                Control = "Ctrl",
-                Mod1 = "Alt",
-                ISO_Level3_Shift = "Alt Gr",
-                Mod4 = "Super",
-                Insert = "Ins",
-                Delete = "Del",
-                Backspace = "BackSpc",
-                Next = "PgDn",
-                Prior = "PgUp",
-                Left = "←",
-                Up = "↑",
-                Right = "→",
-                Down = "↓",
-                KP_End = "Num1",
-                KP_Down = "Num2",
-                KP_Next = "Num3",
-                KP_Left = "Num4",
-                KP_Begin = "Num5",
-                KP_Right = "Num6",
-                KP_Home = "Num7",
-                KP_Up = "Num8",
-                KP_Prior = "Num9",
-                KP_Insert = "Num0",
-                KP_Delete = "Num.",
-                KP_Divide = "Num/",
-                KP_Multiply = "Num*",
-                KP_Subtract = "Num-",
-                KP_Add = "Num+",
-                KP_Enter = "NumEnter",
+                Control = 'Ctrl',
+                Mod1 = 'Alt',
+                ISO_Level3_Shift = 'Alt Gr',
+                Mod4 = 'Super',
+                Insert = 'Ins',
+                Delete = 'Del',
+                Backspace = 'BackSpc',
+                Next = 'PgDn',
+                Prior = 'PgUp',
+                Left = '←',
+                Up = '↑',
+                Right = '→',
+                Down = '↓',
+                KP_End = 'Num1',
+                KP_Down = 'Num2',
+                KP_Next = 'Num3',
+                KP_Left = 'Num4',
+                KP_Begin = 'Num5',
+                KP_Right = 'Num6',
+                KP_Home = 'Num7',
+                KP_Up = 'Num8',
+                KP_Prior = 'Num9',
+                KP_Insert = 'Num0',
+                KP_Delete = 'Num.',
+                KP_Divide = 'Num/',
+                KP_Multiply = 'Num*',
+                KP_Subtract = 'Num-',
+                KP_Add = 'Num+',
+                KP_Enter = 'NumEnter',
                 -- Some "obvious" entries are necessary for the Escape sequence
                 -- and whitespace characters:
-                Escape = "Esc",
-                Tab = "Tab",
-                space = "Space",
-                Return = "Enter",
+                Escape = 'Esc',
+                Tab = 'Tab',
+                space = 'Space',
+                Return = 'Enter',
                 -- Dead keys aren't distinct from non-dead keys
-                dead_acute = "´",
-                dead_circumflex = "^",
-                dead_grave = "`",
+                dead_acute = '´',
+                dead_circumflex = '^',
+                dead_grave = '`',
                 -- Basic multimedia keys:
-                XF86MonBrightnessUp = "🔆+",
-                XF86MonBrightnessDown = "🔅-",
-                XF86AudioRaiseVolume = "+",
-                XF86AudioLowerVolume = "-",
-                XF86Display = "",
-                XF86AudioMute = "",
-                XF86AudioPlay = "",
-                XF86AudioPrev = "",
-                XF86AudioNext = ""
+                XF86MonBrightnessUp = '🔆+',
+                XF86MonBrightnessDown = '🔅-',
+                XF86AudioRaiseVolume = '+',
+                XF86AudioLowerVolume = '-',
+                XF86Display = '',
+                XF86AudioMute = '',
+                XF86AudioPlay = '',
+                XF86AudioPrev = '',
+                XF86AudioNext = ''
             },
         _additional_hotkeys = {},
         _cached_wiboxes = {},
@@ -151,9 +151,8 @@ function widget.new(args)
         self.fg = args.fg or beautiful.hotkeys_fg or beautiful.fg_normal
         self.modifiers_fg = colors.colorF
         self.label_bg = colors.colorE
-        self.font = args.font or beautiful.hotkeys_font or "SF Pro Rounded Heavy 9"
-        self.description_font =
-            args.description_font or beautiful.hotkeys_description_font or "SF Pro Rounded Heavy   8"
+        self.font = args.font or beautiful.hotkeys_font or 'Hanuman Black 9'
+        self.description_font = args.description_font or beautiful.hotkeys_description_font or 'Hanuman Black   8'
         self.group_margin = args.group_margin or beautiful.hotkeys_group_margin or dpi(6)
         self._widget_settings_loaded = true
     end
@@ -169,7 +168,7 @@ function widget.new(args)
         end
         local joined_mods = join_plus_sort(readable_mods)
 
-        local group = data.group or "none"
+        local group = data.group or 'none'
         self._group_list[group] = true
         if not target[group] then
             target[group] = {}
@@ -182,16 +181,16 @@ function widget.new(args)
             mod = joined_mods,
             description = data.description
         }
-        local index = data.description or "none" -- or use its hash?
+        local index = data.description or 'none' -- or use its hash?
         if not target[group][index] then
             target[group][index] = new_key
         else
             if self.merge_duplicates and joined_mods == target[group][index].mod then
-                target[group][index].key = target[group][index].key .. "/" .. new_key.key
+                target[group][index].key = target[group][index].key .. '/' .. new_key.key
                 table.insert(target[group][index].keylist, new_key.key)
             else
                 while target[group][index] do
-                    index = index .. " "
+                    index = index .. ' '
                 end
                 target[group][index] = new_key
             end
@@ -209,7 +208,7 @@ function widget.new(args)
                     sorted_table,
                     function(a, b)
                         local k1, k2 = a.key or a.keys[1][1], b.key or b.keys[1][1]
-                        return (a.mod or "") .. k1 < (b.mod or "") .. k2
+                        return (a.mod or '') .. k1 < (b.mod or '') .. k2
                     end
                 )
                 target[group] = sorted_table
@@ -251,7 +250,7 @@ function widget.new(args)
                     -- four actual keys (discounting duplicates) and ALL of
                     -- these keys can be found one after another in a keygroup:
                     if count > 4 and last - first + 1 == count then
-                        params.key = tally[first] .. "…" .. tally[last]
+                        params.key = tally[first] .. '…' .. tally[last]
                     end
                 end
             end
@@ -277,7 +276,7 @@ function widget.new(args)
         local textbox =
             wibox.widget {
             markup = markup.fg(colors.color2, group),
-            font = "SF Pro Rounded Heavy 9",
+            font = 'Hanuman Black 9',
             widget = wibox.widget.textbox
         }
         -- ------------------------------------------------- --
@@ -298,7 +297,7 @@ function widget.new(args)
                     widget = wibox.container.margin
                 },
                 shape = beautiful.client_shape_rounded_small,
-                bg = "transparent",
+                bg = 'transparent',
                 border_width = dpi(2),
                 border_color = colors.color2,
                 widget = wibox.container.background
@@ -315,9 +314,9 @@ function widget.new(args)
         -- -1 for possible pagination:
         local max_height_px = wibox_height - group_label_height
 
-        local joined_descriptions = ""
+        local joined_descriptions = ''
         for i, key in ipairs(keys) do
-            joined_descriptions = joined_descriptions .. key.description .. (i ~= #keys and "\n" or "")
+            joined_descriptions = joined_descriptions .. key.description .. (i ~= #keys and '\n' or '')
         end
         -- +1 for group label:
         local items_height = gstring.linecount(joined_descriptions) * line_height + group_label_height
@@ -345,7 +344,7 @@ function widget.new(args)
                 table.insert(((i < available_height_items) and new_keys or overlap_leftovers), keys[i])
             end
             keys = new_keys
-            table.insert(keys, {key = markup.fg(self.modifiers_fg, "▽"), description = ""})
+            table.insert(keys, {key = markup.fg(self.modifiers_fg, '▽'), description = ''})
         end
         if not current_column then
             current_column = {
@@ -361,25 +360,25 @@ function widget.new(args)
         -- ------------------------------------------------- --
         local function insert_keys(_keys, _add_new_column)
             local max_label_width = 0
-            local max_label_content = ""
-            local joined_labels = ""
+            local max_label_content = ''
+            local joined_labels = ''
             for i, key in ipairs(_keys) do
-                local length = string.len(key.key or "") + string.len(key.description or "")
+                local length = string.len(key.key or '') + string.len(key.description or '')
                 local modifiers = key.mod
-                if not modifiers or modifiers == "none" then
-                    modifiers = ""
+                if not modifiers or modifiers == 'none' then
+                    modifiers = ''
                 else
                     length = length + string.len(modifiers) + 1 -- +1 for "+" character
-                    modifiers = markup.fg(self.modifiers_fg, modifiers .. "+")
+                    modifiers = markup.fg(self.modifiers_fg, modifiers .. '+')
                 end
                 local rendered_hotkey =
-                    markup.font(self.font, modifiers .. (key.key or "") .. markup.fg(colors.color2, " : ")) ..
-                    markup.font(self.description_font, key.description or "")
+                    markup.font(self.font, modifiers .. (key.key or '') .. markup.fg(colors.color2, ' : ')) ..
+                    markup.font(self.description_font, key.description or '')
                 if length > max_label_width then
                     max_label_width = length
                     max_label_content = rendered_hotkey
                 end
-                joined_labels = joined_labels .. rendered_hotkey .. (i ~= #_keys and "\n" or "")
+                joined_labels = joined_labels .. rendered_hotkey .. (i ~= #_keys and '\n' or '')
             end
             current_column.layout:add(wibox.widget.textbox(joined_labels))
             local max_width, _ = wibox.widget.textbox(max_label_content):get_preferred_size(s)
@@ -431,7 +430,7 @@ function widget.new(args)
         local previous_page_last_layout
         for _, item in ipairs(column_layouts) do
             if item.max_width > available_width_px then
-                previous_page_last_layout:add(self:_group_label("PgDn - Next Page", self.label_bg))
+                previous_page_last_layout:add(self:_group_label('PgDn - Next Page', self.label_bg))
                 table.insert(
                     pages,
                     {
@@ -452,7 +451,7 @@ function widget.new(args)
                     layout = wibox.layout.fixed.horizontal()
                 }
                 available_width_px = wibox_width - item.max_width
-                item.layout:insert(1, self:_group_label("PgUp - Prev Page", self.label_bg))
+                item.layout:insert(1, self:_group_label('PgUp - Prev Page', self.label_bg))
             else
                 available_width_px = available_width_px - item.max_width
             end
@@ -471,7 +470,7 @@ function widget.new(args)
                     columns,
                     widget = wibox.container.background,
                     bg = beautiful.bg_focus,
-                    border_color = colors.alpha(colors.black, "bb"),
+                    border_color = colors.alpha(colors.black, 'bb'),
                     border_width = dpi(3),
                     shape = beautiful.client_shape_rounded_xl
                 },
@@ -492,7 +491,7 @@ function widget.new(args)
             awful.popup {
             widget = pages[1],
             ontop = true,
-            bg = colors.alpha(colors.colorB, "aa"),
+            bg = colors.alpha(colors.colorB, 'aa'),
             border_width = dpi(2),
             border_color = colors.black,
             fg = self.fg,
@@ -612,13 +611,13 @@ function widget.new(args)
         help_wibox.keygrabber =
             awful.keygrabber.run(
             function(_, key, event)
-                if event == "release" then
+                if event == 'release' then
                     return
                 end
                 if key then
-                    if key == "Next" then
+                    if key == 'Next' then
                         help_wibox:page_next()
-                    elseif key == "Prior" then
+                    elseif key == 'Prior' then
                         help_wibox:page_prev()
                     else
                         help_wibox:hide()

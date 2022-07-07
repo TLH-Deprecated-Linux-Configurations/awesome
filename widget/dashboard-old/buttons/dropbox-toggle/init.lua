@@ -10,26 +10,26 @@
 --                |_____|_____|
 -- ------------------------------------------------- --
 local config_dir = gears.filesystem.get_configuration_dir()
-local widget_icon_dir = config_dir .. "themes/icons/svg/"
+local widget_icon_dir = config_dir .. 'themes/icons/svg/'
 
 local device_state = false
 -- ------------------------------------------------- --
 -- Icons
 --
-local dropbox_status_blank = widget_icon_dir .. "dropbox.svg"
-local dropbox_status_busy2 = widget_icon_dir .. "dropboxstatus-busy2.png"
-local dropbox_status_busy1 = widget_icon_dir .. "dropboxstatus-busy1.png"
-local dropbox_status_idle = widget_icon_dir .. "dropboxstatus-idle.png"
-local dropbox_status_logo = widget_icon_dir .. "dropbox.svg"
-local dropbox_status_x = widget_icon_dir .. "dropbox-x.svg"
+local dropbox_status_blank = widget_icon_dir .. 'dropbox.svg'
+local dropbox_status_busy2 = widget_icon_dir .. 'dropboxstatus-busy2.png'
+local dropbox_status_busy1 = widget_icon_dir .. 'dropboxstatus-busy1.png'
+local dropbox_status_idle = widget_icon_dir .. 'dropboxstatus-idle.png'
+local dropbox_status_logo = widget_icon_dir .. 'dropbox.svg'
+local dropbox_status_x = widget_icon_dir .. 'dropbox-x.svg'
 -- ------------------------------------------------- --
 -- Text for toggle button
 --
 local action_name =
     wibox.widget {
-    text = "Dropbox",
-    font = "SF Pro Rounded Heavy    10",
-    align = "left",
+    text = 'Dropbox',
+    font = 'Hanuman Black    10',
+    align = 'left',
     widget = wibox.widget.textbox
 }
 -- ------------------------------------------------- --
@@ -37,9 +37,9 @@ local action_name =
 --
 local action_status =
     wibox.widget {
-    text = "Off",
-    font = "SF Pro Rounded Heavy    10",
-    align = "left",
+    text = 'Off',
+    font = 'Hanuman Black    10',
+    align = 'left',
     widget = wibox.widget.textbox
 }
 -- ------------------------------------------------- --
@@ -57,13 +57,13 @@ local button_widget =
     wibox.widget {
     nil,
     {
-        id = "icon",
+        id = 'icon',
         image = icons.dropboxstatus_logo,
         widget = wibox.widget.imagebox,
         resize = true
     },
     nil,
-    expand = "none",
+    expand = 'none',
     layout = wibox.layout.align.horizontal
 }
 
@@ -77,8 +77,8 @@ local widget_button =
             {
                 button_widget,
                 widget = wibox.container.place,
-                halign = "center",
-                valign = "center"
+                halign = 'center',
+                valign = 'center'
             },
             margins = dpi(10),
             widget = wibox.container.margin
@@ -95,11 +95,11 @@ local widget_button =
 --
 local update_widget = function(device_state)
     if device_state == true then
-        action_status:set_text("On")
+        action_status:set_text('On')
 
         button_widget.icon:set_image(icons.dropboxstatus_logo)
     elseif device_state == false then
-        action_status:set_text("Off")
+        action_status:set_text('Off')
 
         button_widget.icon:set_image(icons.dropboxstatus_x)
     end
@@ -133,7 +133,7 @@ dropbox start &
 		title = 'System Notification',
 		message = 'Initializing Dropbox...',
 		icon = ']] ..
-    widget_icon_dir .. "dropboxstatus-logo" .. ".png" .. [['
+    widget_icon_dir .. 'dropboxstatus-logo' .. '.png' .. [['
 	})
 	"
 ]]
@@ -152,7 +152,7 @@ sleep 1
 		title = 'System Notification',
 		message = 'The dropbox daemon has been disabled.',
 		icon = ']] ..
-    widget_icon_dir .. "dropboxstatus-x" .. ".png" .. [['
+    widget_icon_dir .. 'dropboxstatus-x' .. '.png' .. [['
 	})
 	"
 ]]
@@ -209,7 +209,7 @@ action_info:buttons(
 -- determine state by watching command
 --
 awful.spawn.easy_async_with_shell(
-    "dropbox status &",
+    'dropbox status &',
     function(stdout)
         check_device_state(stdout)
     end

@@ -1,5 +1,5 @@
 configuration {
-  font: "SF Pro Rounded Heavy   14";
+  font: "Hanuman Black   14";
   show-icons: true;
   drun-display-format: "{name}";
   threads: 0;
@@ -41,7 +41,7 @@ prompt {
 button {
   action: "ok";
   str: " ";
-  font: "SF Pro Rounded Heavy   22";
+  font: "Hanuman Black   22";
   expand: true;
   text-color: @foreground-selected;
   background-color: @background;
@@ -51,7 +51,7 @@ button {
 }
 
 entry {
-  font: "SF Pro Rounded Heavy   14";
+  font: "Hanuman Black   14";
   background-color: @background;
   text-color: @foreground;
   expand: true;

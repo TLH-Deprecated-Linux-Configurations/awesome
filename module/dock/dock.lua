@@ -47,15 +47,10 @@ local function helpers()
     -- ------------------------------------------------- --
 
     local function dec_hex(IN)
-        local B,
-            K,
-            OUT,
-            I,
-            D = 16, '0123456789ABCDEF', '', 0
+        local B, K, OUT, I, D = 16, '0123456789ABCDEF', '', 0
         while IN > 0 do
             I = I + 1
-            IN,
-                D = math.floor(IN / B), (IN % B) + 1
+            IN, D = math.floor(IN / B), (IN % B) + 1
             OUT = string.sub(K, D, D) .. OUT
         end
         return #OUT == 2 and OUT or '0' .. OUT
@@ -66,36 +61,21 @@ local function helpers()
 
     color.col_shift = overloaded()
     color.col_shift.string.number = function(c, s)
-        local r,
-            g,
-            b,
-            o = gears.color.parse_color(c)
+        local r, g, b, o = gears.color.parse_color(c)
         return '#' .. dec_hex(r * 255 + s) .. dec_hex(g * 255 + s) .. dec_hex(b * 255 + s) .. dec_hex(o * 255)
     end
     color.col_shift.string.number.number.number = function(c, sr, sg, sb)
-        local r,
-            g,
-            b,
-            o = gears.color.parse_color(c)
+        local r, g, b, o = gears.color.parse_color(c)
         return '#' .. dec_hex(r * 255 + sr) .. dec_hex(g * 255 + sg) .. dec_hex(b * 255 + sb) .. dec_hex(o * 255)
     end
     color.col_shift.string.number.number.number.number = function(c, sr, sg, sb, so)
-        local r,
-            g,
-            b,
-            o = gears.color.parse_color(c)
+        local r, g, b, o = gears.color.parse_color(c)
         return '#' .. dec_hex(r * 255 + sr) .. dec_hex(g * 255 + sg) .. dec_hex(b * 255 + sb) .. dec_hex(o * 255 + so)
     end
 
     color.col_diff = function(f, s)
-        local fr,
-            fg,
-            fb,
-            fo = gears.color.parse_color(f)
-        local sr,
-            sg,
-            sb,
-            so = gears.color.parse_color(s)
+        local fr, fg, fb, fo = gears.color.parse_color(f)
+        local sr, sg, sb, so = gears.color.parse_color(s)
         return sr - fr, sg - fg, sb - fb, so - fo
     end
     --}}}
@@ -116,7 +96,6 @@ local function init(args)
     local o = args.offset or dpi(5)
     local inner_shape = beautiful.client_shape_rounded_xl
     local outer_shape = beautiful.client_shape_rounded_lg
-    local pinneds = args.pinneds
 
     -- ------------------------------------------------- --
     -- ------------------------------------------------- --
@@ -131,7 +110,7 @@ local function init(args)
                 end
                 return ret
             end, --sorts clients in order of their tags
-            filter = awful.widget.tasklist.filter.alltags,
+            filter = awful.widget.tasklist.filter.currenttags,
             forced_height = h,
             layout = {
                 layout = wibox.layout.fixed.horizontal
@@ -196,11 +175,27 @@ local function init(args)
                                 rate = 30,
                                 pos = p,
                                 subscribed = function(pos)
-                                    self:get_children_by_id('bg')[1].bg = beautiful.bg_button
+                                    self:get_children_by_id('bg')[1].bg = beautiful.bg_menu
                                 end
                             }
                         )
                         on_hover.target = t
+                    end
+                    local function release(p, t) --so gc can collect all the timed objects that are flying around
+                        local on_release =
+                            rubato.timed(
+                            {
+                                intro = 0.02,
+                                outro = 0.02,
+                                duration = 0.2,
+                                rate = 30,
+                                pos = p,
+                                subscribed = function(pos)
+                                    self:get_children_by_id('bg')[1].bg = beautiful.bg_button
+                                end
+                            }
+                        )
+                        on_release.target = t
                     end
                     self:connect_signal(
                         'mouse::enter',
@@ -211,7 +206,7 @@ local function init(args)
                     self:connect_signal(
                         'mouse::leave',
                         function()
-                            hover(60, 0)
+                            release(60, 0)
                         end
                     )
                     self:add_button(
@@ -262,7 +257,7 @@ local function init(args)
                             rate = 30,
                             pos = 0,
                             subscribed = function(pos)
-                                self:get_children_by_id('status')[1].bg = beautiful.bg_focus
+                                self:get_children_by_id('status')[1].bg = colors.alpha(colors.white, '88')
                             end
                         }
                     )
@@ -272,116 +267,16 @@ local function init(args)
                         status_w.target = h / 2
                         status_c.target = 1
                     elseif c.minimized then
-                        status_w.target = h / 10
+                        status_w.target = h / 6
                         status_c.target = 0
                     else
-                        status_w.target = h / 3
+                        status_w.target = h / 4
                         status_c.target = 0
                     end
                 end
             }
         }
     )
-    -- ------------------------------------------------- --
-    -- the funny desktop starters
-    local pinned_apps = pinneds and {layout = wibox.layout.fixed.horizontal} or nil
-    if pinneds then
-        for _, p in ipairs(pinneds) do
-            pinned_apps[#pinned_apps + 1] =
-                wibox.widget(
-                {
-                    {
-                        {
-                            nil,
-                            {
-                                {
-                                    {
-                                        widget = wibox.widget.imagebox,
-                                        image = p.icon,
-                                        resize = true
-                                    },
-                                    margins = dpi(5),
-                                    widget = wibox.container.margin
-                                },
-                                widget = wibox.container.place,
-                                halign = 'center',
-                                valign = 'center'
-                            },
-                            {
-                                {
-                                    wibox.widget.base.make_widget(),
-                                    forced_height = h / 10,
-                                    forced_width = h / 10,
-                                    id = 'status',
-                                    shape = inner_shape,
-                                    widget = wibox.container.background
-                                },
-                                widget = wibox.container.place, --so the bg widget doesnt get stretched
-                                halign = 'center'
-                            },
-                            layout = wibox.layout.align.vertical
-                        },
-                        widget = wibox.container.background,
-                        shape = inner_shape,
-                        id = 'bg',
-                        buttons = awful.button(
-                            {},
-                            1,
-                            function()
-                                awful.spawn.easy_async(p.start_cmd)
-                            end
-                        )
-                    },
-                    widget = wibox.container.margin,
-                    margins = dpi(10),
-                    forced_width = h,
-                    forced_height = h
-                }
-            )
-            local self = pinned_apps[#pinned_apps]
-            local function hover(po, t) --so gc can collect all the timed objects that are flying around
-                local on_hover =
-                    rubato.timed(
-                    {
-                        intro = 0.02,
-                        outro = 0.02,
-                        duration = 0.2,
-                        rate = 30,
-                        pos = po,
-                        subscribed = function(pos)
-                            self:get_children_by_id('bg')[1].bg = beautiful.bg_focus
-                        end
-                    }
-                )
-                on_hover.target = t
-            end
-            self:connect_signal(
-                'mouse::enter',
-                function()
-                    collectgarbage('collect')
-                    hover(0, 60)
-                end
-            )
-            self:connect_signal(
-                'mouse::leave',
-                function()
-                    collectgarbage('collect')
-                    hover(60, 0)
-                end
-            )
-            -- self:add_button(
-            --     awful.button(
-            --         {
-            --             --this is very hacky. Please do NOT COPY if you are looking for suggestions on how to implement this
-            --             modifiers = {},
-            --             button = 1,
-            --             on_press = function()
-            --             end
-            --         }
-            --     )
-            -- )
-        end
-    end
     -- ------------------------------------------------- --
     local dock_box =
         awful.popup(
@@ -394,7 +289,6 @@ local function init(args)
             widget = {
                 {
                     {
-                        pinned_apps,
                         tasklist,
                         layout = wibox.layout.fixed.horizontal
                     },
@@ -433,7 +327,7 @@ local function init(args)
     local autohidetimer =
         gears.timer(
         {
-            timeout = 2,
+            timeout = 4,
             single_shot = true,
             callback = function()
                 autohideanim.target = 0

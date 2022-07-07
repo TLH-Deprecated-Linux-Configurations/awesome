@@ -8,11 +8,7 @@
 -- (c) 2014, Harvey Mittens
 -- ------------------------------------------------- --
 local apps = require('settings')
-local io,
-    pairs,
-    string,
-    table,
-    os = io, pairs, string, table, os
+local io, pairs, string, table, os = io, pairs, string, table, os
 
 -- Expecting a wm_name of awesome omits too many applications and tools
 menu_utils.wm_name = ''

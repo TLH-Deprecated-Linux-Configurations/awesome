@@ -33,7 +33,12 @@
 --      (No parameters)
 
 local awful = require('awful')
-local filesystem = require('utils.filesystem')
+local gobject = require('gears.object')
+local gtable = require('gears.table')
+local gtimer = require('gears.timer')
+local gstring = require('gears.string')
+local beautiful = require('beautiful')
+
 local setmetatable = setmetatable
 local ipairs = ipairs
 local pairs = pairs
@@ -185,17 +190,11 @@ local function emit_metadata_signal(self, title, artist, artUrl, album, new, pla
     end
 
     if artUrl ~= '' then
-        local art_path = os.tmpname()
-        filesystem.save_image_async_curl(
-            artUrl,
-            art_path,
-            function()
-                self:emit_signal('metadata', title, artist, art_path, album, new, player_name)
-                capi.awesome.emit_signal('bling::playerctl::title_artist_album', title, artist, art_path, player_name)
-            end
-        )
+        local art_path = artUrl
+        self:emit_signal('metadata', title, artist, art_path, album, new, player_name)
+        capi.awesome.emit_signal('playerctl::title_artist_album', title, artist, art_path, player_name)
     else
-        capi.awesome.emit_signal('bling::playerctl::title_artist_album', title, artist, '', player_name)
+        capi.awesome.emit_signal('playerctl::title_artist_album', title, artist, '', player_name)
         self:emit_signal('metadata', title, artist, '', album, new, player_name)
     end
 end
@@ -259,7 +258,7 @@ local function position_cb(self)
         local position = player:get_position() / 1000000
         local length = (player.metadata.value['mpris:length'] or 0) / 1000000
         if position ~= self._private.last_position or length ~= self._private.last_length then
-            capi.awesome.emit_signal('bling::playerctl::position', position, length, player.player_name)
+            capi.awesome.emit_signal('playerctl::position', position, length, player.player_name)
             self:emit_signal('position', position, length, player.player_name)
             self._private.last_position = position
             self._private.last_length = length
@@ -278,10 +277,10 @@ local function playback_status_cb(self, player, status)
         -- Reported as PLAYING, PAUSED, or STOPPED
         if status == 'PLAYING' then
             self:emit_signal('playback_status', true, player.player_name)
-            capi.awesome.emit_signal('bling::playerctl::status', true, player.player_name)
+            capi.awesome.emit_signal('playerctl::status', true, player.player_name)
         else
             self:emit_signal('playback_status', false, player.player_name)
-            capi.awesome.emit_signal('bling::playerctl::status', false, player.player_name)
+            capi.awesome.emit_signal('playerctl::status', false, player.player_name)
         end
     end
 end
@@ -489,7 +488,7 @@ local function start_manager(self)
             _self._private.metadata_timer:stop()
             _self._private.position_timer:stop()
             _self:emit_signal('no_players')
-            capi.awesome.emit_signal('bling::playerctl::no_players')
+            capi.awesome.emit_signal('playerctl::no_players')
         elseif player == _self._private.active_player then
             _self._private.active_player = self.players[1]
             get_current_player_info(_self, self.players[1])

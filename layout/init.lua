@@ -7,23 +7,23 @@
 -- need to use regular lua local require calls for the libraries here
 -- because this is called earlier than they are
 --
-local awful = require("awful")
-require("startup.screen")
-local empathy = require("layout.layouts.empathy")
-local stack = require("layout.layouts.stack")
-local centermaster = require("layout.layouts.centermaster")
-local thrizen = require("layout.layouts.thrizen")
-local horizon = require("layout.layouts.horizon")
-local equalarea = require("layout.layouts.equalarea")
-local deck = require("layout.layouts.deck")
-local beautiful = require("beautiful")
+local awful = require('awful')
+require('startup.screen')
+local empathy = require('layout.layouts.empathy')
+local stack = require('layout.layouts.stack')
+local centermaster = require('layout.layouts.centermaster')
+local thrizen = require('layout.layouts.thrizen')
+local horizon = require('layout.layouts.horizon')
+local equalarea = require('layout.layouts.equalarea')
+local deck = require('layout.layouts.deck')
+local beautiful = require('beautiful')
 local tag = tag
 local dpi = beautiful.xresources.apply_dpi
 -- ------------------------------------------------- --
 -- define the default layouts, incliding the custom ones called above
 --
 tag.connect_signal(
-    "request::default_layouts",
+    'request::default_layouts',
     function(s)
         awful.layout.append_default_layouts(
             {
@@ -64,7 +64,7 @@ awful.screen.connect_for_each_screen(
         -- Only using 7 tags per screen because the extra "WM" makes the
         -- taglist too long for the wibar
         --
-        local tag_names = {"A", "W", "E", "S", "O", "M", "E", "W", "M"}
+        local tag_names = {'A', 'W', 'E', 'S', 'O', 'M', 'E', 'W', 'M'}
         for idx, name in ipairs(tag_names) do
             local selected = false
             if idx == 1 then
@@ -98,9 +98,9 @@ awful.screen.connect_for_each_screen(
 -- gaps determined by layout type
 --
 tag.connect_signal(
-    "property::layout",
+    'property::layout',
     function(t)
-        local currentLayout = awful.tag.getproperty(t, "layout")
+        local currentLayout = awful.tag.getproperty(t, 'layout')
         if (currentLayout == awful.layout.suit.max) then
             t.gap = dpi(2)
         else

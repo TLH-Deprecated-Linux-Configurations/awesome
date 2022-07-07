@@ -10,7 +10,7 @@
 local user_content =
     wibox.widget {
     text = 'Notifications',
-    font = 'Nineteen Ninety Seven Bold 10',
+    font = beautiful.font .. ' 10',
     widget = wibox.widget.textbox
 }
 -- ------------------------------------------------- --
@@ -52,6 +52,7 @@ local widget =
         layout = wibox.layout.fixed.horizontal
     },
     fg = beautiful.fg_normal,
+    bg = beautiful.normal,
     widget = wibox.container.background
 }
 -- ------------------------------------------------- --w

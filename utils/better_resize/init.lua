@@ -8,6 +8,7 @@
 -- |      <|  -__|__ --||  ||-- __|  -__|
 -- |___|__||_____|_____||__||_____|_____|
 -- ------------------------------------------------- --
+-- https://github.com/JavaCafe01/dotfiles
 local capi = {
     client = client,
     mouse = mouse,
@@ -16,7 +17,8 @@ local capi = {
 }
 -- ------------------------------------------------- --
 local function mouse_resize_handler(m, c)
-    awful.client.incwfact(0, c) -- needed to fix normalization at start
+    awful.client.incwfact(0, c)
+    -- needed to fix normalization at start
     local start = m(capi.mouse.coords())
     local x, y = start.x, start.y
     local wa = m(c.screen.workarea)
@@ -26,7 +28,7 @@ local function mouse_resize_handler(m, c)
     local wfact_above, wfact_below
     local jump_to = {x = x, y = y}
     local move_mwfact = false
-
+    -- ------------------------------------------------- --
     do
         local g = m(c:geometry())
 
@@ -67,11 +69,11 @@ local function mouse_resize_handler(m, c)
     end
 
     if idx_above and move_mwfact then
-        cursor = "cross"
+        cursor = 'cross'
     elseif idx_above then
-        cursor = m({y = "sb_v_double_arrow", x = "sb_h_double_arrow"}).y
+        cursor = m({y = 'sb_v_double_arrow', x = 'sb_h_double_arrow'}).y
     elseif move_mwfact then
-        cursor = m({y = "sb_v_double_arrow", x = "sb_h_double_arrow"}).x
+        cursor = m({y = 'sb_v_double_arrow', x = 'sb_h_double_arrow'}).x
     else
         return false
     end

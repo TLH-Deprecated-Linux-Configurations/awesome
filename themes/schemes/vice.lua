@@ -7,9 +7,9 @@
 -- instead of using Nord or Gruvbox or Catppucin or whatever cool kids like
 -- this week. I like what I like and its not any of those color schemes
 -- ------------------------------------------------- --
-
---  TIP: tailwind shades website is great for finding shades of color, or color space
+--  TIP: tailwind shades website is great for finding shades of color, or colorspace for matching colors
 return {
+    -- ------------------------------------------------- --
     -- Colors
     color1 = '#8b9cbe',
     color2 = '#8265ff',

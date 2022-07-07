@@ -2,51 +2,16 @@
 -- |    |  |.-----.|  |_.--.--.--.-----.----.|  |--.
 -- |       ||  -__||   _|  |  |  |  _  |   _||    <
 -- |__|____||_____||____|________|_____|__|  |__|__|
-
---
--- network.lua
--- network daemon
--- Dependencies:
---   iproute2
---   iw
---
--- Signals:
--- network::status::wired
---   interface (string)
---   healthy (boolean)
---
--- network::status::wireless
---   interface (string)
---   healthy (boolean)
---   essid (string)
---   bitrate (string)
---   strength (integer)
---
--- network::connected::wired
---   interface (string)
---
--- network::connected::wireless
---   interface (string)
---   essid (string)
---
--- network::disconnected::wired
---   interface (string)
---
--- network::disconnected::wireless
---   interface (string)
---
-
-
--- ========================================
--- Config
--- ========================================
-
+-- ------------------------------------------------- --
+-- Dependencies: iproute2   iw
+-- ------------------------------------------------- --
+-- --------------------- config -------------------- --
 -- update interval
 local update_interval = 30
-
+-- ------------------------------------------------- --
 -- script to determine network mode
 local network_mode_script =
-[=[
+    [=[
 wireless="wlan0"
 wired="enp2s0"
 net="/sys/class/net/"
@@ -86,10 +51,10 @@ function print_network_mode() {
 }
 print_network_mode
 ]=]
-
+-- ------------------------------------------------- --
 -- script to check whether can connect to internet
 local healthcheck_script =
-[=[
+    [=[
 status_ping=0
 packets="$(ping -q -w2 -c2 example.com | grep -o "100% packet loss")"
 if [ ! -z "${packets}" ];
@@ -103,16 +68,14 @@ then
   echo 'Connected but no internet'
 fi
 ]=]
-
+-- ------------------------------------------------- --
 -- script to check wireless status
 local wireless_data_script = 'iw dev wlan0 link'
-
+-- ------------------------------------------------- --
 -- script to check wireless strength
 local wireless_strength_script = [[awk 'NR==3 {printf "%3.0f" ,($3/70)*100}' /proc/net/wireless]]
-
--- ========================================
--- Logic
--- ========================================
+-- ------------------------------------------------- --
+-- --------------------- Logic --------------------- --
 
 local network_mode = nil
 
@@ -151,7 +114,7 @@ local emit_wireless_status = function()
         end
     )
 end
-
+-- ------------------------------------------------- --
 -- Emit wired connection status
 local emit_wired_status = function()
     awful.spawn.easy_async_with_shell(
@@ -166,7 +129,7 @@ local emit_wired_status = function()
         end
     )
 end
-
+-- ------------------------------------------------- --
 -- Emit wireless connected
 local emit_wireless_connected = function()
     awful.spawn.easy_async_with_shell(
@@ -182,14 +145,14 @@ local emit_wireless_connected = function()
         end
     )
 end
-
+-- ------------------------------------------------- --
 -- Emit wired connected
 local emit_wired_connected = function()
     local interface = 'eth0l'
 
     awesome.emit_signal('network::connected::wired', interface)
 end
-
+-- ------------------------------------------------- --
 -- Emit network disconnected
 local emit_disconnected = function()
     if network_mode == nil then
@@ -206,7 +169,7 @@ local emit_disconnected = function()
 
     awesome.emit_signal('network::disconnected::' .. network_mode, interface)
 end
-
+-- ------------------------------------------------- --
 -- Main script
 local check_network = function()
     awful.spawn.easy_async_with_shell(
@@ -234,9 +197,9 @@ local check_network = function()
     )
 end
 check_network()
--- ========================================
--- Initialization
--- ========================================
+
+-- ------------------------------------------------- --
+-- ----------------- Initialization ---------------- --
 
 gears.timer {
     timeout = update_interval,

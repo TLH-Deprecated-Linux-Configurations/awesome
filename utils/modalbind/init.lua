@@ -27,7 +27,7 @@ defaults.x_offset = 5
 defaults.y_offset = 5
 defaults.show_options = true
 defaults.show_default_options = true
-defaults.position = "top_left"
+defaults.position = 'top_left'
 defaults.honor_padding = true
 defaults.honor_workarea = true
 defaults.bg = beautiful.bg_normal
@@ -40,10 +40,10 @@ end
 local prev_layout = nil
 
 local aliases = {}
-aliases[" "] = "space"
+aliases[' '] = 'space'
 
 local function layout_swap(new)
-	if type(new) == "number" and new >= 0 and new <= 3 then
+	if type(new) == 'number' and new >= 0 and new <= 3 then
 		prev_layout = awesome.xkb_get_layout_group()
 		awesome.xkb_set_layout_group(new)
 	end
@@ -71,7 +71,7 @@ function modalbind.init()
 			fg = beautiful.fg_normal,
 			shape = gears.shape.rounded_rect,
 			margins = 5,
-			type = "dock"
+			type = 'dock'
 		}
 	)
 
@@ -81,25 +81,25 @@ function modalbind.init()
 				{
 					{
 						{
-							id = "text",
-							align = "left",
-							font = "SF Pro Rounded Normal 16",
+							id = 'text',
+							align = 'left',
+							font = 'Hanuman Black Normal 16',
 							widget = wibox.widget.textbox
 						},
-						id = "margin",
+						id = 'margin',
 						margins = dpi(6),
-						color = "#1b1d2488",
+						color = '#1b1d2488',
 						layout = wibox.container.margin
 					},
 					widget = wibox.container.background,
-					bg = "linear:0,0:0,21:0,#282b3688:1,#2f303d88"
+					bg = 'linear:0,0:0,21:0,#282b3688:1,#2f303d88'
 				},
 				margins = dpi(6),
-				color = "#1b1d2488",
+				color = '#1b1d2488',
 				layout = wibox.container.margin
 			},
 			widget = wibox.container.background,
-			bg = "linear:0,0:0,21:0,#282b3688:1,#2f303d88"
+			bg = 'linear:0,0:0,21:0,#282b3688:1,#2f303d88'
 		}
 	)
 
@@ -112,17 +112,17 @@ end
 
 local function show_box(s, map, name)
 	local mbox = s.modewibox
-	local mar = mbox:get_children_by_id("margin")[1]
-	local txt = mbox:get_children_by_id("text")[1]
+	local mar = mbox:get_children_by_id('margin')[1]
+	local txt = mbox:get_children_by_id('text')[1]
 	mbox.screen = s
 
-	local label = "<big><b>" .. name .. "</b></big>"
+	local label = '<big><b>' .. name .. '</b></big>'
 	if settings.show_options then
 		for _, mapping in ipairs(map) do
-			if mapping[1] == "separator" then
-				label = label .. "\n\n<big>" .. mapping[2] .. "</big>"
-			elseif mapping[1] ~= "onClose" then
-				label = label .. "\n<b>" .. gears.string.xml_escape(mapping[1]) .. "</b>\t" .. (mapping[3] or "???")
+			if mapping[1] == 'separator' then
+				label = label .. '\n\n<big>' .. mapping[2] .. '</big>'
+			elseif mapping[1] ~= 'onClose' then
+				label = label .. '\n<b>' .. gears.string.xml_escape(mapping[1]) .. '</b>\t' .. (mapping[3] or '???')
 			end
 		end
 	end
@@ -177,7 +177,7 @@ local function call_key_if_present(keymap, key, args, use_lower)
 end
 
 function close_box(keymap, args)
-	call_key_if_present(keymap, "onClose", args)
+	call_key_if_present(keymap, 'onClose', args)
 	keygrabber.stop()
 	nesting = 0
 	hide_box()
@@ -189,7 +189,7 @@ function modalbind.close_box()
 end
 
 modalbind.default_keys = {
-	{"Escape", modalbind.close_box, "Exit Modal"}
+	{'Escape', modalbind.close_box, 'Exit Modal'}
 }
 
 local function merge_default_keys(keymap)
@@ -197,7 +197,7 @@ local function merge_default_keys(keymap)
 	for j, k in ipairs(modalbind.default_keys) do
 		local no_add = false
 		for i, m in ipairs(keymap) do
-			if k[1] ~= "separator" and m[1] == k[1] then
+			if k[1] ~= 'separator' and m[1] == k[1] then
 				no_add = true
 				break
 			end
@@ -229,11 +229,11 @@ function modalbind.grab(options)
 		end
 		nesting = nesting + 1
 	end
-	call_key_if_present(keymap, "onOpen", args, use_lower)
+	call_key_if_present(keymap, 'onOpen', args, use_lower)
 
 	keygrabber.run(
 		function(mod, key, event)
-			if event == "release" then
+			if event == 'release' then
 				return true
 			end
 
@@ -248,8 +248,8 @@ function modalbind.grab(options)
 				mapping[2](args)
 
 				-- mapping "stay_in_mode" takes precedence over mode-wide setting
-				if mapping["stay_in_mode"] ~= nil then
-					stay_in_mode = mapping["stay_in_mode"]
+				if mapping['stay_in_mode'] ~= nil then
+					stay_in_mode = mapping['stay_in_mode']
 				end
 
 				if stay_in_mode then

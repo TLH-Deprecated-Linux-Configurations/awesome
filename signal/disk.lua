@@ -2,11 +2,12 @@
 -- |     \|__|.-----.|  |--.
 -- |  --  |  ||__ --||    <
 -- |_____/|__||_____||__|__|
-
+-- ------------------------------------------------- --
 -- Provides:
 -- signal::disk
 --      used (integer - mega bytes)
 --      total (integer - mega bytes)
+-- ------------------------------------------------- --
 local awful = require('awful')
 
 local update_interval = 100
@@ -30,3 +31,4 @@ awful.widget.watch(
         collectgarbage('collect')
     end
 )
+-- ------------------------------------------------- --
