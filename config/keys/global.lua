@@ -51,7 +51,7 @@ local globalKeys =
     -- ------------------------------------------------- --
     awful.key(
         {'Mod1'},
-        'a',
+        'z',
         function()
             modalbind.grab {keymap = applicationsmap, name = 'Applications Launch', stay_in_mode = false}
         end,
@@ -60,7 +60,7 @@ local globalKeys =
     -- ------------------------------------------------- --
     awful.key(
         {'Mod1'},
-        'q',
+        'a',
         function()
             modalbind.grab {keymap = awesomemap, name = 'Awesome Conrol', stay_in_mode = false}
         end,

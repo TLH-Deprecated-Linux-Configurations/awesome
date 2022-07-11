@@ -81,6 +81,19 @@ client.connect_signal(
     end
 )
 -- ------------------------------------------------- --
+-- when focus changes, move mouse to the client focused on
+client.connect_signal(
+    'focus',
+    function(c)
+        gears.timer.delayed_call(
+            function()
+                awful.placement.centered(mouse, {parent = c})
+            end
+        )
+    end
+)
+
+-- ------------------------------------------------- --
 -- Change focused screen when client is switched
 client.connect_signal(
     'focus',

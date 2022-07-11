@@ -6,86 +6,99 @@
 -- ------------------------------------------------- --
 -- ------------------------------------------------- --
 -- ------------------------------------------------- --
-local drop = require("utils.dropdown")
-local apps = require("config.root.apps")
+local drop = require('utils.dropdown')
+local apps = require('config.root.apps')
 
 -- ------------------------------------------------- --
 
 local applicationsmap = {
-    {"separator", "Applications"},
+    {'separator', 'Applications'},
     {
-        "Return",
+        'Return',
         function(c)
-            drop.toggle(apps.default.terminal, "left", "top", 0.7, 0.7)
+            drop.toggle(apps.default.terminal, 'left', 'top', 0.7, 0.7)
         end,
-        "Dropdown Terminal"
+        'Dropdown Terminal'
     },
     -- ------------------------------------------------- --
     {
-        "t",
+        't',
         function(c)
             awful.spawn(apps.default.terminal)
         end,
-        "Terminal"
+        'Terminal'
     },
     -- ------------------------------------------------- --
     {
-        "b",
+        'b',
         function(c)
             awful.spawn(apps.default.browser)
         end,
-        "Browser"
+        'Browser'
     },
     -- ------------------------------------------------- --
     {
-        "f",
+        'f',
         function(c)
             awful.spawn(apps.default.file_manager)
         end,
-        "File Manager"
+        'File Manager'
     },
     -- ------------------------------------------------- --
     {
-        "i",
+        'i',
         function(c)
-            awful.spawn.easy_async_with_shell("~/.config/awesome/config/rofi/fontawesome_menu/fontawesome-menu")
+            awful.spawn.easy_async_with_shell('~/.config/awesome/config/rofi/fontawesome_menu/fontawesome-menu')
         end,
-        "Icon Selector"
+        'Icon Selector'
     },
     -- ------------------------------------------------- --
     {
-        "c",
+        'c',
         function()
             awful.spawn(apps.default.editor)
         end,
-        "Code Editor"
+        'Code Editor'
     },
+    -- ------------------------------------------------- --
     {
-        "e",
+        'e',
         function()
             awful.spawn(apps.default.email)
         end,
-        "Email Client"
+        'Email Client'
     },
     -- ------------------------------------------------- --
-    {"separator", "Screenshots"},
+    {
+        'N',
+        function()
+            local c = awful.client.restore()
+            -- Focus restored client
+            if c then
+                c:emit_signal('request::activate', 'key.unminimize', {raise = true})
+            end
+        end,
+        'Un-Minimize Client'
+    },
+    -- ------------------------------------------------- --
+    {'separator', 'Screenshots'},
     -- ------------------------------------------------- --
     {
-        "Print",
+        'Print',
         function(c)
-            awful.spawn.easy_async_with_shell("$HOME/.config/awesome/bin/snapshot.sh area")
+            awful.spawn.easy_async_with_shell('$HOME/.config/awesome/bin/snapshot.sh area')
         end,
-        "Area Screenshot"
+        'Area Screenshot'
     },
     -- To be honest, I never want or need the full screenshot but here it is
     {
-        "Insert",
+        'Insert',
         function(c)
-            awful.spawn.easy_async_with_shell("$HOME/.config/awesome/bin/snapshot.sh full")
+            awful.spawn.easy_async_with_shell('$HOME/.config/awesome/bin/snapshot.sh full')
         end,
-        "Full Screenshot"
+        'Full Screenshot'
     },
-    {"separator", " "}
+    {'separator', ' '}
 }
 
 return applicationsmap

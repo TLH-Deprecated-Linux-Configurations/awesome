@@ -115,7 +115,7 @@ awful.screen.connect_for_each_screen(
 
         s.stats = require('widget.dashboard.dials')
 
-        s.time_boxed = create_boxed_widget(centered_widget(time), dpi(260), dpi(90), beautiful.transparent)
+        s.time_boxed = create_boxed_widget(centered_widget(time), dpi(260), dpi(110), beautiful.transparent)
         s.date_boxed = create_boxed_widget(date, dpi(260), dpi(110), beautiful.transparent)
         s.notifs = create_boxed_widget(notifs, dpi(420), dpi(640), beautiful.transparent)
         s.stats_boxed = create_boxed_widget(s.stats, dpi(260), dpi(360), beautiful.transparent)
@@ -125,10 +125,9 @@ awful.screen.connect_for_each_screen(
             {
                 nil,
                 {
-                    s.time_boxed,
                     {
                         {
-                            quick_settings,
+                            s.time_boxed,
                             layout = wibox.layout.fixed.vertical
                         },
                         {
