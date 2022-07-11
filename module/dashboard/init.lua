@@ -128,7 +128,7 @@ awful.screen.connect_for_each_screen(
                     s.time_boxed,
                     {
                         {
-                            profile,
+                            quick_settings,
                             layout = wibox.layout.fixed.vertical
                         },
                         {

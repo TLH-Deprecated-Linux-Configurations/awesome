@@ -5,7 +5,7 @@ local quick_settings_text =
 	wibox.widget(
 	{
 		font = beautiful.font .. 'Medium 10',
-		markup = "<span foreground='" .. colors.color1 .. "'>Quick Settings</span> ",
+		text = 'Quick Settings',
 		valign = 'center',
 		widget = wibox.widget.textbox
 	}
@@ -47,7 +47,6 @@ local widget =
 			{
 				{
 					quick_settings_text,
-					ui.vertical_pad(dpi(20)),
 					{
 						buttons,
 						left = dpi(12),

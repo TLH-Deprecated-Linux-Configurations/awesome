@@ -182,7 +182,7 @@ local return_button = function(color, lspace, rspace, tspace, bspace)
                 3,
                 nil,
                 function()
-                    awesome.emit_signal('central_panel::toggle')
+                    dashboard:toggle()
                 end
             )
         )
