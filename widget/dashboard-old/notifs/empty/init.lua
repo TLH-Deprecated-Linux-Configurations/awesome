@@ -14,10 +14,10 @@ local box =
 			layout = wibox.layout.align.horizontal,
 			nil,
 			{
-				text = "Empty",
-				font = "Nineteen Ninety Seven Bold 16",
+				text = 'Empty',
+				font = 'Goldman Bold 16',
 				widget = wibox.widget.textbox,
-				align = "center"
+				align = 'center'
 			},
 			nil
 		},

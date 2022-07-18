@@ -28,7 +28,7 @@ local dropbox_status_x = widget_icon_dir .. 'dropbox-x.svg'
 local action_name =
     wibox.widget {
     text = 'Dropbox',
-    font = 'Hanuman Black    10',
+    font = 'Goldman Black    10',
     align = 'left',
     widget = wibox.widget.textbox
 }
@@ -38,7 +38,7 @@ local action_name =
 local action_status =
     wibox.widget {
     text = 'Off',
-    font = 'Hanuman Black    10',
+    font = 'Goldman Black    10',
     align = 'left',
     widget = wibox.widget.textbox
 }

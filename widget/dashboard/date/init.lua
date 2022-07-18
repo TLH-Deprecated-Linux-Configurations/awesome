@@ -1,56 +1,37 @@
--- Standard awesome library
-local awful = require('awful')
-
--- Theme handling library
-local beautiful = require('beautiful')
-local dpi = beautiful.xresources.apply_dpi
-
--- Widget library
-local wibox = require('wibox')
-
--- Helpers
--- Date
----------
-
+--  _____         __
+-- |     \.---.-.|  |_.-----.
+-- |  --  |  _  ||   _|  -__|
+-- |_____/|___._||____|_____|
+-- ------------------------------------------------- --
+-- -------------------- objects -------------------- --
+--
 local date_day =
     wibox.widget {
-    font = 'Nineteen Ninety Seven Bold 22',
+    font = beautiful.font .. ' 42',
     format = '%d',
     valign = 'center',
     halign = 'center',
     widget = wibox.widget.textclock
 }
-
+-- ------------------------------------------------- --
 local date_month =
     wibox.widget {
-    font = beautiful.font .. ' 18',
+    font = beautiful.font .. ' 38',
     format = '%B',
     valign = 'center',
     halign = 'center',
     widget = wibox.widget.textclock
 }
-
+-- ------------------------------------------------- --
 local date =
     wibox.widget {
     {
-        {
-            {
-                date_day,
-                nil,
-                date_month,
-                expand = 'none',
-                widget = wibox.layout.align.vertical
-            },
-            widget = wibox.container.place,
-            valign = 'center',
-            halign = 'center'
-        },
-        widget = wibox.container.margin,
-        forced_width = dpi(250),
-        forced_height = dpi(150)
+        date_month,
+        date_day,
+        expand = 'none',
+        widget = wibox.layout.fixed.horizontal
     },
-    widget = wibox.container.background,
-    bg = beautiful.bg_button
+    widget = wibox.container.background
 }
 
 return date

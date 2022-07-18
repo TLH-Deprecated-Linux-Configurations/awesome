@@ -6,22 +6,22 @@
 -- ------------------------------------------------- --
 local left_content =
 	wibox.widget {
-	text = "Network Connected:",
-	font = "Nineteen Ninety Seven Bold 11",
+	text = 'Network Connected:',
+	font = 'Goldman Bold 11',
 	widget = wibox.widget.textbox
 }
 
 local right_content =
 	wibox.widget {
-	text = "None",
-	font = "Nineteen Ninety Seven Bold 11",
+	text = 'None',
+	font = 'Goldman Bold 11',
 	widget = wibox.widget.textbox
 }
 
 local widget_user =
 	wibox.widget {
 	layout = wibox.layout.align.vertical,
-	expand = "none",
+	expand = 'none',
 	nil,
 	{
 		left_content,
@@ -33,7 +33,7 @@ local widget_user =
 local widget_host =
 	wibox.widget {
 	layout = wibox.layout.align.vertical,
-	expand = "none",
+	expand = 'none',
 	nil,
 	{
 		right_content,
@@ -45,7 +45,7 @@ local widget_host =
 local spacer_bar =
 	wibox.widget {
 	{
-		orientation = "vertical",
+		orientation = 'vertical',
 		forced_height = dpi(1),
 		forced_width = dpi(2),
 		shape = gears.shape.rounded_bar,
@@ -56,27 +56,27 @@ local spacer_bar =
 }
 
 awesome.connect_signal(
-	"network::connected::wireless",
+	'network::connected::wireless',
 	function(interface, essid)
 		right_content:set_text(essid)
 	end
 )
 awesome.connect_signal(
-	"network::connected::wired",
+	'network::connected::wired',
 	function(interface)
 		right_content:set_text(interface)
 	end
 )
 awesome.connect_signal(
-	"network::disconnected::wireless",
+	'network::disconnected::wireless',
 	function(interface, essid)
-		right_content:set_text("Disconnected")
+		right_content:set_text('Disconnected')
 	end
 )
 awesome.connect_signal(
-	"network::disconnected::wired",
+	'network::disconnected::wired',
 	function(interface)
-		right_content:set_text("Disconnected")
+		right_content:set_text('Disconnected')
 	end
 )
 local widget =

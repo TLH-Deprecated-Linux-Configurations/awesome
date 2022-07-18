@@ -14,10 +14,10 @@ local box =
 			layout = wibox.layout.align.horizontal,
 			nil,
 			{
-				text = "Empty",
-				font = "Nineteen Ninety Seven Bold 16",
+				text = 'Empty',
+				font = 'Goldman Bold 16',
 				widget = wibox.widget.textbox,
-				align = "center"
+				align = 'center'
 			},
 			nil
 		},
@@ -26,7 +26,6 @@ local box =
 	},
 	shape = beautiful.client_shape_rounded_xl,
 	fg = colors.white,
-	bg = colors.black,
 	widget = wibox.container.background
 }
 

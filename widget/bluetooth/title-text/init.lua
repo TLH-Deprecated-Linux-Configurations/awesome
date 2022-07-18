@@ -9,15 +9,15 @@
 -- ------------------------------------------------- --
 local user_content =
 	wibox.widget {
-	text = " Bluetooth ",
-	font = "Nineteen Ninety Seven Bold 10",
+	text = ' Bluetooth ',
+	font = 'Goldman Bold 10',
 	widget = wibox.widget.textbox
 }
 
 local widget_user =
 	wibox.widget {
 	layout = wibox.layout.align.vertical,
-	expand = "none",
+	expand = 'none',
 	nil,
 	{
 		user_content,
@@ -29,7 +29,7 @@ local widget_user =
 local spacer_bar =
 	wibox.widget {
 	{
-		orientation = "vertical",
+		orientation = 'vertical',
 		forced_height = dpi(1),
 		forced_width = dpi(2),
 		shape = gears.shape.rounded_bar,

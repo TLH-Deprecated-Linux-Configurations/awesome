@@ -7,14 +7,14 @@
 -- error as `ruled` was included after the release of Awesome 4.3
 -- ------------------------------------------------- --
 ruled.client.connect_signal(
-    "request::rules",
+    'request::rules',
     function()
         -- ------------------------------------------------- --
         -- ---------------------- ALL ---------------------- --
         -- All clients will match this rule
         --
         ruled.client.append_rule {
-            id = "global",
+            id = 'global',
             rule = {},
             properties = {
                 focus = awful.client.focus.filter,
@@ -42,24 +42,21 @@ ruled.client.connect_signal(
                 shape = beautiful.client_shape_rounded_lg
             }
         }
-
-        -- ------------------------------------------------- --
-        -- ------------------------------------------------- --
         -- ------------------------------------------------- --
         -- ----------------- Titlebar rules ---------------- --
         --
         ruled.client.append_rule {
-            id = "titlebars",
+            id = 'titlebars',
             rule_any = {
                 type = {
-                    "normal",
-                    "dialog",
-                    "modal",
-                    "utility"
+                    'normal',
+                    'dialog',
+                    'modal',
+                    'utility'
                 }
             },
             except_any = {
-                name = {"Discord Updater"}
+                name = {'Discord Updater'}
             },
             properties = {
                 titlebars_enabled = true,
@@ -67,18 +64,17 @@ ruled.client.connect_signal(
                 shape = beautiful.client_shape_rounded_lg
             }
         }
-        -- ------------------------------------------------- --
-        -- ------------------------------------------------- --
+
         -- ------------------------------------------------- --
         -- -------------------- Dialogs -------------------- --
         --
         ruled.client.append_rule {
-            id = "dialog",
+            id = 'dialog',
             rule_any = {
-                type = {"dialog"},
+                type = {'dialog'},
                 class = {
-                    "Wicd-client.py",
-                    "calendar.google.com"
+                    'Wicd-client.py',
+                    'calendar.google.com'
                 }
             },
             properties = {
@@ -88,14 +84,12 @@ ruled.client.connect_signal(
             }
         }
         -- ------------------------------------------------- --
-        -- ------------------------------------------------- --
-        -- ------------------------------------------------- --
         -- --------------------- Modals -------------------- --
         --
         ruled.client.append_rule {
-            id = "modal",
+            id = 'modal',
             rule_any = {
-                type = {"modal"}
+                type = {'modal'}
             },
             properties = {
                 titlebars_enabled = true,
@@ -105,14 +99,12 @@ ruled.client.connect_signal(
             }
         }
         -- ------------------------------------------------- --
-        -- ------------------------------------------------- --
-        -- ------------------------------------------------- --
         -- ------------------- Utilities ------------------- --
         --
         ruled.client.append_rule {
-            id = "utility",
+            id = 'utility',
             rule_any = {
-                type = {"utility"}
+                type = {'utility'}
             },
             properties = {
                 titlebars_enabled = false,
@@ -120,14 +112,13 @@ ruled.client.connect_signal(
             }
         }
         -- ------------------------------------------------- --
-        -- ------------------------------------------------- --
-        -- Splash
+        -- --------------------- Splash -------------------- --
         --
         ruled.client.append_rule {
-            id = "splash",
+            id = 'splash',
             rule_any = {
-                type = {"splash"},
-                name = {"Discord Updater"}
+                type = {'splash'},
+                name = {'Discord Updater'}
             },
             properties = {
                 titlebars_enabled = false,
@@ -138,20 +129,19 @@ ruled.client.connect_signal(
             }
         }
         -- ------------------------------------------------- --
-        -- ------------------------------------------------- --
-        -- Terminal emulators
+        -- --------------- Terminal emulators -------------- --
         --
         ruled.client.append_rule {
-            id = "terminals",
+            id = 'terminals',
             rule_any = {
                 class = {
-                    "URxvt",
-                    "XTerm",
-                    "Alacritty",
-                    "UXTerm",
-                    "kitty",
-                    "tym",
-                    "K3rmit"
+                    'URxvt',
+                    'XTerm',
+                    'Alacritty',
+                    'UXTerm',
+                    'kitty',
+                    'tym',
+                    'K3rmit'
                 }
             },
             properties = {
@@ -161,18 +151,16 @@ ruled.client.connect_signal(
         }
 
         -- ------------------------------------------------- --
-        -- ------------------------------------------------- --
-        -- ------------------------------------------------- --
-        -- Image viewers
+        -- ----------------- Image viewers ----------------- --
         --
         ruled.client.append_rule {
-            id = "image_viewers",
+            id = 'image_viewers',
             rule_any = {
                 class = {
-                    "feh",
-                    "Pqiv",
-                    "Sxiv",
-                    "imv"
+                    'feh',
+                    'Pqiv',
+                    'Sxiv',
+                    'imv'
                 }
             },
             properties = {
@@ -183,48 +171,48 @@ ruled.client.connect_signal(
             }
         }
         -- ------------------------------------------------- --
-        -- ------------------------------------------------- --
-        -- Centered Placement
+        -- --------------- Centered Placement -------------- --
         ruled.client.append_rule {
-            id = "center_placement",
+            id = 'center_placement',
             rule_any = {
-                type = {"dialog", "modal", "utility", "splash"},
+                type = {'dialog', 'modal', 'utility', 'splash'},
                 class = {
-                    "Steam",
-                    "discord",
-                    "markdown_input",
-                    "scratchpad",
-                    "feh",
-                    "Pqiv",
-                    "Sxiv",
-                    "imv"
+                    'Steam',
+                    'discord',
+                    'markdown_input',
+                    'scratchpad',
+                    'feh',
+                    'Pqiv',
+                    'Sxiv',
+                    'imv'
                 },
-                instance = {"markdown_input", "scratchpad"},
-                role = {"GtkFileChooserDialog", "conversation"}
+                instance = {'markdown_input', 'scratchpad'},
+                role = {'GtkFileChooserDialog', 'conversation'}
             },
-            properties = {placement = awful.placement.center}
+            properties = {
+                placement = awful.placement.center
+            }
         }
         -- ------------------------------------------------- --
-        -- ------------------------------------------------- --
-        -- Floating
+        -- -------------------- Floating ------------------- --
         --
         ruled.client.append_rule {
-            id = "floating",
+            id = 'floating',
             rule_any = {
                 instance = {
-                    "file_progress",
-                    "Popup",
-                    "nm-connection-editor"
+                    'file_progress',
+                    'Popup',
+                    'nm-connection-editor'
                 },
                 class = {
-                    "scrcpy",
-                    "Mugshot",
-                    "Pulseeffects"
+                    'scrcpy',
+                    'Mugshot',
+                    'Pulseeffects'
                 },
                 role = {
-                    "AlarmWindow",
-                    "ConfigManager",
-                    "pop-up"
+                    'AlarmWindow',
+                    'ConfigManager',
+                    'pop-up'
                 }
             },
             properties = {
@@ -236,15 +224,15 @@ ruled.client.connect_signal(
         }
         -- ------------------------------------------------- --
         ruled.client.append_rule {
-            id = "floating_not_top",
+            id = 'floating_not_top',
             rule_any = {
                 class = {
-                    "virt-manager",
-                    "Virt-manager",
-                    "VirtualBox Manager",
-                    "VirtualBox Manager",
-                    "mate-color-select",
-                    "Mate-color-select"
+                    'virt-manager',
+                    'Virt-manager',
+                    'VirtualBox Manager',
+                    'VirtualBox Manager',
+                    'mate-color-select',
+                    'Mate-color-select'
                 }
             },
             properties = {

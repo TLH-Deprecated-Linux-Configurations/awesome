@@ -16,7 +16,7 @@ elements.create = function(title, message)
     -- ------------------------------------------------- --
     -- clear element
     local clear =
-    wibox.widget {
+        wibox.widget {
         {
             {
                 {
@@ -38,26 +38,11 @@ elements.create = function(title, message)
             widget = wibox.container.background,
             bg = beautiful.bg_button
         },
-        forced_width = dpi(30),
+        forced_width = dpi(40),
         forced_height = dpi(30),
         widget = clickable_container
     }
-    -- ------------------------------------------------- --
-    -- clear connect signal for mouse entry
-    clear:connect_signal(
-        'mouse::enter',
-        function()
-            clear.bg = beautiful.accent
-        end
-    )
-    -- ------------------------------------------------- --
-    -- clear mouse signal for departure
-    clear:connect_signal(
-        'mouse::leave',
-        function()
-            clear.bg = beautiful.bg_button
-        end
-    )
+
     -- ------------------------------------------------- --
     -- clear button bindings
     clear:buttons(
@@ -76,12 +61,12 @@ elements.create = function(title, message)
     -- ------------------------------------------------- --
     -- notification content template
     local content =
-    wibox.widget {
+        wibox.widget {
         {
             {
                 {
                     text = title,
-                    font = beautiful.font .. ' Bold10',
+                    font = beautiful.font .. ' 10',
                     widget = wibox.widget.textbox
                 },
                 {
@@ -99,14 +84,15 @@ elements.create = function(title, message)
     }
     -- ------------------------------------------------- --
     -- box element template
-    box = wibox.widget {
+    box =
+        wibox.widget {
         {
             {
                 nil,
                 {
                     image = icons.new_notif,
                     widget = wibox.widget.imagebox,
-                    forced_height = dpi(25),
+                    forced_height = dpi(30),
                     id = 'icon',
                     resize = true
                 },
@@ -135,7 +121,7 @@ elements.create = function(title, message)
         },
         shape = beautiful.client_shape_rounded,
         fg = colors.white,
-        bg = beautiful.bg_button,
+        bg = colors.alpha(colors.black, '33'),
         border_width = dpi(1),
         border_color = colors.black,
         widget = wibox.container.background

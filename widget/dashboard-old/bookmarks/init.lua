@@ -9,7 +9,7 @@ local function create_bookmark(name, path)
     local hover_color = colors.colorC
 
     local bookmark = wibox.widget.textbox()
-    bookmark.font = 'Nineteen Ninety Seven Bold 14'
+    bookmark.font = 'Goldman Bold 14'
     bookmark.text = name
     bookmark.align = 'center'
     bookmark.valign = 'center'

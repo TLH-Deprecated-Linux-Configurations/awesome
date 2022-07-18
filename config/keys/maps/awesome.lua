@@ -32,14 +32,6 @@ local awesomemap = {
     },
     -- ------------------------------------------------- --
     {
-        'd',
-        function(c)
-            awesome.emit_signal('central_panel::toggle', awful.screen.focused())
-        end,
-        'Dashboard'
-    },
-    -- ------------------------------------------------- --
-    {
         'h',
         function(c)
             hotkeys_popup_custom.show_help()

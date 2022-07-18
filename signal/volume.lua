@@ -8,7 +8,7 @@
 --      percentage (integer)
 --      muted (boolean)
 local awful = require('awful')
-
+-- ------------------------------------------------- --
 local volume_old = -1
 local muted_old = -1
 local function emit_volume_info()

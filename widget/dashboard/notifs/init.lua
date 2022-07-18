@@ -4,28 +4,25 @@ local title =
     {
         {
             spacing = dpi(0),
-            layout = wibox.layout.flex.vertical,
-            format_item(
-                {
-                    layout = wibox.layout.align.horizontal,
-                    spacing = dpi(16),
-                    {
-                        layout = wibox.container.place,
-                        halign = 'center',
-                        valign = 'center',
-                        require('widget.dashboard.notifs.title-text')
-                    },
-                    require('widget.dashboard.notifs.clear-all')
-                }
-            )
+            layout = wibox.layout.align.horizontal,
+            nil,
+            {
+                layout = wibox.container.place,
+                halign = 'center',
+                valign = 'center',
+                require('widget.dashboard.notifs.title-text')
+            },
+            require('widget.dashboard.notifs.clear-all')
         },
         margins = dpi(5),
         widget = wibox.container.margin
     },
     shape = beautiful.client_shape_rounded_medium,
     forced_height = dpi(70),
+    border_color = colors.black,
+    border_width = dpi(1),
     widget = wibox.container.background,
-    bg = beautiful.bg_button
+    bg = colors.alpha(colors.white, '22')
 }
 
 -- ------------------------------------------------- --
@@ -35,16 +32,14 @@ local notification_panel =
     {
         {
             spacing = dpi(12),
-            layout = wibox.layout.flex.vertical,
-            format_item(
-                {
-                    layout = wibox.layout.fixed.horizontal,
-                    spacing = dpi(16),
-                    require('widget.dashboard.notifs.notifications-panel')
-                }
-            )
+            layout = wibox.layout.fixed.vertical,
+            {
+                layout = wibox.layout.fixed.horizontal,
+                spacing = dpi(16),
+                require('widget.dashboard.notifs.notifications-panel')
+            }
         },
-        margins = dpi(5),
+        margins = dpi(12),
         widget = wibox.container.margin
     },
     shape = beautiful.client_shape_rounded_xl,
@@ -62,12 +57,12 @@ local notifs =
             layout = wibox.layout.fixed.vertical,
             bg = beautiful.bg_focus
         },
-        margins = dpi(5),
+        margins = dpi(0),
         layout = wibox.container.margin
     },
     shape = beautiful.client_shape_rounded_xl,
     widget = wibox.container.background,
-    bg = beautiful.bg_focus
+    bg = beautiful.bg_normal
 }
 
 return notifs

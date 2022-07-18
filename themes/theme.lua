@@ -52,7 +52,7 @@ end
 theme.widget_markup = '<span color=%q><b>%s</b></span>'
 -- ------------------------------------------------- --
 -- Fonts
-theme.font = 'Hanuman Black '
+theme.font = 'Goldman Black '
 theme.display_font = 'Nineteen Ninety Seven '
 theme.icon_font = 'Font Awesome 6 Pro '
 theme.icon_theme = 'chhinamasta'
@@ -62,7 +62,7 @@ theme.icon_theme = 'chhinamasta'
 theme.accent =
     'radial:960,540,20:960,540,500:0,' ..
     colors.alpha(colors.color1, 'cc') ..
-        ':0.2,' .. colors.alpha(colors.colorQ, 'aa') .. ':1,' .. colors.alpha(colors.colorV, 'aa')
+        ':0.2,' .. colors.alpha(colors.colorQ, 'cc') .. ':1,' .. colors.alpha(colors.colorV, 'cc')
 -- ------------------------------------------------- --
 -- Foreground
 theme.fg_normal = colors.white
@@ -71,14 +71,14 @@ theme.fg_urgent = colors.alpha(colors.color15, 'cc')
 -- ------------------------------------------------- --
 -- Backgrounds
 theme.bg_normal =
-    'linear:0,0:0,21:0,' .. colors.alpha(colors.colorM, 'aa') .. ':1,' .. colors.alpha(colors.colorK, 'aa')
-theme.bg_focus = 'linear:0,0:0,21:0,' .. colors.alpha(colors.colorK, 'aa') .. ':1,' .. colors.alpha(colors.colorC, 'aa')
+    'linear:0,0:0,21:0,' .. colors.alpha(colors.colorM, 'cc') .. ':1,' .. colors.alpha(colors.colorK, 'cc')
+theme.bg_focus = 'linear:0,0:0,21:0,' .. colors.alpha(colors.colorK, 'cc') .. ':1,' .. colors.alpha(colors.colorC, 'cc')
 
-theme.bg_urgent = 'linear:0,0:0,21:0,' .. colors.alpha(colors.colorM, 'aa') .. ':1,' .. colors.alpha(colors.black, 'aa')
-theme.bg_menu = 'linear:0,0:0,21:0,' .. colors.alpha(colors.colorK, 'aa') .. ':1,' .. colors.alpha(colors.black, 'aa')
+theme.bg_urgent = 'linear:0,0:0,21:0,' .. colors.alpha(colors.colorM, 'cc') .. ':1,' .. colors.alpha(colors.black, 'cc')
+theme.bg_menu = 'linear:0,0:0,21:0,' .. colors.alpha(colors.colorK, 'cc') .. ':1,' .. colors.alpha(colors.black, 'cc')
 
 theme.bg_button =
-    'linear:0,0:0,32:0,' .. colors.alpha(colors.colorN, 'aa') .. ':1,' .. colors.alpha(colors.colorE, 'aa')
+    'linear:0,0:0,32:0,' .. colors.alpha(colors.colorN, 'cc') .. ':1,' .. colors.alpha(colors.colorE, 'cc')
 -- ------------------------------------------------- --
 -- Hot Keys
 theme.hotkeys_description_font = theme.font .. ' Bold 10'
@@ -113,12 +113,12 @@ theme.systray_icon_spacing = dpi(16)
 -- UI Groups
 --
 theme.groups_title_bg =
-    'linear:0,0:0,21:0,' .. colors.alpha(colors.colorV, 'aa') .. ':1,' .. colors.alpha(colors.colorM, 'aa')
-theme.groups_bg = 'linear:0,0:0,21:0,' .. colors.alpha(colors.colorM, 'aa') .. ':1,' .. colors.alpha(colors.black, 'aa')
+    'linear:0,0:0,21:0,' .. colors.alpha(colors.colorV, 'cc') .. ':1,' .. colors.alpha(colors.colorM, 'cc')
+theme.groups_bg = 'linear:0,0:0,21:0,' .. colors.alpha(colors.colorM, 'cc') .. ':1,' .. colors.alpha(colors.black, 'cc')
 theme.groups_radius = dpi(16)
 
 theme.sliders_fg =
-    'linear:0,0:0,21:0,' .. colors.alpha(colors.color1, 'aa') .. ':1,' .. colors.alpha(colors.white, 'aa')
+    'linear:0,0:0,21:0,' .. colors.alpha(colors.color1, 'cc') .. ':1,' .. colors.alpha(colors.white, 'cc')
 -- ------------------------------------------------- --
 -- UI events
 theme.leave_event = colors.alpha(colors.black, '22')
@@ -136,7 +136,7 @@ theme.menu_border_width = dpi(2)
 theme.menu_bg_focus = colors.alpha(colors.white, '99')
 theme.menu_accent = colors.colorM
 theme.menu_bg_normal =
-    'linear:0,0:0,21:0,' .. colors.alpha(colors.colorM, '88') .. ':1,' .. colors.alpha(colors.black, 'aa')
+    'linear:0,0:0,21:0,' .. colors.alpha(colors.colorM, '88') .. ':1,' .. colors.alpha(colors.black, 'cc')
 theme.menu_fg_normal = colors.colorY
 theme.menu_fg_focus = colors.white
 theme.menu_border_color =
@@ -157,9 +157,9 @@ theme.separator_color = colors.colorP
 -- Titlebar
 theme.titlebar_size = dpi(18)
 theme.titlebar_bg_focus =
-    'linear:0,0:0,21:0,' .. colors.alpha(colors.colorV, 'aa') .. ':1,' .. colors.alpha(colors.colorM, 'aa')
+    'linear:0,0:0,21:0,' .. colors.alpha(colors.colorV, 'cc') .. ':1,' .. colors.alpha(colors.colorM, 'cc')
 theme.titlebar_bg_normal =
-    'linear:0,0:0,21:0,' .. colors.alpha(colors.colorM, 'aa') .. ':1,' .. colors.alpha(colors.black, 'aa')
+    'linear:0,0:0,21:0,' .. colors.alpha(colors.colorM, 'cc') .. ':1,' .. colors.alpha(colors.black, 'cc')
 theme.titlebar_fg_focus = theme.fg_normal
 theme.titlebar_fg_normal = colors.colorY
 -- ------------------------------------------------- --
@@ -180,7 +180,7 @@ theme.taglist_border_focus = colors.white
 theme.taglist_fg_empty = colors.white
 theme.taglist_fg = colors.white
 theme.taglist_fg_occupied = colors.colorD
-theme.taglist_bg_urgent = colors.alpha(colors.color15, 'aa')
+theme.taglist_bg_urgent = colors.alpha(colors.color15, 'cc')
 theme.taglist_spacing = dpi(6)
 -- ------------------------------------------------- --
 
@@ -191,7 +191,7 @@ theme.taglist_spacing = dpi(6)
 theme.tasklist_font = theme.font .. '12'
 theme.tasklist_bg_normal = theme.bg_button
 theme.tasklist_bg_focus = theme.bg_focus
-theme.tasklist_bg_urgent = colors.alpha(colors.color15, 'aa')
+theme.tasklist_bg_urgent = colors.alpha(colors.color15, 'cc')
 theme.tasklist_fg_focus = colors.white
 theme.tasklist_fg_urgent = colors.white
 theme.tasklist_fg_normal = colors.colorY

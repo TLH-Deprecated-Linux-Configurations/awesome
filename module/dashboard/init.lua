@@ -15,10 +15,10 @@ local function centered_widget(widget)
             {
                 nil,
                 widget,
-                expand = 'none',
+                expand = 'inside',
                 layout = wibox.layout.align.vertical
             },
-            expand = 'none',
+            expand = 'outside',
             layout = wibox.layout.align.horizontal
         }
     )
@@ -26,9 +26,8 @@ local function centered_widget(widget)
     return w
 end
 
-local function create_boxed_widget(widget_to_be_boxed, width, height, bg_color)
+local function create_boxed_widget(widget_to_be_boxed, width, height)
     local box_container = wibox.container.background()
-    box_container.bg = bg_color
     box_container.forced_height = height
     box_container.forced_width = width
     box_container.shape = beautiful.client_shape_rounded_large
@@ -43,31 +42,28 @@ local function create_boxed_widget(widget_to_be_boxed, width, height, bg_color)
                     {
                         -- The actual widget goes here
                         widget_to_be_boxed,
-                        top = dpi(12),
-                        bottom = dpi(12),
-                        left = dpi(10),
-                        right = dpi(10),
+                        margins = dpi(5),
                         widget = wibox.container.margin,
                         shape = beautiful.client_shape_rounded_xl
                     },
                     widget = box_container
                 },
-                margins = dpi(8),
+                margins = dpi(2),
                 color = beautiful.bg_menu,
                 widget = wibox.container.margin
             },
             widget = wibox.container.background,
-            bg = beautiful.bg_button,
+            bg = colors.alpha(colors.black, '22'),
             shape = beautiful.client_shape_rounded_xl
         }
     )
 
     return boxed_widget
 end
-
+local battery = require('widget.dashboard.battery')
 local time = require('widget.dashboard.time')
-
 local date = require('widget.dashboard.date')
+local uptime = require('widget.dashboard.uptime')
 -- pfp
 local profile_pic_img = {
     {
@@ -112,13 +108,13 @@ awful.screen.connect_for_each_screen(
 
         -- widgets
         local notifs = require('widget.dashboard.notifs')
-
+        s.uptime_boxed = create_boxed_widget(uptime, dpi(360), dpi(110))
         s.stats = require('widget.dashboard.dials')
-
-        s.time_boxed = create_boxed_widget(centered_widget(time), dpi(260), dpi(110), beautiful.transparent)
-        s.date_boxed = create_boxed_widget(date, dpi(260), dpi(110), beautiful.transparent)
-        s.notifs = create_boxed_widget(notifs, dpi(420), dpi(640), beautiful.transparent)
-        s.stats_boxed = create_boxed_widget(s.stats, dpi(260), dpi(360), beautiful.transparent)
+        s.battery = create_boxed_widget(battery, dpi(360), dpi(110))
+        s.time_boxed = create_boxed_widget(centered_widget(time), dpi(360), dpi(110))
+        s.date_boxed = create_boxed_widget(centered_widget(date), dpi(360), dpi(110))
+        s.notifs = create_boxed_widget(notifs, dpi(420), dpi(640))
+        s.stats_boxed = create_boxed_widget(s.stats, dpi(420), dpi(480))
 
         local dashboard_items =
             wibox.widget(
@@ -128,15 +124,14 @@ awful.screen.connect_for_each_screen(
                     {
                         {
                             s.time_boxed,
-                            layout = wibox.layout.fixed.vertical
-                        },
-                        {
                             s.date_boxed,
+                            s.battery,
+                            s.uptime_boxed,
                             layout = wibox.layout.fixed.vertical
                         },
-                        layout = wibox.layout.fixed.horizontal
+                        layout = wibox.layout.fixed.horizontal,
+                        s.stats_boxed
                     },
-                    s.stats_boxed,
                     layout = wibox.layout.fixed.vertical
                 },
                 expand = 'none',
@@ -168,8 +163,8 @@ awful.screen.connect_for_each_screen(
                                 color = colors.alpha(colors.color1, '88')
                             }
                         ),
-                        dashboard_items,
-                        s.notifs
+                        dashboard_items
+                        -- notifs
                     },
                     bg = beautiful.bg_menu,
                     shape = beautiful.client_shape_rounded_xl,

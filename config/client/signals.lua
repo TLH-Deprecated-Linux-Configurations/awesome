@@ -9,8 +9,7 @@
 -- |_______|__||___  |__|__|___._||__|
 --             |_____|
 -- ------------------------------------------------- --
-
--- ------------------------------------------------- --
+-- -------------------- Functions ------------------ --
 local update_client = function(c)
     -- Set client's shape based on its tag's layout and status (floating, maximized, etc.)
     --
@@ -22,97 +21,63 @@ local update_client = function(c)
 end
 
 -- ------------------------------------------------- --
--- Set the window as a slave (put it at the end of others instead of setting it as master)
+-- based on "backham"
+function beckham()
+    local s = awful.screen.focused()
+    local c = awful.client.focus.history.get(s, 0)
+    if c then
+        client.focus = c
+        c:raise()
+    end
+end
+
+-- ------------------------------------------------- --
+client.connect_signal(
+    'request::manage',
+    function(c)
+        -- Fade in animation (fade out is in keys)
+
+        local fade_in =
+            awestore.tweened(
+            10,
+            {
+                duration = 16,
+                easing = awestore.easing.back_in_out
+            }
+        )
+        local unsub =
+            fade_in:subscribe(
+            function(o)
+                if c and c.valid then
+                    c.opacity = o / 20
+                end
+            end
+        )
+        fade_in:set(19)
+        fade_in.ended:subscribe(
+            function()
+                unsub()
+            end
+        )
+    end
+)
+-- ------------------------------------------------- --
 client.connect_signal(
     'manage',
     function(c)
+        -- Set the windows at the slave,
+        -- i.e. put it at the end of others instead of setting it master.
         if not awesome.startup then
             awful.client.setslave(c)
         end
-    end
-)
--- ------------------------------------------------- --
--- center the mouse on newly opened clients
-client.connect_signal(
-    'manage',
-    function(c)
-        gears.timer.delayed_call(
-            function()
-                awful.placement.centered(mouse, {parent = c})
-            end
-        )
-    end
-)
--- ------------------------------------------------- --
--- Prevent clients from being unreachable after screen count changes.
-client.connect_signal(
-    'manage',
-    function(c)
         if awesome.startup and not c.size_hints.user_position and not c.size_hints.program_position then
+            -- Prevent clients from being unreachable after screen count changes.
             awful.placement.no_offscreen(c)
-            awful.placement.no_overlap(c)
         end
     end
 )
-
 -- ------------------------------------------------- --
 -- --------------------- Focus --------------------- --
--- Refocus parent window after transient window closes
-local last_focus
-client.connect_signal(
-    'unfocus',
-    function(c)
-        last_focus = c
-    end
-)
-client.connect_signal(
-    'focus',
-    function(_)
-        last_focus = nil
-    end
-)
-client.connect_signal(
-    'unmanage',
-    function(c)
-        if last_focus == c and c.transient_for then
-            client.focus = c.transient_for
-            c.transient_for:raise()
-        end
-    end
-)
--- ------------------------------------------------- --
--- when focus changes, move mouse to the client focused on
-client.connect_signal(
-    'focus',
-    function(c)
-        gears.timer.delayed_call(
-            function()
-                awful.placement.centered(mouse, {parent = c})
-            end
-        )
-    end
-)
-
--- ------------------------------------------------- --
--- Change focused screen when client is switched
-client.connect_signal(
-    'focus',
-    function(c)
-        if awful.screen.focused() ~= c.screen then
-            awful.screen.focus(c.screen)
-        end
-    end
-)
-
--- ------------------------------------------------- --
--- Raise urgent clients
-client.connect_signal(
-    'request::urgent',
-    function(c)
-        c:raise()
-    end
-)
--- ------------------------------------------------- --
 -- Enable sloppy focus, so that focus follows mouse. BUT don't raise the window, Lord help me that is annoying when trying to access a popup window within another window
 client.connect_signal(
     'mouse::enter',
@@ -121,7 +86,26 @@ client.connect_signal(
     end
 )
 -- ------------------------------------------------- --
+client.connect_signal(
+    'focus',
+    function(c)
+        c.border_color = beautiful.border_focus
+    end
+)
+-- ------------------------------------------------- --
+client.connect_signal(
+    'unfocus',
+    function(c)
+        c.border_color = beautiful.border_normal
+    end
+)
+-- ------------------------------------------------- --
+client.connect_signal('property::minimized', beckham)
+-- ------------------------------------------------- --
+client.connect_signal('unmanage', beckham)
+------------------------------------------------- --
 -- --------------------- Shape --------------------- --
+-- ------------------------------------------------- --
 -- Manipulate client shape on floating
 client.connect_signal(
     'property::floating',
@@ -160,12 +144,10 @@ client.connect_signal(
 )
 -- ------------------------------------------------- --
 -- -------------------- Pointer -------------------- --
--- ------------------------------------------------- --
 -- Set mouse resize mode (live or after)
 awful.mouse.resize.set_mode('live')
 -- ------------------------------------------------- --
 -- -------------------- Geometry ------------------- --
--- ------------------------------------------------- --
 -- Restore geometry for floating clients
 -- (for example after swapping from tiling mode to floating mode)
 

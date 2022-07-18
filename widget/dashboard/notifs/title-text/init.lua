@@ -10,23 +10,10 @@
 local user_content =
     wibox.widget {
     text = 'Notifications',
-    font = beautiful.font .. ' 10',
+    font = beautiful.font .. ' 25',
     widget = wibox.widget.textbox
 }
--- ------------------------------------------------- --
-local icon = wibox.widget.imagebox(icons.logo)
--- ------------------------------------------------- --
-local widget_user =
-    wibox.widget {
-    layout = wibox.layout.align.vertical,
-    expand = 'none',
-    nil,
-    {
-        user_content,
-        layout = wibox.layout.align.horizontal
-    },
-    nil
-}
+
 -- ------------------------------------------------- --
 local spacer_bar =
     wibox.widget {
@@ -45,11 +32,8 @@ local spacer_bar =
 local widget =
     wibox.widget {
     {
-        icon,
-        spacer_bar,
-        widget_user,
-        spacer_bar,
-        layout = wibox.layout.fixed.horizontal
+        user_content,
+        layout = wibox.layout.flex.horizontal
     },
     fg = beautiful.fg_normal,
     bg = beautiful.normal,

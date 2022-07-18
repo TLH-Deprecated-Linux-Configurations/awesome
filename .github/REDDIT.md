@@ -6,3 +6,5 @@
 - [// Icon Theme //](https://github.com/the-Electric-Tantra-Linux/chhinamasta-icon-theme) - Chhinamasta
 - [// Grub2 Theme //](https://github.com/the-Electric-Tantra-Linux/Bhairava-Grub-Theme) - Bhairava
 - [// base16 Theme //](https://github.com/Thomashighbaugh/base16-vice-scheme)
+
+-[// Font: Goldman //](https://fonts.google.com/specimen/Goldman)

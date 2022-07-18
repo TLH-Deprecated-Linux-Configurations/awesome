@@ -81,12 +81,12 @@ elements.create = function(title, message)
       {
         {
           text = title,
-          font = 'Hanuman Black 10',
+          font = 'Goldman Black 10',
           widget = wibox.widget.textbox
         },
         {
           text = message,
-          font = 'Hanuman Black  8',
+          font = 'Goldman Black  8',
           widget = wibox.widget.textbox
         },
         layout = wibox.layout.align.vertical

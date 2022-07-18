@@ -151,8 +151,8 @@ function widget.new(args)
         self.fg = args.fg or beautiful.hotkeys_fg or beautiful.fg_normal
         self.modifiers_fg = colors.colorF
         self.label_bg = colors.colorE
-        self.font = args.font or beautiful.hotkeys_font or 'Hanuman Black 9'
-        self.description_font = args.description_font or beautiful.hotkeys_description_font or 'Hanuman Black   8'
+        self.font = 'Goldman Black 9'
+        self.description_font = args.description_font or beautiful.hotkeys_description_font or 'Goldman Black   8'
         self.group_margin = args.group_margin or beautiful.hotkeys_group_margin or dpi(6)
         self._widget_settings_loaded = true
     end
@@ -276,7 +276,7 @@ function widget.new(args)
         local textbox =
             wibox.widget {
             markup = markup.fg(colors.color2, group),
-            font = 'Hanuman Black 9',
+            font = 'Goldman Black 9',
             widget = wibox.widget.textbox
         }
         -- ------------------------------------------------- --

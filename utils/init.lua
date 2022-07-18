@@ -5,7 +5,6 @@
 -- ------------------------------------------------- --
 return {
     require(... .. '.awestore'),
-    require(... .. '.beckham'),
     require(... .. '.better_resize'),
     require(... .. '.color'),
     require(... .. '.clickable-container'),

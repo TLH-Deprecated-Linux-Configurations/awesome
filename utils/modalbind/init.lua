@@ -83,7 +83,7 @@ function modalbind.init()
 						{
 							id = 'text',
 							align = 'left',
-							font = 'Hanuman Black Normal 16',
+							font = 'Goldman Black Normal 16',
 							widget = wibox.widget.textbox
 						},
 						id = 'margin',

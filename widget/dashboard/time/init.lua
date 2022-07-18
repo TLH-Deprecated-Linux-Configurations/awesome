@@ -1,3 +1,8 @@
+--  _______ __
+-- |_     _|__|.--------.-----.
+--   |   | |  ||        |  -__|
+--   |___| |__||__|__|__|_____|
+-- ------------------------------------------------- --
 -- Standard awesome library
 local awful = require('awful')
 
@@ -8,14 +13,11 @@ local dpi = beautiful.xresources.apply_dpi
 -- Widget library
 local wibox = require('wibox')
 
--- Helpers
-
--- Time
----------
+-- ------------------------------------------------- --
 
 local time_hour =
-wibox.widget {
-    font = beautiful.font .. ' Bold 64',
+    wibox.widget {
+    font = beautiful.font .. ' Bold 54',
     fg = colors.colorA,
     format = '%H',
     align = 'center',
@@ -24,8 +26,8 @@ wibox.widget {
 }
 
 local time_min =
-wibox.widget {
-    font = beautiful.font .. ' Bold 64',
+    wibox.widget {
+    font = beautiful.font .. ' Bold 54',
     format = '%M',
     align = 'center',
     valign = 'center',
@@ -33,7 +35,7 @@ wibox.widget {
 }
 
 local time =
-wibox.widget {
+    wibox.widget {
     {
         {
             {
@@ -52,7 +54,8 @@ wibox.widget {
         widget = wibox.container.background
     },
     spacing = dpi(25),
-    widget = wibox.layout.fixed.horizontal
+    layout = wibox.layout.fixed.horizontal,
+    widget = wibox.container.background
 }
 
 return time

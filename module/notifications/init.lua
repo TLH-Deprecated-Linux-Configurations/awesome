@@ -151,7 +151,7 @@ naughty.connect_signal(
                                 {
                                     align = 'center',
                                     visible = true,
-                                    font = 'Hanuman Black Bold 8',
+                                    font = 'Goldman Black Bold 8',
                                     markup = '<b>' .. n.title .. '</b>',
                                     -- widget = wibox.widget.textbox
                                     widget = naughty.widget.title
