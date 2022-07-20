@@ -36,7 +36,11 @@ ruled.client.connect_signal(
                 -- on screen with the parent window and the screens open on the screen
                 -- where the mouse is. The joys of awesomewm
                 screen = function(c)
-                    return c.screen or awful.screen.focused(c)
+                    if awesome.startup then
+                        return c.screen
+                    else
+                        return awful.screen.focused(c)
+                    end
                 end,
                 placement = awful.placement.no_offscreen,
                 shape = beautiful.client_shape_rounded_lg
