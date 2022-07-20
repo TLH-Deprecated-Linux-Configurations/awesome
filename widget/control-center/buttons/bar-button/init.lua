@@ -31,7 +31,7 @@ widget:buttons(
             1,
             nil,
             function()
-                awesome.emit_signal('bar:toggle')
+                awesome.emit_signal('bar::toggle')
 
                 widget.bg = beautiful.bg_focus
             end

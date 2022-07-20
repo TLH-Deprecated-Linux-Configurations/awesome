@@ -144,7 +144,7 @@ awesome_menu = {
         icons.keyboard
     },
     {
-        'Edit config',
+        'Edit configuration',
         'nvim ' .. awesome.conffile,
         icons.text_editor
     },

@@ -13,7 +13,7 @@
 -- https://github.com/berlam/awesome-switcher/blob/master/init.lua
 -- https://github.com/jorenheit/awesome_alttab/blob/master/init.lua
 -- ------------------------------------------------- --
-local Get_icon = require('utils.icon_handler')
+local Get_icon = require('utilities.ui.icon_handler')
 ---@diagnostic disable-next-line: deprecated
 local unpack = unpack or table.unpack
 
@@ -27,13 +27,13 @@ local _M = {}
 
 _M.settings = {
     preview_box = true,
-    preview_box_bg = colors.alpha(colors.black, "aa"),
-    preview_box_border = colors.alpha(colors.colorB, "cc"),
+    preview_box_bg = colors.alpha(colors.black, 'aa'),
+    preview_box_border = colors.alpha(colors.colorB, 'cc'),
     preview_box_fps = 30,
     preview_box_delay = 150,
-    preview_box_title_font = { beautiful.font, beautiful.display_font },
+    preview_box_title_font = {beautiful.font, beautiful.display_font},
     preview_box_title_font_size_factor = 0.8,
-    preview_box_title_color = { 244, 244, 247, 1 },
+    preview_box_title_color = {244, 244, 247, 1},
     client_opacity = true,
     client_opacity_value_selected = 1,
     client_opacity_value_in_focus = 0.5,
@@ -42,20 +42,20 @@ _M.settings = {
 }
 -- ------------------------------------------------- --
 -- Create a wibox to contain all the client-widgets
-_M.preview_wbox = wibox({ width = screen[mouse.screen].geometry.width })
+_M.preview_wbox = wibox({width = screen[mouse.screen].geometry.width})
 _M.preview_wbox.border_width = 3
 _M.preview_wbox.ontop = true
 _M.preview_wbox.visible = false
 
-_M.preview_live_timer = gears.timer({ timeout = 1 / _M.settings.preview_box_fps })
+_M.preview_live_timer = gears.timer({timeout = 1 / _M.settings.preview_box_fps})
 _M.preview_widgets = {}
 
 _M.altTabTable = {}
 _M.altTabIndex = 1
 
-_M.source = string.sub(debug.getinfo(1, "S").source, 2)
-_M.path = string.sub(_M.source, 1, string.find(_M.source, "/[^/]*$"))
-_M.noicon = _M.path .. "noicon.png"
+_M.source = string.sub(debug.getinfo(1, 'S').source, 2)
+_M.path = string.sub(_M.source, 1, string.find(_M.source, '/[^/]*$'))
+_M.noicon = _M.path .. 'noicon.png'
 -- ------------------------------------------------- --
 -- simple function for counting the size of a table
 function _M.tableLength(T)
@@ -168,9 +168,9 @@ end
 
 function _M.createPreviewText(client)
     if client.class then
-        return " - " .. client.class
+        return ' - ' .. client.class
     else
-        return " - " .. client.name
+        return ' - ' .. client.name
     end
 end
 
@@ -192,7 +192,7 @@ function _M.clientOpacity()
     if client.focus == _M.altTabTable[_M.altTabIndex].client then
         -- Let's normalize the value up to 1.
         local opacityFocusSelected =
-        _M.settings.client_opacity_value_selected + _M.settings.client_opacity_value_in_focus
+            _M.settings.client_opacity_value_selected + _M.settings.client_opacity_value_in_focus
         if opacityFocusSelected > 1 then
             opacityFocusSelected = 1
         end
@@ -225,7 +225,7 @@ function _M.updatePreview()
     end
 
     for i = 1, #_M.preview_widgets do
-        _M.preview_widgets[i]:emit_signal("widget::updated")
+        _M.preview_widgets[i]:emit_signal('widget::updated')
     end
 end
 
@@ -275,7 +275,7 @@ function _M.preview()
 
     local x = screen[mouse.screen].geometry.x - _M.preview_wbox.border_width
     local y = screen[mouse.screen].geometry.y + (screen[mouse.screen].geometry.height - h - textboxHeight) / 2
-    _M.preview_wbox:geometry({ x = x, y = y, width = W, height = h + textboxHeight })
+    _M.preview_wbox:geometry({x = x, y = y, width = W, height = h + textboxHeight})
     -- ------------------------------------------------- --
     -- create a list that holds the clients to preview, from left to right
     local leftRightTab = {}
@@ -428,7 +428,7 @@ function _M.preview()
         -- ------------------------------------------------- --
         -- Add mouse handler
         _M.preview_widgets[i]:connect_signal(
-            "mouse::enter",
+            'mouse::enter',
             function()
                 _M.cycle(leftRightTabToAltTabIndex[i] - _M.altTabIndex)
             end
@@ -459,7 +459,7 @@ end
 -- This starts the timer for updating and it shows the preview UI.
 function _M.showPreview()
     _M.preview_live_timer.timeout = 1 / _M.settings.preview_box_fps
-    _M.preview_live_timer:connect_signal("timeout", _M.updatePreview)
+    _M.preview_live_timer:connect_signal('timeout', _M.updatePreview)
     _M.preview_live_timer:start()
 
     _M.preview()
@@ -484,9 +484,9 @@ function _M.switch(dir, mod_key1, release_key, mod_key2, key_switch)
 
     -- preview delay timer
     local previewDelay = _M.settings.preview_box_delay / 1000
-    _M.previewDelayTimer = timer({ timeout = previewDelay })
+    _M.previewDelayTimer = timer({timeout = previewDelay})
     _M.previewDelayTimer:connect_signal(
-        "timeout",
+        'timeout',
         function()
             _M.previewDelayTimer:stop()
             _M.showPreview()
@@ -500,7 +500,7 @@ function _M.switch(dir, mod_key1, release_key, mod_key2, key_switch)
         function(mod, key, event)
             -- Stop alt-tabbing when the alt-key is released
             if gears.table.hasitem(mod, mod_key1) then
-                if (key == release_key or key == "Escape") and event == "release" then
+                if (key == release_key or key == 'Escape') and event == 'release' then
                     if _M.preview_wbox.visible == true then
                         _M.preview_wbox.visible = false
                         _M.preview_live_timer:stop()
@@ -508,7 +508,7 @@ function _M.switch(dir, mod_key1, release_key, mod_key2, key_switch)
                         _M.previewDelayTimer:stop()
                     end
 
-                    if key == "Escape" then
+                    if key == 'Escape' then
                         for i = 1, #_M.altTabTable do
                             _M.altTabTable[i].client.opacity = _M.altTabTable[i].opacity
                             _M.altTabTable[i].client.minimized = _M.altTabTable[i].minimized
@@ -539,7 +539,7 @@ function _M.switch(dir, mod_key1, release_key, mod_key2, key_switch)
                     end
 
                     keygrabber.stop()
-                elseif key == key_switch and event == "press" then
+                elseif key == key_switch and event == 'press' then
                     if gears.table.hasitem(mod, mod_key2) then
                         -- Move to previous client on Shift-Tab
                         _M.cycle(-1)
@@ -556,4 +556,4 @@ function _M.switch(dir, mod_key1, release_key, mod_key2, key_switch)
     _M.cycle(dir)
 end -- function altTab
 
-return { switch = _M.switch, settings = _M.settings }
+return {switch = _M.switch, settings = _M.settings}

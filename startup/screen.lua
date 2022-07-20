@@ -46,6 +46,7 @@ autostart_apps = {
     ' eval "$(gnome-keyring-daemon -s --components=pkcs11,secrets,ssh,gpg)" &',
     'xcape -e "Super_L=Super_L|Control_L|Escape" &',
     'udiskie &',
+    'sudo systemctl enable --now NetworkManager &',
     'picom -b --experimental-backends &',
     -- 'xautolock -time 5 -locker /home/tlh/.config/awesome/bin/blur.sh & ',
     'xautolock -time 8 -locker slock & ',

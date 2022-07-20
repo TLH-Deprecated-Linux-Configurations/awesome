@@ -9,7 +9,7 @@ local uptime_command = 'uptime -p'
 -- ------------------------------------------------- --
 local uptime =
     wibox.widget {
-    font = beautiful.font .. ' 22',
+    font = beautiful.font .. ' 16',
     text = 'Loading your uptime data now...',
     widget = wibox.widget.textbox
 }
@@ -43,8 +43,7 @@ local uptime_widget =
             margins = dpi(0),
             widget = wibox.container.margin
         },
-        widget = wibox.container.background,
-        bg = beautiful.bg_button
+        widget = wibox.container.background
     },
     margins = dpi(0),
     widget = wibox.container.margin

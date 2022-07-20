@@ -8,7 +8,7 @@
 --  \_____/ |___._|__|  |__||___._||_____||__||_____|_____|
 -- ------------------------------------------------- --
 -- To prevent needing to call these at the beginning of *most*
--- files this instead calls them once and they are globally scoped
+-- files, this instead calls them once and they are globally scoped
 -- thereafter.
 
 -- ------------------------------------------------- --
@@ -22,8 +22,10 @@ config_dir = filesystem.get_configuration_dir()
 awful = require('awful')
 beautiful = require('beautiful')
 gears = require('gears')
-clickable_container = require('utils.clickable-container')
+clickable_container = require('utilities.ui.clickable_container')
 filesystem = require('gears.filesystem')
+file = require('utilities.platform.file')
+inputfield = require('utilities.ui.inputfield')
 gears = require('gears')
 HOME = os.getenv 'HOME'
 icons = require('themes.icons')
@@ -33,13 +35,13 @@ string = require('string')
 watch = require('awful.widget.watch')
 wibox = require('wibox')
 cairo = require('lgi').cairo
-modkey = require('config.keys.mod').mod_key
-altkey = require('config.keys.mod').alt_key
+modkey = require('configuration.keys.mod').mod_key
+altkey = require('configuration.keys.mod').alt_key
 math = require('math')
 ruled = require('ruled')
-awestore = require('utils.awestore')
-client_keys = require('config.client.keys')
-client_buttons = require('config.client.buttons')
+awestore = require('utilities.client.awestore')
+client_keys = require('configuration.client.keys')
+client_buttons = require('configuration.client.buttons')
 gfs = filesystem
 menubar = require('menubar')
 awful_menu = awful.menu
@@ -47,27 +49,34 @@ menu_gen = menubar.menu_gen
 menu_utils = menubar.utils
 icon_theme = require('menubar.icon_theme')
 hotkeys_popup = require('awful.hotkeys_popup').widget
-freedesktop = require('module.freedesktop')
+freedesktop = require('utilities.ui.freedesktop')
 colors = require('themes').colors
 screen_geometry = require('awful').screen.focused().geometry
-format_item = require('utils.format_item')
+format_item = require('utilities.ui.format_item')
 settings = require('settings')
 hotkeys_popup = require('module.hotkeys-popup')
-overflow = require('utils.overflow')
+overflow = require('utilities.ui.overflow')
 xresources = require('beautiful.xresources')
 gears = require('gears')
-rubato = require('utils.rubato')
+rubato = require('utilities.client.rubato')
 Gio = require('lgi').Gio
 awful_menu = require('awful.menu')
 menu_gen = require('menubar.menu_gen')
 menu_utils = require('menubar.utils')
-prompt = require('utils.prompt')
+prompt = require('utilities.ui.prompt')
 gobject = require('gears.object')
 gtable = require('gears.table')
 gtimer = require('gears.timer')
 gstring = require('gears.string')
-colorize_text = require('utils.colorize_text')
-snap_edge = require('utils.snap_edge')
+
+snap_edge = require('utilities.client.snap_edge')
+card = require('utilities.ui.card')
+seperator_widget = require('utilities.ui.separator')
+hardware = require('utilities.platform.hardware_check')
+
+scrollbox = require('utilities.ui.scrollbox')
+os = require('os')
+
 -- ------------------------------------------------- --
 -- Assignments dependent on above list otherwise it will throw errrors,
 -- this results from trial and error (and lots of blood)

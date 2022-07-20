@@ -10,14 +10,14 @@
 -- ########################################################################
 -- ########################################################################
 -- ########################################################################
-local awful = require("awful")
-local gears = require("gears")
-local wibox = require("wibox")
-local icons = require("themes.icons")
-local clickable_container = require("utils.clickable-container")
-local colors = require("themes").colors
-local apps = require("config.root.apps")
-local dpi = require("beautiful").xresources.apply_dpi
+local awful = require('awful')
+local gears = require('gears')
+local wibox = require('wibox')
+local icons = require('themes.icons')
+local clickable_container = require('utilities.ui.clickable_container')
+local colors = require('themes').colors
+local apps = require('configuration.root.apps')
+local dpi = require('beautiful').xresources.apply_dpi
 --  _______         __ __
 -- |    ___|.--.--.|__|  |_
 -- |    ___||_   _||  |   _|
@@ -46,7 +46,7 @@ local buildButton = function(icon)
           widget = wibox.container.margin
         },
         shape = beautiful.client_shape_rounded_small,
-        bg = "transparent",
+        bg = 'transparent',
         widget = wibox.container.background
       },
       forced_width = icon_size,
@@ -63,64 +63,64 @@ end
 
 function suspend_command()
   exit_screen_hide()
-  awful.spawn.with_shell(apps.default.lock .. " & systemctl suspend")
+  awful.spawn.with_shell(apps.default.lock .. ' & systemctl suspend')
 end
 function exit_command()
   _G.awesome.quit()
 end
 function lock_command()
   exit_screen_hide()
-  awful.spawn.with_shell("sleep 1 && " .. apps.default.lock)
+  awful.spawn.with_shell('sleep 1 && ' .. apps.default.lock)
 end
 function poweroff_command()
-  awful.spawn.with_shell("poweroff")
+  awful.spawn.with_shell('poweroff')
   awful.keygrabber.stop(_G.exit_screen_grabber)
 end
 function reboot_command()
-  awful.spawn.with_shell("reboot")
+  awful.spawn.with_shell('reboot')
   awful.keygrabber.stop(_G.exit_screen_grabber)
 end
 
-local poweroff = buildButton(icons.power, "Shutdown")
+local poweroff = buildButton(icons.power, 'Shutdown')
 poweroff:connect_signal(
-  "button::release",
+  'button::release',
   function()
     poweroff_command()
   end
 )
 
-local reboot = buildButton(icons.restart, "Restart")
+local reboot = buildButton(icons.restart, 'Restart')
 reboot:connect_signal(
-  "button::release",
+  'button::release',
   function()
     reboot_command()
   end
 )
 
-local suspend = buildButton(icons.sleep, "Sleep")
+local suspend = buildButton(icons.sleep, 'Sleep')
 suspend:connect_signal(
-  "button::release",
+  'button::release',
   function()
     suspend_command()
   end
 )
 
-local exit = buildButton(icons.logout, "Logout")
+local exit = buildButton(icons.logout, 'Logout')
 exit:connect_signal(
-  "button::release",
+  'button::release',
   function()
     exit_command()
   end
 )
 
-local lock = buildButton(icons.lock, "Lock")
+local lock = buildButton(icons.lock, 'Lock')
 lock:connect_signal(
-  "button::release",
+  'button::release',
   function()
     lock_command()
   end
 )
- -- ------------------------------------------------- --
+-- ------------------------------------------------- --
 
 -- Get screen geometry
 --local screen_geometry = awful.screen.focused().geometry
@@ -136,10 +136,10 @@ local exit_screen = function(s)
       visible = false,
       screen = s,
       ontop = true,
-      type = "splash",
+      type = 'splash',
       height = s.geometry.height,
       width = s.geometry.width,
-      bg = colors.alpha(colors.black, "aa"),
+      bg = colors.alpha(colors.black, 'aa'),
       fg = colors.white
     }
   )
@@ -152,10 +152,10 @@ local exit_screen = function(s)
       visible = false,
       screen = s,
       ontop = true,
-      type = "splash",
+      type = 'splash',
       height = s.geometry.height,
       width = s.geometry.width,
-      bg = colors.alpha(colors.black, "aa"),
+      bg = colors.alpha(colors.black, 'aa'),
       fg = colors.white
     }
   )
@@ -189,21 +189,21 @@ local exit_screen = function(s)
     exit_screen_grabber =
       awful.keygrabber.run(
       function(_, key, event)
-        if event == "release" then
+        if event == 'release' then
           return
         end
 
-        if key == "1" then
+        if key == '1' then
           poweroff_command()
-        elseif key == "2" then
+        elseif key == '2' then
           reboot_command()
-        elseif key == "3" then
+        elseif key == '3' then
           suspend_command()
-        elseif key == "4" then
+        elseif key == '4' then
           exit_command()
-        elseif key == "5" then
+        elseif key == '5' then
           lock_command()
-        elseif key == "Escape" or key == "q" or key == "x" then
+        elseif key == 'Escape' or key == 'q' or key == 'x' then
           exit_screen_hide()
         end
       end
@@ -246,11 +246,11 @@ local exit_screen = function(s)
         layout = wibox.layout.fixed.horizontal
       },
       nil,
-      expand = "none",
+      expand = 'none',
       layout = wibox.layout.align.vertical
     },
     nil,
-    expand = "none",
+    expand = 'none',
     layout = wibox.layout.align.horizontal
   }
 
@@ -262,7 +262,7 @@ end
 
 -- ------------------------------------------------- --
 awesome.connect_signal(
-  "module::exit_screen:show",
+  'module::exit_screen:show',
   function()
     for s in screen do
       s.exit_screen.visible = false
@@ -272,7 +272,7 @@ awesome.connect_signal(
 )
 -- ------------------------------------------------- --
 awesome.connect_signal(
-  "module::exit_screen:hide",
+  'module::exit_screen:hide',
   function()
     for s in screen do
       s.exit_screen.visible = false

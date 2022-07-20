@@ -5,7 +5,7 @@
 -- ------------------------------------------------- --
 -- where the magic is happening
 -- ------------------------------------------------- --
-local Get_icon = require('utils.icon_handler')
+local Get_icon = require('utilities.ui.icon_handler')
 -- helpful functions
 local function helpers()
     local function overloaded()

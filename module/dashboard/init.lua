@@ -30,7 +30,7 @@ local function create_boxed_widget(widget_to_be_boxed, width, height)
     local box_container = wibox.container.background()
     box_container.forced_height = height
     box_container.forced_width = width
-    box_container.shape = beautiful.client_shape_rounded_large
+    box_container.shape = beautiful.client_shape_rounded_xl
 
     local boxed_widget =
         wibox.widget(
@@ -48,12 +48,12 @@ local function create_boxed_widget(widget_to_be_boxed, width, height)
                     },
                     widget = box_container
                 },
-                margins = dpi(2),
-                color = beautiful.bg_menu,
+                margins = dpi(1),
+                color = colors.alpha(colors.blacker, '22'),
                 widget = wibox.container.margin
             },
             widget = wibox.container.background,
-            bg = colors.alpha(colors.black, '22'),
+            bg = beautiful.bg_menu,
             shape = beautiful.client_shape_rounded_xl
         }
     )
@@ -108,13 +108,13 @@ awful.screen.connect_for_each_screen(
 
         -- widgets
         local notifs = require('widget.dashboard.notifs')
-        s.uptime_boxed = create_boxed_widget(uptime, dpi(360), dpi(110))
+        s.uptime_boxed = create_boxed_widget(uptime, dpi(240), dpi(110))
         s.stats = require('widget.dashboard.dials')
-        s.battery = create_boxed_widget(battery, dpi(360), dpi(110))
-        s.time_boxed = create_boxed_widget(centered_widget(time), dpi(360), dpi(110))
-        s.date_boxed = create_boxed_widget(centered_widget(date), dpi(360), dpi(110))
+        s.battery = create_boxed_widget(battery, dpi(240), dpi(110))
+        s.time_boxed = create_boxed_widget(centered_widget(time), dpi(480), dpi(110))
+        s.date_boxed = create_boxed_widget(centered_widget(date), dpi(480), dpi(110))
         s.notifs = create_boxed_widget(notifs, dpi(420), dpi(640))
-        s.stats_boxed = create_boxed_widget(s.stats, dpi(420), dpi(480))
+        s.stats_boxed = create_boxed_widget(centered_widget(s.stats), dpi(480), dpi(480))
 
         local dashboard_items =
             wibox.widget(
@@ -125,8 +125,11 @@ awful.screen.connect_for_each_screen(
                         {
                             s.time_boxed,
                             s.date_boxed,
-                            s.battery,
-                            s.uptime_boxed,
+                            {
+                                s.battery,
+                                s.uptime_boxed,
+                                layout = wibox.layout.fixed.horizontal
+                            },
                             layout = wibox.layout.fixed.vertical
                         },
                         layout = wibox.layout.fixed.horizontal,

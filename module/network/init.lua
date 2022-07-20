@@ -9,7 +9,7 @@
 -- ------------------------------------------------- --
 -- popup that lists wifi networks and currently connected network.
 
-local screen_geometry = require("awful").screen.focused().geometry
+local screen_geometry = require('awful').screen.focused().geometry
 
 local width = dpi(410)
 
@@ -19,14 +19,14 @@ local title =
         {
             spacing = dpi(0),
             layout = wibox.layout.align.vertical,
-            expand = "max",
+            expand = 'max',
             format_item(
                 {
-                    halign = "center",
-                    valign = "center",
+                    halign = 'center',
+                    valign = 'center',
                     layout = wibox.layout.fixed.horizontal,
                     spacing = dpi(16),
-                    require("widget.network_center.title-text")
+                    require('widget.network_center.title-text')
                 }
             )
         },
@@ -50,13 +50,13 @@ local status =
     {
         {
             spacing = dpi(0),
-            layout = wibox.layout.flex.vertical,
+            layout = wibox.layout.fixed.vertical,
             format_item(
                 {
                     layout = wibox.layout.fixed.horizontal,
                     spacing = dpi(16),
-                    require("widget.network_center.status-icon"),
-                    require("widget.network_center.status")
+                    require('widget.network_center.status-icon'),
+                    require('widget.network_center.status')
                 }
             )
         },
@@ -85,7 +85,7 @@ local networks_panel =
                 {
                     layout = wibox.layout.fixed.horizontal,
                     spacing = dpi(16),
-                    require("widget.network_center.networks-panel")
+                    require('widget.network_center.networks-panel')
                 }
             )
         },
@@ -111,10 +111,10 @@ networkCenter =
         visible = false,
         ontop = true,
         screen = screen.primary,
-        type = "splash",
+        type = 'splash',
         height = screen_geometry.height - dpi(35),
         width = width,
-        bg = "transparent",
+        bg = 'transparent',
         fg = colors.white
     }
 )
@@ -128,11 +128,11 @@ networkCenter:setup {
 _G.nc_status = false
 
 awesome.connect_signal(
-    "network::center:toggle",
+    'network::center:toggle',
     function()
         if networkCenter.visible == false then
             networkCenter.visible = true
-            awesome.emit_signal("network::networks:refreshPanel")
+            awesome.emit_signal('network::networks:refreshPanel')
         elseif networkCenter.visible == true then
             networkCenter.visible = false
         end
@@ -140,7 +140,7 @@ awesome.connect_signal(
 )
 
 awesome.connect_signal(
-    "network::center:toggle:off",
+    'network::center:toggle:off',
     function()
         networkCenter.visible = false
     end

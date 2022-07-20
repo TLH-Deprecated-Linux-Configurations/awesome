@@ -5,15 +5,15 @@
 -- ------------------------------------------------- --
 local awful = require('awful')
 -- ------------------------------------------------- --
-require(... .. '.notifications')
-require(... .. '.menu')
-require(... .. '.dashboard')
-require(... .. '.freedesktop')
-require(... .. '.hotkeys-popup')
+
 require(... .. '.application_switcher')
-require(... .. '.lockscreen')
-require(... .. '.central-panel')
+require(... .. '.dashboard')
+
+require(... .. '.hotkeys-popup')
+
+require(... .. '.menu')
 require(... .. '.network')
+require(... .. '.notifications')
 
 -- ------------------------------------------------- --
 -- modules requiring "connect_for_each_screen"

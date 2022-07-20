@@ -8,15 +8,13 @@ local elements = {}
 elements.create = function(SSID, BSSID, connectStatus, signal, secure, speed)
   local box = {}
 
-
-
   local signalIcon =
-  wibox.widget {
+    wibox.widget {
     layout = wibox.layout.align.vertical,
-    expand = "none",
+    expand = 'none',
     nil,
     {
-      id = "icon",
+      id = 'icon',
       image = icons.wifi_off,
       resize = true,
       widget = wibox.widget.imagebox
@@ -25,7 +23,7 @@ elements.create = function(SSID, BSSID, connectStatus, signal, secure, speed)
   }
 
   local wifiIcon =
-  wibox.widget {
+    wibox.widget {
     {
       {
         signalIcon,
@@ -41,7 +39,6 @@ elements.create = function(SSID, BSSID, connectStatus, signal, secure, speed)
     widget = clickable_container
   }
   wifiIcon:buttons(
-
     gears.table.join(
       awful.button(
         {},
@@ -49,34 +46,33 @@ elements.create = function(SSID, BSSID, connectStatus, signal, secure, speed)
         nil,
         function()
           awful.spawn.easy_async_with_shell(
-
             "nmcli connection show '" .. SSID .. "' | grep 'connection.autoconnect:' | awk '{print $2}'",
             function(stdout)
-              local knownStatus = stdout:gsub("\n", "")
-              if knownStatus == "yes" then
+              local knownStatus = stdout:gsub('\n', '')
+              if knownStatus == 'yes' then
                 awful.spawn.with_shell(
-                  "nmcli device wifi connect " ..
-                  BSSID ..
-                  " && notify-send 'Connected to internet' '" ..
-                  SSID .. "' || notify-send 'Unable to connect' '" .. SSID .. "'"
+                  'nmcli device wifi connect ' ..
+                    BSSID ..
+                      " && notify-send 'Connected to internet' '" ..
+                        SSID .. "' || notify-send 'Unable to connect' '" .. SSID .. "'"
                 )
               else
-                if secure == "no" then
+                if secure == 'no' then
                   awful.spawn.with_shell(
-                    "nmcli device wifi connect " ..
-                    BSSID ..
-                    " && notify-send 'Connected to internet' '" ..
-                    SSID .. "' || notify-send 'Unable to connect' '" .. SSID .. "'"
+                    'nmcli device wifi connect ' ..
+                      BSSID ..
+                        " && notify-send 'Connected to internet' '" ..
+                          SSID .. "' || notify-send 'Unable to connect' '" .. SSID .. "'"
                   )
                 else
                   awful.spawn.with_shell(
-                    "nmcli device wifi connect " ..
-                    BSSID ..
-                    " password $(rofi -dmenu -p '" ..
-                    SSID ..
-                    "' -theme ~/.config/awesome/config/rofi/centered.rasi -password)" ..
-                    " && notify-send 'Connected to internet' '" ..
-                    SSID .. "' || notify-send 'Unable to connect' '" .. SSID .. "'"
+                    'nmcli device wifi connect ' ..
+                      BSSID ..
+                        " password $(rofi -dmenu -p '" ..
+                          SSID ..
+                            "' -theme ~/.config/awesome/configuration/rofi/centered.rasi -password)" ..
+                              " && notify-send 'Connected to internet' '" ..
+                                SSID .. "' || notify-send 'Unable to connect' '" .. SSID .. "'"
                   )
                 end
               end
@@ -87,14 +83,13 @@ elements.create = function(SSID, BSSID, connectStatus, signal, secure, speed)
     )
   )
   local content =
-  wibox.widget {
+    wibox.widget {
     {
       {
-
         nil,
         {
           text = SSID,
-          font = beautiful.font .. " Bold 14",
+          font = beautiful.font .. ' Bold 14',
           widget = wibox.widget.textbox
         },
         -- {
@@ -121,17 +116,14 @@ elements.create = function(SSID, BSSID, connectStatus, signal, secure, speed)
 
   signalIcon.icon:set_image(icon_table[math.ceil(tonumber(signal) / 25)])
 
-
-
-  if connectStatus == "yes" then
-
-    awesome.emit_signal("network::status:updateIcon", icon_table[math.ceil(tonumber(signal) / 25)])
+  if connectStatus == 'yes' then
+    awesome.emit_signal('network::status:updateIcon', icon_table[math.ceil(tonumber(signal) / 25)])
   else
-    awesome.emit_signal("network::status:updateIcon", nil)
-
+    awesome.emit_signal('network::status:updateIcon', nil)
   end
 
-  box = wibox.widget {
+  box =
+    wibox.widget {
     {
       wifiIcon,
       content,

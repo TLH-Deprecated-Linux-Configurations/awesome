@@ -33,9 +33,7 @@ local title =
         margins = dpi(5),
         widget = wibox.container.margin
     },
-    shape = function(cr, width, height)
-        gears.shape.rounded_rect(cr, width, height, beautiful.groups_radius)
-    end,
+    shape = beautiful.client_shape_rounded_xl,
     bg = beautiful.bg_normal,
     forced_width = width,
     forced_height = dpi(40),
@@ -49,22 +47,14 @@ local devices_panel =
     wibox.widget {
     {
         {
-            spacing = dpi(0),
-            layout = wibox.layout.flex.vertical,
-            format_item(
-                {
-                    layout = wibox.layout.fixed.horizontal,
-                    spacing = dpi(16),
-                    require('widget.bluetooth.devices-panel')
-                }
-            )
+            layout = overflow.vertical(),
+            spacing = dpi(16),
+            require('widget.bluetooth.devices-panel')
         },
         margins = dpi(5),
         widget = wibox.container.margin
     },
-    shape = function(cr, width, height)
-        gears.shape.rounded_rect(cr, width, height, beautiful.groups_radius)
-    end,
+    shape = beautiful.client_shape_rounded_xl,
     bg = beautiful.bg_menu,
     forced_width = width,
     ontop = true,
@@ -94,7 +84,7 @@ bluetoothCenter:setup {
     devices_panel,
     layout = wibox.layout.fixed.vertical
 }
-_G.nc_status = false
+_G.bc_status = false
 
 awesome.connect_signal(
     'bluetooth::center:toggle',
@@ -102,8 +92,10 @@ awesome.connect_signal(
         if bluetoothCenter.visible == false then
             bluetoothCenter.visible = true
             awesome.emit_signal('bluetooth::devices:refreshPanel')
+            _G.bc_status = true
         elseif bluetoothCenter.visible == true then
             bluetoothCenter.visible = false
+            _G.bc_status = false
         end
     end
 )

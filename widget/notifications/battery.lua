@@ -27,7 +27,7 @@ awesome.connect_signal(
                 {
                     title = 'Battery Status',
                     text = 'Running low at ' .. value .. '%',
-                    image = gfs.get_configuration_dir() .. 'icons/svg/battery.svg'
+                    image = gfs.get_configuration_dir() .. 'themes/icons/svg/battery-0.svg'
                 }
             )
             display_low = false
@@ -39,7 +39,7 @@ awesome.connect_signal(
                 {
                     title = 'Battery Status',
                     text = 'Fully charged!',
-                    image = gfs.get_configuration_dir() .. 'icons/svg/battery.svg'
+                    image = gfs.get_configuration_dir() .. 'themes/icons/svg/battery-fully-charged.svg'
                 }
             )
             display_high = false
@@ -51,7 +51,7 @@ awesome.connect_signal(
                 {
                     title = 'Battery Status',
                     text = 'Charging',
-                    image = gfs.get_configuration_dir() .. 'icons/svg/battery_charging.svg'
+                    image = gfs.get_configuration_dir() .. 'icons/svg/battery-charging-50.svg'
                 }
             )
             display_charge = false

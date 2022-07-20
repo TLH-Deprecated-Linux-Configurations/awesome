@@ -76,7 +76,6 @@ theme.bg_focus = 'linear:0,0:0,21:0,' .. colors.alpha(colors.colorK, 'cc') .. ':
 
 theme.bg_urgent = 'linear:0,0:0,21:0,' .. colors.alpha(colors.colorM, 'cc') .. ':1,' .. colors.alpha(colors.black, 'cc')
 theme.bg_menu = 'linear:0,0:0,21:0,' .. colors.alpha(colors.colorK, 'cc') .. ':1,' .. colors.alpha(colors.black, 'cc')
-
 theme.bg_button =
     'linear:0,0:0,32:0,' .. colors.alpha(colors.colorN, 'cc') .. ':1,' .. colors.alpha(colors.colorE, 'cc')
 -- ------------------------------------------------- --
@@ -84,10 +83,10 @@ theme.bg_button =
 theme.hotkeys_description_font = theme.font .. ' Bold 10'
 theme.hotkeys_font = theme.font .. ' Bold 10'
 -- ------------------------------------------------- --
--- Transparent
+-- ------------------ Transparent ------------------ --
 theme.transparent = colors.alpha(colors.black, '00')
 -- ------------------------------------------------- --
--- Borders
+-- -------------------- Borders -------------------- --
 theme.border_focus = colors.colorB
 theme.border_normal = colors.colorM
 theme.border_marked = colors.colorX
