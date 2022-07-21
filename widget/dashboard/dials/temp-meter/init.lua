@@ -107,7 +107,7 @@ local temp_meter =
         margins = dpi(5)
     },
     widget = wibox.container.background,
-    bg = colors.alpha(colors.colorA, '44'),
+    bg = colors.alpha(colors.colorA, '88'),
     shape = beautiful.client_shape_rounded_xl
 }
 -- ------------------------------------------------- --

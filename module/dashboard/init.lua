@@ -53,7 +53,7 @@ local function create_boxed_widget(widget_to_be_boxed, width, height)
                 widget = wibox.container.margin
             },
             widget = wibox.container.background,
-            bg = beautiful.bg_menu,
+            bg = beautiful.bg_normal,
             shape = beautiful.client_shape_rounded_xl
         }
     )
@@ -97,7 +97,7 @@ local profile = {
         widget = wibox.container.margin
     },
     widget = wibox.container.background,
-    bg = beautiful.bg_focus,
+    bg = beautiful.bg_normal,
     shape = beautiful.client_shape_rounded_large
 }
 
@@ -163,13 +163,13 @@ awful.screen.connect_for_each_screen(
                         spacing_widget = wibox.widget.separator(
                             {
                                 span_ratio = 0.50,
-                                color = colors.alpha(colors.color1, '88')
+                                color = colors.alpha(colors.color1, 'aa')
                             }
                         ),
                         dashboard_items
                         -- notifs
                     },
-                    bg = beautiful.bg_menu,
+                    bg = beautiful.bg_normal,
                     shape = beautiful.client_shape_rounded_xl,
                     widget = wibox.container.background
                 }
