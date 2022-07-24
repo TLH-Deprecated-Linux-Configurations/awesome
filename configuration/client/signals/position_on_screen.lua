@@ -20,13 +20,12 @@ local _M = function(c)
         )
     else
         awful.client.setslave(c)
-        -- awful.placement.centered(c, {parent = c.transient_for})
+
         awful.placement.no_offscreen(
             c,
             {
                 honor_workarea = true,
-                honor_padding = true,
-                parent = c.transient_for
+                honor_padding = true
             }
         )
     end

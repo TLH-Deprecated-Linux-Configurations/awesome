@@ -15,6 +15,7 @@ client.connect_signal(
     'manage',
     function(c)
         require('configuration.client.signals.position_on_screen')(c)
+        require('configuration.client.signals.floating_properties')(c)
     end
 )
 -- ------------------------------------------------- --
@@ -36,13 +37,6 @@ client.connect_signal(
 )
 -- ------------------------------------------------- --
 client.connect_signal(
-    'swapped',
-    function(c)
-        require('configuration.client.signals.center_mouse_on_client')(c)
-    end
-)
--- ------------------------------------------------- --
-client.connect_signal(
     'unfocus',
     function(c)
         c.border_color = beautiful.border_normal
@@ -50,11 +44,12 @@ client.connect_signal(
 )
 -- ------------------------------------------------- --
 client.connect_signal(
-    'property::minimized',
+    'swapped',
     function(c)
         require('configuration.client.signals.center_mouse_on_client')(c)
     end
 )
+
 -- ------------------------------------------------- --
 client.connect_signal(
     'unmanage',
@@ -62,8 +57,16 @@ client.connect_signal(
         require('configuration.client.signals.center_mouse_on_client')(c)
     end
 )
-------------------------------------------------- --
--- --------------------- Shape --------------------- --
+-- ------------------------------------------------- --
+-- ------------------- Properties ------------------ --
+-- ------------------------------------------------- --
+
+client.connect_signal(
+    'property::minimized',
+    function(c)
+        require('configuration.client.signals.center_mouse_on_client')(c)
+    end
+)
 -- ------------------------------------------------- --
 -- Manipulate client shape on floating
 client.connect_signal(
@@ -89,25 +92,11 @@ client.connect_signal(
     end
 )
 -- ------------------------------------------------- --
--- -------------------- Pointer -------------------- --
--- Set mouse resize mode (live or after)
-awful.mouse.resize.set_mode('live')
--- ------------------------------------------------- --
--- -------------------- Geometry ------------------- --
--- Restore geometry for floating clients
--- (for example after swapping from tiling mode to floating mode)
-
+-- geometry
 tag.connect_signal(
     'property::layout',
     function(t)
         require('configuration.client.signals.floating_geometry')(t)
-    end
-)
-
-client.connect_signal(
-    'manage',
-    function(c)
-        require('configuration.client.signals.floating_properties')(c)
     end
 )
 
@@ -117,4 +106,8 @@ client.connect_signal(
         require('configuration.client.signals.floating_properties')(c)
     end
 )
+
 -- ------------------------------------------------- --
+-- -------------------- Pointer -------------------- --
+-- Set mouse resize mode (live or after)
+awful.mouse.resize.set_mode('live')

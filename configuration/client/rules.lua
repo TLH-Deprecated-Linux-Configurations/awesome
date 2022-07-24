@@ -42,7 +42,6 @@ ruled.client.connect_signal(
                         return awful.screen.focused(c)
                     end
                 end,
-                placement = awful.placement.no_offscreen,
                 shape = beautiful.client_shape_rounded_lg
             }
         }
@@ -84,10 +83,7 @@ ruled.client.connect_signal(
             properties = {
                 titlebars_enabled = true,
                 floating = true,
-                above = true,
-                screen = function(c)
-                    return c.screen or awful.screen.focused(c)
-                end
+                above = true
             }
         }
         -- ------------------------------------------------- --
@@ -179,27 +175,27 @@ ruled.client.connect_signal(
         }
         -- ------------------------------------------------- --
         -- --------------- Centered Placement -------------- --
-        ruled.client.append_rule {
-            id = 'center_placement',
-            rule_any = {
-                type = {'dialog', 'modal', 'utility', 'splash'},
-                class = {
-                    'Steam',
-                    'discord',
-                    'markdown_input',
-                    'scratchpad',
-                    'feh',
-                    'Pqiv',
-                    'Sxiv',
-                    'imv'
-                },
-                instance = {'markdown_input', 'scratchpad'},
-                role = {'GtkFileChooserDialog', 'conversation'}
-            },
-            properties = {
-                placement = awful.placement.center + awful.placement.no_offscreen
-            }
-        }
+        -- ruled.client.append_rule {
+        --     id = 'center_placement',
+        --     rule_any = {
+        --         type = {'dialog', 'modal', 'utility', 'splash'},
+        --         class = {
+        --             'Steam',
+        --             'discord',
+        --             'markdown_input',
+        --             'scratchpad',
+        --             'feh',
+        --             'Pqiv',
+        --             'Sxiv',
+        --             'imv'
+        --         },
+        --         instance = {'markdown_input', 'scratchpad'},
+        --         role = {'GtkFileChooserDialog', 'conversation'}
+        --     },
+        --     properties = {
+        --         placement = awful.placement.center + awful.placement.no_offscreen
+        --     }
+        -- }
         -- ------------------------------------------------- --
         -- -------------------- Floating ------------------- --
         --
@@ -226,8 +222,7 @@ ruled.client.connect_signal(
                 titlebars_enabled = true,
                 ontop = true,
                 floating = true,
-                raise = true,
-                placement = awful.placement.center + awful.placement.no_offscreen
+                raise = true
             }
         }
         -- ------------------------------------------------- --
@@ -247,8 +242,7 @@ ruled.client.connect_signal(
                 titlebars_enabled = true,
                 ontop = false,
                 floating = true,
-                raise = true,
-                placement = awful.placement.center + awful.placement.no_offscreen
+                raise = true
             }
         }
     end

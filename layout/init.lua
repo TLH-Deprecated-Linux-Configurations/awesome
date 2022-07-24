@@ -60,9 +60,7 @@ tag.connect_signal(
 awful.screen.connect_for_each_screen(
     function(s)
         -- Each screen has its own tag table, which I have styled using
-        -- the name of the window manager. Still not as lame as using sway.
-        -- Only using 7 tags per screen because the extra "WM" makes the
-        -- taglist too long for the wibar
+        -- the name of the window manager.
         --
         local tag_names = {'A', 'W', 'E', 'S', 'O', 'M', 'E', 'W', 'M'}
         for idx, name in ipairs(tag_names) do
@@ -95,6 +93,7 @@ awful.screen.connect_for_each_screen(
     end
 )
 -- ------------------------------------------------- --
+-- ------------------ useless gaps ----------------- --
 -- gaps determined by layout type
 --
 tag.connect_signal(
@@ -102,9 +101,9 @@ tag.connect_signal(
     function(t)
         local currentLayout = awful.tag.getproperty(t, 'layout')
         if (currentLayout == awful.layout.suit.max) then
-            t.gap = dpi(2)
+            t.gap = dpi(3)
         else
-            t.gap = dpi(4)
+            t.gap = dpi(6)
         end
         t.master_count = 1
     end
