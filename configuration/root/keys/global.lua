@@ -14,16 +14,16 @@
 local awful = require('awful')
 local naughty = require('naughty')
 
-local modkey = require('configuration.keys.mod').modKey
-local altkey = require('configuration.keys.mod').altKey
+local modkey = require('configuration.root.keys.mod').modKey
+local altkey = require('configuration.root.keys.mod').altKey
 
 local apps = require('configuration.root.apps')
 _G.switcher = require('module.application_switcher')
 require('awful.autofocus')
-local focusmap = require('configuration.keys.maps.focus')
-local applicationsmap = require('configuration.keys.maps.applications')
-local awesomemap = require('configuration.keys.maps.awesome')
-local layoutmap = require('configuration.keys.maps.layout')
+local focusmap = require('configuration.root.keys.maps.focus')
+local applicationsmap = require('configuration.root.keys.maps.applications')
+local awesomemap = require('configuration.root.keys.maps.awesome')
+local layoutmap = require('configuration.root.keys.maps.layout')
 local modalbind = require('utilities.client.modalbind')
 
 modalbind.init()

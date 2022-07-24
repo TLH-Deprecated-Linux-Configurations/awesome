@@ -30,7 +30,7 @@ require('settings.global_variables')
 require('themes')
 -- ------------------------------------------------- --
 -- ---------------- Root Key Mappings --------------- --
-require('configuration.keys')
+require('configuration.root.keys')
 -- ------------------------------------------------- --
 -- --------------- Startup Functions --------------- --
 require('startup')

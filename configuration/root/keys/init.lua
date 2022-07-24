@@ -7,7 +7,7 @@
 -- ------------------------------------------------- --
 -- ------------------------------------------------- --
 return {
-    mod = require('configuration.keys.mod'),
-    global = require('configuration.keys.global'),
-    _G.root.keys(gears.table.join(_G.root.keys(), require('configuration.keys.global')))
+    mod = require('configuration.root.keys.mod'),
+    global = require('configuration.root.keys.global'),
+    _G.root.keys(gears.table.join(_G.root.keys(), require('configuration.root.keys.global')))
 }

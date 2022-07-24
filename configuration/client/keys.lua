@@ -16,11 +16,11 @@ local snap_edge = require('utilities.client.snap_edge')
 -- _G.client.focus = c
 -- ------------------------------------------------- --
 -- Call in the maps for the client keys
-local clientmap = require('configuration.keys.maps.client')
-local snapmap = require('configuration.keys.maps.snap')
-local resizemap = require('configuration.keys.maps.resize-increase')
-local resizemap2 = require('configuration.keys.maps.resize-decrease')
-local movemap = require('configuration.keys.maps.move')
+local clientmap = require('configuration.root.keys.maps.client')
+local snapmap = require('configuration.root.keys.maps.snap')
+local resizemap = require('configuration.root.keys.maps.resize-increase')
+local resizemap2 = require('configuration.root.keys.maps.resize-decrease')
+local movemap = require('configuration.root.keys.maps.move')
 -- ------------------------------------------------- --
 
 -- Now we call modalbinding from utils to make the above useful

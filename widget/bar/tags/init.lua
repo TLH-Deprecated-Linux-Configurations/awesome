@@ -10,7 +10,7 @@
 -- ------------------------------------------------- --
 
 local dpi = require('beautiful').xresources.apply_dpi
-local modkey = require('configuration.keys.mod').modKey
+local modkey = require('configuration.root.keys.mod').modKey
 -- ------------------------------------------------- --
 -- Setup for tag preview
 local tag_preview_box = require('widget.bar.tags.tag-preview')

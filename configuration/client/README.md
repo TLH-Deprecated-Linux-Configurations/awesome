@@ -11,3 +11,4 @@ Because the most major functionality of the window manager by default is... the 
 | keys           | Assigns keybindings for client windows                                                                           |
 | rules          | rules applied to new client windows based on freedesktop characteristics (usually class), crossover with signals |
 | signals        | event callbacks that are set off by various signals that fire when a client window is opened, closed, etc.       |
+

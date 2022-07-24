@@ -4,7 +4,7 @@
 -- |______||_____|__|__|__| |__||___  |
 --                              |_____|
 return {
-  keys = require('configuration.keys'),
+  keys = require('configuration.root.keys'),
   apps = require('configuration.root.apps'),
   require('settings.global_variables'),
   require('configuration.root')
