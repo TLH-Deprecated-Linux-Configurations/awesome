@@ -80,5 +80,17 @@
     "**/.DS_Store": false,
     "**/Thumbs.db": false
   },
-  "explorerExclude.backup": null
+  "explorerExclude.backup": null,
+  "Lua.workspace.checkThirdParty": false,
+  "cSpell.words": [
+    "Bhairava",
+    "Chhinamasta",
+    "configruations",
+    "Dhumavati",
+    "dotfiles",
+    "Dotfiles",
+    "elenapan's",
+    "manilarome's",
+    "nvim"
+  ]
 }

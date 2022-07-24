@@ -16,47 +16,45 @@ local capi = {
 local resizemap = {
     -- ------------------------------------------------- --
     {
-        "Up",
-        function(c)
+        'Up',
+        function()
             if capi.client.focus.height > 10 then
                 capi.client.focus:relative_move(0, 0, 0, dpi(-10))
             end
         end,
-        "Decrease floating size by 10"
+        'Decrease floating size by 10'
     },
     -- ------------------------------------------------- --
     {
-        "Down",
-        function(c)
-            capi.client.focus:relative_move(0, 0, 0, dpi(-10))
+        'Down',
+        function()
             if capi.client.focus.height > 10 then
-                capi.client.focus:relative_move(0, dpi(10), 0, 0)
+                capi.client.focus:relative_move(0, dpi(-10), 0, 0)
             end
         end,
-        "Decrease Size Vertically by 10"
+        'Decrease Size Vertically by 10'
     },
     -- ------------------------------------------------- --
     {
-        "Left",
-        function(c)
+        'Left',
+        function()
             if capi.client.focus.width > 10 then
                 capi.client.focus:relative_move(0, 0, dpi(-10), 0)
             end
         end,
-        "Decrease Size Horizontally by 10"
+        'Decrease Size Horizontally by 10'
     },
     -- ------------------------------------------------- --
     {
-        "Right",
-        function(c)
-            capi.client.focus:relative_move(0, 0, dpi(-10), 0)
+        'Right',
+        function()
             if capi.client.focus.width > 10 then
-                capi.client.focus:relative_move(dpi(10), 0, 0, 0)
+                capi.client.focus:relative_move(dpi(-10), 0, 0, 0)
             end
         end,
-        "Decrease Size Horizontally 10"
+        'Decrease Size Horizontally 10'
     },
-    {"separator", " "}
+    {'separator', ' '}
 }
 
 return resizemap

@@ -8,6 +8,9 @@
 -- |      <|  -__|__ --||  ||-- __|  -__|
 -- |___|__||_____|_____||__||_____|_____|
 -- ------------------------------------------------- --
+-- this only applies when using the mouse to resize. If you
+-- prefer using keys for this,they are also available
+
 -- https://github.com/JavaCafe01/dotfiles
 local capi = {
     client = client,
@@ -27,7 +30,6 @@ local function mouse_resize_handler(m, c)
     local idx_above, idx_below
     local wfact_above, wfact_below
     local jump_to = {x = x, y = y}
-    local move_mwfact = false
     -- ------------------------------------------------- --
     do
         local g = m(c:geometry())

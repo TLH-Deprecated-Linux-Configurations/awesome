@@ -7,7 +7,7 @@
 
 return {
     theme = 'vice',
-    background = '1.png',
+    background = '4.png',
     default_programs = {
         terminal = 'kitty',
         terminal_editor = 'code-oss',
