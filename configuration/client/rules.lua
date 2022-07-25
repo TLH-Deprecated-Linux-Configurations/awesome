@@ -83,7 +83,11 @@ ruled.client.connect_signal(
             properties = {
                 titlebars_enabled = true,
                 floating = true,
-                above = true
+                above = true,
+                size_hints_honor = false,
+                honor_padding = true,
+                honor_workarea = true,
+                placement = awful.placement.center + awful.placement.no_offscreen
             }
         }
         -- ------------------------------------------------- --
@@ -148,7 +152,6 @@ ruled.client.connect_signal(
                 }
             },
             properties = {
-                size_hints_honor = true,
                 titlebars_enabled = true
             }
         }
@@ -175,27 +178,30 @@ ruled.client.connect_signal(
         }
         -- ------------------------------------------------- --
         -- --------------- Centered Placement -------------- --
-        -- ruled.client.append_rule {
-        --     id = 'center_placement',
-        --     rule_any = {
-        --         type = {'dialog', 'modal', 'utility', 'splash'},
-        --         class = {
-        --             'Steam',
-        --             'discord',
-        --             'markdown_input',
-        --             'scratchpad',
-        --             'feh',
-        --             'Pqiv',
-        --             'Sxiv',
-        --             'imv'
-        --         },
-        --         instance = {'markdown_input', 'scratchpad'},
-        --         role = {'GtkFileChooserDialog', 'conversation'}
-        --     },
-        --     properties = {
-        --         placement = awful.placement.center + awful.placement.no_offscreen
-        --     }
-        -- }
+        ruled.client.append_rule {
+            id = 'center_placement',
+            rule_any = {
+                type = {'dialog', 'modal', 'utility', 'splash'},
+                class = {
+                    'Steam',
+                    'discord',
+                    'markdown_input',
+                    'scratchpad',
+                    'feh',
+                    'Pqiv',
+                    'Sxiv',
+                    'imv'
+                },
+                instance = {'markdown_input', 'scratchpad'},
+                role = {'GtkFileChooserDialog', 'conversation'}
+            },
+            properties = {
+                size_hints_honor = false,
+                honor_padding = true,
+                honor_workarea = true,
+                placement = awful.placement.center + awful.placement.no_offscreen
+            }
+        }
         -- ------------------------------------------------- --
         -- -------------------- Floating ------------------- --
         --

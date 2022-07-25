@@ -1,8 +1,8 @@
 <h1>Awesome Modular AwesomeWM Configurations </h1>
 
-1. [Rules](#Rules)
-2. [Configurations](#Configurations)
-3. [Modules, Widgets & More](#Modules)
+- [Configurations](#configurations)
+- [Modules, Widgets & More](#modules-widgets--more)
+- [That's All Folks!](#thats-all-folks)
 
 ---
 
@@ -382,4 +382,14 @@ So here it is:
 
 - [xplugd](https://github.com/troglobit/xplugd)
 
+
+# That's All Folks! 
+
+I hope you found something useful on this list. 
+
+Feel free to add pull requests on the repository to add in other repos I might have missed and they will be merged, so long as they conform to the rules of course.
+
+If you have other questions, comments, whatever's clever, feel free to open up an issue on this repo and say your piece.  
+
 ![stalin-get-out-of-here](https://user-images.githubusercontent.com/32242061/173095742-dc7c22a0-1f4a-4b69-926c-82f9f07aabe5.gif)
+
