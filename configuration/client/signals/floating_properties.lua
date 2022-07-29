@@ -11,7 +11,7 @@
 -- ------------------------------------------------- --
 local _M = function(c)
     if awful.layout.get(mouse.screen) == awful.layout.suit.floating or c.floating then
-        awful.client.property.set(c, 'floating_geometry', c:geometry())
+        awful.client.property.set(c, "floating_geometry", c:geometry())
     end
     if c.floating then
         c.shape = beautiful.client_shape_rounded

@@ -3,22 +3,14 @@
 -- |  --  |  _  |__ --||     ||  _  |  _  |  _  |   _|  _  |
 -- |_____/|___._|_____||__|__||_____|_____|___._|__| |_____|
 -- ------------------------------------------------- --
-
--- Aesthetic Dashboard
--------------------------
-
+--
 local function centered_widget(widget)
     local w =
         wibox.widget(
         {
             nil,
-            {
-                nil,
-                widget,
-                expand = 'inside',
-                layout = wibox.layout.align.vertical
-            },
-            expand = 'outside',
+            {nil, widget, expand = "inside", layout = wibox.layout.align.vertical},
+            expand = "outside",
             layout = wibox.layout.align.horizontal
         }
     )
@@ -49,7 +41,7 @@ local function create_boxed_widget(widget_to_be_boxed, width, height)
                     widget = box_container
                 },
                 margins = dpi(1),
-                color = colors.alpha(colors.blacker, '22'),
+                color = colors.alpha(colors.blacker, "22"),
                 widget = wibox.container.margin
             },
             widget = wibox.container.background,
@@ -60,16 +52,16 @@ local function create_boxed_widget(widget_to_be_boxed, width, height)
 
     return boxed_widget
 end
-local battery = require('widget.dashboard.battery')
-local time = require('widget.dashboard.time')
-local date = require('widget.dashboard.date')
-local uptime = require('widget.dashboard.uptime')
+local battery = require("widget.dashboard.battery")
+local time = require("widget.dashboard.time")
+local date = require("widget.dashboard.date")
+local uptime = require("widget.dashboard.uptime")
 -- pfp
 local profile_pic_img = {
     {
         image = icons.logo,
-        halign = 'center',
-        valign = 'center',
+        halign = "center",
+        valign = "center",
         widget = wibox.widget.imagebox
     },
     widget = wibox.container.background,
@@ -89,10 +81,7 @@ local profile_pic_container =
 
 local profile = {
     {
-        {
-            profile_pic_img,
-            widget = profile_pic_container
-        },
+        {profile_pic_img, widget = profile_pic_container},
         margins = dpi(1),
         widget = wibox.container.margin
     },
@@ -107,9 +96,9 @@ awful.screen.connect_for_each_screen(
         local dashboard_height = dpi(720)
 
         -- widgets
-        local notifs = require('widget.dashboard.notifs')
+        -- local notifs = require('widget.dashboard.notifs')
         s.uptime_boxed = create_boxed_widget(uptime, dpi(240), dpi(110))
-        s.stats = require('widget.dashboard.dials')
+        s.stats = require("widget.dashboard.dials")
         s.battery = create_boxed_widget(battery, dpi(240), dpi(110))
         s.time_boxed = create_boxed_widget(centered_widget(time), dpi(480), dpi(110))
         s.date_boxed = create_boxed_widget(centered_widget(date), dpi(480), dpi(110))
@@ -137,7 +126,7 @@ awful.screen.connect_for_each_screen(
                     },
                     layout = wibox.layout.fixed.vertical
                 },
-                expand = 'none',
+                expand = "none",
                 layout = wibox.layout.align.horizontal
             }
         )
@@ -146,11 +135,11 @@ awful.screen.connect_for_each_screen(
         dashboard =
             awful.popup(
             {
-                type = 'dock',
+                type = "dock",
                 screen = s,
-                maximum_height = dashboard_height,
-                minimum_width = dashboard_width,
-                maximum_width = dashboard_width,
+                forced_height = dashboard_height,
+                forced_width = dashboard_width,
+                forced_width = dashboard_width,
                 -- center it on the screen assuming 1920x1080 resolution
                 x = s.geometry.x + s.geometry.width / 2 - dpi(400),
                 bg = beautiful.transparent,
@@ -163,7 +152,7 @@ awful.screen.connect_for_each_screen(
                         spacing_widget = wibox.widget.separator(
                             {
                                 span_ratio = 0.50,
-                                color = colors.alpha(colors.color1, 'aa')
+                                color = colors.alpha(colors.color1, "aa")
                             }
                         ),
                         dashboard_items
@@ -182,7 +171,7 @@ awful.screen.connect_for_each_screen(
             gears.timer(
             {
                 single_shot = true,
-                timeout = anim_length + 0.1, --so the panel doesnt disappear in the last bit
+                timeout = anim_length + 0.1, -- so the panel doesnt disappear in the last bit
                 callback = function()
                     dashboard.visible = not dashboard.opened
                 end
@@ -208,13 +197,13 @@ awful.screen.connect_for_each_screen(
         local dashboard_show = function()
             dashboard.visible = true
             slide.target = dpi(60)
-            dashboard:emit_signal('opened')
+            dashboard:emit_signal("opened")
         end
 
         local dashboard_hide = function()
             slide_end:again()
             slide.target = -dashboard.height
-            dashboard:emit_signal('closed')
+            dashboard:emit_signal("closed")
         end
 
         function dashboard:toggle()

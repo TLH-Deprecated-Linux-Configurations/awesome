@@ -2,7 +2,6 @@
 -- |   |   |     \|     \
 -- |       |  --  |  --  |
 -- |___|___|_____/|_____/
-
 --  _______         __
 -- |   |   |.-----.|  |_.-----.----.
 -- |       ||  -__||   _|  -__|   _|
@@ -15,14 +14,13 @@ local active_color = {
     stops = {{0, colors.color25}, {0.75, colors.color14}}
 }
 -- ------------------------------------------------- --
-local image =
-    wibox.widget {
+local image = wibox.widget {
     {
         widget = wibox.widget.imagebox,
         image = icons.harddisk,
         valign = 'center',
-        forced_height = dpi(24),
-        forced_width = dpi(24),
+        forced_height = dpi(48),
+        forced_width = dpi(48),
         align = 'center'
     },
     widget = wibox.container.background,
@@ -32,8 +30,7 @@ local image =
 }
 -- ------------------------------------------------- --
 
-local widget_text =
-    wibox.widget {
+local widget_text = wibox.widget {
     font = beautiful.font .. ' 18',
     text = 'HDD',
     valign = 'center',
@@ -41,8 +38,7 @@ local widget_text =
     widget = wibox.widget.textbox
 }
 -- ------------------------------------------------- --
-local disk_bar =
-    wibox.widget {
+local disk_bar = wibox.widget {
     max_value = 100,
     bg = colors.black,
     color = active_color,
@@ -53,31 +49,22 @@ local disk_bar =
     widget = wibox.container.arcchart
 }
 -- ------------------------------------------------- --
-awesome.connect_signal(
-    'signal::disk',
-    function(used, available)
-        local total = used + available
-        local value = math.floor(available / total * 100)
-        disk_bar.value = value
+awesome.connect_signal('signal::disk', function(used, available)
+    local total = used + available
+    local value = math.floor(available / total * 100)
+    disk_bar.value = value
 
-        widget_text:set_text(value .. '%')
-    end
-)
+    widget_text:set_text(value .. '%')
+end)
 
-local hdd_text =
-    wibox.widget {
-    {
-        layout = wibox.layout.fixed.vertical,
-        image,
-        widget_text
-    },
+local hdd_text = wibox.widget {
+    {layout = wibox.layout.fixed.vertical, image, widget_text},
     widget = wibox.container.place,
     align = 'center',
     valign = 'center',
     layout = wibox.layout.fixed.vertical
 }
-local hdd_meter =
-    wibox.widget {
+local hdd_meter = wibox.widget {
     {
         {
             {
@@ -108,7 +95,7 @@ local hdd_meter =
         margins = dpi(5)
     },
     widget = wibox.container.background,
-    bg = colors.alpha(colors.colorA, '88'),
+    bg = colors.alpha(colors.colorD, '33'),
     shape = beautiful.client_shape_rounded_xl
 }
 

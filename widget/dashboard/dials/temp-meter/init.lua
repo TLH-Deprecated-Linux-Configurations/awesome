@@ -15,8 +15,7 @@ local active_color = {
     stops = {{0, colors.color6}, {0.75, colors.color15}}
 }
 -- ------------------------------------------------- --
-local image =
-    wibox.widget {
+local image = wibox.widget {
     {
         widget = wibox.widget.imagebox,
         image = icons.temp,
@@ -31,8 +30,7 @@ local image =
     align = 'center'
 }
 -- ------------------------------------------------- --
-local widget_text =
-    wibox.widget {
+local widget_text = wibox.widget {
     font = beautiful.font .. '  18',
     text = '',
     valign = 'center',
@@ -40,8 +38,7 @@ local widget_text =
     widget = wibox.widget.textbox
 }
 -- ------------------------------------------------- --
-local temp_bar =
-    wibox.widget {
+local temp_bar = wibox.widget {
     max_value = 100,
     bg = colors.black,
     thickness = dpi(12),
@@ -51,32 +48,23 @@ local temp_bar =
     widget = wibox.container.arcchart
 }
 -- ------------------------------------------------- --
-awesome.connect_signal(
-    'signal::temp',
-    function(temp)
-        if temp ~= nil then
-            temp_bar.value = temp
-            widget_text:set_text(math.floor(temp) .. '°')
-        end
+awesome.connect_signal('signal::temp', function(temp)
+    if temp ~= nil then
+        temp_bar.value = temp
+        widget_text:set_text(math.floor(temp) .. '°')
     end
-)
+end)
 local max_temp = 80
 -- ------------------------------------------------- --
-local temp_text =
-    wibox.widget {
-    {
-        layout = wibox.layout.fixed.vertical,
-        image,
-        widget_text
-    },
+local temp_text = wibox.widget {
+    {layout = wibox.layout.fixed.vertical, image, widget_text},
     widget = wibox.container.place,
     align = 'center',
     valign = 'center',
     layout = wibox.layout.fixed.vertical
 }
 -- ------------------------------------------------- --
-local temp_meter =
-    wibox.widget {
+local temp_meter = wibox.widget {
     {
         {
             {
@@ -107,7 +95,7 @@ local temp_meter =
         margins = dpi(5)
     },
     widget = wibox.container.background,
-    bg = colors.alpha(colors.colorA, '88'),
+    bg = colors.alpha(colors.colorD, '33'),
     shape = beautiful.client_shape_rounded_xl
 }
 -- ------------------------------------------------- --

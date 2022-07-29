@@ -11,24 +11,21 @@ local screen_geometry = require('awful').screen.focused().geometry
 
 local width = dpi(410)
 
-local title =
-    wibox.widget {
+local title = wibox.widget {
     {
         {
             spacing = dpi(0),
             layout = wibox.layout.align.vertical,
             expand = 'max',
-            format_item(
-                {
-                    halign = 'center',
-                    valign = 'center',
-                    layout = wibox.layout.fixed.horizontal,
-                    spacing = dpi(16),
-                    require('widget.bluetooth.power-button'),
-                    require('widget.bluetooth.title-text'),
-                    require('widget.bluetooth.search-button')
-                }
-            )
+            format_item({
+                halign = 'center',
+                valign = 'center',
+                layout = wibox.layout.fixed.horizontal,
+                spacing = dpi(16),
+                require('widget.bluetooth.power-button'),
+                require('widget.bluetooth.title-text'),
+                require('widget.bluetooth.search-button')
+            })
         },
         margins = dpi(5),
         widget = wibox.container.margin
@@ -43,8 +40,7 @@ local title =
     widget = wibox.container.background
 }
 
-local devices_panel =
-    wibox.widget {
+local devices_panel = wibox.widget {
     {
         {
             layout = overflow.vertical(),
@@ -63,22 +59,19 @@ local devices_panel =
     widget = wibox.container.background
 }
 
-bluetoothCenter =
-    wibox(
-    {
-        x = screen_geometry.width - width - dpi(8),
-        y = screen_geometry.y + dpi(35),
-        visible = false,
-        ontop = true,
-        screen = screen.primary,
-        type = 'splash',
-        height = screen_geometry.height - dpi(35),
-        width = width,
-        bg = 'transparent',
-        fg = colors.white
-    }
-)
-bluetoothCenter:setup {
+bluetoothCenter = wibox({
+    x = screen_geometry.width - width - dpi(25),
+    y = screen_geometry.y + dpi(35),
+    visible = false,
+    ontop = true,
+    screen = screen.primary,
+    type = "splash",
+    height = screen_geometry.height - dpi(35),
+    width = width,
+    bg = colors.alpha(colors.colorD, "88"),
+    fg = colors.white
+})
+bluetoothCenter:setup{
     spacing = dpi(15),
     title,
     devices_panel,
@@ -86,24 +79,19 @@ bluetoothCenter:setup {
 }
 _G.bc_status = false
 
-awesome.connect_signal(
-    'bluetooth::center:toggle',
-    function()
-        if bluetoothCenter.visible == false then
-            bluetoothCenter.visible = true
-            awesome.emit_signal('bluetooth::devices:refreshPanel')
-            _G.bc_status = true
-        elseif bluetoothCenter.visible == true then
-            bluetoothCenter.visible = false
-            _G.bc_status = false
-        end
-    end
-)
+awesome.connect_signal('bluetooth::center:toggle', function()
+    if bluetoothCenter.visible == true then
 
-awesome.connect_signal(
-    'bluetooth::center:toggle:off',
-    function()
         bluetoothCenter.visible = false
+        _G.bc_status = false
+    else
+        bluetoothCenter.visible = true
+
+        awesome.emit_signal('bluetooth::devices:refreshPanel')
+        _G.bc_status = true
     end
-)
+end)
+
+awesome.connect_signal('bluetooth::center:toggle:off',
+                       function() bluetoothCenter.visible = false end)
 return bluetoothCenter

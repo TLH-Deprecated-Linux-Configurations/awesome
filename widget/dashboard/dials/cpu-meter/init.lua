@@ -2,13 +2,11 @@
 -- |      |   __ \   |   |
 -- |   ---|    __/   |   |
 -- |______|___|  |_______|
-
 --  _______         __
 -- |   |   |.-----.|  |_.-----.----.
 -- |       ||  -__||   _|  -__|   _|
 -- |__|_|__||_____||____|_____|__|
 -- ------------------------------------------------- --
-
 local active_color = {
     type = 'linear',
     from = {0, 0},
@@ -16,8 +14,7 @@ local active_color = {
     stops = {{0, colors.color3}, {0.75, colors.color15}}
 }
 -- ------------------------------------------------- --
-local image =
-    wibox.widget {
+local image = wibox.widget {
     {
         widget = wibox.widget.imagebox,
         image = icons.cpu,
@@ -32,8 +29,7 @@ local image =
     align = 'center'
 }
 -- ------------------------------------------------- --
-local widget_text =
-    wibox.widget {
+local widget_text = wibox.widget {
     font = beautiful.font .. '  18',
     text = 'CPU',
     valign = 'center',
@@ -41,8 +37,7 @@ local widget_text =
     widget = wibox.widget.textbox
 }
 -- ------------------------------------------------- --
-local cpu_bar =
-    wibox.widget {
+local cpu_bar = wibox.widget {
     max_value = 100,
     bg = colors.black,
     color = {active_color},
@@ -53,29 +48,20 @@ local cpu_bar =
     widget = wibox.container.arcchart
 }
 -- ------------------------------------------------- --
-awesome.connect_signal(
-    'signal::cpu',
-    function(value)
-        cpu_bar.value = value
-        widget_text:set_text(value .. '%')
-    end
-)
+awesome.connect_signal('signal::cpu', function(value)
+    cpu_bar.value = value
+    widget_text:set_text(value .. '%')
+end)
 -- ------------------------------------------------- --
-local cpu_text =
-    wibox.widget {
-    {
-        layout = wibox.layout.fixed.vertical,
-        image,
-        widget_text
-    },
+local cpu_text = wibox.widget {
+    {layout = wibox.layout.fixed.vertical, image, widget_text},
     widget = wibox.container.place,
     align = 'center',
     valign = 'center',
     layout = wibox.layout.fixed.vertical
 }
 -- ------------------------------------------------- --
-local cpu_meter =
-    wibox.widget {
+local cpu_meter = wibox.widget {
     {
         {
             {
@@ -103,10 +89,12 @@ local cpu_meter =
             forced_width = dpi(150)
         },
         widget = wibox.container.margin,
+        shape = beautiful.client_shape_rounded_xl,
+
         margins = dpi(5)
     },
     widget = wibox.container.background,
-    bg = colors.alpha(colors.colorA, '88'),
+    bg = colors.alpha(colors.colorD, '33'),
     shape = beautiful.client_shape_rounded_xl
 }
 

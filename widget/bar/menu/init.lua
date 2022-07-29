@@ -1,4 +1,4 @@
-local return_button = function(color, lspace, rspace, tspace, bspace)
+local return_button = function(color, lspace, rspace)
     local widget_button =
         wibox.widget {
         {
@@ -20,8 +20,8 @@ local return_button = function(color, lspace, rspace, tspace, bspace)
             },
             widget = clickable_container
         },
-        left = dpi(lspace),
-        right = dpi(rspace),
+        left = dpi(6),
+        right = dpi(6),
         top = dpi(3),
         bottom = dpi(3),
         widget = wibox.container.margin
@@ -42,13 +42,12 @@ local return_button = function(color, lspace, rspace, tspace, bspace)
         awful.popup {
         ontop = true,
         placement = awful.placement.centered,
-        maximum_height = mouse.screen.geometry.height,
-        maximum_width = mouse.screen.geometry.width,
-        minimum_width = mouse.screen.geometry.width,
+        forced_height = mouse.screen.geometry.height,
+        forced_width = mouse.screen.geometry.width,
         visible = false,
         shape = beautiful.client_shape_rounded_xl,
         border_width = 0,
-        bg = colors.alpha(colors.black, 'cc'),
+        bg = colors.alpha(colors.black, "cc"),
         layout = overflow.vertical(),
         widget = clickable_container
     }
@@ -70,8 +69,8 @@ local return_button = function(color, lspace, rspace, tspace, bspace)
                             widget = wibox.widget.imagebox
                         },
                         {
-                            text = string.sub(program.Name, 1, 6) .. '...',
-                            font = beautiful.font .. ' 9',
+                            text = string.sub(program.Name, 1, 6) .. "...",
+                            font = beautiful.font .. " 9",
                             widget = wibox.widget.textbox
                         }
                     },
@@ -92,13 +91,13 @@ local return_button = function(color, lspace, rspace, tspace, bspace)
             }
 
             icon_widget:connect_signal(
-                'mouse::enter',
+                "mouse::enter",
                 function(c)
                     c:set_bg(beautiful.accent)
                 end
             )
             icon_widget:connect_signal(
-                'mouse::leave',
+                "mouse::leave",
                 function(c)
                     c:set_bg(beautiful.bg_button)
                 end
@@ -133,7 +132,7 @@ local return_button = function(color, lspace, rspace, tspace, bspace)
     end
     generate_drawer()
     app_drawer:connect_signal(
-        'mouse::leave',
+        "mouse::leave",
         function()
             gears.timer {
                 timeout = 4,
@@ -147,7 +146,7 @@ local return_button = function(color, lspace, rspace, tspace, bspace)
         end
     )
     app_drawer:connect_signal(
-        'button::pressed',
+        "button::pressed",
         function()
             if app_drawer.visible then
                 app_drawer.visible = false
@@ -155,7 +154,7 @@ local return_button = function(color, lspace, rspace, tspace, bspace)
         end
     )
     app_drawer:connect_signal(
-        'mouse::enter',
+        "mouse::enter",
         function()
             app_drawer.visible = true
         end
@@ -182,7 +181,7 @@ local return_button = function(color, lspace, rspace, tspace, bspace)
                 3,
                 nil,
                 function()
-                    dashboard:toggle()
+                    cc_toggle()
                 end
             )
         )

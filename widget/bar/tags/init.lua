@@ -9,11 +9,11 @@
 -- |_______|__||_____||____|
 -- ------------------------------------------------- --
 
-local dpi = require('beautiful').xresources.apply_dpi
-local modkey = require('configuration.root.keys.mod').modKey
+local dpi = require("beautiful").xresources.apply_dpi
+local modkey = require("configuration.root.keys.mod").modKey
 -- ------------------------------------------------- --
 -- Setup for tag preview
-local tag_preview_box = require('widget.bar.tags.tag-preview')
+local tag_preview_box = require("widget.bar.tags.tag-preview")
 tag_preview_box.enable {
     show_client_content = true,
     -- Whether or not to show the client content
@@ -35,7 +35,7 @@ tag_preview_box.enable {
     -- Place the widget using awful.placement (this overrides x & y)
     --
     placement_fn = function(c)
-        awful.placement.top_left(c, {margins = {bottom = 54, left = 30}})
+        awful.placement.top_left(c, {margins = {top = 54, left = 300}})
     end
 }
 
@@ -93,17 +93,17 @@ local get_taglist = function(s)
                         nil,
                         {
                             widget = wibox.container.place,
-                            halign = 'center',
-                            valign = 'center',
+                            halign = "center",
+                            valign = "center",
                             {
-                                id = 'text_role',
+                                id = "text_role",
                                 widget = wibox.widget.textbox,
-                                align = 'center',
-                                valign = 'center'
+                                align = "center",
+                                valign = "center"
                             }
                         },
                         nil,
-                        strategy = 'max',
+                        strategy = "max",
                         layout = wibox.container.margin,
                         left = dpi(1),
                         right = dpi(1),
@@ -117,24 +117,24 @@ local get_taglist = function(s)
                 border_width = dpi(0),
                 widget = wibox.container.margin
             },
-            id = 'background_role',
+            id = "background_role",
             forced_width = dpi(64),
             widget = wibox.container.background,
             shape = beautiful.client_shape_rounded_xl,
             create_callback = function(self, c3, index, objects)
                 self:connect_signal(
-                    'mouse::enter',
+                    "mouse::enter",
                     function()
                         if #c3:clients() > 0 then
-                            awesome.emit_signal('tag_preview::update', c3)
-                            awesome.emit_signal('tag_preview::visibility', s, true)
+                            awesome.emit_signal("tag_preview::update", c3)
+                            awesome.emit_signal("tag_preview::visibility", s, true)
                         end
                     end
                 )
                 self:connect_signal(
-                    'mouse::leave',
+                    "mouse::leave",
                     function()
-                        awesome.emit_signal('tag_preview::visibility', s, false)
+                        awesome.emit_signal("tag_preview::visibility", s, false)
                         collectgarbage()
                     end
                 )

@@ -119,8 +119,8 @@ local function draw_widget(
                 {
                     {
                         client_list,
-                        forced_height = geo.height,
-                        forced_width = geo.width,
+                        forced_height = dpi(250),
+                        forced_width = dpi(450),
                         widget = wibox.container.place
                     },
                     layout = wibox.layout.align.horizontal
@@ -201,8 +201,8 @@ local enable = function(opts)
             -- ------------------------------------------------- --
             -- ------------------------------------------------- --
             -- ------------------------------------------------- --
-            tag_preview_box.maximum_width = dpi(480)
-            tag_preview_box.maximum_height = dpi(250)
+            tag_preview_box.forced_width = dpi(480)
+            tag_preview_box.forced_height = dpi(250)
             tag_preview_box:setup(
                 draw_widget(
                     t,

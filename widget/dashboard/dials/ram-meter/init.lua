@@ -14,8 +14,7 @@ local active_color = {
     stops = {{0, colors.color7}, {0.75, colors.color23}}
 }
 -- ------------------------------------------------- --
-local image =
-    wibox.widget {
+local image = wibox.widget {
     {
         widget = wibox.widget.imagebox,
         image = icons.ram,
@@ -30,8 +29,7 @@ local image =
     align = 'center'
 }
 -- ------------------------------------------------- --
-local widget_text =
-    wibox.widget {
+local widget_text = wibox.widget {
     font = beautiful.font .. ' 18',
     text = 'RAM',
     valign = 'center',
@@ -39,8 +37,7 @@ local widget_text =
     widget = wibox.widget.textbox
 }
 -- ------------------------------------------------- --
-local ram_bar =
-    wibox.widget {
+local ram_bar = wibox.widget {
     max_value = 100,
     bg = colors.black,
     thickness = dpi(12),
@@ -50,33 +47,24 @@ local ram_bar =
     widget = wibox.container.arcchart
 }
 -- ------------------------------------------------- --
-awesome.connect_signal(
-    'signal::ram',
-    function(used, total)
-        local r_average = math.floor((used / total) * 100)
-        -- the below will render used gigabytes if that is preferred, switch the widget_text variable from r_average to r_used in the tostring function
-        -- local r_used = string.format("%.1f", used / 1000) .. "G"
+awesome.connect_signal('signal::ram', function(used, total)
+    local r_average = math.floor((used / total) * 100)
+    -- the below will render used gigabytes if that is preferred, switch the widget_text variable from r_average to r_used in the tostring function
+    -- local r_used = string.format("%.1f", used / 1000) .. "G"
 
-        ram_bar.value = r_average
-        widget_text.markup = tostring(r_average) .. '%'
-    end
-)
+    ram_bar.value = r_average
+    widget_text.markup = tostring(r_average) .. '%'
+end)
 -- ------------------------------------------------- --
-local ram_text =
-    wibox.widget {
-    {
-        layout = wibox.layout.fixed.vertical,
-        image,
-        widget_text
-    },
+local ram_text = wibox.widget {
+    {layout = wibox.layout.fixed.vertical, image, widget_text},
     widget = wibox.container.place,
     align = 'center',
     valign = 'center',
     layout = wibox.layout.fixed.vertical
 }
 -- ------------------------------------------------- --
-local ram_meter =
-    wibox.widget {
+local ram_meter = wibox.widget {
     {
         {
             {
@@ -107,7 +95,7 @@ local ram_meter =
         margins = dpi(5)
     },
     widget = wibox.container.background,
-    bg = colors.alpha(colors.colorA, '88'),
+    bg = colors.alpha(colors.colorD, '33'),
     shape = beautiful.client_shape_rounded_xl
 }
 
