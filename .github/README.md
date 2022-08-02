@@ -1,18 +1,15 @@
 <h1>AwesomeWM Configuration</h1>
 <h2>Part of the Electric Tantra Desktop Environment</h2>
-<img src="assets/dreams.gif">
-<figcaption>The flying spaghetti monster of code, this configuration has been forged with bits and pieces of many others and more research, testing and rewriting than I will ever admit in public.</figcaption>
-<hr/>
-<div style="display:inline-block;"> 
 <img align="left" src="assets/awesome-logo.svg" width="256px;" height="256px" alt="stylized awesome logo">
+<img align="center" src="https://media4.giphy.com/media/sFrzOnafOZ4Yg/giphy.gif?cid=ecf05e47ku22zx6xfvb71xbh8vumreg5om5d8xqppmv7kyr2&rid=giphy.gif&ct=g" alt='Let me see your war face' mashed up with the kindergarten cop 'shut up' />
+<img align="right" src="assets/dreams.gif">
 
-<p width="60%" style="width: 60%; padding:0.25rem; " align="right">This is my white whale, like Ahab I have doggedly pursued this configuration's perfection and thrown all caution to the wind in reaching the state it is in at present. </p>
-</div>
+
+
+<hr/>
 <br clear="right"/>
 <br clear="left"/>
 <hr/>
-<img src="https://media4.giphy.com/media/sFrzOnafOZ4Yg/giphy.gif?cid=ecf05e47ku22zx6xfvb71xbh8vumreg5om5d8xqppmv7kyr2&rid=giphy.gif&ct=g" src="'Let me see your war face' mashed up with the kindergarten cop 'shut up' />
-<figcaption>What much of the process of making this configuration ended up looking like as Awesome restarted and I was greeted by the default wallpaper.</figcaption>
 
 <h2>Documentation</h2>
 <p>One of the features of this configuration, partially inspired by <i>Tom Meyers</i> who was inspired by the AwesomeWM developers themselves is that it is what I dub <i>semi-literate</i> in that unlike the often unreadable emacs configurations called <i>literate configurations</i> in which the actual configuration is being read from codeblocks in markdown files, I have opted to instead actually listen to the advise of so many programming tutorials and comment my code with enough description of what is going on that in a few months, returning to the same code, I am able to deduce what I was thinking personally. How this helps others understand the same snippet, I am not sure and will discover in time.</p>
