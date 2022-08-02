@@ -1,12 +1,9 @@
 <h1>AwesomeWM Configuration</h1>
 <h2>Part of the Electric Tantra Desktop Environment</h2>
 <img align="left" src="assets/awesome-logo.svg" width="256px;" height="256px" alt="stylized awesome logo">
-<img align="center" src="https://media4.giphy.com/media/sFrzOnafOZ4Yg/giphy.gif?cid=ecf05e47ku22zx6xfvb71xbh8vumreg5om5d8xqppmv7kyr2&rid=giphy.gif&ct=g" alt='Let me see your war face' mashed up with the kindergarten cop 'shut up' />
+<img align="center" src="https://media4.giphy.com/media/sFrzOnafOZ4Yg/giphy.gif?cid=ecf05e47ku22zx6xfvb71xbh8vumreg5om5d8xqppmv7kyr2&rid=giphy.gif&ct=g" alt='Let me see your war face' mashed up with the kindergarten cop 'shut up'>
 <img align="right" src="assets/dreams.gif">
 
-
-
-<hr/>
 <br clear="right"/>
 <br clear="left"/>
 <hr/>
