@@ -2,7 +2,7 @@
 <h2>Part of the Electric Tantra Desktop Environment</h2>
 <img align="left" src="assets/awesome-logo.svg"  alt="stylized awesome logo">
 <img align="left"  src="https://media4.giphy.com/media/sFrzOnafOZ4Yg/giphy.gif?cid=ecf05e47ku22zx6xfvb71xbh8vumreg5om5d8xqppmv7kyr2&rid=giphy.gif&ct=g" alt="'Let me see your war face' mashed up with the kindergarten cop 'shut up'">
-<img align="left" height="200px" src="assets/dreams.gif">
+<img align="left" height="190px" src="assets/dreams.gif">
 
 <br clear="right"/>
 <br clear="left"/>
