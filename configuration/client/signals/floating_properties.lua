@@ -15,7 +15,6 @@ local _M = function(c)
     end
     if c.floating then
         c.shape = beautiful.client_shape_rounded
-        awful.placement.centered(c, {parent = c.transient_for})
     end
 end
 

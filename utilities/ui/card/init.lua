@@ -8,13 +8,8 @@
 --    -- card with a title and body
 --    local card = lib.card("title")
 --    card.update_body(lib.textbox("body"))
-
-local wibox = require('wibox')
-local beautiful = require('beautiful')
-local gears = require('gears')
-local dpi = beautiful.xresources.apply_dpi
 -- ------------------------------------------------- --
-local header_font = beautiful.font .. ' 14'
+local header_font = beautiful.font .. " 14"
 local bg = beautiful.bg_menu
 local bg_title = beautiful.bg_menu
 -- ------------------------------------------------- --
@@ -23,8 +18,8 @@ local titled_card = function(title, height)
         wibox.widget {
         text = title,
         font = header_font,
-        align = 'center',
-        valign = 'center',
+        align = "center",
+        valign = "center",
         widget = wibox.widget.textbox
     }
     -- ------------------------------------------------- --

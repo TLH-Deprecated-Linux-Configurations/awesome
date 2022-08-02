@@ -14,8 +14,9 @@ require(... .. ".hotkeys-popup")
 require(... .. ".menu")
 require(... .. ".network")
 require(... .. ".notifications")
+-- require(... .. ".notifs")
 require(... .. ".titlebar")
-require(... .. ".controlCenter")
+require(... .. ".control_center")
 
 -- ------------------------------------------------- --
 -- modules requiring "connect_for_each_screen"

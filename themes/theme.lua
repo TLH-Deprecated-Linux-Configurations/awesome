@@ -177,15 +177,17 @@ theme.exit_screen_font = theme.font .. " Bold 22"
 -- Taglist
 theme.taglist_font = "awesomewm-font 24"
 theme.taglist_fg_focus = colors.white
-theme.taglist_bg_focus = colors.alpha(colors.lesswhite, "88")
+theme.taglist_bg_focus = colors.alpha(colors.lesswhite, "aa")
 theme.taglist_border_focus = colors.white
 theme.taglist_fg_empty = colors.white
+
 theme.taglist_fg = colors.white
+theme.taglist_fg = colors.black
 theme.taglist_fg_occupied = colors.colorY
 theme.taglist_bg_occupied = colors.alpha(colors.black, "cc")
 theme.taglist_bg_urgent = colors.alpha(colors.color15, "cc")
 theme.taglist_spacing = dpi(6)
-theme.taglist_shape = theme.client_shape_rounded_xl
+theme.taglist_shape = theme.client_shape_rounded_lg
 -- ------------------------------------------------- --
 
 -- Dock

@@ -21,8 +21,17 @@
 --- Center over parent signal
 ----
 local _M = function(c)
-    if c.transient_for then
-        awful.placement.centered(c, {parent = c.transient_for})
+    if c.transient_for and not c.size_hints.user_position and not c.size_hints.program_position then
+        awful.placement.centered(
+            c,
+            {
+                parent = c.transient_for,
+                honor_workarea = true,
+                honor_padding = true
+            }
+        )
+        awful.placement.no_offscreen(c)
+    else
         awful.placement.no_offscreen(c)
     end
 end

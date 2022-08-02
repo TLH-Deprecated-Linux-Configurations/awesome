@@ -3,12 +3,12 @@
 
 -- widgets
 -- ~~~~~~~
-local battery = require("module.controlCenter.statusbar.battery")
+local battery = require("module.control_center.statusbar.battery")
 
 ---------------------------------------------------------- EOF Battery
 
 -- clock
-local clock = require("module.controlCenter.statusbar.clock")
+local clock = require("module.control_center.statusbar.clock")
 
 -- extra control icon
 local extras =
@@ -23,7 +23,7 @@ local extras =
 local extra_shown = false
 
 awesome.connect_signal(
-    "controlCenter::extras",
+    "control_center::extras",
     function(update)
         extra_shown = update
     end

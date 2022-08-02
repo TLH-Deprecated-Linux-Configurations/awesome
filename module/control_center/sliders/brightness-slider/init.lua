@@ -58,7 +58,7 @@ local slider =
         handle_color = colors.white,
         handle_shape = beautiful.client_shape_rounded,
         handle_width = dpi(24),
-        handle_border_color = colors.blacker,
+        handle_border_color = colors.black,
         handle_border_width = dpi(3),
         maximum = 100,
         value = 100,
@@ -222,7 +222,7 @@ local cc_brightness =
         margins = dpi(15),
         widget = wibox.container.margin
     },
-    shape = beautiful.client_shape_rounded,
+    shape = beautiful.client_shape_rounded_xl,
     bg = beautiful.bg_button,
     fg = beautiful.sliders_fg,
     widget = wibox.container.background

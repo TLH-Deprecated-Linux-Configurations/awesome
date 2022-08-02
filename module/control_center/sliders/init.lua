@@ -15,29 +15,29 @@ local sliders =
                     {
                         {
                             {
-                                require("module.controlCenter.sliders.volume-slider"),
+                                require("module.control_center.sliders.volume-slider"),
                                 forced_height = dpi(85),
                                 widget = wibox.container.background
                             },
                             widget = wibox.container.margin,
-                            margins = dpi(5)
+                            margins = dpi(3)
                         },
                         widget = wibox.container.background,
-                        bg = beautiful.bg_menu,
+                        bg = colors.alpha(colors.black, "cc"),
                         shape = beautiful.client_shape_rounded_xl
                     },
                     {
                         {
                             {
-                                require("module.controlCenter.sliders.brightness-slider"),
+                                require("module.control_center.sliders.brightness-slider"),
                                 forced_height = dpi(85),
                                 widget = wibox.container.background
                             },
                             widget = wibox.container.margin,
-                            margins = dpi(5)
+                            margins = dpi(3)
                         },
                         widget = wibox.container.background,
-                        bg = beautiful.bg_menu,
+                        bg = colors.alpha(colors.black, "cc"),
                         shape = beautiful.client_shape_rounded_xl
                     }
                 }
@@ -49,5 +49,5 @@ local sliders =
     shape = beautiful.client_shape_rounded_xl,
     widget = wibox.container.background
 }
-
+-- ------------------------------------------------- --
 return sliders

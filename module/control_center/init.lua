@@ -34,12 +34,12 @@ awful.screen.connect_for_each_screen(
 
         -- widgets
         --~~~~~~~~
-        local profile = require("module.controlCenter.profile")
-        local sessions = require("module.controlCenter.sessionctl")
-        local sliders = require("module.controlCenter.sliders")
+        local profile = require("module.control_center.profile")
+        local sessions = require("module.control_center.sessionctl")
+        local sliders = require("module.control_center.sliders")
 
-        local services = require("module.controlCenter.services")
-        local statusline = require("module.controlCenter.statusbar")
+        local services = require("module.control_center.services")
+        local statusline = require("module.control_center.statusbar")
 
         -- animations
         --------------
@@ -102,11 +102,11 @@ awful.screen.connect_for_each_screen(
         -- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
         function show_extra_control_stuff(input)
             if input then
-                awesome.emit_signal("controlCenter::extras", true)
+                awesome.emit_signal("control_center::extras", true)
                 control_c.height = dpi(715)
                 readwrite.write("cc_state", "open")
             else
-                awesome.emit_signal("controlCenter::extras", false)
+                awesome.emit_signal("control_center::extras", false)
                 control_c.height = dpi(580)
                 readwrite.write("cc_state", "closed")
             end
@@ -124,7 +124,6 @@ awful.screen.connect_for_each_screen(
                         layout = wibox.layout.align.horizontal
                     },
                     sliders,
-                    -- song,
                     services,
                     layout = wibox.layout.fixed.vertical,
                     spacing = dpi(24)
@@ -145,10 +144,10 @@ awful.screen.connect_for_each_screen(
         local output = readwrite.readall("cc_state")
 
         if output:match("open") then
-            awesome.emit_signal("controlCenter::extras", true)
+            awesome.emit_signal("control_center::extras", true)
             control_c.height = dpi(715)
         else
-            awesome.emit_signal("controlCenter::extras", false)
+            awesome.emit_signal("control_center::extras", false)
             control_c.height = dpi(580)
         end
         --------------------------------------------------------
