@@ -1,14 +1,11 @@
 -- profile widget
 -- ~~~~~~~~~~~~~~
 
--- widgets
--- ~~~~~~~
-
 -- image
 local profile_image =
     wibox.widget {
     {
-        image = config_dir .. "/themes/icons/svg/logo.png",
+        image = config_dir .. '/themes/icons/svg/logo.png',
         clip_shape = beautiful.client_shape_rounded_xl,
         widget = wibox.widget.imagebox
     },
@@ -25,20 +22,20 @@ local profile_image =
 local username =
     wibox.widget {
     widget = wibox.widget.textbox,
-    text = os.getenv("USER"),
-    font = beautiful.font .. " Regular  13",
-    align = "left",
-    valign = "center"
+    text = os.getenv('USER'),
+    font = beautiful.font .. ' Regular  13',
+    align = 'left',
+    valign = 'center'
 }
 
 -- description/host
 local desc =
     wibox.widget {
     widget = wibox.widget.textbox,
-    text = "@AwesomeWM",
-    font = beautiful.font .. " Bold 11",
-    align = "left",
-    valign = "center"
+    text = '@AwesomeWM',
+    font = beautiful.font .. ' Bold 11',
+    align = 'left',
+    valign = 'center'
 }
 
 -- return
@@ -53,7 +50,7 @@ return wibox.widget {
             spacing = dpi(2)
         },
         layout = wibox.layout.align.vertical,
-        expand = "none"
+        expand = 'none'
     },
     layout = wibox.layout.fixed.horizontal,
     spacing = dpi(15)

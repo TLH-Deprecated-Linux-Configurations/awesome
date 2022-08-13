@@ -53,7 +53,7 @@ awesome.connect_signal(
         -- local r_used = string.format("%.1f", used / 1000) .. "G"
 
         ram_bar.value = r_average
-        widget_text.markup = tostring(r_average) .. '%\n'
+        widget_text.markup = tostring(r_average) .. '%'
     end
 )
 -- ------------------------------------------------- --

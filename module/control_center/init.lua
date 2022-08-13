@@ -19,7 +19,7 @@ awful.screen.connect_for_each_screen(
                 shape = beautiful.client_shape_rounded_xl,
                 screen = s,
                 width = dpi(420),
-                bg = beautiful.bg_color,
+                bg = beautiful.bg_normal,
                 margins = dpi(20),
                 ontop = true,
                 visible = false
@@ -120,6 +120,17 @@ awful.screen.connect_for_each_screen(
                                 -- turn off networkgit
                                 net_off(s)
                             end
+                        end
+                        if key == 'b' then
+                            awesome.emit_signal('bluetooth::devices:refreshPanel')
+                            bc_toggle()
+                        end
+                        if key == 'n' then
+                            nc_toggle()
+                            awesome.emit_signal('network::networks:refreshPanel')
+                        end
+                        if key == 'm' then
+                            not_toggle()
                         end
                     end
                 )

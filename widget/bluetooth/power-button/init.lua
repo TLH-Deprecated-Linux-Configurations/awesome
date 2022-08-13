@@ -44,8 +44,8 @@ local widget =
         bg = colors.color8,
         widget = wibox.container.background
     },
-    forced_width = 40,
-    forced_height = 40,
+    forced_width = dpi(40),
+    forced_height = dpi(40),
     widget = clickable_container
 }
 

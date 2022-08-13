@@ -42,8 +42,27 @@ awful.screen.connect_for_each_screen(
                     {
                         halign = 'center',
                         valign = 'center',
-                        layout = wibox.layout.fixed.horizontal,
+                        layout = wibox.layout.align.horizontal,
                         spacing = dpi(16),
+                        {
+                            {
+                                nil,
+                                {
+                                    image = icons.wifi_3,
+                                    widget = wibox.widget.imagebox,
+                                    forced_height = dpi(15),
+                                    id = 'icon',
+                                    resize = true
+                                },
+                                nil,
+                                halign = 'center',
+                                valign = 'center',
+                                forced_height = dpi(30),
+                                layout = wibox.layout.align.vertical
+                            },
+                            widget = wibox.container.margin,
+                            margins = dpi(15)
+                        },
                         require('widget.network_center.title-text')
                     }
                 },
@@ -51,9 +70,9 @@ awful.screen.connect_for_each_screen(
                 widget = wibox.container.margin
             },
             shape = beautiful.client_shape_rounded_xl,
-            bg = beautiful.bg_normal,
+            bg = beautiful.bg_panel,
             forced_width = dpi(480),
-            forced_height = dpi(40),
+            forced_height = dpi(70),
             ontop = true,
             border_width = dpi(2),
             border_color = colors.colorA,
@@ -149,7 +168,7 @@ awful.screen.connect_for_each_screen(
             end
 
             -- control center x position
-            network.x = screen.geometry.x + (dpi(548) + beautiful.useless_gap * 4)
+            network.x = screen.geometry.x + (dpi(480) + beautiful.useless_gap * 4)
 
             -- toggle visibility
             if network.visible then

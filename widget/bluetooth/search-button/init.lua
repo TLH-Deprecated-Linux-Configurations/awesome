@@ -30,32 +30,17 @@ local widget =
         {
             {
                 {widget_icon, layout = wibox.layout.fixed.horizontal},
-                margins = dpi(15),
+                margins = dpi(10),
                 widget = wibox.container.margin
             },
             forced_height = dpi(50),
             widget = clickable_container
         },
-        shape = beautiful.client_shape_rounded_small,
-        bg = colors.colorA,
-        widget = wibox.container.background
+        bg = beautiful.bg_button,
+        widget = wibox.container.background,
+        shape = beautiful.client_shape_rounded_lg
     }
 )
-
-widget:connect_signal(
-    'mouse::enter',
-    function()
-        widget.bg = colors.color4
-    end
-)
-
-widget:connect_signal(
-    'mouse::leave',
-    function()
-        widget.bg = colors.colorA
-    end
-)
-scan = nil
 widget:buttons(
     gears.table.join(
         awful.button(

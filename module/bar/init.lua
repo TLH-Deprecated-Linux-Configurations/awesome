@@ -3,8 +3,9 @@
 -- |   __ <|  _  |   _|
 -- |______/|___._|__|
 -- ------------------------------------------------- --
--- this refers to the top dropdown bar, activated by hovering
+-- NOTE  this refers to the top dropdown bar, activated by hovering
 -- the mouse in the center of the screen at the topmost edge.
+
 -- ------------------------------------------------- --
 -- ----------------- declare widget ---------------- --
 --
@@ -30,8 +31,7 @@ local bar = function(s)
 
     -- ------------------------------------------------- --
     -- ---------------- provide spacing ---------------- --
-    -- ------------------------------------------------- --
-    --  toggle function to make it disappear
+    -- NOTE  toggle function to make it disappear
     --
     function bar_toggle()
         if s.panel.visible == false then
@@ -52,88 +52,45 @@ local bar = function(s)
     end
 
     -- ------------------------------------------------- --
-    --  left portion of the panel
-    --
-    local leftBar = {
-        layout = wibox.layout.fixed.horizontal,
-        spacing = dpi(12)
-    }
-    -- ------------------------------------------------- --
-    --  center portion of the panel, used for spacing purposes
+    -- NOTE   center portion of the panel, used for spacing purposes
     --
     local centerBar = {
         layout = wibox.layout.fixed.horizontal,
         spacing = dpi(12)
     }
     -- ------------------------------------------------- --
-    --  right portion of the panel, used for widgets
+    --   NOTE Center bar insertions
     --
-    local rightBar = {
-        layout = wibox.layout.fixed.horizontal,
-        spacing = dpi(12)
-    }
-    -- ------------------------------------------------- --
-    --  inserting widgets as tables on the left portion
-    --
-    table.insert(centerBar, require('widget.bar.menu')({color = colors[beautiful.bg_button]}, 0, 0, 0, 0))
+    table.insert(centerBar, require('widget.bar.menu')({color = colors[beautiful.bg_button]}, 0, 0))
     table.insert(centerBar, require('widget.bar.tags')(s))
     table.insert(centerBar, require('widget.bar.layoutbox')({color = colors[beautiful.bg_button]}))
 
     -- ------------------------------------------------- --
-    -- center insertions
-    --
-
-    -- table.insert(centerBar, require("widget.bar.clock")({color = colors[beautiful.bg_button]}, 0, 0))
-
-    -- ------------------------------------------------- --
-    --  right widget insertions
-    --
-    -- table.insert(rightBar, require("widget.bar.battery")({color = colors[beautiful.bg_button]}, 0, 0))
-    -- table.insert(rightBar, require("widget.bar.bluetooth")({color = colors[beautiful.bg_button]}, 0, 0))
-    -- table.insert(rightBar, require("widget.bar.network")({color = colors[beautiful.bg_button]}, 0, 0))
-
-    -- table.insert(rightBar, require('widget.bar.end-session')({color = colors[beautiful.bg_button]}, 0, 0))
-
-    -- ------------------------------------------------- --
-    -- panel template
+    -- NOTE  panel template
     --
     s.panel:setup {
         layout = wibox.layout.align.horizontal,
         expand = 'none',
         spacing = dpi(12),
-        -- {
-        --     leftBar,
         left = dpi(4),
-        --     top = dpi(4),
-        --     bottom = dpi(4),
-        --     widget = wibox.container.margin
-        -- },
-        -- {
         centerBar,
         top = dpi(2),
         bottom = dpi(2),
         widget = wibox.container.margin,
-        -- },
-        -- {
-        --     rightBar,
         right = dpi(8)
-        --     top = dpi(2),
-        --     bottom = dpi(2),
-        --     widget = wibox.container.margin
-        -- }
     }
 
     -- ------------------------------------------------- --
     -- ------------------- animation ------------------- --
-    -- when the bar is hidden, where it is located
+    -- NOTE  when the bar is hidden, where it is located
     --
     local hidden_y = awful.screen.focused().geometry.y - (s.panel.height)
     -- ------------------------------------------------- --
-    --setting its height
+    -- NOTE  setting its height
     --
     local visible_y = awful.screen.focused().geometry.y
     -- ------------------------------------------------- --
-    -- defining the anotation
+    -- NOTE defining the anotation
     local animation =
         rubato.timed(
         {
@@ -151,7 +108,7 @@ local bar = function(s)
 
     -- ------------------------------------------------- --
     -- ------------ auto hide functionality ------------ --
-    -- timer to close the bar
+    --  NOTE  timer to close the bar
     --
     s.detect =
         gears.timer {
@@ -167,7 +124,7 @@ local bar = function(s)
     }
 
     -- ------------------------------------------------- --
-    -- shows the bar open
+    --  NOTE  shows the bar open
     --
     s.enable_wibox = function()
         s.panel.visible = true
@@ -177,7 +134,7 @@ local bar = function(s)
         s.detect:start()
     end
     -- ------------------------------------------------- --
-    -- if the bar is not present, this is
+    --  NOTE  if the bar is not present, this is
     --
     s.activation_zone =
         wibox(
@@ -198,7 +155,7 @@ local bar = function(s)
     s.activation_zone:struts {left = 0, right = 0, bottom = 0, top = 0}
 
     -- ------------------------------------------------- --
-    --  when mouse moves to this bar, the other opens
+    --  NOTE  when mouse moves to this bar, the other opens
     --
     s.activation_zone:connect_signal(
         'mouse::enter',
@@ -207,7 +164,7 @@ local bar = function(s)
         end
     )
     -- ------------------------------------------------- --
-    -- this keeps the bar open so long is the mouse is within its boundaries so the other can be hidden
+    --  NOTE this keeps the bar open so long is the mouse is within its boundaries so the other can be hidden
     --
     s.panel:connect_signal(
         'mouse::enter',
@@ -216,7 +173,7 @@ local bar = function(s)
         end
     )
     -- ------------------------------------------------- --
-    -- this keeps the bar open so long is the mouse is within its boundaries so the other can be hidden
+    --  NOTE this keeps the bar open so long is the mouse is within its boundaries so the other can be hidden
     --
     s.panel:connect_signal(
         'button::press',
@@ -225,7 +182,7 @@ local bar = function(s)
         end
     )
     -- ------------------------------------------------- --
-    -- this keeps the bar open so long is the mouse is within its boundaries so the other can be hidden
+    --  NOTE this keeps the bar open so long is the mouse is within its boundaries so the other can be hidden
     --
     s.panel:connect_signal(
         'button::release',
@@ -234,7 +191,7 @@ local bar = function(s)
         end
     )
     -- ------------------------------------------------- --
-    -- signals to begin timer when mouse leaves
+    --  NOTE signals to begin timer when mouse leaves
     --
     s.panel:connect_signal(
         'mouse::leave',
@@ -247,7 +204,7 @@ local bar = function(s)
 end
 
 -- ------------------------------------------------- --
---  connect signal for the bar toggle to run the function
+--  NOTE  connect signal for the bar toggle to run the function
 --
 awesome.connect_signal(
     'bar::toggle',

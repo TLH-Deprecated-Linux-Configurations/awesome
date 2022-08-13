@@ -14,8 +14,8 @@ local box =
 			layout = wibox.layout.align.horizontal,
 			nil,
 			{
-				text = 'Empty',
-				font = 'Goldman Bold 16',
+				text = 'No New Notifications',
+				font = 'Goldman Bold 12',
 				widget = wibox.widget.textbox,
 				align = 'center'
 			},
@@ -26,6 +26,7 @@ local box =
 	},
 	shape = beautiful.client_shape_rounded_xl,
 	fg = colors.white,
+	bg = beautiful.bg_panel,
 	widget = wibox.container.background
 }
 

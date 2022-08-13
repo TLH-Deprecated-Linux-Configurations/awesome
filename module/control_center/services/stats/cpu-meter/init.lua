@@ -52,7 +52,7 @@ awesome.connect_signal(
     'signal::cpu',
     function(value)
         cpu_bar.value = value
-        widget_text:set_text(value .. '%\n')
+        widget_text:set_text(value .. '%')
     end
 )
 -- ------------------------------------------------- --

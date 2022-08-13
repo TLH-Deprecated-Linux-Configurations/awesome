@@ -66,7 +66,7 @@ elements.create = function(title, message)
             {
                 {
                     text = title,
-                    font = beautiful.font .. ' 10',
+                    font = beautiful.font .. ' Bold 10',
                     widget = wibox.widget.textbox
                 },
                 {
@@ -76,10 +76,10 @@ elements.create = function(title, message)
                 },
                 layout = wibox.layout.align.vertical
             },
-            margins = dpi(10),
+            margins = dpi(15),
             widget = wibox.container.margin
         },
-        shape = beautiful.client_shape_rounded,
+        shape = beautiful.client_shape_rounded_xl,
         widget = wibox.container.background
     }
     -- ------------------------------------------------- --
@@ -88,19 +88,23 @@ elements.create = function(title, message)
         wibox.widget {
         {
             {
-                nil,
                 {
-                    image = icons.new_notif,
-                    widget = wibox.widget.imagebox,
+                    nil,
+                    {
+                        image = icons.notifications,
+                        widget = wibox.widget.imagebox,
+                        forced_height = dpi(15),
+                        id = 'icon',
+                        resize = true
+                    },
+                    nil,
+                    halign = 'center',
+                    valign = 'center',
                     forced_height = dpi(30),
-                    id = 'icon',
-                    resize = true
+                    layout = wibox.layout.align.vertical
                 },
-                nil,
-                halign = 'center',
-                valign = 'center',
-                forced_height = dpi(30),
-                layout = wibox.layout.align.vertical
+                widget = wibox.container.margin,
+                margins = dpi(15)
             },
             content,
             {
@@ -119,9 +123,9 @@ elements.create = function(title, message)
             expand = 'none',
             layout = wibox.layout.align.horizontal
         },
-        shape = beautiful.client_shape_rounded,
+        shape = beautiful.client_shape_rounded_xl,
         fg = colors.white,
-        bg = beautiful.bg_normal,
+        bg = beautiful.bg_panel,
         border_width = dpi(1),
         border_color = colors.black,
         widget = wibox.container.background

@@ -15,7 +15,7 @@ elements.create = function(name, macAddress, pairStatus, connectStatus)
         nil,
         {
             id = 'icon',
-            image = icons.chain_broken,
+            image = icons.chain,
             resize = true,
             widget = wibox.widget.imagebox
         },
@@ -37,8 +37,6 @@ elements.create = function(name, macAddress, pairStatus, connectStatus)
             forced_width = dpi(30),
             widget = clickable_container
         },
-        shape = beautiful.client_shape_rounded,
-        bg = colors.black,
         widget = wibox.container.background
     }
 

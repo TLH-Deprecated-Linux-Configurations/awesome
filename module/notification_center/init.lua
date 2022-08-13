@@ -43,7 +43,25 @@ awful.screen.connect_for_each_screen(
                         valign = 'center',
                         layout = wibox.layout.align.horizontal,
                         spacing = dpi(16),
-                        nil,
+                        {
+                            {
+                                nil,
+                                {
+                                    image = icons.notifications,
+                                    widget = wibox.widget.imagebox,
+                                    forced_height = dpi(15),
+                                    id = 'icon',
+                                    resize = true
+                                },
+                                nil,
+                                halign = 'center',
+                                valign = 'center',
+                                forced_height = dpi(30),
+                                layout = wibox.layout.align.vertical
+                            },
+                            widget = wibox.container.margin,
+                            margins = dpi(15)
+                        },
                         require('widget.notification_center.title-text'),
                         require('widget.notification_center.clear-all')
                     }
@@ -52,7 +70,7 @@ awful.screen.connect_for_each_screen(
                 widget = wibox.container.margin
             },
             shape = beautiful.client_shape_rounded_xl,
-            bg = beautiful.bg_normal,
+            bg = beautiful.bg_panel,
             forced_width = dpi(480),
             forced_height = dpi(70),
             ontop = true,
@@ -71,7 +89,8 @@ awful.screen.connect_for_each_screen(
                     {
                         layout = wibox.layout.fixed.horizontal,
                         spacing = dpi(16),
-                        require('widget.notification_center.notifications-panel')
+                        require('widget.notification_center.notifications-panel'),
+                        bg = beautiful.bg_panel
                     }
                 },
                 margins = dpi(12),
@@ -117,7 +136,7 @@ awful.screen.connect_for_each_screen(
             end
 
             -- NOTE control center x position
-            notification_center.x = screen.geometry.x + (dpi(975) + beautiful.useless_gap * 4)
+            notification_center.x = screen.geometry.x + (dpi(905) + beautiful.useless_gap * 4)
 
             -- NOTE toggle visibility
             if notification_center.visible then

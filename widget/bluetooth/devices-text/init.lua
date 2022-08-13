@@ -9,21 +9,9 @@
 -- ------------------------------------------------- --
 local devices_text =
     wibox.widget {
-    text = 'devices',
-    font = beautiful.font .. ' 14',
+    text = 'Devices',
+    font = beautiful.font .. ' 16',
     widget = wibox.widget.textbox
-}
-
-local widget_devices_text =
-    wibox.widget {
-    layout = wibox.layout.align.vertical,
-    expand = 'none',
-    nil,
-    {
-        devices_text,
-        layout = wibox.layout.align.horizontal
-    },
-    nil
 }
 
 local devicesIcon =
@@ -45,15 +33,13 @@ local devices =
     {
         {
             devicesIcon,
-            layout = wibox.layout.fixed.horizontal
+            layout = wibox.layout.flex.horizontal
         },
-        margins = dpi(4),
+        margins = dpi(8),
         widget = wibox.container.margin
     },
     forced_height = dpi(40),
-    forced_width = dpi(40),
-    shape = beautiful.client_shape_rounded_small,
-    bg = colors.transparent,
+    shape = beautiful.client_shape_rounded_xl,
     widget = wibox.container.background
 }
 
@@ -61,8 +47,12 @@ local widget =
     wibox.widget {
     {
         devices,
-        widget_devices_text,
-        layout = wibox.layout.fixed.horizontal,
+        devices_text,
+        layout = wibox.layout.align.horizontal,
+        align = 'center',
+        halign = 'center',
+        valigin = 'center',
+        expand = 'min',
         spacing = dpi(16)
     },
     fg = colors.white,

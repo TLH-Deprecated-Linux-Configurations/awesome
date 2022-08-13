@@ -10,7 +10,7 @@
 local user_content =
     wibox.widget {
     text = ' Notifications',
-    font = beautiful.font .. ' 25',
+    font = beautiful.font .. ' 20',
     widget = wibox.widget.textbox
 }
 

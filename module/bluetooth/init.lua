@@ -26,7 +26,7 @@ awful.screen.connect_for_each_screen(
             }
         )
         -- ------------------------------------------------- --
-        -- widgets
+        -- -------------------- widgets -------------------- --
 
         local title =
             wibox.widget {
@@ -50,16 +50,16 @@ awful.screen.connect_for_each_screen(
                         require('widget.bluetooth.search-button')
                     }
                 },
-                margins = dpi(5),
+                margins = dpi(10),
                 widget = wibox.container.margin
             },
             shape = beautiful.client_shape_rounded_xl,
-            bg = beautiful.bg_normal,
+            bg = beautiful.bg_panel,
             forced_width = dpi(410),
-            forced_height = dpi(60),
+            forced_height = dpi(70),
             ontop = true,
             border_width = dpi(2),
-            border_color = colors.colorA,
+            border_color = colors.black,
             widget = wibox.container.background
         }
         -- ------------------------------------------------- --
@@ -99,16 +99,16 @@ awful.screen.connect_for_each_screen(
                 widget = wibox.container.margin
             },
             shape = beautiful.client_shape_rounded_xl,
-            bg = beautiful.bg_normal,
+            bg = beautiful.bg_panel,
             forced_width = dpi(410),
-            forced_height = 70,
+            forced_height = dpi(50),
             ontop = true,
             border_width = dpi(2),
-            border_color = beautiful.bg_normal,
+            border_color = colors.black,
             widget = wibox.container.background
         }
-        -- animations
-        --------------
+        -- ------------------------------------------------- --
+        -- ------------------- animations ------------------ --
         local slide_right =
             rubato.timed {
             pos = s.geometry.height,
@@ -131,22 +131,23 @@ awful.screen.connect_for_each_screen(
             }
         )
 
-        -- toggler script
-        --~~~~~~~~~~~~~~~
+        -- ------------------------------------------------- --
+        --                   toggler script                  --
+        -- ------------------------------------------------- --
         local screen_backup = 1
 
         bc_toggle = function(screen)
-            -- set screen to default, if none were found
+            -- NOTE set screen to default, if none were found
             if not screen then
                 screen = awful.screen.focused()
             end
 
-            -- control center x position
-            bluetooth.x = screen.geometry.x + (dpi(1405) + beautiful.useless_gap * 4)
+            -- NOTE control center x position
+            bluetooth.x = screen.geometry.x + (dpi(1335) + beautiful.useless_gap * 4)
 
-            -- toggle visibility
+            -- NOTE  toggle visibility
             if bluetooth.visible then
-                -- check if screen is different or the same
+                -- NOTE  check if screen is different or the same
                 if screen_backup ~= screen.index then
                     bluetooth.visible = true
                 else
@@ -158,7 +159,7 @@ awful.screen.connect_for_each_screen(
                 bluetooth.visible = true
             end
 
-            -- set screen_backup to new screen
+            -- NOTE  set screen_backup to new screen
             screen_backup = screen.index
         end
         -- -------------------- Turn Off ------------------- --
@@ -170,7 +171,9 @@ awful.screen.connect_for_each_screen(
             end
         end
 
-        -- Initial setup
+        -- ------------------------------------------------- --
+        --                   Initial setup                   --
+        -- ------------------------------------------------- --
         bluetooth:setup {
             {
                 {

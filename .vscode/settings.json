@@ -70,7 +70,8 @@
     "networkCenter",
     "timer",
     "awesome_dnd_state",
-    "not_off"
+    "not_off",
+    "bluetooth"
   ],
   "lua.targetVersion": "5.1",
   "restructuredtext.languageServer.disabled": true,

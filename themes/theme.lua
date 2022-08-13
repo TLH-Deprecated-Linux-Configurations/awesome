@@ -58,10 +58,8 @@ theme.icon_theme = 'chhinamasta'
 
 -- ------------------------------------------------- --
 -- --------------------- Accent -------------------- --
-theme.accent =
-    'radial:960,540,20:960,540,500:0,' ..
-    colors.alpha(colors.color1, 'cc') ..
-        ':0.2,' .. colors.alpha(colors.colorQ, 'cc') .. ':1,' .. colors.alpha(colors.colorV, 'cc')
+-- NOTE used for the button hover bg
+theme.accent = 'linear:0,0:0,21:0,' .. colors.alpha(colors.colorK, 'cc') .. ':1,' .. colors.alpha(colors.colorP, 'cc')
 -- ------------------------------------------------- --
 -- ------------------- Foreground ------------------ --
 theme.fg_normal = colors.white
@@ -180,14 +178,14 @@ theme.exit_screen_font = theme.font .. ' Bold 22'
 -- -------------------- Taglist -------------------- --
 theme.taglist_font = 'awesomewm-font 24'
 theme.taglist_fg_focus = colors.white
-theme.taglist_bg_focus = colors.alpha(colors.lesswhite, 'aa')
+theme.taglist_bg_focus = colors.alpha(colors.lesswhite, 'cc')
 theme.taglist_border_focus = colors.white
 theme.taglist_fg_empty = colors.white
 
 theme.taglist_fg = colors.white
 theme.taglist_fg = colors.black
 theme.taglist_fg_occupied = colors.colorY
-theme.taglist_bg_occupied = colors.alpha(colors.black, 'cc')
+theme.taglist_bg_occupied = colors.alpha(colors.colorA, 'cc')
 theme.taglist_bg_urgent = colors.alpha(colors.color15, 'cc')
 theme.taglist_spacing = dpi(6)
 theme.taglist_shape = theme.client_shape_rounded_lg
@@ -205,9 +203,7 @@ theme.tasklist_plain_task_name = true
 
 -- ------------------------------------------------- --
 -- ------------------ Notification ----------------- --
-theme.notification_position = 'top_right'
-theme.notification_font = theme.font .. ' 12'
-theme.notification_bg = 'linear:0,0:0,21:0,' .. colors.colorW .. ':1,' .. colors.colorM
+
 theme.notification_margin = dpi(5)
 theme.notification_border_width = dpi(0)
 theme.notification_border_color = colors.colorM
