@@ -15,7 +15,7 @@ elements.create = function(name, macAddress, pairStatus, connectStatus)
         nil,
         {
             id = 'icon',
-            image = icons.chain,
+            image = icons.chain_broken,
             resize = true,
             widget = wibox.widget.imagebox
         },
@@ -30,14 +30,14 @@ elements.create = function(name, macAddress, pairStatus, connectStatus)
                     pairIcon,
                     layout = wibox.layout.fixed.horizontal
                 },
-                margins = dpi(9),
+                margins = dpi(6),
                 widget = wibox.container.margin
             },
             forced_height = dpi(30),
             forced_width = dpi(30),
             widget = clickable_container
         },
-        shape = beautiful.client_shape_rounded_small,
+        shape = beautiful.client_shape_rounded,
         bg = colors.black,
         widget = wibox.container.background
     }
@@ -78,14 +78,14 @@ elements.create = function(name, macAddress, pairStatus, connectStatus)
                     pairIcon,
                     layout = wibox.layout.fixed.horizontal
                 },
-                margins = dpi(9),
+                margins = dpi(6),
                 widget = wibox.container.margin
             },
             forced_height = dpi(30),
             forced_width = dpi(30),
             widget = clickable_container
         },
-        shape = beautiful.client_shape_rounded_small,
+        shape = beautiful.client_shape_rounded,
         bg = colors.colorA,
         widget = wibox.container.background
     }
@@ -111,7 +111,7 @@ elements.create = function(name, macAddress, pairStatus, connectStatus)
         nil,
         {
             id = 'icon',
-            image = icons.bluetooth_on,
+            image = icons.bluetooth,
             resize = true,
             widget = wibox.widget.imagebox
         },
@@ -126,14 +126,14 @@ elements.create = function(name, macAddress, pairStatus, connectStatus)
                     connectIcon,
                     layout = wibox.layout.fixed.horizontal
                 },
-                margins = dpi(9),
+                margins = dpi(3),
                 widget = wibox.container.margin
             },
             forced_height = dpi(30),
             forced_width = dpi(30),
             widget = clickable_container
         },
-        shape = beautiful.client_shape_rounded_small,
+        shape = beautiful.client_shape_rounded,
         bg = colors.colorA,
         widget = wibox.container.background
     }
@@ -159,7 +159,7 @@ elements.create = function(name, macAddress, pairStatus, connectStatus)
         nil,
         {
             id = 'icon',
-            image = icons.bluetooth_off,
+            image = icons.bluetooth,
             resize = true,
             widget = wibox.widget.imagebox
         },
@@ -174,14 +174,14 @@ elements.create = function(name, macAddress, pairStatus, connectStatus)
                     disconnectIcon,
                     layout = wibox.layout.fixed.horizontal
                 },
-                margins = dpi(9),
+                margins = dpi(3),
                 widget = wibox.container.margin
             },
             forced_height = dpi(30),
             forced_width = dpi(30),
             widget = clickable_container
         },
-        shape = beautiful.client_shape_rounded_small,
+        shape = beautiful.client_shape_rounded,
         bg = colors.colorA,
         widget = wibox.container.background
     }
@@ -261,7 +261,7 @@ elements.create = function(name, macAddress, pairStatus, connectStatus)
                     expand = 'none',
                     nil,
                     {
-                        image = icons.bluetooth_on,
+                        image = icons.bluetooth,
                         widget = wibox.widget.imagebox
                     },
                     nil
@@ -297,7 +297,7 @@ elements.create = function(name, macAddress, pairStatus, connectStatus)
             margins = dpi(10),
             widget = wibox.container.margin
         },
-        shape = gears.shape.rect,
+        shape = beautiful.client_shape_rounded,
         bg = colors.colorB,
         widget = wibox.container.background
     }
@@ -333,9 +333,7 @@ elements.create = function(name, macAddress, pairStatus, connectStatus)
             buttons,
             layout = wibox.layout.align.horizontal
         },
-        shape = function(cr, width, height)
-            gears.shape.rounded_rect(cr, width, height, dpi(4))
-        end,
+        shape = beautiful.client_shape_rounded,
         fg = colors.white,
         border_width = dpi(1),
         border_color = colors.colorA,

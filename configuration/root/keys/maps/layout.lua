@@ -4,59 +4,59 @@
 -- |_______|___._|___  |_____|_____||____|
 --               |_____|
 -- ------------------------------------------------- --
--- ------------------------------------------------- --
+-- NOTE: this keymap modifies the layout
 -- ------------------------------------------------- --
 
 local layoutmap = {
     {
-        "Right",
+        'Right',
         function(c)
             awful.tag.incmwfact(0.05)
         end,
-        "Increase Master Column Width"
+        'Increase Master Column Width'
     },
     -- ------------------------------------------------- --
     {
-        "Left",
+        'Left',
         function(c)
             awful.tag.incmwfact(-0.05)
         end,
-        "Decrease Master Client Width"
+        'Decrease Master Client Width'
     },
     -- ------------------------------------------------- --
     {
-        "Up",
+        'Up',
         function(c)
             awful.tag.incnmaster(1, nil, true)
         end,
-        "Increase Number of Master Cluents"
+        'Increase Number of Master Cluents'
     },
     -- ------------------------------------------------- --
     {
-        "Down",
+        'Down',
         function(c)
             awful.tag.incnmaster(-1, nil, true)
         end,
-        "Decrease Number of Master Cluents"
+        'Decrease Number of Master Cluents'
     },
     -- ------------------------------------------------- --
     {
-        "h",
+        'h',
         function(c)
             awful.tag.incncol(1, nil, true)
         end,
-        "Increase Number of Columns"
+        'Increase Number of Columns'
     },
     -- ------------------------------------------------- --
     {
-        "l",
+        'l',
         function(c)
             awful.tag.incncol(-1, nil, true)
         end,
-        "Decrease Number of Columns"
+        'Decrease Number of Columns'
     },
     -- ------------------------------------------------- --
-    {"separator", " "}
+    {'separator', ' '}
 }
 
 return layoutmap

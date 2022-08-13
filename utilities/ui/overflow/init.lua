@@ -28,10 +28,12 @@ function overflow:fit(context, orig_width, orig_height)
         return 0, 0
     end
 
-    local width, height = orig_width, orig_height
+    local width,
+        height = orig_width, orig_height
     local scrollbar_width = self._private.scrollbar_width
     local scrollbar_enabled = self._private.scrollbar_enabled
-    local used_in_dir, used_max = 0, 0
+    local used_in_dir,
+        used_max = 0, 0
     local is_y = self._private.dir == 'y'
     local avail_in_dir = is_y and orig_height or orig_width
 
@@ -47,7 +49,8 @@ function overflow:fit(context, orig_width, orig_height)
     -- Only when the content doesn't fit and needs scrolling should
     -- we reduce content size to make space for a scrollbar.
     for _, widget in pairs(widgets) do
-        local w, h = base.fit_widget(self, context, widget, width, height)
+        local w,
+            h = base.fit_widget(self, context, widget, width, height)
 
         if is_y then
             used_max = math.max(used_max, w)
@@ -88,9 +91,12 @@ function overflow:layout(context, orig_width, orig_height)
     local scrollbar_width = self._private.scrollbar_width
     local scrollbar_enabled = self._private.scrollbar_enabled
     local scrollbar_position = self._private.scrollbar_position
-    local width, height = orig_width, orig_height
-    local widget_x, widget_y = 0, 0
-    local used_in_dir, used_max = 0, 0
+    local width,
+        height = orig_width, orig_height
+    local widget_x,
+        widget_y = 0, 0
+    local used_in_dir,
+        used_max = 0, 0
 
     -- Set the direction covered by scrolling to the maximum value
     -- to allow widgets to take as much space as they want.
@@ -104,7 +110,8 @@ function overflow:layout(context, orig_width, orig_height)
     -- Only when the content doesn't fit and needs scrolling should
     -- we reduce content size to make space for a scrollbar.
     for _, widget in pairs(widgets) do
-        local w, h = base.fit_widget(self, context, widget, width, height)
+        local w,
+            h = base.fit_widget(self, context, widget, width, height)
 
         if is_y then
             used_max = math.max(used_max, w)
@@ -127,8 +134,10 @@ function overflow:layout(context, orig_width, orig_height)
 
     if need_scrollbar then
         local scrollbar_widget = self._private.scrollbar_widget
-        local bar_x, bar_y = 0, 0
-        local bar_w, bar_h
+        local bar_x,
+            bar_y = 0, 0
+        local bar_w,
+            bar_h
         -- The percentage of how much of the content can be visible within
         -- the available space
         local visible_percent = avail_in_dir / used_in_dir
@@ -138,7 +147,8 @@ function overflow:layout(context, orig_width, orig_height)
         local bar_pos = (avail_in_dir - bar_length) * self._private.position
 
         if is_y then
-            bar_w, bar_h = base.fit_widget(self, context, scrollbar_widget, scrollbar_width, bar_length)
+            bar_w,
+                bar_h = base.fit_widget(self, context, scrollbar_widget, scrollbar_width, bar_length)
             bar_y = bar_pos
 
             if scrollbar_position == 'left' then
@@ -151,7 +161,8 @@ function overflow:layout(context, orig_width, orig_height)
 
             width = width - bar_w
         else
-            bar_w, bar_h = base.fit_widget(self, context, scrollbar_widget, bar_length, scrollbar_width)
+            bar_w,
+                bar_h = base.fit_widget(self, context, scrollbar_widget, bar_length, scrollbar_width)
             bar_x = bar_pos
 
             if scrollbar_position == 'top' then
@@ -177,22 +188,26 @@ function overflow:layout(context, orig_width, orig_height)
         )
     end
 
-    local pos, spacing = 0, self._private.spacing
+    local pos,
+        spacing = 0, self._private.spacing
     local interval = used_in_dir - avail_in_dir
 
     local spacing_widget = self._private.spacing_widget
     if spacing_widget then
         if is_y then
             local _
-            _, spacing = base.fit_widget(self, context, spacing_widget, width, spacing)
+            _,
+                spacing = base.fit_widget(self, context, spacing_widget, width, spacing)
         else
             spacing = base.fit_widget(self, context, spacing_widget, spacing, height)
         end
     end
 
     for i, w in pairs(widgets) do
-        local content_x, content_y
-        local content_w, content_h = base.fit_widget(self, context, w, width, height)
+        local content_x,
+            content_y
+        local content_w,
+            content_h = base.fit_widget(self, context, w, width, height)
 
         -- When scrolling down, the content itself moves up -> substract
         local scrolled_pos = pos - (scroll_position * interval)
@@ -203,14 +218,16 @@ function overflow:layout(context, orig_width, orig_height)
         end
 
         if is_y then
-            content_x, content_y = widget_x, scrolled_pos
+            content_x,
+                content_y = widget_x, scrolled_pos
             pos = pos + content_h + spacing
 
             if self._private.fill_space then
                 content_w = width
             end
         else
-            content_x, content_y = scrolled_pos, widget_y
+            content_x,
+                content_y = scrolled_pos, widget_y
             pos = pos + content_w + spacing
 
             if self._private.fill_space then
@@ -572,50 +589,6 @@ end
 function overflow.vertical(...)
     return new('vertical', ...)
 end
-
---- Add spacing between each layout widgets.
---
--- This behaves just like in `wibox.layout.fixed`:
---
---@DOC_wibox_layout_fixed_spacing_EXAMPLE@
---
--- @property spacing
--- @tparam number spacing Spacing between widgets.
--- @propemits true false
--- @see wibox.layout.fixed
-
---- The widget used to fill the spacing between the layout elements.
--- By default, no widget is used.
---
--- This behaves just like in `wibox.layout.fixed`:
---
---@DOC_wibox_layout_fixed_spacing_widget_EXAMPLE@
---
--- @property spacing_widget
--- @tparam widget spacing_widget
--- @propemits true false
--- @see wibox.layout.fixed
-
---- Set the layout's fill_space property.
---
--- If this property is `true`, widgets
--- take all space in the non-scrolling directing (e.g. `width` for vertical
--- scrolling). If `false`, they will only take as much as they need for their
--- content.
---
--- The default is `true`.
---
---@DOC_wibox_layout_overflow_fill_space_EXAMPLE@
---
--- @property fill_space
--- @tparam boolean fill_space
--- @propemits true false
-
---@DOC_fixed_COMMON@
-
---@DOC_widget_COMMON@
-
---@DOC_object_COMMON@
 
 return setmetatable(overflow, overflow.mt)
 

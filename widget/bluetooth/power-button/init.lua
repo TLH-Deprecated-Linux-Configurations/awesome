@@ -32,7 +32,7 @@ local widget =
                 expand = 'none',
                 nil,
                 {
-                    image = icons.bluetooth_on,
+                    image = icons.bluetooth,
                     widget = wibox.widget.imagebox
                 },
                 nil
@@ -55,7 +55,7 @@ widget:connect_signal(
     'mouse::enter',
     function()
         if power_status == false then
-            widget_icon.icon:set_image(icons.bluetooth_on)
+            widget_icon.icon:set_image(icons.bluetooth)
             widget.bg = colors.color8
         elseif power_status == true then
             widget_icon.icon:set_image(icons.bluetooth_off)
@@ -71,7 +71,7 @@ widget:connect_signal(
             widget_icon.icon:set_image(icons.bluetooth_off)
             widget.bg = colors.colorA
         elseif power_status == true then
-            widget_icon.icon:set_image(icons.bluetooth_on)
+            widget_icon.icon:set_image(icons.bluetooth)
             widget.bg = colors.color8
         end
     end
@@ -83,7 +83,7 @@ awesome.connect_signal(
         if power_status == false then
             power_status = true
             awful.spawn.with_shell("echo -e 'power on' | bluetoothctl")
-            widget_icon.icon:set_image(icons.bluetooth_on)
+            widget_icon.icon:set_image(icons.bluetooth)
             widget.bg = colors.color8
         elseif power_status == true then
             power_status = false
@@ -103,7 +103,7 @@ awesome.connect_signal(
                 stdout = stdout:match('[%w:]+', 10)
                 if stdout == 'yes' then
                     power_status = true
-                    widget_icon.icon:set_image(icons.bluetooth_on)
+                    widget_icon.icon:set_image(icons.bluetooth)
                     widget.bg = colors.color8
                 elseif stdout == 'no' then
                     power_status = false

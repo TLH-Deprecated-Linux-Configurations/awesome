@@ -25,7 +25,7 @@ awesome.connect_signal(
         if value < 16 and display_low and state == 2 then
             naughty.notification(
                 {
-                    title = 'Battery Status',
+                    title = 'Battery Low',
                     text = 'Running low at ' .. value .. '%',
                     image = gfs.get_configuration_dir() .. 'themes/icons/svg/battery-0.svg'
                 }

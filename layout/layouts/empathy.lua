@@ -3,10 +3,10 @@
 -- |    ___||        |  _  |  _  ||   _|     |  |  |
 -- |_______||__|__|__|   __|___._||____|__|__|___  |
 --                   |__|                    |_____|
--- Adapted from the work of lilydjwg <lilydjwg@gmail.com>
--- https://github.com/lilydjwg/myawesomerc
 -- ------------------------------------------------- --
---  variable assignment and library import
+-- NOTE: Adapted from the work of lilydjwg <lilydjwg@gmail.com>
+-- https://github.com/lilydjwg/myawesomerc
+-- --------------------- calls --------------------- --
 local ipairs = ipairs
 local math = math
 local table = table
@@ -16,8 +16,6 @@ local buddylist_width = 295
 local function do_empathy(p)
     if #p.clients > 0 then
         -- ------------------------------------------------- --
-        -- ------------------------------------------------- --
-        -- ------------------------------------------------- --
         local cols = 3
         local area = {}
         area.height = p.workarea.height
@@ -26,12 +24,10 @@ local function do_empathy(p)
         area.y = p.workarea.y
 
         -- ------------------------------------------------- --
-        -- ------------------------------------------------- --
-        -- ------------------------------------------------- --
         local cls = {}
         local buddylist_swap
         for k, c in ipairs(p.clients) do
-            if c.name ~= "Empathy" and c.name ~= "Contact List" and c.name ~= "Empathy" then
+            if c.name ~= 'Empathy' and c.name ~= 'Contact List' and c.name ~= 'Empathy' then
                 table.insert(cls, c)
             else
                 if k ~= 1 then
@@ -51,16 +47,12 @@ local function do_empathy(p)
             end
         end
         -- ------------------------------------------------- --
-        -- ------------------------------------------------- --
-        -- ------------------------------------------------- --
         local rows = math.ceil(#cls / cols)
         local cols = math.ceil(#cls / rows)
         local aligned = (rows - 1) * cols
         local col = 1
         local row = 1
 
-        -- ------------------------------------------------- --
-        -- ------------------------------------------------- --
         -- ------------------------------------------------- --
         for k, c in ipairs(cls) do
             local g = {}
@@ -96,11 +88,11 @@ local function do_empathy(p)
 end
 
 local empathy = {}
-empathy.name = "empathy"
+empathy.name = 'empathy'
 
 -- ------------------------------------------------- --
--- The screen to arrange.
---
+-- NOTE: The screen to arrange.
+
 function empathy.arrange(p)
     return do_empathy(p)
 end

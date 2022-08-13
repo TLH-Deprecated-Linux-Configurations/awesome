@@ -9,11 +9,11 @@
 -- ------------------------------------------------- --
 local icon =
     wibox.widget {
-    id = "icon",
+    id = 'icon',
     image = icons.wifi_problem,
     widget = wibox.widget.imagebox,
-    valign = "center",
-    align = "center",
+    valign = 'center',
+    align = 'center',
     forced_width = dpi(84),
     forced_height = dpi(84)
 }
@@ -45,7 +45,8 @@ network_button:buttons(
             {},
             1,
             function()
-                awesome.emit_signal("network::center:toggle")
+                nc_toggle()
+                awesome.emit_signal('network::networks:refreshPanel')
             end
         )
     )

@@ -4,7 +4,8 @@
 -- |_______||__|__|___._|   __|
 --                      |__|
 -- ------------------------------------------------- --
--- ------------------------------------------------- --
+-- NOTE: this keymap enables the snapping of clients to
+-- corners or sides of a window
 -- ------------------------------------------------- --
 local capi = {
     screen = screen,
@@ -14,74 +15,74 @@ local capi = {
 -- ------------------------------------------------- --
 local snapmap = {
     -- ------------------------------------------------- --
-    {"separator", "Snapping by Side"},
+    {'separator', 'Snapping by Side'},
     -- ------------------------------------------------- --
     {
-        "Down",
+        'Down',
         function(c)
-            snap_edge(capi.client.focus, "bottom")
+            snap_edge(capi.client.focus, 'bottom')
         end,
-        "Snap to Bottom"
+        'Snap to Bottom'
     },
     -- ------------------------------------------------- --
     {
-        "Left",
+        'Left',
         function(c)
-            snap_edge(capi.client.focus, "left")
+            snap_edge(capi.client.focus, 'left')
         end,
-        "Snap to Left"
+        'Snap to Left'
     },
     -- ------------------------------------------------- --
     {
-        "Right",
+        'Right',
         function(c)
-            snap_edge(capi.client.focus, "right")
+            snap_edge(capi.client.focus, 'right')
         end,
-        "Snap to Right"
+        'Snap to Right'
     },
     -- ------------------------------------------------- --
     {
-        "Up",
+        'Up',
         function(c)
-            snap_edge(capi.client.focus, "top")
+            snap_edge(capi.client.focus, 'top')
         end,
-        "Snap to Top"
+        'Snap to Top'
     },
     -- ------------------------------------------------- --
-    {"separator", "Corner Snapping"},
+    {'separator', 'Corner Snapping'},
     -- ------------------------------------------------- --
     {
-        "j",
+        'j',
         function(c)
-            snap_edge(capi.client.focus, "bottomright")
+            snap_edge(capi.client.focus, 'bottomright')
         end,
-        "Snap to Bottom Right"
-    },
-    -- ------------------------------------------------- --
-    {
-        "k",
-        function(c)
-            snap_edge(capi.client.focus, "bottomleft")
-        end,
-        "Snap to Bottom Left"
+        'Snap to Bottom Right'
     },
     -- ------------------------------------------------- --
     {
-        "l",
+        'k',
         function(c)
-            snap_edge(capi.client.focus, "topright")
+            snap_edge(capi.client.focus, 'bottomleft')
         end,
-        "Snap to Top Right"
+        'Snap to Bottom Left'
     },
     -- ------------------------------------------------- --
     {
-        "h",
+        'l',
         function(c)
-            snap_edge(capi.client.focus, "topleft")
+            snap_edge(capi.client.focus, 'topright')
         end,
-        "Snap to Top Left"
+        'Snap to Top Right'
     },
-    {"separator", " "}
+    -- ------------------------------------------------- --
+    {
+        'h',
+        function(c)
+            snap_edge(capi.client.focus, 'topleft')
+        end,
+        'Snap to Top Left'
+    },
+    {'separator', ' '}
 }
 
 return snapmap

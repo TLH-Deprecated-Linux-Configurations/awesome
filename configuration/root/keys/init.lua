@@ -4,7 +4,8 @@
 -- |__|\__||_____|___  |_____|
 --               |_____|
 -- ------------------------------------------------- --
--- ------------------------------------------------- --
+-- NOTE: this calls and assigns this directories key
+-- assignments to the root table
 -- ------------------------------------------------- --
 return {
     mod = require('configuration.root.keys.mod'),

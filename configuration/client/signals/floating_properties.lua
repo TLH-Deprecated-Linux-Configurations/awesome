@@ -9,12 +9,13 @@
 -- |___|   |__| |_____|   __|_____|__|  |____|__||_____|_____|
 --                    |__|
 -- ------------------------------------------------- --
+-- NOTE: provides additional properties to floating windows
 local _M = function(c)
     if awful.layout.get(mouse.screen) == awful.layout.suit.floating or c.floating then
-        awful.client.property.set(c, "floating_geometry", c:geometry())
+        awful.client.property.set(c, 'floating_geometry', c:geometry())
     end
     if c.floating then
-        c.shape = beautiful.client_shape_rounded
+        c.shape = beautiful.client_shape_rounded_xl
     end
 end
 

@@ -3,27 +3,27 @@
 
 -- widgets
 -- ~~~~~~~
-local battery = require("module.control_center.statusbar.battery")
+local battery = require('module.control_center.statusbar.battery')
 
 ---------------------------------------------------------- EOF Battery
 
 -- clock
-local clock = require("module.control_center.statusbar.clock")
+local clock = require('module.control_center.statusbar.clock')
 
 -- extra control icon
 local extras =
     wibox.widget {
     widget = wibox.widget.textbox,
-    markup = "",
-    font = "FontAwesome Regular Bold 20",
-    valign = "center",
-    align = "center"
+    markup = '',
+    font = 'FontAwesome Regular Bold 20',
+    valign = 'center',
+    align = 'center'
 }
 
 local extra_shown = false
 
 awesome.connect_signal(
-    "control_center::extras",
+    'control_center::extras',
     function(update)
         extra_shown = update
     end
@@ -38,9 +38,9 @@ extras:buttons {
                 if extra_shown then
                     show_extra_control_stuff()
                     extra_shown = false
-                    extras.markup = ""
+                    extras.markup = ''
                 else
-                    extras.markup = ""
+                    extras.markup = ''
                     extra_shown = true
                     show_extra_control_stuff(true)
                 end

@@ -53,7 +53,7 @@ local function bluetooth()
                 bg = beautiful.bg_focus,
                 widget = wibox.container.background
             },
-            margins = dpi(8),
+            margins = dpi(3),
             widget = wibox.container.margin
         },
         shape = beautiful.client_shape_rounded_xl,

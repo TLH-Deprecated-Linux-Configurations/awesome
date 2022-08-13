@@ -4,7 +4,7 @@
 -- |__|_|__||_____|\___/|_____|
 
 -- ------------------------------------------------- --
--- ------------------------------------------------- --
+-- NOTE: this keymap moves clients
 -- ------------------------------------------------- --
 local capi = {
     screen = screen,
@@ -14,38 +14,38 @@ local capi = {
 local movemap = {
     -- ------------------------------------------------- --
     {
-        "Up",
+        'Up',
         function(c)
             capi.client.focus:relative_move(0, dpi(-10), 0, 0)
         end,
-        "Move Client Up"
+        'Move Client Up'
     },
     -- ------------------------------------------------- --
     {
-        "Down",
+        'Down',
         function(c)
             capi.client.focus:relative_move(0, dpi(10), 0, 0)
         end,
-        "Move Client Down"
+        'Move Client Down'
     },
     -- ------------------------------------------------- --
     {
-        "Left",
+        'Left',
         function(c)
             capi.client.focus:relative_move(dpi(-10), 0, 0, 0)
         end,
-        "Move Client Left"
+        'Move Client Left'
     },
     -- ------------------------------------------------- --
     {
-        "Right",
+        'Right',
         function(c)
             capi.client.focus:relative_move(dpi(10), 0, 0, 0)
         end,
-        "Move Client Right"
+        'Move Client Right'
     },
     -- ------------------------------------------------- --
-    {"separator", " "}
+    {'separator', ' '}
 }
 
 return movemap

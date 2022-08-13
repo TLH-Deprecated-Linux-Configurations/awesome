@@ -8,6 +8,8 @@
 -- |__|\__||_____|___  |_____|
 --               |_____|
 -- ------------------------------------------------- --
+-- NOTE: This assigns the keys specific to client windows
+-- --------------------- Calls --------------------- --
 local awful = require('awful')
 
 local modkey = 'Mod4'

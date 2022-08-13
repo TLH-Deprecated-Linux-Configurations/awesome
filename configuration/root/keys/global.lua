@@ -8,23 +8,23 @@
 -- |__|\__||_____|___  |_____|
 --               |_____|
 -- ------------------------------------------------- --
--- ------------------------------------------------- --
+-- NOTE: Provides the keybindings for the whole system
 -- ------------------------------------------------- --
 -- setup
-local awful = require("awful")
-local naughty = require("naughty")
+local awful = require('awful')
+local naughty = require('naughty')
 
-local modkey = require("configuration.root.keys.mod").modKey
-local altkey = require("configuration.root.keys.mod").altKey
+local modkey = require('configuration.root.keys.mod').modKey
+local altkey = require('configuration.root.keys.mod').altKey
 
-local apps = require("configuration.root.apps")
-_G.switcher = require("module.application_switcher")
-require("awful.autofocus")
-local focusmap = require("configuration.root.keys.maps.focus")
-local applicationsmap = require("configuration.root.keys.maps.applications")
-local awesomemap = require("configuration.root.keys.maps.awesome")
-local layoutmap = require("configuration.root.keys.maps.layout")
-local modalbind = require("utilities.client.modalbind")
+local apps = require('configuration.root.apps')
+_G.switcher = require('module.application_switcher')
+require('awful.autofocus')
+local focusmap = require('configuration.root.keys.maps.focus')
+local applicationsmap = require('configuration.root.keys.maps.applications')
+local awesomemap = require('configuration.root.keys.maps.awesome')
+local layoutmap = require('configuration.root.keys.maps.layout')
+local modalbind = require('utilities.client.modalbind')
 
 modalbind.init()
 
@@ -32,146 +32,146 @@ local globalKeys =
     awful.util.table.join(
     -- ------------------------------------------------- --
     awful.key(
-        {"Mod1"},
-        "b",
+        {'Mod1'},
+        'b',
         function()
-            modalbind.grab {keymap = focusmap, name = "Focus Conrol", stay_in_mode = true}
+            modalbind.grab {keymap = focusmap, name = 'Focus Conrol', stay_in_mode = true}
         end,
-        {description = "Enter Focus Control Mode", group = "Mode"}
+        {description = 'Enter Focus Control Mode', group = 'Mode'}
     ),
     -- ------------------------------------------------- --
     awful.key(
-        {"Mod1"},
-        "l",
+        {'Mod1'},
+        'l',
         function()
-            modalbind.grab {keymap = layoutmap, name = "Layout Conrol", stay_in_mode = true}
+            modalbind.grab {keymap = layoutmap, name = 'Layout Conrol', stay_in_mode = true}
         end,
-        {description = "Enter Layout Control Mode", group = "Mode"}
+        {description = 'Enter Layout Control Mode', group = 'Mode'}
     ),
     -- ------------------------------------------------- --
     awful.key(
-        {"Mod1"},
-        "z",
+        {'Mod1'},
+        'z',
         function()
-            modalbind.grab {keymap = applicationsmap, name = "Applications Launch", stay_in_mode = false}
+            modalbind.grab {keymap = applicationsmap, name = 'Applications Launch', stay_in_mode = false}
         end,
-        {description = "Enter Focus Control Mode", group = "Mode"}
+        {description = 'Enter Focus Control Mode', group = 'Mode'}
     ),
     -- ------------------------------------------------- --
     awful.key(
-        {"Mod1"},
-        "a",
+        {'Mod1'},
+        'a',
         function()
-            modalbind.grab {keymap = awesomemap, name = "Awesome Conrol", stay_in_mode = false}
+            modalbind.grab {keymap = awesomemap, name = 'Awesome Conrol', stay_in_mode = false}
         end,
-        {description = "Enter Awesome Control Mode", group = "Mode"}
+        {description = 'Enter Awesome Control Mode', group = 'Mode'}
     ),
     -- ------------------------------------------------- --
     --- Lockscreen
     awful.key(
         {modkey},
-        "l",
+        'l',
         function()
-            require("module.lockscreen.lockscreen").lock_screen_show()
+            awesome.emit_signal('lockscreen::toggle')
         end,
-        {description = "lock screen", group = "hotkeys"}
+        {description = 'lock screen', group = 'hotkeys'}
     ),
     -- ------------------------------------------------- --
     awful.key(
         {modkey},
-        "Tab",
+        'Tab',
         function()
             awful.client.focus.history.previous()
             if client.focus then
                 client.focus:raise()
             end
         end,
-        {description = "go back", group = "Window"}
+        {description = 'go back', group = 'Window'}
     ),
     -- ------------------------------------------------- --
     -- Tab Between Applications
     awful.key(
-        {"Mod1"},
-        "Tab",
+        {'Mod1'},
+        'Tab',
         function()
-            _G.switcher.switch(1, "Mod1", "Alt_L", "Shift", "Tab")
+            _G.switcher.switch(1, 'Mod1', 'Alt_L', 'Shift', 'Tab')
         end,
-        {description = "Tab Forward Between Applications", group = "Launcher"}
+        {description = 'Tab Forward Between Applications', group = 'Launcher'}
     ),
     -- ------------------------------------------------- --
     awful.key(
-        {"Mod1", "Shift"},
-        "Tab",
+        {'Mod1', 'Shift'},
+        'Tab',
         function()
-            _G.switcher.switch(-1, "Mod1", "Alt_L", "Shift", "Tab")
+            _G.switcher.switch(-1, 'Mod1', 'Alt_L', 'Shift', 'Tab')
         end,
         {
-            description = "Tab Back Between Applications",
-            group = "Launcher"
+            description = 'Tab Back Between Applications',
+            group = 'Launcher'
         }
     ),
     -- ------------------------------------------------- --
     awful.key(
         {modkey},
-        "space",
+        'space',
         function()
-            awesome.emit_signal("layout::changed:next")
+            awesome.emit_signal('layout::changed:next')
             naughty.notify(
                 {
                     preset = naughty.config.presets.low,
-                    title = "Switched Layouts",
+                    title = 'Switched Layouts',
                     text = awful.layout.getname(awful.layout.get(awful.screen.focused()))
                 }
             )
         end,
-        {description = "Select Next Layout", group = "Layout"}
+        {description = 'Select Next Layout', group = 'Layout'}
     ),
     -- ------------------------------------------------- --
     awful.key(
-        {modkey, "Shift"},
-        "space",
+        {modkey, 'Shift'},
+        'space',
         function()
-            awesome.emit_signal("layout::changed:prev")
+            awesome.emit_signal('layout::changed:prev')
             naughty.notify(
                 {
                     preset = naughty.config.presets.low,
-                    title = "Switched Layouts",
+                    title = 'Switched Layouts',
                     text = awful.layout.getname(awful.layout.get(awful.screen.focused()))
                 }
             )
         end,
-        {description = "Select Previous Layout", group = "Layout"}
+        {description = 'Select Previous Layout', group = 'Layout'}
     ),
     -- ------------------------------------------------- --
     --Run App Menu
     awful.key(
-        {modkey, "Control"},
-        "Escape",
+        {modkey, 'Control'},
+        'Escape',
         function()
             awful.spawn.with_shell(
-                "rofi -no-lazy-grab -show drun -theme ~/.config/awesome/configuration/rofi/centered.rasi"
+                'rofi -no-lazy-grab -show drun -theme ~/.config/awesome/configuration/rofi/centered.rasi'
             )
         end,
-        {description = "run rofi prompt", group = "Launcher"}
+        {description = 'run rofi prompt', group = 'Launcher'}
     ),
     -- ------------------------------------------------- --
     -- Raise Brightness
     awful.key(
         {},
-        "XF86MonBrightnessUp",
+        'XF86MonBrightnessUp',
         function()
-            awful.spawn("light -A 5%", false)
+            awful.spawn('light -A 5%', false)
             awful.spawn.with_line_callback(
-                "light -G",
+                'light -G',
                 {
                     stdout = function(value)
                         awful.spawn.with_line_callback(
-                            "light -M ",
+                            'light -M ',
                             {
                                 stdout = function(max)
                                     percentage = value / max * 100
                                     -- if percentage ~= percentage_old then
-                                    awesome.emit_signal("signal::brightness", percentage)
+                                    awesome.emit_signal('signal::brightness', percentage)
                                     -- percentage_old = percentage
                                     -- end
                                 end
@@ -181,26 +181,26 @@ local globalKeys =
                 }
             )
         end,
-        {description = "increase brightness by 10%", group = "Awesome"}
+        {description = 'increase brightness by 10%', group = 'Awesome'}
     ),
     -- ------------------------------------------------- --
     -- Decrease Brightness
     awful.key(
         {},
-        "XF86MonBrightnessDown",
+        'XF86MonBrightnessDown',
         function()
-            awful.spawn("light -U 5%", false)
+            awful.spawn('light -U 5%', false)
             awful.spawn.with_line_callback(
-                "light -G",
+                'light -G',
                 {
                     stdout = function(value)
                         awful.spawn.with_line_callback(
-                            "light -M ",
+                            'light -M ',
                             {
                                 stdout = function(max)
                                     percentage = value / max * 100
                                     -- if percentage ~= percentage_old then
-                                    awesome.emit_signal("signal::brightness", percentage)
+                                    awesome.emit_signal('signal::brightness', percentage)
                                     -- percentage_old = percentage
                                     -- end
                                 end
@@ -210,99 +210,99 @@ local globalKeys =
                 }
             )
         end,
-        {description = "decrease brightness by 10%", group = "Awesome"}
+        {description = 'decrease brightness by 10%', group = 'Awesome'}
     ),
     -- ------------------------------------------------- --
     -- Raise Volume Key
     awful.key(
         {},
-        "XF86AudioRaiseVolume",
+        'XF86AudioRaiseVolume',
         function()
             awful.spawn.easy_async_with_shell(
-                "pamixer -i 5",
+                'pamixer -i 5',
                 function()
                     awful.spawn.with_line_callback(
-                        "pamixer --get-volume",
+                        'pamixer --get-volume',
                         {
                             stdout = function(value)
-                                awesome.emit_signal("signal::volume", value)
+                                awesome.emit_signal('signal::volume', value)
                             end
                         }
                     )
                 end
             )
         end,
-        {description = "Increase Volume", group = "Awesome"}
+        {description = 'Increase Volume', group = 'Awesome'}
     ),
     -- ------------------------------------------------- --
     -- Lower Volume Key
     awful.key(
         {},
-        "XF86AudioLowerVolume",
+        'XF86AudioLowerVolume',
         function()
             awful.spawn.easy_async_with_shell(
-                "pamixer -d 5",
+                'pamixer -d 5',
                 function()
                     awful.spawn.with_line_callback(
-                        "pamixer --get-volume",
+                        'pamixer --get-volume',
                         {
                             stdout = function(value)
-                                awesome.emit_signal("signal::volume", value)
+                                awesome.emit_signal('signal::volume', value)
                             end
                         }
                     )
                 end
             )
         end,
-        {description = "Decrease Volume", group = "Awesome"}
+        {description = 'Decrease Volume', group = 'Awesome'}
     ),
     -- ------------------------------------------------- --
     -- Mute Key
     awful.key(
         {},
-        "XF86AudioMute",
+        'XF86AudioMute',
         function()
-            awful.spawn("pamixer -t")
+            awful.spawn('pamixer -t')
             awful.spawn(
-                "pamixer --get-mute",
+                'pamixer --get-mute',
                 function(value)
                     if value == true then
-                        awesome.emit_signal("signal::volume")
+                        awesome.emit_signal('signal::volume')
                     else
-                        awesome.emit_signal("signal::volume", 0)
+                        awesome.emit_signal('signal::volume', 0)
                     end
                 end
             )
         end,
-        {description = "Mute Volume", group = "Awesome"}
+        {description = 'Mute Volume', group = 'Awesome'}
     ),
     -- ------------------------------------------------- --
     -- Power Button
     awful.key(
         {},
-        "XF86PowerDown",
+        'XF86PowerDown',
         function()
-            awesome.emit_signal("module::exit_screen:show")
+            awesome.emit_signal('module::exit_screen:show')
         end,
-        {description = "Shutdown Skynet", group = "Awesome"}
+        {description = 'Shutdown Skynet', group = 'Awesome'}
     ), -- ------------------------------------------------- --
     awful.key(
         {},
-        "XF86PowerOff",
+        'XF86PowerOff',
         function()
-            awesome.emit_signal("module::exit_screen:show")
+            awesome.emit_signal('module::exit_screen:show')
         end,
-        {description = "Toggle Exit Screen", group = "Awesome"}
+        {description = 'Toggle Exit Screen', group = 'Awesome'}
     ),
     -- ------------------------------------------------- --
     -- Display Button
     awful.key(
         {},
-        "XF86Display",
+        'XF86Display',
         function()
-            awful.spawn.single_instance("arandr", false)
+            awful.spawn.single_instance('arandr', false)
         end,
-        {description = "Arandr", group = "Awesome"}
+        {description = 'Arandr', group = 'Awesome'}
     )
     --
 )
@@ -314,7 +314,7 @@ for i = 1, 9 do
         -- View tag only.
         awful.key(
             {modkey},
-            "#" .. i + 9,
+            '#' .. i + 9,
             function()
                 local screen = awful.screen.focused()
                 local tag = screen.tags[i]
@@ -322,13 +322,13 @@ for i = 1, 9 do
                     tag:view_only()
                 end
             end,
-            {description = "view tag #" .. i, group = "Tag"}
+            {description = 'view tag #' .. i, group = 'Tag'}
         ),
         -- ------------------------------------------------- --
         -- Toggle tag display.
         awful.key(
-            {modkey, "Control"},
-            "#" .. i + 9,
+            {modkey, 'Control'},
+            '#' .. i + 9,
             function()
                 local screen = awful.screen.focused()
                 local tag = screen.tags[i]
@@ -336,13 +336,13 @@ for i = 1, 9 do
                     awful.tag.viewtoggle(tag)
                 end
             end,
-            {description = "toggle tag #" .. i, group = "Tag"}
+            {description = 'toggle tag #' .. i, group = 'Tag'}
         ),
         -- ------------------------------------------------- --
         -- Move client to tag.
         awful.key(
-            {modkey, "Shift"},
-            "#" .. i + 9,
+            {modkey, 'Shift'},
+            '#' .. i + 9,
             function()
                 if client.focus then
                     local tag = client.focus.screen.tags[i]
@@ -351,13 +351,13 @@ for i = 1, 9 do
                     end
                 end
             end,
-            {description = "move focused client to tag #" .. i, group = "Tag"}
+            {description = 'move focused client to tag #' .. i, group = 'Tag'}
         ),
         -- ------------------------------------------------- --
         -- Toggle tag on focused client.
         awful.key(
-            {modkey, "Control", "Shift"},
-            "#" .. i + 9,
+            {modkey, 'Control', 'Shift'},
+            '#' .. i + 9,
             function()
                 if client.focus then
                     local tag = client.focus.screen.tags[i]
@@ -366,7 +366,7 @@ for i = 1, 9 do
                     end
                 end
             end,
-            {description = "toggle focused client on tag #" .. i, group = "Tag"}
+            {description = 'toggle focused client on tag #' .. i, group = 'Tag'}
         )
     )
 end

@@ -4,8 +4,8 @@
 -- |___|___||   __|   __||__|__||____|___._||____|__||_____|__|__|_____|
 --          |__|  |__|
 -- ------------------------------------------------- --
--- ------------------------------------------------- --
--- ------------------------------------------------- --
+-- NOTE: this is the keymap that launches applications
+-- --------------------- Calls --------------------- --
 local drop = require('utilities.client.dropdown')
 local apps = require('configuration.root.apps')
 
@@ -16,7 +16,7 @@ local applicationsmap = {
     {
         'Return',
         function(c)
-            drop.toggle(apps.default.terminal, 'left', 'top', 0.7, 0.7)
+            drop.toggle(apps.default.terminal, 'left', 'top', 0.85, 0.85)
         end,
         'Dropdown Terminal'
     },

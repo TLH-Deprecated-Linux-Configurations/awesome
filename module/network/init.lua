@@ -8,118 +8,207 @@
 -- |______||_____|__|__||____|_____|__|
 -- ------------------------------------------------- --
 -- popup that lists wifi networks and currently connected network.
-local screen_geometry = require("awful").screen.focused().geometry
+-- local screen_geometry = require('awful').screen.focused().geometry
 
-local width = dpi(410)
-
-local title = wibox.widget {
-    {
-        {
-            spacing = dpi(0),
-            layout = wibox.layout.align.vertical,
-            expand = "max",
-            widget = wibox.container.margin,
+-- ------------------------------------------------- --
+awful.screen.connect_for_each_screen(
+    function(s)
+        -- ------------------------------------------------- --
+        network =
+            wibox(
             {
-                halign = "center",
-                valign = "center",
-                layout = wibox.layout.fixed.horizontal,
-                spacing = dpi(16),
-                require("widget.network_center.title-text")
+                type = 'dock',
+                shape = beautiful.client_shape_rounded_xl,
+                screen = s,
+                width = dpi(420),
+                height = dpi(580),
+                bg = beautiful.bg_color,
+                margins = dpi(20),
+                ontop = true,
+                visible = false
             }
-        },
-        margins = dpi(5),
-        widget = wibox.container.margin
-    },
-    shape = beautiful.client_shape_rounded_xl,
-    bg = beautiful.bg_normal,
-    forced_width = width,
-    forced_height = dpi(40),
-    ontop = true,
-    border_width = dpi(2),
-    border_color = colors.colorA,
-    widget = wibox.container.background
-}
+        )
+        -- ------------------------------------------------- --
+        -- widgets
 
-local status = wibox.widget {
-    {
-        {
-            spacing = dpi(0),
-            layout = wibox.layout.fixed.vertical,
-            format_item({
-                layout = wibox.layout.fixed.horizontal,
-                spacing = dpi(16),
-                require("widget.network_center.status-icon"),
-                require("widget.network_center.status")
-            })
-        },
-        margins = dpi(5),
-        widget = wibox.container.margin
-    },
-    shape = beautiful.client_shape_rounded_xl,
-    bg = beautiful.bg_normal,
-    forced_width = width,
-    forced_height = 70,
-    ontop = true,
-    border_width = dpi(2),
-    border_color = colors.colorA,
-    widget = wibox.container.background
-}
+        local title =
+            wibox.widget {
+            {
+                {
+                    spacing = dpi(0),
+                    layout = wibox.layout.align.vertical,
+                    expand = 'max',
+                    widget = wibox.container.margin,
+                    {
+                        halign = 'center',
+                        valign = 'center',
+                        layout = wibox.layout.fixed.horizontal,
+                        spacing = dpi(16),
+                        require('widget.network_center.title-text')
+                    }
+                },
+                margins = dpi(5),
+                widget = wibox.container.margin
+            },
+            shape = beautiful.client_shape_rounded_xl,
+            bg = beautiful.bg_normal,
+            forced_width = dpi(480),
+            forced_height = dpi(40),
+            ontop = true,
+            border_width = dpi(2),
+            border_color = colors.colorA,
+            widget = wibox.container.background
+        }
+        -- ------------------------------------------------- --
+        local status =
+            wibox.widget {
+            {
+                {
+                    spacing = dpi(0),
+                    layout = wibox.layout.fixed.vertical,
+                    format_item(
+                        {
+                            layout = wibox.layout.fixed.horizontal,
+                            spacing = dpi(16),
+                            require('widget.network_center.status-icon'),
+                            require('widget.network_center.status')
+                        }
+                    )
+                },
+                margins = dpi(5),
+                widget = wibox.container.margin
+            },
+            shape = beautiful.client_shape_rounded_xl,
+            bg = beautiful.bg_normal,
+            forced_width = dpi(480),
+            forced_height = 70,
+            ontop = true,
+            border_width = dpi(2),
+            border_color = colors.colorA,
+            widget = wibox.container.background
+        }
+        -- ------------------------------------------------- --
+        local networks_panel =
+            wibox.widget {
+            {
+                {
+                    spacing = dpi(0),
+                    layout = wibox.layout.flex.vertical,
+                    format_item(
+                        {
+                            layout = wibox.layout.fixed.horizontal,
+                            spacing = dpi(16),
+                            require('widget.network_center.networks-panel')
+                        }
+                    )
+                },
+                margins = dpi(5),
+                widget = wibox.container.margin
+            },
+            shape = beautiful.client_shape_rounded_xl,
+            bg = beautiful.bg_menu,
+            forced_width = dpi(480),
+            ontop = true,
+            border_width = dpi(2),
+            border_color = colors.colorA,
+            widget = wibox.container.background
+        }
 
-local networks_panel = wibox.widget {
-    {
-        {
-            spacing = dpi(0),
-            layout = wibox.layout.flex.vertical,
-            format_item({
-                layout = wibox.layout.fixed.horizontal,
-                spacing = dpi(16),
-                require("widget.network_center.networks-panel")
-            })
-        },
-        margins = dpi(5),
-        widget = wibox.container.margin
-    },
-    shape = function(cr, width, height)
-        gears.shape.rounded_rect(cr, width, height, beautiful.groups_radius)
-    end,
-    bg = beautiful.bg_menu,
-    forced_width = width,
-    ontop = true,
-    border_width = dpi(2),
-    border_color = colors.colorA,
-    widget = wibox.container.background
-}
+        -- animations
+        --------------
+        local slide_right =
+            rubato.timed {
+            pos = s.geometry.height,
+            rate = 60,
+            intro = 0.14,
+            duration = 0.33,
+            subscribed = function(pos)
+                network.y = s.geometry.y + pos
+            end
+        }
 
-networkCenter = wibox({
-    x = screen_geometry.width - width - dpi(25),
-    y = screen_geometry.y + dpi(35),
-    visible = false,
-    ontop = true,
-    screen = awful.screen.focused(),
-    type = "splash",
-    height = screen_geometry.height - dpi(35),
-    width = width,
-    bg = colors.alpha(colors.colorD, "88"),
-    fg = colors.white
-})
-networkCenter:setup{
-    spacing = dpi(15),
-    title,
-    status,
-    networks_panel,
-    layout = wibox.layout.fixed.vertical
-}
-_G.nc_status = false
+        local slide_end =
+            gears.timer(
+            {
+                single_shot = true,
+                timeout = 0.33 + 0.08,
+                callback = function()
+                    network.visible = false
+                end
+            }
+        )
 
-awesome.connect_signal("network::center:toggle", function()
-    if networkCenter.visible == false then
-        networkCenter.visible = true
-        awesome.emit_signal("network::networks:refreshPanel")
-    elseif networkCenter.visible == true then
-        networkCenter.visible = false
+        -- toggler script
+        --~~~~~~~~~~~~~~~
+        local screen_backup = 1
+
+        nc_toggle = function(screen)
+            -- set screen to default, if none were found
+            if not screen then
+                screen = awful.screen.focused()
+            end
+
+            -- control center x position
+            network.x = screen.geometry.x + (dpi(548) + beautiful.useless_gap * 4)
+
+            -- toggle visibility
+            if network.visible then
+                -- check if screen is different or the same
+                if screen_backup ~= screen.index then
+                    network.visible = true
+                else
+                    slide_end:again()
+                    slide_right.target = s.geometry.height
+                end
+            elseif not network.visible then
+                slide_right.target = s.geometry.height - (network.height + beautiful.useless_gap * 2)
+                network.visible = true
+            end
+
+            -- set screen_backup to new screen
+            screen_backup = screen.index
+        end
+        -- Eof toggler script
+        --~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+        net_off = function(screen)
+            if network.visible then
+                slide_end:again()
+                slide_right.target = s.geometry.height
+            end
+        end
+        -- function to show/hide extra buttons
+        -- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+        function show_extra_control_stuff(input)
+            if input then
+                awesome.emit_signal('network::center::extras', true)
+                network.height = dpi(715)
+                readwrite.write('cc_state', 'open')
+            else
+                awesome.emit_signal('network::center::extras', false)
+                network.height = dpi(580)
+                readwrite.write('cc_state', 'closed')
+            end
+            slide_right.target = s.geometry.height - (network.height + beautiful.useless_gap * 2)
+        end
+
+        -- Initial setup
+        network:setup {
+            {
+                {
+                    {
+                        nil,
+                        title,
+                        layout = wibox.layout.align.horizontal
+                    },
+                    status,
+                    networks_panel,
+                    layout = wibox.layout.fixed.vertical,
+                    spacing = dpi(24)
+                },
+                widget = wibox.container.margin,
+                margins = dpi(20)
+            },
+            layout = wibox.layout.fixed.vertical
+        }
     end
-end)
-
-awesome.connect_signal("network::center:toggle:off",
-                       function() networkCenter.visible = false end)
-return networkCenter
+)

@@ -4,17 +4,16 @@
 -- |___|___||_____|__|  |__||_____|_____|__|__|
 
 -- ------------------------------------------------- --
--- Area is divided into 1-3 even rows, then new columns start after that.
--- basically thrizen on its side
+-- NOTE: Area is divided into 1-3 even rows, then new
+-- columns start after that. Basically thrizen on its side
 -- ------------------------------------------------- --
--- Grab environment we need
---
+-- --------------------- calls --------------------- --
 local pairs = pairs
 
 local horizon = {
-    name = "horizon"
+    name = 'horizon'
 }
-
+-- --------------------- method -------------------- --
 function horizon.arrange(p)
     local area = p.workarea
     local t = p.tag or screen[p.screen].selected_tag
@@ -25,19 +24,19 @@ function horizon.arrange(p)
     local master_area_height = area.height * mwfact
     local slave_area_height = area.height - master_area_height
 
-    -- Special case: no slaves
+    -- NOTE: Special case: no slaves
     if nslaves == 0 then
         master_area_height = area.height
         slave_area_height = 0
     end
 
-    -- Special case: no masters
+    -- NOTE: Special case: no masters
     if nmaster == 0 then
         master_area_height = 0
         slave_area_height = area.height
     end
 
-    -- itearte through masters
+    -- NOTE: itearte through masters
     for idx = 1, nmaster do
         local c = p.clients[idx]
         local g = {
@@ -49,7 +48,7 @@ function horizon.arrange(p)
         p.geometries[c] = g
     end
 
-    -- iterate through slaves
+    -- NOTE: iterate through slaves
     for idx = 1, nslaves do
         local c = p.clients[idx + nmaster]
         local g = {

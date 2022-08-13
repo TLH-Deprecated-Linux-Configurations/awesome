@@ -3,86 +3,86 @@
 -- |    ___||  _  |  __|  |  |__ --|
 -- |___|    |_____|____|_____|_____|
 -- ------------------------------------------------- --
--- ------------------------------------------------- --
+-- NOTE: This keymap is to change focus between clients
 -- ------------------------------------------------- --
 
 local focusmap = {
-    {"separator", "Focus by Tags"},
+    {'separator', 'Focus by Tags'},
     -- ------------------------------------------------- --
     {
-        "j",
+        'j',
         function()
             awful.tag.viewprev()
         end,
-        "Previous Tag"
+        'Previous Tag'
     },
     -- ------------------------------------------------- --
     {
-        "k",
+        'k',
         function()
             awful.tag.viewnext()
         end,
-        "Next Tag"
+        'Next Tag'
     },
     -- ------------------------------------------------- --
-    {"separator", "Focus by Index"},
+    {'separator', 'Focus by Index'},
     -- ------------------------------------------------- --
     {
-        "Left",
+        'Left',
         function()
             awful.client.focus.byidx(-1)
         end,
-        "Previous by Index"
+        'Previous by Index'
     },
     -- ------------------------------------------------- --
     {
-        "Right",
+        'Right',
         function()
             awful.client.focus.byidx(1)
         end,
-        "Next by Index"
+        'Next by Index'
     },
     -- ------------------------------------------------- --
-    {"separator", "Focus by Screen"},
+    {'separator', 'Focus by Screen'},
     {
-        "o",
+        'o',
         function()
             awful.screen.focus_relative(-1)
         end,
-        "Focus to Previous Screen"
+        'Focus to Previous Screen'
     },
     {
-        "i",
+        'i',
         function()
             awful.screen.focus_relative(1)
         end,
-        "Focus to Next Screen"
+        'Focus to Next Screen'
     },
-    {"separator", "Swap by Index"},
+    {'separator', 'Swap by Index'},
     -- ------------------------------------------------- --
     {
-        "l",
+        'l',
         function()
             awful.client.swap.byidx(-1)
         end,
-        "Swap with Previous"
+        'Swap with Previous'
     },
     {
-        "h",
+        'h',
         function()
             awful.client.swap.byidx(1)
         end,
-        "Swap with Next"
+        'Swap with Next'
     },
-    {"separator", "Focus to Urgent"},
+    {'separator', 'Focus to Urgent'},
     {
-        "u",
+        'u',
         function()
             awful.client.urgent.jumpto()
         end,
-        "Jump to Urgent"
+        'Jump to Urgent'
     },
-    {"separator", " "}
+    {'separator', ' '}
 }
 
 return focusmap

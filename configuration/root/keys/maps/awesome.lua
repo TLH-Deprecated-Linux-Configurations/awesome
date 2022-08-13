@@ -3,7 +3,7 @@
 -- |       ||  |  |  |  -__|__ --|  _  |        |  -__|
 -- |___|___||________|_____|_____|_____|__|__|__|_____|
 -- ------------------------------------------------- --
--- ------------------------------------------------- --
+-- NOTE: This is the keymap for awesome-wide functions
 -- ------------------------------------------------- --
 local hotkeys_popup_custom = require('module.hotkeys-popup')
 local awesomemap = {
@@ -52,9 +52,17 @@ local awesomemap = {
     {
         'd',
         function()
-            dashboard:toggle()
+            cc_toggle()
         end,
         'Dashboard'
+    },
+    -- ------------------------------------------------- --
+    {
+        'l',
+        function()
+            awful.spawn(settings.default_programs.lock)
+        end,
+        'Lock Screen'
     },
     -- ------------------------------------------------- --
     {'separator', ' '}

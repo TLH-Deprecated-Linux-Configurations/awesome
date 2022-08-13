@@ -8,7 +8,11 @@
 -- |  _  |     |    |__     ||  __|   _|  -__|  -__|     |
 -- |_____|__|__|    |_______||____|__| |_____|_____|__|__|
 -- ------------------------------------------------- --
-
+-- NOTE: Provides positioning to derivative clients such
+-- that the client does not appear off screen, respects
+-- the screen's padding and workarea and appears centered
+-- above any parent window.
+-- ------------------------------------------------- --
 local _M = function(c)
     if awesome.startup and not c.size_hints.user_position and not c.size_hints.program_position then
         awful.placement.no_offscreen(

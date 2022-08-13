@@ -9,6 +9,8 @@
 -- |_______||_____|_____|__|__|__|_____||____|__| |___  |
 --                                                |_____|
 -- ------------------------------------------------- --
+-- NOTE: Provides the floating windows with a property
+-- store their geometry within, enabling its restoration.
 local _M = function(t)
     for c in ipairs(t:clients()) do
         if awful.layout.get(mouse.screen) == awful.layout.suit.floating then

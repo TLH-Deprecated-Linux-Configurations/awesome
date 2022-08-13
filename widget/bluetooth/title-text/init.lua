@@ -10,7 +10,7 @@
 local user_content =
 	wibox.widget {
 	text = ' Bluetooth ',
-	font = 'Goldman Bold 10',
+	font = 'Goldman Bold 22',
 	widget = wibox.widget.textbox
 }
 
@@ -42,9 +42,7 @@ local spacer_bar =
 local widget =
 	wibox.widget {
 	{
-		spacer_bar,
 		widget_user,
-		spacer_bar,
 		layout = wibox.layout.fixed.horizontal
 	},
 	fg = colors.white,

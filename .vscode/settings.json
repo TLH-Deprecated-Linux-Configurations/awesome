@@ -65,7 +65,12 @@
     "panel_hold",
     "detect",
     "restore",
-    "remember"
+    "remember",
+    "files",
+    "networkCenter",
+    "timer",
+    "awesome_dnd_state",
+    "not_off"
   ],
   "lua.targetVersion": "5.1",
   "restructuredtext.languageServer.disabled": true,
@@ -92,5 +97,9 @@
     "elenapan's",
     "manilarome's",
     "nvim"
-  ]
+  ],
+  "lua.format.linebreakMultipleAssignments": true,
+  "lua.format.singleQuote": true,
+  "Lua.completion.showParams": false,
+  "Lua.signatureHelp.enable": false
 }

@@ -3,11 +3,15 @@
 -- |  --  |  -__|  __||    <
 -- |_____/|_____|____||__|__|
 -- ------------------------------------------------- --
--- also courtesy of bling
-
+-- NOTE: also courtesy of bling
+--
+-- NOTE: this layout shows the upper right corner of
+-- clients out of focus like a poker hand or deck of
+-- playing cards
+-- ------------------------------------------------- --
 local mylayout = {}
 
-mylayout.name = "deck"
+mylayout.name = 'deck'
 
 function mylayout.arrange(p)
     local area = p.workarea

@@ -4,7 +4,7 @@
 -- |_______|___._|___  |_____|_____||____|
 --               |_____|
 -- ------------------------------------------------- --
--- need to use regular lua local require calls for the libraries here
+-- NOTE: need to use regular lua local require calls for the libraries here
 -- because this is called earlier than they are
 --
 local awful = require('awful')
@@ -20,7 +20,7 @@ local beautiful = require('beautiful')
 local tag = tag
 local dpi = beautiful.xresources.apply_dpi
 -- ------------------------------------------------- --
--- define the default layouts, incliding the custom ones called above
+-- NOTE: define the default layouts, incliding the custom ones called above
 --
 tag.connect_signal(
     'request::default_layouts',
@@ -59,7 +59,7 @@ tag.connect_signal(
 -- ------------------------------------------------- --
 awful.screen.connect_for_each_screen(
     function(s)
-        -- Each screen has its own tag table, which I have styled using
+        -- NOTE: Each screen has its own tag table, which I have styled using
         -- the name of the window manager.
         --
         local tag_names = {'A', 'W', 'E', 'S', 'O', 'M', 'E', 'W', 'M'}
@@ -82,7 +82,7 @@ awful.screen.connect_for_each_screen(
         end
 
         -- ------------------------------------------------- --
-        -- assign properties to the taglist
+        -- NOTE: assign properties to the taglist
         --
         local tags =
             awful.widget.taglist {
@@ -94,7 +94,7 @@ awful.screen.connect_for_each_screen(
 )
 -- ------------------------------------------------- --
 -- ------------------ useless gaps ----------------- --
--- gaps determined by layout type
+-- NOTE: gaps determined by layout type
 --
 tag.connect_signal(
     'property::layout',

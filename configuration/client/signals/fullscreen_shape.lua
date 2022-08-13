@@ -9,18 +9,20 @@
 -- |_____||__|__|___._|   __|_____|
 --                    |__|
 -- ------------------------------------------------- --
--- inspired by the work of Jeff M. Hubbard &lt;jeffmhubbard@gmail.com&gt;
+-- NOTE: inspired by the work of Jeff M. Hubbard
+-- jeffmhubbard@gmail.com&gt;
 --
--- centers popup windows over the center of their parent. Necessary for GIMP
+-- NOTE: Provides the client with its shape, which if
+-- fullscreen or maximized, does not need to round the
+-- corners for obvious reasons
 -- ------------------------------------------------- --
---- Center over parent signal
 ----
 
 local _M = function(c)
     if c.maximized or c.fullscreen then
         c.shape = beautiful.client_shape_rectangle
     else
-        c.shape = beautiful.client_shape_rounded
+        c.shape = beautiful.client_shape_rounded_xl
     end
 end
 

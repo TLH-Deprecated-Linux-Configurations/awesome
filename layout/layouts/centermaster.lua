@@ -3,7 +3,10 @@
 -- |   ---||  -__|     ||   _|  -__|   _|    |       ||  _  |__ --||   _|  -__|   _|
 -- |______||_____|__|__||____|_____|__|      |__|_|__||___._|_____||____|_____|__|
 -- ------------------------------------------------- --
--- Adapted from https://github.com/kotbaton/awesomewm-config
+-- NOTE: Adapted from https://github.com/kotbaton/awesomewm-config
+--
+-- NOTE: The nelow demonstrates the tiling arrangement
+-- provided by this file
 --    +---+-----+---+
 --    | 5 |     | 2 |
 --    |   |     +---+
@@ -12,14 +15,12 @@
 --    | 6 |     | 4 |
 --    +---+-----+---+
 
--- ------------------------------------------------- --
+-- --------------------- calls --------------------- --
 local math = math
 local screen = screen
--- ------------------------------------------------- --
-
+-- --------------------- object -------------------- --
 local centermaster = {}
--- ------------------------------------------------- --
-
+-- -------------------- methods -------------------- --
 function arrange(p)
     local area = p.workarea
     local t = p.tag or screen[p.screen].selected_tag
@@ -35,26 +36,26 @@ function arrange(p)
     local number_of_right_sided_slaves = nslaves - number_of_left_sided_slaves
     local left_iterator = 0
     local right_iterator = 0
-
-    -- Special case: no maters -> rrelapse into awesomes fair layout
+    -- ------------------------------------------------- --
+    -- NOTE: Special case: no maters -> rrelapse into awesomes fair layout
     if t.master_count == 0 then
         awful.layout.suit.fair.arrange(p)
         return
     end
-
-    -- Special case: one slave -> relapse into awesomes masterstack tile layout
+    -- ------------------------------------------------- --
+    -- NOTE: Special case: one slave -> relapse into awesomes masterstack tile layout
     if nslaves == 1 then
         awful.layout.suit.tile.right.arrange(p)
         return
     end
-
-    -- Special case: no slaves -> fullscreen master area
+    -- ------------------------------------------------- --
+    -- NOTE: Special case: no slaves -> fullscreen master area
     if nslaves < 1 then
         master_area_width = area.width
         master_area_x = area.x
     end
-
-    -- iterate through masters
+    -- ------------------------------------------------- --
+    -- NOTE: iterate through masters
     for idx = 1, nmaster do
         local c = p.clients[idx]
         local g
@@ -66,9 +67,9 @@ function arrange(p)
         }
         p.geometries[c] = g
     end
-
-    -- iterate through slaves
-    for idx = 1, nslaves do -- idx=nmaster+1,#p.clients do
+    -- ------------------------------------------------- --
+    -- NOTE: iterate through slaves
+    for idx = 1, nslaves do -- NOTE: idx=nmaster+1,#p.clients do
         local c = p.clients[idx + nmaster]
         local g
         if idx % 2 == 0 then
@@ -92,7 +93,7 @@ function arrange(p)
     end
 end
 -- ------------------------------------------------- --
-centermaster.name = "centermaster"
+centermaster.name = 'centermaster'
 
 function centermaster.arrange(p)
     return arrange(p)

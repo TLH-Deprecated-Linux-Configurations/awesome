@@ -6,8 +6,8 @@
 -- ------------------------------------------------- --
 -- Creates a new card widget
 --    -- card with a title and body
---    local card = lib.card("title")
---    card.update_body(lib.textbox("body"))
+--    local card = card("title")
+--    card.update_body("body")
 -- ------------------------------------------------- --
 local header_font = beautiful.font .. " 14"
 local bg = beautiful.bg_menu

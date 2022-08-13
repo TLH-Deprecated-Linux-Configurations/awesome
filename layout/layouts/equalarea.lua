@@ -8,13 +8,16 @@
 -- |       ||   _|  -__|  _  |
 -- |___|___||__| |_____|___._|
 -- ------------------------------------------------- --
--- from bling directly, but without
--- any extra bloat bundled with it
-
+-- NOTE: from bling directly, but without any extra
+-- bloat bundled with it because I don't need to set
+-- user options to modify what is already part of my
+-- configuration and thus have a lot less bugginess to
+-- contend with.
+-- --------------------- calls --------------------- --
 local math = math
 local screen = screen
 local mylayout = {}
-mylayout.name = "equalarea"
+mylayout.name = 'equalarea'
 
 local function divide(p, g, low, high, cls, mwfact, mcount)
     if low == high then

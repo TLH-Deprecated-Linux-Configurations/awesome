@@ -3,6 +3,9 @@
 -- |   ---|  |  ||  -__|     ||   _|
 -- |______|__|__||_____|__|__||____|
 -- ------------------------------------------------- --
+-- NOTE: this calls the various other files in this
+-- subdirectory
+-- --------------------- Calls --------------------- --
 require(... .. '.rules')
 require(... .. '.signals')
 require(... .. '.keys')

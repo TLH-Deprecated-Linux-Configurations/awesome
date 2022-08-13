@@ -7,6 +7,10 @@
 -- |   __ <|  |  ||   _|   _|  _  |     |__ --|
 -- |______/|_____||____|____|_____|__|__|_____|
 -- ------------------------------------------------- --
+-- NOTE: In awesomewm, buttons usually refer to the mouse
+-- buttons specifically. This file provides the mouse
+-- button functionality when a client window is beneath
+-- the mouse.
 -- ------------------- Libraries ------------------- --
 local awful = require('awful')
 local modkey = require('configuration.root.keys.mod').modKey
@@ -41,7 +45,7 @@ local clientbuttons =
         end
     ),
     -- ------------------------------------------------- --
-    -- Deliberately Not the Scroll Wheel
+    -- NOTE: I deliberately did not use the scroll wheel
     awful.button(
         {modkey},
         8,

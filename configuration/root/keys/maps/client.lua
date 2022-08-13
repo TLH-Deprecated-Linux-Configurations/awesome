@@ -3,7 +3,7 @@
 -- |   ---|  |  ||  -__|     ||   _|
 -- |______|__|__||_____|__|__||____|
 -- ------------------------------------------------- --
--- ------------------------------------------------- --
+-- NOTE: This keymap provides the client controls
 -- ------------------------------------------------- --
 local capi = {
     screen = screen,
@@ -12,106 +12,106 @@ local capi = {
 
 local clientmap = {
     -- ------------------------------------------------- --
-    {"separator", "Client Positioning"},
+    {'separator', 'Client Positioning'},
     -- ------------------------------------------------- --
     {
-        "b",
+        'b',
         function(c)
             capi.client.focus:swap(awful.client.getmaster())
         end,
-        "Move to Master"
+        'Move to Master'
     },
     -- ------------------------------------------------- --
     {
-        "o",
+        'o',
         function(c)
             capi.client.focus:move_to_screen()
         end,
-        "Move to Screen"
+        'Move to Screen'
     },
     -- ------------------------------------------------- --
     {
-        "t",
+        't',
         function()
             capi.client.focus.ontop = not c.ontop
         end,
-        "Toggle Client On Top"
+        'Toggle Client On Top'
     },
     -- ------------------------------------------------- --
     {
-        "n",
+        'n',
         function()
             capi.client.focus.minimized = true
         end,
-        "Minimize Client"
+        'Minimize Client'
     },
     -- ------------------------------------------------- --
     {
-        "N",
+        'N',
         function()
             local c = awful.client.restore()
             -- Focus restored client
             if c then
-                c:emit_signal("request::activate", "key.unminimize", {raise = true})
+                c:emit_signal('request::activate', 'key.unminimize', {raise = true})
             end
         end,
-        "Minimize Client"
+        'Minimize Client'
     },
     -- ------------------------------------------------- --
     {
-        "x",
+        'x',
         function()
             capi.client.focus:kill()
         end,
-        "Close Client"
+        'Close Client'
     },
     -- ------------------------------------------------- --
     {
-        "d",
+        'd',
         function()
             capi.client.focus.floating = not capi.client.focus.floating
         end,
-        "Toggle Floating Client"
+        'Toggle Floating Client'
     },
     -- ------------------------------------------------- --
-    {"separator", "Maximize Client"},
+    {'separator', 'Maximize Client'},
     -- ------------------------------------------------- --
     {
-        "m",
+        'm',
         function()
             capi.client.focus.maximized = not capi.client.focus.maximized
             capi.client.focus:raise()
         end,
-        "Maximize Client"
+        'Maximize Client'
     },
     -- ------------------------------------------------- --
     {
-        "h",
+        'h',
         function()
             capi.client.focus.maximized_horizontal = not capi.client.focus.maximized
             capi.client.focus:raise()
         end,
-        "Maximize Client Horizontally"
+        'Maximize Client Horizontally'
     },
     -- ------------------------------------------------- --
     {
-        "v",
+        'v',
         function()
             capi.client.focus.maximized_vetical = not capi.client.focus.maximized_vertical
             capi.client.focus:raise()
         end,
-        "Maximize Client"
+        'Maximize Client'
     },
     {
-        "f",
+        'f',
         function(c)
             capi.client.focus.fullscreen = not capi.client.focus.fullscreen
             capi.client.focus:raise()
         end,
-        "Toggle Fullscreen"
+        'Toggle Fullscreen'
     },
     -- ------------------------------------------------- --
-    {"separator", " "}
+    {'separator', ' '}
 }
 
 return clientmap

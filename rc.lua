@@ -19,9 +19,11 @@
 -- |       ||  |  |  |  -__|__ --|  _  |        |  -__||  |  |  |       |
 -- |___|___||________|_____|_____|_____|__|__|__|_____||________|__|_|__|
 -- ------------------------------------------------- --
+-- NOTE: This is the central file of the configuration
+--  from which the rest of the configuration is called
+--  using require or pcall functions. Order Matters.
 -- --------------- Luarocks Libraries -------------- --
 pcall(require, 'luarocks.loader')
-
 -- ------------------------------------------------- --
 -- ---------- Global Variable Declaration ---------- --
 require('settings.global_variables')
@@ -54,3 +56,5 @@ require('signal')
 require('module')
 -- ------------------------------------------------- --
 -- ---------------------- fin ---------------------- --
+
+-- vim: filetype=lua:expandtab:shiftwidth=4:tabstop=8:softtabstop=4:textwidth=80

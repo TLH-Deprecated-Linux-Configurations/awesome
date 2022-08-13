@@ -20,22 +20,20 @@
 -- |______|__|__||_____|__|__||____|
 
 -- ------------------------------------------------- --
--- eliminates the three other alternatives I have used to do this. More
--- elegant and not specific to floating
+-- NOTE: eliminates the three other alternatives I
+-- have used to do this. More elegant and not specific
+-- to floating
 -- ------------------------------------------------- --
 -- Always place clients on screen.
 --
 local _M = function(c)
     if mouse.object_under_pointer() ~= c then
-        gears.timer {
-            timeout = 0.25,
-            callback = function()
-                local geometry = c:geometry()
-                local x = geometry.x + geometry.width / 2
-                local y = geometry.y + geometry.height / 2
-                mouse.coords({x = x, y = y}, true)
-            end
-        }
+        callback = function()
+            local geometry = c:geometry()
+            local x = geometry.x + geometry.width / 2
+            local y = geometry.y + geometry.height / 2
+            mouse.coords({x = x, y = y}, true)
+        end
     end
 end
 

@@ -10,11 +10,11 @@ naughty.config.spacing = dpi(8)
 naughty.config.icon_formats = {'svg', 'png', 'jpg', 'gif'}
 
 -- ------------------------------------------------- --
---  provide rules for the notifications
+-- NOTE provide rules for the notifications
 ruled.notification.connect_signal(
     'request::rules',
     function()
-        -- Critical notifs
+        -- NOTE Critical notifs
         ruled.notification.append_rule {
             rule = {urgency = 'critical'},
             properties = {
@@ -22,7 +22,7 @@ ruled.notification.connect_signal(
             }
         }
 
-        -- Normal notifs
+        -- NOTE Normal notifs
         ruled.notification.append_rule {
             rule = {urgency = 'normal'},
             properties = {
@@ -30,7 +30,7 @@ ruled.notification.connect_signal(
             }
         }
 
-        -- Low notifs
+        -- NOTE Low notifs
         ruled.notification.append_rule {
             rule = {urgency = 'low'},
             properties = {
@@ -40,7 +40,7 @@ ruled.notification.connect_signal(
     end
 )
 -- ------------------------------------------------- --
---  connect to the error signal
+-- NOTE connect to the error signal
 naughty.connect_signal(
     'request::display_error',
     function(message, startup)
@@ -54,20 +54,20 @@ naughty.connect_signal(
     end
 )
 -- ------------------------------------------------- --
---  color assignment
+-- NOTE color assignment
 local main_color = {
-    ['low'] = colors.colorI,
-    ['normal'] = colors.colorI,
-    ['critical'] = colors.colorA
+    ['low'] = colors.alpha(colors.colorI, '88'),
+    ['normal'] = colors.alpha(colors.colorI, '88'),
+    ['critical'] = colors.alpha(colors.colorA, '88')
 }
 -- ------------------------------------------------- --
 local edge_color = {
-    ['low'] = colors.colorB,
-    ['normal'] = colors.colorB,
-    ['critical'] = colors.color4
+    ['low'] = colors.alpha(colors.colorB, '88'),
+    ['normal'] = colors.alpha(colors.colorB, '88'),
+    ['critical'] = colors.alpha(colors.color4, '88')
 }
 -- ------------------------------------------------- --
--- template for the notifications in general, with icons
+-- NOTE template for the notifications in general, with icons
 
 naughty.connect_signal(
     'request::display',
@@ -84,7 +84,7 @@ naughty.connect_signal(
         local edge_color = edge_color[n.urgency]
         local icon = icons.awesome
         -- ------------------------------------------------- --
-        -- template for actions on notification
+        -- NOTE template for actions on notification
         local actions =
             wibox.widget {
             notification = n,
@@ -110,11 +110,10 @@ naughty.connect_signal(
                 underline_normal = false,
                 underline_selected = true
             },
-            widget = naughty.list.actions,
-            bg = beautiful.bg_focus
+            widget = naughty.list.actions
         }
         -- ------------------------------------------------- --
-        -- icon template
+        -- NOTE icon template
         local notif_icon =
             wibox.widget {
             {
@@ -139,9 +138,9 @@ naughty.connect_signal(
             notification = n,
             type = 'notification',
             -- ------------------------------------------------- --
-            -- For antialiasing: The real shape is set in widget_template
+            -- NOTE For antialiasing: The real shape is set in widget_template
             shape = beautiful.client_shape_rounded,
-            position = 'bottom_right',
+            position = 'top_right',
             widget_template = {
                 {
                     {
@@ -151,7 +150,7 @@ naughty.connect_signal(
                                 {
                                     align = 'center',
                                     visible = true,
-                                    font = 'Goldman Black Bold 8',
+                                    font = 'Goldman Black Bold 12',
                                     markup = '<b>' .. n.title .. '</b>',
                                     -- widget = wibox.widget.textbox
                                     widget = naughty.widget.title
@@ -187,7 +186,7 @@ naughty.connect_signal(
                     widget = wibox.container.constraint
                 },
                 -- ------------------------------------------------- --
-                -- Anti-aliasing container
+                -- NOTE Anti-aliasing container
                 shape = function(cr, width, height)
                     gears.shape.rounded_rect(cr, width, height, dpi(4))
                 end,
@@ -199,7 +198,7 @@ naughty.connect_signal(
             }
         }
 
-        if _G.dnd_status or nc_status then
+        if _G.dnd_status or _G.nc_status then
             naughty.destroy_all_notifications(nil, 1)
         end
     end

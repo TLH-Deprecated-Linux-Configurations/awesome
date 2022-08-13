@@ -16,6 +16,7 @@ local clickable_container = require('utilities.ui.clickable_container')
 local colors = require('themes').colors
 local apps = require('configuration.root.apps')
 local dpi = require('beautiful').xresources.apply_dpi
+local clock = require('module.exit-screen.clock')
 --  _______         __ __
 -- |    ___|.--.--.|__|  |_
 -- |    ___||_   _||  |   _|
@@ -243,7 +244,7 @@ local exit_screen = function(s)
         lock,
         layout = wibox.layout.fixed.horizontal
       },
-      nil,
+      clock,
       expand = 'none',
       layout = wibox.layout.align.vertical
     },

@@ -10,16 +10,16 @@
 -- ------------------------------------------------- --
 
 -- ------------------- variables ------------------- --
-local service_name = "Silent"
-local service_icon = icons.dont_disturb
+local service_name = 'Silent'
+local service_icon = icons.notifications
 -- ------------------------------------------------- --
 -- ---------------------- icon --------------------- --
 local icon =
     wibox.widget {
     image = service_icon,
     widget = wibox.widget.imagebox,
-    valign = "center",
-    align = "center",
+    valign = 'center',
+    align = 'center',
     forced_width = dpi(48),
     forced_height = dpi(48)
 }
@@ -27,11 +27,11 @@ local icon =
 -- ---------------------- name --------------------- --
 local name =
     wibox.widget {
-    font = beautiful.font .. "12",
+    font = beautiful.font .. '12',
     widget = wibox.widget.textbox,
     text = service_name,
-    valign = "center",
-    align = "center"
+    valign = 'center',
+    align = 'center'
 }
 -- ------------------------------------------------- --
 -- --------------------- button -------------------- --
@@ -63,21 +63,21 @@ _G.awesome_dnd_state = false
 local update_things = function()
     if _G.awesome_dnd_state then
         icon.text = service_icon
-        naughty.notification({title = "Notifs disabled"})
+        naughty.notification({title = 'Notifications', text = 'Notifications are disabled.'})
     else
         icon.text = service_icon
-        naughty.notification({title = "Notifs enabled"})
+        naughty.notification({title = 'Notifications', text = 'Notifications are enabled.'})
     end
 end
 
 -- reload old state
 --~~~~~~~~~~~~~~~~~
 
-local output = readwrite.readall("dnd_state")
+local output = readwrite.readall('dnd_state')
 
 local boolconverter = {
-    ["true"] = true,
-    ["false"] = false
+    ['true'] = true,
+    ['false'] = false
 }
 
 awesome_dnd_state = boolconverter[output]
@@ -90,7 +90,7 @@ dnd_button:buttons(
             {},
             1,
             function()
-                awesome.emit_signal("notifications::center::toggle")
+                not_toggle()
             end
         ),
         awful.button(
@@ -98,7 +98,7 @@ dnd_button:buttons(
             3,
             function()
                 awesome_dnd_state = not awesome_dnd_state
-                readwrite.write("dnd_state", tostring(_G.awesome_dnd_state))
+                readwrite.write('dnd_state', tostring(_G.awesome_dnd_state))
                 update_things()
             end
         )

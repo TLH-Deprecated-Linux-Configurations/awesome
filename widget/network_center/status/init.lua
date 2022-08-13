@@ -87,7 +87,7 @@ local widget =
 		widget_host,
 		layout = wibox.layout.fixed.vertical
 	},
-	fg = beautiful.white,
+	fg = colors.white,
 	widget = wibox.container.background
 }
 

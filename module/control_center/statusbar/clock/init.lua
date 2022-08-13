@@ -3,8 +3,8 @@
 -- |   ---|  ||  _  |  __||    <
 -- |______|__||_____|____||__|__|
 -- ------------------------------------------------- --
-local time = "%H:%M"
-local date = "%d.%b.%Y"
+local time = '%H:%M'
+local date = '%d.%b.%Y'
 -- ------------------------------------------------- --
 
 local widget_button_clock =
@@ -12,7 +12,7 @@ local widget_button_clock =
     format = time,
     refresh = 1,
     widget = wibox.widget.textclock,
-    font = beautiful.font .. " 17"
+    font = beautiful.font .. ' 17'
 }
 -- ------------------------------------------------- --
 local widget_button =
@@ -20,10 +20,8 @@ local widget_button =
     {
         {
             {
-                nil,
                 widget_button_clock,
-                nil,
-                layout = wibox.layout.align.horizontal
+                layout = wibox.layout.flex.horizontal
             },
             top = dpi(4),
             bottom = dpi(4),
@@ -50,14 +48,6 @@ widget_button:buttons(
                 elseif widget_button_clock.format == date then
                     widget_button_clock:set_format(time)
                 end
-            end
-        ),
-        awful.button(
-            {},
-            3,
-            nil,
-            function()
-                awesome.emit_signal("bar::centers:toggle:off")
             end
         )
     )

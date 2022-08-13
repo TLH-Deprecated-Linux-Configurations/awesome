@@ -14,9 +14,10 @@
 -- |___|   |___._|__| |_____|__|__||____|
 
 -- ------------------------------------------------- --
--- inspired by the work of Jeff M. Hubbard &lt;jeffmhubbard@gmail.com&gt;
---
--- centers popup windows over the center of their parent. Necessary for GIMP
+-- NOTE: inspired by the work of Jeff M. Hubbard
+-- jeffmhubbard@gmail.com
+-- ------------------------------------------------- --
+-- NOTE: centers popup windows over the center of their parent. Necessary for GIMP
 -- ------------------------------------------------- --
 --- Center over parent signal
 ----
@@ -37,3 +38,4 @@ local _M = function(c)
 end
 
 return _M
+-- vim: filetype=lua:expandtab:shiftwidth=4:tabstop=8:softtabstop=4:textwidth=80

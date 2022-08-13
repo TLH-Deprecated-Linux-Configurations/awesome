@@ -6,10 +6,10 @@
 local widget_icon =
   wibox.widget {
   layout = wibox.layout.align.vertical,
-  expand = "none",
+  expand = 'none',
   nil,
   {
-    id = "icon",
+    id = 'icon',
     image = icons.devices,
     resize = true,
     widget = wibox.widget.imagebox
@@ -37,14 +37,14 @@ local widget =
 }
 
 widget:connect_signal(
-  "mouse::enter",
+  'mouse::enter',
   function()
     widget.bg = colors.color3
   end
 )
 
 widget:connect_signal(
-  "mouse::leave",
+  'mouse::leave',
   function()
     widget.bg = colors.colorA
   end
@@ -57,7 +57,7 @@ widget:buttons(
       1,
       nil,
       function()
-        awesome.emit_signal("bluetooth::devices:refreshPanel")
+        awesome.emit_signal('bluetooth::devices:refreshPanel')
       end
     )
   )

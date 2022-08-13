@@ -8,10 +8,11 @@
 -- |   __ <|  |  ||   _|   _|  _  |     |__ --|
 -- |______/|_____||____|____|_____|__|__|_____|
 -- ------------------------------------------------- --
--- In the awesome context, buttons refer primarily to the mouse buttons and
--- in the root context to what the mouse buttons do if used without a client
--- beneath the mouse when the button is pressed such as when looking at a
--- blank screen
+-- NOTE: In the awesome context, buttons refer
+-- primarily to the mouse buttons and in the root
+-- context to what the mouse buttons do if used without
+-- a client beneath the mouse when the button is pressed
+--  such as when looking at a blank screen
 -- ------------------------------------------------- --
 _G.root.buttons(
     gears.table.join(
@@ -42,10 +43,10 @@ _G.root.buttons(
         -- ------------------------------------------------- --
         -- with modifier
         awful.button(
-            {"Control"},
+            {'Control'},
             2,
             function()
-                awesome.emit_signal("module::exit_screen:show")
+                awesome.emit_signal('module::exit_screen:show')
             end
         ),
         -- ------------------------------------------------- --
@@ -54,34 +55,34 @@ _G.root.buttons(
             {},
             8,
             function()
-                awful.spawn("light -A 10", false)
-                awesome.emit_signal("widget::brightness")
-                awesome.emit_signal("module::brightness_osd:show", true)
+                awful.spawn('light -A 10', false)
+                awesome.emit_signal('widget::brightness')
+                awesome.emit_signal('module::brightness_osd:show', true)
             end
         ),
         awful.button(
             {},
             9,
             function()
-                awful.spawn("light -U 10", false)
-                awesome.emit_signal("widget::brightness")
-                awesome.emit_signal("module::brightness_osd:show", true)
+                awful.spawn('light -U 10', false)
+                awesome.emit_signal('widget::brightness')
+                awesome.emit_signal('module::brightness_osd:show', true)
             end
         ),
         -- ------------------------------------------------- --
         -- With modifiers
         awful.button(
-            {"Control"},
+            {'Control'},
             8,
             function()
                 awful.spawn.easy_async_with_shell(
-                    "pamixer -i 5",
+                    'pamixer -i 5',
                     function()
                         awful.spawn.with_line_callback(
-                            "pamixer --get-volume",
+                            'pamixer --get-volume',
                             {
                                 stdout = function(value)
-                                    awesome.emit_signal("signal::volume", value)
+                                    awesome.emit_signal('signal::volume', value)
                                 end
                             }
                         )
@@ -90,17 +91,17 @@ _G.root.buttons(
             end
         ),
         awful.button(
-            {"Control"},
+            {'Control'},
             9,
             function()
                 awful.spawn.easy_async_with_shell(
-                    "pamixer -d 5",
+                    'pamixer -d 5',
                     function()
                         awful.spawn.with_line_callback(
-                            "pamixer --get-volume",
+                            'pamixer --get-volume',
                             {
                                 stdout = function(value)
-                                    awesome.emit_signal("signal::volume", value)
+                                    awesome.emit_signal('signal::volume', value)
                                 end
                             }
                         )
