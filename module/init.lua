@@ -7,7 +7,7 @@ local awful = require('awful')
 -- ------------------------------------------------- --
 
 require(... .. '.application_switcher')
-
+require(... .. '.screenshot_menu')
 require(... .. '.hotkeys-popup')
 require(... .. '.bluetooth')
 

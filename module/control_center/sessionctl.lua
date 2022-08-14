@@ -27,6 +27,19 @@ local lock_button =
     margins = dpi(8)
 }
 
+-- screenshot button
+local screenshot_button =
+    wibox.widget {
+    {
+        widget = wibox.widget.textbox,
+        text = '',
+        font = 'FontAwesome Regular 28',
+        align = 'center',
+        valign = 'center'
+    },
+    widget = wibox.container.margin,
+    margins = dpi(8)
+}
 -- exitscreen button
 local power_button =
     wibox.widget {
@@ -71,20 +84,35 @@ lock_button:buttons(
         )
     )
 )
-
+screenshot_button:buttons(
+    gears.table.join(
+        awful.button(
+            {},
+            1,
+            function()
+                if control_c.visible then
+                    cc_toggle()
+                end
+                local screen = awful.screen.focused()
+                sc_toggle()
+            end
+        )
+    )
+)
 --~~~~~~~~~~~~~~~~~~~
 --~~~~~~~~~~~~~~~~~~~
 return wibox.widget {
     nil,
     {
         {
+            clickable_container(screenshot_button),
             clickable_container(lock_button),
             clickable_container(power_button),
             layout = wibox.layout.fixed.horizontal,
-            spacing = dpi(10)
+            spacing = dpi(5)
         },
-        layout = wibox.layout.fixed.vertical
+        layout = wibox.layout.flex.vertical
     },
-    layout = wibox.layout.flex.vertical,
+    layout = wibox.layout.flex.horizontal,
     expand = 'none'
 }

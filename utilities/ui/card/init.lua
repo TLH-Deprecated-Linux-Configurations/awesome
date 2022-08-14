@@ -9,7 +9,7 @@
 --    local card = card("title")
 --    card.update_body("body")
 -- ------------------------------------------------- --
-local header_font = beautiful.font .. " 14"
+
 local bg = beautiful.bg_menu
 local bg_title = beautiful.bg_menu
 -- ------------------------------------------------- --
@@ -17,9 +17,9 @@ local titled_card = function(title, height)
     local header =
         wibox.widget {
         text = title,
-        font = header_font,
-        align = "center",
-        valign = "center",
+        font = beautiful.font .. ' 14',
+        align = 'center',
+        valign = 'center',
         widget = wibox.widget.textbox
     }
     -- ------------------------------------------------- --

@@ -71,7 +71,9 @@
     "timer",
     "awesome_dnd_state",
     "not_off",
-    "bluetooth"
+    "bluetooth",
+    "create_button",
+    "screenshot_menu"
   ],
   "lua.targetVersion": "5.1",
   "restructuredtext.languageServer.disabled": true,

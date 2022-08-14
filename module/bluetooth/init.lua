@@ -161,6 +161,9 @@ awful.screen.connect_for_each_screen(
 
             -- NOTE  set screen_backup to new screen
             screen_backup = screen.index
+            -- ------------------------------------------------- --
+            -- NOTE refresh the power status
+            awesome.emit('bluetooth::power:refresh')
         end
         -- -------------------- Turn Off ------------------- --
         bc_off = function(screem)

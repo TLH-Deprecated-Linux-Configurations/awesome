@@ -41,41 +41,15 @@ local widget =
             widget = wibox.container.margin
         },
         shape = gears.shape.rect,
-        bg = colors.color8,
         widget = wibox.container.background
     },
     forced_width = dpi(40),
     forced_height = dpi(40),
-    widget = clickable_container
+    widget = clickable_container,
+    bg = colors.color8
 }
 
 local power_status = true
-
-widget:connect_signal(
-    'mouse::enter',
-    function()
-        if power_status == false then
-            widget_icon.icon:set_image(icons.bluetooth)
-            widget.bg = colors.color8
-        elseif power_status == true then
-            widget_icon.icon:set_image(icons.bluetooth_off)
-            widget.bg = colors.colorA
-        end
-    end
-)
-
-widget:connect_signal(
-    'mouse::leave',
-    function()
-        if power_status == false then
-            widget_icon.icon:set_image(icons.bluetooth_off)
-            widget.bg = colors.colorA
-        elseif power_status == true then
-            widget_icon.icon:set_image(icons.bluetooth)
-            widget.bg = colors.color8
-        end
-    end
-)
 
 awesome.connect_signal(
     'bluetooth::power:toggle',
