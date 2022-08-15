@@ -280,7 +280,7 @@ awful.screen.connect_for_each_screen(
                     widget = wibox.widget.imagebox
                 },
                 widget = wibox.container.margin,
-                margins = dpi(6)
+                margins = dpi(4)
             }
 
             local btn_minus =
@@ -293,7 +293,7 @@ awful.screen.connect_for_each_screen(
                     widget = wibox.widget.imagebox
                 },
                 widget = wibox.container.margin,
-                margins = dpi(6)
+                margins = dpi(4)
             }
 
             local value_text =
@@ -310,10 +310,10 @@ awful.screen.connect_for_each_screen(
                     shape = beautiful.client_shape_rounded,
                     {
                         widget = wibox.container.margin,
-                        left = dpi(8),
-                        right = dpi(8),
-                        top = dpi(5),
-                        bottom = dpi(5),
+                        left = dpi(4),
+                        right = dpi(4),
+                        top = dpi(1),
+                        bottom = dpi(1),
                         {
                             btn_minus,
                             value_text,

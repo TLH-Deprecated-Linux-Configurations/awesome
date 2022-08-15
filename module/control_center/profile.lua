@@ -1,6 +1,11 @@
--- profile widget
--- ~~~~~~~~~~~~~~
-
+--                    ___ __ __
+-- .-----.----.-----.'  _|__|  |.-----.
+-- |  _  |   _|  _  |   _|  |  ||  -__|
+-- |   __|__| |_____|__| |__|__||_____|
+-- |__|
+-- ------------------------------------------------- --
+-- NOTE this is essentially just for the logo icon in the
+-- dashboard
 -- image
 local profile_image =
     wibox.widget {
@@ -11,31 +16,11 @@ local profile_image =
     },
     widget = wibox.container.background,
     bg = beautiful.bg_button,
-    border_width = dpi(1),
-    forced_width = dpi(125),
-    forced_height = dpi(125),
-    shape = beautiful.client_shape_rounded_xl,
+    border_width = dpi(3),
+    forced_width = dpi(84),
+    forced_height = dpi(84),
+    shape = beautiful.client_shape_rounded,
     border_color = colors.black
-}
-
--- username
-local username =
-    wibox.widget {
-    widget = wibox.widget.textbox,
-    text = os.getenv('USER'),
-    font = beautiful.font .. ' Regular  13',
-    align = 'left',
-    valign = 'center'
-}
-
--- description/host
-local desc =
-    wibox.widget {
-    widget = wibox.widget.textbox,
-    text = '@AwesomeWM',
-    font = beautiful.font .. ' Bold 11',
-    align = 'left',
-    valign = 'center'
 }
 
 -- return
@@ -44,8 +29,7 @@ return wibox.widget {
     {
         nil,
         {
-            username,
-            desc,
+            nil,
             layout = wibox.layout.fixed.vertical,
             spacing = dpi(2)
         },

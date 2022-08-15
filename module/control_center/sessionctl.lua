@@ -31,10 +31,11 @@ local lock_button =
 local screenshot_button =
     wibox.widget {
     {
-        widget = wibox.widget.textbox,
-        text = '',
-        font = 'FontAwesome Regular 28',
-        align = 'center',
+        widget = wibox.widget.imagebox,
+        image = icons.image_crop,
+        halign = 'center',
+        forced_height = dpi(36),
+        forced_width = dpi(36),
         valign = 'center'
     },
     widget = wibox.container.margin,
@@ -111,7 +112,7 @@ return wibox.widget {
             layout = wibox.layout.fixed.horizontal,
             spacing = dpi(5)
         },
-        layout = wibox.layout.flex.vertical
+        layout = wibox.layout.fixed.vertical
     },
     layout = wibox.layout.flex.horizontal,
     expand = 'none'
