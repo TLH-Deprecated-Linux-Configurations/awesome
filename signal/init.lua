@@ -21,7 +21,7 @@ if hardware.hasSound() == true then
     pcall(require, 'signal.volume')
 end
 -- ------------------------------------------------- --
-pcall(require, 'signal.brightness')
+-- pcall(require, 'signal.brightness')
 pcall(require, 'signal.cpu')
 pcall(require, 'signal.disk')
 pcall(require, 'signal.ram')

@@ -22,13 +22,17 @@ local active_color_1 = {
 }
 
 local bright_icon =
-    wibox.widget {
-    markup = "<span foreground='#f4f4f7'><b></b></span>",
-    align = "center",
-    valign = "center",
-    font = "SFMono Nerd Font Mono Bold  64",
-    widget = wibox.widget.textbox
-}
+wibox.widget(
+    {
+        id = 'popup_icon',
+        image = icons.brightness,
+        align = 'center',
+        forced_height = dpi(72),
+        forced_width = dpi(72),
+        valign = 'center',
+        widget = wibox.widget.imagebox()
+    }
+)
 
 -- create the bright_adjust component
 local bright_adjust =
@@ -62,10 +66,10 @@ bright_adjust:setup {
         layout = wibox.layout.align.vertical,
         {
             bright_icon,
-            top = dpi(15),
-            left = dpi(50),
-            right = dpi(50),
-            bottom = dpi(15),
+            top = dpi(35),
+            left = dpi(65),
+            right = dpi(65),
+            bottom = dpi(35),
             widget = wibox.container.margin
         },
         {
@@ -97,12 +101,15 @@ local hide_bright_adjust =
 -- ------------------------------------------------- --
 local update_slider = function(percentage)
     local brightness = percentage
-    if bright_adjust.visible == false then
         bright_adjust.visible = true
-        hide_bright_adjust:start()
-    else
-        hide_bright_adjust:again()
-    end
+        gears.timer {
+            timeout = 3,
+            autostart = true,
+            callback = function()
+                bright_adjust.visible = false
+            end
+        }
+    
     if brightness ~= nil then
         bright_bar:set_value(brightness)
     end

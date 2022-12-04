@@ -7,14 +7,14 @@
 local left_content =
 	wibox.widget {
 	text = 'Network Connected:',
-	font = 'Goldman Bold 11',
+	font = 'Operaror SSm Black 11',
 	widget = wibox.widget.textbox
 }
 
 local right_content =
 	wibox.widget {
 	text = 'None',
-	font = 'Goldman Bold 11',
+	font = 'Operaror SSm Black 11',
 	widget = wibox.widget.textbox
 }
 

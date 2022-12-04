@@ -15,7 +15,7 @@ local box =
 			nil,
 			{
 				text = 'No New Notifications',
-				font = 'Goldman Bold 12',
+				font = 'Operaror SSm Black 12',
 				widget = wibox.widget.textbox,
 				align = 'center'
 			},
