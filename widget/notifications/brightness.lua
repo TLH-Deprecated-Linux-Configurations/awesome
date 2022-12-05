@@ -49,6 +49,7 @@ local bright_adjust =
         bg = colors.alpha(colors.black, "88")
     }
 )
+-- ------------------------------------------------- --
 
 local bright_bar =
     wibox.widget {
@@ -60,7 +61,7 @@ local bright_bar =
     max_value = 100,
     value = 100
 }
-
+-- ------------------------------------------------- --
 bright_adjust:setup {
     {
         layout = wibox.layout.align.vertical,
@@ -86,7 +87,7 @@ bright_adjust:setup {
     border_color = colors.alpha(colors.colorA, "aa"),
     widget = wibox.container.background
 }
-
+-- ------------------------------------------------- --
 -- create a 3 second timer to hide the volume adjust
 -- component whenever the timer is started
 local hide_bright_adjust =
@@ -98,22 +99,22 @@ local hide_bright_adjust =
     end
 }
 
+
 -- ------------------------------------------------- --
 local update_slider = function(percentage)
     local brightness = percentage
+    if bright_adjust.visible then
+        hide_bright_adjust:again()
+    else
         bright_adjust.visible = true
-        gears.timer {
-            timeout = 3,
-            autostart = true,
-            callback = function()
-                bright_adjust.visible = false
-            end
-        }
+        hide_bright_adjust:start()
+    end
     
     if brightness ~= nil then
         bright_bar:set_value(brightness)
     end
 end
+-- ------------------------------------------------- --
 
 awesome.connect_signal(
     "signal::brightness",
