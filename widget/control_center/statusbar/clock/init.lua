@@ -12,7 +12,7 @@ local widget_button_clock =
     format = time,
     refresh = 1,
     widget = wibox.widget.textclock,
-    font = beautiful.font .. ' 17'
+    font = beautiful.font .. ' 15'
 }
 -- ------------------------------------------------- --
 local widget_button =
@@ -44,8 +44,10 @@ widget_button:buttons(
             nil,
             function()
                 if widget_button_clock.format == time then
+                    widget_button_clock.font = beautiful.font .. ' 11'
                     widget_button_clock:set_format(date)
                 elseif widget_button_clock.format == date then
+                    widget_button_clock.font = beautiful.font .. ' 15'
                     widget_button_clock:set_format(time)
                 end
             end

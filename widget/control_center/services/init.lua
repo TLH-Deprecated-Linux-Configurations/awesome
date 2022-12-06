@@ -8,12 +8,12 @@
 -- |_____|_____||____|____|_____|__|__|_____|
 -- ------------------------------------------------- --
 
-local wifi = require('module.control_center.services.network')
-local bluetooth = require('module.control_center.services.bluetooth')
-local dnd = require('module.control_center.services.notifications')
+local wifi = require('widget.control_center.services.network')
+local bluetooth = require('widget.control_center.services.bluetooth')
+local dnd = require('widget.control_center.services.notifications')
 
 -- extras
-local stats = require('module.control_center.services.stats')
+local stats = require('widget.control_center.services.stats')
 
 -- ------------------------------------------------- --
 -- ------------------ extras setup ----------------- --

@@ -15,7 +15,7 @@ local sliders =
                     {
                         {
                             {
-                                require("module.control_center.sliders.volume-slider"),
+                                require('widget.control_center.sliders.volume-slider'),
                                 forced_height = dpi(85),
                                 widget = wibox.container.background
                             },
@@ -23,13 +23,13 @@ local sliders =
                             margins = dpi(3)
                         },
                         widget = wibox.container.background,
-                        bg = colors.alpha(colors.black, "cc"),
+                        bg = colors.alpha(colors.black, 'cc'),
                         shape = beautiful.client_shape_rounded_xl
                     },
                     {
                         {
                             {
-                                require("module.control_center.sliders.brightness-slider"),
+                                require('widget.control_center.sliders.brightness-slider'),
                                 forced_height = dpi(85),
                                 widget = wibox.container.background
                             },
@@ -37,7 +37,7 @@ local sliders =
                             margins = dpi(3)
                         },
                         widget = wibox.container.background,
-                        bg = colors.alpha(colors.black, "cc"),
+                        bg = colors.alpha(colors.black, 'cc'),
                         shape = beautiful.client_shape_rounded_xl
                     }
                 }

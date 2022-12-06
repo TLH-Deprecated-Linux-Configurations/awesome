@@ -34,23 +34,19 @@ end
 
 -- Add apps to autostart here
 autostart_apps = {
-    -- Disable Bell
-    'xset -b', -- Bluetooth
+    'xset -b',
     'xsettingsd &',
-    'sudo thinkfan -q &',
+    -- 'sudo thinkfan -q &',
     'xrdb "$HOME"/.Xresources &',
     'pnmixer &',
-    --"dropbox start &",
     'sudo pkill /usr/libexec/xfce-polkit && /usr/libexec/xfce-polkit &',
     'xinput set-prop "ELAN1301:00 04F3:30C6 Touchpad" "libinput Tapping Enabled" 1 &',
     ' eval "$(gnome-keyring-daemon -s --components=pkcs11,secrets,ssh,gpg)" &',
     'xcape -e "Super_L=Super_L|Control_L|Escape" &',
     'picom -b --experimental-backends &',
     'xautolock -time 8 -locker /home/tlh/.config/awesome/bin/blur.sh & ',
-    -- 'xautolock -time 8 -locker slock & ',
     'dbus-daemon --session --address=unix:path=$XDG_RUNTIME_DIR/bus &',
     ' gpg-agent --daemon'
-    --"feh --bg-fill ~/.config/awesome/themes/backgrounds/" .. settings.background
 }
 
 -- ------------------------------------------------- --

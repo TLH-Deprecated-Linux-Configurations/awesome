@@ -17,7 +17,7 @@ awful.screen.connect_for_each_screen(
                 type = 'dock',
                 shape = beautiful.client_shape_rounded_xl,
                 screen = s,
-                width = dpi(420),
+                width = dpi(340),
                 height = dpi(580),
                 bg = beautiful.bg_color,
                 margins = dpi(20),
@@ -55,7 +55,7 @@ awful.screen.connect_for_each_screen(
             },
             shape = beautiful.client_shape_rounded_xl,
             bg = beautiful.bg_panel,
-            forced_width = dpi(410),
+            forced_width = dpi(330),
             forced_height = dpi(70),
             ontop = true,
             border_width = dpi(2),
@@ -76,7 +76,7 @@ awful.screen.connect_for_each_screen(
             },
             shape = beautiful.client_shape_rounded_xl,
             bg = beautiful.bg_menu,
-            forced_width = dpi(410),
+            forced_width = dpi(330),
             ontop = true,
             border_width = dpi(2),
             border_color = colors.colorA,
@@ -100,7 +100,7 @@ awful.screen.connect_for_each_screen(
             },
             shape = beautiful.client_shape_rounded_xl,
             bg = beautiful.bg_panel,
-            forced_width = dpi(410),
+            forced_width = dpi(330),
             forced_height = dpi(50),
             ontop = true,
             border_width = dpi(2),
@@ -143,7 +143,7 @@ awful.screen.connect_for_each_screen(
             end
 
             -- NOTE control center x position
-            bluetooth.x = screen.geometry.x + (dpi(1335) + beautiful.useless_gap * 4)
+            bluetooth.x = screen.geometry.x + (dpi(1175) + beautiful.useless_gap * 4)
 
             -- NOTE  toggle visibility
             if bluetooth.visible then
@@ -163,7 +163,7 @@ awful.screen.connect_for_each_screen(
             screen_backup = screen.index
             -- ------------------------------------------------- --
             -- NOTE refresh the power status
-            awesome.emit('bluetooth::power:refresh')
+            awesome.emit_signal('bluetooth::power:refresh')
         end
         -- -------------------- Turn Off ------------------- --
         bc_off = function(screem)

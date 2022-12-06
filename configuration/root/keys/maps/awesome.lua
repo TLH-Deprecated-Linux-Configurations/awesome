@@ -54,7 +54,7 @@ local awesomemap = {
         function()
             cc_toggle()
         end,
-        'Dashboard'
+        'Control Center'
     },
     -- ------------------------------------------------- --
     {

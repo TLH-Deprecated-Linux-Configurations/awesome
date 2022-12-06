@@ -20,7 +20,7 @@ awful.screen.connect_for_each_screen(
                 type = 'dock',
                 shape = beautiful.client_shape_rounded_xl,
                 screen = s,
-                width = dpi(420),
+                width = dpi(380),
                 height = dpi(580),
                 bg = beautiful.bg_color,
                 margins = dpi(20),
@@ -71,7 +71,7 @@ awful.screen.connect_for_each_screen(
             },
             shape = beautiful.client_shape_rounded_xl,
             bg = beautiful.bg_panel,
-            forced_width = dpi(480),
+            forced_width = dpi(380),
             forced_height = dpi(70),
             ontop = true,
             border_width = dpi(2),
@@ -99,7 +99,7 @@ awful.screen.connect_for_each_screen(
             },
             shape = beautiful.client_shape_rounded_xl,
             bg = beautiful.bg_normal,
-            forced_width = dpi(480),
+            forced_width = dpi(380),
             forced_height = 70,
             ontop = true,
             border_width = dpi(2),
@@ -126,7 +126,7 @@ awful.screen.connect_for_each_screen(
             },
             shape = beautiful.client_shape_rounded_xl,
             bg = beautiful.bg_menu,
-            forced_width = dpi(480),
+            forced_width = dpi(380),
             ontop = true,
             border_width = dpi(2),
             border_color = colors.colorA,
@@ -168,7 +168,7 @@ awful.screen.connect_for_each_screen(
             end
 
             -- control center x position
-            network.x = screen.geometry.x + (dpi(480) + beautiful.useless_gap * 4)
+            network.x = screen.geometry.x + (dpi(405) + beautiful.useless_gap * 4)
 
             -- toggle visibility
             if network.visible then

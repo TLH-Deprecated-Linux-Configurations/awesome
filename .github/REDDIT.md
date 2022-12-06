@@ -38,7 +38,7 @@ Feel free to borrow as you see fit, all I ask for is a star in the process (and 
 - [// Icon Theme //](https://github.com/the-Electric-Tantra-Linux/chhinamasta-icon-theme) - Chhinamasta
 - [// Grub2 Theme //](https://github.com/the-Electric-Tantra-Linux/Bhairava-Grub-Theme) - Bhairava
 - [// Base16 Theme //](https://github.com/Thomashighbaugh/base16-vice-scheme)
-- [ // Firefox userChrome.css & userChrome.js //](https://github.com/Thomashighbaugh/firefox) - aka Higgs Boson
+- [ // librewolf userChrome.css & userChrome.js //](https://github.com/Thomashighbaugh/librewolf) - aka Higgs Boson
 - [// ZSH Configuration //](https://github.com/Thomashighbaugh/zsh)
 - [// Dotfiles //](https://github.com/Thomashighbaugh/dotfiles) - All the Rest is located here. 
 - [// Wallpaper Collection //](https://github.com/the-Electric-Tantra-Linux/awesome/themes/backgrounds) 

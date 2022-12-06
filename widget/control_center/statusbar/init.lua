@@ -3,12 +3,12 @@
 
 -- widgets
 -- ~~~~~~~
-local battery = require('module.control_center.statusbar.battery')
+local battery = require('widget.control_center.statusbar.battery')
 
 ---------------------------------------------------------- EOF Battery
 
 -- clock
-local clock = require('module.control_center.statusbar.clock')
+local clock = require('widget.control_center.statusbar.clock')
 
 -- extra control icon
 local extras =

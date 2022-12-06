@@ -16,9 +16,8 @@
 client.connect_signal(
     'manage',
     function(c)
-        require('configuration.client.signals.position_on_screen')(c)
+        require('configuration.client.signals.position')(c)
         require('configuration.client.signals.floating_properties')(c)
-        require('configuration.client.signals.center_mouse_on_client')(c)
     end
 )
 -- ------------------------------------------------- --
@@ -27,7 +26,7 @@ client.connect_signal(
 client.connect_signal(
     'mouse::enter',
     function(c)
-        require('configuration.client.signals.sloppy_focus')(c)
+        require('configuration.client.signals.focus')(c)
     end
 )
 -- ------------------------------------------------- --
@@ -35,7 +34,6 @@ client.connect_signal(
     'focus',
     function(c)
         c.border_color = beautiful.border_focus
-        require('configuration.client.signals.center_mouse_on_client')(c)
     end
 )
 -- ------------------------------------------------- --
@@ -46,30 +44,7 @@ client.connect_signal(
     end
 )
 -- ------------------------------------------------- --
-client.connect_signal(
-    'swapped',
-    function(c)
-        require('configuration.client.signals.center_mouse_on_client')(c)
-    end
-)
-
--- ------------------------------------------------- --
-client.connect_signal(
-    'unmanage',
-    function(c)
-        require('configuration.client.signals.center_mouse_on_client')(c)
-    end
-)
--- ------------------------------------------------- --
 -- ------------------- Properties ------------------ --
--- ------------------------------------------------- --
-
-client.connect_signal(
-    'property::minimized',
-    function(c)
-        require('configuration.client.signals.center_mouse_on_client')(c)
-    end
-)
 -- ------------------------------------------------- --
 -- Manipulate client shape on floating
 client.connect_signal(

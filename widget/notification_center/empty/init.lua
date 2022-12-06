@@ -26,7 +26,7 @@ local box =
 	},
 	shape = beautiful.client_shape_rounded_xl,
 	fg = colors.white,
-	bg = beautiful.bg_panel,
+	bg = beautiful.bg_normal,
 	widget = wibox.container.background
 }
 

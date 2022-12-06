@@ -333,8 +333,8 @@ elements.create = function(name, macAddress, pairStatus, connectStatus)
         },
         shape = beautiful.client_shape_rounded,
         fg = colors.white,
-        border_width = dpi(1),
-        border_color = colors.colorA,
+        border_width = dpi(3),
+        border_color = colors.alpha(colors.colorA, '88'),
         widget = wibox.container.background
     }
 

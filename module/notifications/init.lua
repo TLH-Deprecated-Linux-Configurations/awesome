@@ -5,8 +5,9 @@
 -- ------------------------------------------------- --
 require('widget.notifications')
 -- Apply theme variables
-naughty.config.padding = dpi(8)
+naughty.config.padding = dpi(18)
 naughty.config.spacing = dpi(8)
+naughty.config.shape = beautiful.client_shape_rounded_xl
 naughty.config.icon_formats = {'svg', 'png', 'jpg', 'gif'}
 
 -- ------------------------------------------------- --
@@ -74,7 +75,7 @@ naughty.connect_signal(
     function(n)
         local custom_notification_icon =
             wibox.widget {
-            font = beautiful.font .. ' Bold  18',
+            font = beautiful.font .. '  18',
             align = 'center',
             valign = 'center',
             widget = wibox.widget.textbox
@@ -93,7 +94,7 @@ naughty.connect_signal(
                     {
                         {
                             id = 'text_role',
-                            font = beautiful.notification_font,
+                            font = beautiful.font .. ' 12',
                             widget = wibox.widget.textbox
                         },
                         left = dpi(6),
@@ -125,7 +126,7 @@ naughty.connect_signal(
                     margins = dpi(5),
                     widget = wibox.container.margin
                 },
-                shape = beautiful.client_shape_rounded_lg,
+                shape = beautiful.client_shape_rounded_xl,
                 bg = edge_color,
                 widget = wibox.container.background
             },
@@ -139,7 +140,7 @@ naughty.connect_signal(
             type = 'notification',
             -- ------------------------------------------------- --
             -- NOTE For antialiasing: The real shape is set in widget_template
-            shape = beautiful.client_shape_rounded,
+            shape = beautiful.client_shape_rounded_lg,
             position = 'top_right',
             widget_template = {
                 {
@@ -150,7 +151,7 @@ naughty.connect_signal(
                                 {
                                     align = 'center',
                                     visible = true,
-                                    font = 'Goldman Black Bold 12',
+                                    font = beautiful.font .. ' 12',
                                     markup = '<b>' .. n.title .. '</b>',
                                     -- widget = wibox.widget.textbox
                                     widget = naughty.widget.title
@@ -175,7 +176,7 @@ naughty.connect_signal(
                                 },
                                 layout = wibox.layout.align.vertical
                             },
-                            margins = dpi(4),
+                            margins = dpi(14),
                             widget = wibox.container.margin
                         },
                         layout = wibox.layout.fixed.horizontal
@@ -187,13 +188,11 @@ naughty.connect_signal(
                 },
                 -- ------------------------------------------------- --
                 -- NOTE Anti-aliasing container
-                shape = function(cr, width, height)
-                    gears.shape.rounded_rect(cr, width, height, dpi(4))
-                end,
+                shape = beautiful.client_shape_rounded_lg,
                 bg = main_color,
                 fg = colors.white,
-                border_width = dpi(1),
-                border_color = colors.colorA,
+                border_width = dpi(3),
+                border_color = colors.colorC,
                 widget = wibox.container.background
             }
         }

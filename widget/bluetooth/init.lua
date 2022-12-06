@@ -28,7 +28,8 @@ local function bluetooth()
                                 valign = 'center',
                                 require('widget.bluetooth.title-text')
                             },
-                            require('widget.bluetooth.search-button')
+                            require('widget.bluetooth.search-button'),
+                            bg = beautiful.bg_normal
                         }
                     ),
                     {
@@ -47,10 +48,10 @@ local function bluetooth()
                         widget = wibox.container.margin
                     },
                     shape = beautiful.client_shape_rounded,
-                    bg = beautiful.bg_focus,
+                    bg = beautiful.bg_panel,
                     widget = wibox.container.background
                 },
-                bg = beautiful.bg_focus,
+                bg = beautiful.bg_panel,
                 widget = wibox.container.background
             },
             margins = dpi(3),
