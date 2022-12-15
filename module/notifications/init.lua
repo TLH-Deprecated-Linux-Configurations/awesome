@@ -188,11 +188,11 @@ naughty.connect_signal(
                 },
                 -- ------------------------------------------------- --
                 -- NOTE Anti-aliasing container
-                shape = beautiful.client_shape_rounded_lg,
+                shape = beautiful.client_shape_rounded,
                 bg = main_color,
                 fg = colors.white,
-                border_width = dpi(3),
-                border_color = colors.colorC,
+                border_width = dpi(2),
+                border_color = colors.alpha(colors.colorC, 'cc'),
                 widget = wibox.container.background
             }
         }

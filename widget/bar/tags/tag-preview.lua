@@ -51,7 +51,10 @@ local function draw_widget(
                         content = gears.surface(c.prev_content)
                     end
                     local cr = cairo.Context(content)
-                    local x, y, w, h = cr:clip_extents()
+                    local x,
+                        y,
+                        w,
+                        h = cr:clip_extents()
                     local img = cairo.ImageSurface.create(cairo.Format.ARGB32, w - x, h - y)
                     cr = cairo.Context(img)
                     cr:set_source_surface(content, 0, 0)
@@ -83,11 +86,11 @@ local function draw_widget(
                             nil,
                             img_box,
                             nil,
-                            expand = "outside",
+                            expand = 'outside',
                             layout = wibox.layout.align.horizontal
                         },
                         nil,
-                        expand = "outside",
+                        expand = 'outside',
                         widget = wibox.layout.align.vertical
                     },
                     forced_height = math.floor(c.height * scale),
@@ -156,29 +159,29 @@ local enable = function(opts)
     local client_radius = dpi(3)
     local client_opacity = 0.75
     local client_bg = beautiful.bg_focus
-    local client_border_color = colors.alpha(colors.colorB, "99")
-    local client_border_width = dpi(1)
+    local client_border_color = colors.alpha(colors.colorB, '99')
+    local client_border_width = dpi(2)
     local widget_bg = colors.black
-    local widget_border_color = colors.alpha(colors.colorB, "99")
-    local widget_border_width = dpi(1)
+    local widget_border_color = colors.alpha(colors.colorB, '99')
+    local widget_border_width = dpi(2)
 
     local tag_preview_box =
         awful.popup(
         {
-            type = "dropdown_menu",
+            type = 'dropdown_menu',
             visible = false,
             ontop = true,
             placement = placement_fn,
             widget = wibox.container.background,
             input_passthrough = true,
-            bg = colors.alpha(colors.blacker, "00")
+            bg = colors.alpha(colors.blacker, '00')
         }
     )
     -- ------------------------------------------------- --
     -- ------------------------------------------------- --
     -- ------------------------------------------------- --
     tag.connect_signal(
-        "property::selected",
+        'property::selected',
         function(t)
             for _, c in ipairs(t:clients()) do
                 c.prev_content = gears.surface.duplicate_surface(c.content)
@@ -189,7 +192,7 @@ local enable = function(opts)
     -- ------------------------------------------------- --
     -- ------------------------------------------------- --
     awesome.connect_signal(
-        "tag_preview::update",
+        'tag_preview::update',
         function(t)
             local geo =
                 t.screen:get_bounding_geometry(
@@ -227,7 +230,7 @@ local enable = function(opts)
     -- ------------------------------------------------- --
     -- ------------------------------------------------- --
     awesome.connect_signal(
-        "tag_preview::visibility",
+        'tag_preview::visibility',
         function(s, v)
             if not placement_fn then
                 tag_preview_box.x = s.geometry.x + widget_x

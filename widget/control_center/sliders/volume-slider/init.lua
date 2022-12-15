@@ -10,19 +10,19 @@
 -- ------------------------------------------------- --
 local widget_name =
     wibox.widget {
-    text = "Volume",
-    font = beautiful.font .. " Bold 10",
-    align = "left",
+    text = 'Volume',
+    font = beautiful.font .. ' Bold 10',
+    align = 'left',
     widget = wibox.widget.textbox
 }
 -- ------------------------------------------------- --
 local widget_icon =
     wibox.widget {
     layout = wibox.layout.align.vertical,
-    expand = "none",
+    expand = 'none',
     nil,
     {
-        id = "icon",
+        id = 'icon',
         image = icons.volume,
         resize = true,
         widget = wibox.widget.imagebox
@@ -49,22 +49,22 @@ local slider =
     wibox.widget {
     nil,
     {
-        id = "volume_slider",
+        id = 'volume_slider',
         bar_shape = gears.shape.rounded_bar,
-        bar_height = dpi(18),
-        bar_color = colors.alpha(colors.black, "ee"),
-        bar_active_color = colors.alpha(colors.color1, "aa"),
+        bar_height = dpi(12),
+        bar_color = colors.alpha(colors.black, 'ee'),
+        bar_active_color = colors.alpha(colors.color1, 'aa'),
         handle_color = colors.white,
         handle_shape = beautiful.client_shape_rounded,
-        handle_width = dpi(24),
+        handle_width = dpi(12),
         handle_border_color = colors.black,
-        handle_border_width = dpi(3),
+        handle_border_width = dpi(2),
         maximum = 100,
         value = 100,
         widget = wibox.widget.slider
     },
     nil,
-    expand = "none",
+    expand = 'none',
     forced_height = dpi(24),
     layout = wibox.layout.align.vertical
 }
@@ -72,17 +72,17 @@ local slider =
 local volume_slider = slider.volume_slider
 -- ------------------------------------------------- --
 volume_slider:connect_signal(
-    "property::value",
+    'property::value',
     function()
         local volume_level = volume_slider:get_value()
         if volume_level ~= nil then
-            spawn("pamixer --set-volume " .. volume_level, false)
-            awesome.emit_signal("signal::volume:update", tonumber(volume_level))
-            awesome.emit_signal("signal::volume", tonumber(volume_level), 0)
+            spawn('pamixer --set-volume ' .. volume_level, false)
+            awesome.emit_signal('signal::volume:update', tonumber(volume_level))
+            awesome.emit_signal('signal::volume', tonumber(volume_level), 0)
             widget_icon.icon:set_image(icons.volume)
         else
             volume_slider:set_value(0)
-            spawn("pamixer --mute", false)
+            spawn('pamixer --mute', false)
             widget_icon.icon:set_image(icons.mute)
         end
     end
@@ -100,7 +100,7 @@ volume_slider:buttons(
                     return
                 end
                 volume_slider:set_value(volume_slider:get_value() + 5)
-                awesome.emit_signal("signal::volume:update", volume_slider:get_value())
+                awesome.emit_signal('signal::volume:update', volume_slider:get_value())
             end
         ),
         awful.button(
@@ -114,7 +114,7 @@ volume_slider:buttons(
                 end
                 volume_slider:set_value(volume_slider:get_value() - 5)
 
-                awesome.emit_signal("signal::volume:update", volume_slider:get_value())
+                awesome.emit_signal('signal::volume:update', volume_slider:get_value())
             end
         )
     )
@@ -125,14 +125,14 @@ local update_slider_mute = function()
         [["pamixer --get-mute"]],
         function(stdout)
             if stdout ~= nil then
-                local status = string.match(stdout, "%a+")
-                if stdout == "true" then
+                local status = string.match(stdout, '%a+')
+                if stdout == 'true' then
                     widget_icon.icon:set_image(icons.mute)
                     awful.spawn.easy_async_with_shell([["pamixer --mute "]], false)
-                    awesome.emit_signal("signal:volume:mute")
-                elseif status == "false" then
+                    awesome.emit_signal('signal:volume:mute')
+                elseif status == 'false' then
                     awful.spawn.easy_async_with_shell([["pamixer --unmute "]], false)
-                    awesome.emit_signal("signal:volume:unmute")
+                    awesome.emit_signal('signal:volume:unmute')
                     widget_icon.icon:set_image(icons.volume)
                 end
             else
@@ -144,7 +144,7 @@ end
 -- ------------------------------------------------- --
 local update_slider = function()
     awful.spawn.easy_async_with_shell(
-        "pamixer --get-volume",
+        'pamixer --get-volume',
         function(stdout)
             if stdout ~= nil then
                 local volume = tonumber(stdout)
@@ -169,9 +169,9 @@ local mute_toggle = function()
         function()
             if volume_slider:get_value() ~= 0 then
                 widget_icon.icon:set_image(icons.mute)
-                awesome.emit_signal("signal::volume:mute")
+                awesome.emit_signal('signal::volume:mute')
             else
-                awesome.emit_signal("signal::volume:unmute")
+                awesome.emit_signal('signal::volume:unmute')
                 widget_icon.icon:set_image(icons.volume)
             end
         end
@@ -195,23 +195,23 @@ widget_content:buttons(
 local volume_tooltip =
     awful.tooltip {
     objects = {widget_icon},
-    text = "None",
-    mode = "outside",
-    align = "right",
+    text = 'None',
+    mode = 'outside',
+    align = 'right',
     margin_leftright = dpi(8),
     margin_topbottom = dpi(8),
-    preferred_positions = {"right", "left", "top", "bottom"}
+    preferred_positions = {'right', 'left', 'top', 'bottom'}
 }
 -- ------------------------------------------------- --
 -- The emit will come from the global keybind
 awesome.connect_signal(
-    "signal::volume:update",
+    'signal::volume:update',
     function(value)
         local percentage = tonumber(value)
         if percentage ~= nil then
             update_slider()
             update_slider_mute()
-            volume_tooltip:set_text("Volume Level is Currently: " .. percentage .. "%")
+            volume_tooltip:set_text('Volume Level is Currently: ' .. percentage .. '%')
         end
     end
 )
@@ -229,7 +229,7 @@ local cc_volume =
                 spacing = dpi(5),
                 {
                     layout = wibox.layout.align.vertical,
-                    expand = "none",
+                    expand = 'none',
                     nil,
                     {
                         layout = wibox.layout.fixed.horizontal,

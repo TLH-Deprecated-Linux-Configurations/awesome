@@ -5,6 +5,8 @@
 --                                     |__|
 -- ------------------------------------------------- --
 -- call lua dependencies
+-- if you didn't already know, this config requires awesome
+-- compiled with luajit.
 pcall(require, 'luarocks.loader')
 pcall(require, 'luajit.bin.activate')
 pcall(require, 'luajit.bin.lua')

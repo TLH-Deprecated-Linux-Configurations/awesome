@@ -36,7 +36,6 @@ end
 autostart_apps = {
     'xset -b',
     'xsettingsd &',
-    -- 'sudo thinkfan -q &',
     'xrdb "$HOME"/.Xresources &',
     'pnmixer &',
     'sudo pkill /usr/libexec/xfce-polkit && /usr/libexec/xfce-polkit &',

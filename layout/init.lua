@@ -74,7 +74,7 @@ awful.screen.connect_for_each_screen(
                     screen = s,
                     layout = stack,
                     selected = selected,
-                    border_color = colors.colorB,
+                    border_color = colors.alpha(colors.black, 'cc'),
                     border_width = dpi(0)
                 }
             )

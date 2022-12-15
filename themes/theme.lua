@@ -51,7 +51,7 @@ end
 theme.widget_markup = '<span color=%q><b>%s</b></span>'
 -- ------------------------------------------------- --
 -- --------------------- Fonts --------------------- --
-theme.font = 'Goldman Black '
+theme.font = 'Operator SSm  '
 theme.display_font = 'Nineteen Ninety Seven '
 theme.icon_font = 'Font Awesome 6 Pro '
 theme.icon_theme = 'chhinamasta'
@@ -69,16 +69,20 @@ theme.fg_urgent = colors.alpha(colors.color15, 'cc')
 -- ------------------------------------------------- --
 -- ------------------ Backgrounds ------------------ --
 theme.bg_normal =
-    'linear:0,0:0,21:0,' .. colors.alpha(colors.colorM, 'cc') .. ':1,' .. colors.alpha(colors.colorK, 'cc')
-theme.bg_focus = 'linear:0,0:0,21:0,' .. colors.alpha(colors.colorK, 'cc') .. ':1,' .. colors.alpha(colors.colorC, 'cc')
+    'radial:0,21:0,56:0,' .. colors.alpha(colors.colorS, 'dd') .. ':1,' .. colors.alpha(colors.colorD, 'ee')
+
+theme.bg_focus =
+    'radial:0,56:0,21:0,' .. colors.alpha(colors.colorK, 'cc') .. ':1,' .. colors.alpha(colors.colorB, 'ee')
 
 theme.bg_urgent =
-    'linear:0,0:0,21:0,' .. colors.alpha(colors.colorM, 'cc') .. ':1,' .. colors.alpha(colors.colorD, 'cc')
-theme.bg_menu = 'linear:0,0:0,21:0,' .. colors.alpha(colors.colorK, 'cc') .. ':1,' .. colors.alpha(colors.colorD, 'cc')
-theme.bg_button =
-    'linear:0,0:0,32:0,' .. colors.alpha(colors.colorN, 'cc') .. ':1,' .. colors.alpha(colors.colorE, 'cc')
+    'linear:0,0:0,21:0,' .. colors.alpha(colors.colorD, 'cc') .. ':1,' .. colors.alpha(colors.colorM, 'cc')
 
-theme.bg_panel = 'linear:0,0:0,21:0,' .. colors.alpha(colors.colorE, 'cc') .. ':1,' .. colors.alpha(colors.colorX, 'cc')
+theme.bg_menu = 'linear:0,0:0,21:0,' .. colors.alpha(colors.colorY, 'cc') .. ':1,' .. colors.alpha(colors.colorK, 'cc')
+
+theme.bg_button =
+    'linear:0,0:0,32:0,' .. colors.alpha(colors.colorS, 'ee') .. ':1,' .. colors.alpha(colors.colorK, 'ee')
+
+theme.bg_panel = 'linear:0,0:0,21:0,' .. colors.alpha(colors.colorN, 'ee') .. ':1,' .. colors.alpha(colors.colorF, 'ee')
 -- ------------------------------------------------- --
 -- -------------------- Hot Keys ------------------- --
 
@@ -89,7 +93,7 @@ theme.hotkeys_font = theme.font .. ' Bold 11'
 -- ------------------ Transparent ------------------ --
 theme.transparent = colors.alpha(colors.black, '00')
 -- ------------------------------------------------- --
--- -------------------- Borders -------------------- --
+-- -------------------- Borde`rs -------------------- --
 
 theme.border_focus = colors.colorB
 theme.border_normal = colors.colorM
@@ -101,7 +105,7 @@ theme.border_radius = dpi(12)
 -- ---------- Section: Client Decorations ---------- --
 -- ------------------------------------------------- --
 -- hotkeys
-theme.hotkeys_bg = colors.colorB
+theme.hotkeys_bg = colors.alpha(colors.colorB, 'cc')
 theme.hotkeys_fg = colors.white
 theme.hotkeys_modifiers_fg = colors.color2
 theme.hotkeys_border_color = colors.color6
@@ -148,7 +152,7 @@ theme.menu_border_color =
 -- -------------------- Tooltips ------------------- --
 
 theme.tooltip_bg = theme.background
-theme.tooltip_border_color = colors.colorP
+theme.tooltip_border_color = colors.alpha(colors.black, 'cc')
 theme.tooltip_border_width = 0
 theme.tooltip_gaps = dpi(5)
 theme.tooltip_shape = theme.client_shape_rounded
@@ -158,16 +162,16 @@ theme.tooltip_shape = theme.client_shape_rounded
 theme.separator_color = colors.colorP
 -- ------------------------------------------------- --
 -- -------------------- Titlebar ------------------- --
-theme.titlebar_size = dpi(24)
+theme.titlebar_size = dpi(18)
 theme.titlebar_bg_focus =
-    'linear:0,0:0,21:0,' .. colors.alpha(colors.colorV, 'cc') .. ':1,' .. colors.alpha(colors.colorM, 'cc')
+    'linear:0,0:0,21:0,' .. colors.alpha(colors.colorH, 'dd') .. ':1,' .. colors.alpha(colors.colorB, 'dd')
 theme.titlebar_bg_normal =
-    'linear:0,0:0,21:0,' .. colors.alpha(colors.colorM, 'cc') .. ':1,' .. colors.alpha(colors.black, 'cc')
+    'linear:0,0:0,21:0,' .. colors.alpha(colors.colorE, 'dd') .. ':1,' .. colors.alpha(colors.colorA, 'dd')
 theme.titlebar_fg_focus = theme.fg_normal
 theme.titlebar_fg_normal = colors.colorY
 -- ------------------------------------------------- --
 -- ------------------ Client Snap ------------------ --
--- theme.snap_border_color = colors.color1
+-- theme.snap_border_color = colors.alpha(colors.colorL, '99')
 theme.snap_shape = theme.client_shape_rounded_xl
 theme.snap_border_width = dpi(32)
 -- ------------------------------------------------- --
@@ -206,7 +210,7 @@ theme.tasklist_plain_task_name = true
 
 theme.notification_margin = dpi(5)
 theme.notification_border_width = dpi(0)
-theme.notification_border_color = colors.colorM
+theme.notification_border_color = colors.alpha(colors.black, 'cc')
 theme.notification_spacing = dpi(5)
 theme.notification_icon_resize_strategy = 'center'
 theme.notification_icon_size = dpi(32)

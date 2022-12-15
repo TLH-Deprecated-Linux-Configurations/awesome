@@ -206,7 +206,7 @@ screenshot_menu = function(s)
         {
             widget = wibox.container.background,
             bg = beautiful.bg_normal,
-            border_width = dpi(1),
+            border_width = dpi(2),
             border_color = colors.black,
             shape = beautiful.client_shape_rounded,
             {
@@ -229,7 +229,7 @@ screenshot_menu = function(s)
         {
             widget = wibox.container.background,
             bg = beautiful.bg_button,
-            border_width = dpi(1),
+            border_width = dpi(2),
             border_color = colors.black,
             shape = beautiful.client_shape_rounded,
             {
@@ -332,7 +332,7 @@ screenshot_menu = function(s)
         {
             widget = wibox.container.background,
             bg = beautiful.bg_button,
-            border_width = dpi(1),
+            border_width = dpi(2),
             border_color = colors.black,
             shape = gears.shape.circle,
             {

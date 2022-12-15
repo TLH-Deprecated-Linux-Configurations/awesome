@@ -55,7 +55,7 @@ local layout_popup =
         },
         widget = wibox.container.background
     },
-    border_width = dpi(3),
+    border_width = dpi(2),
     border_color = colors.alpha(colors.black, '88'),
     bg = beautiful.bg_normal,
     shape = beautiful.client_shape_rounded_xl,

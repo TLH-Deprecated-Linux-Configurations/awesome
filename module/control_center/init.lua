@@ -18,7 +18,7 @@ awful.screen.connect_for_each_screen(
                 type = 'dock',
                 shape = beautiful.client_shape_rounded_xl,
                 screen = s,
-                width = dpi(380),
+                width = dpi(420),
                 bg = beautiful.bg_normal,
                 margins = dpi(20),
                 ontop = true,
@@ -73,7 +73,7 @@ awful.screen.connect_for_each_screen(
             end
             -- ------------------------------------------------- --
             -- control center x position
-            control_c.x = screen.geometry.x + (dpi(20) + beautiful.useless_gap * 4)
+            control_c.x = screen.geometry.x + (dpi(0) + beautiful.useless_gap * 4)
             -- ------------------------------------------------- --
             -- toggle visibility
             if control_c.visible then

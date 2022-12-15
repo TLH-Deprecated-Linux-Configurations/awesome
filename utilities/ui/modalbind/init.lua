@@ -11,7 +11,11 @@
 -- awesome-modalbind - modal keybindings for awesomewm
 -- https://github.com/crater2150/awesome-modalbind
 -- ------------------------------------------------- --
-local awesome, client, mouse, screen, tag = awesome, client, mouse, screen, tag
+local awesome,
+	client,
+	mouse,
+	screen,
+	tag = awesome, client, mouse, screen, tag
 local dpi = beautiful.xresources.apply_dpi
 local modalbind = {}
 local nesting = 0
@@ -83,7 +87,7 @@ function modalbind.init()
 						{
 							id = 'text',
 							align = 'left',
-							font = 'Goldman Black Normal 16',
+							font = 'Operator SSm  Normal 16',
 							widget = wibox.widget.textbox
 						},
 						id = 'margin',
@@ -128,7 +132,8 @@ local function show_box(s, map, name)
 	end
 	txt:set_markup(label)
 
-	local x, y = txt:get_preferred_size(s)
+	local x,
+		y = txt:get_preferred_size(s)
 	mbox.width = dpi(250) + x + mar.left + mar.right
 	mbox.height = math.max(settings.height, y + mar.top + mar.bottom)
 	awful.placement.align(

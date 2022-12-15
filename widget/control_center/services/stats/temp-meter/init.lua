@@ -51,7 +51,7 @@ awesome.connect_signal(
     function(temp)
         if temp ~= nil then
             temp_bar.value = temp
-            widget_text:set_text(math.floor(temp) .. '°')
+            widget_text:set_text(temp .. '°')
         end
     end
 )

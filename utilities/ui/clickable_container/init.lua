@@ -18,7 +18,7 @@ local create_click_events = function(widget)
 		widget = wibox.container.background,
 		shape = beautiful.client_shape_rounded,
 		bg = beautiful.bg_button,
-		border_width = dpi(3),
+		border_width = dpi(2),
 		border_color = colors.alpha(colors.black, '99')
 	}
 
@@ -32,7 +32,7 @@ local create_click_events = function(widget)
 		function()
 			container.bg = beautiful.accent
 			-- container.shape = beautiful.client_shape_rounded_xl
-			-- container.border_width = dpi(1)
+			-- container.border_width = dpi(2)
 			local w = mouse.current_wibox
 			if w then
 				old_cursor,
@@ -47,7 +47,7 @@ local create_click_events = function(widget)
 		'mouse::leave',
 		function()
 			container.bg = beautiful.bg_button
-			container.border_width = dpi(3)
+			container.border_width = dpi(2)
 			container.shape = beautiful.client_shape_rounded
 			container.border_color = colors.alpha(colors.black, '99')
 
@@ -64,7 +64,7 @@ local create_click_events = function(widget)
 		function()
 			container.bg = beautiful.accent
 			-- container.shape = beautiful.client_shape_rounded_xl
-			-- container.border_width = dpi(1)
+			-- container.border_width = dpi(2)
 		end
 	)
 
@@ -75,7 +75,7 @@ local create_click_events = function(widget)
 			container.bg = beautiful.bg_button
 			container.shape = beautiful.client_shape_rounded
 			container.border_color = colors.alpha(colors.black, '99')
-			container.border_width = dpi(3)
+			container.border_width = dpi(2)
 		end
 	)
 

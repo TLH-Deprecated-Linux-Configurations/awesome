@@ -20,7 +20,7 @@ local title =
     shape = beautiful.client_shape_rounded_medium,
     forced_height = dpi(70),
     border_color = colors.black,
-    border_width = dpi(1),
+    border_width = dpi(2),
     widget = wibox.container.background,
     bg = colors.alpha(colors.white, '22')
 }

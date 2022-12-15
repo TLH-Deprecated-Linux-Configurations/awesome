@@ -126,7 +126,7 @@ elements.create = function(title, message)
         shape = beautiful.client_shape_rounded_xl,
         fg = colors.white,
         bg = beautiful.bg_normal,
-        border_width = dpi(1),
+        border_width = dpi(2),
         border_color = colors.black,
         widget = wibox.container.background
     }

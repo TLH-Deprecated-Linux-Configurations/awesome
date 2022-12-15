@@ -16,7 +16,7 @@ local profile_image =
     },
     widget = wibox.container.background,
     bg = beautiful.bg_button,
-    border_width = dpi(3),
+    border_width = dpi(2),
     forced_width = dpi(84),
     forced_height = dpi(84),
     shape = beautiful.client_shape_rounded,

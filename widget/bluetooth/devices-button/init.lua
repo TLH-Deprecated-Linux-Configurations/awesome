@@ -32,7 +32,7 @@ local widget =
     widget = clickable_container
   },
   shape = beautiful.client_shape_rounded_small,
-  bg = colors.colorA,
+  bg = colors.alpha(colors.colorA, 'cc'),
   widget = wibox.container.background
 }
 
@@ -46,7 +46,7 @@ widget:connect_signal(
 widget:connect_signal(
   'mouse::leave',
   function()
-    widget.bg = colors.colorA
+    widget.bg = colors.alpha(colors.colorA, 'cc')
   end
 )
 

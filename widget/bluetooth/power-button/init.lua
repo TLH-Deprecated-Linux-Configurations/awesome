@@ -63,7 +63,7 @@ awesome.connect_signal(
             power_status = false
             awful.spawn.with_shell("echo -e 'power off' | bluetoothctl")
             widget_icon.icon:set_image(icons.bluetooth_off)
-            widget.bg = colors.colorA
+            widget.bg = colors.alpha(colors.colorA, 'cc')
         end
     end
 )
@@ -82,7 +82,7 @@ awesome.connect_signal(
                 elseif stdout == 'no' then
                     power_status = false
                     widget_icon.icon:set_image(icons.bluetooth_off)
-                    widget.bg = colors.colorA
+                    widget.bg = colors.alpha(colors.colorA, 'cc')
                 end
             end
         )

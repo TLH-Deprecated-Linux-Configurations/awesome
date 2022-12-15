@@ -75,7 +75,7 @@ awful.screen.connect_for_each_screen(
             forced_height = dpi(70),
             ontop = true,
             border_width = dpi(2),
-            border_color = colors.colorA,
+            border_color = colors.alpha(colors.black, 'cc'),
             widget = wibox.container.background
         }
         -- ------------------------------------------------- --

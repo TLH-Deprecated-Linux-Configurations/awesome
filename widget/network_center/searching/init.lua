@@ -7,12 +7,12 @@
 local box = {}
 
 local signalIcon =
-wibox.widget {
+	wibox.widget {
 	layout = wibox.layout.align.vertical,
-	expand = "none",
+	expand = 'none',
 	nil,
 	{
-		id = "icon",
+		id = 'icon',
 		image = icons.wifi_2,
 		resize = true,
 		widget = wibox.widget.imagebox
@@ -21,7 +21,7 @@ wibox.widget {
 }
 
 local wifiIcon =
-wibox.widget {
+	wibox.widget {
 	{
 		{
 			signalIcon,
@@ -38,12 +38,12 @@ wibox.widget {
 }
 
 local content =
-wibox.widget {
+	wibox.widget {
 	{
 		{
 			{
-				text = "Searching...",
-				font = beautiful.font .. " Bold  14",
+				text = 'Searching...',
+				font = beautiful.font .. ' Bold  14',
 				widget = wibox.widget.textbox
 			},
 			layout = wibox.layout.align.vertical
@@ -56,7 +56,8 @@ wibox.widget {
 	widget = wibox.container.background
 }
 
-box = wibox.widget {
+box =
+	wibox.widget {
 	{
 		wifiIcon,
 		content,
@@ -65,8 +66,8 @@ box = wibox.widget {
 	},
 	shape = beautiful.client_shape_rounded_xl,
 	fg = colors.white,
-	border_width = dpi(1),
-	border_color = colors.colorA,
+	border_width = dpi(2),
+	border_color = colors.alpha(colors.black, 'cc'),
 	widget = wibox.container.background
 }
 

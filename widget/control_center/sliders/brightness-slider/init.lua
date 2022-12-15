@@ -11,19 +11,19 @@
 
 local widget_name =
     wibox.widget {
-    text = "Brightness",
-    font = beautiful.font .. " Bold   10",
-    align = "left",
+    text = 'Brightness',
+    font = beautiful.font .. ' Bold   10',
+    align = 'left',
     widget = wibox.widget.textbox
 }
 -- ------------------------------------------------- --
 local widget_icon =
     wibox.widget {
     layout = wibox.layout.align.vertical,
-    expand = "none",
+    expand = 'none',
     nil,
     {
-        id = "icon",
+        id = 'icon',
         image = icons.brightness,
         resize = true,
         widget = wibox.widget.imagebox
@@ -50,23 +50,23 @@ local slider =
     wibox.widget {
     nil,
     {
-        id = "brightness_slider",
+        id = 'brightness_slider',
         bar_shape = gears.shape.rounded_bar,
-        bar_height = dpi(18),
-        bar_color = colors.alpha(colors.black, "ee"),
-        bar_active_color = colors.alpha(colors.color1, "aa"),
+        bar_height = dpi(12),
+        bar_color = colors.alpha(colors.black, 'ee'),
+        bar_active_color = colors.alpha(colors.color1, 'aa'),
         handle_color = colors.white,
         handle_shape = beautiful.client_shape_rounded,
-        handle_width = dpi(24),
+        handle_width = dpi(12),
         handle_border_color = colors.black,
-        handle_border_width = dpi(3),
+        handle_border_width = dpi(2),
         maximum = 100,
         value = 100,
         widget = wibox.widget.slider
     },
     nil,
-    expand = "none",
-    forced_height = dpi(18),
+    expand = 'none',
+    forced_height = dpi(15),
     layout = wibox.layout.align.vertical
 }
 
@@ -78,14 +78,14 @@ local bright_time =
     callback = function()
         local brightness_level = brightness_slider:get_value()
         if brightness_level ~= nil then
-            awful.spawn("light -S " .. brightness_level, false)
-            awesome.emit_signal("signal::brightness", tonumber(brightness_level))
+            awful.spawn('light -S ' .. brightness_level, false)
+            awesome.emit_signal('signal::brightness', tonumber(brightness_level))
         end
     end
 }
 -- ------------------------------------------------- --
 brightness_slider:connect_signal(
-    "property::value",
+    'property::value',
     function()
         bright_time:start()
     end
@@ -106,7 +106,7 @@ widget_icon:buttons(
                     local value = brightness_slider:get_value()
                     brightness_slider:set_value(value + 5)
                     local updated_value = brightness_slider:get_value()
-                    awesome.emit_signal("signal::brightness", updated_value)
+                    awesome.emit_signal('signal::brightness', updated_value)
                 end
             end
         ),
@@ -123,7 +123,7 @@ widget_icon:buttons(
                     local value = brightness_slider:get_value()
                     brightness_slider:set_value(value - 5)
                     local updated_value = brightness_slider:get_value()
-                    awesome.emit_signal("signal::brightness", updated_value)
+                    awesome.emit_signal('signal::brightness', updated_value)
                 end
             end
         )
@@ -143,7 +143,7 @@ brightness_slider:buttons(
                 end
                 brightness_slider:set_value(brightness_slider:get_value() + 5)
                 local updated_value = brightness_slider:get_value()
-                awesome.emit_signal("signal::brightness", updated_value)
+                awesome.emit_signal('signal::brightness', updated_value)
             end
         ),
         awful.button(
@@ -157,7 +157,7 @@ brightness_slider:buttons(
                 end
                 brightness_slider:set_value(brightness_slider:get_value() - 5)
                 local updated_value = brightness_slider:get_value()
-                awesome.emit_signal("signal::brightness", updated_value)
+                awesome.emit_signal('signal::brightness', updated_value)
             end
         )
     )
@@ -166,19 +166,19 @@ brightness_slider:buttons(
 local brightness_tooltip =
     awful.tooltip {
     objects = {widget_icon},
-    text = "None",
-    mode = "outside",
-    align = "right",
+    text = 'None',
+    mode = 'outside',
+    align = 'right',
     margin_leftright = dpi(8),
     margin_topbottom = dpi(8),
-    preferred_positions = {"right", "left", "top", "bottom"}
+    preferred_positions = {'right', 'left', 'top', 'bottom'}
 }
 -- ------------------------------------------------- --
 local update_slider = function(percentage)
     if percentage ~= nil then
         local brightness = percentage
         brightness_slider:set_value(tonumber(brightness))
-        brightness_tooltip:set_text("Brightness Level is Currently: " .. brightness .. "%")
+        brightness_tooltip:set_text('Brightness Level is Currently: ' .. brightness .. '%')
     end
 end
 
@@ -187,7 +187,7 @@ update_slider()
 -- ------------------------------------------------- --
 -- The emit will come from the global keybind
 awesome.connect_signal(
-    "signal::brightness",
+    'signal::brightness',
     function(percentage)
         update_slider(percentage)
     end
@@ -206,7 +206,7 @@ local cc_brightness =
                 spacing = dpi(5),
                 {
                     layout = wibox.layout.align.vertical,
-                    expand = "none",
+                    expand = 'none',
                     nil,
                     {
                         layout = wibox.layout.fixed.horizontal,

@@ -43,7 +43,7 @@ elements.create = function(name, macAddress, pairStatus, connectStatus)
     pair:connect_signal(
         'mouse::enter',
         function()
-            pair.bg = colors.color1
+            pair.bg = colors.alpha(colors.colorY, 'cc')
         end
     )
 
@@ -84,7 +84,7 @@ elements.create = function(name, macAddress, pairStatus, connectStatus)
             widget = clickable_container
         },
         shape = beautiful.client_shape_rounded,
-        bg = colors.colorA,
+        bg = colors.alpha(colors.colorA, 'cc'),
         widget = wibox.container.background
     }
 
@@ -98,7 +98,7 @@ elements.create = function(name, macAddress, pairStatus, connectStatus)
     unpair:connect_signal(
         'mouse::leave',
         function()
-            unpair.bg = colors.colorA
+            unpair.bg = colors.alpha(colors.colorA, 'cc')
         end
     )
 
@@ -132,21 +132,21 @@ elements.create = function(name, macAddress, pairStatus, connectStatus)
             widget = clickable_container
         },
         shape = beautiful.client_shape_rounded,
-        bg = colors.colorA,
+        bg = colors.alpha(colors.colorA, 'cc'),
         widget = wibox.container.background
     }
 
     connect:connect_signal(
         'mouse::enter',
         function()
-            connect.bg = colors.color1
+            connect.bg = colors.alpha(colors.colorY, 'cc')
         end
     )
 
     connect:connect_signal(
         'mouse::leave',
         function()
-            connect.bg = colors.colorA
+            connect.bg = colors.alpha(colors.colorA, 'cc')
         end
     )
 
@@ -180,21 +180,21 @@ elements.create = function(name, macAddress, pairStatus, connectStatus)
             widget = clickable_container
         },
         shape = beautiful.client_shape_rounded,
-        bg = colors.colorA,
+        bg = colors.alpha(colors.colorA, 'cc'),
         widget = wibox.container.background
     }
 
     disconnect:connect_signal(
         'mouse::enter',
         function()
-            disconnect.bg = colors.color1
+            disconnect.bg = colors.alpha(colors.colorY, 'cc')
         end
     )
 
     disconnect:connect_signal(
         'mouse::leave',
         function()
-            disconnect.bg = colors.colorA
+            disconnect.bg = colors.alpha(colors.colorA, 'cc')
         end
     )
 
@@ -296,7 +296,7 @@ elements.create = function(name, macAddress, pairStatus, connectStatus)
             widget = wibox.container.margin
         },
         shape = beautiful.client_shape_rounded,
-        bg = colors.colorB,
+        bg = colors.alpha(colors.colorB, 'cc'),
         widget = wibox.container.background
     }
 
@@ -333,7 +333,7 @@ elements.create = function(name, macAddress, pairStatus, connectStatus)
         },
         shape = beautiful.client_shape_rounded,
         fg = colors.white,
-        border_width = dpi(3),
+        border_width = dpi(2),
         border_color = colors.alpha(colors.colorA, '88'),
         widget = wibox.container.background
     }

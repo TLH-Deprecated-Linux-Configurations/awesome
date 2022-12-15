@@ -12,18 +12,18 @@
 
 local battery_text =
     wibox.widget {
-    font = beautiful.font .. " 13",
-    align = "center",
-    valign = "center",
+    font = beautiful.font .. ' 13',
+    align = 'center',
+    valign = 'center',
     widget = wibox.widget.textbox
 }
 -- ------------------------------------------------- --
 -- create the icon portion of the text, which uses a nerd font to display the icon
 local battery_icon =
     wibox.widget {
-    font = beautiful.icon_font .. " 14",
-    align = "center",
-    valign = "center",
+    font = beautiful.icon_font .. ' 14',
+    align = 'center',
+    valign = 'center',
     widget = wibox.widget.textbox
 }
 
@@ -32,15 +32,15 @@ local widget_button =
     {
         {
             {
-                {battery_icon, margins = dpi(7), widget = wibox.container.margin},
+                {battery_icon, margins = dpi(4), widget = wibox.container.margin},
                 {battery_text, margins = dpi(1), widget = wibox.container.margin},
                 widget = wibox.container.margin,
-                layout = wibox.layout.fixed.horizontal
+                layout = wibox.layout.flex.horizontal
             },
-            top = dpi(1),
-            bottom = dpi(1),
-            left = dpi(22),
-            right = dpi(22),
+            top = dpi(2),
+            bottom = dpi(2),
+            left = dpi(12),
+            right = dpi(12),
             widget = wibox.container.margin
         },
         shape = beautiful.client_shape_rounded,
@@ -54,32 +54,32 @@ local widget_button =
 
 --  respond to the signal changing
 awesome.connect_signal(
-    "signal::battery",
+    'signal::battery',
     function(percentage, state)
         local value = percentage
         -- ------------------------------------------------- --
         -- ------------------------------------------------- --
         -- ------------------------------------------------- --
         -- default output
-        local bat_icon = ""
+        local bat_icon = ''
         -- ------------------------------------------------- --
         -- ------------------------------------------------- --
         -- ------------------------------------------------- --
         --charge dependent output
         if value >= 90 and value <= 100 then
-            bat_icon = ""
+            bat_icon = ''
         elseif value >= 70 and value < 90 then
-            bat_icon = ""
+            bat_icon = ''
         elseif value >= 60 and value < 70 then
-            bat_icon = ""
+            bat_icon = ''
         elseif value >= 50 and value < 60 then
-            bat_icon = ""
+            bat_icon = ''
         elseif value >= 30 and value < 50 then
-            bat_icon = ""
+            bat_icon = ''
         elseif value >= 15 and value < 30 then
-            bat_icon = ""
+            bat_icon = ''
         else
-            bat_icon = ""
+            bat_icon = ''
         end
         -- ------------------------------------------------- --
         -- ------------------------------------------------- --
@@ -87,7 +87,7 @@ awesome.connect_signal(
         -- if charging
         --
         if state == 1 then
-            bat_icon = ""
+            bat_icon = ''
         end
         -- ------------------------------------------------- --
         -- ------------------------------------------------- --
@@ -95,14 +95,14 @@ awesome.connect_signal(
         -- if full
         --
         if state == 4 then
-            bat_icon = ""
+            bat_icon = ''
         end
         -- ------------------------------------------------- --
         -- ------------------------------------------------- --
         -- ------------------------------------------------- --
         -- color the icon output
-        battery_icon.markup = "<span foreground='#f4f4f7'>" .. bat_icon .. "</span>"
-        battery_text.markup = "<span foreground='#f4f4f7'>" .. string.format("%1d", value) .. "%" .. "</span>"
+        battery_icon.markup = "<span foreground='#f4f4f7'>" .. bat_icon .. '</span>'
+        battery_text.markup = "<span foreground='#f4f4f7'>" .. string.format('%1d', value) .. '%' .. '</span>'
     end
 )
 widget_button:buttons(
@@ -112,7 +112,7 @@ widget_button:buttons(
             1,
             nil,
             function()
-                awful.spawn("xfce4-power-manager")
+                awful.spawn('xfce4-power-manager')
             end
         )
     )
@@ -120,22 +120,22 @@ widget_button:buttons(
 local battery_tooltip =
     awful.tooltip {
     objects = {widget_button},
-    text = "None",
-    mode = "outside",
-    align = "right",
+    text = 'None',
+    mode = 'outside',
+    align = 'right',
     margin_leftright = dpi(8),
     margin_topbottom = dpi(8),
-    preferred_positions = {"right", "left", "top", "bottom"}
+    preferred_positions = {'right', 'left', 'top', 'bottom'}
 }
 -- ------------------------------------------------- --
 -- ------------------------------------------------- --
 -- ------------------------------------------------- --
 local get_battery_info = function()
     awful.spawn.easy_async_with_shell(
-        "upower -i $(upower -e | grep BAT)",
+        'upower -i $(upower -e | grep BAT)',
         function(stdout)
-            if stdout == nil or stdout == "" then
-                battery_tooltip:set_text("No battery detected!")
+            if stdout == nil or stdout == '' then
+                battery_tooltip:set_text('No battery detected!')
                 return
             end
 
@@ -147,7 +147,7 @@ end
 get_battery_info()
 
 awesome.connect_signal(
-    "signal::battery:error",
+    'signal::battery:error',
     function()
         widget_button = nil
     end
