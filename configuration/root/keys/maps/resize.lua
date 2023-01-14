@@ -18,6 +18,38 @@ local resizemap = {
     {
         'Up',
         function()
+            capi.client.focus:relative_move(0, 0, 0, dpi(10))
+        end,
+        'Increase Size Vertically Upwards by 10'
+    },
+    -- ------------------------------------------------- --
+    {
+        'Down',
+        function()
+            capi.client.focus:relative_move(0, dpi(10), 0, 0)
+        end,
+        'Increase Size Vertically Downwards by 10'
+    },
+    -- ------------------------------------------------- --
+    {
+        'Left',
+        function()
+            capi.client.focus:relative_move(0, 0, dpi(10), 0)
+        end,
+        'Increase Size Horizontally Leftwards by 10'
+    },
+    -- ------------------------------------------------- --
+    {
+        'Right',
+        function()
+            capi.client.focus:relative_move(dpi(10), 0, 0, 0)
+        end,
+        'Increase Size Horizontally Rightwards by 10'
+    },
+    {'separator', ' '},
+    {
+        {'Up', 'Shift'},
+        function()
             if capi.client.focus.height > 10 then
                 capi.client.focus:relative_move(0, 0, 0, dpi(-10))
             end
@@ -26,7 +58,7 @@ local resizemap = {
     },
     -- ------------------------------------------------- --
     {
-        'Down',
+        {'Down', 'Shift'},
         function()
             if capi.client.focus.height > 10 then
                 capi.client.focus:relative_move(0, dpi(-10), 0, 0)
@@ -36,7 +68,7 @@ local resizemap = {
     },
     -- ------------------------------------------------- --
     {
-        'Left',
+        {'Left', 'Shift'},
         function()
             if capi.client.focus.width > 10 then
                 capi.client.focus:relative_move(0, 0, dpi(-10), 0)
@@ -46,15 +78,14 @@ local resizemap = {
     },
     -- ------------------------------------------------- --
     {
-        'Right',
+        {'RIght', 'Shift'},
         function()
             if capi.client.focus.width > 10 then
                 capi.client.focus:relative_move(dpi(-10), 0, 0, 0)
             end
         end,
         'Decrease Size Horizontally 10'
-    },
-    {'separator', ' '}
+    }
 }
 
 return resizemap

@@ -16,7 +16,5 @@ return {
     require(... .. '.inputfield'),
     require(... .. '.overflow'),
     require(... .. '.prompt'),
-    require(... .. '.scrollbox'),
-    require(... .. '.separator'),
-    require(... .. '.tooltip')
+    require(... .. '.scrollbox')
 }

@@ -20,8 +20,7 @@ local snap_edge = require('utilities.client.snap_edge')
 -- Call in the maps for the client keys
 local clientmap = require('configuration.root.keys.maps.client')
 local snapmap = require('configuration.root.keys.maps.snap')
-local resizemap = require('configuration.root.keys.maps.resize-increase')
-local resizemap2 = require('configuration.root.keys.maps.resize-decrease')
+local resizemap = require('configuration.root.keys.maps.resize')
 local movemap = require('configuration.root.keys.maps.move')
 -- ------------------------------------------------- --
 
@@ -41,16 +40,11 @@ local clientkeys =
     {'Mod1'},
     'r',
     function()
-      modalbind.grab {keymap = resizemap, name = 'Window Resizing', stay_in_mode = true}
-    end,
-    {description = 'Enter Window Resizing Mode', group = 'Floating Client'}
-  ),
-  -- ------------------------------------------------- --
-  awful.key(
-    {'Mod1'},
-    't',
-    function()
-      modalbind.grab {keymap = resizemap2, name = 'Window Resizing', stay_in_mode = true}
+      modalbind.grab {
+        keymap = resizemap,
+        name = 'Window Resizing',
+        stay_in_mode = true
+      }
     end,
     {description = 'Enter Window Resizing Mode', group = 'Floating Client'}
   ),
@@ -59,7 +53,11 @@ local clientkeys =
     {'Mod1'},
     's',
     function()
-      modalbind.grab {keymap = snapmap, name = 'Window Snapping', stay_in_mode = true}
+      modalbind.grab {
+        keymap = snapmap,
+        name = 'Window Snapping',
+        stay_in_mode = true
+      }
     end,
     {description = 'Enter Window Snapping Mode', group = 'Floating Client'}
   ),
@@ -68,7 +66,11 @@ local clientkeys =
     {'Mod1'},
     'm',
     function()
-      modalbind.grab {keymap = movemap, name = 'Window Movement', stay_in_mode = true}
+      modalbind.grab {
+        keymap = movemap,
+        name = 'Window Movement',
+        stay_in_mode = true
+      }
     end,
     {description = 'Enter Window Movement Mode', group = 'Floating Client'}
   ),
@@ -77,7 +79,11 @@ local clientkeys =
     {'Mod1'},
     'd',
     function()
-      modalbind.grab {keymap = clientmap, name = 'Client Control', stay_in_mode = false}
+      modalbind.grab {
+        keymap = clientmap,
+        name = 'Client Control',
+        stay_in_mode = false
+      }
     end,
     {description = 'Enter Client Control Mode', group = 'Client'}
   )

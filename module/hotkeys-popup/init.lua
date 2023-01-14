@@ -435,7 +435,7 @@ function widget.new(args)
                         {
                             columns,
                             widget = wibox.container.background,
-                            bg = beautiful.bg_focus,
+                            bg = beautiful.bg_button_focused,
                             shape = beautiful.client_shape_rounded_xl
                         },
                         margins = dpi(30),
@@ -467,7 +467,7 @@ function widget.new(args)
                 {
                     columns,
                     widget = wibox.container.background,
-                    bg = beautiful.bg_focus,
+                    bg = beautiful.bg_button_focused,
                     border_color = colors.alpha(colors.black, 'bb'),
                     border_width = dpi(2),
                     shape = beautiful.client_shape_rounded_xl

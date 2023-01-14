@@ -92,18 +92,18 @@ function modalbind.init()
                         },
                         id = 'margin',
                         margins = dpi(6),
-                        color = '#1b1d2488',
+                        color = '#1c1c1c88',
                         layout = wibox.container.margin
                     },
                     widget = wibox.container.background,
-                    bg = 'linear:0,0:0,21:0,#282b3688:1,#2f303d88'
+                    bg = 'linear:0,0:0,21:0,#22222288:1,#30303088'
                 },
                 margins = dpi(6),
-                color = '#1b1d2488',
+                color = '#1c1c1c88',
                 layout = wibox.container.margin
             },
             widget = wibox.container.background,
-            bg = 'linear:0,0:0,21:0,#282b3688:1,#2f303d88'
+            bg = 'linear:0,0:0,21:0,#22222288:1,#30303088'
         }
     )
 
@@ -126,7 +126,11 @@ local function show_box(s, map, name)
             if mapping[1] == 'separator' then
                 label = label .. '\n\n<big>' .. mapping[2] .. '</big>'
             elseif mapping[1] ~= 'onClose' then
-                label = label .. '\n<b>' .. gears.string.xml_escape(mapping[1]) .. '</b>\t' .. (mapping[3] or '???')
+                label =
+                    label ..
+                    '\n<b>' ..
+                        gears.string.xml_escape(mapping[1]) ..
+                            '</b>\t' .. (mapping[3] or '???')
             end
         end
     end
@@ -244,7 +248,10 @@ function modalbind.grab(options)
 
             mapping = mapping_for(keymap, key, use_lower)
             if mapping then
-                if (mapping[2] == close_box or mapping[2] == modalbind.close_box) then
+                if
+                    (mapping[2] == close_box or
+                        mapping[2] == modalbind.close_box)
+                 then
                     close_box(keymap, args)
                     return true
                 end

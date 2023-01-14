@@ -73,12 +73,17 @@
     "not_off",
     "bluetooth",
     "create_button",
-    "screenshot_menu"
+    "screenshot_menu",
+    "icon_size"
   ],
   "lua.targetVersion": "5.1",
   "restructuredtext.languageServer.disabled": true,
   "esbonio.server.enabled": false,
-  "Lua.diagnostics.disable": ["undefined-field", 111],
+  "Lua.diagnostics.disable": [
+    "undefined-field",
+    111,
+    "lowercase-global"
+  ],
   "restructuredtext.confPath": "",
   "files.exclude": {
     "**/.git": false,

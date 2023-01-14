@@ -18,13 +18,13 @@ local format_item = function(widget)
                 widget,
                 nil
             },
-            margins = dpi(0),
+            margins = dpi(1),
             widget = wibox.container.margin
         },
         shape = beautiful.client_shape_rounded_medium,
         bg = 'transparent',
         border_width = dpi(0),
-        border_color = colors.alpha(colors.black, 'aa'),
+        border_color = colors.alpha(colors.black, '99'),
         widget = wibox.container.background
     }
 end

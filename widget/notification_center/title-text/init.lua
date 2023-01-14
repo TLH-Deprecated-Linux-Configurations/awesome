@@ -14,21 +14,6 @@ local user_content =
     widget = wibox.widget.textbox
 }
 
--- ------------------------------------------------- --
-local spacer_bar =
-    wibox.widget {
-    {
-        orientation = 'vertical',
-        forced_height = dpi(1),
-        forced_width = dpi(2),
-        shape = gears.shape.rounded_bar,
-        widget = wibox.widget.separator
-    },
-    margins = dpi(10),
-    widget = wibox.container.margin
-}
------------------------------------- --
-
 local widget =
     wibox.widget {
     {

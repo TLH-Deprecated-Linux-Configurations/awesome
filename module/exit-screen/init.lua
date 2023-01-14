@@ -28,7 +28,7 @@ local clock = require('module.exit-screen.clock')
 -- |_______||____|__| |_____|_____|__|__|
 -- ------------------------------------------------- --
 -- Appearance
-local icon_size = dpi(240)
+local icon_size = dpi(120)
 local screen_geometry = awful.screen.focused().geometry
 
 local buildButton = function(icon)
@@ -44,7 +44,7 @@ local buildButton = function(icon)
           margins = dpi(16),
           widget = wibox.container.margin
         },
-        shape = beautiful.client_shape_rounded_small,
+        shape = beautiful.client_shape_rounded_xl,
         bg = 'transparent',
         widget = wibox.container.background
       },
@@ -138,7 +138,7 @@ local exit_screen = function(s)
       type = 'splash',
       height = s.geometry.height,
       width = s.geometry.width,
-      bg = colors.alpha(colors.black, 'aa'),
+      bg = colors.alpha(colors.blacker, '33'),
       fg = colors.white
     }
   )
@@ -154,7 +154,7 @@ local exit_screen = function(s)
       type = 'splash',
       height = s.geometry.height,
       width = s.geometry.width,
-      bg = colors.alpha(colors.black, 'aa'),
+      bg = colors.alpha(colors.blacker, '33'),
       fg = colors.white
     }
   )
@@ -278,5 +278,4 @@ awesome.connect_signal(
     end
   end
 )
-
 return exit_screen

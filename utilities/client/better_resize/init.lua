@@ -23,12 +23,16 @@ local function mouse_resize_handler(m, c)
     awful.client.incwfact(0, c)
     -- needed to fix normalization at start
     local start = m(capi.mouse.coords())
-    local x, y = start.x, start.y
+    local x,
+        y = start.x, start.y
     local wa = m(c.screen.workarea)
     local idx = awful.client.idx(c)
-    local c_above, c_below
-    local idx_above, idx_below
-    local wfact_above, wfact_below
+    local c_above,
+        c_below
+    local idx_above,
+        idx_below
+    local wfact_above,
+        wfact_below
     local jump_to = {x = x, y = y}
     -- ------------------------------------------------- --
     do
@@ -52,7 +56,8 @@ local function mouse_resize_handler(m, c)
             jump_to.y = g.y + g.height
         end
 
-        local mw_split = wa.x + wa.width * c.screen.selected_tag.master_width_factor
+        local mw_split =
+            wa.x + wa.width * c.screen.selected_tag.master_width_factor
 
         if math.abs(mw_split - x) > wa.width / 6 then
             move_mwfact = false
@@ -101,16 +106,21 @@ local function mouse_resize_handler(m, c)
             if pressed then
                 if move_mwfact then
                     c.screen.selected_tag.master_width_factor =
-                        math.min(math.max((_mouse.x - wa.x) / wa.width, 0.01), 0.99)
+                        math.min(
+                        math.max((_mouse.x - wa.x) / wa.width, 0.01),
+                        0.99
+                    )
                 end
 
                 if idx_above then
                     local factor_delta = (_mouse.y - jump_to.y) / wa.height
 
                     if factor_delta < 0 then
-                        factor_delta = math.max(factor_delta, -(wfact_above - 0.05))
+                        factor_delta =
+                            math.max(factor_delta, -(wfact_above - 0.05))
                     else
-                        factor_delta = math.min(factor_delta, wfact_below - 0.05)
+                        factor_delta =
+                            math.min(factor_delta, wfact_below - 0.05)
                     end
 
                     local t = c.screen.selected_tag

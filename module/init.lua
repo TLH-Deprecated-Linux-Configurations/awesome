@@ -16,7 +16,6 @@ require(... .. '.network')
 require(... .. '.notifications')
 require(... .. '.notification_center')
 
-require(... .. '.titlebar')
 require(... .. '.control_center')
 require(... .. '.drawer')
 

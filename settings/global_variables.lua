@@ -77,7 +77,7 @@ gstring = require('gears.string')
 
 snap_edge = require('utilities.client.snap_edge')
 card = require('utilities.ui.card')
-seperator_widget = require('utilities.ui.separator')
+
 hardware = require('utilities.platform.hardware_check')
 
 scrollbox = require('utilities.ui.scrollbox')

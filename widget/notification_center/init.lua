@@ -55,7 +55,7 @@ local notifs =
             notification_panel,
             expand = 'none',
             layout = wibox.layout.fixed.vertical,
-            bg = beautiful.bg_focus
+            bg = beautiful.bg_button_focused
         },
         margins = dpi(0),
         layout = wibox.container.margin

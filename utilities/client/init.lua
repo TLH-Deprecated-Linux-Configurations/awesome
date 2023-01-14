@@ -14,6 +14,6 @@ return {
     require(... .. '.modalbind'),
     require(... .. '.rubato'),
     require(... .. '.save_floats'),
-    require(... .. '.snap_edge')
-    
+    require(... .. '.snap_edge'),
+    require(... .. '.titlebar')
 }

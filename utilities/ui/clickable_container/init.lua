@@ -31,7 +31,7 @@ local create_click_events = function(widget)
 		'mouse::enter',
 		function()
 			container.bg = beautiful.accent
-			-- container.shape = beautiful.client_shape_rounded_xl
+			container.shape = beautiful.client_shape_rounded
 			-- container.border_width = dpi(2)
 			local w = mouse.current_wibox
 			if w then
@@ -63,8 +63,8 @@ local create_click_events = function(widget)
 		'button::press',
 		function()
 			container.bg = beautiful.accent
-			-- container.shape = beautiful.client_shape_rounded_xl
-			-- container.border_width = dpi(2)
+			container.shape = beautiful.client_shape_rounded
+			container.border_width = dpi(2)
 		end
 	)
 

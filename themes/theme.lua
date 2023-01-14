@@ -18,7 +18,8 @@ local dpi = beautiful.xresources.apply_dpi
 -- --------------------- Paths --------------------- --
 local theme_dir = filesystem.get_configuration_dir() .. '/themes'
 local titlebar_theme = 'dhumavati'
-local titlebar_icon_path = theme_dir .. '/icons/titlebar/' .. titlebar_theme .. '/'
+local titlebar_icon_path =
+    theme_dir .. '/icons/titlebar/' .. titlebar_theme .. '/'
 local tip = titlebar_icon_path
 -- ------------------------------------------------- --
 -- declear object
@@ -59,7 +60,10 @@ theme.icon_theme = 'chhinamasta'
 -- ------------------------------------------------- --
 -- --------------------- Accent -------------------- --
 -- NOTE used for the button hover bg
-theme.accent = 'linear:0,0:0,21:0,' .. colors.alpha(colors.colorK, 'cc') .. ':1,' .. colors.alpha(colors.colorP, 'cc')
+theme.accent =
+    'linear:0,0:0,21:0,' ..
+    colors.alpha(colors.colorK, 'cc') ..
+        ':1,' .. colors.alpha(colors.colorP, 'cc')
 -- ------------------------------------------------- --
 -- ------------------- Foreground ------------------ --
 theme.fg_normal = colors.white
@@ -69,20 +73,39 @@ theme.fg_urgent = colors.alpha(colors.color15, 'cc')
 -- ------------------------------------------------- --
 -- ------------------ Backgrounds ------------------ --
 theme.bg_normal =
-    'radial:0,21:0,56:0,' .. colors.alpha(colors.colorS, 'dd') .. ':1,' .. colors.alpha(colors.colorD, 'ee')
+    'radial:0,21:0,56:0,' ..
+    colors.alpha(colors.colorL, 'bb') ..
+        ':1,' .. colors.alpha(colors.colorB, 'cc')
+
+theme.bg_button_focused =
+    'radial:0,510:0,16:0,' ..
+    colors.alpha(colors.colorE, 'bb') ..
+        ':1,' .. colors.alpha(colors.colorA, 'cc')
 
 theme.bg_focus =
-    'radial:0,56:0,21:0,' .. colors.alpha(colors.colorK, 'cc') .. ':1,' .. colors.alpha(colors.colorB, 'ee')
+    'radial:0,56:0,21:0,' ..
+    colors.alpha(colors.colorK, 'cc') ..
+        ':1,' .. colors.alpha(colors.colorB, 'cc')
 
 theme.bg_urgent =
-    'linear:0,0:0,21:0,' .. colors.alpha(colors.colorD, 'cc') .. ':1,' .. colors.alpha(colors.colorM, 'cc')
+    'linear:0,0:0,21:0,' ..
+    colors.alpha(colors.colorD, 'cc') ..
+        ':1,' .. colors.alpha(colors.colorM, 'cc')
 
-theme.bg_menu = 'linear:0,0:0,21:0,' .. colors.alpha(colors.colorY, 'cc') .. ':1,' .. colors.alpha(colors.colorK, 'cc')
+theme.bg_menu =
+    'linear:0,0:0,21:0,' ..
+    colors.alpha(colors.colorY, 'cc') ..
+        ':1,' .. colors.alpha(colors.colorK, 'cc')
 
 theme.bg_button =
-    'linear:0,0:0,32:0,' .. colors.alpha(colors.colorS, 'ee') .. ':1,' .. colors.alpha(colors.colorK, 'ee')
+    'linear:0,0:0,32:0,' ..
+    colors.alpha(colors.colorS, 'cc') ..
+        ':1,' .. colors.alpha(colors.colorK, 'cc')
 
-theme.bg_panel = 'linear:0,0:0,21:0,' .. colors.alpha(colors.colorN, 'ee') .. ':1,' .. colors.alpha(colors.colorF, 'ee')
+theme.bg_panel =
+    'linear:0,0:0,21:0,' ..
+    colors.alpha(colors.colorN, 'cc') ..
+        ':1,' .. colors.alpha(colors.colorF, 'cc')
 -- ------------------------------------------------- --
 -- -------------------- Hot Keys ------------------- --
 
@@ -120,12 +143,19 @@ theme.systray_icon_spacing = dpi(16)
 -- UI Groups
 --
 theme.groups_title_bg =
-    'linear:0,0:0,21:0,' .. colors.alpha(colors.colorV, 'cc') .. ':1,' .. colors.alpha(colors.colorM, 'cc')
-theme.groups_bg = 'linear:0,0:0,21:0,' .. colors.alpha(colors.colorM, 'cc') .. ':1,' .. colors.alpha(colors.black, 'cc')
+    'linear:0,0:0,21:0,' ..
+    colors.alpha(colors.colorV, 'cc') ..
+        ':1,' .. colors.alpha(colors.colorM, 'cc')
+theme.groups_bg =
+    'linear:0,0:0,21:0,' ..
+    colors.alpha(colors.colorM, 'cc') ..
+        ':1,' .. colors.alpha(colors.black, 'cc')
 theme.groups_radius = dpi(16)
 
 theme.sliders_fg =
-    'linear:0,0:0,21:0,' .. colors.alpha(colors.color1, 'cc') .. ':1,' .. colors.alpha(colors.white, 'cc')
+    'linear:0,0:0,21:0,' ..
+    colors.alpha(colors.color1, 'cc') ..
+        ':1,' .. colors.alpha(colors.white, 'cc')
 -- ------------------------------------------------- --
 -- ------------------- UI events ------------------- --
 theme.leave_event = colors.alpha(colors.black, '22')
@@ -143,11 +173,15 @@ theme.menu_border_width = dpi(2)
 theme.menu_bg_focus = colors.alpha(colors.white, '99')
 theme.menu_accent = colors.colorM
 theme.menu_bg_normal =
-    'linear:0,0:0,21:0,' .. colors.alpha(colors.colorM, '88') .. ':1,' .. colors.alpha(colors.black, 'cc')
+    'linear:0,0:0,21:0,' ..
+    colors.alpha(colors.colorM, '88') ..
+        ':1,' .. colors.alpha(colors.black, 'cc')
 theme.menu_fg_normal = colors.colorY
 theme.menu_fg_focus = colors.white
 theme.menu_border_color =
-    'linear:0,0:0,21:0,' .. colors.alpha(colors.colorM, '88') .. ':1,' .. colors.alpha(colors.black, '88')
+    'linear:0,0:0,21:0,' ..
+    colors.alpha(colors.colorM, '88') ..
+        ':1,' .. colors.alpha(colors.black, '88')
 -- ------------------------------------------------- --
 -- -------------------- Tooltips ------------------- --
 
@@ -164,11 +198,15 @@ theme.separator_color = colors.colorP
 -- -------------------- Titlebar ------------------- --
 theme.titlebar_size = dpi(18)
 theme.titlebar_bg_focus =
-    'linear:0,0:0,21:0,' .. colors.alpha(colors.colorH, 'dd') .. ':1,' .. colors.alpha(colors.colorB, 'dd')
+    'linear:0,0:0,21:0,' ..
+    colors.alpha(colors.colorH, 'bb') ..
+        ':1,' .. colors.alpha(colors.colorB, 'bb')
 theme.titlebar_bg_normal =
-    'linear:0,0:0,21:0,' .. colors.alpha(colors.colorE, 'dd') .. ':1,' .. colors.alpha(colors.colorA, 'dd')
+    'linear:0,0:0,21:0,' ..
+    colors.alpha(colors.colorE, 'bb') ..
+        ':1,' .. colors.alpha(colors.colorA, 'bb')
 theme.titlebar_fg_focus = theme.fg_normal
-theme.titlebar_fg_normal = colors.colorY
+theme.titlebar_fg_normal = colors.lesswhite
 -- ------------------------------------------------- --
 -- ------------------ Client Snap ------------------ --
 -- theme.snap_border_color = colors.alpha(colors.colorL, '99')
@@ -227,10 +265,10 @@ theme.layoutlist_border_color_selected = colors.colorC
 -- ------------------ Close Button ----------------- --
 theme.titlebar_close_button_normal = tip .. 'close-inactive.png'
 theme.titlebar_close_button_focus = tip .. 'close-active.png'
-theme.titlebar_close_button_focus_hover = tip .. 'close-alt.png'
-theme.titlebar_close_button_normal_hover = tip .. 'close-alt.png'
-theme.titlebar_close_button_normal_press = tip .. 'close-alt.png'
-theme.titlebar_close_button_focus_press = tip .. 'close-alt.png'
+theme.titlebar_close_button_focus_hover = tip .. 'close-prelight.png'
+theme.titlebar_close_button_normal_hover = tip .. 'close-prelight.png'
+theme.titlebar_close_button_normal_press = tip .. 'close-pressed.png'
+theme.titlebar_close_button_focus_press = tip .. 'close.png'
 
 -- ------------------------------------------------- --
 -- ---------------- Minimize Button ---------------- --
@@ -252,16 +290,16 @@ theme.titlebar_ontop_button_focus_active = tip .. 'stick-active.png'
 -- ------------------------------------------------- --
 -- ---------------- Floating Button ---------------- --
 
-theme.titlebar_floating_button_normal_inactive = tip .. 'shade-inactive.svg'
-theme.titlebar_floating_button_focus_inactive = tip .. 'shade-prelight.svg'
-theme.titlebar_floating_button_normal_active = tip .. 'shade-preseed.svg'
-theme.titlebar_floating_button_focus_active = tip .. 'shade-active.svg'
+theme.titlebar_floating_button_normal_inactive = tip .. 'shade-inactive.png'
+theme.titlebar_floating_button_focus_inactive = tip .. 'shade-prelight.png'
+theme.titlebar_floating_button_normal_active = tip .. 'shade-preseed.png'
+theme.titlebar_floating_button_focus_active = tip .. 'shade-active.png'
 -- ------------------------------------------------- --
 -- ---------------- Maximize Button ---------------- --
 --
 theme.titlebar_maximized_button_normal_inactive = tip .. 'maximize-inactive.png'
 theme.titlebar_maximized_button_focus_inactive = tip .. 'maximize-prelight.png'
-theme.titlebar_maximized_button_normal_active = tip .. 'maximize-active.png'
+theme.titlebar_maximized_button_normal_active = tip .. 'maximize-pressed.png'
 theme.titlebar_maximized_button_focus_active = tip .. 'maximize-active.png'
 -- ------------------------------------------------- --
 -- -------------- Hovered Close Button ------------- --
@@ -272,7 +310,7 @@ theme.titlebar_close_button_focus_hover = tip .. 'close-preseed.png'
 -- ------------ Hovered Minimize Button ------------ --
 --
 theme.titlebar_minimize_button_normal_hover = tip .. 'hide-prelight.png'
-theme.titlebar_minimize_button_focus_hover = tip .. 'hide-preseed.png'
+theme.titlebar_minimize_button_focus_hover = tip .. 'hide-pressed.png'
 -- ------------------------------------------------- --
 -- -------------- Hovered Ontop Button ------------- --
 --
@@ -334,7 +372,8 @@ theme.layout_deck = theme_dir .. '/icons/layouts/deck.png'
 theme.application_switcher_widget_bg = theme.bg_focus
 theme.application_switcher_widget_border_width = dpi(2)
 theme.application_switcher_widget_border_radius = dpi(8)
-theme.application_switcher_widget_border_color = colors.alpha(colors.colorM, '33')
+theme.application_switcher_widget_border_color =
+    colors.alpha(colors.colorM, '33')
 theme.application_switcher_clients_spacing = dpi(50)
 theme.application_switcher_client_icon_horizontal_spacing = dpi(5)
 theme.application_switcher_client_width = dpi(650)

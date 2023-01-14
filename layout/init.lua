@@ -102,7 +102,7 @@ tag.connect_signal(
         if (currentLayout == awful.layout.suit.max) then
             t.gap = dpi(3)
         else
-            t.gap = dpi(6)
+            t.gap = dpi(2)
         end
         t.master_count = 1
     end
